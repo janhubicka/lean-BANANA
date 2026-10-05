@@ -72,7 +72,7 @@ noncomputable def embeddedCompletionAmbientAutomorphism
       (perfectBanana ((l + r) + k))
       (perfectBanana ((l + r) + k)) :=
   conjugatedCompletionAmbientAutomorphism
-    (embeddedCompletionConjugator E) f g k
+    (embeddedCompletionConjugator E) f g
 
 /-- The chosen ambient action restricts to the completion action on the
 embedded left completion block. -/
