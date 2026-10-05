@@ -5,6 +5,7 @@ import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BilinearResidue
+import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
 import BANANA.NonPrecompact.CauchyBinet
 import BANANA.NonPrecompact.CoherentConjugation
 import BANANA.NonPrecompact.ColouringWrappers
