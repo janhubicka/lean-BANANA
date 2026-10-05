@@ -125,7 +125,6 @@ theorem inversePerfectSelfEmbedding_right_rightInverse
     H.right ((inversePerfectSelfEmbedding H).right y) = y := by
   apply (inversePerfectSelfEmbedding H).right_injective
   rw [inversePerfectSelfEmbedding_right_comp]
-  rfl
 
 end BananaMatrixEmbedding
 
@@ -134,14 +133,13 @@ namespace BananaMatrixStructure
 /-- Conjugate the standard ambient completion action by an arbitrary
 perfect-pair automorphism of the ambient witness. -/
 noncomputable def conjugatedCompletionAmbientAutomorphism
-    {l r : ℕ}
+    {l r k : ℕ}
     (H :
       BananaMatrixEmbedding
         (perfectBanana ((l + r) + k))
         (perfectBanana ((l + r) + k)))
     (f : (Fin l → F2) ≃ₗ[F2] (Fin l → F2))
-    (g : (Fin r → F2) ≃ₗ[F2] (Fin r → F2))
-    (k : ℕ) :
+    (g : (Fin r → F2) ≃ₗ[F2] (Fin r → F2)) :
     BananaMatrixEmbedding
       (perfectBanana ((l + r) + k))
       (perfectBanana ((l + r) + k)) :=
@@ -169,7 +167,7 @@ theorem conjugatedCompletionAmbientAutomorphism_left_embedded
     (f : (Fin l → F2) ≃ₗ[F2] (Fin l → F2))
     (g : (Fin r → F2) ≃ₗ[F2] (Fin r → F2))
     (z : Fin (l + r) → F2) :
-    (conjugatedCompletionAmbientAutomorphism H f g k).left
+    (conjugatedCompletionAmbientAutomorphism H f g).left
         (E.left z) =
       E.left (completionLeftEquiv f g z) := by
   change
@@ -200,7 +198,7 @@ theorem conjugatedCompletionAmbientAutomorphism_right_embedded
     (f : (Fin l → F2) ≃ₗ[F2] (Fin l → F2))
     (g : (Fin r → F2) ≃ₗ[F2] (Fin r → F2))
     (z : Fin (l + r) → F2) :
-    (conjugatedCompletionAmbientAutomorphism H f g k).right
+    (conjugatedCompletionAmbientAutomorphism H f g).right
         (E.right z) =
       E.right
         (dotContragredient (completionLeftEquiv f g) z) := by
@@ -226,7 +224,7 @@ theorem conjugatedCompletionAmbientAutomorphism_refl_left
         (perfectBanana ((l + r) + k))) :
     (conjugatedCompletionAmbientAutomorphism H
       (LinearEquiv.refl F2 (Fin l → F2))
-      (LinearEquiv.refl F2 (Fin r → F2)) k).left =
+      (LinearEquiv.refl F2 (Fin r → F2))).left =
       LinearMap.id := by
   apply LinearMap.ext
   intro x
@@ -251,7 +249,7 @@ theorem conjugatedCompletionAmbientAutomorphism_refl_right
         (perfectBanana ((l + r) + k))) :
     (conjugatedCompletionAmbientAutomorphism H
       (LinearEquiv.refl F2 (Fin l → F2))
-      (LinearEquiv.refl F2 (Fin r → F2)) k).right =
+      (LinearEquiv.refl F2 (Fin r → F2))).right =
       LinearMap.id := by
   apply LinearMap.ext
   intro y
@@ -277,10 +275,10 @@ theorem conjugatedCompletionAmbientAutomorphism_comp_left
     (f₁ f₂ : (Fin l → F2) ≃ₗ[F2] (Fin l → F2))
     (g₁ g₂ : (Fin r → F2) ≃ₗ[F2] (Fin r → F2)) :
     (conjugatedCompletionAmbientAutomorphism H
-      (f₁.trans f₂) (g₁.trans g₂) k).left =
+      (f₁.trans f₂) (g₁.trans g₂)).left =
       (BananaMatrixEmbedding.comp
-        (conjugatedCompletionAmbientAutomorphism H f₂ g₂ k)
-        (conjugatedCompletionAmbientAutomorphism H f₁ g₁ k)).left := by
+        (conjugatedCompletionAmbientAutomorphism H f₂ g₂)
+        (conjugatedCompletionAmbientAutomorphism H f₁ g₁)).left := by
   apply LinearMap.ext
   intro x
   change
@@ -314,10 +312,10 @@ theorem conjugatedCompletionAmbientAutomorphism_comp_right
     (f₁ f₂ : (Fin l → F2) ≃ₗ[F2] (Fin l → F2))
     (g₁ g₂ : (Fin r → F2) ≃ₗ[F2] (Fin r → F2)) :
     (conjugatedCompletionAmbientAutomorphism H
-      (f₁.trans f₂) (g₁.trans g₂) k).right =
+      (f₁.trans f₂) (g₁.trans g₂)).right =
       (BananaMatrixEmbedding.comp
-        (conjugatedCompletionAmbientAutomorphism H f₂ g₂ k)
-        (conjugatedCompletionAmbientAutomorphism H f₁ g₁ k)).right := by
+        (conjugatedCompletionAmbientAutomorphism H f₂ g₂)
+        (conjugatedCompletionAmbientAutomorphism H f₁ g₁)).right := by
   apply LinearMap.ext
   intro y
   change
