@@ -108,8 +108,9 @@ def swapPerfectBlockEmbedding
   right_injective := E.left_injective
   pairing_apply := by
     intro x y
-    simpa only [perfectBanana_eval, dotProduct_comm] using
-      E.pairing_apply y x
+    simp only [perfectBanana_eval]
+    rw [dotProduct_comm (E.right x) (E.left y), dotProduct_comm x y]
+    exact E.pairing_apply y x
 
 /-- The right-sort analogue of
 `exists_perfectBlockEmbedding_leftRange_eq`. -/
