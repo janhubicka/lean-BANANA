@@ -35,9 +35,9 @@ noncomputable def map
     (hf : Function.Injective f) :
     FixedSubspace d m := by
   refine ⟨LinearMap.range (f.comp P.1.subtype), ?_⟩
-  rw [LinearMap.finrank_range_of_inj]
-  · exact P.2
-  · exact hf.comp P.1.injective_subtype
+  have hinj : Function.Injective (f.comp P.1.subtype) :=
+    hf.comp P.1.injective_subtype
+  exact (LinearMap.finrank_range_of_inj hinj).trans P.2
 
 /-- The image of a subspace is contained in the range of the ambient map. -/
 theorem map_le_range
@@ -132,7 +132,7 @@ theorem leftOneSidedCopyRamseyOne_of_binarySubspaceRamsey
   rw [← hE]
   change LinearMap.range F.left ≤ LinearMap.range E.left
   simpa [F, BananaMatrixEmbedding.comp] using
-    LinearMap.range_comp_le_range E.left j.left
+    LinearMap.range_comp_le_range j.left E.left
 
 /-- The binary subspace Ramsey theorem also implies the right one-sided
 degree-one assertion. -/
@@ -175,6 +175,6 @@ theorem rightOneSidedCopyRamseyOne_of_binarySubspaceRamsey
   rw [← hE]
   change LinearMap.range F.right ≤ LinearMap.range E.right
   simpa [F, BananaMatrixEmbedding.comp] using
-    LinearMap.range_comp_le_range E.right j.right
+    LinearMap.range_comp_le_range j.right E.right
 
 end SuccessorTree.NonPrecompact
