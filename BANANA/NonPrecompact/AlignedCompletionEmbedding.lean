@@ -48,10 +48,10 @@ theorem exists_alignedCompletionEmbedding
   refine ⟨E, ?_, ?_⟩
   · intro x
     change H.left (E₀.left (A.completionLeft x)) = j.left x
-    simpa [e₀, BananaMatrixEmbedding.comp] using hleft x
+    simpa [e₀, BananaMatrixEmbedding.comp, completionEmbedding] using hleft x
   · intro y
     change H.right (E₀.right (A.completionRight y)) = j.right y
-    simpa [e₀, BananaMatrixEmbedding.comp] using hright y
+    simpa [e₀, BananaMatrixEmbedding.comp, completionEmbedding] using hright y
 
 end BananaMatrixStructure
 
