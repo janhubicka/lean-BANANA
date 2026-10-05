@@ -60,7 +60,9 @@ theorem binarySubspaceRamsey_of_binaryAffineSubspaceRamsey
     { space := Tspace
       nonempty := AffineSubspace.mk'_nonempty p P.1
       finrank_direction := by
-        simpa [Tspace, AffineSubspace.direction_mk'] using P.2 }
+        change finrank F2 (AffineSubspace.mk' p P.1).direction = a
+        rw [AffineSubspace.direction_mk']
+        exact P.2 }
   have hTle : T.space ≤ W.space := by
     intro q hq
     have hqdir : q -ᵥ p ∈ P.1 := by
