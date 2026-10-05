@@ -91,6 +91,42 @@ theorem exists_perfectBlockEmbedding_leftRange_eq
     have hval := congrArg Subtype.val hu
     exact hval
 
+/-- Swap the two sorts of an embedding between standard perfect pairings.
+The standard dot product is symmetric, so this again preserves the pairing. -/
+def swapPerfectBlockEmbedding
+    {D n : ℕ}
+    (E :
+      BananaMatrixEmbedding
+        (perfectBanana D)
+        (perfectBanana n)) :
+    BananaMatrixEmbedding
+      (perfectBanana D)
+      (perfectBanana n) where
+  left := E.right
+  right := E.left
+  left_injective := E.right_injective
+  right_injective := E.left_injective
+  pairing_apply := by
+    intro x y
+    simpa only [perfectBanana_eval, dotProduct_comm] using
+      E.pairing_apply y x
+
+/-- The right-sort analogue of
+`exists_perfectBlockEmbedding_leftRange_eq`. -/
+theorem exists_perfectBlockEmbedding_rightRange_eq
+    {D k : ℕ}
+    (W : Submodule F2 (Fin (D + k) → F2))
+    (hW : finrank F2 W = D) :
+    ∃ E :
+        BananaMatrixEmbedding
+          (perfectBanana D)
+          (perfectBanana (D + k)),
+      LinearMap.range E.right = W := by
+  obtain ⟨E, hE⟩ :=
+    exists_perfectBlockEmbedding_leftRange_eq W hW
+  refine ⟨swapPerfectBlockEmbedding E, ?_⟩
+  exact hE
+
 end BananaMatrixStructure
 
 end SuccessorTree.NonPrecompact
