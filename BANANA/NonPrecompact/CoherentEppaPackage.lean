@@ -102,7 +102,12 @@ theorem exists_alignedCoherentAmbientAction
             embeddedCompletionAmbientAutomorphism_left
               E f g (A.completionLeft x)
         _ = E.left (A.completionLeft (f x)) := by
-            rw [completionAutomorphism_left_completion A f g x]
+            have h :=
+              completionAutomorphism_left_completion A f g x
+            change
+              completionLeftEquiv f g (A.completionLeft x) =
+                A.completionLeft (f x) at h
+            exact congrArg E.left h
         _ = j.left (f x) := hleft (f x)
     · intro y
       calc
