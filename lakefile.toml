@@ -1,0 +1,11 @@
+name = "banana-lean"
+version = "0.1.0"
+defaultTargets = ["BANANA"]
+
+[[require]]
+name = "successor-tree-lean"
+git = "https://github.com/janhubicka/lean-successors"
+rev = "57d35508abd0e55cb2387f88360125d6320e3457"
+
+[[lean_lib]]
+name = "BANANA"
