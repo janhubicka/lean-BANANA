@@ -110,7 +110,7 @@ def swapPerfectBlockEmbedding
     intro x y
     simp only [perfectBanana_eval]
     rw [dotProduct_comm (E.right x) (E.left y), dotProduct_comm x y]
-    exact E.pairing_apply y x
+    simpa only [perfectBanana_eval] using E.pairing_apply y x
 
 /-- The right-sort analogue of
 `exists_perfectBlockEmbedding_leftRange_eq`. -/
