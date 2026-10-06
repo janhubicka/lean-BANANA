@@ -5,6 +5,8 @@ import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BilinearResidue
+import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
+import BANANA.NonPrecompact.BinaryAffineRamseyInterface
 import BANANA.NonPrecompact.CauchyBinet
 import BANANA.NonPrecompact.CoherentConjugation
 import BANANA.NonPrecompact.CoherentEppaPackage
@@ -29,6 +31,7 @@ import BANANA.NonPrecompact.ParityStarMatrix
 import BANANA.NonPrecompact.PerfectBlockConjugator
 import BANANA.NonPrecompact.PerfectCopy
 import BANANA.NonPrecompact.PerfectHomogeneity
+import BANANA.NonPrecompact.PerfectLeftRange
 import BANANA.NonPrecompact.PerfectSelfEmbedding
 import BANANA.NonPrecompact.PersistentColourings
 import BANANA.NonPrecompact.PrebananaAmalgamBridge
