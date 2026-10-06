@@ -71,7 +71,7 @@ theorem commonPrefix_prefix_left :
       | cons b bs =>
           by_cases h : a = b
           · subst b
-            simpa [commonPrefix] using List.IsPrefix.cons a (ih bs)
+            exact List.cons_prefix_cons.mpr ⟨rfl, ih bs⟩
           · simp [commonPrefix, h]
 
 theorem commonPrefix_prefix_right :
@@ -87,7 +87,7 @@ theorem commonPrefix_prefix_right :
       | cons b bs =>
           by_cases h : a = b
           · subst b
-            simpa [commonPrefix] using List.IsPrefix.cons a (ih bs)
+            exact List.cons_prefix_cons.mpr ⟨rfl, ih bs⟩
           · simp [commonPrefix, h]
 
 theorem prefix_commonPrefix :
@@ -102,23 +102,17 @@ theorem prefix_commonPrefix :
       intro x y hx hy
       cases x with
       | nil =>
-          simpa using hx
+          simp at hx
       | cons a as =>
           cases y with
           | nil =>
-              simpa using hy
+              simp at hy
           | cons b bs =>
-              have hxa : c = a := by
-                simpa using hx.head_eq
-              have hyb : c = b := by
-                simpa using hy.head_eq
+              obtain ⟨hca, hxt⟩ := List.cons_prefix_cons.mp hx
+              obtain ⟨hcb, hyt⟩ := List.cons_prefix_cons.mp hy
               subst a
               subst b
-              have hxt : cs <+: as := by
-                simpa using hx.tail
-              have hyt : cs <+: bs := by
-                simpa using hy.tail
-              simpa [commonPrefix] using List.IsPrefix.cons c (ih hxt hyt)
+              exact List.cons_prefix_cons.mpr ⟨rfl, ih hxt hyt⟩
 
 /-- Delete the suffix after position n. -/
 def truncate (x : BinaryWord) (n : Nat) : BinaryWord :=
