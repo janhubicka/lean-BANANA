@@ -294,8 +294,7 @@ def binarySucc : STree BinaryWord F2 where
         subst q
         simp only [Option.some.injEq] at hb
         have hbits := congrArg BinaryWord.bits hb
-        simp only [appendBit, BinaryWord.mk.injEq,
-          List.append_inj_right] at hbits
+        simp [appendBit] at hbits
         exact ⟨ext hbits.1.symm, rfl, hbits.2.symm⟩
       next hq =>
         simp at hb
