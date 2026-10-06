@@ -41,38 +41,6 @@ def add (x y : BinaryWord) : BinaryWord :=
     (add x y).bits.length = x.bits.length := by
   simp [add_length, h]
 
-theorem add_comm (x y : BinaryWord) :
-    add x y = add y x := by
-  apply BinaryWord.ext
-  induction x.bits generalizing y.bits with
-  | nil =>
-      simp [add]
-  | cons a xs ih =>
-      cases y.bits with
-      | nil =>
-          simp [add]
-      | cons b ys =>
-          simp [add, add_comm, ih]
-
-@[simp] theorem add_zero_right
-    (x : BinaryWord) :
-    add x (zero x.bits.length) = x := by
-  apply BinaryWord.ext
-  induction x.bits with
-  | nil =>
-      simp [add, zero]
-  | cons a xs ih =>
-      simp [add, zero, ih]
-
-@[simp] theorem add_self (x : BinaryWord) :
-    add x x = zero x.bits.length := by
-  apply BinaryWord.ext
-  induction x.bits with
-  | nil =>
-      simp [add, zero]
-  | cons a xs ih =>
-      simp [add, zero, ih]
-
 end BinaryWord
 
 /-- A binary-tree shape map is linear on every level. -/
