@@ -130,7 +130,7 @@ theorem prefix_commonPrefix :
               subst b
               have hzx' : cs <+: as := by
                 rcases hzx with ⟨t, ht⟩
-                simpa using List.cons.inj ht |>.2
+                simpa using (List.cons.inj ht).2
               have hzy' : cs <+: bs := by
                 rcases hzy with ⟨t, ht⟩
                 simpa using List.cons.inj ht |>.2
@@ -172,7 +172,7 @@ private theorem covBy_length_succ {a b : BinaryWord} (h : a ⋖ b) :
       have hpre :
           b.bits.take a.bits.length <+:
             b.bits.take (a.bits.length + 1) :=
-        List.take_prefix_take _ hlen
+        List.take_prefix_take_left hlen
       simpa [htake] using hpre
     · intro hca
       have hlen := hca.length_le
@@ -221,7 +221,7 @@ instance : LevelTree BinaryWord where
       have hp :
           c.bits.take a.bits.length <+:
             c.bits.take b.bits.length :=
-        List.take_prefix_take _ hlen
+        List.take_prefix_take_left hlen
       change a.bits <+: b.bits
       simpa [htakeA, htakeB] using hp
     · right
@@ -237,7 +237,7 @@ instance : LevelTree BinaryWord where
       have hp :
           c.bits.take b.bits.length <+:
             c.bits.take a.bits.length :=
-        List.take_prefix_take _ hlen'
+        List.take_prefix_take_left hlen'
       change b.bits <+: a.bits
       simpa [htakeA, htakeB] using hp
   ancestor_exists := by
@@ -312,11 +312,19 @@ def binarySucc : STree BinaryWord F2 where
         simp only [Option.some.injEq] at hb
         have hbits := congrArg BinaryWord.bits hb
         simp [appendBit] at hbits
+        have hlen : a.bits.length = b.bits.length := by
+          have h := congrArg List.length hbits
+          simp at h
+          omega
         have hab : a.bits = b.bits := by
-          exact List.append_right_cancel hbits
+          have htake :=
+            congrArg (fun l : List F2 => l.take a.bits.length) hbits
+          simpa [hlen] using htake
         have hcd : c = d := by
-          have := congrArg List.getLast? hbits
-          simpa using this
+          rw [hab] at hbits
+          have hsingle : [c] = [d] :=
+            List.append_left_cancel hbits
+          exact List.singleton_inj.mp hsingle
         exact ⟨ext hab, rfl, hcd⟩
       next hq =>
         simp at hb
