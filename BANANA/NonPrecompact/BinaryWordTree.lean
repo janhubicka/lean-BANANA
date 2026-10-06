@@ -33,27 +33,19 @@ theorem ext {x y : BinaryWord} (h : x.bits = y.bits) : x = y := by
   cases h
   rfl
 
-instance : LE BinaryWord :=
-  ⟨fun x y => x.bits <+: y.bits⟩
-
-instance : LT BinaryWord :=
-  ⟨fun x y => x ≤ y ∧ ¬ y ≤ x⟩
-
 instance : PartialOrder BinaryWord where
-  le := (· ≤ ·)
-  lt := (· < ·)
+  le x y := x.bits <+: y.bits
   le_refl := by
     intro x
     exact List.prefix_rfl
   le_trans := by
     intro a b c hab hbc
-    exact hab.trans hbc
+    exact List.IsPrefix.trans hab hbc
   le_antisymm := by
     intro a b hab hba
     apply ext
     exact hab.eq_of_length
       (Nat.le_antisymm hab.length_le hba.length_le)
-  lt_iff_le_not_le := Iff.rfl
 
 @[simp] theorem le_iff {x y : BinaryWord} :
     x ≤ y ↔ x.bits <+: y.bits := Iff.rfl
@@ -81,8 +73,9 @@ theorem commonPrefix_prefix_left :
       | cons b bs =>
           by_cases h : a = b
           · subst b
-            simp only [commonPrefix, if_pos rfl]
-            exact List.IsPrefix.cons (ih bs)
+            rw [commonPrefix]
+            simp only [ite_true]
+            exact List.cons_prefix_cons.mpr ⟨rfl, ih bs⟩
           · simp [commonPrefix, h]
 
 theorem commonPrefix_prefix_right :
@@ -98,8 +91,9 @@ theorem commonPrefix_prefix_right :
       | cons b bs =>
           by_cases h : a = b
           · subst b
-            simp only [commonPrefix, if_pos rfl]
-            exact List.IsPrefix.cons (ih bs)
+            rw [commonPrefix]
+            simp only [ite_true]
+            exact List.cons_prefix_cons.mpr ⟨rfl, ih bs⟩
           · simp [commonPrefix, h]
 
 theorem prefix_commonPrefix :
@@ -118,24 +112,16 @@ theorem prefix_commonPrefix :
           | nil =>
               simp at hzy
           | cons b bs =>
-              have hca : c = a := by
-                rcases hzx with ⟨t, ht⟩
-                cases ht
-                rfl
-              have hcb : c = b := by
-                rcases hzy with ⟨t, ht⟩
-                cases ht
-                rfl
+              obtain ⟨hca, hzx'⟩ :=
+                List.cons_prefix_cons.mp hzx
+              obtain ⟨hcb, hzy'⟩ :=
+                List.cons_prefix_cons.mp hzy
               subst a
               subst b
-              have hzx' : cs <+: as := by
-                rcases hzx with ⟨t, ht⟩
-                simpa using (List.cons.inj ht).2
-              have hzy' : cs <+: bs := by
-                rcases hzy with ⟨t, ht⟩
-                simpa using List.cons.inj ht |>.2
-              simp only [commonPrefix, if_pos rfl]
-              exact List.IsPrefix.cons (ih hzx' hzy')
+              rw [commonPrefix]
+              simp only [ite_true]
+              exact List.cons_prefix_cons.mpr
+                ⟨rfl, ih hzx' hzy'⟩
 
 /-- Prefix-tree meet. -/
 def meet (x y : BinaryWord) : BinaryWord :=
@@ -162,11 +148,9 @@ private theorem covBy_length_succ {a b : BinaryWord} (h : a ⋖ b) :
   have hac : a < c := by
     constructor
     · change a.bits <+: b.bits.take (a.bits.length + 1)
-      rcases hab with ⟨t, ht⟩
       have htake :
-          b.bits.take a.bits.length = a.bits := by
-        subst b
-        simp
+          b.bits.take a.bits.length = a.bits :=
+        (List.prefix_iff_eq_take.mp hab).symm
       have hlen :
           a.bits.length ≤ a.bits.length + 1 := by omega
       have hpre :
@@ -210,14 +194,10 @@ instance : LevelTree BinaryWord where
     intro a b c hac hbc
     by_cases hlen : a.bits.length ≤ b.bits.length
     · left
-      rcases hbc with ⟨tb, hcb⟩
-      rcases hac with ⟨ta, hca⟩
-      have htakeA : c.bits.take a.bits.length = a.bits := by
-        rw [hca]
-        simp
-      have htakeB : c.bits.take b.bits.length = b.bits := by
-        rw [hcb]
-        simp
+      have htakeA : c.bits.take a.bits.length = a.bits :=
+        (List.prefix_iff_eq_take.mp hac).symm
+      have htakeB : c.bits.take b.bits.length = b.bits :=
+        (List.prefix_iff_eq_take.mp hbc).symm
       have hp :
           c.bits.take a.bits.length <+:
             c.bits.take b.bits.length :=
@@ -226,14 +206,10 @@ instance : LevelTree BinaryWord where
       simpa [htakeA, htakeB] using hp
     · right
       have hlen' : b.bits.length ≤ a.bits.length := by omega
-      rcases hbc with ⟨tb, hcb⟩
-      rcases hac with ⟨ta, hca⟩
-      have htakeA : c.bits.take a.bits.length = a.bits := by
-        rw [hca]
-        simp
-      have htakeB : c.bits.take b.bits.length = b.bits := by
-        rw [hcb]
-        simp
+      have htakeA : c.bits.take a.bits.length = a.bits :=
+        (List.prefix_iff_eq_take.mp hac).symm
+      have htakeB : c.bits.take b.bits.length = b.bits :=
+        (List.prefix_iff_eq_take.mp hbc).symm
       have hp :
           c.bits.take b.bits.length <+:
             c.bits.take a.bits.length :=
@@ -251,9 +227,13 @@ instance : LevelTree BinaryWord where
     change Set.Finite {x : BinaryWord | x.bits.length = n}
     have hfin : Set.Finite {l : List F2 | l.length = n} :=
       List.finite_length_eq F2 n
-    exact hfin.preimage (fun x : BinaryWord => x.bits) (by
-      intro x y h
-      exact ext h)
+    exact Set.Finite.preimage
+      (f := fun x : BinaryWord => x.bits)
+      (s := {l : List F2 | l.length = n})
+      (by
+        intro x hx y hy hxy
+        exact ext hxy)
+      hfin
   meet := meet
   meet_le_left := by
     intro a b hcommon
@@ -278,9 +258,12 @@ theorem covBy_appendBit (x : BinaryWord) (b : F2) :
       have hlen := h.length_le
       simp [appendBit] at hlen
   · intro z hxz hzb
-    have hzx := hxz.1.length_le
-    have hzbLen := hzb.1.length_le
-    simp [appendBit] at hzbLen
+    have hzx := LevelTree.lt_level_lt hxz
+    have hzbLen := LevelTree.lt_level_lt hzb
+    change x.bits.length < z.bits.length at hzx
+    change z.bits.length < (x.bits ++ [b]).length at hzbLen
+    simp only [List.length_append, List.length_singleton,
+      Nat.add_one] at hzbLen
     omega
 
 /-- Binary successor operation: parameters are empty and the character is the
@@ -311,21 +294,9 @@ def binarySucc : STree BinaryWord F2 where
         subst q
         simp only [Option.some.injEq] at hb
         have hbits := congrArg BinaryWord.bits hb
-        simp [appendBit] at hbits
-        have hlen : a.bits.length = b.bits.length := by
-          have h := congrArg List.length hbits
-          simp at h
-          omega
-        have hab : a.bits = b.bits := by
-          have htake :=
-            congrArg (fun l : List F2 => l.take a.bits.length) hbits
-          simpa [hlen] using htake
-        have hcd : c = d := by
-          rw [hab] at hbits
-          have hsingle : [c] = [d] :=
-            List.append_left_cancel hbits
-          exact List.singleton_inj.mp hsingle
-        exact ⟨ext hab, rfl, hcd⟩
+        simp only [appendBit, BinaryWord.mk.injEq,
+          List.append_inj_right] at hbits
+        exact ⟨ext hbits.1.symm, rfl, hbits.2.symm⟩
       next hq =>
         simp at hb
     next hp =>
@@ -336,9 +307,9 @@ def binarySucc : STree BinaryWord F2 where
       covBy_length_succ hab
     have hpref : a.bits <+: b.bits := hab.le
     rcases hpref with ⟨t, ht⟩
+    have hlen' := congrArg List.length ht
+    simp only [List.length_append] at hlen'
     have htlen : t.length = 1 := by
-      subst b
-      simp at hlen
       omega
     obtain ⟨c, rfl⟩ : ∃ c : F2, t = [c] := by
       cases t with
@@ -349,7 +320,12 @@ def binarySucc : STree BinaryWord F2 where
           | cons d t =>
               simp at htlen
     refine ⟨[], c, ?_⟩
-    simp [binarySucc, appendBit, ht]
+    change
+      (if ([] : List BinaryWord) = [] then
+          some (appendBit a c) else none) = some b
+    simp only [ite_true, Option.some.injEq]
+    apply ext
+    exact ht
 
 end BinaryWord
 
