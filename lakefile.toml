@@ -5,7 +5,7 @@ defaultTargets = ["BANANA"]
 [[require]]
 name = "successor-tree-lean"
 git = "https://github.com/janhubicka/lean-successors"
-rev = "f073735fb28c998e419128c16d28d212675f8600"
+rev = "d9be105f73ca5a0f3f411b87d4c2419d0eb94753"
 
 [[lean_lib]]
 name = "BANANA"
