@@ -7,6 +7,7 @@ import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BilinearResidue
 import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
 import BANANA.NonPrecompact.BinarySubspaceRamseyFromSuccessor
+import BANANA.NonPrecompact.BinaryWordTree
 import BANANA.NonPrecompact.BinaryAffineRamseyInterface
 import BANANA.NonPrecompact.CauchyBinet
 import BANANA.NonPrecompact.CoherentConjugation
