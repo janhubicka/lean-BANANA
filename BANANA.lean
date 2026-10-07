@@ -35,6 +35,7 @@ import BANANA.NonPrecompact.LinearBinaryDuplication
 import BANANA.NonPrecompact.LinearBinaryContraction
 import BANANA.NonPrecompact.LinearBinaryM2
 import BANANA.NonPrecompact.LinearBinarySMTree
+import BANANA.NonPrecompact.LinearBinaryRanges
 import BANANA.NonPrecompact.MatrixAffineParity
 import BANANA.NonPrecompact.PairingCopies
 import BANANA.NonPrecompact.ParityStarMatrix
