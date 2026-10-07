@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.LinearBoringShapeMap
 import Mathlib.Data.List.OfFn
+import Mathlib.Data.Fin.Tuple.Basic
 
 /-!
 # Levelwise-linear shape maps on the binary prefix tree
@@ -66,6 +67,110 @@ theorem LinearOnLevels.map_zero
     funext i
     simp [w0, levelEquiv]
   rw [hw, hz, φ.map_zero]
+
+/-- Restrict a coordinate vector to its first `m` coordinates. -/
+def prefixRestrictionLinearMap
+    (m n : ℕ) (h : m ≤ n) :
+    (Fin n → F2) →ₗ[F2] (Fin m → F2) where
+  toFun := fun x i => x ⟨i.1, lt_of_lt_of_le i.2 h⟩
+  map_add' := by
+    intro x y
+    rfl
+  map_smul' := by
+    intro c x
+    rfl
+
+/-- Insert one linear coordinate into a finite binary coordinate vector. -/
+def insertBoringLinearMap
+    (m n : ℕ) (h : m ≤ n)
+    (e : LinearBoringRule m) :
+    (Fin n → F2) →ₗ[F2] (Fin (n + 1) → F2) where
+  toFun := fun x =>
+    let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
+    p.insertNth (e (prefixRestrictionLinearMap m n h x)) x
+  map_add' := by
+    intro x y
+    funext j
+    let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
+    cases j using Fin.succAboveCases p <;>
+      simp [p, prefixRestrictionLinearMap]
+  map_smul' := by
+    intro c x
+    funext j
+    let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
+    cases j using Fin.succAboveCases p <;>
+      simp [p, prefixRestrictionLinearMap]
+
+/-- On a level reaching the insertion position, the word insertion agrees
+with the corresponding linear tuple insertion. -/
+theorem levelEquiv_insertLinearCoordinate
+    (m n : ℕ) (h : m ≤ n)
+    (e : LinearBoringRule m)
+    (w : AtLevel n) :
+    let hlen :
+        (insertLinearCoordinate m e w.1).bits.length = n + 1 := by
+      rw [length_insertLinearCoordinate]
+      simp [w.2, h]
+    levelEquiv (n + 1)
+        ⟨insertLinearCoordinate m e w.1, hlen⟩ =
+      insertBoringLinearMap m n h e (levelEquiv n w) := by
+  intro hlen
+  funext j
+  let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
+  have hins :
+      (insertLinearCoordinate m e w.1).bits =
+        w.1.bits.insertIdx m
+          (e (prefixCoords w.1 m (by simpa [w.2] using h))) := by
+    exact insertLinearCoordinate_of_le
+      m e w.1 (by simpa [w.2] using h)
+  cases j using Fin.succAboveCases p with
+  | _ =>
+      rw [hins]
+      simp [levelEquiv, insertBoringLinearMap, p,
+        prefixRestrictionLinearMap, prefixCoords, w.2]
+  | _ i =>
+      rw [hins]
+      by_cases hi : i.1 < m
+      · have hs :
+            p.succAbove i = i.castSucc := by
+          apply Fin.succAbove_of_castSucc_lt
+          simpa [p] using hi
+        rw [hs]
+        simp [levelEquiv, insertBoringLinearMap, p,
+          prefixRestrictionLinearMap, prefixCoords, w.2, hi]
+      · have hmi : m ≤ i.1 := Nat.le_of_not_gt hi
+        have hs :
+            p.succAbove i = i.succ := by
+          apply Fin.succAbove_of_le_castSucc
+          simpa [p, Fin.le_iff_val_le_val] using hmi
+        rw [hs]
+        simp [levelEquiv, insertBoringLinearMap, p,
+          prefixRestrictionLinearMap, prefixCoords, w.2, hi, hmi]
+
+/-- Every linear boring coordinate insertion belongs to the levelwise-linear
+monoid. -/
+theorem linearOnLevels_insertLinearCoordinateShapeMap
+    (m : ℕ) (e : LinearBoringRule m) :
+    LinearOnLevels (insertLinearCoordinateShapeMap m e) := by
+  intro n
+  by_cases h : n < m
+  · refine ⟨n, LinearMap.id, ?_⟩
+    intro w
+    have hwlt : w.1.bits.length < m := by simpa [w.2] using h
+    have hfix :=
+      insertLinearCoordinate_of_lt m e w.1 hwlt
+    refine ⟨?_, ?_⟩
+    · simpa [hfix] using w.2
+    · simpa [hfix]
+  · have hmn : m ≤ n := Nat.le_of_not_gt h
+    refine ⟨n + 1, insertBoringLinearMap m n hmn e, ?_⟩
+    intro w
+    let hlen :
+        (insertLinearCoordinate m e w.1).bits.length = n + 1 := by
+      rw [length_insertLinearCoordinate]
+      simp [w.2, hmn]
+    refine ⟨hlen, ?_⟩
+    exact levelEquiv_insertLinearCoordinate m n hmn e w
 
 theorem linearOnLevels_id :
     LinearOnLevels (ShapeMap.id binarySucc) := by
