@@ -87,3 +87,64 @@ encoding is deliberately marked as an interface, not as verified.
 
 The remaining gap is independent of the established infinite-degree
 half and of the coherent-EPPA package.
+
+
+## Update — 7 October: one remaining representation theorem
+
+The exact-coordinate class is nonempty for every source dimension `a` and
+target terminal dimension `D ≥ a`, witnessed by repeated zero linear
+coordinate insertions in `LinearBinaryExactCoordinates.lean`. The range
+of exact finite composition is the image of the inner range under the
+outer induced linear map in `LinearBinaryComposition.lean`.
+
+The new `LinearBinaryRangeTransfer.lean` replaces the earlier
+`BinarySubspaceSuccessorEncoding.factor` requirement by the single
+proposition `EveryBinarySubspaceRepresentable`: every `d`-subspace of
+`F₂^N` is the range of an exact linear binary successor approximation
+with source width `d+1` and terminal level `N`.
+
+**Reduction proof.** Given an exact outer map with injective linear
+action `φ:F₂^D→F₂^N` and an `a`-subspace `P≤range φ`, put
+`Q=P.comap φ`. The standard Mathlib identity
+`Submodule.map_comap_eq_of_le` gives `φ(Q)=P`.
+`Submodule.equivMapOfInjective` shows `dim Q=dim P=a`.
+Representability supplies an exact coordinate map `g` with range `Q`.
+The composition lemma then says the range of the exact composite with
+the outer approximation is `φ(Q)=P`. Thus the independent
+factorisation field is redundant.
+
+The dimension-zero and full-dimensional instances of range
+representability are separately formalised by `zeroPaddingExact`
+and subspace dimension uniqueness. The genuine remaining case is
+`0<d<N`.
+
+**Greedy pivot proof to formalise.** Let `X≤F₂^N` and, for each
+`j<N`, let `λ_j:X→F₂` be restriction of evaluation at coordinate
+`j`. Scan `j=0,…,N-1`. Select `j` as a pivot precisely when
+`λ_j` does not lie in the span of `λ_i`, `i<j`. The selected
+functionals form a basis of `X*` because all ambient evaluations
+separate points of `X`; hence their number is `dim X=d`.
+In the associated dual coordinates `X≅F₂^d`, each pivot is exactly
+the next free input bit and each nonpivot is a linear combination
+of preceding pivot coordinates. Insert the nonpivot target coordinates
+in increasing order as the corresponding linear boring extensions.
+Their composition is a member of the levelwise-linear monoid,
+takes source level `d` to terminal level `N`, and has range `X`.
+
+For a more local induction one can split the last ambient coordinate.
+`BinarySubspaceStep.lean` states and proves the basic alternative:
+for `P≤V×F₂`, either the first-coordinate projection is injective on
+`P`, or `P=π(P)×F₂`. These are precisely the dependent-coordinate
+and new-pivot cases. The remaining formal task is to connect that
+local dichotomy with the recursive construction of the global
+successor approximation.
+
+The independent finite audit now checks uniqueness and completeness of
+the pivot codes against the Gaussian-binomial subspace counts through
+ambient dimension seven; it checks composition through dimension five.
+These computations are independent tests and **not** Lean certification.
+
+The latest new Lean declarations are on a draft branch and **must not
+be reported as kernel-verified until the corresponding Lean build
+and axiom checks succeed**. The circulated manuscript remains
+unchanged except for separately approved TODOs and validation markers.
