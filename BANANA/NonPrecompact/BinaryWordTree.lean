@@ -184,8 +184,7 @@ instance : LevelTree BinaryWord where
       have heqBits := hab.1.eq_of_length heq
       exact hab.2 (by
         change b.bits <+: a.bits
-        rw [heqBits]
-        exact List.prefix_rfl)
+        rw [heqBits])
     omega
   covBy_level := by
     intro a b hab
