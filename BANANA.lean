@@ -28,6 +28,7 @@ import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPersistence
 import BANANA.NonPrecompact.LinearExtension
 import BANANA.NonPrecompact.LinearBoringInsertion
+import BANANA.NonPrecompact.LinearBoringShapeMap
 import BANANA.NonPrecompact.MatrixAffineParity
 import BANANA.NonPrecompact.PairingCopies
 import BANANA.NonPrecompact.ParityStarMatrix
