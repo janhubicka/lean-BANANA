@@ -19,6 +19,33 @@ This algebraic dichotomy is independent of the successor-tree formalisation.
 namespace SuccessorTree.NonPrecompact
 namespace BinaryWord
 
+/-- Separate the last coordinate of a finite binary vector. The
+first component is the prefix, while the second is the final bit. -/
+def lastCoordinateLinearEquiv (n : ℕ) :
+    (Fin (n + 1) → F2) ≃ₗ[F2] ((Fin n → F2) × F2) where
+  toFun := fun x => (Fin.init x, x (Fin.last n))
+  invFun := fun p => Fin.snoc p.1 p.2
+  left_inv := by
+    intro x
+    exact Fin.snoc_init_self x
+  right_inv := by
+    rintro ⟨x, c⟩
+    apply Prod.ext
+    · simp
+    · simp
+  map_add' := by
+    intro x y
+    apply Prod.ext
+    · funext i
+      rfl
+    · rfl
+  map_smul' := by
+    intro c x
+    apply Prod.ext
+    · funext i
+      rfl
+    · rfl
+
 variable {V : Type*} [AddCommGroup V] [Module F2 V]
 
 private def firstCoordinate :
