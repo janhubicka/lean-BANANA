@@ -128,12 +128,15 @@ def insertBoringLinearMap
     funext j
     let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
     change
-      (p.insertNth
-          (e (prefixRestrictionLinearMap m n h (x + y))) (x + y)) j =
-        (p.insertNth
-          (e (prefixRestrictionLinearMap m n h x)) x) j +
-        (p.insertNth
-          (e (prefixRestrictionLinearMap m n h y)) y) j
+      ((p.insertNth
+          (e (prefixRestrictionLinearMap m n h (x + y))) (x + y)) :
+        Fin (n + 1) → F2) j =
+        ((p.insertNth
+          (e (prefixRestrictionLinearMap m n h x)) x) :
+          Fin (n + 1) → F2) j +
+        ((p.insertNth
+          (e (prefixRestrictionLinearMap m n h y)) y) :
+          Fin (n + 1) → F2) j
     rw [(prefixRestrictionLinearMap m n h).map_add, e.map_add]
     refine p.succAboveCases ?_ (fun i => ?_) j
     · simp
@@ -143,10 +146,12 @@ def insertBoringLinearMap
     funext j
     let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
     change
-      (p.insertNth
-          (e (prefixRestrictionLinearMap m n h (c • x))) (c • x)) j =
-        c • (p.insertNth
-          (e (prefixRestrictionLinearMap m n h x)) x) j
+      ((p.insertNth
+          (e (prefixRestrictionLinearMap m n h (c • x))) (c • x)) :
+        Fin (n + 1) → F2) j =
+        c • ((p.insertNth
+          (e (prefixRestrictionLinearMap m n h x)) x) :
+          Fin (n + 1) → F2) j
     rw [(prefixRestrictionLinearMap m n h).map_smul, e.map_smul]
     refine p.succAboveCases ?_ (fun i => ?_) j
     · simp
@@ -176,10 +181,22 @@ theorem levelEquiv_insertLinearCoordinate
       m e w.1 (by simpa [w.2] using h)
   cases j using Fin.succAboveCases p with
   | x =>
+      change
+        (insertLinearCoordinate m e w.1).bits.get
+            ⟨p.1, by simpa [hlen] using p.2⟩ =
+          ((p.insertNth
+              (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
+              (levelEquiv n w)) : Fin (n + 1) → F2) p
       rw [hins]
-      simp [levelEquiv, insertBoringLinearMap, p,
-        prefixRestrictionLinearMap, prefixCoords, w.2]
+      simp [insertBoringLinearMap, p, prefixRestrictionLinearMap,
+        prefixCoords, levelEquiv, w.2]
   | p i =>
+      change
+        (insertLinearCoordinate m e w.1).bits.get
+            ⟨(p.succAbove i).1, by simpa [hlen] using (p.succAbove i).2⟩ =
+          ((p.insertNth
+              (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
+              (levelEquiv n w)) : Fin (n + 1) → F2) (p.succAbove i)
       rw [hins]
       by_cases hi : i.1 < m
       · have hs :
@@ -279,8 +296,10 @@ theorem linearOnLevels_fusionLimit
   · change levelEquiv m
         ⟨ShapeMap.fusionLimit F hstable w.1, _⟩ =
           φ (levelEquiv n w)
-    rw [hpoint]
-    exact hw
+    have hsub :
+        (⟨ShapeMap.fusionLimit F hstable w.1, _⟩ : AtLevel m) =
+          (⟨F n w.1, hFw⟩ : AtLevel m) := Subtype.ext hpoint
+    exact (congrArg (levelEquiv m) hsub).trans hw
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
