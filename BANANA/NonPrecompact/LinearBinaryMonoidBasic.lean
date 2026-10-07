@@ -50,8 +50,6 @@ def LinearOnLevels (F : ShapeMap binarySucc) : Prop :=
             levelEquiv m ⟨F w.1, hFw⟩ =
               φ (levelEquiv n w)
 
-/-- Levelwise linearity forces the all-zero word on every source level to
-map to the all-zero word on the corresponding target level. -/
 /-- A linear map witnessing the action of an injective shape map on one
 level is itself injective. -/
 theorem levelWitness_injective
@@ -129,14 +127,30 @@ def insertBoringLinearMap
     intro x y
     funext j
     let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
-    cases j using Fin.succAboveCases p <;>
-      simp [p, prefixRestrictionLinearMap]
+    change
+      (p.insertNth
+          (e (prefixRestrictionLinearMap m n h (x + y))) (x + y)) j =
+        (p.insertNth
+          (e (prefixRestrictionLinearMap m n h x)) x) j +
+        (p.insertNth
+          (e (prefixRestrictionLinearMap m n h y)) y) j
+    rw [(prefixRestrictionLinearMap m n h).map_add, e.map_add]
+    refine p.succAboveCases ?_ (fun i => ?_) j
+    · simp
+    · simp [Pi.add_apply]
   map_smul' := by
     intro c x
     funext j
     let p : Fin (n + 1) := ⟨m, Nat.lt_succ_of_le h⟩
-    cases j using Fin.succAboveCases p <;>
-      simp [p, prefixRestrictionLinearMap]
+    change
+      (p.insertNth
+          (e (prefixRestrictionLinearMap m n h (c • x))) (c • x)) j =
+        c • (p.insertNth
+          (e (prefixRestrictionLinearMap m n h x)) x) j
+    rw [(prefixRestrictionLinearMap m n h).map_smul, e.map_smul]
+    refine p.succAboveCases ?_ (fun i => ?_) j
+    · simp
+    · simp [Pi.smul_apply]
 
 /-- On a level reaching the insertion position, the word insertion agrees
 with the corresponding linear tuple insertion. -/
@@ -161,11 +175,11 @@ theorem levelEquiv_insertLinearCoordinate
     exact insertLinearCoordinate_of_le
       m e w.1 (by simpa [w.2] using h)
   cases j using Fin.succAboveCases p with
-  | _ =>
+  | x =>
       rw [hins]
       simp [levelEquiv, insertBoringLinearMap, p,
         prefixRestrictionLinearMap, prefixCoords, w.2]
-  | _ i =>
+  | p i =>
       rw [hins]
       by_cases hi : i.1 < m
       · have hs :
@@ -197,8 +211,12 @@ theorem linearOnLevels_insertLinearCoordinateShapeMap
     have hfix :=
       insertLinearCoordinate_of_lt m e w.1 hwlt
     refine ⟨?_, ?_⟩
-    · simpa [hfix] using w.2
-    · simpa [hfix]
+    · change (insertLinearCoordinate m e w.1).bits.length = n
+      simpa [hfix] using w.2
+    · change levelEquiv n
+        ⟨insertLinearCoordinate m e w.1, _⟩ = levelEquiv n w
+      congr 1
+      exact Subtype.ext hfix
   · have hmn : m ≤ n := Nat.le_of_not_gt h
     refine ⟨n + 1, insertBoringLinearMap m n hmn e, ?_⟩
     intro w
@@ -252,11 +270,17 @@ theorem linearOnLevels_fusionLimit
   obtain ⟨hFw, hw⟩ := hφ w
   have hpoint :
       ShapeMap.fusionLimit F hstable w.1 = F n w.1 := by
-    simpa [w.2] using
-      ShapeMap.fusionLimit_apply F hstable w.1
+    change F (LevelTree.lev w.1) w.1 = F n w.1
+    rw [show LevelTree.lev w.1 = n from w.2]
   refine ⟨?_, ?_⟩
-  · simpa [hpoint] using hFw
-  · simpa [hpoint] using hw
+  · change (ShapeMap.fusionLimit F hstable w.1).bits.length = m
+    rw [hpoint]
+    exact hFw
+  · change levelEquiv m
+        ⟨ShapeMap.fusionLimit F hstable w.1, _⟩ =
+          φ (levelEquiv n w)
+    rw [hpoint]
+    exact hw
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
