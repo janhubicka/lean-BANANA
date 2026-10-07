@@ -186,32 +186,37 @@ theorem levelEquiv_insertLinearCoordinate
         ((p.insertNth
             (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
             (levelEquiv n w)) : Fin (n + 1) → F2) p
-    simp only [hins]
-    simp [insertBoringLinearMap, p, prefixRestrictionLinearMap,
-      prefixCoords, levelEquiv, w.2]
+    have hw : m ≤ w.1.bits.length := by
+      simpa [w.2] using h
+    simp [insertLinearCoordinate, hw, insertBoringLinearMap, p,
+      prefixRestrictionLinearMap, prefixCoords, levelEquiv,
+      List.get_insertIdx_self, w.2]
   · change
       (insertLinearCoordinate m e w.1).bits.get
           ⟨(p.succAbove i).1, by simpa [hlen] using (p.succAbove i).2⟩ =
         ((p.insertNth
             (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
             (levelEquiv n w)) : Fin (n + 1) → F2) (p.succAbove i)
-    simp only [hins]
+    have hw : m ≤ w.1.bits.length := by
+      simpa [w.2] using h
     by_cases hi : i.1 < m
-      · have hs :
-            p.succAbove i = i.castSucc := by
-          apply Fin.succAbove_of_castSucc_lt
-          simpa [p] using hi
-        rw [hs]
-        simp [levelEquiv, insertBoringLinearMap, p,
-          prefixRestrictionLinearMap, prefixCoords, w.2, hi]
-      · have hmi : m ≤ i.1 := Nat.le_of_not_gt hi
-        have hs :
-            p.succAbove i = i.succ := by
-          apply Fin.succAbove_of_le_castSucc
-          simpa [p, Fin.le_iff_val_le_val] using hmi
-        rw [hs]
-        simp [levelEquiv, insertBoringLinearMap, p,
-          prefixRestrictionLinearMap, prefixCoords, w.2, hi, hmi]
+    · have hs :
+          p.succAbove i = i.castSucc := by
+        apply Fin.succAbove_of_castSucc_lt
+        simpa [p] using hi
+      rw [hs]
+      simp [insertLinearCoordinate, hw, levelEquiv, insertBoringLinearMap,
+        p, prefixRestrictionLinearMap, prefixCoords, w.2, hi,
+        List.get_insertIdx_of_lt]
+    · have hmi : m ≤ i.1 := Nat.le_of_not_gt hi
+      have hs :
+          p.succAbove i = i.succ := by
+        apply Fin.succAbove_of_le_castSucc
+        simpa [p, Fin.le_iff_val_le_val] using hmi
+      rw [hs]
+      simp [insertLinearCoordinate, hw, levelEquiv, insertBoringLinearMap,
+        p, prefixRestrictionLinearMap, prefixCoords, w.2, hi, hmi,
+        List.get_insertIdx_add_succ]
 
 /-- Every linear boring coordinate insertion belongs to the levelwise-linear
 monoid. -/
