@@ -49,7 +49,9 @@ theorem canonicalExtension_appendBit_at_cut
       _ = H.levelMap F.map n + 1 := by
         rw [H.canonicalExtension_level_at_prefix F n]
       _ = LevelTree.lev (F x) + 1 := by
-        rw [H.levelMap_eq F.map (a := x), hx]
+        have hFx : H.levelMap F.map n = LevelTree.lev (F x) := by
+          simpa only [hx] using (H.levelMap_eq F.map (a := x))
+        rw [hFx]
   have hsucc : binarySucc.succ x [] c = some (appendBit x c) := by
     rfl
   obtain ⟨d, hd, hdb⟩ := G.map.weak_succ' hsucc
