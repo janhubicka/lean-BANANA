@@ -171,5 +171,36 @@ theorem lastCoordinate_boring_or_pivot
   · exact Or.inl (exists_linear_last_coordinate_of_injective P hinj)
   · exact Or.inr hpivot
 
+/-- When the last coordinate is dependent, projection preserves
+dimension. -/
+theorem finrank_projected_of_boring
+    (P : Submodule F2 (V × F2))
+    (hvertical : ((0 : V), (1 : F2)) ∉ P) :
+    finrank F2 (P.map firstCoordinate) = finrank F2 P := by
+  let f : P →ₗ[F2] V := firstCoordinate.comp P.subtype
+  have hf : Function.Injective f :=
+    firstCoordinate_injective_of_no_vertical P hvertical
+  change finrank F2 (LinearMap.range f) = finrank F2 P
+  exact LinearMap.finrank_range_of_inj hf
+
+/-- When the last coordinate is independent, the dimension drops by
+exactly one under projection. -/
+theorem finrank_projected_of_pivot
+    (P : Submodule F2 (V × F2))
+    (hvertical : ((0 : V), (1 : F2)) ∈ P) :
+    finrank F2 P = finrank F2 (P.map firstCoordinate) + 1 := by
+  have hp := subspace_eq_product_of_vertical P hvertical
+  calc
+    finrank F2 P =
+        finrank F2
+          ((P.map firstCoordinate).prod (⊤ : Submodule F2 F2)) := by
+          rw [hp]
+    _ = finrank F2
+          ((P.map firstCoordinate) × (⊤ : Submodule F2 F2)) :=
+        LinearEquiv.finrank_eq
+          ((P.map firstCoordinate).prodEquiv (⊤ : Submodule F2 F2))
+    _ = finrank F2 (P.map firstCoordinate) + 1 := by
+      simp [Module.finrank_prod]
+
 end BinaryWord
 end SuccessorTree.NonPrecompact
