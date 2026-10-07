@@ -93,7 +93,66 @@ def check_factorisation():
             print(f"PASS factor N={n} D={d}: {len(codes)} embeddings")
 
 
+
+
+def check_skipped_coordinate_contraction():
+    # Inspect every penultimate skipped level in each finite row-echelon
+    # prefix map. The deleted coordinate is a linear functional of the
+    # prefix, and reinsertion must recover the original images.
+    for n in range(6):
+        for d in range(n + 1):
+            for pivots in combinations(range(n), d):
+                nonpivots = [j for j in range(n) if j not in pivots]
+                choices = [
+                    range(1 << sum(p < j for p in pivots))
+                    for j in nonpivots
+                ]
+                for choice in product(*choices):
+                    levels = list(pivots) + [n]
+
+                    def prefix_image(i, x):
+                        value = 0
+                        for j in range(levels[i]):
+                            if j in pivots[:i]:
+                                bit = (x >> pivots.index(j)) & 1
+                            else:
+                                coef = choice[nonpivots.index(j)]
+                                bit = (coef & x).bit_count() & 1
+                            value |= bit << j
+                        return value
+
+                    for i in range(d + 1):
+                        t = levels[i] - 1
+                        if levels[i] == 0 or t in levels:
+                            continue
+                        assert t not in pivots[:i]
+                        coef = choice[nonpivots.index(t)]
+                        for j in range(i + 1):
+                            for x in range(1 << j):
+                                value = prefix_image(j, x)
+                                if levels[j] <= t:
+                                    continue
+                                prefix = value & ((1 << t) - 1)
+                                inserted_bit = 0
+                                for k, p in enumerate(pivots[:i]):
+                                    if p < t and (coef >> k) & 1:
+                                        inserted_bit ^= (prefix >> p) & 1
+                                erased = (
+                                    (value & ((1 << t) - 1)) |
+                                    ((value >> (t + 1)) << t)
+                                )
+                                restored = (
+                                    (erased & ((1 << t) - 1)) |
+                                    (inserted_bit << t) |
+                                    ((erased >> t) << (t + 1))
+                                )
+                                assert restored == value, (
+                                    n, d, pivots, choice, i, j, x, t
+                                )
+    print("PASS M2 reinsertion for all row-echelon codes, N <= 5")
+
 if __name__ == "__main__":
     check_range_coverage()
     check_factorisation()
+    check_skipped_coordinate_contraction()
     print("ALL SMALL-DIMENSIONAL CHECKS PASSED")
