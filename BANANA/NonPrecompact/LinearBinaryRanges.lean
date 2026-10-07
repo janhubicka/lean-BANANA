@@ -1,0 +1,154 @@
+import BANANA.NonPrecompact.LinearBinarySMTree
+import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
+
+/-!
+# Linear ranges of exact binary successor approximations
+
+An exact approximation of width d+1 records the action on binary words of
+length d.  In the linear binary successor instance this action is an
+injective linear map F₂^d -> F₂^N, where N is the exact terminal level.
+This file packages its range as the FixedSubspace used by the BANANA
+one-sided Ramsey interface.
+-/
+
+namespace SuccessorTree.NonPrecompact
+namespace BinaryWord
+
+open Module
+
+abbrev LinearBinaryH : SMTree binarySucc :=
+  linearBinarySMTree
+
+/-- A convenient all-zero word at one level. -/
+def zeroAtLevel (n : ℕ) : AtLevel n :=
+  ⟨⟨List.replicate n 0⟩, by simp⟩
+
+/-- The common target level of a shape map on source level n. -/
+def shapeTargetLevel
+    (F : ShapeMap binarySucc) (n : ℕ) : ℕ :=
+  (F (zeroAtLevel n).1).bits.length
+
+theorem shapeTargetLevel_eq
+    (F : ShapeMap binarySucc) (n : ℕ)
+    (w : AtLevel n) :
+    (F w.1).bits.length = shapeTargetLevel F n := by
+  exact F.level_eq_of_level_eq (by
+    change w.1.bits.length = (zeroAtLevel n).1.bits.length
+    simp [w.2, zeroAtLevel])
+
+/-- The linearity predicate carried by an M-map of the concrete instance. -/
+theorem mmap_linear
+    (F : SMTree.MMap LinearBinaryH) :
+    LinearOnLevels F.map := by
+  exact F.mem
+
+/-- A canonical linear model for the action on one source level. -/
+structure LevelLinearModel
+    (F : SMTree.MMap LinearBinaryH) (n : ℕ) where
+  map :
+    (Fin n → F2) →ₗ[F2]
+      (Fin (shapeTargetLevel F.map n) → F2)
+  action :
+    ∀ w : AtLevel n,
+      ∃ hFw :
+          (F w.1).bits.length =
+            shapeTargetLevel F.map n,
+        levelEquiv (shapeTargetLevel F.map n)
+            ⟨F w.1, hFw⟩ =
+          map (levelEquiv n w)
+
+noncomputable def levelLinearModel
+    (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
+    LevelLinearModel F n := by
+  obtain ⟨m, φ, hφ⟩ := mmap_linear F n
+  obtain ⟨h0, hw0⟩ := hφ (zeroAtLevel n)
+  have hm : m = shapeTargetLevel F.map n := by
+    exact h0.symm
+  subst m
+  refine ⟨φ, ?_⟩
+  intro w
+  exact hφ w
+
+theorem levelLinearModel_injective
+    (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
+    Function.Injective (levelLinearModel F n).map :=
+  levelWitness_injective
+    F.map (levelLinearModel F n).map
+    (levelLinearModel F n).action
+
+/-- For an exact approximation, its representative's target level on source
+level d is the specified terminal level N. -/
+theorem exact_shapeTargetLevel
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) :
+    shapeTargetLevel
+        (f.1.representative LinearBinaryH).map d = N := by
+  let R := f.1.representative LinearBinaryH
+  have hlevel :
+      LinearBinaryH.levelMap R.map d =
+        shapeTargetLevel R.map d := by
+    let w := zeroAtLevel d
+    have h :=
+      LinearBinaryH.levelMap_eq R.map (a := w.1)
+    change
+      LinearBinaryH.levelMap R.map d =
+        (R w.1).bits.length
+    simpa [w, zeroAtLevel] using h
+  have hterm : f.1.terminalLevel LinearBinaryH = N :=
+    f.2
+  unfold SMTree.AM.terminalLevel at hterm
+  have hd :
+      0 + (d + 1) - 1 = d := by omega
+  rw [hd] at hterm
+  exact hlevel.symm.trans hterm
+
+/-- Linear top-level model of an exact finite approximation. -/
+structure ExactLinearModel
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) where
+  map : (Fin d → F2) →ₗ[F2] (Fin N → F2)
+  action :
+    ∀ w : AtLevel d,
+      ∃ hFw :
+          ((f.1.representative LinearBinaryH) w.1).bits.length = N,
+        levelEquiv N
+            ⟨(f.1.representative LinearBinaryH) w.1, hFw⟩ =
+          map (levelEquiv d w)
+
+noncomputable def exactLinearModel
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) :
+    ExactLinearModel f := by
+  let R := f.1.representative LinearBinaryH
+  let M := levelLinearModel R d
+  have htarget :
+      shapeTargetLevel R.map d = N :=
+    exact_shapeTargetLevel f
+  subst N
+  exact ⟨M.map, M.action⟩
+
+theorem exactLinearModel_injective
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) :
+    Function.Injective (exactLinearModel f).map := by
+  let R := f.1.representative LinearBinaryH
+  have htarget :
+      shapeTargetLevel R.map d = N :=
+    exact_shapeTargetLevel f
+  subst N
+  exact levelLinearModel_injective R d
+
+/-- The d-dimensional subspace represented by an exact finite successor
+approximation ending at level N. -/
+noncomputable def exactSubspace
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) :
+    FixedSubspace d N := by
+  let E := (exactLinearModel f).map
+  refine ⟨LinearMap.range E, ?_⟩
+  rw [LinearMap.finrank_range_of_inj
+    (exactLinearModel_injective f)]
+  simp [Module.finrank_fintype_fun_eq_card]
+
+end BinaryWord
+end SuccessorTree.NonPrecompact
