@@ -179,26 +179,24 @@ theorem levelEquiv_insertLinearCoordinate
           (e (prefixCoords w.1 m (by simpa [w.2] using h))) := by
     exact insertLinearCoordinate_of_le
       m e w.1 (by simpa [w.2] using h)
-  cases j using Fin.succAboveCases p with
-  | x =>
-      change
-        (insertLinearCoordinate m e w.1).bits.get
-            ⟨p.1, by simpa [hlen] using p.2⟩ =
-          ((p.insertNth
-              (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
-              (levelEquiv n w)) : Fin (n + 1) → F2) p
-      rw [hins]
-      simp [insertBoringLinearMap, p, prefixRestrictionLinearMap,
-        prefixCoords, levelEquiv, w.2]
-  | p i =>
-      change
-        (insertLinearCoordinate m e w.1).bits.get
-            ⟨(p.succAbove i).1, by simpa [hlen] using (p.succAbove i).2⟩ =
-          ((p.insertNth
-              (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
-              (levelEquiv n w)) : Fin (n + 1) → F2) (p.succAbove i)
-      rw [hins]
-      by_cases hi : i.1 < m
+  refine p.succAboveCases ?_ (fun i => ?_) j
+  · change
+      (insertLinearCoordinate m e w.1).bits.get
+          ⟨p.1, by simpa [hlen] using p.2⟩ =
+        ((p.insertNth
+            (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
+            (levelEquiv n w)) : Fin (n + 1) → F2) p
+    simp only [hins]
+    simp [insertBoringLinearMap, p, prefixRestrictionLinearMap,
+      prefixCoords, levelEquiv, w.2]
+  · change
+      (insertLinearCoordinate m e w.1).bits.get
+          ⟨(p.succAbove i).1, by simpa [hlen] using (p.succAbove i).2⟩ =
+        ((p.insertNth
+            (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
+            (levelEquiv n w)) : Fin (n + 1) → F2) (p.succAbove i)
+    simp only [hins]
+    by_cases hi : i.1 < m
       · have hs :
             p.succAbove i = i.castSucc := by
           apply Fin.succAbove_of_castSucc_lt
@@ -289,17 +287,14 @@ theorem linearOnLevels_fusionLimit
       ShapeMap.fusionLimit F hstable w.1 = F n w.1 := by
     change F (LevelTree.lev w.1) w.1 = F n w.1
     rw [show LevelTree.lev w.1 = n from w.2]
-  refine ⟨?_, ?_⟩
-  · change (ShapeMap.fusionLimit F hstable w.1).bits.length = m
-    rw [hpoint]
-    exact hFw
-  · change levelEquiv m
-        ⟨ShapeMap.fusionLimit F hstable w.1, _⟩ =
-          φ (levelEquiv n w)
-    have hsub :
-        (⟨ShapeMap.fusionLimit F hstable w.1, _⟩ : AtLevel m) =
-          (⟨F n w.1, hFw⟩ : AtLevel m) := Subtype.ext hpoint
-    exact (congrArg (levelEquiv m) hsub).trans hw
+  have hlen :
+      (ShapeMap.fusionLimit F hstable w.1).bits.length = m :=
+    (congrArg (fun z : BinaryWord => z.bits.length) hpoint).trans hFw
+  refine ⟨hlen, ?_⟩
+  have hsub :
+      (⟨ShapeMap.fusionLimit F hstable w.1, hlen⟩ : AtLevel m) =
+        (⟨F n w.1, hFw⟩ : AtLevel m) := Subtype.ext hpoint
+  exact (congrArg (levelEquiv m) hsub).trans hw
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
