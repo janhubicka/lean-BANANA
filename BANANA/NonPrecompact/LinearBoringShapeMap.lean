@@ -185,16 +185,20 @@ theorem insertLinearCoordinateShapeMap_skipsOnly
     · let w : BinaryWord := ⟨List.replicate n 0⟩
       refine ⟨w, ?_⟩
       rw [insertLinearCoordinateShapeMap_level m e w]
-      change
-        (if n < m then n else n + 1) = n
+      have hwlev : LevelTree.lev w = n := by
+        change (List.replicate n 0).length = n
+        simp
+      rw [hwlev]
       simp [hnm]
     · have hmn : m < n := lt_of_le_of_ne
         (Nat.le_of_not_gt hnm) (Ne.symm hn)
       let w : BinaryWord := ⟨List.replicate (n - 1) 0⟩
       refine ⟨w, ?_⟩
       rw [insertLinearCoordinateShapeMap_level m e w]
-      change
-        (if n - 1 < m then n - 1 else n - 1 + 1) = n
+      have hwlev : LevelTree.lev w = n - 1 := by
+        change (List.replicate (n - 1) 0).length = n - 1
+        simp
+      rw [hwlev]
       have hwge : ¬ (n - 1 < m) := by omega
       simp [hwge]
       omega
