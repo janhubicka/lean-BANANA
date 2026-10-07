@@ -72,5 +72,36 @@ theorem canonicalExtension_appendBit_at_cut
     _ = appendBit (G x) c := hlabel
     _ = appendBit (F x) c := congrArg (fun w => appendBit w c) hGx
 
+/-- Canonical continuation raises an exact source dimension and
+its terminal target height by one. -/
+noncomputable def extendExactWithPivot
+    {d N : ℕ}
+    (f : SMTree.AM.At linearBinarySMTree 0 (d + 1) N) :
+    SMTree.AM.At linearBinarySMTree 0 (d + 2) (N + 1) := by
+  let H := linearBinarySMTree
+  let F := f.1.representative H
+  let G := H.canonicalExtension F d
+  have hGfix : G.FixesBelow H 0 := by
+    intro x hx
+    omega
+  let g : SMTree.AM H 0 (d + 2) :=
+    G.toAM H 0 (d + 2) hGfix
+  refine ⟨g, ?_⟩
+  have hterm :=
+    SMTree.MMap.toAM_terminalLevel H G 0 (d + 2) hGfix
+      (by omega : 0 < 0 + (d + 2))
+  change g.terminalLevel H = N + 1
+  rw [hterm]
+  have hindex : 0 + (d + 2) - 1 = d + 1 := by omega
+  rw [hindex]
+  rw [H.canonicalExtension_level_succ F d d le_rfl]
+  rw [H.canonicalExtension_level_at_prefix F d]
+  have hbefore : H.levelMap F.map d = N := by
+    have hf : f.1.terminalLevel H = N := f.2
+    unfold SMTree.AM.terminalLevel at hf
+    have hd : 0 + (d + 1) - 1 = d := by omega
+    rwa [hd] at hf
+  rw [hbefore]
+
 end BinaryWord
 end SuccessorTree.NonPrecompact
