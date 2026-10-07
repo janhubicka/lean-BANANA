@@ -33,6 +33,7 @@ import BANANA.NonPrecompact.LinearBoringShapeMap
 import BANANA.NonPrecompact.LinearBinaryMonoidBasic
 import BANANA.NonPrecompact.LinearBinaryDuplication
 import BANANA.NonPrecompact.LinearBinaryContraction
+import BANANA.NonPrecompact.LinearBinaryComposition
 import BANANA.NonPrecompact.LinearBinaryM2
 import BANANA.NonPrecompact.LinearBinarySMTree
 import BANANA.NonPrecompact.LinearBinaryRanges
