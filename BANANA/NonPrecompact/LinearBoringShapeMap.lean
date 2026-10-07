@@ -26,7 +26,10 @@ private theorem insertIdx_append_singleton_of_le_length
           simp at h
       | cons a l =>
           simp only [List.length_cons, Nat.succ_le_succ_iff] at h
-          simp [List.insertIdx, ih l h]
+          change
+            a :: ((l ++ [c]).insertIdx m x) =
+              a :: (l.insertIdx m x ++ [c])
+          exact congrArg (List.cons a) (ih l h)
 
 theorem prefixCoords_appendBit
     (w : BinaryWord) (c : F2) (m : ℕ)
@@ -36,7 +39,8 @@ theorem prefixCoords_appendBit
           h.trans (Nat.le_add_right w.bits.length 1)) =
       prefixCoords w m h := by
   funext i
-  simp [prefixCoords, appendBit]
+  simp only [prefixCoords, appendBit]
+  exact List.getElem_append_left (lt_of_lt_of_le i.2 h)
 
 /-- Once the insertion position is inside a word, appending a source bit
 commutes with inserting the boring coordinate. -/
@@ -49,10 +53,12 @@ theorem insertLinearCoordinate_appendBit_of_le
   apply BinaryWord.ext
   have hchild : m ≤ (appendBit w c).bits.length := by
     simpa [appendBit] using h.trans (Nat.le_add_right w.bits.length 1)
+  change
+    (insertLinearCoordinate m e (appendBit w c)).bits =
+      (insertLinearCoordinate m e w).bits ++ [c]
   rw [insertLinearCoordinate_of_le m e (appendBit w c) hchild,
-    insertLinearCoordinate_of_le m e w h]
-  simp only [appendBit]
-  rw [prefixCoords_appendBit w c m h]
+    insertLinearCoordinate_of_le m e w h,
+    prefixCoords_appendBit w c m h]
   exact insertIdx_append_singleton_of_le_length
     w.bits (e (prefixCoords w m h)) c m h
 
@@ -77,8 +83,11 @@ def insertLinearCoordinateShapeMap
   level_preserving' := by
     intro a b hab
     change a.bits.length = b.bits.length at hab
-    simp only [length_insertLinearCoordinate]
-    rw [hab]
+    change
+      (insertLinearCoordinate m e a).bits.length =
+        (insertLinearCoordinate m e b).bits.length
+    rw [length_insertLinearCoordinate,
+      length_insertLinearCoordinate, hab]
   weak_succ' := by
     intro a b p c hsucc
     change
@@ -86,7 +95,8 @@ def insertLinearCoordinateShapeMap
         some b at hsucc
     by_cases hp : p = []
     · subst p
-      simp only [if_pos rfl, Option.some.injEq] at hsucc
+      have hb : b = appendBit a c := by
+        simpa using hsucc.symm
       subst b
       by_cases hlt : a.bits.length < m
       · have ha :
@@ -151,14 +161,19 @@ theorem insertLinearCoordinateShapeMap_level
 theorem insertLinearCoordinateShapeMap_skipsOnly
     (m : ℕ) (e : LinearBoringRule m) :
     (insertLinearCoordinateShapeMap m e).SkipsOnly m := by
+  change
+    {n | ∃ w : BinaryWord,
+      LevelTree.lev (insertLinearCoordinateShapeMap m e w) = n} =
+      {n | n ≠ m}
   ext n
+  change
+    (∃ w : BinaryWord,
+      LevelTree.lev (insertLinearCoordinateShapeMap m e w) = n) ↔
+      n ≠ m
   constructor
   · rintro ⟨w, hw⟩
-    have hlev := insertLinearCoordinateShapeMap_level m e w
-    change
-      (if w.bits.length < m then
-          w.bits.length else w.bits.length + 1) = n at hw
-    by_cases h : w.bits.length < m
+    rw [insertLinearCoordinateShapeMap_level m e w] at hw
+    by_cases h : LevelTree.lev w < m
     · simp [h] at hw
       rw [← hw]
       omega
@@ -166,19 +181,23 @@ theorem insertLinearCoordinateShapeMap_skipsOnly
       rw [← hw]
       omega
   · intro hn
-    change n ≠ m at hn
     by_cases hnm : n < m
     · let w : BinaryWord := ⟨List.replicate n 0⟩
       refine ⟨w, ?_⟩
-      have hlev := insertLinearCoordinateShapeMap_level m e w
-      simpa [w, hnm] using hlev
+      rw [insertLinearCoordinateShapeMap_level m e w]
+      change
+        (if n < m then n else n + 1) = n
+      simp [hnm]
     · have hmn : m < n := lt_of_le_of_ne
         (Nat.le_of_not_gt hnm) (Ne.symm hn)
       let w : BinaryWord := ⟨List.replicate (n - 1) 0⟩
       refine ⟨w, ?_⟩
+      rw [insertLinearCoordinateShapeMap_level m e w]
+      change
+        (if n - 1 < m then n - 1 else n - 1 + 1) = n
       have hwge : ¬ (n - 1 < m) := by omega
-      have hlev := insertLinearCoordinateShapeMap_level m e w
-      simpa [w, hwge] using hlev
+      simp [hwge]
+      omega
 
 /-- Coordinate projection, viewed as a linear boring rule. -/
 def coordinateRule (n m : ℕ) (h : n < m) :
@@ -203,22 +222,16 @@ theorem insert_coordinateRule_of_edge
     insertLinearCoordinate m (coordinateRule n m hnm) b =
       appendBit b c := by
   have hbm : m ≤ b.bits.length := by omega
+  have hpref : (a.bits ++ [c]) <+: b.bits := hedge
+  have hcoord :
+      prefixCoords b m hbm ⟨n, hnm⟩ = c := by
+    change b.bits[n] = c
+    have hget := hpref.getElem (i := n) (by simp [ha])
+    simpa [ha] using hget.symm
   rw [insertLinearCoordinate_eq_append_of_length
       m (coordinateRule n m hnm) b hb]
   apply BinaryWord.ext
-  congr 1
-  change
-    prefixCoords b m hbm ⟨n, hnm⟩ = c
-  have hpref : (a.bits ++ [c]) <+: b.bits := hedge
-  have htake :
-      b.bits.take (n + 1) = a.bits ++ [c] := by
-    have hlen : (a.bits ++ [c]).length = n + 1 := by
-      simp [ha]
-    exact (List.prefix_iff_eq_take.mp hpref).symm.trans
-      (by rw [hlen])
-  have hget := congrArg (fun l : List F2 => l[n]?) htake
-  simp [prefixCoords, hb, ha] at hget ⊢
-  exact hget
+  simp [appendBit, coordinateRule, hcoord]
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
