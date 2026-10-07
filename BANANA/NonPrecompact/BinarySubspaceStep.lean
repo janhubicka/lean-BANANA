@@ -158,5 +158,18 @@ theorem firstCoordinate_injective_or_full_fibres
   · exact Or.inr (subspace_eq_product_of_vertical P hvertical)
   · exact Or.inl (firstCoordinate_injective_of_no_vertical P hvertical)
 
+/-- The exact dependent-coordinate versus new-pivot alternative used
+at the next stage of greedy finite-subspace coding. -/
+theorem lastCoordinate_boring_or_pivot
+    (P : Submodule F2 (V × F2)) :
+    (∃ e : V →ₗ[F2] F2,
+      ∀ z : V × F2,
+        z ∈ P ↔
+          z.1 ∈ P.map firstCoordinate ∧ z.2 = e z.1) ∨
+      P = (P.map firstCoordinate).prod (⊤ : Submodule F2 F2) := by
+  rcases firstCoordinate_injective_or_full_fibres P with hinj | hpivot
+  · exact Or.inl (exists_linear_last_coordinate_of_injective P hinj)
+  · exact Or.inr hpivot
+
 end BinaryWord
 end SuccessorTree.NonPrecompact
