@@ -148,3 +148,39 @@ The latest new Lean declarations are on a draft branch and **must not
 be reported as kernel-verified until the corresponding Lean build
 and axiom checks succeed**. The circulated manuscript remains
 unchanged except for separately approved TODOs and validation markers.
+
+
+## Canonical-extension simplification of the pivot case
+
+The established successor library already provides
+`SMTree.canonicalExtension` and
+`canonicalExtension_level_succ`: after a protected finite source prefix
+through level `d`, all subsequent target image levels are consecutive.
+
+For the bit-labelled binary prefix tree, that immediately gives the
+identity
+`canonicalExtension_appendBit_at_cut`:
+if a source word `w` has length `d`, then
+`G(w⌢c)=F(w)⌢c` for the canonical extension `G` of `F`
+through level `d`. Its proof combines exact next-level behaviour with
+weak successor preservation; the latter becomes exact because there is
+no extra target level available between the two image levels.
+
+Therefore, if an exact finite approximation of width `d+1` ends at
+level `N`, its canonical extension through level `d` gives an exact
+approximation of width `d+2` ending at `N+1`.
+The new `LinearBinaryCanonicalPivot.lean` formalises these two
+statements, conditional on successful Lean elaboration.
+
+This closes the **construction** part of the independent-coordinate
+case in the final-coordinate induction. The remaining API work is to
+transport the range of the new levelwise linear map under
+`lastCoordinateLinearEquiv` and prove it equals the old range
+times `F₂`. The dependent-coordinate case instead uses the global
+linear functional from
+`BinarySubspaceStep.exists_linear_last_coordinate_of_injective`
+and composes one boring-coordinate insertion at target position `N`.
+
+This avoids an unnecessary global row-echelon matrix formalisation:
+induct directly on the ambient coordinate length, using the two
+local alternatives and the existing shape-map operations.
