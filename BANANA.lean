@@ -33,6 +33,7 @@ import BANANA.NonPrecompact.LinearBoringShapeMap
 import BANANA.NonPrecompact.LinearBinaryMonoidBasic
 import BANANA.NonPrecompact.LinearBinaryDuplication
 import BANANA.NonPrecompact.LinearBinaryContraction
+import BANANA.NonPrecompact.LinearBinaryM2
 import BANANA.NonPrecompact.MatrixAffineParity
 import BANANA.NonPrecompact.PairingCopies
 import BANANA.NonPrecompact.ParityStarMatrix
