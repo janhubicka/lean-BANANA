@@ -33,6 +33,40 @@ def EveryBinarySubspaceRepresentable : Prop :=
     ∃ f : SMTree.AM.At linearBinarySMTree 0 (d + 1) N,
       exactSubspace f = P
 
+/-- Every zero-dimensional subspace has an exact successor
+representation, including at ambient level zero. -/
+theorem exactSubspace_representable_zero
+    (N : ℕ) (P : FixedSubspace 0 N) :
+    ∃ f : SMTree.AM.At linearBinarySMTree 0 (0 + 1) N,
+      exactSubspace f = P := by
+  let f := zeroPaddingExact 0 N (Nat.zero_le N)
+  refine ⟨f, ?_⟩
+  apply Subtype.ext
+  have hP : P.1 = ⊥ :=
+    Submodule.finrank_eq_zero.mp P.2
+  have hf : (exactSubspace f).1 = ⊥ :=
+    Submodule.finrank_eq_zero.mp (exactSubspace f).2
+  exact hf.trans hP.symm
+
+/-- An exact successor approximation can represent the full ambient
+space. This is the other boundary case of the pivot induction. -/
+theorem exactSubspace_representable_full
+    (N : ℕ) (P : FixedSubspace N N) :
+    ∃ f : SMTree.AM.At linearBinarySMTree 0 (N + 1) N,
+      exactSubspace f = P := by
+  let f := zeroPaddingExact N N le_rfl
+  refine ⟨f, ?_⟩
+  apply Subtype.ext
+  have hambient :
+      finrank F2 (Fin N → F2) = N := by
+    simp [Module.finrank_fintype_fun_eq_card]
+  have hP : P.1 = ⊤ :=
+    Submodule.eq_top_of_finrank_eq (P.2.trans hambient.symm)
+  have hf : (exactSubspace f).1 = ⊤ :=
+    Submodule.eq_top_of_finrank_eq
+      ((exactSubspace f).2.trans hambient.symm)
+  exact hf.trans hP.symm
+
 /-- The exact finite successor encoding, conditional only on range
 surjectivity. The M1-M3 structure, exact composition on ranges, and
 nonemptiness of finite coordinate classes are all constructed separately. -/
