@@ -52,6 +52,43 @@ def LinearOnLevels (F : ShapeMap binarySucc) : Prop :=
 
 /-- Levelwise linearity forces the all-zero word on every source level to
 map to the all-zero word on the corresponding target level. -/
+/-- A linear map witnessing the action of an injective shape map on one
+level is itself injective. -/
+theorem levelWitness_injective
+    (F : ShapeMap binarySucc)
+    {n m : ℕ}
+    (φ : (Fin n → F2) →ₗ[F2] (Fin m → F2))
+    (hφ :
+      ∀ w : AtLevel n,
+        ∃ hFw : (F w.1).bits.length = m,
+          levelEquiv m ⟨F w.1, hFw⟩ =
+            φ (levelEquiv n w)) :
+    Function.Injective φ := by
+  intro x y hxy
+  let wx : AtLevel n := (levelEquiv n).symm x
+  let wy : AtLevel n := (levelEquiv n).symm y
+  obtain ⟨hFx, hx⟩ := hφ wx
+  obtain ⟨hFy, hy⟩ := hφ wy
+  let Fx : AtLevel m := ⟨F wx.1, hFx⟩
+  let Fy : AtLevel m := ⟨F wy.1, hFy⟩
+  have hcoords : levelEquiv m Fx = levelEquiv m Fy := by
+    calc
+      levelEquiv m Fx = φ (levelEquiv n wx) := hx
+      _ = φ (levelEquiv n wy) := by
+        rw [(levelEquiv n).apply_symm_apply x,
+          (levelEquiv n).apply_symm_apply y]
+        exact hxy
+      _ = levelEquiv m Fy := hy.symm
+  have hsub : Fx = Fy :=
+    (levelEquiv m).injective hcoords
+  have hword : wx.1 = wy.1 :=
+    F.injective (congrArg Subtype.val hsub)
+  have hwxy : wx = wy := Subtype.ext hword
+  calc
+    x = levelEquiv n wx := ((levelEquiv n).apply_symm_apply x).symm
+    _ = levelEquiv n wy := by rw [hwxy]
+    _ = y := (levelEquiv n).apply_symm_apply y
+
 theorem LinearOnLevels.map_zero
     {F : ShapeMap binarySucc}
     (hF : LinearOnLevels F) (n : ℕ) :
