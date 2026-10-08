@@ -7,7 +7,8 @@ an arbitrary linear combination of earlier pivot coordinates.
 
 Check that these codes realise every d-dimensional subspace for N <= 5,
 and that every subspace of a represented D-space is the image of such a
-code composed inside F_2^D for N <= 4.
+code composed inside F_2^D for N <= 4. The last-coordinate induction is
+checked for every binary subspace through ambient dimension seven.
 
 This is a regression audit, NOT a formal or general proof of GLR.
 """
@@ -151,8 +152,58 @@ def check_skipped_coordinate_contraction():
                                 )
     print("PASS M2 reinsertion for all row-echelon codes, N <= 5")
 
+def check_last_coordinate_induction():
+    """Audit the pivot/boring decomposition for every subspace through N=7.
+
+    The vertical unit lies in P exactly in the pivot case. Otherwise P is
+    the graph of a linear functional on its projected subspace, and that
+    functional must extend to all earlier coordinates.
+    """
+    expected_counts = (1, 2, 5, 16, 67, 374, 2825, 29212)
+    for n in range(8):
+        checked = pivot = dependent = 0
+        for d in range(n + 1):
+            for rows in linear_codes(n, d):
+                P = span(rows)
+                assert len(P) == 1 << d
+                checked += 1
+                if n == 0:
+                    continue
+                mask = (1 << (n - 1)) - 1
+                vertical = 1 << (n - 1)
+                Q = {v & mask for v in P}
+                if vertical in P:
+                    pivot += 1
+                    assert len(Q) * 2 == len(P)
+                    assert P == frozenset(
+                        q | b * vertical
+                        for q in Q for b in (0, 1)
+                    )
+                    assert d == (len(Q).bit_length() - 1) + 1
+                else:
+                    dependent += 1
+                    assert len(P) == len(Q)
+                    assert d == len(Q).bit_length() - 1
+                    graph = {v & mask: v >> (n - 1) for v in P}
+                    assert len(graph) == len(Q)
+                    assert all(
+                        graph[a ^ b] == (graph[a] ^ graph[b])
+                        for a in Q for b in Q
+                    )
+                    assert any(
+                        all(((q & e).bit_count() & 1) == graph[q] for q in Q)
+                        for e in range(1 << (n - 1))
+                    ), (n, d, rows)
+        assert checked == expected_counts[n], (n, checked)
+        print(
+            f"PASS last-coordinate N={n}: {checked} subspaces, "
+            f"{pivot} pivots, {dependent} dependent"
+        )
+
+
 if __name__ == "__main__":
     check_range_coverage()
     check_factorisation()
     check_skipped_coordinate_contraction()
+    check_last_coordinate_induction()
     print("ALL SMALL-DIMENSIONAL CHECKS PASSED")
