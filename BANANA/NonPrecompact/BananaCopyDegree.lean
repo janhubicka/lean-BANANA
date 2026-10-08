@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.BananaCopyPalette
+import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Infinite *copy* Ramsey degree for two-sided BANANA structures
