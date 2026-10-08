@@ -81,7 +81,7 @@ theorem commonPrefix_length_of_eraseIdx_eq
       x.take t <+: commonPrefix x y :=
     prefix_commonPrefix hxpre hypre
   have htakeLen : (x.take t).length = t := by
-    simp [hx, Nat.min_eq_left (Nat.le_of_lt (hx ▸ ht))]
+    simp [hx, Nat.min_eq_left (Nat.le_of_lt ht)]
   have hlow : t ≤ (commonPrefix x y).length := by
     simpa [htakeLen] using hlowpre.length_le
   have hupper : (commonPrefix x y).length ≤ t := by
