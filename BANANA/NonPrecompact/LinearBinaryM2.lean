@@ -74,6 +74,7 @@ theorem linearOnLevels_m2
   have hF1aLen : (F1 a).bits.length = t := by
     change (eraseCoordinate t (F a)).bits.length = t
     rw [eraseCoordinate_length, if_pos htltFa]
+    change (F a).bits.length = t + 1 at hFa
     rw [hFa]
     omega
   have hm1 : m1 = t := by
@@ -89,13 +90,13 @@ theorem linearOnLevels_m2
   let p : Fin (t + 1) := Fin.last t
   let e : LinearBoringRule t :=
     (LinearMap.proj p).comp (φ.comp L)
-  let F2 : ShapeMap binarySucc :=
+  let H2 : ShapeMap binarySucc :=
     insertLinearCoordinateShapeMap t e
 
-  refine ⟨F1, F2, hlin1,
+  refine ⟨F1, H2, hlin1,
     linearOnLevels_insertLinearCoordinateShapeMap t e,
     ?_, ?_⟩
-  · simpa [F2, t] using
+  · simpa [H2, t] using
       insertLinearCoordinateShapeMap_skipsOnly t e
   · intro x hx
     by_cases hxn : LevelTree.lev x = n
@@ -124,18 +125,12 @@ theorem linearOnLevels_m2
         rw [hpval] at hcoord
         exact hcoord.symm
 
-      change
-        insertLinearCoordinate t e
-            (contractSkipped F t hskip x) =
-          F x
+      change insertLinearCoordinate t e (F1 x) = F x
       have htF1 : t ≤ (F1 x).bits.length := by
         rw [hF1x']
-      rw [insertLinearCoordinate_of_le t e (F1 x) htF1]
       apply BinaryWord.ext
-      change
-        (F1 x).bits.insertIdx t
-            (e (prefixCoords (F1 x) t htF1)) =
-          (F x).bits
+      change (insertLinearCoordinate t e (F1 x)).bits = (F x).bits
+      rw [insertLinearCoordinate_of_le t e (F1 x) htF1]
       rw [hscalar]
       change
         ((F x).bits.eraseIdx t).insertIdx t (F x).bits[t] =
