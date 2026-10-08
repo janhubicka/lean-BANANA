@@ -39,8 +39,12 @@ theorem levelEquiv_eraseCoordinate
       removeNthLinearMap p (levelEquiv (k + 1) w) := by
   intro hlen
   funext i
-  simp only [levelEquiv, eraseCoordinate,
-    removeNthLinearMap, Fin.removeNth_apply]
+  change
+    (w.1.bits.eraseIdx p.1).get
+      ⟨i.1, by simpa [hlen] using i.2⟩ =
+    w.1.bits.get
+      ⟨(p.succAbove i).1,
+        by simpa [w.2] using (p.succAbove i).2⟩
   rw [List.getElem_eraseIdx]
   by_cases hi : i.1 < p.1
   · rw [dif_pos hi]
@@ -87,12 +91,14 @@ theorem linearOnLevels_contractSkipped
       change (F w.1).bits.eraseIdx t = (F w.1).bits
       exact List.eraseIdx_of_length_le hle
     refine ⟨?_, ?_⟩
-    · simpa [hcontract] using hFw
+    · change (contractSkipped F t hskip w.1).bits.length = m
+      rw [hcontract]
+      exact hFw
     · simpa [hcontract] using hw
   · have hmpos : 0 < m := lt_of_le_of_lt (Nat.zero_le t) htm
     obtain ⟨k, hk⟩ := Nat.exists_eq_succ_of_ne_zero
       (Nat.ne_of_gt hmpos)
-    subst m
+    rcases hk with rfl
     let p : Fin (k + 1) := ⟨t, htm⟩
     let ψ : (Fin n → F2) →ₗ[F2] (Fin k → F2) :=
       (removeNthLinearMap p).comp φ
