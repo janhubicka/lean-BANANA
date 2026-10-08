@@ -22,6 +22,7 @@ import BANANA.NonPrecompact.CompletionAutomorphismHom
 import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
 import BANANA.NonPrecompact.CopyRamseyDegree
+import BANANA.NonPrecompact.TwoSidedLinePair
 import BANANA.NonPrecompact.EmbeddedCompletionAction
 import BANANA.NonPrecompact.FiberProductParityAmalgam
 import BANANA.NonPrecompact.FiberProductStrong
