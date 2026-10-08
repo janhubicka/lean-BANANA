@@ -63,7 +63,7 @@ theorem linearOnLevels_m2
     calc
       m = (F a).bits.length := hFaM.symm
       _ = t + 1 := hFa
-  subst m
+  rcases hm with rfl
 
   obtain ⟨m1, ψ, hψ⟩ := hlin1 n
   obtain ⟨hF1aM, hψa⟩ := hψ aN
@@ -73,11 +73,12 @@ theorem linearOnLevels_m2
     omega
   have hF1aLen : (F1 a).bits.length = t := by
     change (eraseCoordinate t (F a)).bits.length = t
-    rw [eraseCoordinate_length]
-    simp [htltFa, hFa]
+    rw [eraseCoordinate_length, if_pos htltFa]
+    rw [hFa]
+    omega
   have hm1 : m1 = t := by
     exact hF1aM.symm.trans hF1aLen
-  subst m1
+  rcases hm1 with rfl
 
   have hψinj : Function.Injective ψ :=
     levelWitness_injective F1 ψ hψ
