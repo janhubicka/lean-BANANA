@@ -91,8 +91,8 @@ theorem finalLinearInsertionExact_model_eq
         LinearBinaryH) w.1 = F w.1
     apply SMTree.MMap.toAM_representative_agrees
       LinearBinaryH F 0 (N + 1) hfix
-    change w.1.bits.length < N + 1
-    omega
+    have hwlev : LevelTree.lev w.1 = N := w.2
+    simpa only [hwlev, Nat.zero_add] using Nat.lt_succ_self N
   have hlen :
       (insertLinearCoordinate N e w.1).bits.length = N + 1 := by
     rw [length_insertLinearCoordinate]
@@ -150,9 +150,11 @@ theorem finalLinearInsertion_linear_apply
       prefixRestrictionLinearMap N N le_rfl x = x := by
     funext i
     rfl
-  change (Fin.last N).insertNth
-      (e (prefixRestrictionLinearMap N N le_rfl x)) x =
-        Fin.snoc x (e x)
+  change
+    ((Fin.last N).insertNth
+        (e (prefixRestrictionLinearMap N N le_rfl x)) x :
+      Fin (N + 1) → F2) =
+    (Fin.snoc (α := fun _ : Fin (N + 1) => F2) x (e x))
   rw [hprefix]
   exact Fin.insertNth_last' (e x) x
 
