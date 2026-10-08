@@ -23,6 +23,7 @@ import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.TwoSidedLinePair
+import BANANA.NonPrecompact.LinePairSourceEmbedding
 import BANANA.NonPrecompact.EmbeddedCompletionAction
 import BANANA.NonPrecompact.FiberProductParityAmalgam
 import BANANA.NonPrecompact.FiberProductStrong
