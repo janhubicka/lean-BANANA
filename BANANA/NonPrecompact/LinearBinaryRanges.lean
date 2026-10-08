@@ -150,5 +150,42 @@ noncomputable def exactSubspace
     (exactLinearModel_injective f)]
   simp [Module.finrank_fintype_fun_eq_card]
 
+
+/-- To identify the subspace of an exact successor approximation, it
+suffices to prove containment in another subspace of the same
+dimension. This avoids a separate surjectivity argument in both
+inductive coordinate-extension cases. -/
+theorem exactSubspace_eq_of_range_le
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (P : FixedSubspace d N)
+    (hle : (exactSubspace f).1 ≤ P.1) :
+    exactSubspace f = P := by
+  apply Subtype.ext
+  exact Submodule.eq_of_le_of_finrank_eq hle
+    ((exactSubspace f).2.trans P.2.symm)
+
+/-- It is enough to check containment on the images of the words at
+the last source level, using the linear action of the representative.
+No choice of basis of the image subspace is required. -/
+theorem exactSubspace_eq_of_action_mem
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (P : FixedSubspace d N)
+    (hmem : ∀ (w : AtLevel d)
+        (hFw : ((f.1.representative LinearBinaryH) w.1).bits.length = N),
+        levelEquiv N
+            ⟨(f.1.representative LinearBinaryH) w.1, hFw⟩ ∈ P.1) :
+    exactSubspace f = P := by
+  apply exactSubspace_eq_of_range_le f P
+  rintro v ⟨x, rfl⟩
+  let w : AtLevel d := (levelEquiv d).symm x
+  obtain ⟨hFw, hw⟩ := (exactLinearModel f).action w
+  have hx : levelEquiv d w = x :=
+    (levelEquiv d).apply_symm_apply x
+  have h := hmem w hFw
+  rw [hw, hx] at h
+  exact h
+
 end BinaryWord
 end SuccessorTree.NonPrecompact
