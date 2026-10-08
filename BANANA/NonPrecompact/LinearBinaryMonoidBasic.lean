@@ -192,7 +192,7 @@ theorem levelEquiv_insertLinearCoordinate
     have hget :=
       List.get_insertIdx_self w.1.bits
         (e (prefixCoords w.1 m hle)) m hle
-    simpa [insertLinearCoordinate, w.2, h, levelEquiv,
+    simpa [insertLinearCoordinate, w.2, h, p, levelEquiv,
       prefixRestrictionLinearMap, prefixCoords] using hget
   · change
       (insertLinearCoordinate m e w.1).bits.get
@@ -233,7 +233,7 @@ theorem levelEquiv_insertLinearCoordinate
           w.1.bits
           (e (prefixCoords w.1 m (by simpa [w.2] using h)))
           m (i.1 - m) hiLength
-      rw [hk] at hget
+      simp only [hk] at hget
       simpa [insertLinearCoordinate, w.2, h, levelEquiv,
         prefixRestrictionLinearMap, prefixCoords, hi, hmi]
         using hget
