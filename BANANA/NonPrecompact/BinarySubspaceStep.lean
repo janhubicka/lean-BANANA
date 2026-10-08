@@ -57,6 +57,24 @@ noncomputable def fixedSubspaceLastProduct
   rw [LinearEquiv.finrank_map_eq]
   exact P.2
 
+/-- Transporting a subspace under the last-coordinate linear
+equivalence preserves and reflects membership. -/
+theorem mem_fixedSubspaceLastProduct
+    {d n : ℕ} (P : FixedSubspace d (n + 1))
+    (z : Fin (n + 1) → F2) :
+    z ∈ P.1 ↔
+      lastCoordinateLinearEquiv n z ∈ (fixedSubspaceLastProduct P).1 := by
+  change z ∈ P.1 ↔
+    lastCoordinateLinearEquiv n z ∈
+      P.1.map (lastCoordinateLinearEquiv n).toLinearMap
+  constructor
+  · intro hz
+    exact ⟨z, hz, rfl⟩
+  · rintro ⟨w, hw, hzw⟩
+    have hwz : w = z :=
+      (lastCoordinateLinearEquiv n).injective hzw
+    rwa [hwz] at hw
+
 variable {V : Type*} [AddCommGroup V] [Module F2 V]
 
 private def firstCoordinate :
