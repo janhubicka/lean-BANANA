@@ -104,7 +104,7 @@ theorem subspace_eq_product_of_vertical
       P.add_mem hw hd
     have heq : w + ((0 : V), z.2 - w.2) = z := by
       apply Prod.ext
-      · change w.1 + (0 : V) = z.1
+      · change w.1 = z.1 at hfirst
         simpa only [add_zero] using hfirst
       · change w.2 + (z.2 - w.2) = z.2
         abel
@@ -182,7 +182,7 @@ theorem exists_linear_last_coordinate_of_injective
     let qz : Q := E pz
     have hfirst : qz.1 = z.1 := rfl
     have hsecond : g qz = z.2 := by
-      change (E.symm qz).1.2 = z.2
+      change (E.symm (E pz)).1.2 = z.2
       simpa only [E.symm_apply_apply]
     calc
       z.2 = g qz := hsecond.symm
@@ -240,8 +240,14 @@ theorem finrank_projected_of_boring
   let f : P →ₗ[F2] V := firstCoordinate.comp P.subtype
   have hf : Function.Injective f :=
     firstCoordinate_injective_of_no_vertical P hvertical
-  change finrank F2 (LinearMap.range f) = finrank F2 P
-  exact LinearMap.finrank_range_of_inj hf
+  have hrange : LinearMap.range f = P.map firstCoordinate := by
+    change LinearMap.range (firstCoordinate.comp P.subtype) =
+      P.map firstCoordinate
+    rw [LinearMap.range_comp, Submodule.range_subtype]
+  calc
+    finrank F2 (P.map firstCoordinate) =
+        finrank F2 (LinearMap.range f) := by rw [hrange]
+    _ = finrank F2 P := LinearMap.finrank_range_of_inj hf
 
 /-- When the last coordinate is independent, the dimension drops by
 exactly one under projection. -/
@@ -254,8 +260,8 @@ theorem finrank_projected_of_pivot
   calc
     finrank F2 P =
         finrank F2
-          ((P.map firstCoordinate).prod (⊤ : Submodule F2 F2)) := by
-          rw [hp]
+          ((P.map firstCoordinate).prod (⊤ : Submodule F2 F2)) :=
+        congrArg (fun S : Submodule F2 (V × F2) => finrank F2 S) hp
     _ = finrank F2
           ((P.map firstCoordinate) × (⊤ : Submodule F2 F2)) :=
         LinearEquiv.finrank_eq
