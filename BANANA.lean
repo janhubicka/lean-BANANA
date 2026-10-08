@@ -40,6 +40,7 @@ import BANANA.NonPrecompact.LinearBinaryExactCoordinates
 import BANANA.NonPrecompact.LinearBinaryRangeTransfer
 import BANANA.NonPrecompact.LinearBinaryBoringExtension
 import BANANA.NonPrecompact.LinearBinaryRepresentability
+import BANANA.NonPrecompact.GLRAxiomAudit
 import BANANA.NonPrecompact.LinearBinaryM2
 import BANANA.NonPrecompact.LinearBinarySMTree
 import BANANA.NonPrecompact.LinearBinaryRanges
