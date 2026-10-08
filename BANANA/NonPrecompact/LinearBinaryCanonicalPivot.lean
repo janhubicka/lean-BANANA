@@ -36,43 +36,22 @@ theorem canonicalExtension_appendBit_at_cut
   have hxnext : LevelTree.lev (appendBit x c) = n + 1 := by
     change (x.bits ++ [c]).length = n + 1
     simp [show x.bits.length = n from hx]
-  have hGnext :
-      LevelTree.lev (G (appendBit x c)) =
-        LevelTree.lev (F x) + 1 := by
-    calc
-      LevelTree.lev (G (appendBit x c)) =
-          H.levelMap G.map (n + 1) := by
-            simpa [hxnext] using
-              (H.levelMap_eq G.map (a := appendBit x c)).symm
-      _ = H.levelMap G.map n + 1 :=
-        H.canonicalExtension_level_succ F n n le_rfl
-      _ = H.levelMap F.map n + 1 := by
-        rw [H.canonicalExtension_level_at_prefix F n]
-      _ = LevelTree.lev (F x) + 1 := by
-        have hFx : H.levelMap F.map n = LevelTree.lev (F x) := by
-          simpa only [hx] using (H.levelMap_eq F.map (a := x))
-        rw [hFx]
+  have hlevels :
+      H.levelMap G.map (LevelTree.lev (appendBit x c)) =
+        H.levelMap G.map (LevelTree.lev x) + 1 := by
+    rw [hxnext, hx]
+    exact H.canonicalExtension_level_succ F n n le_rfl
   have hsucc : binarySucc.succ x [] c = some (appendBit x c) := by
     rfl
-  obtain ⟨d, hd, hdb⟩ := G.map.weak_succ' hsucc
-  have hcover : G x ⋖ d :=
-    binarySucc.covBy_of_succ_eq_some hd
-  have hdlevel :
-      LevelTree.lev d = LevelTree.lev (G x) + 1 :=
-    LevelTree.covBy_level_eq hcover
-  have hsame :
-      LevelTree.lev d = LevelTree.lev (G (appendBit x c)) := by
-    rw [hdlevel, hGx, hGnext]
-  have hd_eq : d = G (appendBit x c) :=
-    LevelTree.same_level_of_le hdb hsame
-  have hlabel : d = appendBit (G x) c := by
-    change (some (appendBit (G x) c) : Option BinaryWord) =
-      some d at hd
-    exact (Option.some.inj hd).symm
+  have hsucc' := H.succ_eq_of_consecutive_levels G.map hsucc hlevels
+  change
+    (some (appendBit (G x) c) : Option BinaryWord) =
+      some (G (appendBit x c)) at hsucc'
   calc
-    G (appendBit x c) = d := hd_eq.symm
-    _ = appendBit (G x) c := hlabel
-    _ = appendBit (F x) c := congrArg (fun w => appendBit w c) hGx
+    G (appendBit x c) = appendBit (G x) c :=
+      (Option.some.inj hsucc').symm
+    _ = appendBit (F x) c :=
+      congrArg (fun y => appendBit y c) hGx
 
 /-- Canonical continuation raises an exact source dimension and
 its terminal target height by one. -/
