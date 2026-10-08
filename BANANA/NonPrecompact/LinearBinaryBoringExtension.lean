@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.LinearBinaryComposition
 import BANANA.NonPrecompact.LinearBinaryExactCoordinates
+import BANANA.NonPrecompact.BinarySubspaceStep
 
 /-!
 # Exact extension by a dependent binary coordinate
@@ -138,6 +139,89 @@ theorem extendExactWithBoring_range
         (exactLinearModel (finalLinearInsertionExact N e)).map
         (exactSubspace f).1 := by
   exact exactSubspace_comp (finalLinearInsertionExact N e) f
+
+
+/-- On finite coordinate vectors, the final boring insertion is simply
+the operation `x ↦ (x,e(x))`. -/
+theorem finalLinearInsertion_linear_apply
+    (N : ℕ) (e : LinearBoringRule N) (x : Fin N → F2) :
+    insertBoringLinearMap N N le_rfl e x = Fin.snoc x (e x) := by
+  have hprefix :
+      prefixRestrictionLinearMap N N le_rfl x = x := by
+    funext i
+    rfl
+  change (Fin.last N).insertNth
+      (e (prefixRestrictionLinearMap N N le_rfl x)) x =
+        Fin.snoc x (e x)
+  rw [hprefix]
+  exact Fin.insertNth_last' (e x) x
+
+/-- The last-coordinate equivalence recovers both the old vector and
+the inserted linear functional. -/
+theorem lastCoordinateLinearEquiv_insertion
+    (N : ℕ) (e : LinearBoringRule N) (x : Fin N → F2) :
+    lastCoordinateLinearEquiv N
+        (insertBoringLinearMap N N le_rfl e x) = (x, e x) := by
+  rw [finalLinearInsertion_linear_apply]
+  simp [lastCoordinateLinearEquiv]
+
+/-- Subspace membership after inserting a dependent coordinate is
+exactly the graph condition over the original subspace. -/
+theorem mem_finalLinearInsertion_map_iff
+    (N : ℕ) (e : LinearBoringRule N)
+    (Q : Submodule F2 (Fin N → F2))
+    (z : Fin (N + 1) → F2) :
+    z ∈ Submodule.map (insertBoringLinearMap N N le_rfl e) Q ↔
+      (lastCoordinateLinearEquiv N z).1 ∈ Q ∧
+      (lastCoordinateLinearEquiv N z).2 =
+        e (lastCoordinateLinearEquiv N z).1 := by
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    rw [lastCoordinateLinearEquiv_insertion]
+    exact ⟨hx, rfl⟩
+  · intro hz
+    let x : Fin N → F2 := (lastCoordinateLinearEquiv N z).1
+    have hzEq : z = insertBoringLinearMap N N le_rfl e x := by
+      apply (lastCoordinateLinearEquiv N).injective
+      rw [lastCoordinateLinearEquiv_insertion]
+      apply Prod.ext
+      · rfl
+      · exact hz.2
+    rw [hzEq]
+    exact ⟨x, hz.1, rfl⟩
+
+/-- The exact-dependent-coordinate subspace range is explicitly the
+image under the final linear insertion. -/
+theorem extendExactWithBoring_range_explicit
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (e : LinearBoringRule N) :
+    (exactSubspace (extendExactWithBoring f e)).1 =
+      Submodule.map (insertBoringLinearMap N N le_rfl e)
+        (exactSubspace f).1 := by
+  rw [extendExactWithBoring_range,
+    finalLinearInsertionExact_model_eq]
+
+/-- A dependent-coordinate extension realises any fixed-dimensional
+subspace given by the graph of a linear functional over its old range.
+This is the exact form needed by the ambient-dimension induction. -/
+theorem extendExactWithBoring_realises_graph
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (e : LinearBoringRule N)
+    (P : FixedSubspace d (N + 1))
+    (hgraph : ∀ z : Fin (N + 1) → F2,
+      z ∈ P.1 ↔
+        (lastCoordinateLinearEquiv N z).1 ∈ (exactSubspace f).1 ∧
+        (lastCoordinateLinearEquiv N z).2 =
+          e (lastCoordinateLinearEquiv N z).1) :
+    exactSubspace (extendExactWithBoring f e) = P := by
+  apply Subtype.ext
+  apply Submodule.ext
+  intro z
+  rw [extendExactWithBoring_range_explicit]
+  exact (mem_finalLinearInsertion_map_iff N e (exactSubspace f).1 z).trans
+    (hgraph z).symm
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
