@@ -83,7 +83,6 @@ def BananaLinePairCopy.toSourceEmbedding
         (linePairSource b).eval u v
     rw [linePairSpanMap_apply, linePairSpanMap_apply,
       A.eval_smul_smul, P.pairing, linePairSource_eval]
-    ring
 
 /-- The source basis vectors are sent to the two vectors recording the
 line-pair copy. -/
