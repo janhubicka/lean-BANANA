@@ -48,6 +48,15 @@ def lastCoordinateLinearEquiv (n : ℕ) :
       rfl
     · rfl
 
+/-- Transport a finite binary subspace to a product of a shorter
+coordinate space and its final coordinate, preserving its dimension. -/
+noncomputable def fixedSubspaceLastProduct
+    {d n : ℕ} (P : FixedSubspace d (n + 1)) :
+    {Q : Submodule F2 ((Fin n → F2) × F2) // finrank F2 Q = d} := by
+  refine ⟨P.1.map (lastCoordinateLinearEquiv n).toLinearMap, ?_⟩
+  rw [LinearEquiv.finrank_map_eq]
+  exact P.2
+
 variable {V : Type*} [AddCommGroup V] [Module F2 V]
 
 private def firstCoordinate :
