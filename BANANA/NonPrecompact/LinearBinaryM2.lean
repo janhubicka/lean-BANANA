@@ -121,9 +121,7 @@ theorem linearOnLevels_m2
         rw [hLψ]
         have hcoord := congrFun hφx p
         change (F x).bits[p.1] = (φ v) p at hcoord
-        have hpval : p.1 = t := by simp [p]
-        rw [hpval] at hcoord
-        exact hcoord.symm
+        simpa [p] using hcoord.symm
 
       change insertLinearCoordinate t e (F1 x) = F x
       have htF1 : t ≤ (F1 x).bits.length := by
