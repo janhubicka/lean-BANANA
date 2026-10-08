@@ -57,6 +57,20 @@ structure LevelLinearModel
             ⟨F w.1, hFw⟩ =
           map (levelEquiv n w)
 
+/-- Transport a levelwise-linear witness across an equality of
+target dimensions. Keeping the target dimension a genuine parameter
+avoids substituting into a dependent `Classical.choose` expression. -/
+private noncomputable def levelLinearModel_of_witness
+    (F : SMTree.MMap LinearBinaryH) (n m : ℕ)
+    (φ : (Fin n → F2) →ₗ[F2] (Fin m → F2))
+    (hφ : ∀ w : AtLevel n,
+      ∃ hFw : (F w.1).bits.length = m,
+        levelEquiv m ⟨F w.1, hFw⟩ = φ (levelEquiv n w))
+    (hm : m = shapeTargetLevel F.map n) :
+    LevelLinearModel F n := by
+  cases hm
+  exact ⟨φ, hφ⟩
+
 noncomputable def levelLinearModel
     (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
     LevelLinearModel F n := by
@@ -68,8 +82,7 @@ noncomputable def levelLinearModel
   have hm : m = shapeTargetLevel F.map n := by
     obtain ⟨h0, _⟩ := hφ (zeroAtLevel n)
     exact h0.symm
-  rcases hm with rfl
-  exact ⟨φ, hφ⟩
+  exact levelLinearModel_of_witness F n m φ hφ hm
 
 theorem levelLinearModel_injective
     (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
