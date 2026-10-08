@@ -105,7 +105,9 @@ theorem subspace_eq_product_of_vertical
     have heq : w + ((0 : V), z.2 - w.2) = z := by
       apply Prod.ext
       · change w.1 = z.1 at hfirst
-        simpa only [add_zero] using hfirst
+        change w.1 + (0 : V) = z.1
+        rw [add_zero]
+        exact hfirst
       · change w.2 + (z.2 - w.2) = z.2
         abel
     rw [heq] at hs
@@ -183,7 +185,7 @@ theorem exists_linear_last_coordinate_of_injective
     have hfirst : qz.1 = z.1 := rfl
     have hsecond : g qz = z.2 := by
       change (E.symm (E pz)).1.2 = z.2
-      simpa only [E.symm_apply_apply]
+      rw [E.symm_apply_apply]
     calc
       z.2 = g qz := hsecond.symm
       _ = e qz.1 := (heval qz).symm
