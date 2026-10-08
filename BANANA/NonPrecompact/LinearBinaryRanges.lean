@@ -68,8 +68,8 @@ noncomputable def levelLinearModel
   have hm : m = shapeTargetLevel F.map n := by
     obtain ⟨h0, _⟩ := hφ (zeroAtLevel n)
     exact h0.symm
-  refine ⟨hm ▸ φ, ?_⟩
-  exact hm ▸ hφ
+  rcases hm with rfl
+  exact ⟨φ, hφ⟩
 
 theorem levelLinearModel_injective
     (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
@@ -120,17 +120,34 @@ structure ExactLinearModel
             ⟨(f.1.representative LinearBinaryH) w.1, hFw⟩ =
           map (levelEquiv d w)
 
+/-- A level-linear action packaged with an independently specified
+target dimension. The map and its action law must be transported together
+when the target dimension is changed. -/
+private structure LevelModelAt
+    (R : SMTree.MMap LinearBinaryH) (d N : ℕ) where
+  map : (Fin d → F2) →ₗ[F2] (Fin N → F2)
+  action :
+    ∀ w : AtLevel d,
+      ∃ hRw : (R w.1).bits.length = N,
+        levelEquiv N ⟨R w.1, hRw⟩ =
+          map (levelEquiv d w)
+
+private noncomputable def levelModelAt_of_target
+    (R : SMTree.MMap LinearBinaryH) (d N : ℕ)
+    (hN : shapeTargetLevel R.map d = N) :
+    LevelModelAt R d N := by
+  cases hN
+  exact ⟨(levelLinearModel R d).map,
+    (levelLinearModel R d).action⟩
+
 noncomputable def exactLinearModel
     {d N : ℕ}
     (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) :
     ExactLinearModel f := by
   let R := f.1.representative LinearBinaryH
-  let M := levelLinearModel R d
-  have htarget :
-      shapeTargetLevel R.map d = N :=
-    exact_shapeTargetLevel f
-  refine ⟨htarget ▸ M.map, ?_⟩
-  exact htarget ▸ M.action
+  let M : LevelModelAt R d N :=
+    levelModelAt_of_target R d N (exact_shapeTargetLevel f)
+  exact ⟨M.map, M.action⟩
 
 theorem exactLinearModel_injective
     {d N : ℕ}
