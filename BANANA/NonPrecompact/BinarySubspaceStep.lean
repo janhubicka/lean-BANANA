@@ -19,6 +19,8 @@ This algebraic dichotomy is independent of the successor-tree formalisation.
 namespace SuccessorTree.NonPrecompact
 namespace BinaryWord
 
+open Module
+
 /-- Separate the last coordinate of a finite binary vector. The
 first component is the prefix, while the second is the final bit. -/
 def lastCoordinateLinearEquiv (n : ℕ) :
@@ -75,9 +77,10 @@ theorem subspace_eq_product_of_vertical
       P.add_mem hw hd
     have heq : w + ((0 : V), z.2 - w.2) = z := by
       apply Prod.ext
-      · change w.1 = z.1 at hfirst
-        exact hfirst
-      · abel
+      · change w.1 + (0 : V) = z.1
+        simpa only [add_zero] using hfirst
+      · change w.2 + (z.2 - w.2) = z.2
+        abel
     rw [heq] at hs
     exact hs
 
@@ -153,8 +156,7 @@ theorem exists_linear_last_coordinate_of_injective
     have hfirst : qz.1 = z.1 := rfl
     have hsecond : g qz = z.2 := by
       change (E.symm qz).1.2 = z.2
-      rw [E.symm_apply_apply]
-      rfl
+      simpa only [E.symm_apply_apply]
     calc
       z.2 = g qz := hsecond.symm
       _ = e qz.1 := (heval qz).symm
