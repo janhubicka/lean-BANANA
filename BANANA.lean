@@ -38,6 +38,8 @@ import BANANA.NonPrecompact.LinearBinaryComposition
 import BANANA.NonPrecompact.LinearBinaryCanonicalPivot
 import BANANA.NonPrecompact.LinearBinaryExactCoordinates
 import BANANA.NonPrecompact.LinearBinaryRangeTransfer
+import BANANA.NonPrecompact.LinearBinaryBoringExtension
+import BANANA.NonPrecompact.LinearBinaryRepresentability
 import BANANA.NonPrecompact.LinearBinaryM2
 import BANANA.NonPrecompact.LinearBinarySMTree
 import BANANA.NonPrecompact.LinearBinaryRanges
