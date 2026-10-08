@@ -187,9 +187,13 @@ theorem levelEquiv_insertLinearCoordinate
             (e (prefixRestrictionLinearMap m n h (levelEquiv n w)))
             (levelEquiv n w)) : Fin (n + 1) → F2) p
     simp only [Fin.insertNth_apply_same]
-    simp [insertLinearCoordinate, w.2, h,
-      prefixRestrictionLinearMap, prefixCoords, levelEquiv,
-      List.get_insertIdx_self]
+    have hle : m ≤ w.1.bits.length := by
+      simpa [w.2] using h
+    have hget :=
+      List.get_insertIdx_self w.1.bits
+        (e (prefixCoords w.1 m hle)) m hle
+    simpa [insertLinearCoordinate, w.2, h, levelEquiv,
+      prefixRestrictionLinearMap, prefixCoords] using hget
   · change
       (insertLinearCoordinate m e w.1).bits.get
           ⟨(p.succAbove i).1, by simpa [hlen] using (p.succAbove i).2⟩ =
@@ -204,9 +208,15 @@ theorem levelEquiv_insertLinearCoordinate
         change i.1 < m
         exact hi
       rw [hs]
-      simp [insertLinearCoordinate, w.2, h, levelEquiv,
-        prefixRestrictionLinearMap, prefixCoords, hi,
-        List.get_insertIdx_of_lt]
+      have hle : m ≤ w.1.bits.length := by
+        simpa [w.2] using h
+      have hiLength : i.1 < w.1.bits.length := by
+        simpa [w.2] using i.2
+      have hget :=
+        List.get_insertIdx_of_lt w.1.bits
+          (e (prefixCoords w.1 m hle)) m i.1 hi hiLength
+      simpa [insertLinearCoordinate, w.2, h, levelEquiv,
+        prefixRestrictionLinearMap, prefixCoords, hi] using hget
     · have hmi : m ≤ i.1 := Nat.le_of_not_gt hi
       have hs :
           p.succAbove i = i.succ := by
