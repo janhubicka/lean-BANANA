@@ -189,11 +189,16 @@ theorem levelEquiv_insertLinearCoordinate
     simp only [Fin.insertNth_apply_same]
     have hle : m ≤ w.1.bits.length := by
       simpa [w.2] using h
+    have hpref :
+        prefixCoords w.1 m hle =
+          prefixRestrictionLinearMap m n h (levelEquiv n w) := by
+      funext i
+      rfl
+    rw [← hpref]
     have hget :=
       List.get_insertIdx_self w.1.bits
         (e (prefixCoords w.1 m hle)) m hle
-    simpa [insertLinearCoordinate, w.2, h, p, levelEquiv,
-      prefixRestrictionLinearMap, prefixCoords] using hget
+    simpa [insertLinearCoordinate, w.2, h, p] using hget
   · change
       (insertLinearCoordinate m e w.1).bits.get
           ⟨(p.succAbove i).1, by simpa [hlen] using (p.succAbove i).2⟩ =
