@@ -125,7 +125,7 @@ noncomputable def extendExactWithBoring
     SMTree.AM.At LinearBinaryH 0 (d + 1) (N + 1) :=
   SMTree.exactComp LinearBinaryH
     (by omega : 0 < N + 1) (by omega : 0 < d + 1)
-    (finalLinearInsertionExact N e) f
+    (finalLinearInsertionExact N e) (zeroBasedExactInner f)
 
 /-- The range of the dependent-coordinate extension is the image of
 the preceding exact subspace under the inserted-coordinate map.
