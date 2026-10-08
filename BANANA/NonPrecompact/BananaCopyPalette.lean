@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.BananaCopyRanges
+import Mathlib.Data.Fintype.OfMap
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
