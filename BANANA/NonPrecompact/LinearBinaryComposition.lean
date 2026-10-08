@@ -19,6 +19,25 @@ namespace BinaryWord
 
 open Module
 
+/-- An exact approximation whose terminal level is `D` also ends at the
+last source level of a width-`D + 1` approximation based at level zero.
+The underlying approximation is unchanged; only the terminal index is
+normalised. -/
+def zeroBasedExactInner
+    {a D : ℕ}
+    (g : SMTree.AM.At LinearBinaryH 0 (a + 1) D) :
+    SMTree.AM.At LinearBinaryH 0 (a + 1)
+      (0 + (D + 1) - 1) := by
+  refine ⟨g.1, ?_⟩
+  have hindex : 0 + (D + 1) - 1 = D := by omega
+  rw [hindex]
+  exact g.2
+
+@[simp] theorem zeroBasedExactInner_val
+    {a D : ℕ}
+    (g : SMTree.AM.At LinearBinaryH 0 (a + 1) D) :
+    (zeroBasedExactInner g).1 = g.1 := rfl
+
 /-- On exact finite linear binary approximations, the induced level
 linear map respects finite successor composition. -/
 theorem exactLinearModel_comp
@@ -29,7 +48,7 @@ theorem exactLinearModel_comp
       (SMTree.exactComp LinearBinaryH
         (by omega : 0 < D + 1)
         (by omega : 0 < a + 1)
-        f g)).map =
+        f (zeroBasedExactInner g))).map =
       (exactLinearModel f).map.comp (exactLinearModel g).map := by
   apply LinearMap.ext
   intro x
@@ -43,7 +62,7 @@ theorem exactLinearModel_comp
     SMTree.exactComp LinearBinaryH
       (by omega : 0 < D + 1)
       (by omega : 0 < a + 1)
-      f g
+      f (zeroBasedExactInner g)
   let FG := fg.1.representative LinearBinaryH
 
   obtain ⟨hGw, hg⟩ :=
@@ -94,7 +113,7 @@ theorem exactSubspace_comp
       (SMTree.exactComp LinearBinaryH
         (by omega : 0 < D + 1)
         (by omega : 0 < a + 1)
-        f g)).1 =
+        f (zeroBasedExactInner g))).1 =
       Submodule.map (exactLinearModel f).map (exactSubspace g).1 := by
   change
     LinearMap.range
@@ -102,7 +121,7 @@ theorem exactSubspace_comp
         (SMTree.exactComp LinearBinaryH
           (by omega : 0 < D + 1)
           (by omega : 0 < a + 1)
-          f g)).map =
+          f (zeroBasedExactInner g))).map =
       Submodule.map (exactLinearModel f).map
         (LinearMap.range (exactLinearModel g).map)
   rw [exactLinearModel_comp f g, LinearMap.range_comp]
