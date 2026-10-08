@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.LinearBinaryRanges
+import BANANA.NonPrecompact.BinarySubspaceStep
 import SuccessorTree.Canonical
 
 /-!
@@ -97,6 +98,118 @@ noncomputable def extendExactWithPivot
     have hd : 0 + (d + 1) - 1 = d := by omega
     rwa [hd] at hf
   rw [hbefore]
+
+
+/-- On the new top source level the representative of the extended
+approximation agrees with the canonical total extension. -/
+theorem extendExactWithPivot_representative_agrees
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (w : AtLevel (d + 1)) :
+    ((extendExactWithPivot f).1.representative LinearBinaryH) w.1 =
+      (LinearBinaryH.canonicalExtension
+        (f.1.representative LinearBinaryH) d) w.1 := by
+  let F := f.1.representative LinearBinaryH
+  let G := LinearBinaryH.canonicalExtension F d
+  have hfix : G.FixesBelow LinearBinaryH 0 := by
+    intro x hx
+    omega
+  change
+    ((G.toAM LinearBinaryH 0 (d + 2) hfix).representative
+      LinearBinaryH) w.1 = G w.1
+  apply SMTree.MMap.toAM_representative_agrees
+    LinearBinaryH G 0 (d + 2) hfix
+  change w.1.bits.length < 0 + (d + 2)
+  omega
+
+/-- The new pivot appears as an independent final bit in the induced
+linear map, in the last-coordinate product presentation. -/
+theorem extendExactWithPivot_action_append
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (w : AtLevel d) (c : F2) :
+    lastCoordinateLinearEquiv N
+      ((exactLinearModel (extendExactWithPivot f)).map
+        (Fin.snoc (levelEquiv d w) c)) =
+      ((exactLinearModel f).map (levelEquiv d w), c) := by
+  let src : AtLevel (d + 1) :=
+    ⟨appendBit w.1 c, by simp [appendBit, w.2]⟩
+  let F := f.1.representative LinearBinaryH
+  obtain ⟨hG, hactionG⟩ :=
+    (exactLinearModel (extendExactWithPivot f)).action src
+  obtain ⟨hF, hactionF⟩ :=
+    (exactLinearModel f).action w
+  have hrep :
+      ((extendExactWithPivot f).1.representative
+        LinearBinaryH) src.1 = appendBit (F w.1) c := by
+    calc
+      ((extendExactWithPivot f).1.representative
+        LinearBinaryH) src.1 =
+          (LinearBinaryH.canonicalExtension F d) src.1 :=
+        extendExactWithPivot_representative_agrees f src
+      _ = appendBit (F w.1) c :=
+        canonicalExtension_appendBit_at_cut F d w.1 c w.2
+  have hlen :
+      (appendBit (F w.1) c).bits.length = N + 1 := by
+    simp [appendBit, hF]
+  have hsub :
+      (⟨((extendExactWithPivot f).1.representative
+            LinearBinaryH) src.1, hG⟩ : AtLevel (N + 1)) =
+        (⟨appendBit (F w.1) c, hlen⟩ : AtLevel (N + 1)) :=
+    Subtype.ext hrep
+  have hsource :
+      levelEquiv (d + 1) src = Fin.snoc (levelEquiv d w) c :=
+    levelEquiv_appendBit d w c
+  have htarget :
+      levelEquiv (N + 1) ⟨appendBit (F w.1) c, hlen⟩ =
+        Fin.snoc (levelEquiv N ⟨F w.1, hF⟩) c :=
+    levelEquiv_appendBit N ⟨F w.1, hF⟩ c
+  have hmodel :
+      (exactLinearModel (extendExactWithPivot f)).map
+        (Fin.snoc (levelEquiv d w) c) =
+      Fin.snoc ((exactLinearModel f).map (levelEquiv d w)) c := by
+    calc
+      (exactLinearModel (extendExactWithPivot f)).map
+          (Fin.snoc (levelEquiv d w) c) =
+          (exactLinearModel (extendExactWithPivot f)).map
+            (levelEquiv (d + 1) src) := by rw [hsource]
+      _ = levelEquiv (N + 1)
+            ⟨((extendExactWithPivot f).1.representative
+                LinearBinaryH) src.1, hG⟩ := hactionG.symm
+      _ = levelEquiv (N + 1)
+            ⟨appendBit (F w.1) c, hlen⟩ :=
+        congrArg (levelEquiv (N + 1)) hsub
+      _ = Fin.snoc (levelEquiv N ⟨F w.1, hF⟩) c := htarget
+      _ = Fin.snoc ((exactLinearModel f).map (levelEquiv d w)) c := by
+        rw [hactionF]
+  rw [hmodel]
+  simp [lastCoordinateLinearEquiv]
+
+/-- To realise the product of a represented subspace with one new free
+coordinate, it suffices that the target subspace has that product
+membership condition. Both have dimension `d+1`, so inclusion is enough. -/
+theorem extendExactWithPivot_realises_product
+    {d N : ℕ}
+    (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N)
+    (P : FixedSubspace (d + 1) (N + 1))
+    (hprod : ∀ z : Fin (N + 1) → F2,
+      z ∈ P.1 ↔
+        (lastCoordinateLinearEquiv N z).1 ∈ (exactSubspace f).1) :
+    exactSubspace (extendExactWithPivot f) = P := by
+  apply exactSubspace_eq_of_range_le (extendExactWithPivot f) P
+  rintro v ⟨x, rfl⟩
+  let u : Fin d → F2 := Fin.init x
+  let c : F2 := x (Fin.last d)
+  let w : AtLevel d := (levelEquiv d).symm u
+  have hwu : levelEquiv d w = u :=
+    (levelEquiv d).apply_symm_apply u
+  have hxs : Fin.snoc u c = x := by
+    exact Fin.snoc_init_self x
+  have hcoord := extendExactWithPivot_action_append f w c
+  rw [hwu, hxs] at hcoord
+  apply (hprod _).2
+  rw [hcoord]
+  exact ⟨u, rfl⟩
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
