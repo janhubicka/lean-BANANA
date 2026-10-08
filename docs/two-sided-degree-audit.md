@@ -66,3 +66,49 @@ spawned referee reports**.
 
 The associated manuscript patch touches no circulation prose and
 remains independent of this uncompiled Lean work.
+
+## Exhaustive finite regression (8 October 2026)
+
+`scripts/check_linepair_extension_small.py` was run locally with Python.
+It exhaustively enumerates injective left and right coordinate maps,
+all pairing matrices, all nonzero source vector pairs, and all
+compatible prescribed image pairs in the perfect target for ten
+dimension triples `(l,r,extra)` with `l+r+extra <= 4`.
+Result: **126,871 pairs of coordinate embeddings examined, 310
+source-pair coverage equalities checked, no counterexample**.
+This is regression evidence for the extension lemma, not a Lean proof
+or a kernel check.
+
+## More direct route to the manuscript's copy-degree classification
+
+The manuscript states degrees of *unlabelled copies*. It is possible
+to avoid choosing representatives of those copies, and even to avoid
+importing the abstract degree-propagation theorem, using set-valued
+colours. Let `A` contain a fixed line-pair source `P = A_b`, and
+let `s` be the number of P-copies within A (finite, positive).
+
+For each ambient C choose the fixed-completion colouring
+`c : copies(P,C) -> Fin (2^k)` from the persistent-colouring theorem.
+Colour each unlabelled A-copy `D` by the **set** of c-colours of the
+P-copies contained in D. This is independent of a labelling of D.
+Every such set has cardinal at most `s`. In a distinguished perfect
+target of dimension `n = dim(L_A) + dim(R_A) + 2^(k+1)`, every P-copy
+extends to an A-copy by the line-pair extension lemma, and the P-copy
+colours cover all `2^k` values. If only `t` distinct set-colours
+occurred among its A-copies, their union could have cardinal at most
+`s*t`. Choosing `k` with `2^k > s*t` is a contradiction.
+
+This gives the desired *copy* Ramsey-degree obstruction without
+a source-automorphism quotient or a general amalgamation-class
+degree-propagation theorem. It remains to implement the copy-range
+representation and finite set-counting argument in Lean and run a
+kernel/axiom audit before adding a green marker.
+
+## Safe integration policy
+
+The new modules are **not imported by root `BANANA.lean`** pending
+a successful local kernel build. To check them, run
+`lake env lean BANANA/NonPrecompact/LinePairDegreeAxiomAudit.lean`
+or the corresponding targeted Lake build, then restore the imports
+only after a clean result. Merging the staged source files is not
+a claim that the new declarations have been accepted by the kernel.
