@@ -184,3 +184,69 @@ and composes one boring-coordinate insertion at target position `N`.
 This avoids an unnecessary global row-echelon matrix formalisation:
 induct directly on the ambient coordinate length, using the two
 local alternatives and the existing shape-map operations.
+
+
+## Update — 8 October: complete induction submitted for compilation
+
+The branch now includes
+`LinearBinaryBoringExtension.lean` and
+`LinearBinaryRepresentability.lean`, and its root module imports both.
+The intended Lean statement `everyBinarySubspaceRepresentable` is
+**unconditional** in source: no unproved hypothesis is supplied to the
+representation theorem.
+
+The dependent-coordinate branch factors through an exact approximation
+whose level-`N` action inserts `e(x)` as the final coordinate. This
+uses the existing `exactSubspace_comp` theorem and the identity
+`Fin.insertNth_last'`, making the resulting range exactly the graph
+of `e` over the preceding range.
+
+The independent-coordinate branch uses
+`canonicalExtension_appendBit_at_cut`, an instance of the existing
+`SMTree.succ_eq_of_consecutive_levels`, to obtain
+`F'(x,c)=(F(x),c)`. The associated subspace range is contained in
+the pullback of `range F × F₂`. Both subspaces have dimension `d+1`,
+so `Submodule.eq_of_le_of_finrank_eq` gives equality. This route needs
+no converse-surjectivity argument.
+
+The ambient-dimension induction uses the dichotomy of
+`BinarySubspaceStep`. It proves the zero-dimensional base case,
+projects each `P ≤ F₂^(N+1)` to `Q ≤ F₂^N`, applies induction to
+`Q`, and chooses one of the two exact extensions. It also exposes
+the intended unconditional conclusions
+`binarySubspaceRamsey_via_successors` and
+`leftOneSidedCopyRamseyOne_via_successors` /
+`rightOneSidedCopyRamseyOne_via_successors`.
+
+**Verification status.** These are source-level proof attempts, not
+Lean-certified theorems: the current GitHub Actions run is queued due to
+the runner situation and the available local container has no Lean
+toolchain. Do **not** promote corresponding manuscript interface markers
+to verified, pin these declarations as checked, or merge draft PR #7
+until the actual kernel build and axiom audit succeed.
+
+**Independent mathematical check.** The branch's
+`scripts/check_binary_successor_small.py` now includes
+`check_inductive_range_rebuilding`. A separately executed exhaustive
+test of that exact reconstruction algorithm passed all 29,212 subspaces
+of `F₂^7`, also checking all smaller ambient dimensions. This is finite
+evidence only; it cannot replace the induction in Lean.
+
+### Adversarial obligations before merge
+
+1. Compile the whole dependency chain, starting with
+   `LinearBinaryMonoidBasic.levelEquiv_insertLinearCoordinate`.
+   Its dependent-list-index proof was still failing in the most recent
+   completed CI log. No later file can be trusted while this blocker
+   remains.
+2. Verify that `toAM_representative_agrees` is used with the correct
+   source cutoff in the two exact extensions, especially dimensions zero
+   and one.
+3. Verify that the last-coordinate membership transport reflects the
+   submodule predicate in the reverse direction and that the induction
+   handles `d=0` in the pivot branch by contradiction.
+4. Run `lake build BANANA` and `#print axioms` on the final GLR and
+   one-sided copy Ramsey declarations, ideally from a fresh local
+   dependency cache, before updating `validation.tex`.
+5. Keep circulation prose frozen. Only TODOs or justified validation
+   markers may be added to the circulated TeX.
