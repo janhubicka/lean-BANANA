@@ -65,6 +65,56 @@ noncomputable def finalLinearInsertionExact
   rw [hlast]
   exact finalLinearInsertion_levelMap N e
 
+/-- The exact insertion has exactly the expected linear action:
+inserting the final coordinate `e(x)` at the end of `x`. -/
+theorem finalLinearInsertionExact_model_eq
+    (N : ℕ) (e : LinearBoringRule N) :
+    (exactLinearModel (finalLinearInsertionExact N e)).map =
+      insertBoringLinearMap N N le_rfl e := by
+  apply LinearMap.ext
+  intro x
+  let w : AtLevel N := (levelEquiv N).symm x
+  have hw : levelEquiv N w = x :=
+    (levelEquiv N).apply_symm_apply x
+  obtain ⟨hFw, haction⟩ :=
+    (exactLinearModel (finalLinearInsertionExact N e)).action w
+  let F := finalLinearInsertion N e
+  have hfix : F.FixesBelow LinearBinaryH 0 := by
+    intro y hy
+    omega
+  have hrep :
+      ((finalLinearInsertionExact N e).1.representative LinearBinaryH) w.1 =
+        F w.1 := by
+    change
+      ((F.toAM LinearBinaryH 0 (N + 1) hfix).representative
+        LinearBinaryH) w.1 = F w.1
+    apply SMTree.MMap.toAM_representative_agrees
+      LinearBinaryH F 0 (N + 1) hfix
+    change w.1.bits.length < N + 1
+    omega
+  have hlen :
+      (insertLinearCoordinate N e w.1).bits.length = N + 1 := by
+    rw [length_insertLinearCoordinate]
+    simp [w.2]
+  have hsub :
+      (⟨((finalLinearInsertionExact N e).1.representative
+            LinearBinaryH) w.1, hFw⟩ : AtLevel (N + 1)) =
+        (⟨insertLinearCoordinate N e w.1, hlen⟩ : AtLevel (N + 1)) :=
+    Subtype.ext hrep
+  calc
+    (exactLinearModel (finalLinearInsertionExact N e)).map x =
+        (exactLinearModel (finalLinearInsertionExact N e)).map
+          (levelEquiv N w) := by rw [hw]
+    _ = levelEquiv (N + 1)
+          ⟨((finalLinearInsertionExact N e).1.representative
+              LinearBinaryH) w.1, hFw⟩ := haction.symm
+    _ = levelEquiv (N + 1)
+          ⟨insertLinearCoordinate N e w.1, hlen⟩ :=
+      congrArg (levelEquiv (N + 1)) hsub
+    _ = insertBoringLinearMap N N le_rfl e (levelEquiv N w) :=
+      levelEquiv_insertLinearCoordinate N N le_rfl e w
+    _ = insertBoringLinearMap N N le_rfl e x := by rw [hw]
+
 /-- Adding the dependent coordinate to an exact approximation is
 exact finite composition with the insertion approximation. -/
 noncomputable def extendExactWithBoring
