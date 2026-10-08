@@ -48,6 +48,7 @@ theorem levelEquiv_eraseCoordinate
     w.1.bits.get
       ⟨(p.succAbove i).1,
         by simpa [w.2] using (p.succAbove i).2⟩
+  simp only [List.get_eq_getElem]
   rw [List.getElem_eraseIdx]
   by_cases hi : i.1 < p.1
   · rw [dif_pos hi]
@@ -118,7 +119,7 @@ theorem linearOnLevels_contractSkipped
         (contractSkipped F t hskip w.1).bits.length = k := by
       change (eraseCoordinate t (F w.1)).bits.length = k
       rw [eraseCoordinate_length]
-      simp only [if_pos htFw, hFw]
+      rw [if_pos htFw, hFw]
       omega
     refine ⟨hlen, ?_⟩
     change
