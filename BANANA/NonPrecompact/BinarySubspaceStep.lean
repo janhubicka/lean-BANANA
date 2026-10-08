@@ -215,6 +215,7 @@ theorem lastCoordinate_boring_or_pivot
 /-- When the last coordinate is dependent, projection preserves
 dimension. -/
 theorem finrank_projected_of_boring
+    [FiniteDimensional F2 V]
     (P : Submodule F2 (V × F2))
     (hvertical : ((0 : V), (1 : F2)) ∉ P) :
     finrank F2 (P.map firstCoordinate) = finrank F2 P := by
@@ -227,6 +228,7 @@ theorem finrank_projected_of_boring
 /-- When the last coordinate is independent, the dimension drops by
 exactly one under projection. -/
 theorem finrank_projected_of_pivot
+    [FiniteDimensional F2 V]
     (P : Submodule F2 (V × F2))
     (hvertical : ((0 : V), (1 : F2)) ∈ P) :
     finrank F2 P = finrank F2 (P.map firstCoordinate) + 1 := by
@@ -242,6 +244,40 @@ theorem finrank_projected_of_pivot
           ((P.map firstCoordinate).prodEquiv (⊤ : Submodule F2 F2))
     _ = finrank F2 (P.map firstCoordinate) + 1 := by
       simp [Module.finrank_prod]
+
+/-- The first-coordinate projection of the last-coordinate product
+form of a finite binary subspace. -/
+noncomputable def projectedSubspace
+    {d n : ℕ} (P : FixedSubspace d (n + 1)) :
+    Submodule F2 (Fin n → F2) :=
+  (fixedSubspaceLastProduct P).1.map firstCoordinate
+
+/-- In the dependent-coordinate case, projection has the same finite
+dimension. -/
+theorem projectedSubspace_finrank_boring
+    {d n : ℕ} (P : FixedSubspace d (n + 1))
+    (hvertical : ((0 : Fin n → F2), (1 : F2)) ∉
+      (fixedSubspaceLastProduct P).1) :
+    finrank F2 (projectedSubspace P) = d := by
+  change finrank F2 ((fixedSubspaceLastProduct P).1.map firstCoordinate) = d
+  exact (finrank_projected_of_boring
+    (fixedSubspaceLastProduct P).1 hvertical).trans
+    (fixedSubspaceLastProduct P).2
+
+/-- In the free-pivot case, projection has dimension one less. -/
+theorem projectedSubspace_finrank_pivot
+    {d n : ℕ} (P : FixedSubspace (d + 1) (n + 1))
+    (hvertical : ((0 : Fin n → F2), (1 : F2)) ∈
+      (fixedSubspaceLastProduct P).1) :
+    finrank F2 (projectedSubspace P) = d := by
+  have hdim :=
+    finrank_projected_of_pivot
+      (fixedSubspaceLastProduct P).1 hvertical
+  have hP := (fixedSubspaceLastProduct P).2
+  change
+    finrank F2 (fixedSubspaceLastProduct P).1 =
+      finrank F2 (projectedSubspace P) + 1 at hdim
+  omega
 
 end BinaryWord
 end SuccessorTree.NonPrecompact
