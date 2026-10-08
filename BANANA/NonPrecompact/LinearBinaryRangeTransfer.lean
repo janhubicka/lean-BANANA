@@ -98,7 +98,7 @@ noncomputable def binarySuccessorEncoding_of_representable
         _ = a := P.2
     let Qfix : FixedSubspace a D := ⟨Q, hdim⟩
     obtain ⟨g, hg⟩ := hrep a D Qfix
-    refine ⟨g, ?_⟩
+    refine ⟨zeroBasedExactInner g, ?_⟩
     apply Subtype.ext
     have hgval : (exactSubspace g).1 = Q := by
       exact congrArg Subtype.val hg
@@ -107,7 +107,7 @@ noncomputable def binarySuccessorEncoding_of_representable
         (SMTree.exactComp linearBinarySMTree
           (by omega : 0 < D + 1)
           (by omega : 0 < a + 1)
-          f g)).1 =
+          f (zeroBasedExactInner g))).1 =
           Submodule.map φ (exactSubspace g).1 :=
         exactSubspace_comp f g
       _ = Q.map φ := by rw [hgval]
