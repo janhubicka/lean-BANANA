@@ -60,14 +60,16 @@ structure LevelLinearModel
 noncomputable def levelLinearModel
     (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
     LevelLinearModel F n := by
-  obtain ⟨m, φ, hφ⟩ := mmap_linear F n
-  obtain ⟨h0, hw0⟩ := hφ (zeroAtLevel n)
+  classical
+  let m := Classical.choose (mmap_linear F n)
+  have hExist := Classical.choose_spec (mmap_linear F n)
+  let φ := Classical.choose hExist
+  have hφ := Classical.choose_spec hExist
   have hm : m = shapeTargetLevel F.map n := by
+    obtain ⟨h0, _⟩ := hφ (zeroAtLevel n)
     exact h0.symm
-  subst m
-  refine ⟨φ, ?_⟩
-  intro w
-  exact hφ w
+  refine ⟨hm ▸ φ, ?_⟩
+  exact hm ▸ hφ
 
 theorem levelLinearModel_injective
     (F : SMTree.MMap LinearBinaryH) (n : ℕ) :
@@ -91,15 +93,18 @@ theorem exact_shapeTargetLevel
     have h :=
       LinearBinaryH.levelMap_eq R.map (a := w.1)
     change
-      LinearBinaryH.levelMap R.map d =
-        (R w.1).bits.length
-    simpa [w, zeroAtLevel] using h
-  have hterm : f.1.terminalLevel LinearBinaryH = N :=
-    f.2
-  unfold SMTree.AM.terminalLevel at hterm
-  have hd :
-      0 + (d + 1) - 1 = d := by omega
-  rw [hd] at hterm
+      LinearBinaryH.levelMap R.map w.1.bits.length =
+        (R w.1).bits.length at h
+    have hw : w.1.bits.length = d := w.2
+    rw [hw] at h
+    simpa [shapeTargetLevel, w] using h
+  have hterm : LinearBinaryH.levelMap R.map d = N := by
+    have ht := f.2
+    change
+      LinearBinaryH.levelMap
+        (f.1.representative LinearBinaryH).map
+        (0 + (d + 1) - 1) = N at ht
+    simpa [R] using ht
   exact hlevel.symm.trans hterm
 
 /-- Linear top-level model of an exact finite approximation. -/
@@ -124,19 +129,17 @@ noncomputable def exactLinearModel
   have htarget :
       shapeTargetLevel R.map d = N :=
     exact_shapeTargetLevel f
-  subst N
-  exact ⟨M.map, M.action⟩
+  refine ⟨htarget ▸ M.map, ?_⟩
+  exact htarget ▸ M.action
 
 theorem exactLinearModel_injective
     {d N : ℕ}
     (f : SMTree.AM.At LinearBinaryH 0 (d + 1) N) :
-    Function.Injective (exactLinearModel f).map := by
-  let R := f.1.representative LinearBinaryH
-  have htarget :
-      shapeTargetLevel R.map d = N :=
-    exact_shapeTargetLevel f
-  subst N
-  exact levelLinearModel_injective R d
+    Function.Injective (exactLinearModel f).map :=
+  levelWitness_injective
+    (f.1.representative LinearBinaryH).map
+    (exactLinearModel f).map
+    (exactLinearModel f).action
 
 /-- The d-dimensional subspace represented by an exact finite successor
 approximation ending at level N. -/
