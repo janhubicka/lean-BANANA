@@ -18,6 +18,20 @@ new free pivot, rather than a boring coordinate.
 namespace SuccessorTree.NonPrecompact
 namespace BinaryWord
 
+/-- At a fixed level, appending one bit to a binary word is
+the standard `Fin.snoc` extension of its coordinate vector. -/
+theorem levelEquiv_appendBit
+    (d : ℕ) (w : AtLevel d) (c : F2) :
+    let hlen : (appendBit w.1 c).bits.length = d + 1 := by
+      simp [appendBit, w.2]
+    levelEquiv (d + 1) ⟨appendBit w.1 c, hlen⟩ =
+      Fin.snoc (levelEquiv d w) c := by
+  intro hlen
+  funext i
+  refine Fin.lastCases ?_ (fun j => ?_) i
+  · simp [levelEquiv, appendBit, Fin.snoc_last, w.2]
+  · simp [levelEquiv, appendBit, Fin.snoc_castSucc, w.2]
+
 /-- At the first source level beyond its fixed prefix, the canonical
 extension maps the labelled binary edge to an actual labelled edge.
 
