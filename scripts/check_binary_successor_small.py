@@ -201,9 +201,60 @@ def check_last_coordinate_induction():
         )
 
 
+def check_inductive_range_rebuilding():
+    """Rebuild every binary subspace by the two operations in the Lean proof.
+
+    Cache one exact code for each smaller subspace. If the final coordinate
+    is free, append an independent pivot basis vector. Otherwise extend the
+    last-coordinate functional and append its values to the old basis.
+    """
+    by_dimension = {}
+    expected = (1, 2, 5, 16, 67, 374, 2825, 29212)
+    for n in range(8):
+        by_dimension[n] = {}
+        count = 0
+        for d in range(n + 1):
+            for rows in linear_codes(n, d):
+                P = span(rows)
+                if n == 0:
+                    rebuilt = []
+                else:
+                    top = 1 << (n - 1)
+                    Q = frozenset(v & (top - 1) for v in P)
+                    old = by_dimension[n - 1][Q]
+                    if top in P:
+                        rebuilt = old + [top]
+                    else:
+                        graph = {
+                            v & (top - 1): (v >> (n - 1)) & 1
+                            for v in P
+                        }
+                        extensions = [
+                            e for e in range(top)
+                            if all(
+                                ((q & e).bit_count() & 1) == bit
+                                for q, bit in graph.items()
+                            )
+                        ]
+                        assert extensions, (n, d, rows)
+                        e = extensions[0]
+                        rebuilt = [
+                            v | (((v & e).bit_count() & 1) * top)
+                            for v in old
+                        ]
+                assert len(rebuilt) == d
+                assert span(rebuilt) == P, (n, d, rows, rebuilt)
+                assert P not in by_dimension[n]
+                by_dimension[n][P] = rebuilt
+                count += 1
+        assert count == expected[n], (n, count)
+        print(f"PASS inductive representation N={n}: {count} subspaces")
+
+
 if __name__ == "__main__":
     check_range_coverage()
     check_factorisation()
     check_skipped_coordinate_contraction()
     check_last_coordinate_induction()
+    check_inductive_range_rebuilding()
     print("ALL SMALL-DIMENSIONAL CHECKS PASSED")
