@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.BananaEmbeddingDegree
+import Mathlib.Data.Finset.Image
 
 /-!
 # Unlabelled copies of finite BANANA structures
