@@ -41,7 +41,10 @@ theorem levelEquiv_eraseCoordinate
   funext i
   change
     (w.1.bits.eraseIdx p.1).get
-      ⟨i.1, by simpa [hlen] using i.2⟩ =
+      ⟨i.1, by
+        have hlength : (w.1.bits.eraseIdx p.1).length = k := hlen
+        rw [hlength]
+        exact i.2⟩ =
     w.1.bits.get
       ⟨(p.succAbove i).1,
         by simpa [w.2] using (p.succAbove i).2⟩
@@ -90,11 +93,14 @@ theorem linearOnLevels_contractSkipped
       apply BinaryWord.ext
       change (F w.1).bits.eraseIdx t = (F w.1).bits
       exact List.eraseIdx_of_length_le hle
-    refine ⟨?_, ?_⟩
-    · change (contractSkipped F t hskip w.1).bits.length = m
+    have hlen : (contractSkipped F t hskip w.1).bits.length = m := by
       rw [hcontract]
       exact hFw
-    · simpa [hcontract] using hw
+    refine ⟨hlen, ?_⟩
+    have hsub :
+        (⟨contractSkipped F t hskip w.1, hlen⟩ : AtLevel m) =
+          (⟨F w.1, hFw⟩ : AtLevel m) := Subtype.ext hcontract
+    exact (congrArg (levelEquiv m) hsub).trans hw
   · have hmpos : 0 < m := lt_of_le_of_lt (Nat.zero_le t) htm
     obtain ⟨k, hk⟩ := Nat.exists_eq_succ_of_ne_zero
       (Nat.ne_of_gt hmpos)
@@ -112,7 +118,8 @@ theorem linearOnLevels_contractSkipped
         (contractSkipped F t hskip w.1).bits.length = k := by
       change (eraseCoordinate t (F w.1)).bits.length = k
       rw [eraseCoordinate_length]
-      simp [htFw, hFw]
+      simp only [if_pos htFw, hFw]
+      omega
     refine ⟨hlen, ?_⟩
     change
       levelEquiv k
