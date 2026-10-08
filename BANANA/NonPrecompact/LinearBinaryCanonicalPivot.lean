@@ -93,10 +93,9 @@ noncomputable def extendExactWithPivot
   rw [H.canonicalExtension_level_succ F d d le_rfl]
   rw [H.canonicalExtension_level_at_prefix F d]
   have hbefore : H.levelMap F.map d = N := by
-    have hf : f.1.terminalLevel H = N := f.2
-    unfold SMTree.AM.terminalLevel at hf
+    have ht : H.levelMap F.map (0 + (d + 1) - 1) = N := f.2
     have hd : 0 + (d + 1) - 1 = d := by omega
-    rwa [hd] at hf
+    simpa only [hd] using ht
   rw [hbefore]
 
 
@@ -151,7 +150,9 @@ theorem extendExactWithPivot_action_append
         canonicalExtension_appendBit_at_cut F d w.1 c w.2
   have hlen :
       (appendBit (F w.1) c).bits.length = N + 1 := by
-    simp [appendBit, hF]
+    have hF' : (F w.1).bits.length = N := hF
+    simpa only [appendBit, List.length_append, List.length_singleton]
+      using congrArg Nat.succ hF'
   have hsub :
       (⟨((extendExactWithPivot f).1.representative
             LinearBinaryH) src.1, hG⟩ : AtLevel (N + 1)) =
