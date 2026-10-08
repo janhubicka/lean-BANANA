@@ -214,9 +214,19 @@ theorem levelEquiv_insertLinearCoordinate
         change m ≤ i.1
         exact hmi
       rw [hs]
-      simp [insertLinearCoordinate, w.2, h, levelEquiv,
-        prefixRestrictionLinearMap, prefixCoords, hi, hmi,
-        List.get_insertIdx_add_succ]
+      have hk : m + (i.1 - m) = i.1 := by omega
+      have hiLength : m + (i.1 - m) < w.1.bits.length := by
+        rw [hk, w.2]
+        exact i.2
+      have hget :=
+        List.get_insertIdx_add_succ
+          w.1.bits
+          (e (prefixCoords w.1 m (by simpa [w.2] using h)))
+          m (i.1 - m) hiLength
+      rw [hk] at hget
+      simpa [insertLinearCoordinate, w.2, h, levelEquiv,
+        prefixRestrictionLinearMap, prefixCoords, hi, hmi]
+        using hget
 
 /-- Every linear boring coordinate insertion belongs to the levelwise-linear
 monoid. -/
