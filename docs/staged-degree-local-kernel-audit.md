@@ -22,6 +22,8 @@ imported by root `BANANA.lean`:
 - `BananaOneSidedSubspaceEquiv.lean`: bijections between one-sided
   copies and fixed-dimensional subspaces of the nonzero sort for
   **every** ambient BANANA pairing.
+- `BananaCopyFunctor.lean`: copy-image functoriality, reflection of
+  equality under embeddings, and exact line-pair palette pullback.
 
 The GLR successor-tree derivation was independently built and merged
 through PR #7. The subsequent modules above were committed as
@@ -36,7 +38,7 @@ toolchain and dependencies installed, run:
 bash scripts/check_staged_ramsey_degrees.sh
 ```
 
-The script builds the four transitive axiom-audit modules and then
+The script builds the five transitive axiom-audit modules and then
 runs Lean on each `#print axioms` file. It requires outputs for each
 requested declaration, rejects any unexpected axiom (including
 `sorryAx`) and exits without a success message if any build or
