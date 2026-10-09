@@ -1,4 +1,4 @@
-import BANANA.NonPrecompact.BananaOneSidedCopyDegree
+import BANANA.NonPrecompact.BananaCopyDegreeClassification
 
 /-!
 # Pending axiom audit: genuine unlabelled one-sided copy degrees
@@ -19,3 +19,4 @@ dependency. The current sources are staged but uncompiled.
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.not_copyRamseyDegreeLE_zero
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.leftOnly_copy_degree_exactly_one
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.rightOnly_copy_degree_exactly_one
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.copyDegreeClassification
