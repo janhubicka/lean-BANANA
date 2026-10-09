@@ -73,7 +73,8 @@ theorem BananaMatrixStructure.exists_leftOnlyCopy_overSubspace
   · intro hz
     obtain ⟨x, _, hx⟩ := Finset.mem_image.mp hz
     have hmember : leftMap x ∈ W.1 := (e x).property
-    rw [hx] at hmember
+    have hmap : leftMap x = z := hx
+    rw [hmap] at hmember
     exact hmember
   · intro hz
     obtain ⟨x, hx⟩ := e.surjective ⟨z, hz⟩
@@ -157,7 +158,8 @@ theorem BananaMatrixStructure.exists_rightOnlyCopy_overSubspace
   · intro hz
     obtain ⟨x, _, hx⟩ := Finset.mem_image.mp hz
     have hmember : rightMap x ∈ W.1 := (e x).property
-    rw [hx] at hmember
+    have hmap : rightMap x = z := hx
+    rw [hmap] at hmember
     exact hmember
   · intro hz
     obtain ⟨x, hx⟩ := e.surjective ⟨z, hz⟩
