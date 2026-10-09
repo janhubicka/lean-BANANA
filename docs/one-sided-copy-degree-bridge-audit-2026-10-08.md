@@ -88,6 +88,10 @@ locally. Result:
 The calculation concerns finite models and cannot certify arbitrary
 dimensions or Lean proof terms.
 
+## Assembled classification
+
+`BananaCopyDegreeClassification.lean` now assembles the unconditional *source-level* implications into `BananaMatrixStructure.copyDegreeClassification`. In standard coordinates, it states both zero-sort cases as degree at most one but not zero, and the positive-positive case as having no finite copy degree, regardless of the pairing matrix. Its proof delegates to the two one-sided bridges and to the separately staged two-sided copy-degree theorem. The result is **not kernel-verified** until all transitive imports are checked; it is not yet an arbitrary-basis equivalence theorem for every finite presentation.
+
 ## Remaining mandatory verification
 
 1. Provide a local Lean/Lake/Mathlib checkout matching `lean-toolchain`.
