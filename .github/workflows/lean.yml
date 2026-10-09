@@ -42,3 +42,6 @@ jobs:
 
       - name: Build
         run: lake build
+
+      - name: Check staged copy Ramsey theorems and axioms
+        run: bash scripts/check_staged_ramsey_degrees.sh
