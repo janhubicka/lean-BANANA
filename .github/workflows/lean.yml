@@ -66,6 +66,11 @@ jobs:
       - name: Regression on arbitrary strong amalgamation diagrams
         run: python3 scripts/check_strong_amalgam_arbitrary_small.py
 
+      - name: Check finite hereditary and joint embedding properties
+        run: |
+          lake build BANANA.NonPrecompact.BananaFiniteFraissePropertiesAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaFiniteFraissePropertiesAxiomAudit.lean
+
       - name: Check arbitrary strong-amalgamation transport tools
         run: |
           lake build BANANA.NonPrecompact.BananaArbitraryAmalgamToolsAxiomAudit
