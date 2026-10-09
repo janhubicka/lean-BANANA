@@ -20,6 +20,7 @@ import BANANA.NonPrecompact.BananaLimitFiniteEmbeddingFactor
 import BANANA.NonPrecompact.BananaLimitFinitePairHomogeneity
 import BANANA.NonPrecompact.BananaLimitBlockProjection
 import BANANA.NonPrecompact.BananaRetractionLiftEquiv
+import BANANA.NonPrecompact.BananaLimitBlockPairLift
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BilinearResidue
