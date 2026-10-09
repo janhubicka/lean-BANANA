@@ -7,6 +7,7 @@ import BANANA.NonPrecompact.BananaTriplePairing
 import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaFiniteFraisseProperties
 import BANANA.NonPrecompact.BananaFiniteCountability
+import BANANA.NonPrecompact.BananaExplicitLimit
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BilinearResidue

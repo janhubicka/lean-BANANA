@@ -66,6 +66,11 @@ jobs:
       - name: Regression on arbitrary strong amalgamation diagrams
         run: python3 scripts/check_strong_amalgam_arbitrary_small.py
 
+      - name: Check explicit countable BANANA limit pairing
+        run: |
+          lake build BANANA.NonPrecompact.BananaExplicitLimitAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaExplicitLimitAxiomAudit.lean
+
       - name: Check finite BANANA countability and unbounded dimensions
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteCountabilityAxiomAudit
