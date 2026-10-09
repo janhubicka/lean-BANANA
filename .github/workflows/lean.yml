@@ -131,6 +131,14 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteCountabilityAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteCountabilityAxiomAudit.lean
 
+      - name: Check global lifts of finite BANANA block pairing automorphisms
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitBlockPairLiftAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitBlockPairLiftAxiomAudit.lean
+
+      - name: Exhaustive small-model regression of finite-block pairing lifts
+        run: python3 scripts/check_finite_block_pair_lift_small.py
+
       - name: Check lifting automorphisms of finite BANANA blocks
         run: |
           lake build BANANA.NonPrecompact.BananaRetractionLiftEquivAxiomAudit
