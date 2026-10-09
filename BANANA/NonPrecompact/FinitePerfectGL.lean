@@ -113,7 +113,9 @@ theorem finitePerfectGLBlockLift_injective
     (fun u : FinitePerfectGL (n + k) => u (Fin.append x 0)) h
   rw [finitePerfectGLBlockLift_first,
     finitePerfectGLBlockLift_first] at hx
-  exact (Fin.append_injective hx).1
+  funext i
+  have hi := congrFun hx (Fin.castAdd k i)
+  simpa using hi
 
 /-- The induced automorphism fixes the added left coordinates. -/
 theorem finitePerfectGLBlockLift_automorphism_left_complement
@@ -134,7 +136,7 @@ theorem finitePerfectGLBlockLift_automorphism_right_first
       (Fin.append y 0) = _
   rw [finitePerfectGLBlockLift,
     BananaMatrixStructure.dotContragredient_directSumLinearEquiv,
-    dotContragredient_refl,
+    BananaMatrixStructure.dotContragredient_refl,
     BananaMatrixStructure.directSumLinearEquiv_apply]
   simp
 
@@ -148,7 +150,7 @@ theorem finitePerfectGLBlockLift_automorphism_right_complement
       (Fin.append 0 z) = _
   rw [finitePerfectGLBlockLift,
     BananaMatrixStructure.dotContragredient_directSumLinearEquiv,
-    dotContragredient_refl,
+    BananaMatrixStructure.dotContragredient_refl,
     BananaMatrixStructure.directSumLinearEquiv_apply]
   simp
 
