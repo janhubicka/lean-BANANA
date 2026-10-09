@@ -96,6 +96,14 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSupportBlocksAxiomAudit.lean
 
+      - name: Regress finite BANANA tuple signatures against GL orbits
+        run: python3 scripts/check_omega_tuple_signature_small.py
+
+      - name: Check finite tuple signature foundations for BANANA orbit types
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitTupleSignaturesAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitTupleSignaturesAxiomAudit.lean
+
       - name: Check global homogeneity of explicit BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitGlobalHomogeneityAxiomAudit
