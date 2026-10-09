@@ -96,6 +96,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSupportBlocksAxiomAudit.lean
 
+      - name: Check finite age of explicit BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteAgeAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteAgeAxiomAudit.lean
+
       - name: Check cofinal perfect blocks in explicit BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitBlockCofinalityAxiomAudit
