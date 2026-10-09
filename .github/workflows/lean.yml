@@ -45,3 +45,8 @@ jobs:
 
       - name: Check staged copy Ramsey theorems and axioms
         run: bash scripts/check_staged_ramsey_degrees.sh
+
+      - name: Check strong BANANA block amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.BananaStrongBlockAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaStrongBlockAmalgamAxiomAudit.lean
