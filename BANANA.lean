@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.AffineParity
 import BANANA.NonPrecompact.AlignedCompletionEmbedding
 import BANANA.NonPrecompact.BananaAmalgam
+import BANANA.NonPrecompact.BananaStrongBlockAmalgam
 import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
