@@ -149,6 +149,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitBlockProjectionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitBlockProjectionAxiomAudit.lean
 
+      - name: Check tuple orbit signature completeness
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitTupleOrbitAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitTupleOrbitAxiomAudit.lean
+
       - name: Check pairings of all finite BANANA tuple combinations
         run: |
           lake build BANANA.NonPrecompact.BananaLimitTuplePairingAxiomAudit
