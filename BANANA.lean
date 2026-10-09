@@ -18,6 +18,7 @@ import BANANA.NonPrecompact.BananaLimitBlockCofinality
 import BANANA.NonPrecompact.BananaLimitFiniteAge
 import BANANA.NonPrecompact.BananaLimitFiniteEmbeddingFactor
 import BANANA.NonPrecompact.BananaLimitFinitePairHomogeneity
+import BANANA.NonPrecompact.BananaLimitGlobalHomogeneity
 import BANANA.NonPrecompact.BananaLimitBlockProjection
 import BANANA.NonPrecompact.BananaRetractionLiftEquiv
 import BANANA.NonPrecompact.BananaLimitBlockPairLift
