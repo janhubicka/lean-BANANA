@@ -99,6 +99,11 @@ jobs:
       - name: Regress finite BANANA tuple signatures against GL orbits
         run: python3 scripts/check_omega_tuple_signature_small.py
 
+      - name: Check BANANA tuple kernel and range equivalences
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitTupleKernelRangeAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitTupleKernelRangeAxiomAudit.lean
+
       - name: Check finite tuple signature foundations for BANANA orbit types
         run: |
           lake build BANANA.NonPrecompact.BananaLimitTupleSignaturesAxiomAudit

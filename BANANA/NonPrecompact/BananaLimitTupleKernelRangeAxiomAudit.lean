@@ -1,0 +1,13 @@
+import BANANA.NonPrecompact.BananaLimitTupleKernelRange
+
+/-!
+# Axiom audit for coefficient kernels and canonical range equivalences
+-/
+
+#print axioms SuccessorTree.NonPrecompact.bananaLimitTupleSignature_eq_left_relations
+#print axioms SuccessorTree.NonPrecompact.bananaLimitTupleSignature_eq_right_relations
+#print axioms SuccessorTree.NonPrecompact.bananaLimitTupleSignature_eq_pairing
+#print axioms SuccessorTree.NonPrecompact.bananaLimitTupleSignature_eq_left_kernel
+#print axioms SuccessorTree.NonPrecompact.bananaLimitTupleSignature_eq_right_kernel
+#print axioms SuccessorTree.NonPrecompact.bananaLimitRangeEquivOfKernelEq
+#print axioms SuccessorTree.NonPrecompact.bananaLimitRangeEquivOfKernelEq_apply
