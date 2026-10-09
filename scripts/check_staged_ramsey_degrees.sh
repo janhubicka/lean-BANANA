@@ -17,6 +17,7 @@ modules=(
   BANANA.NonPrecompact.BananaOneSidedAxiomAudit
   BANANA.NonPrecompact.BananaOneSidedSubspaceEquivAxiomAudit
   BANANA.NonPrecompact.BananaCopyFunctorAxiomAudit
+  BANANA.NonPrecompact.FinitePerfectGLAxiomAudit
 )
 
 for module in "${modules[@]}"; do
