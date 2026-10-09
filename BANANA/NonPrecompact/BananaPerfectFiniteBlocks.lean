@@ -67,8 +67,11 @@ theorem bananaLimitBlock_basis_pairing
       (bananaLimitBlockBasis S q) =
     if p = q then 1 else 0 := by
   classical
-  rw [bananaLimitBlock_pairing_eq_dotProduct]
-  simp [bananaLimitBlockBasis, Basis.coe_ofEquivFun,
-    dotProduct, Pi.single_apply]
+  have hcoords (i : {q : ℚ // q ∈ S}) :
+      bananaLimitBlockEquiv S (bananaLimitBlockBasis S i) =
+        Pi.single i (1 : F2) := by
+    simp [bananaLimitBlockBasis, Basis.coe_ofEquivFun]
+  rw [bananaLimitBlock_pairing_eq_dotProduct, hcoords p, hcoords q]
+  simp [Pi.single_apply, eq_comm]
 
 end SuccessorTree.NonPrecompact
