@@ -74,7 +74,7 @@ theorem BananaMatrixStructure.not_copyRamseyDegreeLE_of_linePair
   let j :
       BananaMatrixEmbedding (perfectBanana q) (perfectBanana n) := by
     dsimp [n]
-    simpa only [Nat.add_comm (l + r) q] using
+    simpa only [Nat.add_comm q (l + r)] using
       (BananaMatrixStructure.standardPerfectBlockEmbedding q (l + r))
 
   /- Distinct colours of unlabelled A-copies are finite residue
