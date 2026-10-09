@@ -68,9 +68,11 @@ theorem BananaMatrixStructure.exists_extend_linePairCopy
       P.toSourceEmbedding
   refine ⟨F, ?_⟩
   apply BananaLinePairCopy.eq_of_vectors
-  · simpa only [BananaLinePairCopy.toSourceEmbedding_left_basis] using
+  · change F.left (i.left (Pi.single (0 : Fin 1) 1)) = P.left
+    simpa only [BananaLinePairCopy.toSourceEmbedding_left_basis] using
       hleft (Pi.single (0 : Fin 1) 1)
-  · simpa only [BananaLinePairCopy.toSourceEmbedding_right_basis] using
+  · change F.right (i.right (Pi.single (0 : Fin 1) 1)) = P.right
+    simpa only [BananaLinePairCopy.toSourceEmbedding_right_basis] using
       hright (Pi.single (0 : Fin 1) 1)
 
 end SuccessorTree.NonPrecompact

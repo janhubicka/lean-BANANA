@@ -43,7 +43,7 @@ private theorem image_zeroCoordinates
     have hz0 : z = 0 := Finset.mem_singleton.mp hz
     subst z
     exact Finset.mem_image.mpr
-      ⟨0, Finset.mem_univ _, by simp⟩
+      ⟨0, Finset.mem_univ _, f.map_zero⟩
 
 /-- The left image subspace of an unlabelled copy of a left-only
 source, of exactly the source's dimension. -/
@@ -106,6 +106,7 @@ theorem BananaCopyRanges.leftFixedSubspace_injective
   · ext x
     have heq : x ∈ D.leftFixedSubspace.1 ↔
         x ∈ E.leftFixedSubspace.1 := by
+      change D.leftFixedSubspace = E.leftFixedSubspace at h
       rw [h]
     exact (D.mem_leftFixedSubspace_iff x).symm.trans
       (heq.trans (E.mem_leftFixedSubspace_iff x))
@@ -204,6 +205,7 @@ theorem BananaCopyRanges.rightFixedSubspace_injective
   · ext y
     have heq : y ∈ D.rightFixedSubspace.1 ↔
         y ∈ E.rightFixedSubspace.1 := by
+      change D.rightFixedSubspace = E.rightFixedSubspace at h
       rw [h]
     exact (D.mem_rightFixedSubspace_iff y).symm.trans
       (heq.trans (E.mem_rightFixedSubspace_iff y))
