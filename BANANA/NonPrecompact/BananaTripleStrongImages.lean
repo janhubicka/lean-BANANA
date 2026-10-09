@@ -15,6 +15,8 @@ preservation of the bilinear pairing is proved separately.
 
 namespace SuccessorTree.NonPrecompact
 
+open BananaMatrixStructure
+
 /-- The B-only coordinate of the inclusion from B. -/
 theorem tripleProjB_inl
     {a b c : ℕ}
