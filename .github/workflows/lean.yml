@@ -121,6 +121,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteCountabilityAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteCountabilityAxiomAudit.lean
 
+      - name: Check lifting automorphisms of finite BANANA blocks
+        run: |
+          lake build BANANA.NonPrecompact.BananaRetractionLiftEquivAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaRetractionLiftEquivAxiomAudit.lean
+
       - name: Check finite hereditary and joint embedding properties
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteFraissePropertiesAxiomAudit
