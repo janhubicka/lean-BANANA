@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check arbitrary strong-amalgamation transport tools
+        run: |
+          lake build BANANA.NonPrecompact.BananaArbitraryAmalgamToolsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaArbitraryAmalgamToolsAxiomAudit.lean
+
       - name: Check staged copy Ramsey theorems and axioms
         run: bash scripts/check_staged_ramsey_degrees.sh
 
