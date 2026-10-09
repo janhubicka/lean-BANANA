@@ -57,9 +57,10 @@ theorem BananaMatrixStructure.not_embeddingRamseyDegreeLE_of_linePair
   obtain ⟨f, colours, hcard, hinside⟩ := hC embeddingColour
 
   let j : BananaMatrixEmbedding (perfectBanana q) (perfectBanana n) := by
-    dsimp [n]
-    simpa only [Nat.add_comm q (l + r)] using
-      (BananaMatrixStructure.standardPerfectBlockEmbedding q (l + r))
+    have hn : q + (l + r) = n := by
+      dsimp [n]
+      omega
+    exact hn ▸ (BananaMatrixStructure.standardPerfectBlockEmbedding q (l + r))
 
   have hall (c : Fin (2 ^ k)) : c ∈ colours := by
     obtain ⟨P, hP⟩ :=
