@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.BananaCopySubspaces
+import BANANA.NonPrecompact.BananaCopyDegree
 import BANANA.NonPrecompact.LinearBinaryRepresentability
 
 /-!
@@ -236,7 +237,7 @@ theorem BananaMatrixStructure.not_copyRamseyDegreeLE_zero
   let colouring : BananaCopyRanges A C → Fin 1 := fun _ => 0
   obtain ⟨f, used, husedCard, hused⟩ := hC colouring
   have hmem : (0 : Fin 1) ∈ used :=
-    hused A.identityCopyEmbedding.copyRanges
+    hused (A.identityCopyEmbedding.copyRanges)
   have hpos : 0 < used.card :=
     Finset.card_pos.mpr ⟨0, hmem⟩
   omega
