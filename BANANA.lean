@@ -21,6 +21,7 @@ import BANANA.NonPrecompact.BananaLimitFinitePairHomogeneity
 import BANANA.NonPrecompact.BananaLimitGlobalHomogeneity
 import BANANA.NonPrecompact.BananaLimitSubspaceHomogeneity
 import BANANA.NonPrecompact.BananaLimitTupleSignatures
+import BANANA.NonPrecompact.BananaLimitTupleKernelRange
 import BANANA.NonPrecompact.BananaLimitBlockProjection
 import BANANA.NonPrecompact.BananaRetractionLiftEquiv
 import BANANA.NonPrecompact.BananaLimitBlockPairLift
