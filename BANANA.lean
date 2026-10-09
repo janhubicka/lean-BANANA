@@ -11,6 +11,7 @@ import BANANA.NonPrecompact.BananaExplicitLimit
 import BANANA.NonPrecompact.BananaLimitBilinearity
 import BANANA.NonPrecompact.BananaLimitTuplePairing
 import BANANA.NonPrecompact.BananaLimitTupleOrbit
+import BANANA.NonPrecompact.BananaLimitFiniteOrbits
 import BANANA.NonPrecompact.BananaFiniteSupportBlocks
 import BANANA.NonPrecompact.BananaPerfectFiniteBlocks
 import BANANA.NonPrecompact.BananaLimitOrthogonality

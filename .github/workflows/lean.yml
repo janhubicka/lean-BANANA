@@ -149,6 +149,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitBlockProjectionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitBlockProjectionAxiomAudit.lean
 
+      - name: Check finite tuple orbits of explicit BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteOrbitsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteOrbitsAxiomAudit.lean
+
       - name: Check tuple orbit signature completeness
         run: |
           lake build BANANA.NonPrecompact.BananaLimitTupleOrbitAxiomAudit
