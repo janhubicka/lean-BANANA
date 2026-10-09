@@ -96,6 +96,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSupportBlocksAxiomAudit.lean
 
+      - name: Check cofinal perfect blocks in explicit BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitBlockCofinalityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitBlockCofinalityAxiomAudit.lean
+
       - name: Check explicit countable BANANA limit pairing
         run: |
           lake build BANANA.NonPrecompact.BananaExplicitLimitAxiomAudit
