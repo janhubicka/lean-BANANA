@@ -71,6 +71,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectFiniteBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectFiniteBlocksAxiomAudit.lean
 
+      - name: Check BANANA limit orthogonality of disjoint blocks
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitOrthogonalityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitOrthogonalityAxiomAudit.lean
+
       - name: Check finite coordinate blocks of the BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit

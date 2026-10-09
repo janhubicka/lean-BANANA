@@ -10,6 +10,7 @@ import BANANA.NonPrecompact.BananaFiniteCountability
 import BANANA.NonPrecompact.BananaExplicitLimit
 import BANANA.NonPrecompact.BananaFiniteSupportBlocks
 import BANANA.NonPrecompact.BananaPerfectFiniteBlocks
+import BANANA.NonPrecompact.BananaLimitOrthogonality
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BilinearResidue
