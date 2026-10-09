@@ -1,4 +1,4 @@
-import BANANA.NonPrecompact.BananaOneSidedSubspaceEquiv
+import BANANA.NonPrecompact.BananaOneSidedCopyDegree
 
 /-!
 # Functoriality of unlabelled BANANA copies and their line-pair palettes
