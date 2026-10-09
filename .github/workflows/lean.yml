@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check redundant triple-coordinate maps
+        run: |
+          lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaTripleCoordinatesAxiomAudit.lean
+
       - name: Regression on arbitrary strong amalgamation diagrams
         run: python3 scripts/check_strong_amalgam_arbitrary_small.py
 
