@@ -22,8 +22,9 @@ namespace SuccessorTree.NonPrecompact
 open LinearMap Module
 
 /-- All vectors of the zero-dimensional binary space coincide. -/
-private theorem zeroCoordinates_eq_zero (x : Fin 0 → F2) : x = 0 :=
-  Subsingleton.elim x 0
+private theorem zeroCoordinates_eq_zero (x : Fin 0 → F2) : x = 0 := by
+  funext i
+  exact Fin.elim0 i
 
 /-- The image of the zero-dimensional space under any linear map is
 the singleton consisting of zero. -/
