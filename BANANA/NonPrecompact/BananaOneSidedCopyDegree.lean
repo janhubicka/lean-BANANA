@@ -211,4 +211,48 @@ theorem BananaMatrixStructure.copyRamseyDegreeLE_one_right_via_successors
   A.copyRamseyDegreeLE_one_of_rightOneSided
     (BinaryWord.rightOneSidedCopyRamseyOne_via_successors a)
 
+/-- The identity embedding witnesses that an unlabelled A-copy always
+exists in A itself.  This is independent of any Ramsey theorem. -/
+def BananaMatrixStructure.identityCopyEmbedding
+    {l r : ℕ} (A : BananaMatrixStructure l r) :
+    BananaMatrixEmbedding A A where
+  left := LinearMap.id
+  right := LinearMap.id
+  left_injective := fun _ _ h => h
+  right_injective := fun _ _ h => h
+  pairing_apply := by
+    intro x y
+    rfl
+
+/-- The copy Ramsey degree of any finite BANANA source cannot be zero.
+Taking the target equal to the source forces a copy to occur. -/
+theorem BananaMatrixStructure.not_copyRamseyDegreeLE_zero
+    {l r : ℕ} (A : BananaMatrixStructure l r) :
+    ¬ A.copyRamseyDegreeLE 0 := by
+  classical
+  intro hzero
+  obtain ⟨lC, rC, C, hC⟩ :=
+    hzero l r A 1 (by omega)
+  let colouring : BananaCopyRanges A C → Fin 1 := fun _ => 0
+  obtain ⟨f, used, husedCard, hused⟩ := hC colouring
+  have hmem : (0 : Fin 1) ∈ used :=
+    hused A.identityCopyEmbedding.copyRanges
+  have hpos : 0 < used.card :=
+    Finset.card_pos.mpr ⟨0, hmem⟩
+  omega
+
+/-- Both one-sided classes have degree exactly one in the sense of the
+two separate bounds; the zero-dimensional source is included. -/
+theorem BananaMatrixStructure.leftOnly_copy_degree_exactly_one
+    {a : ℕ} (A : BananaMatrixStructure a 0) :
+    A.copyRamseyDegreeLE 1 ∧ ¬ A.copyRamseyDegreeLE 0 :=
+  ⟨A.copyRamseyDegreeLE_one_left_via_successors,
+    A.not_copyRamseyDegreeLE_zero⟩
+
+theorem BananaMatrixStructure.rightOnly_copy_degree_exactly_one
+    {a : ℕ} (A : BananaMatrixStructure 0 a) :
+    A.copyRamseyDegreeLE 1 ∧ ¬ A.copyRamseyDegreeLE 0 :=
+  ⟨A.copyRamseyDegreeLE_one_right_via_successors,
+    A.not_copyRamseyDegreeLE_zero⟩
+
 end SuccessorTree.NonPrecompact
