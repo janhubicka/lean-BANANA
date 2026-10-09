@@ -104,6 +104,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitTupleSignaturesAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitTupleSignaturesAxiomAudit.lean
 
+      - name: Check intrinsic finite-subspace homogeneity of BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitSubspaceHomogeneityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitSubspaceHomogeneityAxiomAudit.lean
+
       - name: Check global homogeneity of explicit BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitGlobalHomogeneityAxiomAudit
