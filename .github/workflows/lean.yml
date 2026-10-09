@@ -96,6 +96,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSupportBlocksAxiomAudit.lean
 
+      - name: Check finite tuple signature foundations for BANANA orbit types
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitTupleSignaturesAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitTupleSignaturesAxiomAudit.lean
+
       - name: Check global homogeneity of explicit BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitGlobalHomogeneityAxiomAudit
