@@ -96,6 +96,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSupportBlocksAxiomAudit.lean
 
+      - name: Check global homogeneity of explicit BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitGlobalHomogeneityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitGlobalHomogeneityAxiomAudit.lean
+
       - name: Check finite perfect ambient automorphism for two limit embeddings
         run: |
           lake build BANANA.NonPrecompact.BananaLimitFinitePairHomogeneityAxiomAudit
