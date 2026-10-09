@@ -30,6 +30,16 @@ def indexedBananaPairing
     (x : L → F2) (y : R → F2) : F2 :=
   ∑ i : L, ∑ j : R, x i * M i j * y j
 
+/-- On standard finite coordinate sets, the double-sum pairing is
+exactly the evaluation function of a BANANA matrix structure. -/
+theorem indexedBananaPairing_fin_eq_eval
+    {l r : ℕ} (A : BananaMatrixStructure l r)
+    (x : Fin l → F2) (y : Fin r → F2) :
+    indexedBananaPairing A.pairing x y = A.eval x y := by
+  classical
+  simp [indexedBananaPairing, BananaMatrixStructure.eval,
+    Matrix.mulVec, dotProduct, Finset.mul_sum, mul_assoc]
+
 /-- Preservation of both vectors' pairing when taking the first
 summand of the block amalgam. -/
 theorem indexedBananaPairing_amalgam_left
