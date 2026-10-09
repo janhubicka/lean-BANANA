@@ -43,6 +43,9 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Regression on arbitrary strong amalgamation diagrams
+        run: python3 scripts/check_strong_amalgam_arbitrary_small.py
+
       - name: Check arbitrary strong-amalgamation transport tools
         run: |
           lake build BANANA.NonPrecompact.BananaArbitraryAmalgamToolsAxiomAudit
