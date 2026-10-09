@@ -71,9 +71,9 @@ theorem bananaPairingPullback_eval
       (((LinearMap.toMatrix' fL)ᵀ *
         B.pairing * (LinearMap.toMatrix' fR)) *ᵥ y) =
     (fL x) ⬝ᵥ (B.pairing *ᵥ (fR y))
-  rw [Matrix.mulVec_mulVec]
+  rw [← Matrix.mulVec_mulVec]
   rw [LinearMap.toMatrix'_mulVec]
-  rw [Matrix.mulVec_mulVec]
+  rw [← Matrix.mulVec_mulVec]
   rw [Matrix.dotProduct_transpose_mulVec]
   rw [LinearMap.toMatrix'_mulVec]
   exact dotProduct_comm _ _
