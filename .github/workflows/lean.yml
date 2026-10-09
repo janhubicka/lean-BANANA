@@ -144,6 +144,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitBlockProjectionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitBlockProjectionAxiomAudit.lean
 
+      - name: Check scalar bilinearity of explicit BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitBilinearityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitBilinearityAxiomAudit.lean
+
       - name: Check explicit countable BANANA limit pairing
         run: |
           lake build BANANA.NonPrecompact.BananaExplicitLimitAxiomAudit
