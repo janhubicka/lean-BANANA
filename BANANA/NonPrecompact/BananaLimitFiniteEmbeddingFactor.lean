@@ -50,6 +50,7 @@ noncomputable def factorToPerfectBlock
     apply e.right_injective
     exact congrArg Subtype.val (E.symm.injective h)
   · intro x y
+    simp only [perfectBanana_eval, LinearMap.comp_apply]
     change (E.symm (fL x)) ⬝ᵥ (E.symm (fR y)) =
       A.eval x y
     calc
