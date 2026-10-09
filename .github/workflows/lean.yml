@@ -71,6 +71,16 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectFiniteBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectFiniteBlocksAxiomAudit.lean
 
+      - name: Check standard perfect pairings inside the rational limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitPerfectEmbeddingAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitPerfectEmbeddingAxiomAudit.lean
+
+      - name: Check embedding of every finite BANANA pairing into the limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitUniversalityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitUniversalityAxiomAudit.lean
+
       - name: Check algebraic local finiteness of the BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitLocalFinitenessAxiomAudit
