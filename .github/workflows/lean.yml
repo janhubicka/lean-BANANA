@@ -149,6 +149,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitBlockProjectionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitBlockProjectionAxiomAudit.lean
 
+      - name: Check pairings of all finite BANANA tuple combinations
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitTuplePairingAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitTuplePairingAxiomAudit.lean
+
       - name: Check scalar bilinearity of explicit BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitBilinearityAxiomAudit
