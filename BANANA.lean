@@ -16,6 +16,7 @@ import BANANA.NonPrecompact.BananaLimitPerfectEmbedding
 import BANANA.NonPrecompact.BananaLimitUniversality
 import BANANA.NonPrecompact.BananaLimitBlockCofinality
 import BANANA.NonPrecompact.BananaLimitFiniteAge
+import BANANA.NonPrecompact.BananaLimitFiniteEmbeddingFactor
 import BANANA.NonPrecompact.BananaLimitBlockProjection
 import BANANA.NonPrecompact.BananaRetractionLiftEquiv
 import BANANA.NonPrecompact.BananaPersistence

@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.BananaLimitFiniteEmbeddingFactor
+
+/-!
+# Axiom audit for finite-support factorisation of limit embeddings
+-/
+
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbeddingToLimit.factorToPerfectBlock
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbeddingToLimit.factorToPerfectBlock_left
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbeddingToLimit.factorToPerfectBlock_right
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbeddingToLimit.exists_common_finite_block

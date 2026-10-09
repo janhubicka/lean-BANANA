@@ -96,6 +96,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSupportBlocksAxiomAudit.lean
 
+      - name: Check finite embedding factorisation into BANANA limit blocks
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteEmbeddingFactorAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteEmbeddingFactorAxiomAudit.lean
+
       - name: Check finite age of explicit BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaLimitFiniteAgeAxiomAudit
