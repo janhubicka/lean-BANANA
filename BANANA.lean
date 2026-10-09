@@ -8,6 +8,7 @@ import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaFiniteFraisseProperties
 import BANANA.NonPrecompact.BananaFiniteCountability
 import BANANA.NonPrecompact.BananaExplicitLimit
+import BANANA.NonPrecompact.BananaLimitBilinearity
 import BANANA.NonPrecompact.BananaFiniteSupportBlocks
 import BANANA.NonPrecompact.BananaPerfectFiniteBlocks
 import BANANA.NonPrecompact.BananaLimitOrthogonality
