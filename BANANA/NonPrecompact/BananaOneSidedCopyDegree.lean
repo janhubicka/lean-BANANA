@@ -143,7 +143,7 @@ theorem BananaMatrixStructure.not_copyRamseyDegreeLE_zero
   let colouring : BananaCopyRanges A C → Fin 1 := fun _ => 0
   obtain ⟨f, used, hbound, hcolours⟩ := hC colouring
   have hmem : (0 : Fin 1) ∈ used := by
-    have h := hcolours (BananaMatrixEmbedding.identity A).copyRanges
+    have h := hcolours ((BananaMatrixEmbedding.identity A).copyRanges)
     simpa only [colouring] using h
   have hzero : used = ∅ :=
     Finset.card_eq_zero.mp (Nat.eq_zero_of_le_zero hbound)
