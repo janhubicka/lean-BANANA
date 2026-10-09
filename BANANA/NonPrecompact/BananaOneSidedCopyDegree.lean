@@ -147,8 +147,9 @@ theorem BananaMatrixStructure.not_copyRamseyDegreeLE_zero
     simpa only [colouring] using h
   have hzero : used = ∅ :=
     Finset.card_eq_zero.mp (Nat.eq_zero_of_le_zero hbound)
-  rw [hzero] at hmem
-  exact Finset.not_mem_empty _ hmem
+  have hfalse : False := by
+    simpa [hzero] using hmem
+  exact hfalse
 
 /-- The complete copy Ramsey-degree classification, in the same
 unlabelled-copy formalisation used for the two-sided obstruction.
