@@ -48,6 +48,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaTripleCoordinatesAxiomAudit.lean
 
+      - name: Check injective strong images in redundant coordinates
+        run: |
+          lake build BANANA.NonPrecompact.BananaTripleStrongImagesAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaTripleStrongImagesAxiomAudit.lean
+
       - name: Regression on arbitrary strong amalgamation diagrams
         run: python3 scripts/check_strong_amalgam_arbitrary_small.py
 
