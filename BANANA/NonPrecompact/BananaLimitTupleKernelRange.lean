@@ -121,6 +121,12 @@ theorem bananaLimitRangeEquivOfKernelEq_apply {n : ℕ}
       (⟨f c, ⟨c, rfl⟩⟩ : LinearMap.range f) :
         BananaLimitVector) = g c := by
   classical
-  simp [bananaLimitRangeEquivOfKernelEq]
+  change ((g.quotKerEquivRange
+    ((Submodule.quotEquivOfEq (LinearMap.ker f) (LinearMap.ker g) h)
+      (f.quotKerEquivRange.symm
+        (⟨f c, ⟨c, rfl⟩⟩ : LinearMap.range f)))) :
+      BananaLimitVector) = g c
+  rw [LinearMap.quotKerEquivRange_symm_apply_image]
+  simp
 
 end SuccessorTree.NonPrecompact
