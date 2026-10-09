@@ -53,6 +53,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaTripleStrongImagesAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaTripleStrongImagesAxiomAudit.lean
 
+      - name: Check exact intersection of arbitrary strong images
+        run: |
+          lake build BANANA.NonPrecompact.BananaTripleIntersectionAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaTripleIntersectionAxiomAudit.lean
+
       - name: Regression on arbitrary strong amalgamation diagrams
         run: python3 scripts/check_strong_amalgam_arbitrary_small.py
 
