@@ -66,6 +66,11 @@ jobs:
       - name: Regression on arbitrary strong amalgamation diagrams
         run: python3 scripts/check_strong_amalgam_arbitrary_small.py
 
+      - name: Check perfect pairing of finite BANANA limit blocks
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectFiniteBlocksAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectFiniteBlocksAxiomAudit.lean
+
       - name: Check finite coordinate blocks of the BANANA limit
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteSupportBlocksAxiomAudit
