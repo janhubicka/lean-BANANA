@@ -5,7 +5,8 @@ import BANANA.NonPrecompact.BananaOneSidedCopyDegree
 
 The degree-one proof in `BananaOneSidedCopyDegree` needs only the
 injection from unlabelled copies into fixed-dimensional subspaces:
-colourings extend by a default colour outside the image. In every ambient BANANA structure the injection is also surjective.
+colourings extend by a default colour outside the image. In every
+ambient BANANA structure, however, the injection is also surjective.
 
 This file records the stronger equivalence explicitly. It is useful for
 auditing that the copy representation has no omitted structures and for
@@ -28,9 +29,9 @@ private theorem zeroSort_ext (x y : Fin 0 → F2) : x = y := by
   funext i
   exact Fin.elim0 i
 
-/-- Every fixed-dimensional left subspace of an arbitrary ambient BANANA structure
-is the image of an unlabelled copy of any left-only source of that
-dimension. -/
+/-- Every fixed-dimensional left subspace of an arbitrary ambient BANANA
+structure is the image of an unlabelled copy of any left-only source
+of that dimension. -/
 theorem BananaMatrixStructure.exists_leftOnlyCopy_overSubspace
     {a n m : ℕ} (A : BananaMatrixStructure a 0)
     (C : BananaMatrixStructure n m)
@@ -181,7 +182,7 @@ noncomputable def BananaMatrixStructure.rightOnlyCopyOfSubspace
   Classical.choose_spec (A.exists_rightOnlyCopy_overSubspace C W)
 
 /-- The symmetric equivalence between right-only copies and
-fixed-dimensional right subspaces in standard perfect pairings. -/
+fixed-dimensional right subspaces in arbitrary ambient structures. -/
 noncomputable def BananaMatrixStructure.rightOnlyCopySubspaceEquiv
     {a n m : ℕ} (A : BananaMatrixStructure 0 a)
     (C : BananaMatrixStructure n m) :
