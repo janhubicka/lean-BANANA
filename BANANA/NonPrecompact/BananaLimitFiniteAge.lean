@@ -22,7 +22,7 @@ namespace SuccessorTree.NonPrecompact
 
 /-- Composition of a finite BANANA embedding with an embedding
 of its ambient finite structure into the explicit countable model. -/
-def BananaMatrixEmbeddingToLimit.comp
+noncomputable def BananaMatrixEmbeddingToLimit.comp
     {aL aR bL bR : ℕ}
     {A : BananaMatrixStructure aL aR}
     {B : BananaMatrixStructure bL bR}
