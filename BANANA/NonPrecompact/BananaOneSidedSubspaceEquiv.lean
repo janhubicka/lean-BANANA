@@ -5,8 +5,7 @@ import BANANA.NonPrecompact.BananaOneSidedCopyDegree
 
 The degree-one proof in `BananaOneSidedCopyDegree` needs only the
 injection from unlabelled copies into fixed-dimensional subspaces:
-colourings extend by a default colour outside the image. In a standard
-perfect pairing, however, the injection is also surjective.
+colourings extend by a default colour outside the image. In every ambient BANANA structure the injection is also surjective.
 
 This file records the stronger equivalence explicitly. It is useful for
 auditing that the copy representation has no omitted structures and for
@@ -29,13 +28,14 @@ private theorem zeroSort_ext (x y : Fin 0 → F2) : x = y := by
   funext i
   exact Fin.elim0 i
 
-/-- Every fixed-dimensional left subspace of a standard perfect pairing
+/-- Every fixed-dimensional left subspace of an arbitrary ambient BANANA structure
 is the image of an unlabelled copy of any left-only source of that
 dimension. -/
 theorem BananaMatrixStructure.exists_leftOnlyCopy_overSubspace
-    {a n : ℕ} (A : BananaMatrixStructure a 0)
+    {a n m : ℕ} (A : BananaMatrixStructure a 0)
+    (C : BananaMatrixStructure n m)
     (W : FixedSubspace a n) :
-    ∃ D : BananaCopyRanges A (perfectBanana n),
+    ∃ D : BananaCopyRanges A C,
       D.leftFixedSubspace = W := by
   classical
   have hdim :
@@ -50,7 +50,7 @@ theorem BananaMatrixStructure.exists_leftOnlyCopy_overSubspace
     W.1.subtype.comp e.toLinearMap
   have hleft : Function.Injective leftMap :=
     W.1.injective_subtype.comp e.injective
-  let f : BananaMatrixEmbedding A (perfectBanana n) :=
+  let f : BananaMatrixEmbedding A C :=
     { left := leftMap
       right := 0
       left_injective := hleft
@@ -85,37 +85,41 @@ theorem BananaMatrixStructure.exists_leftOnlyCopy_overSubspace
 choice is immaterial to the copy, by
 `BananaCopyRanges.leftFixedSubspace_injective`. -/
 noncomputable def BananaMatrixStructure.leftOnlyCopyOfSubspace
-    {a n : ℕ} (A : BananaMatrixStructure a 0)
+    {a n m : ℕ} (A : BananaMatrixStructure a 0)
+    (C : BananaMatrixStructure n m)
     (W : FixedSubspace a n) :
-    BananaCopyRanges A (perfectBanana n) :=
-  Classical.choose (A.exists_leftOnlyCopy_overSubspace W)
+    BananaCopyRanges A C :=
+  Classical.choose (A.exists_leftOnlyCopy_overSubspace C W)
 
 @[simp] theorem BananaMatrixStructure.leftOnlyCopyOfSubspace_range
-    {a n : ℕ} (A : BananaMatrixStructure a 0)
+    {a n m : ℕ} (A : BananaMatrixStructure a 0)
+    (C : BananaMatrixStructure n m)
     (W : FixedSubspace a n) :
-    (A.leftOnlyCopyOfSubspace W).leftFixedSubspace = W :=
-  Classical.choose_spec (A.exists_leftOnlyCopy_overSubspace W)
+    (A.leftOnlyCopyOfSubspace C W).leftFixedSubspace = W :=
+  Classical.choose_spec (A.exists_leftOnlyCopy_overSubspace C W)
 
-/-- In standard perfect pairings, taking the left image subspace gives
+/-- In arbitrary BANANA structures, taking the left image subspace gives
 a bijection from unlabelled left-only copies to fixed-dimensional
 subspaces. -/
 noncomputable def BananaMatrixStructure.leftOnlyCopySubspaceEquiv
-    {a n : ℕ} (A : BananaMatrixStructure a 0) :
-    BananaCopyRanges A (perfectBanana n) ≃ FixedSubspace a n where
+    {a n m : ℕ} (A : BananaMatrixStructure a 0)
+    (C : BananaMatrixStructure n m) :
+    BananaCopyRanges A C ≃ FixedSubspace a n where
   toFun := fun D => D.leftFixedSubspace
-  invFun := A.leftOnlyCopyOfSubspace
+  invFun := A.leftOnlyCopyOfSubspace C
   left_inv := by
     intro D
     apply BananaCopyRanges.leftFixedSubspace_injective
-    exact A.leftOnlyCopyOfSubspace_range D.leftFixedSubspace
-  right_inv := A.leftOnlyCopyOfSubspace_range
+    exact A.leftOnlyCopyOfSubspace_range C D.leftFixedSubspace
+  right_inv := A.leftOnlyCopyOfSubspace_range C
 
-/-- Every fixed-dimensional right subspace of a standard perfect
+/-- Every fixed-dimensional right subspace of an arbitrary ambient
 pairing is the image of a copy of any right-only source. -/
 theorem BananaMatrixStructure.exists_rightOnlyCopy_overSubspace
-    {a n : ℕ} (A : BananaMatrixStructure 0 a)
-    (W : FixedSubspace a n) :
-    ∃ D : BananaCopyRanges A (perfectBanana n),
+    {a n m : ℕ} (A : BananaMatrixStructure 0 a)
+    (C : BananaMatrixStructure n m)
+    (W : FixedSubspace a m) :
+    ∃ D : BananaCopyRanges A C,
       D.rightFixedSubspace = W := by
   classical
   have hdim :
@@ -126,11 +130,11 @@ theorem BananaMatrixStructure.exists_rightOnlyCopy_overSubspace
       _ = finrank F2 W.1 := W.2.symm
   let e : (Fin a → F2) ≃ₗ[F2] W.1 :=
     LinearEquiv.ofFinrankEq (Fin a → F2) W.1 hdim
-  let rightMap : (Fin a → F2) →ₗ[F2] (Fin n → F2) :=
+  let rightMap : (Fin a → F2) →ₗ[F2] (Fin m → F2) :=
     W.1.subtype.comp e.toLinearMap
   have hright : Function.Injective rightMap :=
     W.1.injective_subtype.comp e.injective
-  let f : BananaMatrixEmbedding A (perfectBanana n) :=
+  let f : BananaMatrixEmbedding A C :=
     { left := 0
       right := rightMap
       left_injective := by
@@ -163,28 +167,31 @@ theorem BananaMatrixStructure.exists_rightOnlyCopy_overSubspace
 
 /-- A canonical-for-the-proof unlabelled copy over a right subspace. -/
 noncomputable def BananaMatrixStructure.rightOnlyCopyOfSubspace
-    {a n : ℕ} (A : BananaMatrixStructure 0 a)
-    (W : FixedSubspace a n) :
-    BananaCopyRanges A (perfectBanana n) :=
-  Classical.choose (A.exists_rightOnlyCopy_overSubspace W)
+    {a n m : ℕ} (A : BananaMatrixStructure 0 a)
+    (C : BananaMatrixStructure n m)
+    (W : FixedSubspace a m) :
+    BananaCopyRanges A C :=
+  Classical.choose (A.exists_rightOnlyCopy_overSubspace C W)
 
 @[simp] theorem BananaMatrixStructure.rightOnlyCopyOfSubspace_range
-    {a n : ℕ} (A : BananaMatrixStructure 0 a)
-    (W : FixedSubspace a n) :
-    (A.rightOnlyCopyOfSubspace W).rightFixedSubspace = W :=
-  Classical.choose_spec (A.exists_rightOnlyCopy_overSubspace W)
+    {a n m : ℕ} (A : BananaMatrixStructure 0 a)
+    (C : BananaMatrixStructure n m)
+    (W : FixedSubspace a m) :
+    (A.rightOnlyCopyOfSubspace C W).rightFixedSubspace = W :=
+  Classical.choose_spec (A.exists_rightOnlyCopy_overSubspace C W)
 
 /-- The symmetric equivalence between right-only copies and
 fixed-dimensional right subspaces in standard perfect pairings. -/
 noncomputable def BananaMatrixStructure.rightOnlyCopySubspaceEquiv
-    {a n : ℕ} (A : BananaMatrixStructure 0 a) :
-    BananaCopyRanges A (perfectBanana n) ≃ FixedSubspace a n where
+    {a n m : ℕ} (A : BananaMatrixStructure 0 a)
+    (C : BananaMatrixStructure n m) :
+    BananaCopyRanges A C ≃ FixedSubspace a m where
   toFun := fun D => D.rightFixedSubspace
-  invFun := A.rightOnlyCopyOfSubspace
+  invFun := A.rightOnlyCopyOfSubspace C
   left_inv := by
     intro D
     apply BananaCopyRanges.rightFixedSubspace_injective
-    exact A.rightOnlyCopyOfSubspace_range D.rightFixedSubspace
-  right_inv := A.rightOnlyCopyOfSubspace_range
+    exact A.rightOnlyCopyOfSubspace_range C D.rightFixedSubspace
+  right_inv := A.rightOnlyCopyOfSubspace_range C
 
 end SuccessorTree.NonPrecompact
