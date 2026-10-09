@@ -152,7 +152,7 @@ theorem BananaMatrixStructure.not_copyRamseyDegreeLE_of_linePair
       _ ≤ t * s := Nat.mul_le_mul_right s family_card_le
   have hlarge : t * s < 2 ^ k := by
     change t * s < 2 ^ (t * s)
-    exact Nat.lt_two_pow_self (t * s)
+    exact Nat.lt_two_pow_self
   exact (Nat.not_le_of_gt hlarge) htooFew
 
 /-- Every BANANA source admitting a four-element line-pair
