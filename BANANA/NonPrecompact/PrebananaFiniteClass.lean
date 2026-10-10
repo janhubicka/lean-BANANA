@@ -41,20 +41,17 @@ def PrebananaAtomStructure.fromZeroBase (B : PrebananaAtomStructure) :
   fibre_nonempty := by
     classical
     intro a
+    change Fin 1 at a
+    fin_cases a
     refine ⟨B.zeroAtom, ?_⟩
-    change B.zeroAtom ∈
-      (Finset.univ : Finset (Fin B.atomCount)).filter
-        (fun _ => (0 : Fin 1) = (a : Fin 1))
-    have ha : (a : Fin 1) = 0 := Subsingleton.elim _ _
-    simp [ha]
+    simp [prebananaFiber, prebananaZeroBase, prebananaUnmarked]
   fibre_mark_parity := by
     classical
     intro a
-    change (prebananaMarkedCount B.mark
-      ((Finset.univ : Finset (Fin B.atomCount)).filter
-        (fun _ => (0 : Fin 1) = (a : Fin 1))) : F2) = 0
-    have ha : (a : Fin 1) = 0 := Subsingleton.elim _ _
-    simpa [ha] using B.total_mark_parity
+    change Fin 1 at a
+    fin_cases a
+    simpa [prebananaFiber, prebananaZeroBase, prebananaUnmarked] using
+      B.total_mark_parity
 
 /-- Every source atom presentation has a code consisting of its
 atom count and marking function. -/
