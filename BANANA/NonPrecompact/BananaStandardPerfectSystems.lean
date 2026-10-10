@@ -81,23 +81,19 @@ def Embedding.ofPartial {S T : BananaStandardPerfectSystem n}
   carrier := f.carrier
   intertwines_left := by
     intro i x
-    have hd : f.carrier.left x = (f.source i).left x := by
-      exact f.domain_left i x
-    have hr :
-        f.carrier.left ((S.actions i).left x) =
-          (T.actions i).left ((f.source i).left x) := by
-      exact f.range_left i x
-    rw [hd]
+    have hd := f.domain_left i x
+    have hr := f.range_left i x
+    have h := (congrArg (T.actions i).left hd).trans hr.symm
+    simpa [BananaStandardPerfectSystem.toPartial,
+      BananaMatrixEmbedding.id] using h
     exact hr.symm
   intertwines_right := by
     intro i y
-    have hd : f.carrier.right y = (f.source i).right y := by
-      exact f.domain_right i y
-    have hr :
-        f.carrier.right ((S.actions i).right y) =
-          (T.actions i).right ((f.source i).right y) := by
-      exact f.range_right i y
-    rw [hd]
+    have hd := f.domain_right i y
+    have hr := f.range_right i y
+    have h := (congrArg (T.actions i).right hd).trans hr.symm
+    simpa [BananaStandardPerfectSystem.toPartial,
+      BananaMatrixEmbedding.id] using h
     exact hr.symm
 
 end BananaStandardPerfectSystem
