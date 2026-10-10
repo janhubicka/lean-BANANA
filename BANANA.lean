@@ -33,6 +33,7 @@ import BANANA.NonPrecompact.BananaLimitBlockPairLift
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BananaFinitePartialSystems
+import BANANA.NonPrecompact.BananaFiniteSystemCofinalTransfer
 import BANANA.NonPrecompact.BilinearResidue
 import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
 import BANANA.NonPrecompact.BinarySubspaceRamseyFromSuccessor
