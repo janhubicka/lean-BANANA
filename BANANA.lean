@@ -91,6 +91,7 @@ import BANANA.NonPrecompact.BananaLimitBlockRestriction
 import BANANA.NonPrecompact.BananaLimitBlockExtendRestriction
 import BANANA.NonPrecompact.BananaLimitFiniteGLStageInclusions
 import BANANA.NonPrecompact.BananaLimitDirectedGLUnion
+import BANANA.NonPrecompact.BananaLimitLocallyFiniteDense
 import BANANA.NonPrecompact.BananaLimitFiniteGLGroupAction
 import BANANA.NonPrecompact.BananaLimitOutsideLargerBlock
 import BANANA.NonPrecompact.BananaLimitFiniteGLStages

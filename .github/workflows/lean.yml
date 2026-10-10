@@ -230,6 +230,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLGroupActionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLGroupActionAxiomAudit.lean
 
+      - name: Check pointwise approximation by the locally finite GL union
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitLocallyFiniteDenseAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitLocallyFiniteDenseAxiomAudit.lean
+
       - name: Check directed locally finite GL automorphism union
         run: |
           lake build BANANA.NonPrecompact.BananaLimitDirectedGLUnionAxiomAudit
