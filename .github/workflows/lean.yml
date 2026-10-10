@@ -260,6 +260,21 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalEquivAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalEquivAxiomAudit.lean
 
+      - name: Check perfect-total actions become block diagonal
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectTotalBlockDiagonalAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectTotalBlockDiagonalAxiomAudit.lean
+
+      - name: Check perfect-system automorphisms on orthogonal complements
+        run: |
+          lake build BANANA.NonPrecompact.PerfectTotalComplementEquivAxiomAudit
+          lake env lean BANANA/NonPrecompact/PerfectTotalComplementEquivAxiomAudit.lean
+
+      - name: Check orthogonal product equivalences of perfect BANANA pairs
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectOrthogonalEquivAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalEquivAxiomAudit.lean
+
       - name: Check orthogonal decompositions around perfect BANANA subpairs
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalDecompositionAxiomAudit
