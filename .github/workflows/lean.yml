@@ -245,6 +245,9 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalDecompositionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalDecompositionAxiomAudit.lean
 
+      - name: Regress orthogonal complements of finite perfect pairings
+        run: python3 scripts/check_perfect_orthogonal_complements_small.py
+
       - name: Check simultaneous actions on three perfect BANANA blocks
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectTripleAutomorphismsAxiomAudit
