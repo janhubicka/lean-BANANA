@@ -80,7 +80,10 @@ theorem prebananaGridPartB_surjective
   let p : FiberGrid f.part g.part :=
     ⟨f.part b, (⟨b, rfl⟩, ⟨c, hc⟩)⟩
   refine ⟨(prebananaGridIndexEquiv f g).symm p, ?_⟩
-  simp [prebananaGridPartB, p]
+  change (((prebananaGridIndexEquiv f g)
+    ((prebananaGridIndexEquiv f g).symm p)).2.1.1) = b
+  rw [Equiv.apply_symm_apply]
+  rfl
 
 theorem prebananaGridPartC_surjective
     {A B C : PrebananaAtomStructure}
@@ -92,7 +95,10 @@ theorem prebananaGridPartC_surjective
   let p : FiberGrid f.part g.part :=
     ⟨g.part c, (⟨b, hb⟩, ⟨c, rfl⟩)⟩
   refine ⟨(prebananaGridIndexEquiv f g).symm p, ?_⟩
-  simp [prebananaGridPartC, p]
+  change (((prebananaGridIndexEquiv f g)
+    ((prebananaGridIndexEquiv f g).symm p)).2.2.1) = c
+  rw [Equiv.apply_symm_apply]
+  rfl
 
 /-- The two Boolean subalgebras of the compatible grid have exactly
 the common A-image as intersection. This statement works even for
@@ -114,6 +120,7 @@ theorem prebananaGrid_exact_common_subsets
     f.part g.part f.part_surjective g.part_surjective SB SC
   intro p
   have hp := h ((prebananaGridIndexEquiv f g).symm p)
-  simpa [prebananaGridPartB, prebananaGridPartC] using hp
+  simpa only [prebananaGridPartB, prebananaGridPartC,
+    Equiv.apply_symm_apply] using hp
 
 end SuccessorTree.NonPrecompact
