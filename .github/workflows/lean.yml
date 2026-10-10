@@ -227,6 +227,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLGroupActionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLGroupActionAxiomAudit.lean
 
+      - name: Check smaller-block lifts equal extended larger restrictions
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitBlockExtendRestrictionAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitBlockExtendRestrictionAxiomAudit.lean
+
       - name: Check larger-block restriction of finite GL lifts
         run: |
           lake build BANANA.NonPrecompact.BananaLimitBlockRestrictionAxiomAudit
