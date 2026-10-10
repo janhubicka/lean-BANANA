@@ -273,6 +273,11 @@ jobs:
           lake build BANANA.NonPrecompact.PerfectTotalComplementEquivAxiomAudit
           lake env lean BANANA/NonPrecompact/PerfectTotalComplementEquivAxiomAudit.lean
 
+      - name: Check canonical pairing projections intertwine total automorphisms
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectProjectionEquivarianceAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectProjectionEquivarianceAxiomAudit.lean
+
       - name: Check complement invariance in perfect total systems
         run: |
           lake build BANANA.NonPrecompact.PerfectTotalInvariantComplementsAxiomAudit
