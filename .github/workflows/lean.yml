@@ -192,6 +192,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaRetractionLiftEquivAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaRetractionLiftEquivAxiomAudit.lean
 
+      - name: Check finite partial-system identities and embedding composition
+        run: |
+          lake build BANANA.NonPrecompact.BananaFinitePartialSystemsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaFinitePartialSystemsAxiomAudit.lean
+
       - name: Check finite hereditary and joint embedding properties
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteFraissePropertiesAxiomAudit
