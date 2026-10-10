@@ -53,6 +53,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaGridMarginalsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaGridMarginalsAxiomAudit.lean
 
+      - name: Check finite pre-BANANA atom grid reindexing
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGridReindexAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGridReindexAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
