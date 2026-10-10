@@ -52,7 +52,7 @@ theorem sum_fiberGridMark_eq_sum_left
       simpa using
         (sum_fiberGridMark_right f g hf hg markB markC bb)
     _ = ∑ b : B, markB b := by
-      simpa using (Fintype.sum_fiberwise f markB).symm
+      simpa using (Fintype.sum_fiberwise f markB)
 
 /-- Every fibre-product star marking has even total parity as
 soon as the old B marking has even total parity. -/
