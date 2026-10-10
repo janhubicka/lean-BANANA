@@ -87,6 +87,7 @@ import BANANA.NonPrecompact.ParityStarMatrix
 import BANANA.NonPrecompact.PerfectBlockConjugator
 import BANANA.NonPrecompact.PerfectCopy
 import BANANA.NonPrecompact.PerfectHomogeneity
+import BANANA.NonPrecompact.BananaPerfectOrthogonalDecomposition
 import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.BananaLimitFiniteGLAction
 import BANANA.NonPrecompact.BananaLimitBlockLiftGroupLaw

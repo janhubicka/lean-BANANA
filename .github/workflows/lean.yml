@@ -240,6 +240,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectSplitSystemActionsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectSplitSystemActionsAxiomAudit.lean
 
+      - name: Check orthogonal decompositions around perfect BANANA subpairs
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectOrthogonalDecompositionAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalDecompositionAxiomAudit.lean
+
       - name: Check simultaneous actions on three perfect BANANA blocks
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectTripleAutomorphismsAxiomAudit
