@@ -85,7 +85,7 @@ def Embedding.ofPartial {S T : BananaStandardPerfectSystem n}
     have hr := f.range_left i x
     have h := (congrArg (T.actions i).left hd).trans hr.symm
     simpa [BananaStandardPerfectSystem.toPartial,
-      BananaMatrixEmbedding.id] using h
+      BananaMatrixEmbedding.id, LinearMap.id] using h
     exact hr.symm
   intertwines_right := by
     intro i y
@@ -93,7 +93,7 @@ def Embedding.ofPartial {S T : BananaStandardPerfectSystem n}
     have hr := f.range_right i y
     have h := (congrArg (T.actions i).right hd).trans hr.symm
     simpa [BananaStandardPerfectSystem.toPartial,
-      BananaMatrixEmbedding.id] using h
+      BananaMatrixEmbedding.id, LinearMap.id] using h
     exact hr.symm
 
 end BananaStandardPerfectSystem
