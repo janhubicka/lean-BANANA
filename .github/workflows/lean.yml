@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check mixed-sort BANANA tuple oligomorphicity
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitMixedTupleOrbitsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitMixedTupleOrbitsAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
