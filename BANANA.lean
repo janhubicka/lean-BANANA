@@ -89,6 +89,7 @@ import BANANA.NonPrecompact.BananaLimitBlockLiftGroupLaw
 import BANANA.NonPrecompact.BananaLimitBlockSupportMonotonicity
 import BANANA.NonPrecompact.BananaLimitBlockRestriction
 import BANANA.NonPrecompact.BananaLimitBlockExtendRestriction
+import BANANA.NonPrecompact.BananaLimitFiniteGLStageInclusions
 import BANANA.NonPrecompact.BananaLimitFiniteGLGroupAction
 import BANANA.NonPrecompact.BananaLimitOutsideLargerBlock
 import BANANA.NonPrecompact.BananaLimitFiniteGLStages
