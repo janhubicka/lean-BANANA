@@ -217,6 +217,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLStagesAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLStagesAxiomAudit.lean
 
+      - name: Check fixed outside components of nested BANANA blocks
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitOutsideLargerBlockAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitOutsideLargerBlockAxiomAudit.lean
+
       - name: Check finite GL global action identity and composition
         run: |
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLGroupActionAxiomAudit
