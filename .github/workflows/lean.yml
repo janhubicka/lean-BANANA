@@ -232,6 +232,16 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSystemSourceBridgeAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSystemSourceBridgeAxiomAudit.lean
 
+      - name: Check cofinality of standard perfect-total BANANA n-systems
+        run: |
+          lake build BANANA.NonPrecompact.BananaStandardPerfectSystemsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaStandardPerfectSystemsAxiomAudit.lean
+
+      - name: Check all finite BANANA n-systems have JEP and WAP
+        run: |
+          lake build BANANA.NonPrecompact.BananaFiniteSystemsJepWapAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaFiniteSystemsJepWapAxiomAudit.lean
+
       - name: Check finite hereditary and joint embedding properties
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteFraissePropertiesAxiomAudit
