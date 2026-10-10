@@ -39,6 +39,7 @@ def PrebananaAtomStructure.fromZeroBase (B : PrebananaAtomStructure) :
     PrebananaAtomEmbedding prebananaZeroBase B where
   part := fun _ => (0 : Fin 1)
   fibre_nonempty := by
+    classical
     intro a
     refine ⟨B.zeroAtom, ?_⟩
     change B.zeroAtom ∈
@@ -47,6 +48,7 @@ def PrebananaAtomStructure.fromZeroBase (B : PrebananaAtomStructure) :
     have ha : (a : Fin 1) = 0 := Subsingleton.elim _ _
     simp [ha]
   fibre_mark_parity := by
+    classical
     intro a
     change (prebananaMarkedCount B.mark
       ((Finset.univ : Finset (Fin B.atomCount)).filter
