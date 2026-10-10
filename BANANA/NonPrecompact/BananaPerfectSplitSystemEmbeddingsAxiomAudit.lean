@@ -1,0 +1,15 @@
+import BANANA.NonPrecompact.BananaPerfectSplitSystemEmbeddings
+
+/-!
+# Transitive axiom audit: genuine split perfect-system embeddings
+-/
+
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplit_append_parts
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplit_dot_parts
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitLinearB_injective
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitLinearC_injective
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitEmbedB_pairing
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitEmbedC_pairing
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitEmbeddingB
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitEmbeddingC
+#print axioms SuccessorTree.NonPrecompact.bananaPerfectSplitEmbeddings_agree_common
