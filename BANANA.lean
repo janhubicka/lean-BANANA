@@ -6,6 +6,7 @@ import BANANA.NonPrecompact.BananaArbitraryAmalgamTools
 import BANANA.NonPrecompact.BananaTriplePairing
 import BANANA.NonPrecompact.BananaEquivariantTripleAmalgam
 import BANANA.NonPrecompact.BananaPerfectTotalEquivariantDiagram
+import BANANA.NonPrecompact.BananaPerfectTotalDiagramAmalgam
 import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaFiniteFraisseProperties
 import BANANA.NonPrecompact.BananaFiniteCountability
