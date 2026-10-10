@@ -83,6 +83,7 @@ import BANANA.NonPrecompact.ParityStarMatrix
 import BANANA.NonPrecompact.PerfectBlockConjugator
 import BANANA.NonPrecompact.PerfectCopy
 import BANANA.NonPrecompact.PerfectHomogeneity
+import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.PerfectLeftRange
 import BANANA.NonPrecompact.PerfectSelfEmbedding
 import BANANA.NonPrecompact.PersistentColourings

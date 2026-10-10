@@ -202,6 +202,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaArbitraryAmalgamToolsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaArbitraryAmalgamToolsAxiomAudit.lean
 
+      - name: Check finite perfect-pair GL stages for coherent EPPA
+        run: |
+          lake build BANANA.NonPrecompact.FinitePerfectGLAxiomAudit
+          lake env lean BANANA/NonPrecompact/FinitePerfectGLAxiomAudit.lean
+
       - name: Check staged copy Ramsey theorems and axioms
         run: bash scripts/check_staged_ramsey_degrees.sh
 
