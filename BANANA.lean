@@ -36,6 +36,7 @@ import BANANA.NonPrecompact.BananaLimitBlockPairLift
 import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BananaFinitePartialSystems
+import BANANA.NonPrecompact.BananaFiniteSystemSourceBridge
 import BANANA.NonPrecompact.BananaFiniteSystemPerfectTotalCofinality
 import BANANA.NonPrecompact.BananaFiniteSystemCofinalTransfer
 import BANANA.NonPrecompact.BilinearResidue
