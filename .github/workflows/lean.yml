@@ -245,6 +245,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectSplitSystemActionsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectSplitSystemActionsAxiomAudit.lean
 
+      - name: Check uniqueness of orthogonal perfect-pair splittings
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectOrthogonalUniquenessAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalUniquenessAxiomAudit.lean
+
       - name: Check orthogonal decompositions around perfect BANANA subpairs
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalDecompositionAxiomAudit
