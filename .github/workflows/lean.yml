@@ -63,6 +63,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteClassAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteClassAxiomAudit.lean
 
+      - name: Check parity of reindexed pre-BANANA atom grid
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaIndexedParityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaIndexedParityAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
