@@ -88,6 +88,7 @@ import BANANA.NonPrecompact.ParityStarMatrix
 import BANANA.NonPrecompact.PerfectBlockConjugator
 import BANANA.NonPrecompact.PerfectCopy
 import BANANA.NonPrecompact.PerfectHomogeneity
+import BANANA.NonPrecompact.PerfectFamilyExtension
 import BANANA.NonPrecompact.BananaPerfectOrthogonalDecomposition
 import BANANA.NonPrecompact.BananaPerfectOrthogonalEquiv
 import BANANA.NonPrecompact.BananaPerfectOrthogonalNondegenerate
