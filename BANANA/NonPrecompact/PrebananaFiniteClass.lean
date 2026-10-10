@@ -37,7 +37,7 @@ theorem prebanana_arbitrarily_many_atoms (n : ℕ) :
 the one source atom is a legitimate embedding. -/
 def PrebananaAtomStructure.fromZeroBase (B : PrebananaAtomStructure) :
     PrebananaAtomEmbedding prebananaZeroBase B where
-  part := fun _ => 0
+  part := fun _ => (0 : Fin 1)
   fibre_nonempty := by
     intro a
     refine ⟨B.zeroAtom, ?_⟩
@@ -65,7 +65,6 @@ most countably many pre-BANANA isomorphism types. -/
 noncomputable instance prebananaAtomStructureCountable :
     Countable PrebananaAtomStructure := by
   classical
-  exact Countable.of_injective prebananaAtomCode
-    prebananaAtomCode_injective
+  exact prebananaAtomCode_injective.countable
 
 end SuccessorTree.NonPrecompact
