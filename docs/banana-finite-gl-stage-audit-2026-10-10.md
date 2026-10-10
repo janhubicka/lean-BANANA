@@ -14,20 +14,21 @@ The stage calculations were kernel-checked before considering a directed union.
 
 The density argument must not assume that an arbitrary automorphism sends a whole finite *coordinate block* to itself. Given finite test families F_L and F_R, instead take their generated finite subspaces, realise their exact ranges by an embedded finite BANANA structure, transport that embedding by the global automorphism, then apply finite perfect-pair homogeneity inside a common block containing both images. This is the route formalised by `BananaLimitFiniteGLDensity.lean`, merged after full Lean checks.
 
-There is an additional issue with nesting: `bananaLimitBlockStandardEquiv S` and `bananaLimitBlockStandardEquiv T` choose their finite enumerations independently. Thus one must NOT identify GL(S) with an upper-left matrix corner of GL(T) without conjugating the choices. The candidate theorem `exists_bananaLimitFiniteGLAction_larger_stage` instead restricts the actual global action to the T-supported subspace, conjugates it to the standard T coordinates and uses perfect-pair nondegeneracy to recover the right contragredient. The final global equality follows from the extend–restrict identity. This candidate is NOT marked verified until its Lean build and transitive axiom audit succeed.
+There is an additional issue with nesting: `bananaLimitBlockStandardEquiv S` and `bananaLimitBlockStandardEquiv T` choose their finite enumerations independently. Thus one must NOT identify GL(S) with an upper-left matrix corner of GL(T) without conjugating the choices. The theorem `exists_bananaLimitFiniteGLAction_larger_stage` instead restricts the actual global action to the T-supported subspace, conjugates it to the standard T coordinates and uses perfect-pair nondegeneracy to recover the right contragredient. The final global equality follows from the extend–restrict identity. The theorem has passed its Lean root build, dedicated transitive-axiom audit and complete CI workflow, and was merged in PR #58.
 
 ## Small finite-model adversarial checks
 
-A separate exhaustive binary bitset calculation checked all invertible matrices of dimensions n=0,1,2,3, with GL counts 1,1,6,168. The inverse-transpose pairing law passed 10,853 tests over these dimensions.
+The reproducible script `scripts/check_nested_banana_gl_small.py` in PR #60 exhaustively checks all **713** invertible binary transformations on the subsets S of a four-coordinate ambient block with |S| at most three (GL(0,2), GL(1,2), GL(2,2), GL(3,2) have orders 1, 1, 6 and 168). It performs **182,528** pairing-preservation comparisons on all left/right ambient vector pairs.
 
-For a four-coordinate ambient block, each subset S of size at most three and each invertible transformation on S was extended by the identity on the other coordinates, without assuming S consecutive. The induced full matrix and its inverse transpose were checked against the direct finite-support actions on every ambient vector: 22,816 separate equalities passed.
+For every S⊆T, independently scrambled coordinate enumerations are used for S and T. The script constructs the induced T-block left transformation and its inverse transpose, and compares both globally lifted actions on every ambient vector: **49,152** component-action equalities pass. The Python regression step has passed CI. These counts supersede earlier informal illustrative counts that were not retained in a reproducible test.
 
 These checks are finite regressions, **not** proofs of the infinite statements and **not** independently spawned referees. The mathematical audit and Lean kernel remain distinct evidence.
 
 ## Remaining obligations
 
-- Lean validation/merger of T-block restriction, fixed outside-component, extend–restrict and nested-stage parameter transport results (draft PRs #54, #56, #57, #58).
-- Explicitly assemble the directed union of finite subgroups and interpret the finite-set approximation lemma as density in the pointwise convergence topology, or cite the standard general topology lemma.
+- The nested-block restrictions, fixed outside components, extend–restrict identity and finite-stage inclusion theorem are merged and Lean-verified (PRs #54, #56, #57, #58). The directed-union local-finiteness theorem was subsequently kernel-verified and merged (PR #59).
+- Complete verification/merger of the combined finite-set approximation theorem for that directed union (PR #61); the underlying finite-set approximation theorem itself was previously merged.
+- Interpret the concrete finite-set approximation statement as density in the pointwise convergence topology, citing the standard general topology fact if it is not Lean-formalised.
 - Apply the standard facts that locally finite discrete groups are amenable and a topological group with a dense amenable subgroup is amenable. These are not currently Lean-formalised and should not receive green validation markers.
 
 Only validation markers and TODO notes may be added to the frozen circulation text.
