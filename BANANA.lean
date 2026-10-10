@@ -85,6 +85,7 @@ import BANANA.NonPrecompact.PerfectCopy
 import BANANA.NonPrecompact.PerfectHomogeneity
 import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.BananaLimitFiniteGLAction
+import BANANA.NonPrecompact.BananaLimitBlockLiftGroupLaw
 import BANANA.NonPrecompact.BananaLimitFiniteGLApproximation
 import BANANA.NonPrecompact.BananaLimitFiniteGLDensity
 import BANANA.NonPrecompact.PerfectLeftRange
