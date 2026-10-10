@@ -37,10 +37,18 @@ theorem bananaPerfectSplit_dot_parts {a b : ℕ}
         BananaMatrixStructure.finLeftPart y) +
       (BananaMatrixStructure.finRightPart x ⬝ᵥ
         BananaMatrixStructure.finRightPart y) := by
-  conv_lhs =>
-    rw [← bananaPerfectSplit_append_parts x,
-      ← bananaPerfectSplit_append_parts y,
-      dotProduct_append]
+  calc
+    x ⬝ᵥ y =
+        (Fin.append (BananaMatrixStructure.finLeftPart x)
+          (BananaMatrixStructure.finRightPart x)) ⬝ᵥ
+        (Fin.append (BananaMatrixStructure.finLeftPart y)
+          (BananaMatrixStructure.finRightPart y)) := by
+          rw [bananaPerfectSplit_append_parts x,
+            bananaPerfectSplit_append_parts y]
+    _ = _ := by
+          simp only [dotProduct]
+          rw [Fin.sum_univ_add]
+          simp [dotProduct]
 
 /-- The inclusion B→D, as a linear map on either vector-space sort. -/
 def bananaPerfectSplitLinearB (a b c : ℕ) :
@@ -92,7 +100,9 @@ theorem bananaPerfectSplitEmbedB_pairing (a b c : ℕ)
         BananaMatrixStructure.finLeftPart y) +
       (BananaMatrixStructure.finRightPart x ⬝ᵥ
         BananaMatrixStructure.finRightPart y) := by
-          simp [bananaPerfectSplitEmbedB, dotProduct_append]
+          simp only [bananaPerfectSplitEmbedB, dotProduct]
+          rw [Fin.sum_univ_add]
+          simp [Fin.sum_univ_add, dotProduct]
     _ = x ⬝ᵥ y := (bananaPerfectSplit_dot_parts x y).symm
 
 /-- The C-inclusion preserves all cross-pairings. -/
@@ -107,7 +117,9 @@ theorem bananaPerfectSplitEmbedC_pairing (a b c : ℕ)
         BananaMatrixStructure.finLeftPart y) +
       (BananaMatrixStructure.finRightPart x ⬝ᵥ
         BananaMatrixStructure.finRightPart y) := by
-          simp [bananaPerfectSplitEmbedC, dotProduct_append]
+          simp only [bananaPerfectSplitEmbedC, dotProduct]
+          rw [Fin.sum_univ_add]
+          simp [Fin.sum_univ_add, dotProduct]
     _ = x ⬝ᵥ y := (bananaPerfectSplit_dot_parts x y).symm
 
 /-- The embedding of the first perfect total subsystem. -/
