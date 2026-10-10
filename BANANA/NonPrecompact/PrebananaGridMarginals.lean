@@ -29,8 +29,12 @@ theorem PrebananaAtomEmbedding.sum_mark_leftFiber
     (a : Fin A.atomCount) :
     (∑ b : LeftFiber f.part a, B.mark b.1) = A.mark a := by
   classical
-  simpa [LeftFiber, prebananaFiber, Fintype.sum_subtype] using
-    f.sum_mark_fibre a
+  have hsub :=
+    (Finset.sum_subtype_eq_sum_filter
+      (s := (Finset.univ : Finset (Fin B.atomCount)))
+      (p := fun b => f.part b = a) B.mark)
+  simpa [LeftFiber, prebananaFiber] using
+    hsub.trans (f.sum_mark_fibre a)
 
 /-- If two finite atom embeddings have the same source, the total
 marks on the two fibres above any source atom coincide. -/
