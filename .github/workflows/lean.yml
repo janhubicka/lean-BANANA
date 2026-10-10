@@ -250,6 +250,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalUniquenessAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalUniquenessAxiomAudit.lean
 
+      - name: Check perfectness of orthogonal BANANA complements
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectOrthogonalNondegenerateAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalNondegenerateAxiomAudit.lean
+
       - name: Check orthogonal decompositions around perfect BANANA subpairs
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalDecompositionAxiomAudit
