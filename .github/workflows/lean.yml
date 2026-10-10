@@ -202,6 +202,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaArbitraryAmalgamToolsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaArbitraryAmalgamToolsAxiomAudit.lean
 
+      - name: Check finite perfect-block GL actions on the BANANA limit
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteGLActionAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLActionAxiomAudit.lean
+
       - name: Check finite perfect-pair GL stages for coherent EPPA
         run: |
           lake build BANANA.NonPrecompact.FinitePerfectGLAxiomAudit
