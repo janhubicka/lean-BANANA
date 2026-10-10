@@ -75,7 +75,9 @@ theorem directSum_natural_inl_left
     Fin.append (f.left (finLeftPart (Fin.append x 0)))
       (g.left (finRightPart (Fin.append x 0))) =
     Fin.append (f.left x) 0
-  simp [finLeftPart, finRightPart]
+  funext i
+  induction i using Fin.addCases <;>
+    simp [finLeftPart, finRightPart]
 
 /-- Functoriality of the first inclusion on the right sort. -/
 theorem directSum_natural_inl_right
@@ -93,7 +95,9 @@ theorem directSum_natural_inl_right
     Fin.append (f.right (finLeftPart (Fin.append x 0)))
       (g.right (finRightPart (Fin.append x 0))) =
     Fin.append (f.right x) 0
-  simp [finLeftPart, finRightPart]
+  funext i
+  induction i using Fin.addCases <;>
+    simp [finLeftPart, finRightPart]
 
 /-- Functoriality of the second canonical inclusion on the left sort. -/
 theorem directSum_natural_inr_left
@@ -111,7 +115,9 @@ theorem directSum_natural_inr_left
     Fin.append (f.left (finLeftPart (Fin.append 0 x)))
       (g.left (finRightPart (Fin.append 0 x))) =
     Fin.append 0 (g.left x)
-  simp [finLeftPart, finRightPart]
+  funext i
+  induction i using Fin.addCases <;>
+    simp [finLeftPart, finRightPart]
 
 /-- Functoriality of the second canonical inclusion on the right sort. -/
 theorem directSum_natural_inr_right
@@ -129,7 +135,9 @@ theorem directSum_natural_inr_right
     Fin.append (f.right (finLeftPart (Fin.append 0 x)))
       (g.right (finRightPart (Fin.append 0 x))) =
     Fin.append 0 (g.right x)
-  simp [finLeftPart, finRightPart]
+  funext i
+  induction i using Fin.addCases <;>
+    simp [finLeftPart, finRightPart]
 
 /-- The direct sum witnesses strong amalgamation over the two named
 zero elements, with vanishing cross-pairings on both sorts. -/
@@ -144,9 +152,9 @@ theorem exists_canonical_zero_amalgam :
   refine ⟨bananaDirectSum A B, A.directSumInlEmbedding B,
     A.directSumInrEmbedding B, ?_, ?_, ?_, ?_⟩
   · intro x y
-    exact A.directSum_inl_inr_eq_iff_zero_left B x y
+    exact directSum_inl_inr_eq_iff_zero_left x y
   · intro x y
-    exact A.directSum_inl_inr_eq_iff_zero_right B x y
+    exact directSum_inl_inr_eq_iff_zero_right x y
   · intro x y
     exact A.directSum_cross_pairing_left_right B x y
   · intro x y
