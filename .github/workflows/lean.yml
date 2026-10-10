@@ -250,6 +250,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalUniquenessAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectOrthogonalUniquenessAxiomAudit.lean
 
+      - name: Check induced perfect pairing on orthogonal complements
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectComplementPairingAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectComplementPairingAxiomAudit.lean
+
       - name: Check perfectness of orthogonal BANANA complements
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectOrthogonalNondegenerateAxiomAudit
