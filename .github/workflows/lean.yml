@@ -230,6 +230,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectTotalSplitSystemsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectTotalSplitSystemsAxiomAudit.lean
 
+      - name: Check strong intersection of split perfect BANANA systems
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectSplitStrongIntersectionAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectSplitStrongIntersectionAxiomAudit.lean
+
       - name: Check split perfect-total system embeddings
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectSplitSystemEmbeddingsAxiomAudit
