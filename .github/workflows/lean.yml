@@ -288,6 +288,11 @@ jobs:
           lake build BANANA.NonPrecompact.PerfectTotalInvariantComplementsAxiomAudit
           lake env lean BANANA/NonPrecompact/PerfectTotalInvariantComplementsAxiomAudit.lean
 
+      - name: Check cofinal completion to perfect total BANANA n-systems
+        run: |
+          lake build BANANA.NonPrecompact.PerfectCofinalTotalSystemsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PerfectCofinalTotalSystemsAxiomAudit.lean
+
       - name: Check simultaneous extension of finite families in perfect pairs
         run: |
           lake build BANANA.NonPrecompact.PerfectFamilyExtensionAxiomAudit
