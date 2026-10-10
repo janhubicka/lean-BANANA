@@ -63,6 +63,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaEquivariantTripleAmalgamAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaEquivariantTripleAmalgamAxiomAudit.lean
 
+      - name: Check all perfect-system diagram actions intertwine canonical amalgam embeddings
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectTotalEquivariantDiagramAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectTotalEquivariantDiagramAxiomAudit.lean
+
       - name: Check complete arbitrary BANANA strong amalgamation
         run: |
           lake build BANANA.NonPrecompact.BananaTriplePairingAxiomAudit
