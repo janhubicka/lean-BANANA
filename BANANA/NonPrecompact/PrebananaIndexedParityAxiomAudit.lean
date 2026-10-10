@@ -4,3 +4,5 @@ import BANANA.NonPrecompact.PrebananaIndexedParity
 
 #print axioms SuccessorTree.NonPrecompact.prebananaMarkedCount_reindex_eq_sum
 #print axioms SuccessorTree.NonPrecompact.prebananaIndexedGrid_total_zero
+
+#print axioms SuccessorTree.NonPrecompact.prebananaGridMarkedStructure
