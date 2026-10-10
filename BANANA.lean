@@ -56,6 +56,7 @@ import BANANA.NonPrecompact.BananaPerfectSplitSystemEmbeddings
 import BANANA.NonPrecompact.BananaPerfectSplitStrongIntersection
 import BANANA.NonPrecompact.BananaPerfectTotalSplitSystems
 import BANANA.NonPrecompact.CompletionAutomorphism
+import BANANA.NonPrecompact.BananaTotalFamilyPerfectCompletion
 import BANANA.NonPrecompact.CompletionAutomorphismHom
 import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
