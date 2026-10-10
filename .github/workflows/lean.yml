@@ -207,6 +207,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFiniteSystemCofinalTransferAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFiniteSystemCofinalTransferAxiomAudit.lean
 
+      - name: Check genuine cofinal perfect-total n-system embeddings
+        run: |
+          lake build BANANA.NonPrecompact.BananaFiniteSystemPerfectTotalCofinalityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaFiniteSystemPerfectTotalCofinalityAxiomAudit.lean
+
       - name: Check finite hereditary and joint embedding properties
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteFraissePropertiesAxiomAudit
