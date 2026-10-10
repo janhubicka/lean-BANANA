@@ -1,0 +1,11 @@
+import BANANA.NonPrecompact.BananaPerfectOrthogonalDecomposition
+
+/-!
+# Transitive axiom audit: canonical orthogonal decompositions
+-/
+
+#print axioms SuccessorTree.NonPrecompact.perfectLeftPairingMap_pairing
+#print axioms SuccessorTree.NonPrecompact.rightPairingMap_left_retraction
+#print axioms SuccessorTree.NonPrecompact.perfectLeftPairingMap_right_retraction
+#print axioms SuccessorTree.NonPrecompact.perfectPair_left_orthogonal_decomposition
+#print axioms SuccessorTree.NonPrecompact.perfectPair_right_orthogonal_decomposition
