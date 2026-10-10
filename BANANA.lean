@@ -87,6 +87,7 @@ import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.BananaLimitFiniteGLAction
 import BANANA.NonPrecompact.BananaLimitBlockLiftGroupLaw
 import BANANA.NonPrecompact.BananaLimitBlockSupportMonotonicity
+import BANANA.NonPrecompact.BananaLimitBlockRestriction
 import BANANA.NonPrecompact.BananaLimitFiniteGLGroupAction
 import BANANA.NonPrecompact.BananaLimitFiniteGLStages
 import BANANA.NonPrecompact.BananaLimitFiniteGLApproximation
