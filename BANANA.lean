@@ -91,6 +91,7 @@ import BANANA.NonPrecompact.PerfectHomogeneity
 import BANANA.NonPrecompact.BananaPerfectOrthogonalDecomposition
 import BANANA.NonPrecompact.BananaPerfectOrthogonalEquiv
 import BANANA.NonPrecompact.BananaPerfectOrthogonalNondegenerate
+import BANANA.NonPrecompact.BananaPerfectComplementPairing
 import BANANA.NonPrecompact.BananaPerfectOrthogonalUniqueness
 import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.BananaLimitFiniteGLAction
