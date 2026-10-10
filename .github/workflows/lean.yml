@@ -212,6 +212,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLApproximationAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLApproximationAxiomAudit.lean
 
+      - name: Check finite GL stages as finite subgroup families
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteGLStagesAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLStagesAxiomAudit.lean
+
       - name: Check finite GL global action identity and composition
         run: |
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLGroupActionAxiomAudit
