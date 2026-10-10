@@ -268,6 +268,11 @@ jobs:
       - name: Regress orthogonal complements of finite perfect pairings
         run: python3 scripts/check_perfect_orthogonal_complements_small.py
 
+      - name: Check perfect-system automorphisms on orthogonal complements
+        run: |
+          lake build BANANA.NonPrecompact.PerfectTotalComplementEquivAxiomAudit
+          lake env lean BANANA/NonPrecompact/PerfectTotalComplementEquivAxiomAudit.lean
+
       - name: Check complement invariance in perfect total systems
         run: |
           lake build BANANA.NonPrecompact.PerfectTotalInvariantComplementsAxiomAudit
