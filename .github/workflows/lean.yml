@@ -217,6 +217,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLGroupActionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLGroupActionAxiomAudit.lean
 
+      - name: Check nested support preservation of finite block lifts
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitBlockSupportMonotonicityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitBlockSupportMonotonicityAxiomAudit.lean
+
       - name: Check finite-block lift identity and composition
         run: |
           lake build BANANA.NonPrecompact.BananaLimitBlockLiftGroupLawAxiomAudit
