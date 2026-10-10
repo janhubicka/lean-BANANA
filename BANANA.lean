@@ -8,6 +8,7 @@ import BANANA.NonPrecompact.BananaEquivariantTripleAmalgam
 import BANANA.NonPrecompact.BananaPerfectTotalEquivariantDiagram
 import BANANA.NonPrecompact.BananaPerfectTotalDiagramAmalgam
 import BANANA.NonPrecompact.BananaDirectSum
+import BANANA.NonPrecompact.BananaDirectSumCanonical
 import BANANA.NonPrecompact.BananaFiniteFraisseProperties
 import BANANA.NonPrecompact.BananaFiniteCountability
 import BANANA.NonPrecompact.BananaExplicitLimit
