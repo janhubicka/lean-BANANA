@@ -227,6 +227,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLGroupActionAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLGroupActionAxiomAudit.lean
 
+      - name: Check nested finite GL group stages are compatible
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteGLStageInclusionsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLStageInclusionsAxiomAudit.lean
+
       - name: Check smaller-block lifts equal extended larger restrictions
         run: |
           lake build BANANA.NonPrecompact.BananaLimitBlockExtendRestrictionAxiomAudit
