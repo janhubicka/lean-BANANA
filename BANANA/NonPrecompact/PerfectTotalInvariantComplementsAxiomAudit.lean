@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.PerfectTotalInvariantComplements
+
+/-!
+# Transitive axiom audit: invariant perfect-system complements
+-/
+
+#print axioms SuccessorTree.NonPrecompact.perfectPair_leftAnnihilator_invariant
+#print axioms SuccessorTree.NonPrecompact.perfectPair_rightAnnihilator_invariant
+#print axioms SuccessorTree.NonPrecompact.perfectPair_leftAnnihilator_invariant_of_total
+#print axioms SuccessorTree.NonPrecompact.perfectPair_rightAnnihilator_invariant_of_total
