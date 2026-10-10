@@ -83,7 +83,6 @@ theorem prebananaGridPartB_surjective
   change (((prebananaGridIndexEquiv f g)
     ((prebananaGridIndexEquiv f g).symm p)).2.1.1) = b
   rw [Equiv.apply_symm_apply]
-  rfl
 
 theorem prebananaGridPartC_surjective
     {A B C : PrebananaAtomStructure}
@@ -98,7 +97,6 @@ theorem prebananaGridPartC_surjective
   change (((prebananaGridIndexEquiv f g)
     ((prebananaGridIndexEquiv f g).symm p)).2.2.1) = c
   rw [Equiv.apply_symm_apply]
-  rfl
 
 /-- The two Boolean subalgebras of the compatible grid have exactly
 the common A-image as intersection. This statement works even for
@@ -120,7 +118,12 @@ theorem prebananaGrid_exact_common_subsets
     f.part g.part f.part_surjective g.part_surjective SB SC
   intro p
   have hp := h ((prebananaGridIndexEquiv f g).symm p)
-  simpa only [prebananaGridPartB, prebananaGridPartC,
-    Equiv.apply_symm_apply] using hp
+  change
+    (((prebananaGridIndexEquiv f g)
+      ((prebananaGridIndexEquiv f g).symm p)).2.1.1 ∈ SB ↔
+      ((prebananaGridIndexEquiv f g)
+      ((prebananaGridIndexEquiv f g).symm p)).2.2.1 ∈ SC) at hp
+  rw [Equiv.apply_symm_apply] at hp
+  exact hp
 
 end SuccessorTree.NonPrecompact
