@@ -73,4 +73,27 @@ theorem prebananaIndexedGrid_total_zero
         f.part_surjective g.part_surjective
         B.mark C.mark hB
 
+/-- The fully reindexed fibre product is a genuine finite pre-BANANA
+atom structure. The two projection maps are not yet supplied with
+proofs that their individual fibres have the prescribed parities. -/
+noncomputable def prebananaGridMarkedStructure
+    {A B C : PrebananaAtomStructure}
+    (f : PrebananaAtomEmbedding A B)
+    (g : PrebananaAtomEmbedding A C) : PrebananaAtomStructure where
+  atomCount := Fintype.card (FiberGrid f.part g.part)
+  atomCount_pos := by
+    classical
+    apply Fintype.card_pos_iff.mpr
+    let b := B.zeroAtom
+    obtain ⟨c, hc⟩ := g.part_surjective (f.part b)
+    exact ⟨⟨f.part b, (⟨b, rfl⟩, ⟨c, hc⟩)⟩⟩
+  mark := fun i =>
+    fiberGridMark f.part g.part
+      f.part_surjective g.part_surjective B.mark C.mark
+      ((Fintype.equivFin (FiberGrid f.part g.part)).symm i)
+  total_mark_parity := by
+    classical
+    exact prebananaIndexedGrid_total_zero f g
+      ((Fintype.equivFin (FiberGrid f.part g.part)).symm)
+
 end SuccessorTree.NonPrecompact
