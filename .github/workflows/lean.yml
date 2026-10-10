@@ -48,6 +48,21 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaGridTotalAxiomAudit.lean
 
+      - name: Check pre-BANANA compatible fibre-grid marginals
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGridMarginalsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGridMarginalsAxiomAudit.lean
+
+      - name: Check finite pre-BANANA atom grid reindexing
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGridReindexAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGridReindexAxiomAudit.lean
+
+      - name: Check finite pre-BANANA codes and base embeddings
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteClassAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteClassAxiomAudit.lean
+
       - name: Check parity of reindexed pre-BANANA atom grid
         run: |
           lake build BANANA.NonPrecompact.PrebananaIndexedParityAxiomAudit
