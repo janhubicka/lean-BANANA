@@ -197,6 +197,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaFinitePartialSystemsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaFinitePartialSystemsAxiomAudit.lean
 
+      - name: Check cofinal transfer of JEP and WAP for BANANA n-systems
+        run: |
+          lake build BANANA.NonPrecompact.BananaFiniteSystemCofinalTransferAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaFiniteSystemCofinalTransferAxiomAudit.lean
+
       - name: Check finite hereditary and joint embedding properties
         run: |
           lake build BANANA.NonPrecompact.BananaFiniteFraissePropertiesAxiomAudit
