@@ -41,13 +41,13 @@ def PrebananaAtomStructure.fromZeroBase (B : PrebananaAtomStructure) :
   fibre_nonempty := by
     intro a
     refine ⟨B.zeroAtom, ?_⟩
-    have ha : a = 0 := Subsingleton.elim _ _
-    subst a
+    change Fin 1 at a
+    fin_cases a
     simp [prebananaFiber]
   fibre_mark_parity := by
     intro a
-    have ha : a = 0 := Subsingleton.elim _ _
-    subst a
+    change Fin 1 at a
+    fin_cases a
     simpa [prebananaZeroBase, prebananaUnmarked, prebananaFiber] using
       B.total_mark_parity
 
