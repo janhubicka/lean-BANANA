@@ -52,12 +52,13 @@ theorem bananaPerfectTriple_left_first
     (bananaPerfectTripleAutomorphism fA fB fC).left
       (Fin.append x (0 : Fin (b + c) → F2)) =
       Fin.append (fA x) (0 : Fin (b + c) → F2) := by
-  change bananaPerfectTripleLeft fA fB fC
+  change
+    (BananaMatrixStructure.directSumLinearEquiv fA
+      (BananaMatrixStructure.directSumLinearEquiv fB fC))
       (Fin.append x (0 : Fin (b + c) → F2)) = _
-  simp [bananaPerfectTripleLeft,
-    BananaMatrixStructure.directSumLinearEquiv_apply,
-    BananaMatrixStructure.finLeftPart,
-    BananaMatrixStructure.finRightPart]
+  rw [BananaMatrixStructure.directSumLinearEquiv_apply]
+  simp only [BananaMatrixStructure.finLeftPart_append,
+    BananaMatrixStructure.finRightPart_append, map_zero]
 
 /-- The left action has the specified restriction to the second block. -/
 theorem bananaPerfectTriple_left_second
