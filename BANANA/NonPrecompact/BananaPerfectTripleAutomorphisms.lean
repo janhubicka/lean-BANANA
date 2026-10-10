@@ -55,7 +55,9 @@ theorem bananaPerfectTriple_left_first
   change bananaPerfectTripleLeft fA fB fC
       (Fin.append x (0 : Fin (b + c) → F2)) = _
   simp [bananaPerfectTripleLeft,
-    BananaMatrixStructure.directSumLinearEquiv_apply]
+    BananaMatrixStructure.directSumLinearEquiv_apply,
+    BananaMatrixStructure.finLeftPart,
+    BananaMatrixStructure.finRightPart]
 
 /-- The left action has the specified restriction to the second block. -/
 theorem bananaPerfectTriple_left_second
