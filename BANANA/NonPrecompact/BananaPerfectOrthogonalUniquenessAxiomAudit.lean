@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.BananaPerfectOrthogonalUniqueness
+
+/-!
+# Axiom audit: directness of orthogonal perfect-pair decompositions
+-/
+
+#print axioms SuccessorTree.NonPrecompact.perfectPair_left_annihilator_projection_zero
+#print axioms SuccessorTree.NonPrecompact.perfectPair_right_annihilator_projection_zero
+#print axioms SuccessorTree.NonPrecompact.perfectPair_left_orthogonal_decomposition_unique
+#print axioms SuccessorTree.NonPrecompact.perfectPair_right_orthogonal_decomposition_unique
