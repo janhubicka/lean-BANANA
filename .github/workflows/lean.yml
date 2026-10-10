@@ -68,6 +68,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaPerfectTotalEquivariantDiagramAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaPerfectTotalEquivariantDiagramAxiomAudit.lean
 
+      - name: Check total pairing automorphism families extend to one perfect completion
+        run: |
+          lake build BANANA.NonPrecompact.BananaTotalFamilyPerfectCompletionAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaTotalFamilyPerfectCompletionAxiomAudit.lean
+
       - name: Check complete arbitrary BANANA strong amalgamation
         run: |
           lake build BANANA.NonPrecompact.BananaTriplePairingAxiomAudit
