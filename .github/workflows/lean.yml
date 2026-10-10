@@ -293,6 +293,11 @@ jobs:
       - name: Regress orthogonal complements of finite perfect pairings
         run: python3 scripts/check_perfect_orthogonal_complements_small.py
 
+      - name: Check canonical block-diagonalisation of perfect-total systems
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectTotalBlockDiagonalAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectTotalBlockDiagonalAxiomAudit.lean
+
       - name: Check perfect-system automorphisms on orthogonal complements
         run: |
           lake build BANANA.NonPrecompact.PerfectTotalComplementEquivAxiomAudit
