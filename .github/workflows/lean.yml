@@ -202,6 +202,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaArbitraryAmalgamToolsAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaArbitraryAmalgamToolsAxiomAudit.lean
 
+      - name: Check pointwise finite-GL approximation of BANANA automorphisms
+        run: |
+          lake build BANANA.NonPrecompact.BananaLimitFiniteGLDensityAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaLimitFiniteGLDensityAxiomAudit.lean
+
       - name: Check finite GL approximants of embedded BANANA structures
         run: |
           lake build BANANA.NonPrecompact.BananaLimitFiniteGLApproximationAxiomAudit

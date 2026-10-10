@@ -86,6 +86,7 @@ import BANANA.NonPrecompact.PerfectHomogeneity
 import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.BananaLimitFiniteGLAction
 import BANANA.NonPrecompact.BananaLimitFiniteGLApproximation
+import BANANA.NonPrecompact.BananaLimitFiniteGLDensity
 import BANANA.NonPrecompact.PerfectLeftRange
 import BANANA.NonPrecompact.PerfectSelfEmbedding
 import BANANA.NonPrecompact.PersistentColourings
