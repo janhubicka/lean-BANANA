@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check pre-BANANA fibre-grid total parity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGridTotalAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
