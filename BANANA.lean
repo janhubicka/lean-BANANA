@@ -4,6 +4,7 @@ import BANANA.NonPrecompact.BananaAmalgam
 import BANANA.NonPrecompact.BananaStrongBlockAmalgam
 import BANANA.NonPrecompact.BananaArbitraryAmalgamTools
 import BANANA.NonPrecompact.BananaTriplePairing
+import BANANA.NonPrecompact.BananaEquivariantTripleAmalgam
 import BANANA.NonPrecompact.BananaDirectSum
 import BANANA.NonPrecompact.BananaFiniteFraisseProperties
 import BANANA.NonPrecompact.BananaFiniteCountability
