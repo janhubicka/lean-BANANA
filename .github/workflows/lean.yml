@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check canonical BANANA zero-base amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.BananaDirectSumCanonicalAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaDirectSumCanonicalAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
