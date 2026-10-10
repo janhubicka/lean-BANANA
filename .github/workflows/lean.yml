@@ -43,6 +43,9 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Regress mixed-sort tuple signatures against exact finite orbits
+        run: python3 scripts/check_banana_mixed_tuples.py
+
       - name: Check mixed-sort BANANA tuple oligomorphicity
         run: |
           lake build BANANA.NonPrecompact.BananaLimitMixedTupleOrbitsAxiomAudit
