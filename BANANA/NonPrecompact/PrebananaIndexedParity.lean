@@ -30,10 +30,9 @@ theorem prebananaMarkedCount_reindex_eq_sum
       ∑ x : ι, mark x := by
   classical
   rw [prebananaMarkedCount_cast_eq_sum]
-  simpa only [Finset.sum_univ] using
-    (Fintype.sum_equiv e
-      (fun i : Fin (Fintype.card ι) => mark (e i))
-      mark (fun i => rfl))
+  exact Fintype.sum_equiv e
+    (fun i : Fin (Fintype.card ι) => mark (e i))
+    mark (fun i => rfl)
 
 /-- An indexed compatible fibre-product grid has even marking.
 The row and column requirements are *not* asserted by this
