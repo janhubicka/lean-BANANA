@@ -36,6 +36,7 @@ import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BananaFinitePartialSystems
 import BANANA.NonPrecompact.BananaFiniteSystemPerfectTotalCofinality
+import BANANA.NonPrecompact.BananaStandardPerfectSystems
 import BANANA.NonPrecompact.BananaFiniteSystemCofinalTransfer
 import BANANA.NonPrecompact.BilinearResidue
 import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
