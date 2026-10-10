@@ -47,6 +47,7 @@ import BANANA.NonPrecompact.Completion
 import BANANA.NonPrecompact.CompletionAmbientAction
 import BANANA.NonPrecompact.BananaPerfectTripleAutomorphisms
 import BANANA.NonPrecompact.BananaPerfectSplitSystemActions
+import BANANA.NonPrecompact.BananaPerfectSplitSystemEmbeddings
 import BANANA.NonPrecompact.CompletionAutomorphism
 import BANANA.NonPrecompact.CompletionAutomorphismHom
 import BANANA.NonPrecompact.CompletionPersistence
