@@ -225,6 +225,11 @@ jobs:
           lake build BANANA.NonPrecompact.BananaLimitOutsideLargerBlockAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaLimitOutsideLargerBlockAxiomAudit.lean
 
+      - name: Check simultaneous amalgamation of split perfect n-systems
+        run: |
+          lake build BANANA.NonPrecompact.BananaPerfectTotalSplitSystemsAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaPerfectTotalSplitSystemsAxiomAudit.lean
+
       - name: Check split perfect-total system embeddings
         run: |
           lake build BANANA.NonPrecompact.BananaPerfectSplitSystemEmbeddingsAxiomAudit
