@@ -48,6 +48,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaGridTotalAxiomAudit.lean
 
+      - name: Check pre-BANANA compatible fibre-grid marginals
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGridMarginalsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGridMarginalsAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
