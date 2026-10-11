@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check surjective atom partitions of finite powerset embeddings
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaPowersetMapPartitionsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaPowersetMapPartitionsAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
