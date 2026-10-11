@@ -15,6 +15,8 @@ This is the abstract side of the converse atom-partition theorem.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical
+
 /-- Conjugate a map of finite Boolean algebras by their canonical
 order isomorphisms to finite powersets of atoms. -/
 noncomputable def prebananaAbstractPowersetMap
