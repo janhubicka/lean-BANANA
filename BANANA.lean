@@ -177,3 +177,4 @@ import BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodes
 import BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisation
 import BANANA.NonPrecompact.PrebananaFiniteJEP
 import BANANA.NonPrecompact.BananaLimitMixedTupleOrbits
+import BANANA.NonPrecompact.PrebananaBooleanTerms
