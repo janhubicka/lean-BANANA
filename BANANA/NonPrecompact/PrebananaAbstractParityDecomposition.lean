@@ -112,6 +112,6 @@ theorem prebananaAbstractParity_total_even
     ∑ a ∈ e (⊤ : α),
       μ (e.symm ({a} : Finset (PrebananaAbstractAtoms α))) at hsum
   rw [htop, he_top] at hsum
-  simpa only [Finset.sum_univ] using hsum.symm
+  simpa using hsum.symm
 
 end SuccessorTree.NonPrecompact
