@@ -144,6 +144,7 @@ import BANANA.NonPrecompact.PrebananaAbstractMarkedPartitions
 import BANANA.NonPrecompact.PrebananaAbstractParityDecomposition
 import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 import BANANA.NonPrecompact.PrebananaAbstractCodeParity
+import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
