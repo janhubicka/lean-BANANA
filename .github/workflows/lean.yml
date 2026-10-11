@@ -88,6 +88,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractCodeEquivalenceAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractCodeEquivalenceAxiomAudit.lean
 
+      - name: Check strong intersection transfer to abstract carriers
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractStrongIntersectionTransferAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongIntersectionTransferAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
