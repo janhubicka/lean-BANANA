@@ -73,11 +73,10 @@ theorem prebananaEncodedBooleanMap_naturality
         (Finset.univ :
           Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
-    ext j
-    simp only [prebananaBooleanMap, Finset.mem_filter,
-      Finset.mem_univ, true_and]
+    unfold prebananaBooleanMap
+    apply Finset.filter_congr
+    intro j hj
     rw [hpart j]
-    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
