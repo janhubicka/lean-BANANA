@@ -83,6 +83,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaReindexPartitionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaReindexPartitionAxiomAudit.lean
 
+      - name: Check bijective abstract Boolean element code
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractCodeEquivalenceAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractCodeEquivalenceAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
