@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.PrebananaPowersetMapPartitions
 import BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMap
 import BANANA.NonPrecompact.PrebananaAbstractParityDecomposition
+import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 
 /-!
 # The atom partition of an arbitrary finite Boolean embedding
@@ -117,5 +118,39 @@ theorem prebananaAbstractEmbedding_exists_markedAtomPartition
       hsum.symm
     _ = μA (eA.symm ({a} : Finset (PrebananaAbstractAtoms α))) :=
       hmark _
+
+/-- In the original finite Boolean algebras the marking is literally
+the sum of the marking values at the target atoms in each source
+fibre. This removes the singleton-representative abstraction. -/
+theorem prebananaAbstractEmbedding_exists_literalMarkedAtomPartition
+    (α β : Type*)
+    [BooleanAlgebra α] [Fintype α]
+    [BooleanAlgebra β] [Fintype β]
+    (μA : α → F2) (μB : β → F2)
+    (hzeroB : μB ⊥ = 0)
+    (haddB : ∀ x y : β, x ⊓ y = ⊥ →
+      μB (x ⊔ y) = μB x + μB y)
+    (φ : α → β)
+    (hinj : Function.Injective φ)
+    (hbot : φ ⊥ = ⊥)
+    (htop : φ ⊤ = ⊤)
+    (hsup : ∀ x y : α, φ (x ⊔ y) = φ x ⊔ φ y)
+    (hinf : ∀ x y : α, φ (x ⊓ y) = φ x ⊓ φ y)
+    (hmark : ∀ x : α, μB (φ x) = μA x) :
+    ∃ part : PrebananaAbstractAtoms β → PrebananaAbstractAtoms α,
+      Function.Surjective part ∧
+      (∀ s : Finset (PrebananaAbstractAtoms α),
+        prebananaAbstractPowersetMap φ s =
+          Finset.univ.filter (fun b => part b ∈ s)) ∧
+      (∀ a : PrebananaAbstractAtoms α,
+        (∑ b ∈ (Finset.univ : Finset (PrebananaAbstractAtoms β)).filter
+          (fun b => part b = a), μB (b : β)) = μA (a : α)) := by
+  obtain ⟨part, hsurj, hpart, hmark_fibre⟩ :=
+    prebananaAbstractEmbedding_exists_markedAtomPartition
+      α β μA μB hzeroB haddB φ hinj hbot htop hsup hinf hmark
+  refine ⟨part, hsurj, hpart, ?_⟩
+  intro a
+  simpa only [prebananaFiniteBoolean_singleton_represents_atom] using
+    (hmark_fibre a)
 
 end SuccessorTree.NonPrecompact
