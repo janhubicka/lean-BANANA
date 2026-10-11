@@ -74,12 +74,13 @@ theorem prebananaEncodedBooleanMap_naturality
           Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
     classical
-    -- Compare the two filters directly, so their binders acquire the
-    -- same explicit Fin-index type before the atom-part equality is used.
-    unfold prebananaBooleanMap
-    apply Finset.filter_congr
-    intro j _
-    rw [hpart j]
+    -- Comparing the atom-partition *functions* avoids the implicit
+    -- Fin-index instance ambiguity in a predicate-level filter proof.
+    have hPartFun :
+        f.part = prebananaReindexedPart eA eB part := by
+      funext j
+      exact hpart j
+    simpa only [prebananaBooleanMap, hPartFun]
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
