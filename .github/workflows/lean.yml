@@ -143,6 +143,16 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaBooleanTermsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaBooleanTermsAxiomAudit.lean
 
+      - name: Check naturality of abstract coded Boolean embeddings
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractEncodedNaturalityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractEncodedNaturalityAxiomAudit.lean
+
+      - name: Check full algebraic pre-BANANA strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractStrongAmalgamationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAmalgamationAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit

@@ -177,5 +177,7 @@ import BANANA.NonPrecompact.PrebananaCodedStrongAmalgam
 import BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodes
 import BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisation
 import BANANA.NonPrecompact.PrebananaFiniteJEP
+import BANANA.NonPrecompact.PrebananaAbstractEncodedNaturality
+import BANANA.NonPrecompact.PrebananaAbstractStrongAmalgamation
 import BANANA.NonPrecompact.BananaLimitMixedTupleOrbits
 import BANANA.NonPrecompact.PrebananaBooleanTerms
