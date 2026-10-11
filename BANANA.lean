@@ -140,6 +140,7 @@ import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
 import BANANA.NonPrecompact.PrebananaPowersetMapPartitions
 import BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMap
 import BANANA.NonPrecompact.PrebananaAbstractParityDecomposition
+import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
