@@ -169,3 +169,4 @@ import BANANA.NonPrecompact.SubsetSums
 import BANANA.NonPrecompact.SymplecticAmalgam
 import BANANA.NonPrecompact.SymplecticQuadraticPolar
 import BANANA.NonPrecompact.SymplecticSlice
+import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
