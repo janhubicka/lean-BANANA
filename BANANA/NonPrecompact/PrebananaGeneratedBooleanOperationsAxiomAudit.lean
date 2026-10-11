@@ -1,0 +1,11 @@
+import BANANA.NonPrecompact.PrebananaGeneratedBooleanOperations
+
+/-! Kernel audit for the generated marked Boolean subalgebra isomorphism interfaces. -/
+
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_of_term
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_zero
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_one
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_generator
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_complement
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_join
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedRangeEquiv_meet
