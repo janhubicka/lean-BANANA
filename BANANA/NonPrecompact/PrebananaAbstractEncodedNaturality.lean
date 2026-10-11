@@ -74,6 +74,14 @@ theorem prebananaEncodedBooleanMap_naturality
           Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
     classical
+    -- The original filter uses the canonical finite-set membership
+    -- decision procedure. Pin the same DecidablePred instance in the
+    -- proof, rather than allowing Classical.propDecidable to be
+    -- synthesised when applying the filter-membership lemma.
+    letI : DecidablePred
+        (fun j : Fin (Fintype.card (PrebananaAbstractAtoms β)) =>
+          prebananaReindexedPart eA eB part j ∈ S) :=
+      fun j => Finset.decidableMem (prebananaReindexedPart eA eB part j) S
     -- Unfold the concrete finite atom-count projection in the embedding
     -- type, avoiding semireducible index mismatch in membership rewriting.
     dsimp only [prebananaAbstractAtomCode] at f
