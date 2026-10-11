@@ -136,6 +136,7 @@ import BANANA.NonPrecompact.PrebananaGridStrongAmalgam
 import BANANA.NonPrecompact.PrebananaPowersetBridge
 import BANANA.NonPrecompact.PrebananaPowersetStrongAmalgam
 import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
+import BANANA.NonPrecompact.PrebananaPowersetMapPartitions
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
