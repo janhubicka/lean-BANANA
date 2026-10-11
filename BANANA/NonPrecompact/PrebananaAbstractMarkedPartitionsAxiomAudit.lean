@@ -4,3 +4,4 @@ import BANANA.NonPrecompact.PrebananaAbstractMarkedPartitions
 
 #print axioms SuccessorTree.NonPrecompact.prebananaAbstractEmbedding_exists_atomPartition
 #print axioms SuccessorTree.NonPrecompact.prebananaAbstractEmbedding_exists_markedAtomPartition
+#print axioms SuccessorTree.NonPrecompact.prebananaAbstractEmbedding_exists_literalMarkedAtomPartition
