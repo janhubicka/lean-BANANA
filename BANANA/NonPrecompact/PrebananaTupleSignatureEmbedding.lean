@@ -83,8 +83,11 @@ theorem prebananaSignatureMark_booleanMap
           pattern) =
       prebananaBooleanMap f support := by
     ext b
-    simp [prebananaBooleanMap, support,
-      prebananaAtomSignature_booleanMap f tuple b]
+    simp only [prebananaBooleanMap, support, Finset.mem_filter,
+      Finset.mem_univ, true_and]
+    have hsig := prebananaAtomSignature_booleanMap f tuple b
+    simp only [prebananaBooleanMap] at hsig
+    rw [hsig]
   change
     (∑ b ∈ (Finset.univ : Finset (Fin B.atomCount)).filter
       (fun b =>
