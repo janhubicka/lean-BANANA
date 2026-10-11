@@ -24,7 +24,7 @@ namespace SuccessorTree.NonPrecompact
 inductive PrebananaBooleanTerm (n : ℕ) : Type where
   | zero : PrebananaBooleanTerm n
   | one : PrebananaBooleanTerm n
-  | variable : Fin n → PrebananaBooleanTerm n
+  | generator : Fin n → PrebananaBooleanTerm n
   | complement : PrebananaBooleanTerm n → PrebananaBooleanTerm n
   | join : PrebananaBooleanTerm n → PrebananaBooleanTerm n → PrebananaBooleanTerm n
   | meet : PrebananaBooleanTerm n → PrebananaBooleanTerm n → PrebananaBooleanTerm n
@@ -35,7 +35,7 @@ def PrebananaBooleanTerm.evalSet
     (tuple : Fin n → Finset ι) : PrebananaBooleanTerm n → Finset ι
   | .zero => ∅
   | .one => Finset.univ
-  | .variable i => tuple i
+  | .generator i => tuple i
   | .complement t => Finset.univ \ evalSet tuple t
   | .join t u => evalSet tuple t ∪ evalSet tuple u
   | .meet t u => evalSet tuple t ∩ evalSet tuple u
@@ -45,7 +45,7 @@ def PrebananaBooleanTerm.evalPattern
     {n : ℕ} (pattern : Fin n → Bool) : PrebananaBooleanTerm n → Bool
   | .zero => false
   | .one => true
-  | .variable i => pattern i
+  | .generator i => pattern i
   | .complement t => !(evalPattern pattern t)
   | .join t u => evalPattern pattern t || evalPattern pattern u
   | .meet t u => evalPattern pattern t && evalPattern pattern u
@@ -64,7 +64,7 @@ theorem PrebananaBooleanTerm.mem_evalSet_iff_pattern
       simp [evalSet, evalPattern]
   | one =>
       simp [evalSet, evalPattern]
-  | variable i =>
+  | generator i =>
       simpa [evalSet, evalPattern] using
         (prebananaAtomSignature_apply_true_iff A tuple a i).symm
   | complement t ih =>
