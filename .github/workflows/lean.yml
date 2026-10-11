@@ -133,6 +133,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaTupleSignaturesAxiomAudit.lean
 
+      - name: Check pre-BANANA tuple signature invariance under embeddings
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaTupleSignatureEmbeddingAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaTupleSignatureEmbeddingAxiomAudit.lean
+
       - name: Check mixed-sort tuple orbit representatives
         run: |
           lake build BANANA.NonPrecompact.BananaLimitMixedTupleOrbitsAxiomAudit
