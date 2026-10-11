@@ -148,6 +148,7 @@ import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 import BANANA.NonPrecompact.PrebananaAbstractCodeParity
 import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaTupleSignatures
+import BANANA.NonPrecompact.PrebananaBooleanTerms
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
