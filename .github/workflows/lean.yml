@@ -83,6 +83,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanRepresentationAxiomAudit.lean
 
+      - name: Audit abstract finite Boolean parity decomposition
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractParityDecompositionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractParityDecompositionAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
