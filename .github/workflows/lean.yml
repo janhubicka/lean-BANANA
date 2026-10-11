@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check arbitrary finite Boolean parity atom code
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractAtomCodesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractAtomCodesAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
