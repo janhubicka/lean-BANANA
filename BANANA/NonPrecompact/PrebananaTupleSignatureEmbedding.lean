@@ -60,4 +60,68 @@ theorem prebananaRealisedSignatures_booleanMap
     rw [prebananaAtomSignature_booleanMap f tuple b, hb]
     exact ha
 
+/-- Parities of every tuple-membership-pattern fibre are preserved
+by marked Boolean embeddings, not just the realised signatures. -/
+theorem prebananaSignatureMark_booleanMap
+    {A B : PrebananaAtomStructure}
+    (f : PrebananaAtomEmbedding A B)
+    {n : ℕ}
+    (tuple : Fin n → Finset (Fin A.atomCount))
+    (pattern : Fin n → Bool) :
+    prebananaSignatureMark B
+      (fun i => prebananaBooleanMap f (tuple i)) pattern =
+      prebananaSignatureMark A tuple pattern := by
+  classical
+  let support : Finset (Fin A.atomCount) :=
+    Finset.univ.filter
+      (fun a => prebananaAtomSignature A tuple a = pattern)
+  have hSupport :
+      (Finset.univ : Finset (Fin B.atomCount)).filter
+        (fun b =>
+          prebananaAtomSignature B
+            (fun i => prebananaBooleanMap f (tuple i)) b =
+          pattern) =
+      prebananaBooleanMap f support := by
+    ext b
+    simp [prebananaBooleanMap, support,
+      prebananaAtomSignature_booleanMap f tuple b]
+  change
+    (∑ b ∈ (Finset.univ : Finset (Fin B.atomCount)).filter
+      (fun b =>
+        prebananaAtomSignature B
+          (fun i => prebananaBooleanMap f (tuple i)) b = pattern),
+      B.mark b) =
+    ∑ a ∈ (Finset.univ : Finset (Fin A.atomCount)).filter
+      (fun a => prebananaAtomSignature A tuple a = pattern), A.mark a
+  rw [hSupport]
+  change
+    (∑ b ∈ prebananaBooleanMap f support, B.mark b) =
+      ∑ a ∈ support, A.mark a
+  calc
+    (∑ b ∈ prebananaBooleanMap f support, B.mark b) =
+        prebananaBooleanParity B (prebananaBooleanMap f support) := by
+          exact (prebananaMarkedCount_cast_eq_sum B.mark
+            (prebananaBooleanMap f support)).symm
+    _ = prebananaBooleanParity A support :=
+          prebananaBooleanMap_parity f support
+    _ = ∑ a ∈ support, A.mark a :=
+          prebananaMarkedCount_cast_eq_sum A.mark support
+
+/-- The complete finite tuple profile is invariant under every
+pre-BANANA marked Boolean embedding. This is a finite algebraic
+statement and does not itself prove orbit classification. -/
+theorem prebananaTupleProfile_booleanMap
+    {A B : PrebananaAtomStructure}
+    (f : PrebananaAtomEmbedding A B)
+    {n : ℕ}
+    (tuple : Fin n → Finset (Fin A.atomCount)) :
+    prebananaTupleProfile B
+        (fun i => prebananaBooleanMap f (tuple i)) =
+      prebananaTupleProfile A tuple := by
+  classical
+  apply Prod.ext
+  · exact prebananaRealisedSignatures_booleanMap f tuple
+  · funext pattern
+    exact prebananaSignatureMark_booleanMap f tuple pattern
+
 end SuccessorTree.NonPrecompact
