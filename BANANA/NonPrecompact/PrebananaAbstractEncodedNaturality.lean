@@ -77,6 +77,7 @@ theorem prebananaEncodedBooleanMap_naturality
     simp only [prebananaBooleanMap, Finset.mem_filter,
       Finset.mem_univ, true_and]
     rw [hpart j]
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
