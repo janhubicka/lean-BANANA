@@ -134,6 +134,7 @@ import BANANA.NonPrecompact.PrebananaGridProjections
 import BANANA.NonPrecompact.PrebananaGridFibreEquivs
 import BANANA.NonPrecompact.PrebananaGridMarkedEmbeddings
 import BANANA.NonPrecompact.PrebananaGridStrongAmalgam
+import BANANA.NonPrecompact.PrebananaFiniteJEP
 import BANANA.NonPrecompact.PrebananaPowersetBridge
 import BANANA.NonPrecompact.PrebananaMarkedPowersetFibre
 import BANANA.NonPrecompact.PrebananaPowersetStrongAmalgam
