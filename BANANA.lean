@@ -153,6 +153,7 @@ import BANANA.NonPrecompact.PrebananaTupleSignatureEmbedding
 import BANANA.NonPrecompact.PrebananaTupleTermEqualities
 import BANANA.NonPrecompact.PrebananaTupleTermParity
 import BANANA.NonPrecompact.PrebananaGeneratedTermRange
+import BANANA.NonPrecompact.PrebananaGeneratedProfileEquiv
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
