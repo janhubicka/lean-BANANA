@@ -75,16 +75,12 @@ theorem prebananaEncodedBooleanMap_naturality
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
     classical
     ext j
-    have hleft : j ∈ prebananaBooleanMap f S ↔ f.part j ∈ S := by
-      simp [prebananaBooleanMap]
-    have hright :
-        j ∈
-          ((Finset.univ :
-            Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
-            (fun t => prebananaReindexedPart eA eB part t ∈ S)) ↔
-        prebananaReindexedPart eA eB part j ∈ S := by
-      simp
-    rw [hleft, hright, hpart j]
+    -- Preserve the definally equal atom-index types until after
+    -- changing the membership goal, avoiding elaborator transparency
+    -- failures in the two intermediate `simp` lemmas.
+    change (f.part j ∈ S) ↔
+      (prebananaReindexedPart eA eB part j ∈ S)
+    rw [hpart j]
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
