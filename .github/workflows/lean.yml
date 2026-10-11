@@ -133,6 +133,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaTupleSignaturesAxiomAudit.lean
 
+      - name: Check all Boolean-term equations are classified by tuple profiles
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaTupleTermEqualitiesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaTupleTermEqualitiesAxiomAudit.lean
+
       - name: Check pre-BANANA tuple signature invariance under embeddings
         run: |
           lake build BANANA.NonPrecompact.PrebananaTupleSignatureEmbeddingAxiomAudit
