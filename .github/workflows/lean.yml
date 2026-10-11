@@ -73,6 +73,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaGridStrongAmalgamAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaGridStrongAmalgamAxiomAudit.lean
 
+      - name: Audit finite Boolean powerset strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaPowersetStrongAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaPowersetStrongAmalgamAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
