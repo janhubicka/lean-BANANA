@@ -134,10 +134,11 @@ import BANANA.NonPrecompact.PrebananaGridProjections
 import BANANA.NonPrecompact.PrebananaGridFibreEquivs
 import BANANA.NonPrecompact.PrebananaGridMarkedEmbeddings
 import BANANA.NonPrecompact.PrebananaGridStrongAmalgam
-import BANANA.NonPrecompact.PrebananaFiniteJEP
 import BANANA.NonPrecompact.PrebananaPowersetBridge
+import BANANA.NonPrecompact.PrebananaCodedBooleanEmbedding
 import BANANA.NonPrecompact.PrebananaMarkedPowersetFibre
 import BANANA.NonPrecompact.PrebananaPowersetStrongAmalgam
+import BANANA.NonPrecompact.PrebananaAbstractStrongIntersectionTransfer
 import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
 import BANANA.NonPrecompact.PrebananaPowersetMapPartitions
 import BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMap
@@ -168,3 +169,9 @@ import BANANA.NonPrecompact.SubsetSums
 import BANANA.NonPrecompact.SymplecticAmalgam
 import BANANA.NonPrecompact.SymplecticQuadraticPolar
 import BANANA.NonPrecompact.SymplecticSlice
+import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
+import BANANA.NonPrecompact.PrebananaAbstractCodeOperations
+import BANANA.NonPrecompact.PrebananaCodedStrongAmalgam
+import BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodes
+import BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisation
+import BANANA.NonPrecompact.PrebananaFiniteJEP
