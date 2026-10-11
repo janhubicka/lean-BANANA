@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
+
+/-! Transitive axiom audit of the finite Boolean-algebra representation. -/
+
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomSetOrderIso
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomSet_mem_iff
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetEquiv
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetEquiv_injective
