@@ -118,6 +118,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaCanonicalFaithfulCodesAxiomAudit.lean
 
+      - name: Check abstract pre-BANANA strong AP specialised to canonical codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAPSpecialisationAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit

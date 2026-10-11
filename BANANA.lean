@@ -173,3 +173,4 @@ import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
 import BANANA.NonPrecompact.PrebananaAbstractCodeOperations
 import BANANA.NonPrecompact.PrebananaCodedStrongAmalgam
 import BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodes
+import BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisation
