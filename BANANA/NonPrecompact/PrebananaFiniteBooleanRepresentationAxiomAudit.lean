@@ -6,3 +6,7 @@ import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
 #print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomSet_mem_iff
 #print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetEquiv
 #print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetEquiv_injective
+
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetOrderIso
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetOrderIso_sup
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteBooleanAtomFinsetOrderIso_inf
