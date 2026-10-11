@@ -44,7 +44,8 @@ theorem prebananaBooleanTerm_evalParity_eq_profile_sum
         ext a
         constructor
         · intro ha
-          exact (Finset.mem_filter.mp ha).2
+          exact Finset.mem_filter.mpr
+            ⟨Finset.mem_univ _, (Finset.mem_filter.mp ha).2⟩
         · intro ha
           have hs : sig a = p := (Finset.mem_filter.mp ha).2
           have heval : a ∈ t.evalSet tuple :=
