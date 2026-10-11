@@ -71,4 +71,29 @@ theorem prebananaGridPart_commute
   change f.part p.2.1.1 = g.part p.2.2.1
   exact p.2.1.2.trans p.2.2.2.symm
 
+
+/-- Every B atom has a nonempty fibre in the grid atom partition. -/
+theorem prebananaGridLeftPart_fibre_nonempty
+    {A B C : PrebananaAtomStructure}
+    (f : PrebananaAtomEmbedding A B)
+    (g : PrebananaAtomEmbedding A C)
+    (b : Fin B.atomCount) :
+    (prebananaFiber (prebananaGridLeftPart f g) b).Nonempty := by
+  classical
+  obtain ⟨i, hi⟩ := prebananaGridLeftPart_surjective f g b
+  refine ⟨i, ?_⟩
+  simp [prebananaFiber, hi]
+
+/-- Every C atom has a nonempty fibre in the grid atom partition. -/
+theorem prebananaGridRightPart_fibre_nonempty
+    {A B C : PrebananaAtomStructure}
+    (f : PrebananaAtomEmbedding A B)
+    (g : PrebananaAtomEmbedding A C)
+    (c : Fin C.atomCount) :
+    (prebananaFiber (prebananaGridRightPart f g) c).Nonempty := by
+  classical
+  obtain ⟨i, hi⟩ := prebananaGridRightPart_surjective f g c
+  refine ⟨i, ?_⟩
+  simp [prebananaFiber, hi]
+
 end SuccessorTree.NonPrecompact
