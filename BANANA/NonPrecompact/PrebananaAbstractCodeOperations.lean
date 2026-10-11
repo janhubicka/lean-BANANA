@@ -54,7 +54,7 @@ theorem prebananaAbstractBooleanCode_sup
   rw [e.map_sup]
   change ((e x ∪ e y).image a.symm) =
     (e x).image a.symm ∪ (e y).image a.symm
-  exact Finset.image_union
+  exact Finset.image_union (e x) (e y)
 
 /-- Meets become intersections of abstract-atom index sets. -/
 theorem prebananaAbstractBooleanCode_inf
