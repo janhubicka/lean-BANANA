@@ -19,6 +19,8 @@ translation of arbitrary unital embeddings remain separate steps.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical
+
 /-- Atoms of an arbitrary Boolean algebra, as a subtype. -/
 abbrev PrebananaAbstractAtoms (α : Type*) [BooleanAlgebra α] :=
   {a : α // IsAtom a}
