@@ -108,6 +108,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractCodeOperationsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractCodeOperationsAxiomAudit.lean
 
+      - name: Check faithful finite codes give marked strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaCodedStrongAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaCodedStrongAmalgamAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
