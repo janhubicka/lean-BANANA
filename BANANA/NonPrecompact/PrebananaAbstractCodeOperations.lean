@@ -51,7 +51,10 @@ theorem prebananaAbstractBooleanCode_sup
   let a := prebananaAbstractAtomIndex α
   change ((e (x ⊔ y)).image a.symm) =
     ((e x).image a.symm) ∪ ((e y).image a.symm)
-  rw [e.map_sup, Finset.image_union]
+  rw [e.map_sup]
+  change ((e x ∪ e y).image a.symm) =
+    (e x).image a.symm ∪ (e y).image a.symm
+  exact Finset.image_union
 
 /-- Meets become intersections of abstract-atom index sets. -/
 theorem prebananaAbstractBooleanCode_inf
@@ -66,6 +69,8 @@ theorem prebananaAbstractBooleanCode_inf
   change ((e (x ⊓ y)).image a.symm) =
     ((e x).image a.symm) ∩ ((e y).image a.symm)
   rw [e.map_inf]
+  change ((e x ∩ e y).image a.symm) =
+    (e x).image a.symm ∩ (e y).image a.symm
   exact Finset.image_inter _ _ a.symm.injective
 
 end SuccessorTree.NonPrecompact
