@@ -131,12 +131,9 @@ theorem prebananaBooleanMap_parity
         ((∑ a ∈ s,
           prebananaMarkedCount B.mark
             (prebananaFiber f.part a)) : F2) := by
-        exact congrArg (fun n : ℕ => (n : F2))
-          (prebanana_sum_fiber_markedCount B.mark f.part s).symm
-    _ = ∑ a ∈ s,
-          (prebananaMarkedCount B.mark
-            (prebananaFiber f.part a) : F2) := by
-        simp only [Nat.cast_sum]
+        simpa only [Nat.cast_sum] using
+          congrArg (fun n : ℕ => (n : F2))
+            (prebanana_sum_fiber_markedCount B.mark f.part s).symm
     _ = ∑ a ∈ s, A.mark a := by
         apply Finset.sum_congr rfl
         intro a ha
