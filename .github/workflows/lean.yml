@@ -108,6 +108,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractEncodedNaturalityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractEncodedNaturalityAxiomAudit.lean
 
+      - name: Check full algebraic pre-BANANA strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractStrongAmalgamationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAmalgamationAxiomAudit.lean
+
       - name: Check abstract pre-BANANA strong AP specialised to canonical codes
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisationAxiomAudit
