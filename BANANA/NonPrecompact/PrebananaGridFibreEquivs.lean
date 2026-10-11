@@ -31,7 +31,7 @@ def fiberGridRowSubtypeEquiv
     rcases p with ⟨⟨a, ⟨⟨bb, hb⟩, ⟨cc, hc⟩⟩⟩, heq⟩
     dsimp at heq ⊢
     subst bb
-    subst a
+    cases hb
     rfl
 
 /-- Fixing the right coordinate leaves exactly the left fibre. -/
@@ -51,7 +51,7 @@ def fiberGridColumnSubtypeEquiv
     rcases p with ⟨⟨a, ⟨⟨bb, hb⟩, ⟨cc, hc⟩⟩⟩, heq⟩
     dsimp at heq ⊢
     subst cc
-    subst a
+    cases hc
     rfl
 
 /-- The indexed finite left fibre is equivalent to the corresponding
@@ -76,7 +76,8 @@ noncomputable def prebananaGridLeftIndexFiberEquiv
   }
   · exact i.2
   · change (e (e.symm p.1)).2.1.1 = b
-    simpa only [Equiv.apply_symm_apply] using p.2
+    rw [e.apply_symm_apply]
+    exact p.2
   · intro i
     apply Subtype.ext
     exact e.symm_apply_apply i.1
@@ -105,7 +106,8 @@ noncomputable def prebananaGridRightIndexFiberEquiv
   }
   · exact i.2
   · change (e (e.symm p.1)).2.2.1 = c
-    simpa only [Equiv.apply_symm_apply] using p.2
+    rw [e.apply_symm_apply]
+    exact p.2
   · intro i
     apply Subtype.ext
     exact e.symm_apply_apply i.1
