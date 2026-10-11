@@ -22,12 +22,12 @@ source atom fibre, hence on every Boolean element. -/
 theorem prebananaAtomClass_joint_embedding
     (B C : PrebananaAtomStructure) :
     ∃ D : PrebananaAtomStructure,
-      ∃ f : PrebananaAtomEmbedding B D,
-      ∃ g : PrebananaAtomEmbedding C D, True := by
+      Nonempty (PrebananaAtomEmbedding B D) ∧
+      Nonempty (PrebananaAtomEmbedding C D) := by
   obtain ⟨D, f, g, _, _⟩ :=
     exists_prebananaAtomStrongAmalgam
       (PrebananaAtomStructure.fromZeroBase B)
       (PrebananaAtomStructure.fromZeroBase C)
-  exact ⟨D, f, g, trivial⟩
+  exact ⟨D, ⟨f⟩, ⟨g⟩⟩
 
 end SuccessorTree.NonPrecompact
