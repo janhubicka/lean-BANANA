@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check abstract finite Boolean embedding conjugation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMapAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractBooleanEmbeddingMapAxiomAudit.lean
+
       - name: Check surjective atom partitions of finite powerset embeddings
         run: |
           lake build BANANA.NonPrecompact.PrebananaPowersetMapPartitionsAxiomAudit
@@ -87,6 +92,11 @@ jobs:
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanRepresentationAxiomAudit.lean
+
+      - name: Audit abstract finite Boolean parity decomposition
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractParityDecompositionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractParityDecompositionAxiomAudit.lean
 
       - name: Check redundant triple-coordinate maps
         run: |
