@@ -128,6 +128,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteJEPAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteJEPAxiomAudit.lean
 
+      - name: Check finite Boolean tuple signature bounds
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaTupleSignaturesAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
