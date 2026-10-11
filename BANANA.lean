@@ -148,7 +148,6 @@ import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 import BANANA.NonPrecompact.PrebananaAbstractCodeParity
 import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaTupleSignatures
-import BANANA.NonPrecompact.PrebananaBooleanTerms
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
@@ -177,3 +176,5 @@ import BANANA.NonPrecompact.PrebananaCodedStrongAmalgam
 import BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodes
 import BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisation
 import BANANA.NonPrecompact.PrebananaFiniteJEP
+import BANANA.NonPrecompact.BananaLimitMixedTupleOrbits
+import BANANA.NonPrecompact.PrebananaBooleanTerms
