@@ -133,6 +133,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaTupleSignaturesAxiomAudit.lean
 
+      - name: Check parity of every Boolean term from marked tuple profiles
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaTupleTermParityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaTupleTermParityAxiomAudit.lean
+
       - name: Check pre-BANANA tuple signature invariance under embeddings
         run: |
           lake build BANANA.NonPrecompact.PrebananaTupleSignatureEmbeddingAxiomAudit
