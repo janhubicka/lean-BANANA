@@ -74,32 +74,13 @@ theorem prebananaEncodedBooleanMap_naturality
           Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
     classical
-    -- The original filter uses the canonical finite-set membership
-    -- decision procedure. Pin the same DecidablePred instance in the
-    -- proof, rather than allowing Classical.propDecidable to be
-    -- synthesised when applying the filter-membership lemma.
-    letI : DecidablePred
-        (fun j : Fin (Fintype.card (PrebananaAbstractAtoms β)) =>
-          prebananaReindexedPart eA eB part j ∈ S) :=
-      fun j => Finset.decidableMem (prebananaReindexedPart eA eB part j) S
-    -- Unfold the concrete finite atom-count projection in the embedding
-    -- type, avoiding semireducible index mismatch in membership rewriting.
     dsimp only [prebananaAbstractAtomCode] at f
-    -- Work extensionally: the two filters have extensionally equal
-    -- membership predicates, even when their DecidablePred instances
-    -- are not definitionally the same.
-    ext j
-    simp only [prebananaBooleanMap, Finset.mem_filter,
-      Finset.mem_univ, true_and]
-    rw [hpart j]
-    -- Use the defining membership characterisation directly. This
-    -- avoids asking simp to elaborate the two semireducible Fin
-    -- index types under a DecidablePred instance.
-    constructor
-    · intro hj
-      exact Finset.mem_filter.mpr ⟨Finset.mem_univ _, hj⟩
-    · intro hj
-      exact (Finset.mem_filter.mp hj).2
+    unfold prebananaBooleanMap
+    -- Filter congruence, unlike explicit membership conversion, is
+    -- independent of the two DecidablePred implementations.
+    apply Finset.filter_congr
+    intro j _
+    exact Iff.of_eq (hpart j)
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
