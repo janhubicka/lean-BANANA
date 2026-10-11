@@ -23,6 +23,35 @@ variable {l₁ r₁ l₂ r₂ : ℕ}
 variable (A : BananaMatrixStructure l₁ r₁)
 variable (B : BananaMatrixStructure l₂ r₂)
 
+/-- The canonical first-block inclusion has the original first component. -/
+@[simp] private theorem prebanana_finLeftPart_append_left
+    {m n : ℕ} (x : Fin m → F2) :
+    finLeftPart (Fin.append x (0 : Fin n → F2)) = x := by
+  funext i
+  simp [finLeftPart]
+
+/-- The second component of the first-block inclusion is zero. -/
+@[simp] private theorem prebanana_finRightPart_append_left
+    {m n : ℕ} (x : Fin m → F2) :
+    finRightPart (Fin.append x (0 : Fin n → F2)) = 0 := by
+  funext i
+  simp [finRightPart]
+
+/-- The first component of the second-block inclusion is zero. -/
+@[simp] private theorem prebanana_finLeftPart_append_right
+    {m n : ℕ} (x : Fin n → F2) :
+    finLeftPart (Fin.append (0 : Fin m → F2) x) = 0 := by
+  funext i
+  simp [finLeftPart]
+
+/-- The second-block inclusion has the original second component. -/
+@[simp] private theorem prebanana_finRightPart_append_right
+    {m n : ℕ} (x : Fin n → F2) :
+    finRightPart (Fin.append (0 : Fin m → F2) x) = x := by
+  funext i
+  simp [finRightPart]
+
+
 /-- Images of the two canonical left-sort inclusions intersect
 exactly in the named zero vector. -/
 theorem directSum_inl_inr_eq_iff_zero_left
@@ -75,9 +104,10 @@ theorem directSum_natural_inl_left
     Fin.append (f.left (finLeftPart (Fin.append x 0)))
       (g.left (finRightPart (Fin.append x 0))) =
     Fin.append (f.left x) 0
-  funext i
-  induction i using Fin.addCases <;>
-    simp [finLeftPart, finRightPart]
+  simp [prebanana_finLeftPart_append_left,
+    prebanana_finRightPart_append_left,
+    prebanana_finLeftPart_append_right,
+    prebanana_finRightPart_append_right]
 
 /-- Functoriality of the first inclusion on the right sort. -/
 theorem directSum_natural_inl_right
@@ -95,9 +125,10 @@ theorem directSum_natural_inl_right
     Fin.append (f.right (finLeftPart (Fin.append x 0)))
       (g.right (finRightPart (Fin.append x 0))) =
     Fin.append (f.right x) 0
-  funext i
-  induction i using Fin.addCases <;>
-    simp [finLeftPart, finRightPart]
+  simp [prebanana_finLeftPart_append_left,
+    prebanana_finRightPart_append_left,
+    prebanana_finLeftPart_append_right,
+    prebanana_finRightPart_append_right]
 
 /-- Functoriality of the second canonical inclusion on the left sort. -/
 theorem directSum_natural_inr_left
@@ -115,9 +146,10 @@ theorem directSum_natural_inr_left
     Fin.append (f.left (finLeftPart (Fin.append 0 x)))
       (g.left (finRightPart (Fin.append 0 x))) =
     Fin.append 0 (g.left x)
-  funext i
-  induction i using Fin.addCases <;>
-    simp [finLeftPart, finRightPart]
+  simp [prebanana_finLeftPart_append_left,
+    prebanana_finRightPart_append_left,
+    prebanana_finLeftPart_append_right,
+    prebanana_finRightPart_append_right]
 
 /-- Functoriality of the second canonical inclusion on the right sort. -/
 theorem directSum_natural_inr_right
@@ -135,9 +167,10 @@ theorem directSum_natural_inr_right
     Fin.append (f.right (finLeftPart (Fin.append 0 x)))
       (g.right (finRightPart (Fin.append 0 x))) =
     Fin.append 0 (g.right x)
-  funext i
-  induction i using Fin.addCases <;>
-    simp [finLeftPart, finRightPart]
+  simp [prebanana_finLeftPart_append_left,
+    prebanana_finRightPart_append_left,
+    prebanana_finLeftPart_append_right,
+    prebanana_finRightPart_append_right]
 
 /-- The direct sum witnesses strong amalgamation over the two named
 zero elements, with vanishing cross-pairings on both sorts. -/
