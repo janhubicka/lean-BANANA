@@ -74,6 +74,9 @@ theorem prebananaEncodedBooleanMap_naturality
           Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
     classical
+    -- Unfold the concrete finite atom-count projection in the embedding
+    -- type, avoiding semireducible index mismatch in membership rewriting.
+    dsimp only [prebananaAbstractAtomCode] at f
     -- Work extensionally: the two filters have extensionally equal
     -- membership predicates, even when their DecidablePred instances
     -- are not definitionally the same.
