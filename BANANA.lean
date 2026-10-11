@@ -130,6 +130,7 @@ import BANANA.NonPrecompact.PersistentColourings
 import BANANA.NonPrecompact.PrebananaAmalgamBridge
 import BANANA.NonPrecompact.PrebananaIndexedParity
 import BANANA.NonPrecompact.PrebananaGridProjections
+import BANANA.NonPrecompact.PrebananaGridFibreEquivs
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
