@@ -84,10 +84,14 @@ theorem prebananaEncodedBooleanMap_naturality
     simp only [prebananaBooleanMap, Finset.mem_filter,
       Finset.mem_univ, true_and]
     rw [hpart j]
-    -- The final goal is the membership equivalence for a finite-set
-    -- filter. Keep this simplification after rewriting the partition
-    -- to avoid a decidable-predicate elaboration mismatch.
-    simp
+    -- Use the defining membership characterisation directly. This
+    -- avoids asking simp to elaborate the two semireducible Fin
+    -- index types under a DecidablePred instance.
+    constructor
+    · intro hj
+      exact Finset.mem_filter.mpr ⟨Finset.mem_univ _, hj⟩
+    · intro hj
+      exact (Finset.mem_filter.mp hj).2
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
