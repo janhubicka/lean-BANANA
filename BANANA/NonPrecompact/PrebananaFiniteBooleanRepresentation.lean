@@ -61,6 +61,40 @@ noncomputable def prebananaFiniteBooleanAtomFinsetEquiv
     change (e (e.symm (s : Set (PrebananaAbstractAtoms α)))).toFinset = s
     simp
 
+/-- The stronger order isomorphism to finite atom subsets.
+All Boolean operations may be transported through this order isomorphism. -/
+noncomputable def prebananaFiniteBooleanAtomFinsetOrderIso
+    (α : Type*) [BooleanAlgebra α] [Fintype α] :
+    α ≃o Finset (PrebananaAbstractAtoms α) :=
+  (prebananaFiniteBooleanAtomSetOrderIso α).trans
+    ((Fintype.finsetOrderIsoSet :
+      Finset (PrebananaAbstractAtoms α) ≃o
+        Set (PrebananaAbstractAtoms α)).symm)
+
+/-- The finite-atom order isomorphism preserves joins (unions). -/
+theorem prebananaFiniteBooleanAtomFinsetOrderIso_sup
+    (α : Type*) [BooleanAlgebra α] [Fintype α]
+    (x y : α) :
+    prebananaFiniteBooleanAtomFinsetOrderIso α (x ⊔ y) =
+      prebananaFiniteBooleanAtomFinsetOrderIso α x ∪
+      prebananaFiniteBooleanAtomFinsetOrderIso α y := by
+  change prebananaFiniteBooleanAtomFinsetOrderIso α (x ⊔ y) =
+    prebananaFiniteBooleanAtomFinsetOrderIso α x ⊔
+    prebananaFiniteBooleanAtomFinsetOrderIso α y
+  exact (prebananaFiniteBooleanAtomFinsetOrderIso α).map_sup x y
+
+/-- The finite-atom order isomorphism preserves meets (intersections). -/
+theorem prebananaFiniteBooleanAtomFinsetOrderIso_inf
+    (α : Type*) [BooleanAlgebra α] [Fintype α]
+    (x y : α) :
+    prebananaFiniteBooleanAtomFinsetOrderIso α (x ⊓ y) =
+      prebananaFiniteBooleanAtomFinsetOrderIso α x ∩
+      prebananaFiniteBooleanAtomFinsetOrderIso α y := by
+  change prebananaFiniteBooleanAtomFinsetOrderIso α (x ⊓ y) =
+    prebananaFiniteBooleanAtomFinsetOrderIso α x ⊓
+    prebananaFiniteBooleanAtomFinsetOrderIso α y
+  exact (prebananaFiniteBooleanAtomFinsetOrderIso α).map_inf x y
+
 /-- The abstract element corresponding to a finite collection
 of atoms is uniquely recovered from that collection. -/
 theorem prebananaFiniteBooleanAtomFinsetEquiv_injective
