@@ -98,6 +98,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaCodedBooleanEmbeddingAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaCodedBooleanEmbeddingAxiomAudit.lean
 
+      - name: Check abstract pre-BANANA strong AP specialised to canonical codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAPSpecialisationAxiomAudit.lean
+
       - name: Check canonical faithful marked Boolean atom codes
         run: |
           lake build BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodesAxiomAudit
