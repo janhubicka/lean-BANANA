@@ -114,9 +114,8 @@ theorem prebananaAbstractEmbedding_exists_encodedAtomEmbedding
       intro a
       obtain ⟨b, hb⟩ :=
         prebananaReindexedPart_surjective eA eB part hsurj a
-      refine ⟨b, ?_⟩
-      simpa only [prebananaFiber, Finset.mem_filter,
-        Finset.mem_univ, true_and, q] using hb
+      apply Finset.filter_nonempty_iff.mpr
+      exact ⟨b, Finset.mem_univ _, hb⟩
     fibre_mark_parity := by
       intro a
       rw [prebananaMarkedCount_cast_eq_sum]
