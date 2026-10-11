@@ -74,4 +74,46 @@ theorem prebananaAbstractFiniteStrongAmalgamation
     hzeroC htopC haddC
     φ ψ f g hf hg
 
+/-- An injective bounded-lattice map into a finite Boolean powerset
+also preserves Boolean complement. Thus the marked maps constructed
+above preserve the full functional language of pre-BANANA. -/
+theorem PrebananaMarkedFiniteMap.preserves_complement
+    {β : Type*} [BooleanAlgebra β]
+    (D : PrebananaAtomStructure) (μ : β → F2)
+    (h : PrebananaMarkedFiniteMap β D μ)
+    (x : β) :
+    h.toFun xᶜ = Finset.univ \ h.toFun x := by
+  classical
+  have hi :
+      h.toFun x ∩ h.toFun xᶜ =
+        (∅ : Finset (Fin D.atomCount)) := by
+    calc
+      h.toFun x ∩ h.toFun xᶜ = h.toFun (x ⊓ xᶜ) :=
+        (h.map_inf x xᶜ).symm
+      _ = h.toFun ⊥ := by rw [inf_compl_eq_bot]
+      _ = ∅ := h.map_bot
+  have hu :
+      h.toFun x ∪ h.toFun xᶜ =
+        (Finset.univ : Finset (Fin D.atomCount)) := by
+    calc
+      h.toFun x ∪ h.toFun xᶜ = h.toFun (x ⊔ xᶜ) :=
+        (h.map_sup x xᶜ).symm
+      _ = h.toFun ⊤ := by rw [sup_compl_eq_top]
+      _ = Finset.univ := h.map_top
+  have hd : Disjoint (h.toFun x) (h.toFun xᶜ) :=
+    Finset.disjoint_iff_inter_eq_empty.mpr hi
+  ext i
+  constructor
+  · intro hic
+    exact Finset.mem_sdiff.mpr
+      ⟨Finset.mem_univ _, fun hx =>
+        (Finset.disjoint_left.mp hd) hx hic⟩
+  · intro hic
+    have hx : i ∉ h.toFun x :=
+      (Finset.mem_sdiff.mp hic).2
+    have hmem : i ∈ h.toFun x ∪ h.toFun xᶜ := by
+      rw [hu]
+      exact Finset.mem_univ i
+    exact (Finset.mem_union.mp hmem).resolve_left hx
+
 end SuccessorTree.NonPrecompact
