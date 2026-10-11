@@ -34,6 +34,7 @@ theorem prebananaCodedBooleanEmbedding_properties
     (hmark : ∀ x : β,
       prebananaBooleanParity B (codeB x) = μB x) :
     ∃ h : β → Finset (Fin D.atomCount),
+      (∀ x : β, h x = prebananaBooleanMap u (codeB x)) ∧
       Function.Injective h ∧
       h ⊥ = ∅ ∧
       h ⊤ = Finset.univ ∧
@@ -43,7 +44,9 @@ theorem prebananaCodedBooleanEmbedding_properties
   classical
   let h : β → Finset (Fin D.atomCount) :=
     fun x => prebananaBooleanMap u (codeB x)
-  refine ⟨h, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨h, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro x
+    rfl
   · intro x y hxy
     exact hinj ((prebananaBooleanMap_injective u) hxy)
   · change prebananaBooleanMap u (codeB (⊥ : β)) = ∅
