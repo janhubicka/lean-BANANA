@@ -46,18 +46,20 @@ theorem prebananaCodedBooleanEmbedding_properties
   refine ⟨h, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro x y hxy
     exact hinj ((prebananaBooleanMap_injective u) hxy)
-  · dsimp [h]
+  · change prebananaBooleanMap u (codeB (⊥ : β)) = ∅
     rw [hbot, prebananaBooleanMap_empty]
-  · dsimp [h]
+  · change prebananaBooleanMap u (codeB (⊤ : β)) = Finset.univ
     rw [htop, prebananaBooleanMap_univ]
   · intro x y
-    dsimp [h]
+    change prebananaBooleanMap u (codeB (x ⊔ y)) =
+      prebananaBooleanMap u (codeB x) ∪ prebananaBooleanMap u (codeB y)
     rw [hsup, prebananaBooleanMap_union]
   · intro x y
-    dsimp [h]
+    change prebananaBooleanMap u (codeB (x ⊓ y)) =
+      prebananaBooleanMap u (codeB x) ∩ prebananaBooleanMap u (codeB y)
     rw [hinf, prebananaBooleanMap_inter]
   · intro x
-    dsimp [h]
+    change prebananaBooleanParity D (prebananaBooleanMap u (codeB x)) = μB x
     exact (prebananaBooleanMap_parity u (codeB x)).trans (hmark x)
 
 end SuccessorTree.NonPrecompact
