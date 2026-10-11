@@ -115,8 +115,7 @@ theorem prebananaAbstractEmbedding_exists_encodedAtomEmbedding
       obtain ⟨b, hb⟩ :=
         prebananaReindexedPart_surjective eA eB part hsurj a
       refine ⟨b, ?_⟩
-      simp only [prebananaFiber, Finset.mem_filter, Finset.mem_univ, true_and]
-      exact hb
+      simp [prebananaFiber, q, hb]
     fibre_mark_parity := by
       intro a
       rw [prebananaMarkedCount_cast_eq_sum]
@@ -135,7 +134,16 @@ theorem prebananaAbstractEmbedding_exists_encodedAtomEmbedding
             exact congrArg μB
               (prebananaFiniteBoolean_singleton_represents_atom β (eB j))
         _ = μA (eA a : α) := by
-          simpa only [prebananaFiber, q] using hsum
+          have hfilter :
+              prebananaFiber q a =
+                (Finset.univ :
+                  Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
+                    (fun j => prebananaReindexedPart eA eB part j = a) := by
+            classical
+            ext j
+            simp [prebananaFiber, q]
+          rw [hfilter]
+          exact hsum
         _ = (prebananaAbstractAtomCode α μA hzeroA htopA haddA).mark a := by
           exact (congrArg μA
             (prebananaFiniteBoolean_singleton_represents_atom α (eA a))).symm
