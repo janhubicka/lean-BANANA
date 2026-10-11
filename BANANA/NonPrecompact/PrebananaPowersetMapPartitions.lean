@@ -21,6 +21,7 @@ operations and injectivity is the inverse-image map of a
 surjective atom-partition map. -/
 theorem prebanana_exists_atomPartition_of_powersetEmbedding
     {ι κ : Type*} [Fintype ι] [Fintype κ]
+    [DecidableEq ι] [DecidableEq κ]
     (F : Finset ι → Finset κ)
     (hbot : F ∅ = ∅)
     (htop : F Finset.univ = Finset.univ)
