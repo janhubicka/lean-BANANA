@@ -68,6 +68,16 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractAtomCodesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractAtomCodesAxiomAudit.lean
 
+      - name: Check arbitrary marked finite Boolean atom partitions
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractMarkedPartitionsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractMarkedPartitionsAxiomAudit.lean
+
+      - name: Check parity of arbitrary finite Boolean element codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractCodeParityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractCodeParityAxiomAudit.lean
+
       - name: Check Fin-indexed marked atom-partition transport
         run: |
           lake build BANANA.NonPrecompact.PrebananaReindexPartitionAxiomAudit
