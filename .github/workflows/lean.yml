@@ -98,6 +98,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaCodedBooleanEmbeddingAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaCodedBooleanEmbeddingAxiomAudit.lean
 
+      - name: Check canonical faithful marked Boolean atom codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaCanonicalFaithfulCodesAxiomAudit.lean
+
       - name: Check faithful finite codes give marked strong amalgamation
         run: |
           lake build BANANA.NonPrecompact.PrebananaCodedStrongAmalgamAxiomAudit
