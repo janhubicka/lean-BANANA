@@ -117,8 +117,8 @@ against reversing the direction of atom partitions.
   circulated proposition.
 - The marked target and embeddings must live in the original
   Boolean-functional language with the parity predicate. The
-  intermediate two-sided atom representation is an equivalence of
-  presentations, not an enlargement of the finite class.
+  intermediate atom presentation is equivalent to the original
+  one, not an enlargement of the finite class.
 - The object nontriviality hypothesis `0 ≠ 1` is needed to ensure a
   positive number of atoms in the `Fin n` representation.
 - Avoid upgrading the manuscript marker for omega-categoricity on
