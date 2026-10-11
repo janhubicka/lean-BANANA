@@ -132,6 +132,7 @@ import BANANA.NonPrecompact.PrebananaIndexedParity
 import BANANA.NonPrecompact.PrebananaGridProjections
 import BANANA.NonPrecompact.PrebananaGridFibreEquivs
 import BANANA.NonPrecompact.PrebananaGridMarkedEmbeddings
+import BANANA.NonPrecompact.PrebananaGridStrongAmalgam
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
