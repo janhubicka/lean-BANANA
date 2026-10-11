@@ -83,11 +83,19 @@ theorem prebananaSignatureMark_booleanMap
           pattern) =
       prebananaBooleanMap f support := by
     ext b
-    simp only [prebananaBooleanMap, support, Finset.mem_filter,
-      Finset.mem_univ, true_and]
-    have hsig := prebananaAtomSignature_booleanMap f tuple b
-    simp only [prebananaBooleanMap] at hsig
-    rw [hsig]
+    -- Avoid unfolding the decidable predicate stored inside a filter.
+    -- Simplify each membership separately, then use signature equality.
+    calc
+      b ∈ (Finset.univ : Finset (Fin B.atomCount)).filter
+          (fun c => prebananaAtomSignature B
+            (fun i => prebananaBooleanMap f (tuple i)) c = pattern) ↔
+          prebananaAtomSignature B
+            (fun i => prebananaBooleanMap f (tuple i)) b = pattern := by
+              simp
+      _ ↔ prebananaAtomSignature A tuple (f.part b) = pattern := by
+              rw [prebananaAtomSignature_booleanMap f tuple b]
+      _ ↔ b ∈ prebananaBooleanMap f support := by
+              simp [prebananaBooleanMap, support]
   change
     (∑ b ∈ (Finset.univ : Finset (Fin B.atomCount)).filter
       (fun b =>
