@@ -103,6 +103,31 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddingsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractEncodedEmbeddingsAxiomAudit.lean
 
+      - name: Check Boolean operations of abstract finite atom codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractCodeOperationsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractCodeOperationsAxiomAudit.lean
+
+      - name: Check faithful finite codes give marked strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaCodedStrongAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaCodedStrongAmalgamAxiomAudit.lean
+
+      - name: Check canonical faithful marked Boolean atom codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaCanonicalFaithfulCodesAxiomAudit.lean
+
+      - name: Check abstract pre-BANANA strong AP specialised to canonical codes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAPSpecialisationAxiomAudit.lean
+
+      - name: Check finite pre-BANANA joint embedding
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteJEPAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteJEPAxiomAudit.lean
+
       - name: Check naturality of abstract coded Boolean embeddings
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractEncodedNaturalityAxiomAudit
@@ -112,26 +137,6 @@ jobs:
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractStrongAmalgamationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAmalgamationAxiomAudit.lean
-
-      - name: Check abstract pre-BANANA strong AP specialised to canonical codes
-        run: |
-          lake build BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisationAxiomAudit
-          lake env lean BANANA/NonPrecompact/PrebananaAbstractStrongAPSpecialisationAxiomAudit.lean
-
-      - name: Check canonical faithful marked Boolean atom codes
-        run: |
-          lake build BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodesAxiomAudit
-          lake env lean BANANA/NonPrecompact/PrebananaCanonicalFaithfulCodesAxiomAudit.lean
-
-      - name: Check faithful finite codes give marked strong amalgamation
-        run: |
-          lake build BANANA.NonPrecompact.PrebananaCodedStrongAmalgamAxiomAudit
-          lake env lean BANANA/NonPrecompact/PrebananaCodedStrongAmalgamAxiomAudit.lean
-
-      - name: Check Boolean operations of abstract finite atom codes
-        run: |
-          lake build BANANA.NonPrecompact.PrebananaAbstractCodeOperationsAxiomAudit
-          lake env lean BANANA/NonPrecompact/PrebananaAbstractCodeOperationsAxiomAudit.lean
 
       - name: Check pre-BANANA fibre-grid total parity
         run: |
