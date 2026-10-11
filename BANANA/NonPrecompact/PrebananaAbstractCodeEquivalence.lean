@@ -45,7 +45,13 @@ of the original Boolean algebra. -/
 theorem prebananaAbstractBooleanCode_bijective
     (α : Type*) [BooleanAlgebra α] [Fintype α] :
     Function.Bijective (prebananaAbstractBooleanCode α) := by
-  rw [← funext fun x => prebananaAbstractBooleanCodeEquiv_apply α x]
+  have heq :
+      prebananaAbstractBooleanCode α =
+        (prebananaAbstractBooleanCodeEquiv α :
+          α → Finset (Fin (Fintype.card (PrebananaAbstractAtoms α)))) := by
+    funext x
+    exact (prebananaAbstractBooleanCodeEquiv_apply α x).symm
+  rw [heq]
   exact (prebananaAbstractBooleanCodeEquiv α).bijective
 
 /-- The surjectivity direction needed for strong amalgamation:
