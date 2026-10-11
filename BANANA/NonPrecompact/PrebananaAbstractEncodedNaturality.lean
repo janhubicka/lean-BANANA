@@ -73,7 +73,14 @@ theorem prebananaEncodedBooleanMap_naturality
         (Finset.univ :
           Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
-    unfold prebananaBooleanMap
+    classical
+    change
+      (Finset.univ :
+        Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
+          (fun j => f.part j ∈ S) =
+      (Finset.univ :
+        Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
+          (fun j => prebananaReindexedPart eA eB part j ∈ S)
     apply Finset.filter_congr
     intro j hj
     rw [hpart j]
