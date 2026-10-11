@@ -129,15 +129,16 @@ import BANANA.NonPrecompact.BananaPerfectTotalBlockDiagonal
 import BANANA.NonPrecompact.PersistentColourings
 import BANANA.NonPrecompact.PrebananaAmalgamBridge
 import BANANA.NonPrecompact.PrebananaReindexPartition
-import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
 import BANANA.NonPrecompact.PrebananaIndexedParity
 import BANANA.NonPrecompact.PrebananaGridProjections
 import BANANA.NonPrecompact.PrebananaGridFibreEquivs
 import BANANA.NonPrecompact.PrebananaGridMarkedEmbeddings
 import BANANA.NonPrecompact.PrebananaGridStrongAmalgam
 import BANANA.NonPrecompact.PrebananaPowersetBridge
+import BANANA.NonPrecompact.PrebananaCodedBooleanEmbedding
 import BANANA.NonPrecompact.PrebananaMarkedPowersetFibre
 import BANANA.NonPrecompact.PrebananaPowersetStrongAmalgam
+import BANANA.NonPrecompact.PrebananaAbstractStrongIntersectionTransfer
 import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
 import BANANA.NonPrecompact.PrebananaPowersetMapPartitions
 import BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMap
@@ -145,6 +146,7 @@ import BANANA.NonPrecompact.PrebananaAbstractMarkedPartitions
 import BANANA.NonPrecompact.PrebananaAbstractParityDecomposition
 import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 import BANANA.NonPrecompact.PrebananaAbstractCodeParity
+import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
@@ -167,3 +169,4 @@ import BANANA.NonPrecompact.SubsetSums
 import BANANA.NonPrecompact.SymplecticAmalgam
 import BANANA.NonPrecompact.SymplecticQuadraticPolar
 import BANANA.NonPrecompact.SymplecticSlice
+import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
