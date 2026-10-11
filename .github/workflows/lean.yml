@@ -43,6 +43,11 @@ jobs:
       - name: Build
         run: lake build
 
+      - name: Check abstract finite Boolean embedding conjugation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMapAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractBooleanEmbeddingMapAxiomAudit.lean
+
       - name: Check pre-BANANA fibre-grid total parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaGridTotalAxiomAudit
