@@ -133,6 +133,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaTupleSignaturesAxiomAudit.lean
 
+      - name: Check generated Boolean term-range equivalence and parity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGeneratedTermRangeAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGeneratedTermRangeAxiomAudit.lean
+
       - name: Check pre-BANANA tuple signature invariance under embeddings
         run: |
           lake build BANANA.NonPrecompact.PrebananaTupleSignatureEmbeddingAxiomAudit
