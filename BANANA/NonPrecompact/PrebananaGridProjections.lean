@@ -43,7 +43,10 @@ theorem prebananaGridLeftPart_surjective
   let p : FiberGrid f.part g.part :=
     ⟨f.part b, (⟨b, rfl⟩, ⟨c, hc⟩)⟩
   refine ⟨(Fintype.equivFin (FiberGrid f.part g.part)) p, ?_⟩
-  simp [prebananaGridLeftPart, p, prebananaGridMarkedStructure]
+  change ((Fintype.equivFin (FiberGrid f.part g.part)).symm
+    ((Fintype.equivFin (FiberGrid f.part g.part)) p)).2.1.1 = b
+  rw [Equiv.symm_apply_apply]
+  rfl
 
 theorem prebananaGridRightPart_surjective
     {A B C : PrebananaAtomStructure}
@@ -56,7 +59,10 @@ theorem prebananaGridRightPart_surjective
   let p : FiberGrid f.part g.part :=
     ⟨g.part c, (⟨b, hb⟩, ⟨c, rfl⟩)⟩
   refine ⟨(Fintype.equivFin (FiberGrid f.part g.part)) p, ?_⟩
-  simp [prebananaGridRightPart, p, prebananaGridMarkedStructure]
+  change ((Fintype.equivFin (FiberGrid f.part g.part)).symm
+    ((Fintype.equivFin (FiberGrid f.part g.part)) p)).2.2.1 = c
+  rw [Equiv.symm_apply_apply]
+  rfl
 
 /-- Both projections induce the same map to the common base atoms. -/
 theorem prebananaGridPart_commute
