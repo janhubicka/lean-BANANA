@@ -68,6 +68,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaIndexedParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaIndexedParityAxiomAudit.lean
 
+      - name: Check finite pre-BANANA strong amalgamation axioms
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGridStrongAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGridStrongAmalgamAxiomAudit.lean
+
       - name: Check redundant triple-coordinate maps
         run: |
           lake build BANANA.NonPrecompact.BananaTripleCoordinatesAxiomAudit
