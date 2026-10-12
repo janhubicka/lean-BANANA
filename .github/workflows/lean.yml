@@ -148,6 +148,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaCopyDegreeAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaCopyDegreeAxiomAudit.lean
 
+      - name: Check abstract marked tuple profile equations and parity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractMarkedTupleProfileAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractMarkedTupleProfileAxiomAudit.lean
+
       - name: Check abstract pre-BANANA Boolean-term coding and parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractTermEvaluationAxiomAudit
