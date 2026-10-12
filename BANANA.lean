@@ -149,6 +149,7 @@ import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 import BANANA.NonPrecompact.PrebananaAbstractCodeParity
 import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaTupleSignatures
+import BANANA.NonPrecompact.PrebananaFiniteOrbitCriterion
 import BANANA.NonPrecompact.PrebananaTupleSignatureEmbedding
 import BANANA.NonPrecompact.PrebananaTupleTermEqualities
 import BANANA.NonPrecompact.PrebananaTupleTermParity
