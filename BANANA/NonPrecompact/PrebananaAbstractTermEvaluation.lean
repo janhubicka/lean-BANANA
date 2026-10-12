@@ -73,7 +73,8 @@ theorem PrebananaBooleanTerm.code_evalBoolean
   | generator i =>
       rfl
   | complement t ih =>
-      simp [evalBoolean, evalSet, prebananaAbstractBooleanCode_compl, ih]
+      simpa [evalBoolean, evalSet, prebananaAbstractBooleanCode_compl,
+        Finset.compl_eq_univ_sdiff, ih]
   | join t u iht ihu =>
       simp [evalBoolean, evalSet, prebananaAbstractBooleanCode_sup,
         iht, ihu]
@@ -96,8 +97,18 @@ theorem PrebananaBooleanTerm.code_evalBoolean_parity
       (prebananaAbstractAtomCode α μ hzero htop hadd)
       (t.evalSet (fun i => prebananaAbstractBooleanCode α (tuple i))) =
     μ (t.evalBoolean tuple) := by
-  rw [← t.code_evalBoolean α tuple]
-  exact prebananaAbstractBooleanCode_parity α μ hzero htop hadd
-    (t.evalBoolean tuple)
+  let Acode := prebananaAbstractAtomCode α μ hzero htop hadd
+  let data := fun i => prebananaAbstractBooleanCode α (tuple i)
+  have hcode :
+      t.evalSet data = prebananaAbstractBooleanCode α (t.evalBoolean tuple) :=
+    (t.code_evalBoolean α tuple).symm
+  calc
+    prebananaBooleanParity Acode (t.evalSet data) =
+        prebananaBooleanParity Acode
+          (prebananaAbstractBooleanCode α (t.evalBoolean tuple)) :=
+      congrArg (prebananaBooleanParity Acode) hcode
+    _ = μ (t.evalBoolean tuple) :=
+      prebananaAbstractBooleanCode_parity α μ hzero htop hadd
+        (t.evalBoolean tuple)
 
 end SuccessorTree.NonPrecompact
