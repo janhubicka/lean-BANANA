@@ -184,6 +184,7 @@ import BANANA.NonPrecompact.SymplecticQuadraticPolar
 import BANANA.NonPrecompact.SymplecticSlice
 import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
 import BANANA.NonPrecompact.PrebananaAbstractCodeOperations
+import BANANA.NonPrecompact.PrebananaAbstractTermEvaluation
 import BANANA.NonPrecompact.PrebananaCodedStrongAmalgam
 import BANANA.NonPrecompact.PrebananaCanonicalFaithfulCodes
 import BANANA.NonPrecompact.PrebananaAbstractStrongAPSpecialisation
