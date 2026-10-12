@@ -138,6 +138,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaTupleTermParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaTupleTermParityAxiomAudit.lean
 
+      - name: Check complete finite marked generated Boolean isomorphism
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGeneratedMarkedIsomorphismAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGeneratedMarkedIsomorphismAxiomAudit.lean
+
       - name: Check Boolean operation preservation on generated subalgebras
         run: |
           lake build BANANA.NonPrecompact.PrebananaGeneratedBooleanOperationsAxiomAudit
