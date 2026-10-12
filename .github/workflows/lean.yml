@@ -138,6 +138,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaTupleTermParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaTupleTermParityAxiomAudit.lean
 
+      - name: Check Boolean operation preservation on generated subalgebras
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGeneratedBooleanOperationsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGeneratedBooleanOperationsAxiomAudit.lean
+
       - name: Check generated marked term ranges classified by tuple profiles
         run: |
           lake build BANANA.NonPrecompact.PrebananaGeneratedProfileEquivAxiomAudit
