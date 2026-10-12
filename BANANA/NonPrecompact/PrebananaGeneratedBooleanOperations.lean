@@ -46,7 +46,8 @@ noncomputable def prebananaTermRange_complement
     (x : prebananaTermRange A tuple) :
     prebananaTermRange A tuple := by
   classical
-  obtain ⟨t, ht⟩ := x.property
+  let t := Classical.choose x.property
+  have ht : t.evalSet tuple = x.val := Classical.choose_spec x.property
   refine ⟨Finset.univ \ x.val, ⟨.complement t, ?_⟩⟩
   change Finset.univ \ t.evalSet tuple = Finset.univ \ x.val
   rw [ht]
@@ -58,8 +59,10 @@ noncomputable def prebananaTermRange_join
     (x y : prebananaTermRange A tuple) :
     prebananaTermRange A tuple := by
   classical
-  obtain ⟨t, ht⟩ := x.property
-  obtain ⟨u, hu⟩ := y.property
+  let t := Classical.choose x.property
+  let u := Classical.choose y.property
+  have ht : t.evalSet tuple = x.val := Classical.choose_spec x.property
+  have hu : u.evalSet tuple = y.val := Classical.choose_spec y.property
   refine ⟨x.val ∪ y.val, ⟨.join t u, ?_⟩⟩
   change t.evalSet tuple ∪ u.evalSet tuple = x.val ∪ y.val
   rw [ht, hu]
@@ -71,8 +74,10 @@ noncomputable def prebananaTermRange_meet
     (x y : prebananaTermRange A tuple) :
     prebananaTermRange A tuple := by
   classical
-  obtain ⟨t, ht⟩ := x.property
-  obtain ⟨u, hu⟩ := y.property
+  let t := Classical.choose x.property
+  let u := Classical.choose y.property
+  have ht : t.evalSet tuple = x.val := Classical.choose_spec x.property
+  have hu : u.evalSet tuple = y.val := Classical.choose_spec y.property
   refine ⟨x.val ∩ y.val, ⟨.meet t u, ?_⟩⟩
   change t.evalSet tuple ∩ u.evalSet tuple = x.val ∩ y.val
   rw [ht, hu]
