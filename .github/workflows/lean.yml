@@ -148,6 +148,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaCopyDegreeAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaCopyDegreeAxiomAudit.lean
 
+      - name: Check abstract generated finite Boolean term ranges and marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractGeneratedTermRangeAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractGeneratedTermRangeAxiomAudit.lean
+
       - name: Check abstract marked tuple profile equations and parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractMarkedTupleProfileAxiomAudit
