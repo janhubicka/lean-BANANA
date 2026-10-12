@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.PrebananaAbstractTermEvaluation
+import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaTupleTermEqualities
 import BANANA.NonPrecompact.PrebananaTupleTermParity
 
