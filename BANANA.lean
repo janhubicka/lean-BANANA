@@ -159,6 +159,7 @@ import BANANA.NonPrecompact.PrebananaGeneratedBooleanOperations
 import BANANA.NonPrecompact.PrebananaGeneratedMarkedIsomorphism
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
+import BANANA.NonPrecompact.PrebananaCopyDegreeAxiomAudit
 import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
