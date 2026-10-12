@@ -138,6 +138,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteOrbitCriterionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteOrbitCriterionAxiomAudit.lean
 
+      - name: Check abstract pre-BANANA Boolean-term coding and parity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractTermEvaluationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractTermEvaluationAxiomAudit.lean
+
       - name: Check finite Boolean tuple signature bounds
         run: |
           lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit
