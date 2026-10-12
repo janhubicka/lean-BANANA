@@ -75,12 +75,32 @@ theorem prebananaEncodedBooleanMap_naturality
           (fun j => prebananaReindexedPart eA eB part j ∈ S) := by
     classical
     dsimp only [prebananaAbstractAtomCode] at f
-    unfold prebananaBooleanMap
-    -- Filter congruence, unlike explicit membership conversion, is
-    -- independent of the two DecidablePred implementations.
-    apply Finset.filter_congr
-    intro j _
-    exact Iff.of_eq (hpart j)
+    let U : Finset (Fin (Fintype.card (PrebananaAbstractAtoms β))) := Finset.univ
+    let predF : Fin (Fintype.card (PrebananaAbstractAtoms β)) → Prop :=
+      fun j => f.part j ∈ S
+    let predQ : Fin (Fintype.card (PrebananaAbstractAtoms β)) → Prop :=
+      fun j => prebananaReindexedPart eA eB part j ∈ S
+    have hFilter : U.filter predF = U.filter predQ := by
+      apply Finset.filter_congr
+      intro j hj
+      change (f.part j ∈ S) ↔ (prebananaReindexedPart eA eB part j ∈ S)
+      rw [hpart j]
+    -- Compare filters independently of how their decidable
+    -- membership predicates were elaborated. Mathlib's dedicated
+    -- filter_congr_decidable precisely handles this instance issue.
+    have hLeft : prebananaBooleanMap f S = U.filter predF := by
+      unfold prebananaBooleanMap
+      exact Finset.filter_congr_decidable U predF
+        (fun j => Finset.decidableMem (f.part j) S)
+    have hRight :
+        ((Finset.univ :
+          Finset (Fin (Fintype.card (PrebananaAbstractAtoms β)))).filter
+          (fun j => prebananaReindexedPart eA eB part j ∈ S)) =
+        U.filter predQ := by
+      exact Finset.filter_congr_decidable U predQ
+        (fun j =>
+          Finset.decidableMem (prebananaReindexedPart eA eB part j) S)
+    exact hLeft.trans (hFilter.trans hRight.symm)
   have hImage :
       (prebananaBooleanMap f S).image eB =
       (prebananaAbstractBooleanCode β (φ x)).image eB := by
