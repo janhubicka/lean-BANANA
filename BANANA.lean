@@ -67,6 +67,7 @@ import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.BananaOneSidedCopyDegree
+import BANANA.NonPrecompact.BananaCopyDegreeClassificationAxiomAudit
 import BANANA.NonPrecompact.BananaOneSidedSubspaceEquiv
 import BANANA.NonPrecompact.BananaCopyFunctor
 import BANANA.NonPrecompact.TwoSidedLinePair
@@ -160,6 +161,7 @@ import BANANA.NonPrecompact.PrebananaGeneratedBooleanOperations
 import BANANA.NonPrecompact.PrebananaGeneratedMarkedIsomorphism
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
+import BANANA.NonPrecompact.PrebananaCopyDegreeAxiomAudit
 import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
