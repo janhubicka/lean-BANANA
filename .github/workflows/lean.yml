@@ -133,6 +133,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteOrbitCriterionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteOrbitCriterionAxiomAudit.lean
 
+      - name: Audit complete BANANA unlabelled copy Ramsey degrees
+        run: |
+          lake build BANANA.NonPrecompact.BananaCopyDegreeClassificationAxiomAudit
+          lake env lean BANANA/NonPrecompact/BananaCopyDegreeClassificationAxiomAudit.lean
+
       - name: Check finite Boolean tuple signature bounds
         run: |
           lake build BANANA.NonPrecompact.PrebananaTupleSignaturesAxiomAudit

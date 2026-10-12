@@ -67,6 +67,7 @@ import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.BananaOneSidedCopyDegree
+import BANANA.NonPrecompact.BananaCopyDegreeClassificationAxiomAudit
 import BANANA.NonPrecompact.BananaOneSidedSubspaceEquiv
 import BANANA.NonPrecompact.BananaCopyFunctor
 import BANANA.NonPrecompact.TwoSidedLinePair
