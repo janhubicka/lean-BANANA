@@ -155,6 +155,7 @@ import BANANA.NonPrecompact.PrebananaTupleTermParity
 import BANANA.NonPrecompact.PrebananaGeneratedTermRange
 import BANANA.NonPrecompact.PrebananaGeneratedProfileEquiv
 import BANANA.NonPrecompact.PrebananaGeneratedBooleanOperations
+import BANANA.NonPrecompact.PrebananaGeneratedMarkedIsomorphism
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
 import BANANA.NonPrecompact.PrebananaEppaObstruction
