@@ -103,8 +103,8 @@ theorem folkmanFinsetLeftMap_symmDiff
     {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset B) :
-    folkmanFinsetLeftMap f g (Finset.symmDiff s t) =
-      Finset.symmDiff (folkmanFinsetLeftMap f g s) (folkmanFinsetLeftMap f g t) := by
+    folkmanFinsetLeftMap f g (symmDiff s t) =
+      symmDiff (folkmanFinsetLeftMap f g s) (folkmanFinsetLeftMap f g t) := by
   classical
   ext p
   cases p with
@@ -162,8 +162,8 @@ theorem folkmanFinsetRightMap_symmDiff
     {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset C) :
-    folkmanFinsetRightMap f g (Finset.symmDiff s t) =
-      Finset.symmDiff (folkmanFinsetRightMap f g s) (folkmanFinsetRightMap f g t) := by
+    folkmanFinsetRightMap f g (symmDiff s t) =
+      symmDiff (folkmanFinsetRightMap f g s) (folkmanFinsetRightMap f g t) := by
   classical
   ext p
   cases p with
