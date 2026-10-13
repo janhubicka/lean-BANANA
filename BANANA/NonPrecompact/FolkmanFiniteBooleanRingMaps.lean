@@ -68,7 +68,7 @@ theorem folkmanFinsetLeftMap_empty
 
 /-- Left maps preserve binary unions. -/
 theorem folkmanFinsetLeftMap_union
-    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C]
+    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset B) :
     folkmanFinsetLeftMap f g (s ∪ t) =
@@ -84,7 +84,7 @@ theorem folkmanFinsetLeftMap_union
 
 /-- Left maps preserve multiplication (intersection). -/
 theorem folkmanFinsetLeftMap_inter
-    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C]
+    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset B) :
     folkmanFinsetLeftMap f g (s ∩ t) =
@@ -100,11 +100,11 @@ theorem folkmanFinsetLeftMap_inter
 
 /-- Left maps preserve addition (symmetric difference). -/
 theorem folkmanFinsetLeftMap_symmDiff
-    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C]
+    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset B) :
-    folkmanFinsetLeftMap f g (s ∆ t) =
-      folkmanFinsetLeftMap f g s ∆ folkmanFinsetLeftMap f g t := by
+    folkmanFinsetLeftMap f g (Finset.symmDiff s t) =
+      Finset.symmDiff (folkmanFinsetLeftMap f g s) (folkmanFinsetLeftMap f g t) := by
   classical
   ext p
   cases p with
@@ -129,7 +129,7 @@ theorem folkmanFinsetRightMap_empty
       | inr c => simp [folkmanRightImage]
 
 theorem folkmanFinsetRightMap_union
-    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C]
+    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset C) :
     folkmanFinsetRightMap f g (s ∪ t) =
@@ -144,7 +144,7 @@ theorem folkmanFinsetRightMap_union
       | inr c => simp [folkmanRightImage]
 
 theorem folkmanFinsetRightMap_inter
-    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C]
+    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset C) :
     folkmanFinsetRightMap f g (s ∩ t) =
@@ -159,11 +159,11 @@ theorem folkmanFinsetRightMap_inter
       | inr c => simp [folkmanRightImage]
 
 theorem folkmanFinsetRightMap_symmDiff
-    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C]
+    {A B C : Type*} [Fintype A] [Fintype B] [Fintype C] [DecidableEq B] [DecidableEq C]
     (f : B → Option A) (g : C → Option A)
     (s t : Finset C) :
-    folkmanFinsetRightMap f g (s ∆ t) =
-      folkmanFinsetRightMap f g s ∆ folkmanFinsetRightMap f g t := by
+    folkmanFinsetRightMap f g (Finset.symmDiff s t) =
+      Finset.symmDiff (folkmanFinsetRightMap f g s) (folkmanFinsetRightMap f g t) := by
   classical
   ext p
   cases p with
@@ -191,7 +191,7 @@ theorem folkmanFinsetLeftMap_injective
   · obtain ⟨a, ha⟩ : ∃ a : A, f b = some a := by
       cases h : f b with
       | none => exact False.elim (hb h)
-      | some a => exact ⟨a, h⟩
+      | some a => exact ⟨a, rfl⟩
     obtain ⟨c, hc⟩ := hg a
     let p : FolkmanAtomAmalgam f g := .inl ⟨(b, c), ⟨a, ha, hc⟩⟩
     have hm : p ∈ folkmanFinsetLeftMap f g s ↔
@@ -216,7 +216,7 @@ theorem folkmanFinsetRightMap_injective
   · obtain ⟨a, ha⟩ : ∃ a : A, g c = some a := by
       cases h : g c with
       | none => exact False.elim (hc h)
-      | some a => exact ⟨a, h⟩
+      | some a => exact ⟨a, rfl⟩
     obtain ⟨b, hb⟩ := hf a
     let p : FolkmanAtomAmalgam f g := .inl ⟨(b, c), ⟨a, hb, ha⟩⟩
     have hm : p ∈ folkmanFinsetRightMap f g s ↔
