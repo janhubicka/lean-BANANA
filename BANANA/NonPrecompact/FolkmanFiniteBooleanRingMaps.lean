@@ -108,11 +108,11 @@ theorem folkmanFinsetLeftMap_symmDiff
   classical
   ext p
   cases p with
-  | inl p => simp [folkmanLeftImage, Finset.mem_symmDiff]
+  | inl p => simp [folkmanLeftImage, Finset.mem_symmDiff, Set.mem_symmDiff]
   | inr p =>
       cases p with
-      | inl b => simp [folkmanLeftImage, Finset.mem_symmDiff]
-      | inr c => simp [folkmanLeftImage, Finset.mem_symmDiff]
+      | inl b => simp [folkmanLeftImage, Finset.mem_symmDiff, Set.mem_symmDiff]
+      | inr c => simp [folkmanLeftImage, Finset.mem_symmDiff, Set.mem_symmDiff]
 
 /-- The symmetric ring-operation statements for the right embedding. -/
 theorem folkmanFinsetRightMap_empty
@@ -167,11 +167,11 @@ theorem folkmanFinsetRightMap_symmDiff
   classical
   ext p
   cases p with
-  | inl p => simp [folkmanRightImage, Finset.mem_symmDiff]
+  | inl p => simp [folkmanRightImage, Finset.mem_symmDiff, Set.mem_symmDiff]
   | inr p =>
       cases p with
-      | inl b => simp [folkmanRightImage, Finset.mem_symmDiff]
-      | inr c => simp [folkmanRightImage, Finset.mem_symmDiff]
+      | inl b => simp [folkmanRightImage, Finset.mem_symmDiff, Set.mem_symmDiff]
+      | inr c => simp [folkmanRightImage, Finset.mem_symmDiff, Set.mem_symmDiff]
 
 /-- Nonempty opposite base fibres make the left Boolean-ring map
 injective; private points make the outside atoms injective as well. -/
