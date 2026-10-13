@@ -77,6 +77,7 @@ import BANANA.NonPrecompact.FiberProductParityAmalgam
 import BANANA.NonPrecompact.FiberProductStrong
 import BANANA.NonPrecompact.FolkmanAtomAmalgam
 import BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps
+import BANANA.NonPrecompact.FolkmanFiniteBaseImages
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
 import BANANA.NonPrecompact.FolkmanPersistence
