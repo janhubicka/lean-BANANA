@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.PrebananaActualMarkedEmbedding
+
+/-! Transitive kernel audit of the finite marked Boolean embedding interface. -/
+
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_injective
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_surjective
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_preserves_mark
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_generator
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_map_compl
