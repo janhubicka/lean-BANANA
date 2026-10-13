@@ -80,14 +80,14 @@ theorem PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_top_val
 theorem PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_compl_val
     (e : PrebananaAbstractGeneratedMarkedIso α β tupleA tupleB μA μB)
     (x : prebananaGeneratedBooleanSubalgebra α tupleA) :
-    (e.toGeneratedEquiv xᶜ).val = (e.toGeneratedEquiv x).valᶜ := by
+    (e.toGeneratedEquiv (xᶜ)).val = (e.toGeneratedEquiv x).valᶜ := by
   let E := prebananaAbstractTermRangeEquivGenerated α tupleA
-  have h : E.symm xᶜ =
+  have h : E.symm (xᶜ) =
       prebananaAbstractTermRange_complement α tupleA (E.symm x) := by
     apply Subtype.ext
     rfl
   calc
-    (e.toGeneratedEquiv xᶜ).val = (e.equiv (E.symm xᶜ)).val := rfl
+    (e.toGeneratedEquiv (xᶜ)).val = (e.equiv (E.symm (xᶜ))).val := rfl
     _ = (e.equiv (prebananaAbstractTermRange_complement α tupleA (E.symm x))).val :=
       congrArg (fun z : prebananaAbstractTermRange α tupleA => (e.equiv z).val) h
     _ = (e.equiv (E.symm x)).valᶜ := e.map_complement (E.symm x)
@@ -154,7 +154,7 @@ theorem PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_top
 theorem PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_compl
     (e : PrebananaAbstractGeneratedMarkedIso α β tupleA tupleB μA μB)
     (x : prebananaGeneratedBooleanSubalgebra α tupleA) :
-    e.toGeneratedEquiv xᶜ = (e.toGeneratedEquiv x)ᶜ := by
+    e.toGeneratedEquiv (xᶜ) = (e.toGeneratedEquiv x)ᶜ := by
   apply Subtype.ext
   exact e.toGeneratedEquiv_compl_val x
 
