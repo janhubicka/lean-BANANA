@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.PrebananaGeneratedBooleanClosure
+
+/-! Transitive kernel audit for the actual generated Boolean subalgebra interface. -/
+
+#print axioms SuccessorTree.NonPrecompact.prebananaGeneratedBooleanSubalgebra_mem_iff
+#print axioms SuccessorTree.NonPrecompact.prebananaAbstractTermRangeEquivGenerated
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_preserves_mark

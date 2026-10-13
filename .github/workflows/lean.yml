@@ -163,6 +163,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractGeneratedMarkedIsoAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractGeneratedMarkedIsoAxiomAudit.lean
 
+      - name: Check actual generated Boolean subalgebras equal term-value ranges
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaGeneratedBooleanClosureAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaGeneratedBooleanClosureAxiomAudit.lean
+
       - name: Check abstract generated finite Boolean term ranges and marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractGeneratedTermRangeAxiomAudit
