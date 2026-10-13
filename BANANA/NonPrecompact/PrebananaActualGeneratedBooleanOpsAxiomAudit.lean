@@ -1,0 +1,12 @@
+import BANANA.NonPrecompact.PrebananaActualGeneratedBooleanOps
+
+/-! Transitive axiom audit for Boolean operations on actual generated
+subalgebras. Run locally after building Mathlib and lean-BANANA. -/
+
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_term
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_bot
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_top
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_compl
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_sup
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_map_inf
+#print axioms SuccessorTree.NonPrecompact.PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_preserves_mark
