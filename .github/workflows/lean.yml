@@ -643,6 +643,11 @@ jobs:
           lake build BANANA.NonPrecompact.SymplecticCirculationAxiomAudit
           lake env lean BANANA/NonPrecompact/SymplecticCirculationAxiomAudit.lean
 
+      - name: Audit Folkman atom strong intersection and bilinear extension
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanStrongAmalgamAxiomAudit.lean
+
       - name: Check staged copy Ramsey theorems and axioms
         run: bash scripts/check_staged_ramsey_degrees.sh
 
