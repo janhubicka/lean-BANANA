@@ -70,15 +70,23 @@ theorem prebanana_threeAtom_oneGenerator_profiles_equal :
     apply prebanana_oneGenerator_all_signatures
       (yes := (⟨0, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
       (no := (⟨2, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
-    · simp [xs, prebananaUnmarked, Fin.ext_iff]
-    · simp [xs, prebananaUnmarked, Fin.ext_iff]
+    · exact Finset.mem_singleton.mpr rfl
+    · intro h
+      have heq := Finset.mem_singleton.mp h
+      have hnat := congrArg Fin.val heq
+      norm_num at hnat
   have hys :
       prebananaRealisedSignatures (prebananaUnmarked 2) ys = Finset.univ := by
     apply prebanana_oneGenerator_all_signatures
       (yes := (⟨0, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
       (no := (⟨2, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
-    · simp [ys, prebananaUnmarked, Fin.ext_iff]
-    · simp [ys, prebananaUnmarked, Fin.ext_iff]
+    · exact Finset.mem_insert_self _ _
+    · intro h
+      rcases Finset.mem_insert.mp h with hzero | hone
+      · have hnat := congrArg Fin.val hzero
+        norm_num at hnat
+      · have hnat := congrArg Fin.val (Finset.mem_singleton.mp hone)
+        norm_num at hnat
   change (prebananaRealisedSignatures (prebananaUnmarked 2) xs,
       prebananaSignatureMark (prebananaUnmarked 2) xs) =
     (prebananaRealisedSignatures (prebananaUnmarked 2) ys,
