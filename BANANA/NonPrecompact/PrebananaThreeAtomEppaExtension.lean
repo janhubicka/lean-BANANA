@@ -34,7 +34,7 @@ theorem prebananaThreeAtom_no_boundedLattice_extension
     intro s t hst
     have hmeet : f s ⊓ f t = f s := by
       calc
-        f s ⊓ f t = f (s ⊓ t) := (f.map_inf s t).symm
+        f s ⊓ f t = f (s ⊓ t) := (map_inf f s t).symm
         _ = f s := congrArg f (inf_eq_left.mpr hst)
     exact inf_eq_left.mp hmeet
   exact prebananaThreeAtoms_no_finite_extension
