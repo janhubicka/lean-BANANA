@@ -31,6 +31,22 @@ structure FolkmanFiniteTwoSortAtomDiagram
   hfR : ∀ a : AR, ∃ b : BR, fR b = some a
   hgR : ∀ a : AR, ∃ c : CR, gR c = some a
 
+
+/-- Addition on a pair of finite Boolean-ring atom supports; the sorts
+remain distinct, with symmetric difference on each coordinate. -/
+noncomputable def folkmanTwoSortSymmDiff
+    {X Y : Type*} (x y : Finset X × Finset Y) :
+    Finset X × Finset Y := by
+  classical
+  exact (symmDiff x.1 y.1, symmDiff x.2 y.2)
+
+/-- Multiplication on a pair of finite atom supports. -/
+noncomputable def folkmanTwoSortInter
+    {X Y : Type*} (x y : Finset X × Finset Y) :
+    Finset X × Finset Y := by
+  classical
+  exact (x.1 ∩ y.1, x.2 ∩ y.2)
+
 namespace FolkmanFiniteTwoSortAtomDiagram
 
 variable {AL BL CL AR BR CR : Type*}
@@ -84,6 +100,61 @@ theorem embedC_injective : Function.Injective D.embedC := by
       (congrArg Prod.fst h)
   · exact (folkmanFinsetRightMap_injective D.fR D.gR D.hfR)
       (congrArg Prod.snd h)
+
+
+/-- The B-side map preserves zero in both Boolean-ring sorts. -/
+theorem embedB_zero :
+    D.embedB (∅, ∅) = (∅, ∅) := by
+  apply Prod.ext
+  · exact folkmanFinsetLeftMap_empty D.fL D.gL
+  · exact folkmanFinsetLeftMap_empty D.fR D.gR
+
+/-- The C-side map preserves zero in both sorts. -/
+theorem embedC_zero :
+    D.embedC (∅, ∅) = (∅, ∅) := by
+  apply Prod.ext
+  · exact folkmanFinsetRightMap_empty D.fL D.gL
+  · exact folkmanFinsetRightMap_empty D.fR D.gR
+
+/-- The B-side embeddings preserve Boolean-ring addition. -/
+theorem embedB_symmDiff
+    (x y : Finset BL × Finset BR) :
+    D.embedB (folkmanTwoSortSymmDiff x y) =
+      folkmanTwoSortSymmDiff (D.embedB x) (D.embedB y) := by
+  classical
+  apply Prod.ext
+  · exact folkmanFinsetLeftMap_symmDiff D.fL D.gL x.1 y.1
+  · exact folkmanFinsetLeftMap_symmDiff D.fR D.gR x.2 y.2
+
+/-- The C-side embeddings preserve Boolean-ring addition. -/
+theorem embedC_symmDiff
+    (x y : Finset CL × Finset CR) :
+    D.embedC (folkmanTwoSortSymmDiff x y) =
+      folkmanTwoSortSymmDiff (D.embedC x) (D.embedC y) := by
+  classical
+  apply Prod.ext
+  · exact folkmanFinsetRightMap_symmDiff D.fL D.gL x.1 y.1
+  · exact folkmanFinsetRightMap_symmDiff D.fR D.gR x.2 y.2
+
+/-- The B-side embeddings preserve Boolean-ring multiplication. -/
+theorem embedB_inter
+    (x y : Finset BL × Finset BR) :
+    D.embedB (folkmanTwoSortInter x y) =
+      folkmanTwoSortInter (D.embedB x) (D.embedB y) := by
+  classical
+  apply Prod.ext
+  · exact folkmanFinsetLeftMap_inter D.fL D.gL x.1 y.1
+  · exact folkmanFinsetLeftMap_inter D.fR D.gR x.2 y.2
+
+/-- The C-side embeddings preserve Boolean-ring multiplication. -/
+theorem embedC_inter
+    (x y : Finset CL × Finset CR) :
+    D.embedC (folkmanTwoSortInter x y) =
+      folkmanTwoSortInter (D.embedC x) (D.embedC y) := by
+  classical
+  apply Prod.ext
+  · exact folkmanFinsetRightMap_inter D.fL D.gL x.1 y.1
+  · exact folkmanFinsetRightMap_inter D.fR D.gR x.2 y.2
 
 /-- The two finite ring-sort embeddings agree on their common base. -/
 theorem base_commutes (a : Finset AL × Finset AR) :

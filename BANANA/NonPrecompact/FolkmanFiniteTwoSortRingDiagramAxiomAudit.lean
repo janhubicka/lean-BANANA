@@ -5,5 +5,11 @@ This module does not certify a bilinear pairing extension. -/
 
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedB_injective
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedC_injective
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedB_zero
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedC_zero
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedB_symmDiff
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedC_symmDiff
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedB_inter
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.embedC_inter
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.base_commutes
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTwoSortAtomDiagram.images_eq_iff_common_base
