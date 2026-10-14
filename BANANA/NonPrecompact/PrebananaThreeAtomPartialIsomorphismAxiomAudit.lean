@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphism
+
+/-! Transitive axiom audit for the three-atom partial isomorphism. -/
+#print axioms SuccessorTree.NonPrecompact.prebanana_oneGenerator_all_signatures
+#print axioms SuccessorTree.NonPrecompact.prebanana_threeAtom_oneGenerator_profiles_equal
+#print axioms SuccessorTree.NonPrecompact.prebanana_threeAtom_partialIsomorphism
+#print axioms SuccessorTree.NonPrecompact.prebanana_threeAtom_partialIsomorphism_generator
