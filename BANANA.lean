@@ -172,6 +172,7 @@ import BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstruction
 import BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphism
 import BANANA.NonPrecompact.PrebananaThreeAtomEppaExtension
 import BANANA.NonPrecompact.PrebananaClassEPPA
+import BANANA.NonPrecompact.PrebananaAbstractClassEPPA
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient

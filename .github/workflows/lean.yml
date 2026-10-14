@@ -90,6 +90,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaHomogeneousLimitMassObstructionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaHomogeneousLimitMassObstructionAxiomAudit.lean
 
+      - name: Audit abstract finite Boolean class EPPA failure
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractClassEPPAAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractClassEPPAAxiomAudit.lean
+
       - name: Build
         run: lake build
 
