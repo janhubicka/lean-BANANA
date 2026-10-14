@@ -168,6 +168,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractGeneratedMarkedIsoAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractGeneratedMarkedIsoAxiomAudit.lean
 
+      - name: Audit marked bounded-lattice embedding of actual generated subalgebras
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaActualMarkedEmbeddingAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaActualMarkedEmbeddingAxiomAudit.lean
+
       - name: Audit Boolean operations on actual generated subalgebras
         run: |
           lake build BANANA.NonPrecompact.PrebananaActualGeneratedBooleanOpsAxiomAudit
