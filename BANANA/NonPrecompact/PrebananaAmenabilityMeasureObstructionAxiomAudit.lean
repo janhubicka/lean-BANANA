@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.PrebananaAmenabilityMeasureObstruction
+
+/-! Transitive axiom audit of the pre-BANANA invariant-mass obstruction. -/
+#print axioms SuccessorTree.NonPrecompact.prebanana_no_uniformMass_two_three
+#print axioms SuccessorTree.NonPrecompact.prebanana_invariantMass_constant_on_zeroMark_orbit
+#print axioms SuccessorTree.NonPrecompact.prebanana_no_invariantMass_of_zeroMark_orbit
+#print axioms SuccessorTree.NonPrecompact.prebanana_threeAtom_unmarked_pair
+#print axioms SuccessorTree.NonPrecompact.prebanana_threeAtom_unmarked_triple

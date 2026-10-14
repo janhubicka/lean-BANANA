@@ -691,6 +691,11 @@ jobs:
       - name: Check staged copy Ramsey theorems and axioms
         run: bash scripts/check_staged_ramsey_degrees.sh
 
+      - name: Audit pre-BANANA invariant mass obstruction
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAmenabilityMeasureObstructionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAmenabilityMeasureObstructionAxiomAudit.lean
+
       - name: Audit finite abstract pre-BANANA EPPA obstruction
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstructionAxiomAudit
