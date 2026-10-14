@@ -50,27 +50,27 @@ theorem prebanana_no_uniformMass_of_threeAtom_copy
       apply hinj
       calc
         f s = ⊥ := h
-        _ = f (⊥ : Finset (Fin 3)) := (f.map_bot).symm
+        _ = f (⊥ : Finset (Fin 3)) := (map_bot f).symm
     · intro h
       apply htop
       apply hinj
       calc
         f s = ⊤ := h
-        _ = f (⊤ : Finset (Fin 3)) := (f.map_top).symm
+        _ = f (⊤ : Finset (Fin 3)) := (map_top f).symm
   have hdj (s t : Finset (Fin 3))
       (h : s ∩ t = ∅) : f s ⊓ f t = ⊥ := by
     have h' : s ⊓ t = (⊥ : Finset (Fin 3)) := by simpa using h
     calc
-      f s ⊓ f t = f (s ⊓ t) := (f.map_inf s t).symm
+      f s ⊓ f t = f (s ⊓ t) := (map_inf f s t).symm
       _ = f ⊥ := congrArg f h'
-      _ = ⊥ := f.map_bot
+      _ = ⊥ := map_bot f
   have hjoin (s t : Finset (Fin 3))
       (h : s ∪ t = Finset.univ) : f s ⊔ f t = ⊤ := by
     have h' : s ⊔ t = (⊤ : Finset (Fin 3)) := by simpa using h
     calc
-      f s ⊔ f t = f (s ⊔ t) := (f.map_sup s t).symm
+      f s ⊔ f t = f (s ⊔ t) := (map_sup f s t).symm
       _ = f ⊤ := congrArg f h'
-      _ = ⊤ := f.map_top
+      _ = ⊤ := map_top f
   have ha0 : a ≠ ∅ := by decide
   have ha1 : a ≠ Finset.univ := by decide
   have hb0 : b ≠ ∅ := by decide
@@ -93,11 +93,11 @@ theorem prebanana_no_uniformMass_of_threeAtom_copy
       simpa using htrtop
     calc
       (f a ⊔ f d) ⊔ f e = f (a ⊔ d) ⊔ f e := by
-        rw [f.map_sup a d]
+        rw [map_sup f a d]
       _ = f ((a ⊔ d) ⊔ e) :=
-        (f.map_sup (a ⊔ d) e).symm
+        (map_sup f (a ⊔ d) e).symm
       _ = f ⊤ := congrArg f htr'
-      _ = ⊤ := f.map_top
+      _ = ⊤ := map_top f
   exact prebanana_no_uniformMass_two_three μ mass hadd hunit hequal
     (f a) (f b) (f a) (f d) (f e)
     (hproper a ha0 ha1) (hproper b hb0 hb1)
