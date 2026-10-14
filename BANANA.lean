@@ -170,6 +170,7 @@ import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstruction
 import BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphism
 import BANANA.NonPrecompact.PrebananaThreeAtomEppaExtension
+import BANANA.NonPrecompact.PrebananaAtomCoordinateEppaFailure
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient
