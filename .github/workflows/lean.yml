@@ -691,6 +691,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstructionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractEppaFiniteObstructionAxiomAudit.lean
 
+      - name: Audit three-atom pre-BANANA partial isomorphism
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphismAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaThreeAtomPartialIsomorphismAxiomAudit.lean
+
       - name: Check strong BANANA block amalgamation
         run: |
           lake build BANANA.NonPrecompact.BananaStrongBlockAmalgamAxiomAudit
