@@ -60,6 +60,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaStoneMeasureMassAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaStoneMeasureMassAxiomAudit.lean
 
+      - name: Audit atom-class pre-BANANA EPPA failure
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaClassEPPAAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaClassEPPAAxiomAudit.lean
+
       - name: Build
         run: lake build
 
