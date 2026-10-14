@@ -70,6 +70,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaOneGeneratorFourValuesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaOneGeneratorFourValuesAxiomAudit.lean
 
+      - name: Audit unary Boolean truth-table normalisation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaUnaryTermTruthTableAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaUnaryTermTruthTableAxiomAudit.lean
+
       - name: Build
         run: lake build
 
