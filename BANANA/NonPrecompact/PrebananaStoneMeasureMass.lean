@@ -92,7 +92,7 @@ theorem prebanana_no_invariantPresentedProbability_of_threeAtom
     (hmark : ∀ s : Finset (Fin 3), μ (f s) = 0) :
     False := by
   apply prebanana_no_invariantMass_of_threeAtom_copy
-    μ (prebananaPresentedProbabilityMass ν ι)
+    (β := β) (G := G) μ (prebananaPresentedProbabilityMass ν ι)
   · intro x y hxy
     exact prebananaPresentedProbabilityMass_additive ν ι hmeas x y hxy
   · exact prebananaPresentedProbabilityMass_top ν ι
