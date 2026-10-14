@@ -175,6 +175,7 @@ import BANANA.NonPrecompact.PrebananaClassEPPA
 import BANANA.NonPrecompact.PrebananaAbstractClassEPPA
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelStrongAP
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelJEP
+import BANANA.NonPrecompact.PrebananaFiniteBooleanModelSkeleton
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient
