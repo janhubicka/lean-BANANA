@@ -1,5 +1,4 @@
 import BANANA.NonPrecompact.PrebananaAmenabilityMeasureObstruction
-import BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphism
 
 /-!
 # The unmarked three-atom copy supplies both mass partitions
