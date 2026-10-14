@@ -95,6 +95,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAbstractClassEPPAAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractClassEPPAAxiomAudit.lean
 
+      - name: Audit finite Boolean model strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelStrongAPAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelStrongAPAxiomAudit.lean
+
       - name: Build
         run: lake build
 
