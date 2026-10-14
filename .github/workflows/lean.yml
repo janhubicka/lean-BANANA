@@ -60,6 +60,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaStoneMeasureMassAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaStoneMeasureMassAxiomAudit.lean
 
+      - name: Audit one-generator Boolean local finiteness
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaOneGeneratorFourValuesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaOneGeneratorFourValuesAxiomAudit.lean
+
       - name: Build
         run: lake build
 
