@@ -62,8 +62,11 @@ theorem prebananaUnaryTruthValue_injective
     first
     | rfl
     | (exfalso
-       simp [prebananaUnaryTruthValue, hbot, htop, hbotTop,
-         hcompBot, hcompTop, hcompNe] at h)
+       simp [prebananaUnaryTruthValue,
+         hbot, hbot.symm, htop, htop.symm,
+         hbotTop, hbotTop.symm,
+         hcompBot, hcompBot.symm, hcompTop, hcompTop.symm,
+         hcompNe, hcompNe.symm] at h)
 
 /-- For a proper nonzero generator x, equality of two term values
 is equivalent to equality of their two-bit Boolean truth tables. -/
