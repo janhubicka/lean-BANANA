@@ -42,7 +42,7 @@ theorem prebanana_oneGenerator_all_signatures
     simp [prebananaAtomSignature, hyes, hp]
   · have hf : p (0 : Fin 1) = false := by
       cases hb : p (0 : Fin 1) with
-      | false => exact hb
+      | false => rfl
       | true => exact False.elim (hp hb)
     change p ∈ (Finset.univ : Finset (Fin A.atomCount)).image
       (prebananaAtomSignature A (fun _ : Fin 1 => s))
@@ -61,29 +61,30 @@ theorem prebanana_threeAtom_oneGenerator_profiles_equal :
     prebananaTupleProfile (prebananaUnmarked 2)
       (fun _ : Fin 1 => ({0, 1} : Finset (Fin 3))) := by
   classical
-  let A : PrebananaAtomStructure := prebananaUnmarked 2
-  let xs : Fin 1 → Finset (Fin A.atomCount) :=
+  let xs : Fin 1 → Finset (Fin 3) :=
     fun _ => {0}
-  let ys : Fin 1 → Finset (Fin A.atomCount) :=
+  let ys : Fin 1 → Finset (Fin 3) :=
     fun _ => {0, 1}
-  have hxs : prebananaRealisedSignatures A xs = Finset.univ := by
-    exact prebanana_oneGenerator_all_signatures A
-      ({0} : Finset (Fin A.atomCount))
-      (0 : Fin A.atomCount) (2 : Fin A.atomCount)
+  have hxs :
+      prebananaRealisedSignatures (prebananaUnmarked 2) xs = Finset.univ := by
+    exact prebanana_oneGenerator_all_signatures (prebananaUnmarked 2)
+      ({0} : Finset (Fin 3))
+      (0 : Fin 3) (2 : Fin 3)
       (by simp) (by simp)
-  have hys : prebananaRealisedSignatures A ys = Finset.univ := by
-    exact prebanana_oneGenerator_all_signatures A
-      ({0, 1} : Finset (Fin A.atomCount))
-      (0 : Fin A.atomCount) (2 : Fin A.atomCount)
+  have hys :
+      prebananaRealisedSignatures (prebananaUnmarked 2) ys = Finset.univ := by
+    exact prebanana_oneGenerator_all_signatures (prebananaUnmarked 2)
+      ({0, 1} : Finset (Fin 3))
+      (0 : Fin 3) (2 : Fin 3)
       (by simp) (by simp)
-  change (prebananaRealisedSignatures A xs,
-      prebananaSignatureMark A xs) =
-    (prebananaRealisedSignatures A ys,
-      prebananaSignatureMark A ys)
+  change (prebananaRealisedSignatures (prebananaUnmarked 2) xs,
+      prebananaSignatureMark (prebananaUnmarked 2) xs) =
+    (prebananaRealisedSignatures (prebananaUnmarked 2) ys,
+      prebananaSignatureMark (prebananaUnmarked 2) ys)
   apply Prod.ext
   · rw [hxs, hys]
   · funext p
-    simp [prebananaSignatureMark, A, prebananaUnmarked]
+    simp [prebananaSignatureMark, prebananaUnmarked]
 
 /-- A genuine marked Boolean isomorphism between the two
 four-element generated subalgebras of the unmarked three-atom
