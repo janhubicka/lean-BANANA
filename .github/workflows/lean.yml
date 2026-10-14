@@ -65,6 +65,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaClassEPPAAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaClassEPPAAxiomAudit.lean
 
+      - name: Audit one-generator Boolean local finiteness
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaOneGeneratorFourValuesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaOneGeneratorFourValuesAxiomAudit.lean
+
       - name: Build
         run: lake build
 
