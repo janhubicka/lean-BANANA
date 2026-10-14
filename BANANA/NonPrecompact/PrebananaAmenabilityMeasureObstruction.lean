@@ -54,7 +54,8 @@ theorem prebanana_no_uniformMass_two_three
     (hcdetop : (c ⊔ d) ⊔ e = ⊤) :
     False := by
   have ht : (c ⊔ d) ⊓ e = ⊥ := by
-    rw [sup_inf_right, hce, hde]
+    rw [inf_comm (c ⊔ d) e, inf_sup_left]
+    rw [inf_comm e c, inf_comm e d, hce, hde]
     simp
   have htwo : mass a + mass b = 1 := by
     calc
