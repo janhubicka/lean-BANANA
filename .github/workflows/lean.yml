@@ -115,6 +115,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelHeredityAxiomAudit.lean
 
+      - name: Audit finite Boolean embedding identity and composition
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculusAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelEmbeddingCalculusAxiomAudit.lean
+
       - name: Build
         run: lake build
 
