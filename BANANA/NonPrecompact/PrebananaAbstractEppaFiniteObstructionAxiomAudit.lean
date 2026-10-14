@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstruction
+
+/-! Transitive axiom audit of the abstract finite EPPA obstruction. -/
+#print axioms SuccessorTree.NonPrecompact.finiteOrderIso_no_strict_increase
+#print axioms SuccessorTree.NonPrecompact.finiteOrderIso_no_strict_partial_extension
+#print axioms SuccessorTree.NonPrecompact.prebananaThreeAtoms_strict_inclusion
+#print axioms SuccessorTree.NonPrecompact.prebananaThreeAtoms_no_finite_extension
