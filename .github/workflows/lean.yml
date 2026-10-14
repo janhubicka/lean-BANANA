@@ -110,6 +110,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelSkeletonAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelSkeletonAxiomAudit.lean
 
+      - name: Audit finite Boolean subalgebra heredity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelHeredityAxiomAudit.lean
+
       - name: Build
         run: lake build
 
