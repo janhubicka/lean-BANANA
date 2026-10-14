@@ -59,8 +59,11 @@ theorem prebananaUnaryTruthValue_injective
     simpa using hh
   rintro ⟨a, b⟩ ⟨c, d⟩ h
   cases a <;> cases b <;> cases c <;> cases d <;>
-    simp_all [prebananaUnaryTruthValue, hbot, htop, hbotTop,
-      hcompBot, hcompTop, hcompNe]
+    first
+    | rfl
+    | (exfalso
+       simp [prebananaUnaryTruthValue, hbot, htop, hbotTop,
+         hcompBot, hcompTop, hcompNe] at h)
 
 /-- For a proper nonzero generator x, equality of two term values
 is equivalent to equality of their two-bit Boolean truth tables. -/
