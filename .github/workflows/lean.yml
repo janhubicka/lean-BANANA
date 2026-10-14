@@ -40,6 +40,11 @@ jobs:
       - name: Download Mathlib cache
         run: lake exe cache get
 
+      - name: Audit three-atom pre-BANANA partial isomorphism
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphismAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaThreeAtomPartialIsomorphismAxiomAudit.lean
+
       - name: Build
         run: lake build
 
@@ -690,11 +695,6 @@ jobs:
         run: |
           lake build BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstructionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAbstractEppaFiniteObstructionAxiomAudit.lean
-
-      - name: Audit three-atom pre-BANANA partial isomorphism
-        run: |
-          lake build BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphismAxiomAudit
-          lake env lean BANANA/NonPrecompact/PrebananaThreeAtomPartialIsomorphismAxiomAudit.lean
 
       - name: Check strong BANANA block amalgamation
         run: |
