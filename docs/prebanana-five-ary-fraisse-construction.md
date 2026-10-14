@@ -174,6 +174,18 @@ For levels \(k=1,\dots,4\), the observed \((Z_k,M_k)\) counts were
 \((3,2),(13,12),(63,62),(313,312)\) for parent mark \(0\), and
 the reversed pairs for parent mark \(1\).
 
+A second independent exhaustive check covers **1,327 complete finite
+extension diagrams**: one existing five-atom ambient stage, between
+one and three source atoms, at most three target atoms, all surjective
+atom partitions in the two embeddings and every parity-compatible
+choice of target marking. It verifies the extension square, disjoint
+nonempty bins, full coverage and correct mark of every bin, using
+the uniform depth equal to the number of target atoms.
+
+The complete reproducible check is
+`scripts/check_prebanana_fiveary_extension_small.py`
+(run `python3 scripts/check_prebanana_fiveary_extension_small.py`).
+
 **Limitations:** This enumerative check is not a Lean proof and does
 not verify direct-limit construction, countable homogeneity, the
 Stone action, or topological non-amenability.
