@@ -178,6 +178,7 @@ import BANANA.NonPrecompact.PrebananaFiniteBooleanModelJEP
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelSkeleton
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredity
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculus
+import BANANA.NonPrecompact.PrebananaFiniteBooleanTower
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient
