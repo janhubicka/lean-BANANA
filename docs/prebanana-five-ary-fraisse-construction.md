@@ -13,7 +13,7 @@ Boolean algebras with an additive marking
 \(\mu:B\to\mathbb F_2\), satisfying \(\mu(0)=\mu(1)=0\).
 An embedding is a unital Boolean embedding preserving \(\mu\).
 
-The Mathlib file \`Mathlib/ModelTheory/Fraisse.lean\` contains the language of
+The Mathlib file `Mathlib/ModelTheory/Fraisse.lean` contains the language of
 ages, countable-age existence, direct limits, extension pairs and
 ultrahomogeneity, but explicitly lists *existence of Fraïssé limits* as a
 TODO. In particular, countable age alone does not give the requisite
@@ -123,14 +123,14 @@ and marking through compatible stages.
    many tuple orbits and hence \(\omega\)-categoricity.
 
 The measure obstruction already formalised in
-\`PrebananaHomogeneousLimitMassObstruction.lean\` can then be applied
+`PrebananaHomogeneousLimitMassObstruction.lean` can then be applied
 once the limit, automorphism group, Stone action, and relevant
 invariant-measure interface have been constructed.
 
 ## Suggested Lean modules and exact milestones
 
 1. **Finite embedding calculus**: identities and composition for
-   \`PrebananaFiniteBooleanEmbedding\` (draft #193).
+   `PrebananaFiniteBooleanEmbedding` (draft #193).
 2. **Finite tower interface**: stages \(B_n\), embeddings \(i_n\),
    compatible iterated embeddings and marking preservation.
 3. **Word-marking recursion and arithmetic**: prove parent/child sum,
@@ -147,8 +147,8 @@ invariant-measure interface have been constructed.
    invariant-measure transfer separately. Do not conflate conditional
    finite mass contradiction with the full non-amenability theorem.
 
-Any new circulation TeX entries may be only \`\\todo\` notes and
-\`\\leanverified...\` markers for **completed kernel checks**.
+Any new circulation TeX entries may be only `\todo` notes and
+`\leanverified...` markers for **completed kernel checks**.
 
 ## Adversarial finite check
 
