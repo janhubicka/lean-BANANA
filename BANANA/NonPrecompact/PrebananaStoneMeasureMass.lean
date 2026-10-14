@@ -91,16 +91,11 @@ theorem prebanana_no_invariantPresentedProbability_of_threeAtom
     (hinj : Function.Injective f)
     (hmark : ∀ s : Finset (Fin 3), μ (f s) = 0) :
     False := by
-  apply prebanana_no_invariantMass_of_threeAtom_copy
+  exact prebanana_no_invariantMass_of_threeAtom_copy
     (β := β) (G := G) μ (prebananaPresentedProbabilityMass ν ι)
-  · intro x y hxy
-    exact prebananaPresentedProbabilityMass_additive ν ι hmeas x y hxy
-  · exact prebananaPresentedProbabilityMass_top ν ι
-  · exact htrans
-  · intro g x
-    exact hinvariant g x
-  · exact f
-  · exact hinj
-  · exact hmark
+    (fun x y hxy =>
+      prebananaPresentedProbabilityMass_additive ν ι hmeas x y hxy)
+    (prebananaPresentedProbabilityMass_top ν ι)
+    htrans (fun g x => hinvariant g x) f hinj hmark
 
 end SuccessorTree.NonPrecompact
