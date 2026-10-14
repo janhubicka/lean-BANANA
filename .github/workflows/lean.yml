@@ -75,6 +75,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaUnaryTermTruthTableAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaUnaryTermTruthTableAxiomAudit.lean
 
+      - name: Audit unary Boolean equality kernels
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaUnaryKernelTransferAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaUnaryKernelTransferAxiomAudit.lean
+
       - name: Build
         run: lake build
 
