@@ -75,11 +75,17 @@ Compatibility of markings implies
    =\sum_{b\in F_a}\mu_B(b).
 \]
 
-Choose one common \(k\) sufficiently large that, for every \(a\),
-the descendants of \(E_a\) in \(W_{n+k}\) include at least
-\(\#\{b\in F_a:\mu_B(b)=0\}\) unmarked atoms and at least
-\(\#\{b\in F_a:\mu_B(b)=1\}\) marked atoms. The descendant-count
-formula guarantees this.
+In fact we may choose the **uniform depth**
+\(k=\#\operatorname{At}(B)\), independent of \(n\), \(e\), and the
+sizes of the source atom fibres. From \(M_0(p)=p\geq0\) and
+\(M_{k+1}(p)=M_k(p)+2\cdot5^k\), induction gives
+\(M_k(p)\geq2k\); also \(Z_k(p)=M_k(1-p)\geq2k\).
+Each \(E_a\) is nonempty, so its descendants at depth \(k\) contain
+at least \(2k\) marked and \(2k\) unmarked atoms. This exceeds
+each of the two required numbers
+\(\#\{b\in F_a:\mu_B(b)=0\}\) and
+\(\#\{b\in F_a:\mu_B(b)=1\}\), both at most \(k\).
+Thus one explicit common depth works for every source fibre.
 
 For each \(b\in F_a\), put one distinct descendant of mark
 \(\mu_B(b)\) into a bin \(P_b\). The as-yet unallocated descendants
