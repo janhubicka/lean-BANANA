@@ -100,6 +100,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelStrongAPAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelStrongAPAxiomAudit.lean
 
+      - name: Audit finite Boolean model joint embedding
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelJEPAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelJEPAxiomAudit.lean
+
       - name: Build
         run: lake build
 
