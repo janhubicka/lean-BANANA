@@ -55,6 +55,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAmenabilityThreeAtomCopyAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAmenabilityThreeAtomCopyAxiomAudit.lean
 
+      - name: Audit probability-to-Boolean mass transfer
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaStoneMeasureMassAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaStoneMeasureMassAxiomAudit.lean
+
       - name: Audit pre-BANANA atom-coordinate EPPA failure
         run: |
           lake build BANANA.NonPrecompact.PrebananaAtomCoordinateEppaFailureAxiomAudit
