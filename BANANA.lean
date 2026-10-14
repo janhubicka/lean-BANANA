@@ -175,6 +175,7 @@ import BANANA.NonPrecompact.PrebananaClassEPPA
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient
+import BANANA.NonPrecompact.PrebananaPositiveMassRefinement
 import BANANA.NonPrecompact.PrebananaResidueRealisation
 import BANANA.NonPrecompact.QuadraticArithmetic
 import BANANA.NonPrecompact.QuadraticBinomial
