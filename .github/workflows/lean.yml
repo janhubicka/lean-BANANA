@@ -55,6 +55,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAmenabilityThreeAtomCopyAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAmenabilityThreeAtomCopyAxiomAudit.lean
 
+      - name: Audit pre-BANANA atom-coordinate EPPA failure
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAtomCoordinateEppaFailureAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAtomCoordinateEppaFailureAxiomAudit.lean
+
       - name: Build
         run: lake build
 
