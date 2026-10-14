@@ -50,6 +50,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaThreeAtomEppaExtensionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaThreeAtomEppaExtensionAxiomAudit.lean
 
+      - name: Audit three-atom embedding mass obstruction
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAmenabilityThreeAtomCopyAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAmenabilityThreeAtomCopyAxiomAudit.lean
+
       - name: Build
         run: lake build
 
