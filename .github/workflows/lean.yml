@@ -40,6 +40,11 @@ jobs:
       - name: Download Mathlib cache
         run: lake exe cache get
 
+      - name: Audit three-atom embedding mass obstruction
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAmenabilityThreeAtomCopyAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAmenabilityThreeAtomCopyAxiomAudit.lean
+
       - name: Build
         run: lake build
 
