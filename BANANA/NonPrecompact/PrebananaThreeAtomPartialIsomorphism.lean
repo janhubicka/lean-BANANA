@@ -70,15 +70,15 @@ theorem prebanana_threeAtom_oneGenerator_profiles_equal :
     apply prebanana_oneGenerator_all_signatures
       (yes := (⟨0, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
       (no := (⟨2, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
-    · simp [Fin.ext_iff]
-    · simp [Fin.ext_iff]
+    · simp [xs, prebananaUnmarked, Fin.ext_iff]
+    · simp [xs, prebananaUnmarked, Fin.ext_iff]
   have hys :
       prebananaRealisedSignatures (prebananaUnmarked 2) ys = Finset.univ := by
     apply prebanana_oneGenerator_all_signatures
       (yes := (⟨0, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
       (no := (⟨2, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
-    · simp [Fin.ext_iff]
-    · simp [Fin.ext_iff]
+    · simp [ys, prebananaUnmarked, Fin.ext_iff]
+    · simp [ys, prebananaUnmarked, Fin.ext_iff]
   change (prebananaRealisedSignatures (prebananaUnmarked 2) xs,
       prebananaSignatureMark (prebananaUnmarked 2) xs) =
     (prebananaRealisedSignatures (prebananaUnmarked 2) ys,
