@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.PrebananaOneGeneratorMarkedIso
+
+/-! Axiom audit for marked one-generator isomorphisms and orbit transfer. -/
+#print axioms SuccessorTree.NonPrecompact.prebananaOneGeneratorTermRangeEquiv
+#print axioms SuccessorTree.NonPrecompact.prebananaOneGeneratorTermRangeEquiv_eval
+#print axioms SuccessorTree.NonPrecompact.prebananaOneGeneratorTermRangeEquiv_preserves_mark
+#print axioms SuccessorTree.NonPrecompact.prebananaOneGeneratorMarkedIso
+#print axioms SuccessorTree.NonPrecompact.prebananaProperZeroMark_orbit_of_ultrahomogeneity
