@@ -67,16 +67,18 @@ theorem prebanana_threeAtom_oneGenerator_profiles_equal :
     fun _ => {0, 1}
   have hxs :
       prebananaRealisedSignatures (prebananaUnmarked 2) xs = Finset.univ := by
-    exact prebanana_oneGenerator_all_signatures (prebananaUnmarked 2)
-      ({0} : Finset (Fin 3))
-      (0 : Fin 3) (2 : Fin 3)
-      (by simp) (by simp)
+    apply prebanana_oneGenerator_all_signatures
+      (yes := (⟨0, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
+      (no := (⟨2, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
+    · decide
+    · decide
   have hys :
       prebananaRealisedSignatures (prebananaUnmarked 2) ys = Finset.univ := by
-    exact prebanana_oneGenerator_all_signatures (prebananaUnmarked 2)
-      ({0, 1} : Finset (Fin 3))
-      (0 : Fin 3) (2 : Fin 3)
-      (by simp) (by simp)
+    apply prebanana_oneGenerator_all_signatures
+      (yes := (⟨0, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
+      (no := (⟨2, by decide⟩ : Fin (prebananaUnmarked 2).atomCount))
+    · decide
+    · decide
   change (prebananaRealisedSignatures (prebananaUnmarked 2) xs,
       prebananaSignatureMark (prebananaUnmarked 2) xs) =
     (prebananaRealisedSignatures (prebananaUnmarked 2) ys,
