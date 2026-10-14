@@ -691,6 +691,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaAmenabilityMeasureObstructionAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaAmenabilityMeasureObstructionAxiomAudit.lean
 
+      - name: Audit finite abstract pre-BANANA EPPA obstruction
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstructionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaAbstractEppaFiniteObstructionAxiomAudit.lean
+
       - name: Check strong BANANA block amalgamation
         run: |
           lake build BANANA.NonPrecompact.BananaStrongBlockAmalgamAxiomAudit
