@@ -45,6 +45,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphismAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaThreeAtomPartialIsomorphismAxiomAudit.lean
 
+      - name: Audit finite Boolean EPPA non-extension
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaThreeAtomEppaExtensionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaThreeAtomEppaExtensionAxiomAudit.lean
+
       - name: Build
         run: lake build
 
