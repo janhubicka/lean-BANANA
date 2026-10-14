@@ -105,6 +105,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelJEPAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelJEPAxiomAudit.lean
 
+      - name: Audit canonical finite Boolean atom presentation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelSkeletonAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelSkeletonAxiomAudit.lean
+
       - name: Build
         run: lake build
 
