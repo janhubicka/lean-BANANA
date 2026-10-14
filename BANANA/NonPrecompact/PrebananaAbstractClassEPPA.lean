@@ -93,12 +93,16 @@ theorem prebananaFiniteBooleanClassEPPA_fails :
   let sy : Finset (Fin 3) := {0, 1}
   have hx : prebananaProperZeroMark A.μ sx := by
     refine ⟨?_, ?_, rfl⟩
-    · decide
-    · decide
+    · change ({0} : Finset (Fin 3)) ≠ ∅
+      simp
+    · change ({0} : Finset (Fin 3)) ≠ Finset.univ
+      decide
   have hy : prebananaProperZeroMark A.μ sy := by
     refine ⟨?_, ?_, rfl⟩
-    · decide
-    · decide
+    · change ({0, 1} : Finset (Fin 3)) ≠ ∅
+      simp
+    · change ({0, 1} : Finset (Fin 3)) ≠ Finset.univ
+      decide
   let p : PrebananaAbstractGeneratedMarkedIso
       A.carrier A.carrier
       (fun _ : Fin 1 => sx) (fun _ : Fin 1 => sy) A.μ A.μ :=
