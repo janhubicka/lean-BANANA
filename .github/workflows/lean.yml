@@ -673,6 +673,11 @@ jobs:
           lake build BANANA.NonPrecompact.SymplecticCirculationAxiomAudit
           lake env lean BANANA/NonPrecompact/SymplecticCirculationAxiomAudit.lean
 
+      - name: Audit two-sorted Folkman Boolean-ring amalgamation diagram
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagramAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagramAxiomAudit.lean
+
       - name: Audit Folkman common-base diagram and exact sortwise intersection
         run: |
           lake build BANANA.NonPrecompact.FolkmanFiniteBaseImagesAxiomAudit
