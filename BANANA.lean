@@ -141,6 +141,7 @@ import BANANA.NonPrecompact.PrebananaGridStrongAmalgam
 import BANANA.NonPrecompact.PrebananaPowersetBridge
 import BANANA.NonPrecompact.PrebananaAmenabilityMeasureObstruction
 import BANANA.NonPrecompact.PrebananaAmenabilityThreeAtomCopy
+import BANANA.NonPrecompact.PrebananaStoneMeasureMass
 import BANANA.NonPrecompact.PrebananaCodedBooleanEmbedding
 import BANANA.NonPrecompact.PrebananaMarkedPowersetFibre
 import BANANA.NonPrecompact.PrebananaPowersetStrongAmalgam
