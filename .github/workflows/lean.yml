@@ -80,6 +80,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaUnaryKernelTransferAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaUnaryKernelTransferAxiomAudit.lean
 
+      - name: Audit marked one-generator orbit transfer
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaOneGeneratorMarkedIsoAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaOneGeneratorMarkedIsoAxiomAudit.lean
+
       - name: Build
         run: lake build
 
