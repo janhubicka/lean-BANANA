@@ -223,6 +223,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryRefinementAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryRefinementAllocationAxiomAudit.lean
 
+      - name: Audit marked allocation on actual five-ary word levels
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryWordLevelAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordLevelAllocationAxiomAudit.lean
+
       - name: Regress uniform five-ary finite extensions
         run: python3 scripts/check_prebanana_fiveary_extension_small.py
 
