@@ -81,6 +81,7 @@ import BANANA.NonPrecompact.FolkmanFiniteBaseImages
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
+import BANANA.NonPrecompact.FolkmanBilinearAllVectors
 import BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
 import BANANA.NonPrecompact.FolkmanPersistence
 import BANANA.NonPrecompact.FiniteOwnerSums
