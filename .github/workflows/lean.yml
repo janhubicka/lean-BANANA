@@ -190,6 +190,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaSingleParentMarkedAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaSingleParentMarkedAllocationAxiomAudit.lean
 
+      - name: Audit finite multi-parent marked allocation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaParentFibreMarkedAllocationAxiomAudit.lean
+
       - name: Audit five-ary prefix and fibre marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
