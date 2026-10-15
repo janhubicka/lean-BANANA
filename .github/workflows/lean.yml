@@ -150,6 +150,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaResidualParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaResidualParityAxiomAudit.lean
 
+      - name: Audit shared total and partial finite-owner sum identities
+        run: |
+          lake build BANANA.NonPrecompact.FiniteOwnerSumsAxiomAudit
+          lake env lean BANANA/NonPrecompact/FiniteOwnerSumsAxiomAudit.lean
+
       - name: Audit atom witness allocation and surjectivity
         run: |
           lake build BANANA.NonPrecompact.PrebananaWitnessAllocationAxiomAudit

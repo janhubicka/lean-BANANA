@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.ColouringWrappers
+import BANANA.NonPrecompact.FiniteOwnerSums
 
 /-!
 # Persistent copy colourings for Folkman--BANANA
@@ -37,6 +38,25 @@ def folkmanFiber
     (owner : Fin n → Option (Fin q))
     (j : Fin q) : Finset (Fin n) :=
   Finset.univ.filter fun x => owner x = some j
+
+/-- Total incidence count over all *assigned* left atoms. Unused
+atoms are excluded, as required for non-unital embeddings.
+This is the partial-owner counterpart of the F₂ fibre sum in
+pre-BANANA, using the same additive-monoid identity. -/
+theorem folkmanEdgeCount_ownedLeft
+    {q l r : ℕ}
+    (edge : Fin l → Fin r → F2)
+    (owner : Fin l → Option (Fin q))
+    (Y : Finset (Fin r)) :
+    (∑ i : Fin q,
+      folkmanEdgeCount edge (folkmanFiber owner i) Y) =
+      ∑ x : Fin l,
+        if owner x = none then 0
+        else ∑ y ∈ Y, if edge x y = 1 then 1 else 0 := by
+  classical
+  simpa only [folkmanEdgeCount, folkmanFiber, Finset.sum_filter] using
+    (finitePartialOwner_sum_fibres owner
+      (fun x : Fin l => ∑ y ∈ Y, if edge x y = 1 then 1 else 0))
 
 /-- Distinct owner fibres are disjoint. -/
 theorem folkmanFiber_pairwiseDisjoint
