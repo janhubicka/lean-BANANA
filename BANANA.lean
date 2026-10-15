@@ -181,6 +181,7 @@ import BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculus
 import BANANA.NonPrecompact.PrebananaFiniteBooleanTower
 import BANANA.NonPrecompact.PrebananaFiveAryChildMarking
 import BANANA.NonPrecompact.PrebananaFiveAryDescendantCounts
+import BANANA.NonPrecompact.PrebananaFiveAryWordMark
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient
