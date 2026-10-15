@@ -155,6 +155,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryDescendantParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryDescendantParityAxiomAudit.lean
 
+      - name: Audit five-ary word concatenation and marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryConcatenationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryConcatenationAxiomAudit.lean
+
       - name: Audit five-ary prefix and fibre marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
