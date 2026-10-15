@@ -187,6 +187,7 @@ import BANANA.NonPrecompact.PrebananaFiveAryWordPrefix
 import BANANA.NonPrecompact.PrebananaFiveAryBooleanStage
 import BANANA.NonPrecompact.PrebananaFiveAryWordLift
 import BANANA.NonPrecompact.PrebananaFiveAryWordLiftParity
+import BANANA.NonPrecompact.PrebananaExplicitFiveAryTower
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
 import BANANA.NonPrecompact.PrebananaPersistence
 import BANANA.NonPrecompact.PrebananaResidueAmbient

@@ -165,6 +165,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordLiftParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordLiftParityAxiomAudit.lean
 
+      - name: Audit explicit five-ary marked Boolean tower
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaExplicitFiveAryTowerAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaExplicitFiveAryTowerAxiomAudit.lean
+
       - name: Build
         run: lake build
 
