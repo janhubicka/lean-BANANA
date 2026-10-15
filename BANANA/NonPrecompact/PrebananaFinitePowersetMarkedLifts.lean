@@ -32,6 +32,7 @@ theorem finiteOwner_sum_subset
     fun b => Finset.univ.filter (fun x : α => owner x = b)
   have hd : (s : Set β).PairwiseDisjoint fibre := by
     intro b hb c hc hne
+    change Disjoint (fibre b) (fibre c)
     rw [Finset.disjoint_left]
     intro x hbx hcx
     have h₁ : owner x = b := (Finset.mem_filter.mp hbx).2
@@ -60,7 +61,7 @@ theorem finiteOwner_sum_subset
 /-- A finite, nontrivial powerset Boolean algebra with additive F₂
 marking and zero total mark. -/
 noncomputable def prebananaFiniteMarkedPowerset
-    (β : Type*) [Fintype β] [Nonempty β]
+    (β : Type) [Fintype β] [Nonempty β]
     (mark : β → F2)
     (htotal : (∑ b : β, mark b) = 0) :
     PrebananaFiniteBooleanModel := by
@@ -85,7 +86,7 @@ noncomputable def prebananaFiniteMarkedPowerset
 word atoms induces a genuine marking-preserving Boolean embedding
 from the corresponding target powerset into the word stage. -/
 noncomputable def prebananaFiveAryOwnerMarkedEmbedding
-    (n : ℕ) (β : Type*) [Fintype β]
+    (n : ℕ) (β : Type) [Fintype β]
     [DecidableEq β] [Nonempty β]
     (markB : β → F2)
     (htotal : (∑ b : β, markB b) = 0)
