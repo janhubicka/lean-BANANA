@@ -135,6 +135,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryDescendantCountsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryDescendantCountsAxiomAudit.lean
 
+      - name: Audit actual five-ary word marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryWordMarkAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordMarkAxiomAudit.lean
+
       - name: Build
         run: lake build
 
