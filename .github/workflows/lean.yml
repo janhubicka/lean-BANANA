@@ -215,6 +215,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFibrewiseMarkedAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFibrewiseMarkedAllocationAxiomAudit.lean
 
+      - name: Audit simultaneous marked refinement over finite base
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryRefinementAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryRefinementAllocationAxiomAudit.lean
+
       - name: Audit prebanana five ary concatenation
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryConcatenationAxiomAudit
