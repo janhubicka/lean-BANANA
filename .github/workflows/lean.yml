@@ -125,6 +125,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanTowerAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanTowerAxiomAudit.lean
 
+      - name: Audit five-ary child marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryChildMarkingAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryChildMarkingAxiomAudit.lean
+
       - name: Build
         run: lake build
 
