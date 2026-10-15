@@ -185,11 +185,6 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaArbitraryTargetSuffixesAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaArbitraryTargetSuffixesAxiomAudit.lean
 
-      - name: Audit one-parent marked allocation
-        run: |
-          lake build BANANA.NonPrecompact.PrebananaSingleParentMarkedAllocationAxiomAudit
-          lake env lean BANANA/NonPrecompact/PrebananaSingleParentMarkedAllocationAxiomAudit.lean
-
       - name: Audit finite multi-parent marked allocation
         run: |
           lake build BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocationAxiomAudit

@@ -1,4 +1,5 @@
-import BANANA.NonPrecompact.PrebananaSingleParentMarkedAllocation
+import BANANA.NonPrecompact.PrebananaArbitraryTargetSuffixes
+import BANANA.NonPrecompact.PrebananaMarkedAllocation
 
 /-!
 # Marked allocation below a nonempty finite fibre of existing atoms
