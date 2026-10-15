@@ -41,7 +41,7 @@ theorem prebananaFibrewiseAllocate_nonbase
     rw [hx] at hs
     have hd : base (source x) = b := by
       simpa [prebananaFibrewiseAllocate, hr] using hx
-    rw [hs] at hd
+    rw [← hs] at hd
     exact False.elim (hb hd.symm)
 
 /-- Every non-distinguished base fibre has the prescribed target mark. -/
