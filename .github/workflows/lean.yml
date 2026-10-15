@@ -871,6 +871,9 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanPairingExtensionCertificateAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanPairingExtensionCertificateAxiomAudit.lean
 
+      - name: Exhaustive small Folkman pairing-extension regression
+        run: python3 scripts/check_folkman_pairing_extension_small.py
+
       - name: Audit Folkman atom strong intersection and bilinear extension
         run: |
           lake build BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
