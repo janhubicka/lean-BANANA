@@ -8,7 +8,8 @@ Independent of Lean. Checks:
 
 For diagrams, select the globally distinct reset-letter suffix witnesses
 of the Lean refinement proof (uniform depth = number of target atoms).
-Verify markings, nonempty fibres, complete partition and commutation. This is NOT a proof of the infinite limit.
+Verify markings on all Boolean subsets, nonempty fibres, complete
+partition and the commuting square on every base Boolean element. This is NOT a proof of the infinite limit.
 """
 from itertools import product
 
@@ -93,6 +94,21 @@ def check_diagram(ambient_to_source, n_source, target_to_source, n_target, targe
     assert set().union(*bins) == universe
     assert all(parity(descendant_marks[i][j] for i, j in bins[b]) == target_marks[b]
                for b in range(n_target))
+
+    # Adversarially verify the *full Boolean* marking and commuting
+    # square, not only the atomic conditions. This is the assertion
+    # exported by the finite marked powerset embedding.
+    for selected in product((0, 1), repeat=n_target):
+        image = set().union(*(bins[b] for b in range(n_target) if selected[b]))
+        assert parity(descendant_marks[i][j] for i, j in image) == parity(
+            target_marks[b] for b in range(n_target) if selected[b])
+
+    for selected in product((0, 1), repeat=n_source):
+        left = set().union(*(bins[b] for b in range(n_target)
+                             if selected[target_to_source[b]]))
+        right = {(i, j) for i in range(5) if selected[ambient_to_source[i]]
+                 for j in range(5 ** depth)}
+        assert left == right
 
 
 def word_mark(word):
