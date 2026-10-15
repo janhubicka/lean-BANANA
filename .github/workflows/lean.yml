@@ -190,6 +190,36 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaParentFibreMarkedAllocationAxiomAudit.lean
 
+      - name: Audit prebanana fibrewise allocation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFibrewiseAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFibrewiseAllocationAxiomAudit.lean
+
+      - name: Audit prebanana fibrewise nonbase mark
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFibrewiseNonbaseMarkAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFibrewiseNonbaseMarkAxiomAudit.lean
+
+      - name: Audit prebanana fibrewise sum
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFibrewiseSumAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFibrewiseSumAxiomAudit.lean
+
+      - name: Audit prebanana base mark completion
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaBaseMarkCompletionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaBaseMarkCompletionAxiomAudit.lean
+
+      - name: Audit prebanana fibrewise marked allocation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFibrewiseMarkedAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFibrewiseMarkedAllocationAxiomAudit.lean
+
+      - name: Audit prebanana five ary concatenation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryConcatenationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryConcatenationAxiomAudit.lean
+
       - name: Audit five-ary prefix and fibre marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
