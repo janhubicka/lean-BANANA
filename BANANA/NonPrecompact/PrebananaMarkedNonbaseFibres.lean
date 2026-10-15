@@ -18,7 +18,7 @@ namespace SuccessorTree.NonPrecompact
 /-- Every non-distinguished fibre of the witness retraction has
 the prescribed F₂ mark. -/
 theorem prebananaWitnessAllocation_nonbaseMark
-    {α β : Type*} [Fintype α]
+    {α β : Type*} [Fintype α] [DecidableEq β]
     (markA : α → F2) (markB : β → F2)
     (witness : β → α) (hinj : Function.Injective witness)
     (hmark : ∀ b : β, markA (witness b) = markB b)
