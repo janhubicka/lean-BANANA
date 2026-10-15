@@ -220,6 +220,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryRefinementAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryRefinementAllocationAxiomAudit.lean
 
+      - name: Audit full five-ary finite-extension commuting square
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryFiniteExtensionSquareAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryFiniteExtensionSquareAxiomAudit.lean
+
       - name: Audit marked finite powerset embeddings of five-ary stages
         run: |
           lake build BANANA.NonPrecompact.PrebananaFinitePowersetMarkedLiftsAxiomAudit
