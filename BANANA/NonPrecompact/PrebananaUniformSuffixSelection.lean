@@ -31,10 +31,14 @@ theorem prebananaSuffixLetter_ne_four (m : F2) :
 theorem prebananaSuffixLetter_mark (p m : F2) :
     prebananaFiveAryChildMark p (prebananaSuffixLetter m) = m := by
   fin_cases m
-  · simpa [prebananaSuffixLetter] using
-      (prebananaFiveAryChildMark_zeros p).1
-  · simpa [prebananaSuffixLetter] using
-      (prebananaFiveAryChildMark_ones p).1
+  · change prebananaFiveAryChildMark p
+        (if (0 : F2) = 0 then 0 else 2) = 0
+    rw [if_pos rfl]
+    exact (prebananaFiveAryChildMark_zeros p).1
+  · change prebananaFiveAryChildMark p
+        (if (1 : F2) = 0 then 0 else 2) = 1
+    rw [if_neg (by decide)]
+    exact (prebananaFiveAryChildMark_ones p).1
 
 /-- The concrete suffix selected for each target atom position. -/
 def prebananaSelectedSuffix (k : ℕ) (mark : Fin k → F2)
