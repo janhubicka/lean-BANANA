@@ -6,10 +6,8 @@ import BANANA.NonPrecompact.PrebananaFiveAryWordStage
 The connecting map from length-(n+1) atoms to length-n atoms
 forgets the last letter. Each prefix has five extensions.
 
-Together with the already verified child-mark sum, this is the
-word-level ingredient needed to construct a marked Boolean
-embedding between successive finite stages. The reindexing to
-the Fin atom coordinates is still to be formalised.
+The induced Boolean embeddings and their marking preservation are
+proved in PrebananaFiveAryWordLift and PrebananaFiveAryWordLiftParity.
 -/
 
 namespace SuccessorTree.NonPrecompact

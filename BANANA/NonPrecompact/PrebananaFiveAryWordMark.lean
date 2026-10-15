@@ -1,4 +1,5 @@
-import BANANA.NonPrecompact.PrebananaFiveAryDescendantCounts
+import BANANA.NonPrecompact.PrebananaFiveAryChildMarking
+import Mathlib
 
 /-!
 # Marks on actual finite words of the five-ary pre-BANANA tower
@@ -7,10 +8,10 @@ An atom at level n is an n-letter word over Fin 5. Its mark is
 defined by starting with zero at the empty word, and applying the
 five-child rule to the final letter at every extension.
 
-This module verifies the *actual word-level* one-step rule, rather
-than merely the numerical recurrence for descendant counts. The
-finite-set Boolean algebras, the maps between them, and the
-Fraïssé-limit extension property are separate obligations.
+This module verifies the actual word-level marking rule. The
+finite Boolean stages and marking-preserving connecting embeddings
+are constructed in the adjacent five-ary modules. The countable
+limit and its finite-extension property remain open.
 -/
 
 namespace SuccessorTree.NonPrecompact

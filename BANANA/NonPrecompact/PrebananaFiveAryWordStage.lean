@@ -4,14 +4,14 @@ import BANANA.NonPrecompact.PrebananaIndexedParity
 /-!
 # The actual finite stages of the five-ary pre-BANANA tower
 
-A stage is the Boolean powerset of all five-letter words of a
+A stage is the Boolean powerset of all five-ary words of a
 fixed length, marked according to the recursive word marking.
 The sum of the marks of all words at each level is zero.
 
 This verifies each finite stage as an admissible marked Boolean
-algebra in the atom-coordinate presentation. The connecting
-embeddings, the direct limit, and its finite-extension property
-remain separate obligations.
+algebra in the atom-coordinate presentation. Marking-preserving
+connecting embeddings are constructed in the subsequent word-lift
+modules. The direct limit and extension property remain open.
 -/
 
 namespace SuccessorTree.NonPrecompact

@@ -1,8 +1,11 @@
 # Pre-BANANA: explicit five-ary Fraïssé limit — formalisation plan
 
-Status: **mathematical construction and finite adversarial audit**, **not yet
-formalised in Lean**. This note belongs to the Lean development, not to the
-frozen circulation text. Existing Lean proofs of finite strong amalgamation,
+Status: **finite five-ary stages, connecting embeddings, explicit suffix
+witnesses, and finite-fibre marking allocation formalised in Lean**.
+The base-compatible extension square, direct limit and back-and-forth
+ultrahomogeneity theorem are not yet formalised. The finite-fibre allocation
+is verified on `main` in `PrebananaParentFibreMarkedAllocation.lean`.
+This note belongs to the Lean development, not to the frozen circulation text. Existing Lean proofs of finite strong amalgamation,
 joint embedding, finite atom presentations, generated Boolean subalgebras and
 conditional invariant-mass obstruction should be reused.
 
@@ -141,31 +144,42 @@ The measure obstruction already formalised in
 once the limit, automorphism group, Stone action, and relevant
 invariant-measure interface have been constructed.
 
-## Suggested Lean modules and exact milestones
+## Completed and outstanding Lean milestones
 
-1. **Finite embedding calculus**: identities and composition for
-   `PrebananaFiniteBooleanEmbedding` (draft #193).
-2. **Finite tower interface**: stages \(B_n\), embeddings \(i_n\),
-   compatible iterated embeddings and marking preservation.
-3. **Word-marking recursion and arithmetic**: prove parent/child sums
-   and total top parity. For the extension theorem, construct the
-   explicit single-0 and single-2 suffixes, prove their marks and
-   their injectivity in the distinguished position. Full descendant
-   counts are optional rather than required.
-4. **Partition-realisation lemma**: formalise the residual-even-parity
-   allocation argument for finite marked sets. This is the principal
-   new combinatorial step.
-5. **Finite extension**: prove the commuting-square embedding above.
-6. **Limit and back-and-forth**: use Mathlib's directed-limit and
-   extension-pair mechanisms where they fit, but prove all required
-   language/embedding bridges; do not assert a generic Fraïssé-limit
-   existence theorem that has not been proved.
-7. **Topological dynamics**: formalise the Stone representation and
-   invariant-measure transfer separately. Do not conflate conditional
-   finite mass contradiction with the full non-amenability theorem.
+The following component modules on `main` are kernel-checked:
 
-Any new circulation TeX entries may be only `\todo` notes and
-`\leanverified...` markers for **completed kernel checks**.
+1. Finite marked Boolean models, strong amalgamation, joint embedding,
+   hereditary property and finite atom presentations.
+2. Five-ary word marks, child sums, actual finite Boolean stages,
+   marking-preserving prefix embeddings and the abstract finite tower.
+3. Explicit mark-compatible suffix witnesses, arbitrary finite target
+   indexing and parity-preserving residual allocation.
+4. `prebananaParentFibre_markedAllocation`: allocation over a
+   nonempty **family of existing stage atoms**, with matching total
+   F₂-marking and correctly marked nonempty target blocks.
+
+The remaining essential obligations are:
+
+5. Assemble the fibrewise allocations simultaneously above all
+   atoms of a prescribed common base. Global F₂ parity alone is
+   insufficient; the per-base sums must agree. Integrate the
+   commuting-allocation results from PRs #217–#222.
+6. Relate suffixes to actual stage-`n+k` words via concatenation,
+   construct a single unital marked Boolean embedding, and verify the
+   full commuting square.
+7. Build the countable direct limit; prove its age, finite-extension
+   property, ultrahomogeneity and finite tuple-orbit bound.
+8. Treat the Stone representation, invariant measures and any
+   group-theoretic consequences independently, keeping explicit
+   hypotheses visible.
+
+The previous exact numerical descendant-count module was deleted
+as a dead-end calculation. Its formula remains a useful independent
+mathematical check but is not needed in the final Lean proof: the
+explicit 0/2 reset-letter suffixes directly provide all the witnesses.
+
+The circulated TeX remains frozen. Any requested annotations may
+only be `\\todo` notes and accurately scoped `\\leanverified` markers.
 
 ## Adversarial finite check
 

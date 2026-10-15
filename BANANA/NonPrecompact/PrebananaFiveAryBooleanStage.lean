@@ -12,7 +12,8 @@ Unlike the indexed atom presentation, the model here uses its actual
 Boolean carrier. The statement that each finite stage is an
 admissible pre-BANANA model follows from the all-level parity lemma.
 
-Connecting maps and the countable limit are still to be proved.
+Connecting maps and marking preservation are established in the
+word-lift modules. The countable limit remains to be constructed.
 -/
 
 namespace SuccessorTree.NonPrecompact
