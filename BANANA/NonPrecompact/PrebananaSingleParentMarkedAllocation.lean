@@ -24,7 +24,7 @@ namespace SuccessorTree.NonPrecompact
 marks sum to a parent mark admits a surjective, marked allocation
 of all descendants at depth equal to the number of target atoms. -/
 theorem prebananaSingleParent_markedAllocation
-    (β : Type*) [Fintype β] [Nonempty β]
+    (β : Type*) [Fintype β] [Nonempty β] [DecidableEq β]
     (p : F2) (markB : β → F2)
     (htotal : (∑ b : β, markB b) = p) :
     ∃ part : PrebananaFiveAryWord (Fintype.card β) → β,
