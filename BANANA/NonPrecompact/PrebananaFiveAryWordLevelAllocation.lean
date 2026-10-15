@@ -69,7 +69,9 @@ theorem prebananaFiveAryWordLevel_markedAllocation
       prebananaFiveAryWordMark (n + k) (e p) =
         prebananaFiveAryDescendantMark
           (prebananaFiveAryWordMark n p.1) k p.2 := by
-    simpa [e] using prebananaFiveAryWordMark_append n k p.1 p.2
+    have he : e p = Fin.append p.1 p.2 := rfl
+    rw [he]
+    exact prebananaFiveAryWordMark_append n k p.1 p.2
   have hpartMark (b : β) :
       (∑ w : PrebananaFiveAryWord (n + k),
         if part w = b then prebananaFiveAryWordMark (n + k) w else 0) =
