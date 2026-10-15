@@ -59,8 +59,8 @@ theorem prebananaFiveAryWordLift_preserves_mark
               (fun w => if prebananaFiveAryPrefix n w ∈ s then
                 prebananaFiveAryWordMark (n + 1) w else 0)
               (fun p => by
-                simp only [e, Fin.snocEquiv_apply,
-                  prebananaFiveAryPrefix_snoc])).symm
+                have he : e p = Fin.snoc p.2 p.1 := rfl
+                rw [he, prebananaFiveAryPrefix_snoc])).symm
     _ = ∑ w : PrebananaFiveAryWord n,
         if w ∈ s then prebananaFiveAryWordMark n w else 0 := hsum
     _ = (∑ w ∈ s, prebananaFiveAryWordMark n w) := by
