@@ -190,6 +190,9 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaParentFibreMarkedAllocationAxiomAudit.lean
 
+      - name: Exhaustive base-compatible finite-allocation regression
+        run: python3 scripts/check_prebanana_fibrewise_allocation_small.py
+
       - name: Audit five-ary prefix and fibre marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
