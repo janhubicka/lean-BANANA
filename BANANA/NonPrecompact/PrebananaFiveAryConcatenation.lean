@@ -34,8 +34,12 @@ theorem prebananaFiveAryWordMark_append
   | succ k ih =>
       cases s using Fin.snocCases with
       | snoc s c =>
-          rw [Fin.append_snoc, Nat.add_succ,
-            prebananaFiveAryWordMark_snoc,
+          rw [Fin.append_snoc]
+          change prebananaFiveAryWordMark ((n + k) + 1)
+              (Fin.snoc (Fin.append w s) c) =
+            prebananaFiveAryDescendantMark
+              (prebananaFiveAryWordMark n w) (k + 1) (Fin.snoc s c)
+          rw [prebananaFiveAryWordMark_snoc,
             prebananaFiveAryDescendantMark_snoc, ih]
 
 /-- Concatenation uniquely determines both the prefix and suffix. -/
