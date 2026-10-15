@@ -155,6 +155,16 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaWitnessAllocationAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaWitnessAllocationAxiomAudit.lean
 
+      - name: Audit non-base witness fibre marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaMarkedNonbaseFibresAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaMarkedNonbaseFibresAxiomAudit.lean
+
+      - name: Audit full witness allocation parity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaMarkedAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaMarkedAllocationAxiomAudit.lean
+
       - name: Audit arbitrary-parent five-ary descendant parity
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryDescendantParityAxiomAudit
@@ -164,6 +174,21 @@ jobs:
         run: |
           lake build BANANA.NonPrecompact.PrebananaSingleSpecialSuffixAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaSingleSpecialSuffixAxiomAudit.lean
+
+      - name: Audit uniform suffix selection
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaUniformSuffixSelectionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaUniformSuffixSelectionAxiomAudit.lean
+
+      - name: Audit arbitrary finite target suffixes
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaArbitraryTargetSuffixesAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaArbitraryTargetSuffixesAxiomAudit.lean
+
+      - name: Audit finite multi-parent marked allocation
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocationAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaParentFibreMarkedAllocationAxiomAudit.lean
 
       - name: Audit five-ary prefix and fibre marking
         run: |
