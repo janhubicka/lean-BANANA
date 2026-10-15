@@ -84,7 +84,29 @@ def check_diagram(ambient_to_source, n_source, target_to_source, n_target, targe
                for b in range(n_target))
 
 
+def word_mark(word):
+    """The exact recursive finite-word marking formalised in Lean."""
+    value = 0
+    for letter in word:
+        value = (0 if letter in (0, 1) else
+                 1 if letter in (2, 3) else value)
+    return value
+
+
+def check_word_levels():
+    """Independently check prefix fibres and even total marking."""
+    for n in range(5):
+        words = list(product(range(5), repeat=n))
+        marks = [word_mark(w) for w in words]
+        assert parity(marks) == 0
+        assert sum(marks) == (5 ** n - 1) // 2
+        for w in words:
+            assert parity(word_mark(w + (c,)) for c in range(5)) == word_mark(w)
+    return 5
+
+
 def main():
+    word_levels = check_word_levels()
     split_checks = 0
     maximum_depth = 0
     for parent in (0, 1):
@@ -122,6 +144,7 @@ def main():
                                       target_to_source, n_target, target_marks)
                         diagram_checks += 1
     assert diagram_checks == 1327
+    print(f"PASS: {word_levels} complete five-ary word levels")
     print(f"PASS: {split_checks} child-mark splits (maximal depth {maximum_depth})")
     print(f"PASS: {diagram_checks} finite embedding extension diagrams")
 
