@@ -125,10 +125,12 @@ theorem embedB_symmDiff
   apply Prod.ext
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetLeftMap_symmDiff D.fL D.gL x.1 y.1)
-    simpa only [embedB, folkmanTwoSortSymmDiff, Prod.fst, Finset.mem_symmDiff] using hz
+    simp only [embedB, folkmanTwoSortSymmDiff, Prod.fst, Finset.mem_symmDiff]
+    rw [hz]
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetLeftMap_symmDiff D.fR D.gR x.2 y.2)
-    simpa only [embedB, folkmanTwoSortSymmDiff, Prod.snd, Finset.mem_symmDiff] using hz
+    simp only [embedB, folkmanTwoSortSymmDiff, Prod.snd, Finset.mem_symmDiff]
+    rw [hz]
 
 /-- The C-side embeddings preserve Boolean-ring addition. -/
 theorem embedC_symmDiff
@@ -139,10 +141,12 @@ theorem embedC_symmDiff
   apply Prod.ext
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetRightMap_symmDiff D.fL D.gL x.1 y.1)
-    simpa only [embedC, folkmanTwoSortSymmDiff, Prod.fst, Finset.mem_symmDiff] using hz
+    simp only [embedC, folkmanTwoSortSymmDiff, Prod.fst, Finset.mem_symmDiff]
+    rw [hz]
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetRightMap_symmDiff D.fR D.gR x.2 y.2)
-    simpa only [embedC, folkmanTwoSortSymmDiff, Prod.snd, Finset.mem_symmDiff] using hz
+    simp only [embedC, folkmanTwoSortSymmDiff, Prod.snd, Finset.mem_symmDiff]
+    rw [hz]
 
 /-- The B-side embeddings preserve Boolean-ring multiplication. -/
 theorem embedB_inter
@@ -153,10 +157,12 @@ theorem embedB_inter
   apply Prod.ext
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetLeftMap_inter D.fL D.gL x.1 y.1)
-    simpa only [embedB, folkmanTwoSortInter, Prod.fst, Finset.mem_inter] using hz
+    simp only [embedB, folkmanTwoSortInter, Prod.fst, Finset.mem_inter]
+    rw [hz]
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetLeftMap_inter D.fR D.gR x.2 y.2)
-    simpa only [embedB, folkmanTwoSortInter, Prod.snd, Finset.mem_inter] using hz
+    simp only [embedB, folkmanTwoSortInter, Prod.snd, Finset.mem_inter]
+    rw [hz]
 
 /-- The C-side embeddings preserve Boolean-ring multiplication. -/
 theorem embedC_inter
@@ -167,10 +173,12 @@ theorem embedC_inter
   apply Prod.ext
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetRightMap_inter D.fL D.gL x.1 y.1)
-    simpa only [embedC, folkmanTwoSortInter, Prod.fst, Finset.mem_inter] using hz
+    simp only [embedC, folkmanTwoSortInter, Prod.fst, Finset.mem_inter]
+    rw [hz]
   · ext z
     have hz := congrArg (fun t => z ∈ t) (folkmanFinsetRightMap_inter D.fR D.gR x.2 y.2)
-    simpa only [embedC, folkmanTwoSortInter, Prod.snd, Finset.mem_inter] using hz
+    simp only [embedC, folkmanTwoSortInter, Prod.snd, Finset.mem_inter]
+    rw [hz]
 
 /-- The two finite ring-sort embeddings agree on their common base. -/
 theorem base_commutes (a : Finset AL × Finset AR) :
