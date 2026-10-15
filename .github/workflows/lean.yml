@@ -130,6 +130,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryChildMarkingAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryChildMarkingAxiomAudit.lean
 
+      - name: Audit five-ary numerical descendant bounds
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryDescendantCountsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryDescendantCountsAxiomAudit.lean
+
       - name: Build
         run: lake build
 
