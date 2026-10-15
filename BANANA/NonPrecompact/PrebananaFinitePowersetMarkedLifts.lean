@@ -64,23 +64,24 @@ noncomputable def prebananaFiniteMarkedPowerset
     (β : Type) [Fintype β] [Nonempty β]
     (mark : β → F2)
     (htotal : (∑ b : β, mark b) = 0) :
-    PrebananaFiniteBooleanModel := by
-  classical
-  exact {
-    carrier := Finset β
-    booleanAlgebra := inferInstance
-    finite := inferInstance
-    nontrivial := inferInstance
-    μ := fun s => ∑ b ∈ s, mark b
-    μ_bot := by simp
-    μ_top := by simpa using htotal
-    μ_add := by
-      intro s t hst
-      change (∑ b ∈ s ∪ t, mark b) =
-        (∑ b ∈ s, mark b) + (∑ b ∈ t, mark b)
-      exact Finset.sum_union
-        (Finset.disjoint_iff_inter_eq_empty.mpr hst)
-  }
+    PrebananaFiniteBooleanModel where
+  carrier := Finset β
+  booleanAlgebra := inferInstance
+  finite := inferInstance
+  nontrivial := by
+    classical
+    infer_instance
+  μ := fun s => ∑ b ∈ s, mark b
+  μ_bot := by
+    simp
+  μ_top := by
+    simpa using htotal
+  μ_add := by
+    intro s t hst
+    change (∑ b ∈ s ∪ t, mark b) =
+      (∑ b ∈ s, mark b) + (∑ b ∈ t, mark b)
+    exact Finset.sum_union
+      (Finset.disjoint_iff_inter_eq_empty.mpr hst)
 
 /-- A marked surjective partition of the actual finite five-ary
 word atoms induces a genuine marking-preserving Boolean embedding
