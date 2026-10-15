@@ -30,8 +30,11 @@ theorem prebananaSuffixLetter_ne_four (m : F2) :
 /-- The chosen letter resets a parent of *any* parity to m. -/
 theorem prebananaSuffixLetter_mark (p m : F2) :
     prebananaFiveAryChildMark p (prebananaSuffixLetter m) = m := by
-  fin_cases m <;>
-    simp [prebananaSuffixLetter, prebananaFiveAryChildMark]
+  fin_cases m
+  · simpa [prebananaSuffixLetter] using
+      (prebananaFiveAryChildMark_zeros p).1
+  · simpa [prebananaSuffixLetter] using
+      (prebananaFiveAryChildMark_ones p).1
 
 /-- The concrete suffix selected for each target atom position. -/
 def prebananaSelectedSuffix (k : ℕ) (mark : Fin k → F2)
@@ -56,8 +59,8 @@ theorem prebananaSelectedSuffix_injective
   by_contra hne
   have heq := congrFun hij i
   have hbad : prebananaSuffixLetter (mark i) = (4 : Fin 5) := by
-    simpa only [prebananaSelectedSuffix, prebananaSingleSpecialSuffix,
-      if_pos rfl, if_neg hne] using heq
+    simpa [prebananaSelectedSuffix, prebananaSingleSpecialSuffix,
+      hne] using heq
   exact prebananaSuffixLetter_ne_four (mark i) hbad
 
 end SuccessorTree.NonPrecompact
