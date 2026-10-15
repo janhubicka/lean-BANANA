@@ -195,6 +195,8 @@ import BANANA.NonPrecompact.PrebananaSingleSpecialSuffix
 import BANANA.NonPrecompact.PrebananaUniformSuffixSelection
 import BANANA.NonPrecompact.PrebananaArbitraryTargetSuffixes
 import BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocation
+import BANANA.NonPrecompact.PrebananaFibrewiseMarkedAllocation
+import BANANA.NonPrecompact.PrebananaFiveAryConcatenation
 import BANANA.NonPrecompact.PrebananaFiveAryWordPrefix
 import BANANA.NonPrecompact.PrebananaFiveAryBooleanStage
 import BANANA.NonPrecompact.PrebananaFiveAryWordLift
