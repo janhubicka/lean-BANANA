@@ -58,26 +58,72 @@ strong-intersection conclusion for every pair of image subsets.
 comparisons, no failures.** This is a finite counterexample search,
 **not** a proof of generality or a Lean kernel check.
 
-## Compiler interface issue
+## Validation update — 15 October 2026
 
-Initial PR #167 compilation failed on unrecognised Finset operation
-notation and dependent `Option` pattern matches.  The subsequent
-revision specifies decidable equalities, uses the global `symmDiff`
-rather than the nonexistent `Finset.symmDiff`, and repairs the two
-dependent pattern witnesses.  These revisions must be checked with
-the repository's pinned local Lean/Mathlib toolchain before any
-`\leanverifiedpinned` marker is added.
+The earlier Finset notation and dependent Option-pattern compilation
+issues were repaired. The one-sort Boolean-ring maps, exact common-base
+image (merged PR #171), two-sort ring diagram (merged PR #172) and
+canonical zero-block pairing certificate (merged PR #173) have now
+passed their respective Lean checks. The all-source-vector pairing
+identities are present in the original green PR #174 and forward-ported
+to clean PR #226, whose new branch still requires verification.
 
-## Outstanding proof interfaces
+This is **not** yet a formal proof of the complete two-sorted
+Folkman--BANANA amalgamation theorem: the bilinear form constructed in
+canonical split coordinates must still be transported to the *actual*
+atom-grid-plus-private-points Boolean-ring sorts.
 
-- Verify the revised `FolkmanFiniteBooleanRingMaps.lean` and its
-  transitive axiom audit with a **local** root build.
-- Package both sortwise Boolean-ring embeddings, their commuting
-  base embeddings and the bilinear extension into one two-sorted
-  structure, proving the strong image intersection at structure level.
-- Keep the Fraïssé existence and \(\omega\)-categoricity deductions
-  separate from the finite amalgam construction.
-- Check clarity: the circulating text's choice of linear complements
-  should explicitly say that the new pairing *restricts to the given
-  pairings on all of* \(L_B\times R_B\) and \(L_C\times R_C\);
-  this is a TODO proposal only, not approval to edit the frozen prose.
+A separate exhaustive small-model regression
+(`scripts/check_folkman_pairing_extension_small.py`) writes the
+pairing-preservation requirements as linear equations over F₂.
+For 0 or 1 base atom on each sort, and 1 or 2 atoms on every
+B/C sort, all **23,838 compatible pairings among 38,288 candidates**
+admitted an extension on the actual atom-grid amalgam. The search
+includes arbitrary pairing matrices, outside atoms, and empty base
+sorts; it is a counterexample search, not a general proof.
+
+## Reusable algebra for the missing bridge
+
+It is preferable to reuse the already verified BANANA linear algebra
+than to reproduce a new adapted-basis calculus for Folkman:
+
+1. Express a finite Boolean-ring atom carrier `Finset I`, with
+   addition symmetric difference, as the F₂-coordinate vector space
+   `I → F2` by characteristic functions. Verify this is a linear
+   equivalence; no multiplicative/unit compatibility is needed for
+   extending a bilinear pairing, but the existing ring embedding
+   proofs remain essential for the structure language.
+2. Transport the two sortwise Folkman ring embeddings and the
+   exact-common-image lemma to injective linear maps on those
+   finite F₂-spaces. Their images must meet *exactly* in the common
+   base; intersection merely on atoms would be insufficient without
+   the proven ring-image intersection statement.
+3. Reuse the linear retractions and bilinear pullback operations in
+   `BananaArbitraryAmalgamTools.lean` and the redundant-coordinate
+   construction in `BananaTripleCoordinates.lean` /
+   `BananaTriplePairing.lean`, or equivalently transport the
+   canonical block matrix from `FolkmanPairingExtensionCertificate.lean`.
+   The common-base pairing is counted twice and must be subtracted;
+   over F₂ this is the same as adding it once.
+4. Choose complementary coordinates in the *ambient* Folkman
+   atom grid and put zero pairing on all additional coordinates.
+   Verify preservation on every pair of source vectors, not only
+   on basis entries, then package the resulting two-sort structure
+   and its embeddings.
+
+This linearisation bridge is shared with the BANANA strong-amalgamation
+proof. The partial `Option`-owner representation is specific to
+Folkman and should not be collapsed into the total unital pre-BANANA
+embedding definition. Likewise, the shared `FiniteOwnerSums`
+module handles combinatorial sums, not the pairing transport itself.
+
+## Remaining verification
+
+- Finish and kernel-check the linearisation and full ambient pairing
+  transport for the Folkman two-sort atom-grid diagram.
+- Package finite strong amalgamation at the actual structure level,
+  including pairing preservation, injection and exact intersection.
+- Keep the Fraïssé-limit and ω-categoricity deductions separate.
+- Proposed prose clarification (TODO only): say explicitly that the
+  extended pairing restricts to the original pairing on **all**
+  source vectors. The frozen circulation text is not edited here.
