@@ -36,7 +36,8 @@ theorem prebananaAllocateWitnesses_witness
     prebananaAllocateWitnesses witness base (witness b) = b := by
   classical
   letI : Nonempty β := ⟨base⟩
-  simp [prebananaAllocateWitnesses, Function.leftInverse_invFun hinj]
+  simpa [prebananaAllocateWitnesses] using
+    (Function.leftInverse_invFun hinj b)
 
 /-- Every target atom has a nonempty fibre, witnessed by its
 selected source leaf. -/
