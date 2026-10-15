@@ -26,7 +26,7 @@ theorem prebananaFiveAryWordMark_append
     prebananaFiveAryWordMark (n + k) (Fin.append w s) =
       prebananaFiveAryDescendantMark
         (prebananaFiveAryWordMark n w) k s := by
-  induction k generalizing s with
+  induction k with
   | zero =>
       have hs : s = (Fin.elim0 : Fin 0 → Fin 5) := Subsingleton.elim _ _
       subst s
@@ -34,7 +34,8 @@ theorem prebananaFiveAryWordMark_append
   | succ k ih =>
       cases s using Fin.snocCases with
       | snoc s c =>
-          rw [Fin.append_snoc, prebananaFiveAryWordMark_snoc,
+          rw [Fin.append_snoc, Nat.add_succ,
+            prebananaFiveAryWordMark_snoc,
             prebananaFiveAryDescendantMark_snoc, ih]
 
 /-- Concatenation uniquely determines both the prefix and suffix. -/
