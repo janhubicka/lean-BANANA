@@ -186,6 +186,7 @@ import BANANA.NonPrecompact.PrebananaFiveAryWordStage
 import BANANA.NonPrecompact.PrebananaResidualParity
 import BANANA.NonPrecompact.PrebananaWitnessAllocation
 import BANANA.NonPrecompact.PrebananaFiveAryDescendantParity
+import BANANA.NonPrecompact.PrebananaSingleSpecialSuffix
 import BANANA.NonPrecompact.PrebananaFiveAryWordPrefix
 import BANANA.NonPrecompact.PrebananaFiveAryBooleanStage
 import BANANA.NonPrecompact.PrebananaFiveAryWordLift
