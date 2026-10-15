@@ -61,7 +61,7 @@ theorem finiteOwner_sum_subset
 /-- A finite, nontrivial powerset Boolean algebra with additive F₂
 marking and zero total mark. -/
 noncomputable def prebananaFiniteMarkedPowerset
-    (β : Type) [Fintype β] [Nonempty β]
+    (β : Type) [Fintype β] [Nonempty β] [DecidableEq β]
     (mark : β → F2)
     (htotal : (∑ b : β, mark b) = 0) :
     PrebananaFiniteBooleanModel where
