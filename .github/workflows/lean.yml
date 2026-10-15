@@ -160,6 +160,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordLiftAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordLiftAxiomAudit.lean
 
+      - name: Audit five-ary word-lift marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryWordLiftParityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordLiftParityAxiomAudit.lean
+
       - name: Build
         run: lake build
 
