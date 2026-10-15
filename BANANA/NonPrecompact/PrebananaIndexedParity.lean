@@ -9,10 +9,9 @@ The atom presentation of the circulated pre-BANANA class uses
 an arbitrary finite compatible-pair grid. Reindexing its atoms
 does not change the total F₂ marking.
 
-This module proves exactly the parity obligation for the
-candidate finite amalgam. Constructing its two marked
-partition embeddings and proving strong intersection are
-separate obligations.
+This module proves the total-parity obligation for the candidate
+finite amalgam. The subsequent grid-embedding and strong-amalgamation
+modules prove the two fibre marks and the exact image intersection.
 -/
 
 namespace SuccessorTree.NonPrecompact
@@ -73,8 +72,8 @@ theorem prebananaIndexedGrid_total_zero
         B.mark C.mark hB
 
 /-- The fully reindexed fibre product is a genuine finite pre-BANANA
-atom structure. The two projection maps are not yet supplied with
-proofs that their individual fibres have the prescribed parities. -/
+atom structure. The marking-preserving projection maps are constructed
+in PrebananaGridMarkedEmbeddings. -/
 noncomputable def prebananaGridMarkedStructure
     {A B C : PrebananaAtomStructure}
     (f : PrebananaAtomEmbedding A B)
