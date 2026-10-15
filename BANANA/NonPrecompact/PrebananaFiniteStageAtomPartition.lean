@@ -77,4 +77,47 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
           simp only [Finset.sum_filter]
     _ = A.μ (a : A.carrier) := hmark a
 
+
+/-- Given two marked embeddings out of an arbitrary finite base,
+one into an arbitrary finite target and one into a five-ary stage,
+their induced atom projections have equal marking totals separately
+in *every* base-atom fibre. This is the exact hypothesis required by
+the canonical finite-extension construction. -/
+theorem prebananaFiniteExtension_exists_compatibleAtomPartitions
+    (A B : PrebananaFiniteBooleanModel) (n : ℕ)
+    (f : PrebananaFiniteBooleanEmbedding A B)
+    (e : PrebananaFiniteBooleanEmbedding
+      A (prebananaFiveAryBooleanStage n)) :
+    ∃ source : PrebananaFiveAryWord n →
+        PrebananaAbstractAtoms A.carrier,
+      ∃ target : PrebananaAbstractAtoms B.carrier →
+          PrebananaAbstractAtoms A.carrier,
+        Function.Surjective source ∧
+        Function.Surjective target ∧
+        ∀ a : PrebananaAbstractAtoms A.carrier,
+          (∑ w : PrebananaFiveAryWord n,
+            if source w = a then prebananaFiveAryWordMark n w else 0) =
+          ∑ b : PrebananaAbstractAtoms B.carrier,
+            if target b = a then B.μ (b : B.carrier) else 0 := by
+  classical
+  obtain ⟨source, hsurj, hsourceMark⟩ :=
+    prebananaFiniteStageEmbedding_exists_wordPartition A n e
+  obtain ⟨target, htsurj, _, htargetMark⟩ :=
+    prebananaAbstractEmbedding_exists_literalMarkedAtomPartition
+      A.carrier B.carrier A.μ B.μ
+      B.μ_bot B.μ_add f.hom f.injective
+      (map_bot f.hom) (map_top f.hom)
+      (fun x y => map_sup f.hom x y)
+      (fun x y => map_inf f.hom x y)
+      f.preserves_μ
+  refine ⟨source, target, hsurj, htsurj, ?_⟩
+  intro a
+  calc
+    (∑ w : PrebananaFiveAryWord n,
+      if source w = a then prebananaFiveAryWordMark n w else 0) =
+        A.μ (a : A.carrier) := hsourceMark a
+    _ = ∑ b : PrebananaAbstractAtoms B.carrier,
+        if target b = a then B.μ (b : B.carrier) else 0 := by
+          simpa only [Finset.sum_filter] using (htargetMark a).symm
+
 end SuccessorTree.NonPrecompact
