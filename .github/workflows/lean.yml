@@ -120,6 +120,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculusAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanModelEmbeddingCalculusAxiomAudit.lean
 
+      - name: Audit finite marked Boolean tower iteration
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBooleanTowerAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBooleanTowerAxiomAudit.lean
+
       - name: Build
         run: lake build
 
