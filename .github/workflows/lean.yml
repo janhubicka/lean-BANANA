@@ -155,6 +155,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryDescendantParityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryDescendantParityAxiomAudit.lean
 
+      - name: Audit explicit unmarked and marked suffix witnesses
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaSingleSpecialSuffixAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaSingleSpecialSuffixAxiomAudit.lean
+
       - name: Audit five-ary prefix and fibre marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
