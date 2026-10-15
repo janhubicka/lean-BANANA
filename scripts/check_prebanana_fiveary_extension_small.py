@@ -6,8 +6,9 @@ Independent of Lean. Checks:
   * all 1,327 compatible extension diagrams with one five-atom ambient
     stage, 1..3 source atoms and at most 3 target atoms.
 
-For diagrams, verify markings, nonempty fibres, complete partition and
-commutation over the source. This is NOT a proof of the infinite limit.
+For diagrams, select the globally distinct reset-letter suffix witnesses
+of the Lean refinement proof (uniform depth = number of target atoms).
+Verify markings, nonempty fibres, complete partition and commutation. This is NOT a proof of the infinite limit.
 """
 from itertools import product
 
@@ -63,11 +64,21 @@ def check_diagram(ambient_to_source, n_source, target_to_source, n_target, targe
         remaining = set(leaves)
         target_atoms = [b for b in range(n_target) if target_to_source[b] == a]
         assert target_atoms
+        # Use the *same* explicit witness family as the Lean proof:
+        # a suffix of length |B| with 4 everywhere, except at the
+        # target atom's globally unique position, where 0 or 2
+        # resets the marking. All witnesses lie below one selected
+        # old parent in the appropriate source fibre.
+        parent = min(i for i in range(5) if ambient_to_source[i] == a)
         for b in target_atoms:
-            chosen = next(
-                leaf for leaf in sorted(remaining)
-                if descendant_marks[leaf[0]][leaf[1]] == target_marks[b]
-            )
+            suffix = [4] * depth
+            suffix[b] = 0 if target_marks[b] == 0 else 2
+            index = 0
+            for letter in suffix:
+                index = 5 * index + letter
+            chosen = (parent, index)
+            assert chosen in remaining
+            assert descendant_marks[parent][index] == target_marks[b]
             bins[b].add(chosen)
             remaining.remove(chosen)
         bins[target_atoms[0]].update(remaining)
