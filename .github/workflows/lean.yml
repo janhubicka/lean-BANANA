@@ -160,6 +160,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaSingleSpecialSuffixAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaSingleSpecialSuffixAxiomAudit.lean
 
+      - name: Audit injective mark-compatible suffix selection
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaUniformSuffixSelectionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaUniformSuffixSelectionAxiomAudit.lean
+
       - name: Audit five-ary prefix and fibre marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
