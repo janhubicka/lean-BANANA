@@ -102,12 +102,25 @@ transitive axiom audit, and was squash-merged into `main` as
    subsumes it. The many-parent declaration explicitly carries
    `[DecidableEq β]`, and the revised theorem passed Lean CI.
 
-5. An independent finite adversarial calculation checked 210
-   parity-compatible allocations with 1–3 existing parents and
-   1–4 target atoms, using the explicit 0/2 reset suffixes and
-   residual-bin allocation. All expected total/fibre markings and
-   surjectivity equations held. These tests do not prove the
-   infinitely quantified extension theorem.
+5. The strengthened finite-fibre regression enumerates 17,585
+   compatible injective-witness diagrams (including all distinguished
+   target sections), and 260,226 parity-compatible marked allocations,
+   with up to five source atoms, four target atoms and two base atoms.
+   Every allocation is surjective, commutes with the base projections
+   and preserves the exact mark on every target fibre. A separate
+   explicit example refutes replacement of the per-base compatibility
+   hypotheses by global parity alone. This remains finite evidence,
+   not a Lean proof of the general finite-extension theorem.
+
+6. An independent Folkman two-sort regression represents the bilinear
+   extension problem over the *actual* compatible-pair/private-point
+   atom-grid amalgam as a binary linear system. For up to one base
+   atom on each sort and up to two atoms on each side of B and C,
+   all 23,838 compatible pairings among 38,288 enumerated candidates
+   admitted an extension. The test checks arbitrary forms on the B
+   and C atom bases, not just constant or diagonal forms. This
+   supports, but does not replace, the still-required Lean bridge
+   from the canonical block pairing to the Boolean-ring amalgam.
 
 ## Referee pass III — maintenance, code reuse, and readability
 

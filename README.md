@@ -52,10 +52,17 @@ lake build BANANA
 bash scripts/audit_all_axioms_local.sh
 ```
 
-The first command compiles the library. The second compiles each
-`*AxiomAudit.lean` entry point, prints its transitive axioms, and fails
-if an audit reveals `sorryAx`. It does **not** claim that the absence
-of `sorryAx` establishes fidelity to the English theorem.
+The first command compiles the library. The second runs
+`scripts/check_lean_module_graph.py`, compiles every
+`*AxiomAudit.lean` entry point, and checks each printed transitive
+axiom set against **exactly** `propext`, `Classical.choice`, and
+`Quot.sound`. Unexpected axioms (including `sorryAx`) make the audit
+fail. This proves neither theorem-statement fidelity nor the
+remaining conditional hypotheses in the manuscript.
+
+Run `python3 scripts/check_lean_module_graph.py` separately to report
+unreachable source modules, missing local imports, import cycles,
+and empty axiom-audit entry points without invoking Lean.
 
 There are small independent finite regression scripts in `scripts/`;
 these supplement, but do not replace, Lean kernel checks. For the
