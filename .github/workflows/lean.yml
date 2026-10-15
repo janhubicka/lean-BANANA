@@ -858,6 +858,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanFiniteBooleanRingMapsAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanFiniteBooleanRingMapsAxiomAudit.lean
 
+      - name: Check complete canonical Folkman pairing extension certificate
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanPairingExtensionCertificateAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanPairingExtensionCertificateAxiomAudit.lean
+
       - name: Audit Folkman atom strong intersection and bilinear extension
         run: |
           lake build BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
