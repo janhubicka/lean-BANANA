@@ -75,17 +75,25 @@ Compatibility of markings implies
    =\sum_{b\in F_a}\mu_B(b).
 \]
 
-In fact we may choose the **uniform depth**
-\(k=\#\operatorname{At}(B)\), independent of \(n\), \(e\), and the
-sizes of the source atom fibres. From \(M_0(p)=p\geq0\) and
-\(M_{k+1}(p)=M_k(p)+2\cdot5^k\), induction gives
-\(M_k(p)\geq2k\); also \(Z_k(p)=M_k(1-p)\geq2k\).
-Each \(E_a\) is nonempty, so its descendants at depth \(k\) contain
-at least \(2k\) marked and \(2k\) unmarked atoms. This exceeds
-each of the two required numbers
+Choose the **uniform depth** \(k=\#\operatorname{At}(B)\),
+independently of the ambient stage and the sizes of the source fibres.
+There is an elementary supply of witnesses that avoids counting all
+descendants. Fix any \(w\in E_a\). For each of the \(k\) positions in
+a length-\(k\) suffix, take the word consisting entirely of 4s except
+for a **0** in that position. Its final marking is 0, regardless of
+the mark of \(w\), because 0 resets the marking to 0 while 4 preserves
+it. Replacing the distinguished 0 by **2** gives a suffix of mark 1.
+All these \(2k\) suffixes are distinct. Consequently the descendants
+of \(w\), and hence of \(E_a\), contain at least \(k\) unmarked
+and \(k\) marked atoms. Each required number
 \(\#\{b\in F_a:\mu_B(b)=0\}\) and
-\(\#\{b\in F_a:\mu_B(b)=1\}\), both at most \(k\).
-Thus one explicit common depth works for every source fibre.
+\(\#\{b\in F_a:\mu_B(b)=1\}\) is at most \(k\), so the
+needed representatives exist.
+
+This explicit injection of positions into descendants is the preferred
+formalisation route: it bypasses the exact numerical descendant-count
+formula, which remains a useful independent check but is not needed
+for the finite-extension theorem.
 
 For each \(b\in F_a\), put one distinct descendant of mark
 \(\mu_B(b)\) into a bin \(P_b\). The as-yet unallocated descendants
@@ -139,8 +147,11 @@ invariant-measure interface have been constructed.
    `PrebananaFiniteBooleanEmbedding` (draft #193).
 2. **Finite tower interface**: stages \(B_n\), embeddings \(i_n\),
    compatible iterated embeddings and marking preservation.
-3. **Word-marking recursion and arithmetic**: prove parent/child sum,
-   total top parity and both explicit descendant counts.
+3. **Word-marking recursion and arithmetic**: prove parent/child sums
+   and total top parity. For the extension theorem, construct the
+   explicit single-0 and single-2 suffixes, prove their marks and
+   their injectivity in the distinguished position. Full descendant
+   counts are optional rather than required.
 4. **Partition-realisation lemma**: formalise the residual-even-parity
    allocation argument for finite marked sets. This is the principal
    new combinatorial step.
