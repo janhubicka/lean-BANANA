@@ -24,6 +24,8 @@ namespace SuccessorTree.NonPrecompact
 marked Boolean embedding, with the same F₂ marking on *all* elements. -/
 noncomputable def prebananaAbstractModel_markedPowersetEmbedding
     (B : PrebananaFiniteBooleanModel)
+    [Fintype (PrebananaAbstractAtoms B.carrier)]
+    [DecidableEq (PrebananaAbstractAtoms B.carrier)]
     [Nonempty (PrebananaAbstractAtoms B.carrier)] :
     PrebananaFiniteBooleanEmbedding B
       (prebananaFiniteMarkedPowerset
