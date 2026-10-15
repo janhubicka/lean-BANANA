@@ -23,12 +23,15 @@ verified separately.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical BigOperators
+
 /-- Any marked embedding from a finite Boolean model into the actual
 five-ary stage induces a surjective word-atom projection with
 exact per-atom F₂ marking. -/
 theorem prebananaFiniteStageEmbedding_exists_wordPartition
     (A : PrebananaFiniteBooleanModel)
     (n : ℕ)
+    [DecidableEq (PrebananaAbstractAtoms A.carrier)]
     (f : PrebananaFiniteBooleanEmbedding
       A (prebananaFiveAryBooleanStage n)) :
     ∃ source : PrebananaFiveAryWord n →
@@ -59,7 +62,9 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
     intro a
     obtain ⟨b, hb⟩ := hsurj a
     refine ⟨e b, ?_⟩
-    simpa [source] using hb
+    change part (e.symm (e b)) = a
+    rw [e.symm_apply_apply]
+    exact hb
   refine ⟨source, hsource, ?_⟩
   intro a
   calc
@@ -85,6 +90,8 @@ in *every* base-atom fibre. This is the exact hypothesis required by
 the canonical finite-extension construction. -/
 theorem prebananaFiniteExtension_exists_compatibleAtomPartitions
     (A B : PrebananaFiniteBooleanModel) (n : ℕ)
+    [DecidableEq (PrebananaAbstractAtoms A.carrier)]
+    [Fintype (PrebananaAbstractAtoms B.carrier)]
     (f : PrebananaFiniteBooleanEmbedding A B)
     (e : PrebananaFiniteBooleanEmbedding
       A (prebananaFiveAryBooleanStage n)) :
