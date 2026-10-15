@@ -1,10 +1,11 @@
 # Pre-BANANA: explicit five-ary Fraïssé limit — formalisation plan
 
-Status: **mathematical construction and finite adversarial audit**, **not yet
-formalised in Lean**. This note belongs to the Lean development, not to the
-frozen circulation text. Existing Lean proofs of finite strong amalgamation,
-joint embedding, finite atom presentations, generated Boolean subalgebras and
-conditional invariant-mass obstruction should be reused.
+Status (15 October 2026): **finite stages, tower embeddings, descendant
+markings, explicit reset-letter witnesses and residual-parity lemmas are
+formalised**; the full finite-extension square and countable limit are not.
+Some marked-allocation steps are being integrated in PR #223 and must not be
+counted as verified on main before their kernel checks pass. This note belongs
+to the Lean development, not to the frozen circulation text.
 
 ## Aim
 
@@ -141,31 +142,36 @@ The measure obstruction already formalised in
 once the limit, automorphism group, Stone action, and relevant
 invariant-measure interface have been constructed.
 
-## Suggested Lean modules and exact milestones
+## Lean milestones and remaining obligations
 
-1. **Finite embedding calculus**: identities and composition for
-   `PrebananaFiniteBooleanEmbedding` (draft #193).
-2. **Finite tower interface**: stages \(B_n\), embeddings \(i_n\),
-   compatible iterated embeddings and marking preservation.
-3. **Word-marking recursion and arithmetic**: prove parent/child sums
-   and total top parity. For the extension theorem, construct the
-   explicit single-0 and single-2 suffixes, prove their marks and
-   their injectivity in the distinguished position. Full descendant
-   counts are optional rather than required.
-4. **Partition-realisation lemma**: formalise the residual-even-parity
-   allocation argument for finite marked sets. This is the principal
-   new combinatorial step.
-5. **Finite extension**: prove the commuting-square embedding above.
-6. **Limit and back-and-forth**: use Mathlib's directed-limit and
-   extension-pair mechanisms where they fit, but prove all required
-   language/embedding bridges; do not assert a generic Fraïssé-limit
-   existence theorem that has not been proved.
-7. **Topological dynamics**: formalise the Stone representation and
-   invariant-measure transfer separately. Do not conflate conditional
-   finite mass contradiction with the full non-amenability theorem.
+1. **Completed on main:** finite marked Boolean-algebra models,
+   embeddings, identities, composition, strong amalgamation and
+   countability of finite isomorphism types.
+2. **Completed on main:** the concrete five-ary Boolean stages, their
+   one-step marking-preserving embeddings and the abstract iterated
+   tower interface.
+3. **Completed on main:** total descendant parity and the explicit
+   injection of k reset-letter suffixes of each prescribed mark.
+   The numerical descendant-count recurrence is not needed for this
+   proof and is not maintained as a separate Lean dependency.
+4. **Partially complete:** residual-even-parity identities and
+   surjective witness allocation are available on main. The combined
+   marked finite-fibre allocation theorem is in PR #223; further
+   Lean compilation and integration checks remain necessary.
+5. **Outstanding:** assemble base-compatible allocations for every
+   source atom, identify the resulting full tower words, and construct
+   the actual bounded-lattice embedding satisfying the commuting
+   finite-extension square. Equality of markings is required **above
+   each base atom**, not only for the total sum.
+6. **Outstanding:** construct the countable limit and prove the
+   extension property and back-and-forth homogeneity, without
+   assuming an unproved generic existence theorem.
+7. **Outstanding:** construct the Stone presentation and continuous
+   automorphism action needed for the group-theoretic consequences.
+   The finite invariant-mass contradiction is conditional.
 
-Any new circulation TeX entries may be only `\todo` notes and
-`\leanverified...` markers for **completed kernel checks**.
+Circulation TeX remains frozen; only authorised TODO notes and
+validation markers may be added there.
 
 ## Adversarial finite check
 

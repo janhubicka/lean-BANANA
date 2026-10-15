@@ -180,7 +180,6 @@ import BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredity
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculus
 import BANANA.NonPrecompact.PrebananaFiniteBooleanTower
 import BANANA.NonPrecompact.PrebananaFiveAryChildMarking
-import BANANA.NonPrecompact.PrebananaFiveAryDescendantCounts
 import BANANA.NonPrecompact.PrebananaFiveAryWordMark
 import BANANA.NonPrecompact.PrebananaFiveAryWordStage
 import BANANA.NonPrecompact.PrebananaResidualParity
