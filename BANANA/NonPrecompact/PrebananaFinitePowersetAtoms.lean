@@ -20,7 +20,7 @@ namespace SuccessorTree.NonPrecompact
 /-- Canonical correspondence between abstract atoms of the Boolean
 powerset of a finite type and the underlying individual atoms. -/
 noncomputable def prebananaFinitePowersetAtomEquiv
-    (ι : Type*) [Fintype ι] :
+    (ι : Type*) [Fintype ι] [DecidableEq ι] :
     PrebananaAbstractAtoms (Finset ι) ≃ ι := by
   classical
   refine
@@ -39,7 +39,7 @@ noncomputable def prebananaFinitePowersetAtomEquiv
 /-- Every abstract atom of a finite powerset is literally its
 corresponding singleton. -/
 theorem prebananaFinitePowersetAtom_eq_singleton
-    (ι : Type*) [Fintype ι]
+    (ι : Type*) [Fintype ι] [DecidableEq ι]
     (a : PrebananaAbstractAtoms (Finset ι)) :
     (a : Finset ι) = {prebananaFinitePowersetAtomEquiv ι a} := by
   classical
@@ -69,6 +69,7 @@ theorem prebananaFiveAryStageAtom_mark (n : ℕ)
 the abstract atoms of a word powerset by the actual word atoms. -/
 theorem prebananaFiveAryStageAtom_fibreSum
     (n : ℕ) (δ : Type*) [DecidableEq δ]
+    [Fintype (PrebananaAbstractAtoms (Finset (PrebananaFiveAryWord n)))]
     (part : PrebananaAbstractAtoms
       (Finset (PrebananaFiveAryWord n)) → δ)
     (d : δ) :
