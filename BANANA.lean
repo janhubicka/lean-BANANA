@@ -82,6 +82,7 @@ import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
 import BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
 import BANANA.NonPrecompact.FolkmanPersistence
+import BANANA.NonPrecompact.FiniteOwnerSums
 import BANANA.NonPrecompact.LinearExtension
 import BANANA.NonPrecompact.LinearBoringInsertion
 import BANANA.NonPrecompact.LinearBoringShapeMap

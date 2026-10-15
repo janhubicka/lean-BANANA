@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.PrebananaMarkedNonbaseFibres
+import BANANA.NonPrecompact.FiniteOwnerSums
 
 /-!
 # All fibres of the finite witness allocation preserve marking
@@ -42,11 +43,8 @@ theorem prebananaWitnessAllocation_preserves_mark
         if prebananaAllocateWitnesses witness base x = y
         then markA x else 0
     have hdecomp : (∑ y : β, F y) = ∑ x : α, markA x := by
-      change (∑ y : β, ∑ x : α,
-        if prebananaAllocateWitnesses witness base x = y
-        then markA x else 0) = ∑ x : α, markA x
-      rw [Finset.sum_comm]
-      simp
+      exact finiteTotalOwner_sum_fibres
+        (prebananaAllocateWitnesses witness base) markA
     have hrest :
         (∑ y ∈ (Finset.univ : Finset β).erase base, F y) =
         ∑ y ∈ (Finset.univ : Finset β).erase base, markB y := by
