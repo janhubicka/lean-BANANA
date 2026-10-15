@@ -140,6 +140,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordMarkAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordMarkAxiomAudit.lean
 
+      - name: Audit all five-ary finite word stages
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryWordStageAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordStageAxiomAudit.lean
+
       - name: Build
         run: lake build
 
