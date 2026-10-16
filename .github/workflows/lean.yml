@@ -228,6 +228,16 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryTowerLongPrefixAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryTowerLongPrefixAxiomAudit.lean
 
+      - name: Audit all-map compatibility of finite marked atom partitions
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteStageAtomPartitionAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteStageAtomPartitionAxiomAudit.lean
+
+      - name: Audit unconditional arbitrary pre-BANANA finite extension
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryFiniteExtensionTheoremAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryFiniteExtensionTheoremAxiomAudit.lean
+
       - name: Audit abstract finite extension from compatible atom partitions
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryAbstractExtensionFromPartitionsAxiomAudit
