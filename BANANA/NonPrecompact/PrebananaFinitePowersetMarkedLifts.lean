@@ -101,9 +101,9 @@ noncomputable def prebananaFiveAryOwnerMarkedEmbedding
       (prebananaFiniteMarkedPowerset β markB htotal)
       (prebananaFiveAryBooleanStage n) := by
   classical
-  refine {
-    hom := {
-      toFun := fun s => Finset.univ.filter
+  let h : BoundedLatticeHom
+      (Finset β) (Finset (PrebananaFiveAryWord n)) :=
+    { toFun := fun s => Finset.univ.filter
         (fun w : PrebananaFiveAryWord n => part w ∈ s)
       map_bot' := by
         ext w
@@ -120,32 +120,35 @@ noncomputable def prebananaFiveAryOwnerMarkedEmbedding
         ext w
         simp
     }
-    injective := by
-      intro s t h
-      ext b
-      obtain ⟨w, hw⟩ := hsurj b
-      have heq := congrArg
-        (fun q : Finset (PrebananaFiveAryWord n) => w ∈ q) h
-      simpa [hw] using heq
-    preserves_μ := by
-      intro s
-      change
-        (∑ w ∈ (Finset.univ.filter
-          (fun w : PrebananaFiveAryWord n => part w ∈ s)),
-          prebananaFiveAryWordMark n w) =
-        ∑ b ∈ s, markB b
-      calc
-        (∑ w ∈ (Finset.univ.filter
-          (fun w : PrebananaFiveAryWord n => part w ∈ s)),
-          prebananaFiveAryWordMark n w) =
-          ∑ b ∈ s, ∑ w ∈ (Finset.univ.filter
-            (fun w : PrebananaFiveAryWord n => part w = b)),
-            prebananaFiveAryWordMark n w :=
-              finiteOwner_sum_subset part (prebananaFiveAryWordMark n) s
-        _ = ∑ b ∈ s, markB b := by
-          apply Finset.sum_congr rfl
-          intro b hb
-          simpa only [Finset.sum_filter] using hmark b
-  }
+  have hinjective : Function.Injective h := by
+    intro s t hst
+    ext b
+    obtain ⟨w, hw⟩ := hsurj b
+    have heq := congrArg
+      (fun q : Finset (PrebananaFiveAryWord n) => w ∈ q) hst
+    simpa [h, hw] using heq
+  have hpreserves (s : Finset β) :
+      (∑ w ∈ h s, prebananaFiveAryWordMark n w) =
+      ∑ b ∈ s, markB b := by
+    change
+      (∑ w ∈ (Finset.univ.filter
+        (fun w : PrebananaFiveAryWord n => part w ∈ s)),
+        prebananaFiveAryWordMark n w) =
+      ∑ b ∈ s, markB b
+    calc
+      (∑ w ∈ (Finset.univ.filter
+        (fun w : PrebananaFiveAryWord n => part w ∈ s)),
+        prebananaFiveAryWordMark n w) =
+        ∑ b ∈ s, ∑ w ∈ (Finset.univ.filter
+          (fun w : PrebananaFiveAryWord n => part w = b)),
+          prebananaFiveAryWordMark n w :=
+            finiteOwner_sum_subset part (prebananaFiveAryWordMark n) s
+      _ = ∑ b ∈ s, markB b := by
+        apply Finset.sum_congr rfl
+        intro b hb
+        simpa only [Finset.sum_filter] using hmark b
+  refine { hom := h, injective := hinjective, preserves_μ := ?_ }
+  intro s
+  exact hpreserves s
 
 end SuccessorTree.NonPrecompact
