@@ -53,11 +53,9 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
     exact map_top f.hom
   have hsup (x y : A.carrier) :
       φ (x ⊔ y) = φ x ⊔ φ y := by
-    change f.hom (x ⊔ y) = f.hom x ∪ f.hom y
     exact map_sup f.hom x y
   have hinf (x y : A.carrier) :
       φ (x ⊓ y) = φ x ⊓ φ y := by
-    change f.hom (x ⊓ y) = f.hom x ∩ f.hom y
     exact map_inf f.hom x y
   have hmark (x : A.carrier) : μW (φ x) = A.μ x := by
     change (prebananaFiveAryBooleanStage n).μ (f.hom x) = A.μ x
@@ -97,7 +95,7 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
     _ = ∑ b ∈ (Finset.univ : Finset
         (PrebananaAbstractAtoms (Finset W))).filter
         (fun b => part b = a), μW (b : Finset W) := by
-          simp [μW, prebananaFiveAryBooleanStage, Finset.sum_filter]
+          simp [μW, prebananaFiveAryBooleanStage, Finset.sum_filter] <;> rfl
     _ = A.μ (a : A.carrier) := hfibre a
 
 /-- Given two marked embeddings out of an arbitrary finite base,
