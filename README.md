@@ -49,10 +49,16 @@ packages arbitrary finite Boolean algebras as marked atom powersets.
 The original-embedding atom-partition bridge
 ([PR #234](https://github.com/janhubicka/lean-BANANA/pull/234)
 and [PR #237](https://github.com/janhubicka/lean-BANANA/pull/237))
-and its extension composition
-([PR #236](https://github.com/janhubicka/lean-BANANA/pull/236))
-remain drafts pending verification. The **unconditional** arbitrary-carrier
-finite-extension theorem and the countable limit are not yet complete.
+is also verified and merged. The integration lemma
+([draft PR #236](https://github.com/janhubicka/lean-BANANA/pull/236))
+and the **unconditional** arbitrary-carrier finite-extension theorem
+([draft PR #238](https://github.com/janhubicka/lean-BANANA/pull/238))
+still await Lean verification.
+The concrete **countable cylinder carrier** and faithful maps of finite
+stages are verified in [PR #239](https://github.com/janhubicka/lean-BANANA/pull/239).
+Cylinder/tower coherence is in [draft PR #240](https://github.com/janhubicka/lean-BANANA/pull/240).
+A marked Boolean-algebra limit, its ultrahomogeneity and subsequent
+topological deductions are **not yet** end-to-end Lean theorems.
 
 ## Local verification
 
