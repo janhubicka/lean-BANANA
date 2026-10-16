@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.PrebananaFiveAryBooleanStage
+import Mathlib.Data.Set.Countable
 
 /-!
 # A countable concrete carrier for the five-ary pre-BANANA limit
@@ -117,6 +118,13 @@ noncomputable instance : Countable PrebananaFiveAryCylinderLimitCarrier := by
     apply Subtype.ext
     change prebananaFiveAryCylinder n s = X
     exact hX.symm
-  exact Countable.of_surjective present hsurj
+  have hcount : (Set.range present).Countable :=
+    Set.countable_range present
+  have hrange :
+      Set.range present =
+        (Set.univ : Set PrebananaFiveAryCylinderLimitCarrier) :=
+    Set.range_eq_univ.mpr hsurj
+  rw [hrange] at hcount
+  exact (Set.countable_univ_iff).mp hcount
 
 end SuccessorTree.NonPrecompact
