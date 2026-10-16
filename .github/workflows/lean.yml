@@ -241,6 +241,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryWordPrefixAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryWordPrefixAxiomAudit.lean
 
+      - name: Audit finite powerset atoms versus literal five-ary word atoms
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFinitePowersetAtomsAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFinitePowersetAtomsAxiomAudit.lean
+
       - name: Audit actual five-ary Boolean stages
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryBooleanStageAxiomAudit
