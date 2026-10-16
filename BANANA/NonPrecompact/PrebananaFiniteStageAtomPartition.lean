@@ -51,10 +51,10 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
       (fun x y => map_sup f.hom x y)
       (fun x y => map_inf f.hom x y)
       f.preserves_μ
-  let e : PrebananaAbstractAtoms
-      (Finset (PrebananaFiveAryWord n)) ≃
-      PrebananaFiveAryWord n :=
-    prebananaFinitePowersetAtomEquiv (PrebananaFiveAryWord n)
+  let e : PrebananaAbstractAtoms S.carrier ≃
+      PrebananaFiveAryWord n := by
+    dsimp [S, prebananaFiveAryBooleanStage]
+    exact prebananaFinitePowersetAtomEquiv (PrebananaFiveAryWord n)
   let source : PrebananaFiveAryWord n →
       PrebananaAbstractAtoms A.carrier :=
     fun w => part (e.symm w)
@@ -70,17 +70,16 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
   calc
     (∑ w : PrebananaFiveAryWord n,
       if source w = a then prebananaFiveAryWordMark n w else 0) =
-        ∑ b : PrebananaAbstractAtoms (Finset (PrebananaFiveAryWord n)),
-          if part b = a then
-            (prebananaFiveAryBooleanStage n).μ
-              (b : Finset (PrebananaFiveAryWord n)) else 0 := by
-          exact prebananaFiveAryStageAtom_fibreSum n
-            (PrebananaAbstractAtoms A.carrier) part a
-    _ = ∑ b ∈ (Finset.univ : Finset
-          (PrebananaAbstractAtoms S.carrier)).filter
-          (fun b => part b = a), S.μ (b : S.carrier) := by
-          simp only [Finset.sum_filter]
-    _ = A.μ (a : A.carrier) := hmark a
+        ∑ b : PrebananaAbstractAtoms S.carrier,
+          if part b = a then S.μ (b : S.carrier) else 0 := by
+          let partW : PrebananaAbstractAtoms (Finset (PrebananaFiveAryWord n)) →
+              PrebananaAbstractAtoms A.carrier := by
+            simpa [S, prebananaFiveAryBooleanStage] using part
+          have h := prebananaFiveAryStageAtom_fibreSum n
+            (PrebananaAbstractAtoms A.carrier) partW a
+          simpa [partW, S, prebananaFiveAryBooleanStage] using h
+    _ = A.μ (a : A.carrier) := by
+          simpa only [Finset.sum_filter] using hmark a
 
 
 /-- Given two marked embeddings out of an arbitrary finite base,
@@ -125,6 +124,11 @@ theorem prebananaFiniteExtension_exists_compatibleAtomPartitions
         A.μ (a : A.carrier) := hsourceMark a
     _ = ∑ b : PrebananaAbstractAtoms B.carrier,
         if target b = a then B.μ (b : B.carrier) else 0 := by
-          simpa only [Finset.sum_filter] using (htargetMark a).symm
+          convert (htargetMark a).symm using 1
+          · apply Finset.sum_congr
+            · ext b
+              simp
+            · intro b hb
+              rfl
 
 end SuccessorTree.NonPrecompact
