@@ -36,10 +36,13 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
     ∃ source : PrebananaFiveAryWord n →
         PrebananaAbstractAtoms A.carrier,
       Function.Surjective source ∧
-      ∀ a : PrebananaAbstractAtoms A.carrier,
+      (∀ a : PrebananaAbstractAtoms A.carrier,
         (∑ w : PrebananaFiveAryWord n,
           if source w = a then prebananaFiveAryWordMark n w else 0) =
-          A.μ (a : A.carrier) := by
+          A.μ (a : A.carrier)) ∧
+      ∀ x : A.carrier,
+        f.hom x = Finset.univ.filter (fun w : PrebananaFiveAryWord n =>
+          source w ∈ prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x) := by
   classical
   let W := PrebananaFiveAryWord n
   let μW : Finset W → F2 :=
@@ -74,7 +77,7 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
       (∑ w ∈ s, prebananaFiveAryWordMark n w) +
       (∑ w ∈ t, prebananaFiveAryWordMark n w)
     exact Finset.sum_union (Finset.disjoint_iff_inter_eq_empty.mpr hst)
-  obtain ⟨part, hsurj, _, hfibre⟩ :=
+  obtain ⟨part, hsurj, hpart, hfibre⟩ :=
     prebananaAbstractEmbedding_exists_literalMarkedAtomPartition
       A.carrier (Finset W) A.μ μW
       (by simp [μW]) hadd φ f.injective
@@ -90,21 +93,56 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
     change part (e.symm (e b)) = a
     rw [e.symm_apply_apply]
     exact hb
-  refine ⟨source, hs, ?_⟩
-  intro a
-  calc
-    (∑ w : W, if source w = a then
-      prebananaFiveAryWordMark n w else 0) =
-      ∑ b : PrebananaAbstractAtoms (Finset W),
-        if part b = a then
-          (prebananaFiveAryBooleanStage n).μ (b : Finset W) else 0 :=
-            prebananaFiveAryStageAtom_fibreSum n
-              (PrebananaAbstractAtoms A.carrier) part a
-    _ = ∑ b ∈ (Finset.univ : Finset
-        (PrebananaAbstractAtoms (Finset W))).filter
-        (fun b => part b = a), μW (b : Finset W) := by
-          simp [μW, prebananaFiveAryBooleanStage, Finset.sum_filter] <;> rfl
-    _ = A.μ (a : A.carrier) := hfibre a
+  refine ⟨source, hs, ?_, ?_⟩
+  · intro a
+    calc
+      (∑ w : W, if source w = a then
+        prebananaFiveAryWordMark n w else 0) =
+        ∑ b : PrebananaAbstractAtoms (Finset W),
+          if part b = a then
+            (prebananaFiveAryBooleanStage n).μ (b : Finset W) else 0 :=
+              prebananaFiveAryStageAtom_fibreSum n
+                (PrebananaAbstractAtoms A.carrier) part a
+      _ = ∑ b ∈ (Finset.univ : Finset
+          (PrebananaAbstractAtoms (Finset W))).filter
+          (fun b => part b = a), μW (b : Finset W) := by
+            simp [μW, prebananaFiveAryBooleanStage, Finset.sum_filter] <;> rfl
+      _ = A.μ (a : A.carrier) := hfibre a
+  · intro x
+    ext w
+    have hsingleton :
+        ((e.symm w : PrebananaAbstractAtoms (Finset W)) : Finset W) =
+          {w} := by
+      calc
+        ((e.symm w : PrebananaAbstractAtoms (Finset W)) : Finset W) =
+            {e (e.symm w)} :=
+              prebananaFinitePowersetAtom_eq_singleton W (e.symm w)
+        _ = {w} := by simp
+    have hword :
+        (e.symm w) ∈
+          prebananaFiniteBooleanAtomFinsetOrderIso (Finset W) (φ x) ↔
+        w ∈ φ x := by
+      have hh :=
+        prebananaFiniteBooleanAtomSet_mem_iff (Finset W) (φ x) (e.symm w)
+      have hk :
+          (e.symm w) ∈
+            prebananaFiniteBooleanAtomFinsetOrderIso (Finset W) (φ x) ↔
+          ((e.symm w : PrebananaAbstractAtoms (Finset W)) : Finset W)
+            ≤ φ x := by
+        simpa [prebananaFiniteBooleanAtomFinsetOrderIso] using hh
+      simpa [hsingleton] using hk
+    have hpartx :
+        (e.symm w) ∈
+          prebananaFiniteBooleanAtomFinsetOrderIso (Finset W) (φ x) ↔
+        part (e.symm w) ∈
+          prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x := by
+      have hh := congrArg
+        (fun t : Finset (PrebananaAbstractAtoms (Finset W)) =>
+          e.symm w ∈ t)
+        (hpart (prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x))
+      simpa [prebananaAbstractPowersetMap] using hh
+    simpa only [source, Finset.mem_filter, Finset.mem_univ, true_and] using
+      (hword.symm.trans hpartx)
 
 /-- Given two marked embeddings out of an arbitrary finite base,
 one into an arbitrary finite target and one into a five-ary stage,
@@ -122,15 +160,26 @@ theorem prebananaFiniteExtension_exists_compatibleAtomPartitions
           PrebananaAbstractAtoms A.carrier,
         Function.Surjective source ∧
         Function.Surjective target ∧
-        ∀ a : PrebananaAbstractAtoms A.carrier,
+        (∀ a : PrebananaAbstractAtoms A.carrier,
           (∑ w : PrebananaFiveAryWord n,
             if source w = a then prebananaFiveAryWordMark n w else 0) =
           ∑ b : PrebananaAbstractAtoms B.carrier,
-            if target b = a then B.μ (b : B.carrier) else 0 := by
+            if target b = a then B.μ (b : B.carrier) else 0) ∧
+        (∀ x : A.carrier,
+          e.hom x = Finset.univ.filter
+            (fun w : PrebananaFiveAryWord n =>
+              source w ∈
+                prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x)) ∧
+        ∀ x : A.carrier,
+          prebananaFiniteBooleanAtomFinsetOrderIso B.carrier (f.hom x) =
+            Finset.univ.filter
+              (fun b : PrebananaAbstractAtoms B.carrier =>
+                target b ∈
+                  prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x) := by
   classical
-  obtain ⟨source, hsurj, hsourceMark⟩ :=
+  obtain ⟨source, hsurj, hsourceMark, hsourceMap⟩ :=
     prebananaFiniteStageEmbedding_exists_wordPartition A n e
-  obtain ⟨target, htsurj, _, htargetMark⟩ :=
+  obtain ⟨target, htsurj, htargetMap, htargetMark⟩ :=
     prebananaAbstractEmbedding_exists_literalMarkedAtomPartition
       A.carrier B.carrier A.μ B.μ
       B.μ_bot B.μ_add f.hom f.injective
@@ -138,14 +187,17 @@ theorem prebananaFiniteExtension_exists_compatibleAtomPartitions
       (fun x y => map_sup f.hom x y)
       (fun x y => map_inf f.hom x y)
       f.preserves_μ
-  refine ⟨source, target, hsurj, htsurj, ?_⟩
-  intro a
-  calc
-    (∑ w : PrebananaFiveAryWord n,
-      if source w = a then prebananaFiveAryWordMark n w else 0) =
-        A.μ (a : A.carrier) := hsourceMark a
-    _ = ∑ b : PrebananaAbstractAtoms B.carrier,
-        if target b = a then B.μ (b : B.carrier) else 0 := by
-          simpa [Finset.sum_filter] using (htargetMark a).symm
+  refine ⟨source, target, hsurj, htsurj, ?_, hsourceMap, ?_⟩
+  · intro a
+    calc
+      (∑ w : PrebananaFiveAryWord n,
+        if source w = a then prebananaFiveAryWordMark n w else 0) =
+          A.μ (a : A.carrier) := hsourceMark a
+      _ = ∑ b : PrebananaAbstractAtoms B.carrier,
+          if target b = a then B.μ (b : B.carrier) else 0 := by
+            simpa [Finset.sum_filter] using (htargetMark a).symm
+  · intro x
+    simpa [prebananaAbstractPowersetMap] using
+      (htargetMap (prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x))
 
 end SuccessorTree.NonPrecompact
