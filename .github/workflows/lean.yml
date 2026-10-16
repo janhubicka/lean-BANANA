@@ -271,6 +271,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFinitePowersetAtomsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFinitePowersetAtomsAxiomAudit.lean
 
+      - name: Audit countable pre-BANANA cylinder carrier
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderLimitCarrierAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderLimitCarrierAxiomAudit.lean
+
       - name: Audit actual five-ary Boolean stages
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryBooleanStageAxiomAudit
