@@ -1,10 +1,14 @@
 # Pre-BANANA: explicit five-ary Fraïssé limit — formalisation plan
 
 Status: **finite five-ary stages, connecting embeddings, explicit suffix
-witnesses, and finite-fibre marking allocation formalised in Lean**.
-The base-compatible extension square, direct limit and back-and-forth
-ultrahomogeneity theorem are not yet formalised. The finite-fibre allocation
-is verified on `main` in `PrebananaParentFibreMarkedAllocation.lean`.
+witnesses, finite-fibre marking allocation and the base-compatible
+finite-extension square in literal atom-powerset coordinates are verified in Lean**.
+The iterated tower map is identified with the long-prefix inverse-image
+map, and the canonical marked atom-powerset presentation of an arbitrary
+finite Boolean algebra is verified. The full arbitrary-carrier
+finite-extension theorem still needs the pointwise atom-partition bridges
+and integration (draft PRs #234, #237 and #236). The countable direct
+limit and back-and-forth ultrahomogeneity theorem remain to be formalised.
 This note belongs to the Lean development, not to the frozen circulation text. Existing Lean proofs of finite strong amalgamation,
 joint embedding, finite atom presentations, generated Boolean subalgebras and
 conditional invariant-mass obstruction should be reused.
@@ -160,17 +164,26 @@ The following component modules on `main` are kernel-checked:
 
 The remaining essential obligations are:
 
-5. Assemble the fibrewise allocations simultaneously above all
-   atoms of a prescribed common base. Global F₂ parity alone is
-   insufficient; the per-base sums must agree. Integrate the
-   commuting-allocation results from PRs #217–#222.
-6. Relate suffixes to actual stage-`n+k` words via concatenation,
-   construct a single unital marked Boolean embedding, and verify the
-   full commuting square.
-7. Build the countable direct limit; prove its age, finite-extension
-   property, ultrahomogeneity and finite tuple-orbit bound.
-8. Treat the Stone representation, invariant measures and any
-   group-theoretic consequences independently, keeping explicit
+5. **Verified on `main`:** assemble fibrewise marked allocations
+   above all atoms of the common base; the per-base marking equations
+   are essential. See the simultaneous refinement and marked word
+   allocation modules, merged before PR #231.
+6. **Verified in canonical marked powerset coordinates:** construct a
+   genuine unital marked Boolean embedding with the complete
+   base-commuting square (PR #231); identify the resulting word-prefix
+   map with iteration of the actual tower embeddings (PR #232).
+   Represent arbitrary finite Boolean algebras as marked atom
+   powersets (PR #235).
+7. **Still open:** derive both *pointwise* representation equations
+   for a specified pair of arbitrary finite embeddings (draft PRs
+   #234 and #237), and use them to discharge the explicit hypotheses
+   of the abstract extension composition (draft PR #236). Do not
+   mistake per-base parity alone for the complete map equality.
+8. **Still open:** build the countable direct limit; prove its age,
+   finite-extension property, ultrahomogeneity and finite tuple-orbit
+   bound.
+9. **Still open:** treat the Stone representation, invariant measures
+   and group-theoretic consequences separately, with explicit
    hypotheses visible.
 
 The previous exact numerical descendant-count module was deleted
