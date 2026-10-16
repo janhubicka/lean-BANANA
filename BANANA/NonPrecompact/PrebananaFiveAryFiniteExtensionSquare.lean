@@ -28,7 +28,7 @@ namespace SuccessorTree.NonPrecompact
 the level n+|β| marked Boolean stage, commuting exactly with the old
 base partition on all finite subsets of base atoms. -/
 theorem prebananaFiveAry_finiteExtensionSquare
-    (n : ℕ) (β δ : Type*) [Fintype β]
+    (n : ℕ) (β : Type) (δ : Type*) [Fintype β]
     [DecidableEq β] [DecidableEq δ] [Nonempty β]
     (source : PrebananaFiveAryWord n → δ)
     (target : β → δ)
@@ -60,14 +60,14 @@ theorem prebananaFiveAry_finiteExtensionSquare
       (n + Fintype.card β) β markB htotal part hsurj hmark
   refine ⟨g, ?_⟩
   intro s
-  ext w
   change
-    (w ∈ Finset.univ.filter
-      (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
-        part w ∈ Finset.univ.filter (fun b : β => target b ∈ s))) ↔
-    w ∈ Finset.univ.filter
-      (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
+    (Finset.univ : Finset (PrebananaFiveAryWord (n + Fintype.card β))).filter
+      (fun w => part w ∈
+        (Finset.univ : Finset β).filter (fun b => target b ∈ s)) =
+    (Finset.univ : Finset (PrebananaFiveAryWord (n + Fintype.card β))).filter
+      (fun w =>
         source ((Fin.appendEquiv n (Fintype.card β)).symm w).1 ∈ s)
+  ext w
   simp only [Finset.mem_filter, Finset.mem_univ, true_and]
   rw [hcomm w]
 
