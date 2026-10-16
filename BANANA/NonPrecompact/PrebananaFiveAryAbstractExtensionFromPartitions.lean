@@ -95,25 +95,24 @@ theorem prebananaFiveAry_abstractExtensionFromPartitions
       Finset (PrebananaFiveAryWord (n + Fintype.card β))) =
     (prebananaExplicitFiveAryTower.iterFrom n
       (Fintype.card β)).hom old
-  calc
-    (gcoord.hom (code.hom (f.hom x)) :
-      Finset (PrebananaFiveAryWord (n + Fintype.card β))) =
-        gcoord.hom
-          (Finset.univ.filter (fun b : β => target b ∈ s)) := by
-            rw [hcode]
-    _ = Finset.univ.filter
-          (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
-            source (prebananaFiveAryLongPrefix n (Fintype.card β) w) ∈ s) :=
-              hcomm s
-    _ = Finset.univ.filter
-          (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
-            prebananaFiveAryLongPrefix n (Fintype.card β) w ∈ old) := by
-            ext w
-            simp only [Finset.mem_filter, Finset.mem_univ, true_and]
-            exact (hext _).symm
-    _ = (prebananaExplicitFiveAryTower.iterFrom n
-          (Fintype.card β)).hom old :=
-            (prebananaFiveAryTower_iter_eq_prefix
-              n (Fintype.card β) old).symm
+  have hcoord :
+      (gcoord.hom
+        (Finset.univ.filter (fun b : β => target b ∈ s)) :
+          Finset (PrebananaFiveAryWord (n + Fintype.card β))) =
+      Finset.univ.filter
+        (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
+          source (prebananaFiveAryLongPrefix n (Fintype.card β) w) ∈ s) := by
+    simpa only [prebananaFiveAryLongPrefix] using hcomm s
+  have hprefix :
+      ((prebananaExplicitFiveAryTower.iterFrom n (Fintype.card β)).hom old :
+        Finset (PrebananaFiveAryWord (n + Fintype.card β))) =
+      Finset.univ.filter
+        (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
+          prebananaFiveAryLongPrefix n (Fintype.card β) w ∈ old) :=
+    prebananaFiveAryTower_iter_eq_prefix n (Fintype.card β) old
+  rw [hcode, hcoord, hprefix]
+  ext w
+  simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+  exact (hext _).symm
 
 end SuccessorTree.NonPrecompact
