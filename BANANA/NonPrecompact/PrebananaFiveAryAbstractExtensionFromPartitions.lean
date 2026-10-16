@@ -82,21 +82,38 @@ theorem prebananaFiveAry_abstractExtensionFromPartitions
       (f.hom x) =
         Finset.univ.filter (fun b : β => target b ∈ s)
     exact htargetMap x
+  let old : Finset (PrebananaFiveAryWord n) := e.hom x
+  have hsourceOld : old =
+      Finset.univ.filter (fun w : PrebananaFiveAryWord n =>
+        source w ∈ s) := hsourceMap x
   have hext (w : PrebananaFiveAryWord n) :
-      w ∈ (e.hom x : Finset (PrebananaFiveAryWord n)) ↔
-        source w ∈ s := by
-    rw [hsourceMap x]
-    simp [s]
+      w ∈ old ↔ source w ∈ s := by
+    rw [hsourceOld]
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and]
   change
     (gcoord.hom (code.hom (f.hom x)) :
       Finset (PrebananaFiveAryWord (n + Fintype.card β))) =
     (prebananaExplicitFiveAryTower.iterFrom n
-      (Fintype.card β)).hom (e.hom x)
-  rw [hcode, hcomm s,
-    prebananaFiveAryTower_iter_eq_prefix n
-      (Fintype.card β) (e.hom x)]
-  ext w
-  simp only [Finset.mem_filter, Finset.mem_univ, true_and]
-  exact (hext _).symm
+      (Fintype.card β)).hom old
+  calc
+    (gcoord.hom (code.hom (f.hom x)) :
+      Finset (PrebananaFiveAryWord (n + Fintype.card β))) =
+        gcoord.hom
+          (Finset.univ.filter (fun b : β => target b ∈ s)) := by
+            rw [hcode]
+    _ = Finset.univ.filter
+          (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
+            source (prebananaFiveAryLongPrefix n (Fintype.card β) w) ∈ s) :=
+              hcomm s
+    _ = Finset.univ.filter
+          (fun w : PrebananaFiveAryWord (n + Fintype.card β) =>
+            prebananaFiveAryLongPrefix n (Fintype.card β) w ∈ old) := by
+            ext w
+            simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+            exact (hext _).symm
+    _ = (prebananaExplicitFiveAryTower.iterFrom n
+          (Fintype.card β)).hom old :=
+            (prebananaFiveAryTower_iter_eq_prefix
+              n (Fintype.card β) old).symm
 
 end SuccessorTree.NonPrecompact
