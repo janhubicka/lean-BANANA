@@ -20,12 +20,12 @@ complete extension square for arbitrary embeddings.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical
+
 /-- The canonical finite Boolean-algebra-to-atom-powerset map is a
 marked Boolean embedding, with the same F₂ marking on *all* elements. -/
 noncomputable def prebananaAbstractModel_markedPowersetEmbedding
     (B : PrebananaFiniteBooleanModel)
-    [Fintype (PrebananaAbstractAtoms B.carrier)]
-    [DecidableEq (PrebananaAbstractAtoms B.carrier)]
     [Nonempty (PrebananaAbstractAtoms B.carrier)] :
     PrebananaFiniteBooleanEmbedding B
       (prebananaFiniteMarkedPowerset
