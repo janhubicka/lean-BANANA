@@ -16,7 +16,7 @@ consequence in the paper is already a theorem of Lean.
 
 | Development | Established in the Lean sources | Further obligations |
 | --- | --- | --- |
-| **pre-BANANA** | Finite marked Boolean-algebra models; atom-powerset representations; marked embeddings; finite strong amalgamation, heredity and joint embedding; obstruction to EPPA; persistent copy colourings and infinite copy Ramsey degree; five-ary finite stages, marking-preserving connecting embeddings and residual-parity lemmas | A complete finite-extension diagram, countable homogeneous Fraïssé limit and its Stone/topological actions. The measure obstruction is conditional on the stated representation and homogeneity hypotheses |
+| **pre-BANANA** | Finite marked Boolean-algebra models; atom-powerset representations; marked embeddings; finite strong amalgamation, heredity and joint embedding; obstruction to EPPA; persistent copy colourings and infinite copy Ramsey degree; five-ary finite stages, marking-preserving connecting embeddings and residual-parity lemmas; a genuine common-base-commuting finite-extension square in powerset coordinates | The finite-extension theorem for arbitrary marked Boolean embeddings (pointwise atom-partition bridge), countable homogeneous Fraïssé limit and its Stone/topological actions. The measure obstruction is conditional on the stated representation and homogeneity hypotheses |
 | **Folkman–BANANA** | Non-unital atom-owner representation; individual Boolean-ring-sort amalgamation and exact image intersection; bilinear block-extension calculations; persistent copy colourings and infinite copy Ramsey degree | Combined two-sorted, pairing-preserving strong amalgamation and finite-age/limit conclusions need the remaining integration work |
 | **BANANA** | Bilinear-pairing matrix models, perfect completion and finite amalgamation; explicit countable pairing, finite age, finite-substructure homogeneity and finite tuple-orbit criteria; locally finite finite-GL approximation; algebraic constituents of coherent EPPA; persistent colourings and copy Ramsey degrees | Final group-theoretic deductions (including topological amenability and ample generics) and the finite representative bookkeeping for a fully packaged coherent-EPPA assertion are not all expressed as end-to-end Lean theorems |
 
@@ -40,7 +40,19 @@ The principal files are under `BANANA/NonPrecompact/`:
 For the five-ary extension proof, start with
 `docs/prebanana-five-ary-fraisse-construction.md`. The finite-parent-fibre allocation theorem was verified and merged
 via [PR #223](https://github.com/janhubicka/lean-BANANA/pull/223).
-The full common-base-commuting finite extension is still open.
+The full common-base-commuting finite extension **in marked powerset
+coordinates** was checked and merged in [PR #231](https://github.com/janhubicka/lean-BANANA/pull/231);
+[PR #232](https://github.com/janhubicka/lean-BANANA/pull/232)
+identifies its prefix map with the actual iterated tower embedding, and
+[PR #235](https://github.com/janhubicka/lean-BANANA/pull/235)
+packages arbitrary finite Boolean algebras as marked atom powersets.
+The original-embedding atom-partition bridge
+([PR #234](https://github.com/janhubicka/lean-BANANA/pull/234)
+and [PR #237](https://github.com/janhubicka/lean-BANANA/pull/237))
+and its extension composition
+([PR #236](https://github.com/janhubicka/lean-BANANA/pull/236))
+remain drafts pending verification. The **unconditional** arbitrary-carrier
+finite-extension theorem and the countable limit are not yet complete.
 
 ## Local verification
 
