@@ -109,6 +109,9 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
             simp [μW, prebananaFiveAryBooleanStage, Finset.sum_filter] <;> rfl
       _ = A.μ (a : A.carrier) := hfibre a
   · intro x
+    change (φ x : Finset W) =
+      Finset.univ.filter (fun w : W =>
+        source w ∈ prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x)
     ext w
     have hsingleton :
         ((e.symm w : PrebananaAbstractAtoms (Finset W)) : Finset W) =
