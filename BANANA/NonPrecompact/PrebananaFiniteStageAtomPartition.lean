@@ -53,10 +53,18 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
     exact map_top f.hom
   have hsup (x y : A.carrier) :
       φ (x ⊔ y) = φ x ⊔ φ y := by
-    exact map_sup f.hom x y
+    have h : f.hom (x ⊔ y) =
+        (f.hom x ⊔ f.hom y :
+          (prebananaFiveAryBooleanStage n).carrier) :=
+      map_sup f.hom x y
+    exact h
   have hinf (x y : A.carrier) :
       φ (x ⊓ y) = φ x ⊓ φ y := by
-    exact map_inf f.hom x y
+    have h : f.hom (x ⊓ y) =
+        (f.hom x ⊓ f.hom y :
+          (prebananaFiveAryBooleanStage n).carrier) :=
+      map_inf f.hom x y
+    exact h
   have hmark (x : A.carrier) : μW (φ x) = A.μ x := by
     change (prebananaFiveAryBooleanStage n).μ (f.hom x) = A.μ x
     exact f.preserves_μ x
