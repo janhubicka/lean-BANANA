@@ -21,6 +21,27 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical
 
+/-- Transporting a finite word subset along equality of word
+lengths does not change its cylinder subset. The two length
+variables are independent, so dependent elimination is valid. -/
+theorem prebananaFiveAryCylinder_cast
+    {a b : ℕ} (h : a = b)
+    (s : Finset (PrebananaFiveAryWord a)) :
+    prebananaFiveAryCylinder b (h ▸ s) =
+      prebananaFiveAryCylinder a s := by
+  cases h
+  rfl
+
+/-- The same equality transport preserves the marking of
+the associated finite Boolean stage. -/
+theorem prebananaFiveAryCylinder_cast_mark
+    {a b : ℕ} (h : a = b)
+    (s : Finset (PrebananaFiveAryWord a)) :
+    (prebananaFiveAryBooleanStage b).μ (h ▸ s) =
+      (prebananaFiveAryBooleanStage a).μ s := by
+  cases h
+  rfl
+
 /-- Refine a finite word subset to any later level of the
 actual five-ary marked Boolean tower. -/
 noncomputable def prebananaFiveAryRefineTo
@@ -46,8 +67,7 @@ theorem prebananaFiveAryRefineTo_cylinder
       prebananaFiveAryCylinder (n + k) z := by
     change prebananaFiveAryCylinder N (hN ▸ z) =
       prebananaFiveAryCylinder (n + k) z
-    cases hN
-    rfl
+    exact prebananaFiveAryCylinder_cast hN z
   exact htransport.trans (prebananaFiveAryCylinder_iter n k s)
 
 /-- Refinement preserves exactly the F₂ marking of the finite
@@ -68,8 +88,7 @@ theorem prebananaFiveAryRefineTo_mark
       (prebananaFiveAryBooleanStage (n + k)).μ z := by
     change (prebananaFiveAryBooleanStage N).μ (hN ▸ z) =
       (prebananaFiveAryBooleanStage (n + k)).μ z
-    cases hN
-    rfl
+    exact prebananaFiveAryCylinder_cast_mark hN z
   exact htransport.trans
     (prebananaExplicitFiveAryTower_iter_preserves_mark n k s)
 
