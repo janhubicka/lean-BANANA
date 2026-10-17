@@ -15,9 +15,10 @@ with the genuine marked stage embedding into the cylinder limit.
 Exact commutation follows from the already verified cylinder/tower
 compatibility theorem.
 
-The remaining independent task is to prove that *every* finite
-marked cylinder embedding factors through one finite stage
-(draft PR #248). No ultrahomogeneity assumption occurs here.
+The required factorisation of arbitrary finite marked embeddings
+is now verified separately in `PrebananaFiveAryCylinderFiniteEmbeddingFactor`.
+That theorem will be combined with this lemma in the unconditional
+extension-property interface. No ultrahomogeneity assumption occurs here.
 -/
 
 namespace SuccessorTree.NonPrecompact
