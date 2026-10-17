@@ -321,6 +321,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderLocalFinitenessAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderLocalFinitenessAxiomAudit.lean
 
+      - name: Audit finite Boolean ambient subalgebras in the cylinder limit
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAmbientAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteAmbientAxiomAudit.lean
+
       - name: Audit common-stage presentation of finite cylinder families
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteFamilyAxiomAudit
