@@ -37,8 +37,18 @@ theorem prebananaFiveAryRefineTo_cylinder
     (s : Finset (PrebananaFiveAryWord n)) :
     prebananaFiveAryCylinder N (prebananaFiveAryRefineTo n N hn s) =
       prebananaFiveAryCylinder n s := by
-  simpa only [prebananaFiveAryRefineTo, Nat.add_sub_of_le hn] using
-    (prebananaFiveAryCylinder_iter n (N - n) s)
+  let k := N - n
+  have hN : n + k = N := Nat.add_sub_of_le hn
+  let z : Finset (PrebananaFiveAryWord (n + k)) :=
+    (prebananaExplicitFiveAryTower.iterFrom n k).hom s
+  have htransport :
+      prebananaFiveAryCylinder N (prebananaFiveAryRefineTo n N hn s) =
+      prebananaFiveAryCylinder (n + k) z := by
+    change prebananaFiveAryCylinder N (hN ▸ z) =
+      prebananaFiveAryCylinder (n + k) z
+    cases hN
+    rfl
+  exact htransport.trans (prebananaFiveAryCylinder_iter n k s)
 
 /-- Refinement preserves exactly the F₂ marking of the finite
 marked Boolean algebra. -/
@@ -48,8 +58,20 @@ theorem prebananaFiveAryRefineTo_mark
     (prebananaFiveAryBooleanStage N).μ
       (prebananaFiveAryRefineTo n N hn s) =
     (prebananaFiveAryBooleanStage n).μ s := by
-  simpa only [prebananaFiveAryRefineTo, Nat.add_sub_of_le hn] using
-    (prebananaExplicitFiveAryTower_iter_preserves_mark n (N - n) s)
+  let k := N - n
+  have hN : n + k = N := Nat.add_sub_of_le hn
+  let z : Finset (PrebananaFiveAryWord (n + k)) :=
+    (prebananaExplicitFiveAryTower.iterFrom n k).hom s
+  have htransport :
+      (prebananaFiveAryBooleanStage N).μ
+        (prebananaFiveAryRefineTo n N hn s) =
+      (prebananaFiveAryBooleanStage (n + k)).μ z := by
+    change (prebananaFiveAryBooleanStage N).μ (hN ▸ z) =
+      (prebananaFiveAryBooleanStage (n + k)).μ z
+    cases hN
+    rfl
+  exact htransport.trans
+    (prebananaExplicitFiveAryTower_iter_preserves_mark n k s)
 
 /-- Two possibly different-level finite descriptions of exactly the
 same cylinder necessarily have identical F₂ markings. -/
