@@ -72,7 +72,7 @@ theorem prebananaFiveAryCylinder_finiteEmbedding_factor
       prebananaFiveAryCylinder n (s (x ⊔ y)) =
           (e (x ⊔ y)).val := hv _
       _ = (e x ⊔ e y).val :=
-        congrArg Subtype.val (map_sup e x y)
+        congrArg Subtype.val (e.map_sup' x y)
       _ = (e x).val ∪ (e y).val :=
         prebananaFiveAryCylinder_val_sup (e x) (e y)
       _ = prebananaFiveAryCylinder n (s x) ∪
@@ -86,7 +86,7 @@ theorem prebananaFiveAryCylinder_finiteEmbedding_factor
       prebananaFiveAryCylinder n (s (x ⊓ y)) =
           (e (x ⊓ y)).val := hv _
       _ = (e x ⊓ e y).val :=
-        congrArg Subtype.val (map_inf e x y)
+        congrArg Subtype.val (e.map_inf' x y)
       _ = (e x).val ∩ (e y).val :=
         prebananaFiveAryCylinder_val_inf (e x) (e y)
       _ = prebananaFiveAryCylinder n (s x) ∩
@@ -94,7 +94,7 @@ theorem prebananaFiveAryCylinder_finiteEmbedding_factor
       _ = prebananaFiveAryCylinder n (s x ∩ s y) :=
         (prebananaFiveAryCylinder_inter n (s x) (s y)).symm
   let ghom : BoundedLatticeHom A.carrier
-      (prebananaFiveAryBooleanStage n).carrier where
+      (prebananaFiveAryBooleanStage n).carrier := {
     toFun := s
     map_bot' := by
       change s (⊥ : A.carrier) = (∅ : Finset (PrebananaFiveAryWord n))
@@ -111,6 +111,7 @@ theorem prebananaFiveAryCylinder_finiteEmbedding_factor
       intro x y
       change s (x ⊓ y) = s x ∩ s y
       exact hinf x y
+  }
   have hgInj : Function.Injective ghom := by
     intro x y hxy
     apply hinj
@@ -130,10 +131,11 @@ theorem prebananaFiveAryCylinder_finiteEmbedding_factor
           congrArg prebananaFiveAryCylinderMark (hs x)
       _ = A.μ x := hmark x
   let g : PrebananaFiniteBooleanEmbedding A
-      (prebananaFiveAryBooleanStage n) where
+      (prebananaFiveAryBooleanStage n) := {
     hom := ghom
     injective := hgInj
     preserves_μ := hgMark
+  }
   refine ⟨n, g, ?_⟩
   intro x
   exact hs x
