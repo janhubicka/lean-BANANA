@@ -133,6 +133,7 @@ theorem PrebananaFiniteBridge.exists_exhaustive_chain
     (hext : M.HasFiniteExtensionProperty)
     (p : PrebananaFiniteBridge M) :
     ∃ chain : ℕ → PrebananaFiniteBridge M,
+      chain 0 = p ∧
       Monotone chain ∧
       (∀ x : M.carrier, ∃ n : ℕ,
         ∃ a : (chain n).base.carrier, (chain n).left.hom a = x) ∧
@@ -148,7 +149,7 @@ theorem PrebananaFiniteBridge.exists_exhaustive_chain
       (PrebananaFiniteBridge.rightCofinal hfinite hext)
   let chain : ℕ → PrebananaFiniteBridge M :=
     Order.sequenceOfCofinals p D
-  refine ⟨chain, Order.sequenceOfCofinals.monotone p D, ?_, ?_⟩
+  refine ⟨chain, rfl, Order.sequenceOfCofinals.monotone p D, ?_, ?_⟩
   · intro x
     have h :=
       Order.sequenceOfCofinals.encode_mem p D (Sum.inl x)
