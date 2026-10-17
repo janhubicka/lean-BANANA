@@ -31,7 +31,7 @@ noncomputable instance : Nontrivial PrebananaFiveAryCylinderLimitCarrier := by
     have hw : w ∈ (∅ : Finset (PrebananaFiveAryWord 0)) := by
       rw [hh]
       exact Finset.mem_univ w
-    exact (Finset.not_mem_empty w) hw
+    simpa using hw
   exact ⟨f (∅ : Finset (PrebananaFiveAryWord 0)),
     f (Finset.univ : Finset (PrebananaFiveAryWord 0)), hne⟩
 
