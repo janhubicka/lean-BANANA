@@ -311,6 +311,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteEmbeddingFactorAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteEmbeddingFactorAxiomAudit.lean
 
+      - name: Audit local finiteness of finitely generated cylinder algebras
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderLocalFinitenessAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderLocalFinitenessAxiomAudit.lean
+
       - name: Audit common-stage presentation of finite cylinder families
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteFamilyAxiomAudit
