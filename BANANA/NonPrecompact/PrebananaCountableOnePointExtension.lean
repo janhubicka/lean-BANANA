@@ -98,7 +98,7 @@ theorem PrebananaCountableBooleanModel.onePointForth
         (∀ a : A.carrier, h.hom (f.hom a) = e.hom a) := by
   classical
   let xs : Finset M.carrier :=
-    (Finset.univ.image (fun a : A.carrier => j.hom a)).insert x
+    insert x (Finset.univ.image (fun a : A.carrier => j.hom a))
   obtain ⟨S, hSfinite, hS⟩ := hfinite xs
   have hjS (a : A.carrier) : j.hom a ∈ S := by
     apply hS
