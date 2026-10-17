@@ -291,6 +291,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFinitePowersetAtomsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFinitePowersetAtomsAxiomAudit.lean
 
+      - name: Audit cylinder extension from a finite-stage base factor
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderExtensionFromStageAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderExtensionFromStageAxiomAudit.lean
+
       - name: Audit packaged countable pre-BANANA marked Boolean model
         run: |
           lake build BANANA.NonPrecompact.PrebananaCountableMarkedBooleanModelAxiomAudit
