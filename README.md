@@ -16,7 +16,7 @@ consequence in the paper is already a theorem of Lean.
 
 | Development | Established in the Lean sources | Further obligations |
 | --- | --- | --- |
-| **pre-BANANA** | Finite marked Boolean-algebra models; atom-powerset representations; marked embeddings; finite strong amalgamation, heredity and joint embedding; obstruction to EPPA; persistent copy colourings and infinite copy Ramsey degree; five-ary finite stages, marking-preserving connecting embeddings and residual-parity lemmas; a genuine common-base-commuting finite-extension square in powerset coordinates | The finite-extension theorem for arbitrary marked Boolean embeddings (pointwise atom-partition bridge), countable homogeneous Fraïssé limit and its Stone/topological actions. The measure obstruction is conditional on the stated representation and homogeneity hypotheses |
+| **pre-BANANA** | Finite marked Boolean-algebra models, strong amalgamation, heredity, joint embedding, EPPA obstruction and persistent copy colourings; the unconditional finite-extension theorem for arbitrary marked Boolean embeddings; explicit five-ary tower and finite-model universality; a countable Boolean algebra of cylinders with well-defined, disjoint-additive F₂ marking; compatibility with all finite-stage embeddings; simultaneous finite-stage presentations for finite families | Factor arbitrary finite marked embeddings into a finite stage, obtain the extension property and ultrahomogeneity of the countable algebra, prove finite tuple-orbit bounds, and handle Stone/topological consequences separately. Conditional measure-obstruction hypotheses remain explicit |
 | **Folkman–BANANA** | Non-unital atom-owner representation; individual Boolean-ring-sort amalgamation and exact image intersection; bilinear block-extension calculations; persistent copy colourings and infinite copy Ramsey degree | Combined two-sorted, pairing-preserving strong amalgamation and finite-age/limit conclusions need the remaining integration work |
 | **BANANA** | Bilinear-pairing matrix models, perfect completion and finite amalgamation; explicit countable pairing, finite age, finite-substructure homogeneity and finite tuple-orbit criteria; locally finite finite-GL approximation; algebraic constituents of coherent EPPA; persistent colourings and copy Ramsey degrees | Final group-theoretic deductions (including topological amenability and ample generics) and the finite representative bookkeeping for a fully packaged coherent-EPPA assertion are not all expressed as end-to-end Lean theorems |
 
@@ -29,6 +29,8 @@ The principal files are under `BANANA/NonPrecompact/`:
 `PrebananaFiniteBooleanModelStrongAP.lean`,
 `PrebananaCopyDegree.lean`,
 `PrebananaExplicitFiveAryTower.lean`,
+`PrebananaFiveAryCylinderMarkedModel.lean`,
+`PrebananaFiveAryCylinderFiniteFamily.lean`,
 `FolkmanAtomAmalgam.lean`,
 `FolkmanPersistence.lean`,
 `BananaStructure.lean`,
@@ -59,14 +61,24 @@ injections ([PR #239](https://github.com/janhubicka/lean-BANANA/pull/239))
 and its compatibility with tower iteration
 ([PR #240](https://github.com/janhubicka/lean-BANANA/pull/240))
 are also verified. Finite-model universality
-([draft PR #245](https://github.com/janhubicka/lean-BANANA/pull/245))
-has passed its targeted axiom audit, but is not yet merged.
-Stage-independent marking ([draft PR #242](https://github.com/janhubicka/lean-BANANA/pull/242)),
-Boolean closure ([draft PR #243](https://github.com/janhubicka/lean-BANANA/pull/243))
-and the marked cylinder algebra ([draft PR #244](https://github.com/janhubicka/lean-BANANA/pull/244))
-remain under verification.
-The full Fraïssé age, ultrahomogeneity and topological deductions
-are **not yet** end-to-end Lean theorems.
+([PR #245](https://github.com/janhubicka/lean-BANANA/pull/245)),
+stage-independent marking
+([PR #242](https://github.com/janhubicka/lean-BANANA/pull/242)),
+Boolean closure
+([PR #243](https://github.com/janhubicka/lean-BANANA/pull/243))
+and the admissible countable marked cylinder algebra
+([PR #244](https://github.com/janhubicka/lean-BANANA/pull/244))
+are kernel-checked and merged. Simultaneous finite-stage presentations
+for finite families are verified in
+[PR #247](https://github.com/janhubicka/lean-BANANA/pull/247).
+Finite embedding factorisation
+([draft PR #248](https://github.com/janhubicka/lean-BANANA/pull/248)),
+the packaged finite-to-countable marked embedding interface
+([draft PR #250](https://github.com/janhubicka/lean-BANANA/pull/250))
+and countable extension transfer
+([draft PR #251](https://github.com/janhubicka/lean-BANANA/pull/251))
+remain under verification. Exact finite age, ultrahomogeneity and
+topological deductions are **not yet** end-to-end Lean theorems.
 
 ## Local verification
 
