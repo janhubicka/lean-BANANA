@@ -4,8 +4,9 @@ import BANANA.NonPrecompact.PrebananaFiveAryCylinderExtensionFromStage
 /-!
 # Finite extension property of the explicit countable pre-BANANA algebra
 
-The finite extension theorem in the five-ary tower and finite-stage
-factorisation of arbitrary embeddings into its cylinder algebra imply
+The verified finite-extension theorem in the five-ary tower,
+the verified finite-stage factorisation of arbitrary marked embeddings,
+and the verified stage-to-cylinder extension theorem together imply
 the genuine extension property for the countable marked Boolean model.
 
 There are no extra assumptions about presentations, split embeddings,
