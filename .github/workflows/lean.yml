@@ -306,6 +306,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit.lean
 
+      - name: Audit exact finite age of countable pre-BANANA cylinders
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAgeAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteAgeAxiomAudit.lean
+
       - name: Audit finite marked Boolean embedding factorisation into five-ary stages
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteEmbeddingFactorAxiomAudit
