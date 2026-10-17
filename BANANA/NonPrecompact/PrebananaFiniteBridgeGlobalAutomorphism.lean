@@ -88,14 +88,6 @@ noncomputable def PrebananaFiniteBridge.limitOrderIso
       PrebananaFiniteBridge.forward_map_sup chain hmono hleft x y
     constructor
     · intro hxy
-      have heq : x ⊔ y = y := sup_eq_right.mpr hxy
-      have hmaps :
-          PrebananaFiniteBridge.forward chain hleft x ⊔
-            PrebananaFiniteBridge.forward chain hleft y =
-          PrebananaFiniteBridge.forward chain hleft y := by
-        rw [← hsup, heq]
-      exact sup_eq_right.mp hmaps
-    · intro hxy
       have heq :
           PrebananaFiniteBridge.forward chain hleft x ⊔
             PrebananaFiniteBridge.forward chain hleft y =
@@ -109,6 +101,14 @@ noncomputable def PrebananaFiniteBridge.limitOrderIso
         rw [hsup]
         exact heq
       exact sup_eq_right.mp hxy'
+    · intro hxy
+      have heq : x ⊔ y = y := sup_eq_right.mpr hxy
+      have hmaps :
+          PrebananaFiniteBridge.forward chain hleft x ⊔
+            PrebananaFiniteBridge.forward chain hleft y =
+          PrebananaFiniteBridge.forward chain hleft y := by
+        rw [← hsup, heq]
+      exact sup_eq_right.mp hmaps
 
 /-- Back-and-forth yields an order automorphism of any countable
 marked Boolean algebra satisfying finite ambient subalgebras and
