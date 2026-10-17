@@ -65,13 +65,14 @@ theorem prebananaCylinder_extension_of_stageFactor
   refine ⟨h, ?_⟩
   intro x
   change j.hom (hstage.hom (f.hom x)) = e.hom x
-  calc
-    j.hom (hstage.hom (f.hom x)) =
-        j.hom
-          ((prebananaExplicitFiveAryTower.iterFrom n k).hom (g.hom x)) :=
-      congrArg j.hom (hcomm x)
-    _ = prebananaFiveAryCylinderStageEmbedding n (g.hom x) :=
-      prebananaFiveAryCylinderStageEmbedding_iter n k (g.hom x)
-    _ = e.hom x := hfactor x
+  have hstep :
+      j.hom
+        ((prebananaExplicitFiveAryTower.iterFrom n k).hom (g.hom x)) =
+      prebananaFiveAryCylinderStageEmbedding n (g.hom x) := by
+    change prebananaFiveAryCylinderStageEmbedding (n + k)
+      ((prebananaExplicitFiveAryTower.iterFrom n k).hom (g.hom x)) =
+      prebananaFiveAryCylinderStageEmbedding n (g.hom x)
+    exact prebananaFiveAryCylinderStageEmbedding_iter n k (g.hom x)
+  exact ((congrArg j.hom (hcomm x)).trans hstep).trans (hfactor x)
 
 end SuccessorTree.NonPrecompact
