@@ -29,7 +29,7 @@ theorem prebananaCylinder_hasFiniteAmbients_forHomogeneity :
   intro xs
   obtain ⟨S, hfinite, hmem⟩ :=
     prebananaFiveAryCylinder_finiteAmbient
-      (fun y : xs => (y : PrebananaFiveAryCylinderLimitCarrier))
+      (fun y : xs => y.val)
   refine ⟨S, hfinite, ?_⟩
   intro x hx
   exact hmem ⟨x, hx⟩
