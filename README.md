@@ -50,15 +50,23 @@ The original-embedding atom-partition bridge
 ([PR #234](https://github.com/janhubicka/lean-BANANA/pull/234)
 and [PR #237](https://github.com/janhubicka/lean-BANANA/pull/237))
 is also verified and merged. The integration lemma
-([draft PR #236](https://github.com/janhubicka/lean-BANANA/pull/236))
-and the **unconditional** arbitrary-carrier finite-extension theorem
-([draft PR #238](https://github.com/janhubicka/lean-BANANA/pull/238))
-still await Lean verification.
-The concrete **countable cylinder carrier** and faithful maps of finite
-stages are verified in [PR #239](https://github.com/janhubicka/lean-BANANA/pull/239).
-Cylinder/tower coherence is in [draft PR #240](https://github.com/janhubicka/lean-BANANA/pull/240).
-A marked Boolean-algebra limit, its ultrahomogeneity and subsequent
-topological deductions are **not yet** end-to-end Lean theorems.
+([PR #236](https://github.com/janhubicka/lean-BANANA/pull/236))
+and **unconditional** arbitrary-carrier finite-extension theorem
+([PR #238](https://github.com/janhubicka/lean-BANANA/pull/238))
+are now verified and merged.
+The concrete **countable cylinder carrier** with faithful finite-stage
+injections ([PR #239](https://github.com/janhubicka/lean-BANANA/pull/239))
+and its compatibility with tower iteration
+([PR #240](https://github.com/janhubicka/lean-BANANA/pull/240))
+are also verified. Finite-model universality
+([draft PR #245](https://github.com/janhubicka/lean-BANANA/pull/245))
+has passed its targeted axiom audit, but is not yet merged.
+Stage-independent marking ([draft PR #242](https://github.com/janhubicka/lean-BANANA/pull/242)),
+Boolean closure ([draft PR #243](https://github.com/janhubicka/lean-BANANA/pull/243))
+and the marked cylinder algebra ([draft PR #244](https://github.com/janhubicka/lean-BANANA/pull/244))
+remain under verification.
+The full Fraïssé age, ultrahomogeneity and topological deductions
+are **not yet** end-to-end Lean theorems.
 
 ## Local verification
 
