@@ -6,13 +6,16 @@ finite-extension square in literal atom-powerset coordinates are verified in Lea
 The iterated tower map is identified with the long-prefix inverse-image
 map, and the canonical marked atom-powerset presentation of an arbitrary
 finite Boolean algebra is verified. The exact pointwise atom-partition
-bridges are also verified on `main` (PRs #234 and #237). The full
-arbitrary-carrier finite-extension theorem awaits the integration of
-draft PRs #236 and #238. A **countable concrete carrier** of finite-prefix
-cylinders with faithful stage maps has been verified and merged (PR #239);
-its compatibility with tower iteration is in draft PR #240. The marked
-Boolean-algebra structure, marking well-definedness, finite age and
-back-and-forth ultrahomogeneity remain to be formalised.
+bridges are also verified on `main` (PRs #234 and #237). The
+**unconditional finite-extension theorem** for all arbitrary finite
+marked Boolean embeddings is now verified on `main` (PRs #236 and #238).
+A **countable concrete carrier** of finite-prefix cylinders with faithful
+stage maps is verified (PR #239), as is its compatibility with all
+tower refinements (PR #240). Finite-stage universality is draft PR #245;
+stage-independent marking is draft PR #242, Boolean closure is draft
+PR #243 and the marked algebra is draft PR #244. Full age,
+finite-extension over arbitrary finite subalgebras, back-and-forth
+ultrahomogeneity and tuple-orbit finiteness are still open.
 This note belongs to the Lean development, not to the frozen circulation text. Existing Lean proofs of finite strong amalgamation,
 joint embedding, finite atom presentations, generated Boolean subalgebras and
 conditional invariant-mass obstruction should be reused.
@@ -182,19 +185,20 @@ The remaining essential obligations are:
    representation equations for arbitrary finite embeddings (PRs #234
    and #237). Do not mistake per-base parity alone for equality of
    the complete Boolean-element maps.
-8. **Still open:** finish the abstract finite-extension composition
-   (draft PR #236) and unconditional finite-extension theorem (draft
-   PR #238); both await the last kernel checks and integration.
-9. **Verified on `main`:** the countable carrier of cylinders on
-   infinite five-ary branches, injectivity of finite-stage maps, and
-   elementary fixed-stage cylinder operations (PR #239). The
-   all-level tower compatibility is draft PR #240.
-10. **Still open:** prove mixed-level Boolean closure, well-defined
-    F₂ marking, finite age, finite-extension property in the countable
-    limit, ultrahomogeneity and finite tuple-orbit bound.
-11. **Still open:** treat the Stone representation, invariant measures
-    and group-theoretic consequences separately, with explicit
-    hypotheses visible.
+8. **Verified on `main`:** the arbitrary-carrier extension
+   composition and unconditional marked finite-extension theorem,
+   including explicit depth |At(B)| (PRs #236 and #238).
+9. **Verified on `main`:** the countable cylinder carrier, faithful
+   finite-stage injections and exact compatibility with iterated
+   five-ary tower embeddings (PRs #239 and #240).
+10. **Drafts awaiting Lean checks:** every finite marked Boolean algebra
+    embeds into a five-ary stage (PR #245), stage-independent F₂
+    marking (PR #242), Boolean closure of cylinders (PR #243),
+    and a fully admissible countable marked Boolean algebra (PR #244).
+11. **Still open:** exact finite age, finite-extension over arbitrary
+    finite subalgebras, ultrahomogeneity, and finite tuple-orbit bound.
+12. **Still open:** the Stone representation, invariant measures and
+    group-theoretic deductions; retain their explicit hypotheses.
 
 The previous exact numerical descendant-count module was deleted
 as a dead-end calculation. Its formula remains a useful independent
