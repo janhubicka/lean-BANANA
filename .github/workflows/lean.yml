@@ -301,6 +301,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderExtensionFromStageAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderExtensionFromStageAxiomAudit.lean
 
+      - name: Audit concrete cylinder one-point marked extension
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderOnePointForthAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderOnePointForthAxiomAudit.lean
+
       - name: Audit generic one-point marked Boolean extension
         run: |
           lake build BANANA.NonPrecompact.PrebananaCountableOnePointExtensionAxiomAudit
