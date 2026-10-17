@@ -47,7 +47,7 @@ theorem prebananaCylinder_extension_of_stageFactor
       prebananaCylinderCountableModel :=
     prebananaCylinderCountableStageEmbedding (n + k)
   let h : PrebananaFiniteToCountableEmbedding
-      B prebananaCylinderCountableModel where
+      B prebananaCylinderCountableModel := {
     hom := j.hom.comp hstage.hom
     injective := by
       intro x y hxy
@@ -60,6 +60,7 @@ theorem prebananaCylinder_extension_of_stageFactor
             (prebananaFiveAryBooleanStage (n + k)).μ (hstage.hom x) :=
           j.preserves_μ (hstage.hom x)
         _ = B.μ x := hstage.preserves_μ x
+  }
   refine ⟨h, ?_⟩
   intro x
   change j.hom (hstage.hom (f.hom x)) = e.hom x
