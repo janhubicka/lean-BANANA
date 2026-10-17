@@ -243,6 +243,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryAbstractExtensionFromPartitionsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryAbstractExtensionFromPartitionsAxiomAudit.lean
 
+      - name: Audit every finite marked Boolean model embeds in a five-ary stage
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryFiniteUniversalityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryFiniteUniversalityAxiomAudit.lean
+
       - name: Audit full five-ary finite-extension commuting square
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryFiniteExtensionSquareAxiomAudit
