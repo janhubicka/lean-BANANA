@@ -296,6 +296,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit.lean
 
+      - name: Audit common-stage presentation of finite cylinder families
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteFamilyAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteFamilyAxiomAudit.lean
+
       - name: Audit stage-independent F2 cylinder marking
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkAxiomAudit
