@@ -27,11 +27,13 @@ noncomputable instance : Nontrivial PrebananaFiveAryCylinderLimitCarrier := by
     have hh : (∅ : Finset (PrebananaFiveAryWord 0)) =
         (Finset.univ : Finset (PrebananaFiveAryWord 0)) :=
       f.injective h
-    have hmem := congrArg
-      (fun u : Finset (PrebananaFiveAryWord 0) =>
-        (fun _ : Fin 0 => (0 : Fin 5)) ∈ u) hh
-    simpa using hmem
-  exact ⟨f ∅, f Finset.univ, hne⟩
+    let w : PrebananaFiveAryWord 0 := fun _ => 0
+    have hw : w ∈ (∅ : Finset (PrebananaFiveAryWord 0)) := by
+      rw [hh]
+      exact Finset.mem_univ w
+    exact (Finset.not_mem_empty w) hw
+  exact ⟨f (∅ : Finset (PrebananaFiveAryWord 0)),
+    f (Finset.univ : Finset (PrebananaFiveAryWord 0)), hne⟩
 
 /-- The parity of the empty cylinder vanishes. -/
 theorem prebananaFiveAryCylinderMark_bot :
@@ -123,13 +125,18 @@ theorem prebananaFiveAryCylinderMark_sup
       _ = prebananaFiveAryCylinder N ∅ :=
         (prebananaFiveAryCylinder_empty N).symm
   have hsum :
-      (prebananaFiveAryBooleanStage N).μ (sn ∪ tm) =
+      (prebananaFiveAryBooleanStage N).μ
+        ((sn ∪ tm) : Finset (PrebananaFiveAryWord N)) =
       (prebananaFiveAryBooleanStage N).μ sn +
         (prebananaFiveAryBooleanStage N).μ tm := by
-    exact (prebananaFiveAryBooleanStage N).μ_add sn tm hmeet
+    change (∑ w ∈ sn ∪ tm, prebananaFiveAryWordMark N w) =
+      (∑ w ∈ sn, prebananaFiveAryWordMark N w) +
+        ∑ w ∈ tm, prebananaFiveAryWordMark N w
+    exact Finset.sum_union (Finset.disjoint_iff_inter_eq_empty.mpr hmeet)
   calc
     prebananaFiveAryCylinderMark (X ⊔ Y) =
-        (prebananaFiveAryBooleanStage N).μ (sn ∪ tm) :=
+        (prebananaFiveAryBooleanStage N).μ
+          ((sn ∪ tm) : Finset (PrebananaFiveAryWord N)) :=
           prebananaFiveAryCylinderMark_eq _ N _ hxy
     _ = (prebananaFiveAryBooleanStage N).μ sn +
           (prebananaFiveAryBooleanStage N).μ tm := hsum
