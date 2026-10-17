@@ -30,6 +30,10 @@ structure PrebananaCountableBooleanModel where
   μ_add : ∀ x y : carrier, x ⊓ y = ⊥ →
     μ (x ⊔ y) = μ x + μ y
 
+attribute [instance] PrebananaCountableBooleanModel.booleanAlgebra
+  PrebananaCountableBooleanModel.countable
+  PrebananaCountableBooleanModel.nontrivial
+
 /-- An actual marked embedding from an arbitrary finite
 pre-BANANA algebra into a countable marked Boolean algebra. -/
 structure PrebananaFiniteToCountableEmbedding
