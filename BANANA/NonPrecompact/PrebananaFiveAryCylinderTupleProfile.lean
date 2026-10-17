@@ -40,11 +40,11 @@ structure PrebananaCylinderTupleWitness
 Its existence is kernel-verified independently. -/
 noncomputable def prebananaCylinderTupleWitness
     {n : ℕ} (xs : Fin n → PrebananaFiveAryCylinderLimitCarrier) :
-    PrebananaCylinderTupleWitness xs := by
-  classical
-  obtain ⟨A, e, ys, hys⟩ :=
-    prebananaCylinder_exists_finiteTuplePresentation xs
-  exact ⟨A, e, ys, hys⟩
+    PrebananaCylinderTupleWitness xs :=
+  Classical.choice (by
+    obtain ⟨A, e, ys, hys⟩ :=
+      prebananaCylinder_exists_finiteTuplePresentation xs
+    exact ⟨⟨A, e, ys, hys⟩⟩)
 
 /-- The complete finite membership-pattern and F₂-mark profile
 of a countable cylinder tuple, measured in one finite marked
@@ -64,9 +64,14 @@ noncomputable def prebananaCylinderTupleProfileSetoid (n : ℕ) :
   r xs ys :=
     prebananaCylinderTupleProfile xs =
       prebananaCylinderTupleProfile ys
-  iseqv := ⟨(fun _ => rfl),
-    (fun _ _ h => h.symm),
-    (fun _ _ _ h g => h.trans g)⟩
+  iseqv := by
+    constructor
+    · intro xs
+      rfl
+    · intro xs ys h
+      exact h.symm
+    · intro xs ys zs hxy hyz
+      exact hxy.trans hyz
 
 /-- The quotient of countable cylinder n-tuples by equal finite
 profiles has finitely many classes, even before proving that
