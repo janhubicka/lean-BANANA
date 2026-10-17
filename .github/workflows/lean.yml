@@ -291,6 +291,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFinitePowersetAtomsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFinitePowersetAtomsAxiomAudit.lean
 
+      - name: Audit stage-independent F2 cylinder marking
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderMarkAxiomAudit.lean
+
       - name: Audit cylinder compatibility with all five-ary tower refinements
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderTowerCompatibilityAxiomAudit
