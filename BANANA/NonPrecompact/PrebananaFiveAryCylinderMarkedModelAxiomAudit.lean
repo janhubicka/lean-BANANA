@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkedModel
+
+/-! Transitive axiom audit of the countable marked Boolean cylinder algebra. -/
+
+#print axioms SuccessorTree.NonPrecompact.prebananaFiveAryCylinderMark_bot
+#print axioms SuccessorTree.NonPrecompact.prebananaFiveAryCylinderMark_top
+#print axioms SuccessorTree.NonPrecompact.prebananaFiveAryCylinderMark_sup
+#print axioms SuccessorTree.NonPrecompact.prebananaFiveAryCylinderStageHom_injective
+#print axioms SuccessorTree.NonPrecompact.prebananaFiveAryCylinderStageHom_preserves_mark
