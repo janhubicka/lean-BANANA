@@ -316,6 +316,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit.lean
 
+      - name: Audit finite marked profiles of countable cylinder tuples
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderTupleProfileAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderTupleProfileAxiomAudit.lean
+
       - name: Audit finite marked tuple presentations in the countable cylinder model
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteTuplePresentationAxiomAudit
