@@ -37,7 +37,7 @@ noncomputable def prebananaFiveAryCylinderSubalgebra :
     rw [hs]
     exact (prebananaFiveAryCylinder_compl n s).symm
   supClosed' := by
-    intro X Y hX hY
+    intro X hX Y hY
     obtain ⟨n, s, hs⟩ := hX
     obtain ⟨m, t, ht⟩ := hY
     let N := max n m
@@ -56,7 +56,7 @@ noncomputable def prebananaFiveAryCylinderSubalgebra :
       _ = prebananaFiveAryCylinder N (sn ∪ tm) :=
         (prebananaFiveAryCylinder_union N sn tm).symm
   infClosed' := by
-    intro X Y hX hY
+    intro X hX Y hY
     obtain ⟨n, s, hs⟩ := hX
     obtain ⟨m, t, ht⟩ := hY
     let N := max n m
