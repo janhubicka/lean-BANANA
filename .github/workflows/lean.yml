@@ -291,6 +291,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFinitePowersetAtomsAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFinitePowersetAtomsAxiomAudit.lean
 
+      - name: Audit countable marked Boolean cylinder algebra
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkedModelAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderMarkedModelAxiomAudit.lean
+
       - name: Audit Boolean algebra of the countable cylinder carrier
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit
