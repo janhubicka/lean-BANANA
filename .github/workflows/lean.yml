@@ -301,6 +301,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderExtensionFromStageAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderExtensionFromStageAxiomAudit.lean
 
+      - name: Audit finite marked bridge preorder and two-sided cofinal chains
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBridgeCofinalAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBridgeCofinalAxiomAudit.lean
+
       - name: Audit generic one-point marked Boolean extension
         run: |
           lake build BANANA.NonPrecompact.PrebananaCountableOnePointExtensionAxiomAudit
