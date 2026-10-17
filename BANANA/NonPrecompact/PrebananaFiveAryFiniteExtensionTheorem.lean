@@ -17,6 +17,8 @@ or homogeneity assumption is used.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical
+
 /-- The full finite extension property at explicit depth |At(B)|,
 for arbitrary genuine finite marked Boolean algebra embeddings. -/
 theorem prebananaFiveAry_finiteExtension_ofEmbeddings
