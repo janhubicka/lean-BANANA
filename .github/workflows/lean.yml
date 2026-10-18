@@ -1069,6 +1069,12 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagramAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagramAxiomAudit.lean
 
+      - name: Audit pairing-from-retractions identity on both Folkman sorts
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanPairingFromRetractionsAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanPairingFromRetractionsAxiomAudit.lean
+
+
       - name: Audit Folkman common-base diagram and exact sortwise intersection
         run: |
           lake build BANANA.NonPrecompact.FolkmanFiniteBaseImagesAxiomAudit
