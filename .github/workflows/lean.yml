@@ -301,6 +301,16 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderExtensionFromStageAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderExtensionFromStageAxiomAudit.lean
 
+      - name: Audit global marked Boolean automorphism from finite bridges
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiniteBridgeGlobalAutomorphismAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiniteBridgeGlobalAutomorphismAxiomAudit.lean
+
+      - name: Audit explicit countable pre-BANANA marked ultrahomogeneity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderUltrahomogeneityAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderUltrahomogeneityAxiomAudit.lean
+
       - name: Audit global marked bijection from two-sided bridge chains
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiniteBridgeLimitBijectionAxiomAudit
