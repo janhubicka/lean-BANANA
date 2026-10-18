@@ -386,6 +386,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderTowerCompatibilityAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderTowerCompatibilityAxiomAudit.lean
 
+      - name: Audit infinitude of the countable pre-BANANA cylinder carrier
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderInfiniteAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderInfiniteAxiomAudit.lean
+
       - name: Audit countable pre-BANANA cylinder carrier
         run: |
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderLimitCarrierAxiomAudit
