@@ -45,10 +45,10 @@ proof checklist `docs/prebanana-explicit-limit-audit-2026-10-17.md`.
 
 The actual five-ary finite stages, their marked embeddings, the
 arbitrary finite-extension theorem and finite-stage universality
-are kernel-checked (PRs #231–#245). The countable marked Boolean
+are kernel-checked in the corresponding modules. The countable marked Boolean
 cylinder algebra, exact finite age, local finiteness, factorisation
 of finite marked embeddings and unconditional countable extension
-property are verified (PRs #239–#258).
+property are verified in the corresponding Lean modules and axiom audits.
 
 The global marked Boolean automorphism and explicit embedding-form
 ultrahomogeneity results are now present on `main` in
