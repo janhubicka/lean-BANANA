@@ -331,6 +331,11 @@ jobs:
           lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit
           lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderBooleanAlgebraAxiomAudit.lean
 
+      - name: Audit completeness of cylinder tuple profiles under homogeneity
+        run: |
+          lake build BANANA.NonPrecompact.PrebananaFiveAryCylinderTupleProfileCompletenessAxiomAudit
+          lake env lean BANANA/NonPrecompact/PrebananaFiveAryCylinderTupleProfileCompletenessAxiomAudit.lean
+
       - name: Audit true finite marked generated-subalgebra profile embedding
         run: |
           lake build BANANA.NonPrecompact.PrebananaGeneratedProfileEmbeddingAxiomAudit
