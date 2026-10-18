@@ -83,4 +83,41 @@ theorem prebananaFiniteGeneratedMarkedEmbedding_surjective
   change Function.Surjective e.toGeneratedEquiv
   exact e.toGeneratedEquiv.surjective
 
+/-- The embedding induced by equal marked tuple profiles carries
+each distinguished generator to the corresponding target generator.
+This equality is on the original finite Boolean-algebra carriers,
+not merely on abstract term symbols. -/
+theorem prebananaFiniteGeneratedMarkedEmbedding_map_generator
+    {n : ℕ} (A B : PrebananaFiniteBooleanModel)
+    (tupleA : Fin n → A.carrier)
+    (tupleB : Fin n → B.carrier)
+    (hprofile :
+      prebananaAbstractMarkedTupleProfile
+        A.carrier A.μ A.μ_bot A.μ_top A.μ_add tupleA =
+      prebananaAbstractMarkedTupleProfile
+        B.carrier B.μ B.μ_bot B.μ_top B.μ_add tupleB)
+    (i : Fin n) :
+    ((prebananaFiniteGeneratedMarkedEmbedding_of_profile_eq
+      A B tupleA tupleB hprofile).hom
+      (⟨tupleA i,
+        BooleanSubalgebra.subset_closure (Set.mem_range_self i)⟩ :
+        (prebananaFiniteBooleanSubmodel A
+          (prebananaGeneratedBooleanSubalgebra A.carrier tupleA)).carrier)).val =
+      tupleB i := by
+  classical
+  let e : PrebananaAbstractGeneratedMarkedIso
+      A.carrier B.carrier tupleA tupleB A.μ B.μ :=
+    prebananaAbstractGeneratedMarkedIso_of_profile_eq
+      A.carrier B.carrier A.μ B.μ
+      A.μ_bot A.μ_top A.μ_add
+      B.μ_bot B.μ_top B.μ_add
+      tupleA tupleB hprofile
+  change (e.toGeneratedEquiv
+    (⟨tupleA i,
+      BooleanSubalgebra.subset_closure (Set.mem_range_self i)⟩ :
+      prebananaGeneratedBooleanSubalgebra A.carrier tupleA)).val =
+    tupleB i
+  simpa only [PrebananaBooleanTerm.evalBoolean] using
+    (e.toGeneratedEquiv_map_term (.generator i))
+
 end SuccessorTree.NonPrecompact
