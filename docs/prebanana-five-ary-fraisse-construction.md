@@ -1,24 +1,26 @@
 # Pre-BANANA: explicit five-ary Fraïssé limit — formalisation plan
 
-Status: **finite five-ary stages, connecting embeddings, explicit suffix
-witnesses, finite-fibre marking allocation and the base-compatible
-finite-extension square in literal atom-powerset coordinates are verified in Lean**.
-The iterated tower map is identified with the long-prefix inverse-image
-map, and the canonical marked atom-powerset presentation of an arbitrary
-finite Boolean algebra is verified. The exact pointwise atom-partition
-bridges are also verified on `main` (PRs #234 and #237). The
-**unconditional finite-extension theorem** for all arbitrary finite
-marked Boolean embeddings is now verified on `main` (PRs #236 and #238).
-A **countable concrete carrier** of finite-prefix cylinders with faithful
-stage maps is verified (PR #239), as is its compatibility with all
-tower refinements (PR #240). Finite-stage universality is draft PR #245;
-stage-independent marking is draft PR #242, Boolean closure is draft
-PR #243 and the marked algebra is draft PR #244. Full age,
-finite-extension over arbitrary finite subalgebras, back-and-forth
-ultrahomogeneity and tuple-orbit finiteness are still open.
-This note belongs to the Lean development, not to the frozen circulation text. Existing Lean proofs of finite strong amalgamation,
-joint embedding, finite atom presentations, generated Boolean subalgebras and
-conditional invariant-mass obstruction should be reused.
+Status: **the explicit countable pre-BANANA marked Boolean algebra,
+its exact finite age and its embedding-form ultrahomogeneity are
+kernel-checked on `main`**. The finite combinatorial construction uses
+genuine marked Boolean embeddings and the per-base-atom marking
+equations; it is not merely an atom-partition computation.
+
+The countable cylinder construction has its own Boolean operations,
+well-defined F₂ marking, countability, local finiteness and
+unconditional finite-extension property. The generic two-sided
+back-and-forth theorem yields global marking-preserving Boolean
+automorphisms. The complete finite-valued marked profile for each
+countable tuple and the corresponding finite generated-subalgebra
+embedding are verified. The next task is the actual finite
+automorphism-orbit quotient (draft PRs #269 and #270), followed by
+the standard Ryll–Nardzewski deduction, which is not a Lean theorem
+in this library. The Stone representation and topological deductions
+must continue to be audited separately.
+
+This is an internal Lean development note, not part of the frozen
+circulation manuscript. Only TODOs and validation markers may be
+added to its circulation section.
 
 ## Aim
 
@@ -157,48 +159,46 @@ invariant-measure interface have been constructed.
 
 ## Completed and outstanding Lean milestones
 
-The following component modules on `main` are kernel-checked:
+The following components are kernel-checked on `main`:
 
-1. Finite marked Boolean models, strong amalgamation, joint embedding,
-   hereditary property and finite atom presentations.
-2. Five-ary word marks, child sums, actual finite Boolean stages,
-   marking-preserving prefix embeddings and the abstract finite tower.
-3. Explicit mark-compatible suffix witnesses, arbitrary finite target
-   indexing and parity-preserving residual allocation.
-4. `prebananaParentFibre_markedAllocation`: allocation over a
-   nonempty **family of existing stage atoms**, with matching total
-   F₂-marking and correctly marked nonempty target blocks.
+1. Finite marked Boolean models, strong amalgamation, heredity, joint
+   embedding, finite atom representations and marking-preserving
+   partitions.
+2. Actual five-ary marked Boolean stages, the full commuting
+   finite-extension theorem for arbitrary finite diagrams, and
+   finite-stage universality.
+3. The concrete countable Boolean algebra of finite-prefix cylinders,
+   countability, stage-independent F₂ marking and compatibility
+   with all iterated tower embeddings.
+4. Finite-family common-stage representation, exact finite age,
+   local finiteness, finite embedding factorisation and the
+   unconditional countable finite-extension property.
+5. Two-sided cofinal back-and-forth, global Boolean
+   automorphisms preserving marking and the explicit
+   finite-embedding form of ultrahomogeneity (PR #267).
+6. Finite-valued marked profiles for arbitrary countable tuples
+   (PR #266), and genuine marking-preserving finite Boolean
+   embeddings between generated subalgebras of equal-profile
+   finite presentations (PR #268).
 
-The remaining essential obligations are:
+The remaining proof obligations are:
 
-5. **Verified on `main`:** assemble fibrewise marked allocations
-   above all atoms of the common base; the per-base marking equations
-   are essential. See the simultaneous refinement and marked word
-   allocation modules, merged before PR #231.
-6. **Verified in canonical marked powerset coordinates:** construct a
-   genuine unital marked Boolean embedding with the complete
-   base-commuting square (PR #231); identify the resulting word-prefix
-   map with iteration of the actual tower embeddings (PR #232).
-   Represent arbitrary finite Boolean algebras as marked atom
-   powersets (PR #235).
-7. **Verified on `main`:** the *pointwise* source/target
-   representation equations for arbitrary finite embeddings (PRs #234
-   and #237). Do not mistake per-base parity alone for equality of
-   the complete Boolean-element maps.
-8. **Verified on `main`:** the arbitrary-carrier extension
-   composition and unconditional marked finite-extension theorem,
-   including explicit depth |At(B)| (PRs #236 and #238).
-9. **Verified on `main`:** the countable cylinder carrier, faithful
-   finite-stage injections and exact compatibility with iterated
-   five-ary tower embeddings (PRs #239 and #240).
-10. **Drafts awaiting Lean checks:** every finite marked Boolean algebra
-    embeds into a five-ary stage (PR #245), stage-independent F₂
-    marking (PR #242), Boolean closure of cylinders (PR #243),
-    and a fully admissible countable marked Boolean algebra (PR #244).
-11. **Still open:** exact finite age, finite-extension over arbitrary
-    finite subalgebras, ultrahomogeneity, and finite tuple-orbit bound.
-12. **Still open:** the Stone representation, invariant measures and
-    group-theoretic deductions; retain their explicit hypotheses.
+7. **Draft #269:** show that equal chosen profiles induce a
+   global marked automorphism mapping the tuples pointwise,
+   using the verified generated-subalgebra and ultrahomogeneity
+   results. The arbitrary finite presentations need not be canonical.
+8. **Draft #270:** define the orbit relation by *actual* marked
+   Boolean automorphisms and prove the finite quotient using
+   profile completeness; do not replace it by the profile setoid.
+9. **Draft #271:** prove the countable cylinder carrier is infinite,
+   by explicit distinct coordinate cylinders.
+10. **External standard implication:** deduce ω-categoricity
+    from the resulting finite orbit counts via the
+    Ryll–Nardzewski theorem. This is a citation, not an
+    already formalised theorem.
+11. **Further circulation results:** audit the Stone-space
+    representation, invariant measures and the topological
+    group deductions independently; preserve their hypotheses.
 
 The previous exact numerical descendant-count module was deleted
 as a dead-end calculation. Its formula remains a useful independent
