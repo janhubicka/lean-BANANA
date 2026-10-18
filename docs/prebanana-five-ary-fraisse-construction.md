@@ -1,8 +1,9 @@
 # Pre-BANANA: explicit five-ary Fraïssé limit — formalisation plan
 
-Status: **the explicit countable pre-BANANA marked Boolean algebra,
-its exact finite age and its embedding-form ultrahomogeneity are
-kernel-checked on `main`**. The finite combinatorial construction uses
+Status (18 October 2026): **the explicit countably infinite pre-BANANA
+marked Boolean cylinder algebra, its exact finite age, embedding-form
+ultrahomogeneity and finite automorphism-orbit quotients are kernel-checked
+on `main`**. The finite combinatorial construction uses
 genuine marked Boolean embeddings and the per-base-atom marking
 equations; it is not merely an atom-partition computation.
 
@@ -10,13 +11,14 @@ The countable cylinder construction has its own Boolean operations,
 well-defined F₂ marking, countability, local finiteness and
 unconditional finite-extension property. The generic two-sided
 back-and-forth theorem yields global marking-preserving Boolean
-automorphisms. The complete finite-valued marked profile for each
-countable tuple and the corresponding finite generated-subalgebra
-embedding are verified. The next task is the actual finite
-automorphism-orbit quotient (draft PRs #269 and #270), followed by
-the standard Ryll–Nardzewski deduction, which is not a Lean theorem
-in this library. The Stone representation and topological deductions
-must continue to be audited separately.
+automorphisms. The complete finite-valued marked profile for each countable tuple,
+the corresponding generated-subalgebra marked embedding, the transfer
+to a genuine global marked automorphism and the finiteness of the
+actual automorphism-orbit quotient are verified (merged PRs #268–#270).
+An independent cylinder-coordinate embedding of ℕ proves infinitude
+(PR #271). The standard Ryll–Nardzewski deduction of ω-categoricity
+is not a Lean theorem in this library. Stone representation and
+topological deductions must continue to be audited separately.
 
 This is an internal Lean development note, not part of the frozen
 circulation manuscript. Only TODOs and validation markers may be
@@ -181,24 +183,27 @@ The following components are kernel-checked on `main`:
    embeddings between generated subalgebras of equal-profile
    finite presentations (PR #268).
 
-The remaining proof obligations are:
+The additional completed proof steps are:
 
-7. **Draft #269:** show that equal chosen profiles induce a
-   global marked automorphism mapping the tuples pointwise,
-   using the verified generated-subalgebra and ultrahomogeneity
-   results. The arbitrary finite presentations need not be canonical.
-8. **Draft #270:** define the orbit relation by *actual* marked
-   Boolean automorphisms and prove the finite quotient using
-   profile completeness; do not replace it by the profile setoid.
-9. **Draft #271:** prove the countable cylinder carrier is infinite,
-   by explicit distinct coordinate cylinders.
-10. **External standard implication:** deduce ω-categoricity
-    from the resulting finite orbit counts via the
-    Ryll–Nardzewski theorem. This is a citation, not an
-    already formalised theorem.
+7. **Merged #269:** equal chosen profiles induce a genuine global
+   marked automorphism carrying the tuples pointwise. Neither the
+   finite presentations nor their atom enumerations must be canonical.
+8. **Merged #270:** the relation defined using *actual* global
+   marked Boolean automorphisms has a finite quotient for each
+   tuple length. The theorem uses the independently verified
+   unconditional ultrahomogeneity theorem; it does not merely
+   count classes of equality of chosen profiles.
+9. **Merged #271:** explicit distinct coordinate cylinders witness
+   the infinitude of the countable cylinder carrier.
+
+Remaining external or independent obligations:
+
+10. **Standard model-theoretic implication:** deduce ω-categoricity
+    from the finite orbit counts via Ryll–Nardzewski. This needs an
+    appropriate citation and is not a separately formalised theorem.
 11. **Further circulation results:** audit the Stone-space
-    representation, invariant measures and the topological
-    group deductions independently; preserve their hypotheses.
+    representation, invariant measures and topological group
+    deductions independently; preserve their hypotheses.
 
 The previous exact numerical descendant-count module was deleted
 as a dead-end calculation. Its formula remains a useful independent
