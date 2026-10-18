@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.PrebananaFiveAryCylinderUltrahomogeneity
+
+/-! Transitive axiom audit of explicit pre-BANANA ultrahomogeneity. -/
+
+#print axioms SuccessorTree.NonPrecompact.prebananaCylinder_hasFiniteAmbients_forHomogeneity
+#print axioms SuccessorTree.NonPrecompact.prebananaCylinder_hasFiniteExtensionProperty_forHomogeneity
+#print axioms SuccessorTree.NonPrecompact.prebananaCylinder_exists_global_marked_boolean_automorphism
