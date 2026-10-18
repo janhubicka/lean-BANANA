@@ -95,9 +95,8 @@ theorem prebananaCylinder_profile_eq_implies_automorphism
     change wy.embedding.hom (F.hom a).val = ys i
     rw [hmap]
     exact wy.covers i
-  calc
-    E (xs i) = E (iX.hom a) := congrArg E hleft.symm
-    _ = iY.hom a := hemb a
-    _ = ys i := hright
+  have h0 : E (xs i) = E (iX.hom a) := congrArg E hleft.symm
+  have h1 : E (iX.hom a) = iY.hom a := hemb a
+  exact h0.trans (h1.trans hright)
 
 end SuccessorTree.NonPrecompact
