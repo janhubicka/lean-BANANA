@@ -3,6 +3,17 @@
 **Internal Lean development note.** The circulation manuscript is frozen;
 only its TODOs and validation markers may be changed.
 
+**Subsequent status (18 October 2026):** The tasks described below as
+plans or draft PRs were completed and merged into `main`. In particular,
+finite-age and stage-factorisation results, countable extension,
+ultrahomogeneity (#267), finite tuple profiles (#266), true generated-subalgebra
+marked embeddings (#268), equal-profile-to-automorphism transfer (#269),
+finite actual automorphism-orbit quotients (#270), and infinitude (#271)
+have successful Lean and transitive-axiom audits. The historical checklist
+below is retained as an adversarial explanation of those obligations, not
+as the current verification ledger. The final Ryll–Nardzewski implication
+and the Stone/topological deductions remain external.
+
 ## Verified finite ingredients
 
 The five-ary tower has genuine finite marked Boolean stages and
