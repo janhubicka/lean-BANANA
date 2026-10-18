@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderTupleProfileCompleteness
 import BANANA.NonPrecompact.PrebananaFiniteOrbitCriterion
+import BANANA.NonPrecompact.PrebananaFiveAryCylinderUltrahomogeneity
 
 /-!
 # Finite marked automorphism-orbit quotients of countable cylinders
@@ -13,8 +14,9 @@ finite marked profiles are known to imply equivalence under that
 relation. The latter implication is proved in the preceding module
 under an explicit ultrahomogeneity hypothesis.
 
-The conclusion below is deliberately conditional; the explicit
-countable pre-BANANA ultrahomogeneity theorem is formalised separately.
+The conditional result isolates the finite-profile argument.  The final
+corollary discharges its homogeneity premise using the already verified
+countable-cylinder back-and-forth theorem.
 -/
 
 namespace SuccessorTree.NonPrecompact
@@ -81,5 +83,14 @@ theorem prebananaCylinderMarkedOrbit_finite_of_homogeneity
     prebananaCylinderTupleProfile
     (fun xs ys hp =>
       prebananaCylinder_profile_eq_implies_automorphism hhom xs ys hp)
+
+/-- The concrete countable pre-BANANA cylinder algebra has finitely many
+orbits of n-tuples under its genuine F₂-mark-preserving Boolean
+automorphism group.  No homogeneity hypothesis remains: the proof
+uses the previously verified global back-and-forth theorem. -/
+theorem prebananaCylinderMarkedOrbit_finite (n : ℕ) :
+    Finite (Quotient (prebananaCylinderMarkedOrbitSetoid n)) := by
+  exact prebananaCylinderMarkedOrbit_finite_of_homogeneity
+    prebananaCylinder_exists_global_marked_boolean_automorphism n
 
 end SuccessorTree.NonPrecompact
