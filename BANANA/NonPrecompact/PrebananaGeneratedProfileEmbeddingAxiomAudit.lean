@@ -4,3 +4,5 @@ import BANANA.NonPrecompact.PrebananaGeneratedProfileEmbedding
 
 #print axioms SuccessorTree.NonPrecompact.prebananaFiniteGeneratedMarkedEmbedding_of_profile_eq
 #print axioms SuccessorTree.NonPrecompact.prebananaFiniteGeneratedMarkedEmbedding_surjective
+
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteGeneratedMarkedEmbedding_map_generator
