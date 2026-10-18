@@ -1074,6 +1074,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanPairingFromRetractionsAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanPairingFromRetractionsAxiomAudit.lean
 
+      - name: Audit pivot choices and retractions in the actual Folkman atom grid
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanAtomPivotsAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanAtomPivotsAxiomAudit.lean
+
 
       - name: Audit Folkman common-base diagram and exact sortwise intersection
         run: |
