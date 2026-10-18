@@ -4,3 +4,4 @@ import BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkedOrbitFiniteness
 
 #print axioms SuccessorTree.NonPrecompact.prebananaCylinderMarkedOrbitSetoid
 #print axioms SuccessorTree.NonPrecompact.prebananaCylinderMarkedOrbit_finite_of_homogeneity
+#print axioms SuccessorTree.NonPrecompact.prebananaCylinderMarkedOrbit_finite
