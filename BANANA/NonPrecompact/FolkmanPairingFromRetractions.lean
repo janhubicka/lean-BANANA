@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
+import BANANA.NonPrecompact.FolkmanBilinearExtension
 
 /-!
 # A retraction-based pairing extension for Folkman--BANANA
