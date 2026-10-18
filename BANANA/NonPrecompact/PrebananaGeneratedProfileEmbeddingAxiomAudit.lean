@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.PrebananaGeneratedProfileEmbedding
+
+/-! Transitive axiom audit of genuine marked generated-Boolean embedding from profile equality. -/
+
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteGeneratedMarkedEmbedding_of_profile_eq
+#print axioms SuccessorTree.NonPrecompact.prebananaFiniteGeneratedMarkedEmbedding_surjective
