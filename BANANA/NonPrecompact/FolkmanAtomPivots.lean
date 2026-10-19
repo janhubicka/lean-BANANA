@@ -41,26 +41,20 @@ noncomputable def folkmanLeftPivot
     {A B C : Type*}
     (f : B → Option A) (g : C → Option A)
     (P : FolkmanAtomPivotChoices f g) (b : B) :
-    FolkmanAtomAmalgam f g := by
-  classical
-  cases h : f b with
-  | none =>
-      exact .inr (.inl ⟨b, h⟩)
-  | some a =>
-      exact .inl ⟨(b, P.c a), ⟨a, h, P.hc a⟩⟩
+    FolkmanAtomAmalgam f g :=
+  match h : f b with
+  | none => .inr (.inl ⟨b, h⟩)
+  | some a => .inl ⟨(b, P.c a), ⟨a, h, P.hc a⟩⟩
 
 /-- The symmetric pivot for a source C-atom. -/
 noncomputable def folkmanRightPivot
     {A B C : Type*}
     (f : B → Option A) (g : C → Option A)
     (P : FolkmanAtomPivotChoices f g) (c : C) :
-    FolkmanAtomAmalgam f g := by
-  classical
-  cases h : g c with
-  | none =>
-      exact .inr (.inr ⟨c, h⟩)
-  | some a =>
-      exact .inl ⟨(P.b a, c), ⟨a, P.hb a, h⟩⟩
+    FolkmanAtomAmalgam f g :=
+  match h : g c with
+  | none => .inr (.inr ⟨c, h⟩)
+  | some a => .inl ⟨(P.b a, c), ⟨a, P.hb a, h⟩⟩
 
 /-- One grid atom selected above each common base atom. -/
 noncomputable def folkmanBasePivot
@@ -81,11 +75,8 @@ theorem folkmanLeftPivot_mem_leftMap
     folkmanLeftPivot f g P b ∈ folkmanFinsetLeftMap f g s ↔ b ∈ s := by
   classical
   rw [folkmanFinsetLeftMap_mem]
-  cases h : f b with
-  | none =>
-      simp [folkmanLeftPivot, h, folkmanLeftImage]
-  | some a =>
-      simp [folkmanLeftPivot, h, folkmanLeftImage]
+  unfold folkmanLeftPivot
+  split <;> simp only [folkmanLeftImage, SetLike.mem_coe]
 
 /-- Membership in a right image is detected by its selected pivot. -/
 theorem folkmanRightPivot_mem_rightMap
@@ -97,11 +88,8 @@ theorem folkmanRightPivot_mem_rightMap
     folkmanRightPivot f g P c ∈ folkmanFinsetRightMap f g s ↔ c ∈ s := by
   classical
   rw [folkmanFinsetRightMap_mem]
-  cases h : g c with
-  | none =>
-      simp [folkmanRightPivot, h, folkmanRightImage]
-  | some a =>
-      simp [folkmanRightPivot, h, folkmanRightImage]
+  unfold folkmanRightPivot
+  split <;> simp only [folkmanRightImage, SetLike.mem_coe]
 
 /-- The base pivot reads the selected B-atom. -/
 theorem folkmanBasePivot_mem_leftMap
