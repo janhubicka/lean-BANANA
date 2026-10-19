@@ -1079,6 +1079,12 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanAtomPivotsAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanAtomPivotsAxiomAudit.lean
 
+      - name: Audit additive and cross-base identities of Folkman pivots
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanPivotCrossIdentitiesAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanPivotCrossIdentitiesAxiomAudit.lean
+
+
       - name: Regress actual Folkman pivot pairing on small atom-grid diagrams
         run: python3 scripts/check_folkman_pivot_small.py
 

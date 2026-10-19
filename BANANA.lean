@@ -81,6 +81,7 @@ import BANANA.NonPrecompact.FolkmanFiniteBaseImages
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
+import BANANA.NonPrecompact.FolkmanPivotCrossIdentities
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
 import BANANA.NonPrecompact.FolkmanBilinearAllVectors
