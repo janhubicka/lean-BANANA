@@ -18,6 +18,8 @@ asserted to preserve intersections or ring units.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical
+
 /-- The left pivot retraction is additive over symmetric difference. -/
 theorem folkmanPivotLeftRetract_symmDiff
     {A B C : Type*} [Fintype B]
