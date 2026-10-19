@@ -17,6 +17,8 @@ yields the class-level strong amalgamation used in the circulation paper.
 -/
 
 namespace SuccessorTree.NonPrecompact
+open scoped Classical
+
 namespace FolkmanFiniteTwoSortAtomDiagram
 
 variable {AL BL CL AR BR CR : Type*}
