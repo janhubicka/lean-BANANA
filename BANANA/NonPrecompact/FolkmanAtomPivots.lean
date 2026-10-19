@@ -76,7 +76,7 @@ theorem folkmanLeftPivot_mem_leftMap
   classical
   rw [folkmanFinsetLeftMap_mem]
   unfold folkmanLeftPivot
-  split <;> simp only [folkmanLeftImage, SetLike.mem_coe]
+  split <;> simp [folkmanLeftImage]
 
 /-- Membership in a right image is detected by its selected pivot. -/
 theorem folkmanRightPivot_mem_rightMap
@@ -89,7 +89,7 @@ theorem folkmanRightPivot_mem_rightMap
   classical
   rw [folkmanFinsetRightMap_mem]
   unfold folkmanRightPivot
-  split <;> simp only [folkmanRightImage, SetLike.mem_coe]
+  split <;> simp [folkmanRightImage]
 
 /-- The base pivot reads the selected B-atom. -/
 theorem folkmanBasePivot_mem_leftMap
