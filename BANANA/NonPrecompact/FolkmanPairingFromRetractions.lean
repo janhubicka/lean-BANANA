@@ -84,6 +84,11 @@ theorem folkmanPairingFromRetractions_right
   unfold folkmanPairingFromRetractions
   rw [hCL x, hCR y, hBL x, hBR y]
   rw [hcommon (ρAL (iCL x)) (ρAR (iCR y))]
-  rw [add_left_comm, CharTwo.add_self_eq_zero, zero_add]
+  calc
+    βA (ρAL (iCL x)) (ρAR (iCR y)) + βC x y +
+        βA (ρAL (iCL x)) (ρAR (iCR y)) =
+        (βA (ρAL (iCL x)) (ρAR (iCR y)) +
+          βA (ρAL (iCL x)) (ρAR (iCR y))) + βC x y := by ac_rfl
+    _ = βC x y := by rw [CharTwo.add_self_eq_zero, zero_add]
 
 end SuccessorTree.NonPrecompact
