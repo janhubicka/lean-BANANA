@@ -16,6 +16,8 @@ atom sorts and non-unital embeddings with private outside atoms.
 -/
 
 namespace SuccessorTree.NonPrecompact
+open scoped Classical
+
 namespace FolkmanFiniteTwoSortAtomDiagram
 
 variable {AL BL CL AR BR CR : Type*}
