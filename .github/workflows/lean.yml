@@ -1089,6 +1089,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanActualTwoSortPairingAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanActualTwoSortPairingAxiomAudit.lean
 
+      - name: Audit actual Folkman bilinearity and full pairing certificate
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanActualTwoSortPairingBilinearAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanActualTwoSortPairingBilinearAxiomAudit.lean
+
 
       - name: Regress actual Folkman pivot pairing on small atom-grid diagrams
         run: python3 scripts/check_folkman_pivot_small.py
