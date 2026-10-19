@@ -80,6 +80,7 @@ import BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps
 import BANANA.NonPrecompact.FolkmanFiniteBaseImages
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
+import BANANA.NonPrecompact.FolkmanAtomPivots
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
 import BANANA.NonPrecompact.FolkmanBilinearAllVectors
