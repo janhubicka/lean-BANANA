@@ -1114,6 +1114,14 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanPartialAtomOwnersAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanPartialAtomOwnersAxiomAudit.lean
 
+      - name: Audit the Folkman ring-language partial owner bridge
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanRingPartialOwnersAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanRingPartialOwnersAxiomAudit.lean
+
+      - name: Regress partial owners of small Folkman ring embeddings
+        run: python3 scripts/check_folkman_partial_owner_small.py
+
       - name: Check Folkman finite Boolean-ring operations and strong intersection
         run: |
           lake build BANANA.NonPrecompact.FolkmanFiniteBooleanRingMapsAxiomAudit
