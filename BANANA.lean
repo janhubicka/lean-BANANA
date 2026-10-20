@@ -82,6 +82,7 @@ import BANANA.NonPrecompact.FolkmanPartialAtomOwners
 import BANANA.NonPrecompact.FolkmanRingPartialOwners
 import BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv
 import BANANA.NonPrecompact.FolkmanNativeRingAtomInverse
+import BANANA.NonPrecompact.FolkmanNativeRingMapCoordinates
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
