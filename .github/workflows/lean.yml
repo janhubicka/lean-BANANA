@@ -1124,6 +1124,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeNonUnitalRingOwnersAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeNonUnitalRingOwnersAxiomAudit.lean
 
+      - name: Audit four native Folkman embeddings as a two-sort atom diagram
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeTwoSortOwnerDiagramAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeTwoSortOwnerDiagramAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
