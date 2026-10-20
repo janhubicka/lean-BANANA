@@ -1119,6 +1119,16 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanRingPartialOwnersAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanRingPartialOwnersAxiomAudit.lean
 
+      - name: Audit native non-unital Folkman ring owners
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeNonUnitalRingOwnersAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeNonUnitalRingOwnersAxiomAudit.lean
+
+      - name: Audit four native Folkman embeddings as a two-sort atom diagram
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeTwoSortOwnerDiagramAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeTwoSortOwnerDiagramAxiomAudit.lean
+
       - name: Audit native finite Boolean-ring atom-coordinate equivalence
         run: |
           lake build BANANA.NonPrecompact.FolkmanNativeRingAtomEquivAxiomAudit
