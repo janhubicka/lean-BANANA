@@ -83,6 +83,7 @@ import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
 import BANANA.NonPrecompact.FolkmanPivotCrossIdentities
 import BANANA.NonPrecompact.FolkmanActualTwoSortPairing
+import BANANA.NonPrecompact.FolkmanActualTwoSortPairingBilinear
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
 import BANANA.NonPrecompact.FolkmanBilinearAllVectors
