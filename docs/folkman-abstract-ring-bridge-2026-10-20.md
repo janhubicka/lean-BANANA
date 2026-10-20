@@ -39,6 +39,14 @@ to preserve `0`, symmetric difference and intersection.
 
 ## Reconstructing an embedding
 
+**Lean API warning:** the correct type is `NonUnitalRingHom` (`→ₙ+*`).
+Mathlib's `RingHom.asBoolAlg` produces a *bounded* lattice homomorphism
+and silently imposes preservation of the greatest element. Using it
+would change the Folkman embedding notion and invalidate this bridge.
+PR #284 constructs the bottom/join/meet-preserving `AsBoolAlg` map
+from a genuine `NonUnitalRingHom` by the Boolean-ring identities
+`x⊔y=x+y+xy` and `x⊓y=xy`, with no `map_one` hypothesis.
+
 Let `f:R→S` be an injective non-unital ring homomorphism. Transfer it
 to atom subsets:
 
