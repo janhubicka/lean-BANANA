@@ -55,7 +55,7 @@ theorem folkmanNativeRingAtomEquiv_zero
   letI : Fintype (AsBoolAlg α) := Fintype.ofEquiv α toBoolAlg
   let e := prebananaFiniteBooleanAtomFinsetOrderIso (AsBoolAlg α)
   change e (toBoolAlg (0 : α)) = ∅
-  simpa only [toBoolAlg_zero] using e.map_bot
+  simpa [toBoolAlg_zero] using e.map_bot
 
 /-- Native ring multiplication becomes intersection of atom sets. -/
 theorem folkmanNativeRingAtomEquiv_mul
@@ -69,7 +69,7 @@ theorem folkmanNativeRingAtomEquiv_mul
   let e := prebananaFiniteBooleanAtomFinsetOrderIso (AsBoolAlg α)
   change e (toBoolAlg (x * y)) =
     e (toBoolAlg x) ∩ e (toBoolAlg y)
-  simpa only [toBoolAlg_mul] using e.map_inf (toBoolAlg x) (toBoolAlg y)
+  simpa [toBoolAlg_mul] using e.map_inf (toBoolAlg x) (toBoolAlg y)
 
 /-- Native ring addition becomes symmetric difference of atom sets.
 This is the crucial non-unital ring-language coordinate identity. -/
