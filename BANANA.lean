@@ -81,6 +81,7 @@ import BANANA.NonPrecompact.FolkmanFiniteBaseImages
 import BANANA.NonPrecompact.FolkmanPartialAtomOwners
 import BANANA.NonPrecompact.FolkmanRingPartialOwners
 import BANANA.NonPrecompact.FolkmanNativeNonUnitalRingOwners
+import BANANA.NonPrecompact.FolkmanNativeTwoSortOwnerDiagram
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
