@@ -1109,6 +1109,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanFiniteBaseImagesAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanFiniteBaseImagesAxiomAudit.lean
 
+      - name: Audit non-unital partial owner representation
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanPartialAtomOwnersAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanPartialAtomOwnersAxiomAudit.lean
+
       - name: Check Folkman finite Boolean-ring operations and strong intersection
         run: |
           lake build BANANA.NonPrecompact.FolkmanFiniteBooleanRingMapsAxiomAudit

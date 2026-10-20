@@ -78,6 +78,7 @@ import BANANA.NonPrecompact.FiberProductStrong
 import BANANA.NonPrecompact.FolkmanAtomAmalgam
 import BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps
 import BANANA.NonPrecompact.FolkmanFiniteBaseImages
+import BANANA.NonPrecompact.FolkmanPartialAtomOwners
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
