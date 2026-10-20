@@ -21,6 +21,11 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical
 
+/-- Transfer the finite atom carrier through Mathlib's Boolean-ring
+    type synonym. The resulting finite type is used only locally. -/
+local instance folkmanAsBoolAlgFintype (γ : Type*) [Fintype γ] :
+    Fintype (AsBoolAlg γ) := Fintype.ofEquiv γ toBoolAlg
+
 /-- A non-unital Boolean-ring homomorphism becomes a bottom-, join-,
 and meet-preserving map between the associated Boolean algebras.
 This does not assert preservation of top. -/
