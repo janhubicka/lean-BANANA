@@ -1134,6 +1134,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeRingMapCoordinatesAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeRingMapCoordinatesAxiomAudit.lean
 
+      - name: Audit native Folkman pairing transport to finite atom coordinates
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativePairingTransportAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativePairingTransportAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
