@@ -1124,6 +1124,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeRingAtomEquivAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeRingAtomEquivAxiomAudit.lean
 
+      - name: Audit inverse native Boolean-ring atom-coordinate operations
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeRingAtomInverseAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeRingAtomInverseAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
