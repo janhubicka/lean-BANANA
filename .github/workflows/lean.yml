@@ -1139,6 +1139,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeRingAtomInverseAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeRingAtomInverseAxiomAudit.lean
 
+      - name: Audit naturality of native non-unital ring maps on atom coordinates
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeRingMapCoordinatesAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeRingMapCoordinatesAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
