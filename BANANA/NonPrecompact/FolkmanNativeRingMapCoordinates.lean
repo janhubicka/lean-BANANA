@@ -20,6 +20,13 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical
 
+-- The finite-carrier instance is needed in theorem *statements*:
+-- prebananaAbstractPowersetMap elaborates its implicit Fintype arguments
+-- before the proof begins.  Locality avoids changing other modules.
+local instance folkmanAsBoolAlgFiniteForMap
+    (γ : Type*) [Fintype γ] : Fintype (AsBoolAlg γ) :=
+  Fintype.ofEquiv γ toBoolAlg
+
 /-- Transport an arbitrary native non-unital Boolean-ring homomorphism
 through the source and target atom-coordinate equivalences.
 
@@ -36,8 +43,6 @@ theorem folkmanNativeRingAtomEquiv_map
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg α => toBoolAlg (f (ofBoolAlg x))) s := by
   classical
-  letI : Fintype (AsBoolAlg α) := Fintype.ofEquiv α toBoolAlg
-  letI : Fintype (AsBoolAlg β) := Fintype.ofEquiv β toBoolAlg
   rfl
 
 end SuccessorTree.NonPrecompact
