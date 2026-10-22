@@ -1149,6 +1149,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativePairingTransportAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativePairingTransportAxiomAudit.lean
 
+      - name: Audit native Folkman pairing compatibility through atom embeddings
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativePairingCompatibilityAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativePairingCompatibilityAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
