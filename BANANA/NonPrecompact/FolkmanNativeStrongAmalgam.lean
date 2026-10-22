@@ -83,7 +83,17 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
             D.embedB b = D.embedC c ↔
               ∃ a : Finset (PrebananaAbstractAtoms (AsBoolAlg AL)) ×
                       Finset (PrebananaAbstractAtoms (AsBoolAlg AR)),
-                b = D.baseB a ∧ c = D.baseC a) := by
+                b = D.baseB a ∧ c = D.baseC a) ∧
+        (∀ a : AL × AR,
+          D.baseB (folkmanNativeRingAtomEquiv AL a.1,
+            folkmanNativeRingAtomEquiv AR a.2) =
+            (folkmanNativeRingAtomEquiv BL (fBL a.1),
+              folkmanNativeRingAtomEquiv BR (fBR a.2))) ∧
+        (∀ a : AL × AR,
+          D.baseC (folkmanNativeRingAtomEquiv AL a.1,
+            folkmanNativeRingAtomEquiv AR a.2) =
+            (folkmanNativeRingAtomEquiv CL (gCL a.1),
+              folkmanNativeRingAtomEquiv CR (gCR a.2))) := by
   classical
   obtain ⟨D, hBL, hCL, hBR, hCR⟩ :=
     folkmanNativeTwoSort_exists_atomDiagram
@@ -138,7 +148,8 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
       (fun x y y' => folkmanNativeTransportPairing_add_right γB hBright x y y')
       (fun x y y' => folkmanNativeTransportPairing_add_right γC hCright x y y')
       hBco hCco
-  refine ⟨D, βD, hDleft, hDright, ?_, ?_, hIntersection⟩
+  refine ⟨D, βD, hDleft, hDright, ?_, ?_,
+    hIntersection, ?_, ?_⟩
   · intro x y
     simpa only [folkmanNativeTransportPairing_apply_codes] using
       hDB (folkmanNativeRingAtomEquiv BL x)
@@ -147,5 +158,37 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
     simpa only [folkmanNativeTransportPairing_apply_codes] using
       hDC (folkmanNativeRingAtomEquiv CL x)
         (folkmanNativeRingAtomEquiv CR y)
+  · intro a
+    apply Prod.ext
+    · change folkmanFinsetBaseLeft D.fL
+          (folkmanNativeRingAtomEquiv AL a.1) =
+        folkmanNativeRingAtomEquiv BL (fBL a.1)
+      rw [← hBL' (folkmanNativeRingAtomEquiv AL a.1),
+          ← folkmanNativeRingAtomEquiv_map fBL
+            (folkmanNativeRingAtomEquiv AL a.1)]
+      simp
+    · change folkmanFinsetBaseLeft D.fR
+          (folkmanNativeRingAtomEquiv AR a.2) =
+        folkmanNativeRingAtomEquiv BR (fBR a.2)
+      rw [← hBR' (folkmanNativeRingAtomEquiv AR a.2),
+          ← folkmanNativeRingAtomEquiv_map fBR
+            (folkmanNativeRingAtomEquiv AR a.2)]
+      simp
+  · intro a
+    apply Prod.ext
+    · change folkmanFinsetBaseRight D.gL
+          (folkmanNativeRingAtomEquiv AL a.1) =
+        folkmanNativeRingAtomEquiv CL (gCL a.1)
+      rw [← hCL' (folkmanNativeRingAtomEquiv AL a.1),
+          ← folkmanNativeRingAtomEquiv_map gCL
+            (folkmanNativeRingAtomEquiv AL a.1)]
+      simp
+    · change folkmanFinsetBaseRight D.gR
+          (folkmanNativeRingAtomEquiv AR a.2) =
+        folkmanNativeRingAtomEquiv CR (gCR a.2)
+      rw [← hCR' (folkmanNativeRingAtomEquiv AR a.2),
+          ← folkmanNativeRingAtomEquiv_map gCR
+            (folkmanNativeRingAtomEquiv AR a.2)]
+      simp
 
 end SuccessorTree.NonPrecompact
