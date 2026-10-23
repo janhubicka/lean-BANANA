@@ -89,6 +89,7 @@ import BANANA.NonPrecompact.FolkmanNativePairingTransport
 import BANANA.NonPrecompact.FolkmanNativePairingCompatibility
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanIntersectionTransport
+import BANANA.NonPrecompact.FolkmanNativeEmbeddings
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
 import BANANA.NonPrecompact.FolkmanPivotCrossIdentities

@@ -1,0 +1,15 @@
+import BANANA.NonPrecompact.FolkmanNativeEmbeddings
+
+/-! Audit actual native two-sort Boolean-ring embeddings. -/
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeTwoSortCode_zero
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeTwoSortCode_add
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeTwoSortCode_mul
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeTwoSortCode_injective
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedB_injective
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedC_injective
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedB_zero
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedC_zero
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedB_add
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedC_add
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedB_mul
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEmbedC_mul
