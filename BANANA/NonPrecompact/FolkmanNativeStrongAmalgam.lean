@@ -150,29 +150,29 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
       (folkmanNativeTransportPairing γB)
       (folkmanNativeTransportPairing γC)
       (fun x x' y => by
-        unfold folkmanNativeTransportPairing
-        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
-        exact hAleft _ _ _)
+        convert folkmanNativeTransportPairing_add_left γA hAleft x x' y using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       (fun x x' y => by
-        unfold folkmanNativeTransportPairing
-        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
-        exact hBleft _ _ _)
+        convert folkmanNativeTransportPairing_add_left γB hBleft x x' y using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       (fun x x' y => by
-        unfold folkmanNativeTransportPairing
-        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
-        exact hCleft _ _ _)
+        convert folkmanNativeTransportPairing_add_left γC hCleft x x' y using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       (fun x y y' => by
-        unfold folkmanNativeTransportPairing
-        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
-        exact hAright _ _ _)
+        convert folkmanNativeTransportPairing_add_right γA hAright x y y' using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       (fun x y y' => by
-        unfold folkmanNativeTransportPairing
-        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
-        exact hBright _ _ _)
+        convert folkmanNativeTransportPairing_add_right γB hBright x y y' using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       (fun x y y' => by
-        unfold folkmanNativeTransportPairing
-        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
-        exact hCright _ _ _)
+        convert folkmanNativeTransportPairing_add_right γC hCright x y y' using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       hBco hCco
   refine ⟨D, βD, ?_, ?_, ?_, ?_,
     hIntersection, ?_, ?_⟩
