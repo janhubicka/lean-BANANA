@@ -1164,6 +1164,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeEmbeddingsAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeEmbeddingsAxiomAudit.lean
 
+      - name: Audit exact intersection on original native ring pairs
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeIntersectionAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeIntersectionAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
