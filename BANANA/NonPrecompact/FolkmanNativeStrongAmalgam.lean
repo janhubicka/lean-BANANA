@@ -150,40 +150,40 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
       (folkmanNativeTransportPairing γB)
       (folkmanNativeTransportPairing γC)
       (fun x x' y => by
-        convert folkmanNativeTransportPairing_add_left γA hAleft x x' y using 1
-          <;> first | rfl | apply Subsingleton.elim |
-            (ext z; simp only [Finset.mem_symmDiff]))
+        unfold folkmanNativeTransportPairing
+        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
+        exact hAleft _ _ _)
       (fun x x' y => by
-        convert folkmanNativeTransportPairing_add_left γB hBleft x x' y using 1
-          <;> first | rfl | apply Subsingleton.elim |
-            (ext z; simp only [Finset.mem_symmDiff]))
+        unfold folkmanNativeTransportPairing
+        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
+        exact hBleft _ _ _)
       (fun x x' y => by
-        convert folkmanNativeTransportPairing_add_left γC hCleft x x' y using 1
-          <;> first | rfl | apply Subsingleton.elim |
-            (ext z; simp only [Finset.mem_symmDiff]))
+        unfold folkmanNativeTransportPairing
+        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
+        exact hCleft _ _ _)
       (fun x y y' => by
-        convert folkmanNativeTransportPairing_add_right γA hAright x y y' using 1
-          <;> first | rfl | apply Subsingleton.elim |
-            (ext z; simp only [Finset.mem_symmDiff]))
+        unfold folkmanNativeTransportPairing
+        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
+        exact hAright _ _ _)
       (fun x y y' => by
-        convert folkmanNativeTransportPairing_add_right γB hBright x y y' using 1
-          <;> first | rfl | apply Subsingleton.elim |
-            (ext z; simp only [Finset.mem_symmDiff]))
+        unfold folkmanNativeTransportPairing
+        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
+        exact hBright _ _ _)
       (fun x y y' => by
-        convert folkmanNativeTransportPairing_add_right γC hCright x y y' using 1
-          <;> first | rfl | apply Subsingleton.elim |
-            (ext z; simp only [Finset.mem_symmDiff]))
+        unfold folkmanNativeTransportPairing
+        rw [folkmanNativeRingAtomEquiv_symm_symmDiff]
+        exact hCright _ _ _)
       hBco hCco
   refine ⟨D, βD, ?_, ?_, ?_, ?_,
     hIntersection, ?_, ?_⟩
   · intro x x' y
     convert hDleft x x' y using 1
-      <;> first | rfl | apply Subsingleton.elim |
-        (ext z; simp only [Finset.mem_symmDiff])
+      <;> first | rfl |
+        (congr 1; ext z; simp only [Finset.mem_symmDiff])
   · intro x y y'
     convert hDright x y y' using 1
-      <;> first | rfl | apply Subsingleton.elim |
-        (ext z; simp only [Finset.mem_symmDiff])
+      <;> first | rfl |
+        (congr 1; ext z; simp only [Finset.mem_symmDiff])
   · intro x y
     simpa only [folkmanNativeTransportPairing_apply_codes] using
       hDB (folkmanNativeRingAtomEquiv BL x)
