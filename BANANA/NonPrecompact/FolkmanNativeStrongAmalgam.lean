@@ -103,28 +103,28 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
         (fun x : AsBoolAlg AL => toBoolAlg (fBL (ofBoolAlg x))) s =
         folkmanFinsetBaseLeft D.fL s := by
     ext b
-    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg BL)) => b ∈ t) (hBL s)
+    have hb := (Finset.ext_iff.mp (hBL s)) b
     simpa only [folkmanFinsetBaseLeft, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hBR' (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AR => toBoolAlg (fBR (ofBoolAlg x))) s =
         folkmanFinsetBaseLeft D.fR s := by
     ext b
-    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg BR)) => b ∈ t) (hBR s)
+    have hb := (Finset.ext_iff.mp (hBR s)) b
     simpa only [folkmanFinsetBaseLeft, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hCL' (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AL))) :
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AL => toBoolAlg (gCL (ofBoolAlg x))) s =
         folkmanFinsetBaseRight D.gL s := by
     ext b
-    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg CL)) => b ∈ t) (hCL s)
+    have hb := (Finset.ext_iff.mp (hCL s)) b
     simpa only [folkmanFinsetBaseRight, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hCR' (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AR => toBoolAlg (gCR (ofBoolAlg x))) s =
         folkmanFinsetBaseRight D.gR s := by
     ext b
-    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg CR)) => b ∈ t) (hCR s)
+    have hb := (Finset.ext_iff.mp (hCR s)) b
     simpa only [folkmanFinsetBaseRight, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hBco (a : Finset (PrebananaAbstractAtoms (AsBoolAlg AL)))
       (r : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :
