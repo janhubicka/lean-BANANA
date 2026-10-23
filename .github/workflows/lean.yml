@@ -1154,6 +1154,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativePairingCompatibilityAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativePairingCompatibilityAxiomAudit.lean
 
+      - name: Audit native Folkman finite strong-amalgamation certificate
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeStrongAmalgamAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeStrongAmalgamAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
