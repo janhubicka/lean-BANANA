@@ -102,22 +102,30 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AL => toBoolAlg (fBL (ofBoolAlg x))) s =
         folkmanFinsetBaseLeft D.fL s := by
-    simpa only [folkmanFinsetBaseLeft] using hBL s
+    ext b
+    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg BL)) => b ∈ t) (hBL s)
+    simpa only [folkmanFinsetBaseLeft, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hBR' (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AR => toBoolAlg (fBR (ofBoolAlg x))) s =
         folkmanFinsetBaseLeft D.fR s := by
-    simpa only [folkmanFinsetBaseLeft] using hBR s
+    ext b
+    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg BR)) => b ∈ t) (hBR s)
+    simpa only [folkmanFinsetBaseLeft, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hCL' (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AL))) :
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AL => toBoolAlg (gCL (ofBoolAlg x))) s =
         folkmanFinsetBaseRight D.gL s := by
-    simpa only [folkmanFinsetBaseRight] using hCL s
+    ext b
+    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg CL)) => b ∈ t) (hCL s)
+    simpa only [folkmanFinsetBaseRight, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hCR' (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :
       prebananaAbstractPowersetMap
         (fun x : AsBoolAlg AR => toBoolAlg (gCR (ofBoolAlg x))) s =
         folkmanFinsetBaseRight D.gR s := by
-    simpa only [folkmanFinsetBaseRight] using hCR s
+    ext b
+    have hb := congrArg (fun t : Finset (PrebananaAbstractAtoms (AsBoolAlg CR)) => b ∈ t) (hCR s)
+    simpa only [folkmanFinsetBaseRight, Finset.mem_filter, Finset.mem_univ, true_and] using hb
   have hBco (a : Finset (PrebananaAbstractAtoms (AsBoolAlg AL)))
       (r : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :
       folkmanNativeTransportPairing γB
@@ -141,15 +149,41 @@ theorem folkmanNativeTwoSort_exists_strongAmalgamPairing
       (folkmanNativeTransportPairing γA)
       (folkmanNativeTransportPairing γB)
       (folkmanNativeTransportPairing γC)
-      (fun x x' y => folkmanNativeTransportPairing_add_left γA hAleft x x' y)
-      (fun x x' y => folkmanNativeTransportPairing_add_left γB hBleft x x' y)
-      (fun x x' y => folkmanNativeTransportPairing_add_left γC hCleft x x' y)
-      (fun x y y' => folkmanNativeTransportPairing_add_right γA hAright x y y')
-      (fun x y y' => folkmanNativeTransportPairing_add_right γB hBright x y y')
-      (fun x y y' => folkmanNativeTransportPairing_add_right γC hCright x y y')
+      (fun x x' y => by
+        convert folkmanNativeTransportPairing_add_left γA hAleft x x' y using 1
+          <;> first | rfl | apply Subsingleton.elim |
+            (ext z; simp only [Finset.mem_symmDiff]))
+      (fun x x' y => by
+        convert folkmanNativeTransportPairing_add_left γB hBleft x x' y using 1
+          <;> first | rfl | apply Subsingleton.elim |
+            (ext z; simp only [Finset.mem_symmDiff]))
+      (fun x x' y => by
+        convert folkmanNativeTransportPairing_add_left γC hCleft x x' y using 1
+          <;> first | rfl | apply Subsingleton.elim |
+            (ext z; simp only [Finset.mem_symmDiff]))
+      (fun x y y' => by
+        convert folkmanNativeTransportPairing_add_right γA hAright x y y' using 1
+          <;> first | rfl | apply Subsingleton.elim |
+            (ext z; simp only [Finset.mem_symmDiff]))
+      (fun x y y' => by
+        convert folkmanNativeTransportPairing_add_right γB hBright x y y' using 1
+          <;> first | rfl | apply Subsingleton.elim |
+            (ext z; simp only [Finset.mem_symmDiff]))
+      (fun x y y' => by
+        convert folkmanNativeTransportPairing_add_right γC hCright x y y' using 1
+          <;> first | rfl | apply Subsingleton.elim |
+            (ext z; simp only [Finset.mem_symmDiff]))
       hBco hCco
-  refine ⟨D, βD, hDleft, hDright, ?_, ?_,
+  refine ⟨D, βD, ?_, ?_, ?_, ?_,
     hIntersection, ?_, ?_⟩
+  · intro x x' y
+    convert hDleft x x' y using 1
+      <;> first | rfl | apply Subsingleton.elim |
+        (ext z; simp only [Finset.mem_symmDiff])
+  · intro x y y'
+    convert hDright x y y' using 1
+      <;> first | rfl | apply Subsingleton.elim |
+        (ext z; simp only [Finset.mem_symmDiff])
   · intro x y
     simpa only [folkmanNativeTransportPairing_apply_codes] using
       hDB (folkmanNativeRingAtomEquiv BL x)
