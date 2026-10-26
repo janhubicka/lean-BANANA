@@ -1159,6 +1159,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanIntersectionTransportAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanIntersectionTransportAxiomAudit.lean
 
+      - name: Audit operation laws of native Folkman ring embeddings
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeEmbeddingsAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeEmbeddingsAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
