@@ -1159,6 +1159,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeStrongAmalgamAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeStrongAmalgamAxiomAudit.lean
 
+      - name: Audit final original-carrier Folkman finite strong amalgamation
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeFiniteStrongAPAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeFiniteStrongAPAxiomAudit.lean
+
 
       - name: Audit exact common-base intersection under carrier equivalences
         run: |
