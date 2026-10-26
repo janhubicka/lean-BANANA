@@ -88,6 +88,7 @@ import BANANA.NonPrecompact.FolkmanNativeRingMapCoordinates
 import BANANA.NonPrecompact.FolkmanNativePairingTransport
 import BANANA.NonPrecompact.FolkmanNativePairingCompatibility
 import BANANA.NonPrecompact.FolkmanNativeStrongAmalgam
+import BANANA.NonPrecompact.FolkmanNativeFiniteStrongAP
 import BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram
 import BANANA.NonPrecompact.FolkmanIntersectionTransport
 import BANANA.NonPrecompact.FolkmanNativeEmbeddings
