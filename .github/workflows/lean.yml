@@ -1149,6 +1149,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativePairingTransportAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativePairingTransportAxiomAudit.lean
 
+      - name: Audit native Folkman finite pairing heredity and finiteness
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeFinitePairingClassAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeFinitePairingClassAxiomAudit.lean
+
       - name: Audit native Folkman pairing compatibility through atom embeddings
         run: |
           lake build BANANA.NonPrecompact.FolkmanNativePairingCompatibilityAxiomAudit
