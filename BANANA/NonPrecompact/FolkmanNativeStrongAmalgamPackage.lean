@@ -112,8 +112,8 @@ theorem folkmanNative_exists_language_strong_amalgam
     (hCright : ∀ x y y', γC x (y + y') = γC x y + γC x y')
     (hcommonB : ∀ a r, γB (fBL a) (fBR r) = γA a r)
     (hcommonC : ∀ a r, γC (gCL a) (gCR r) = γA a r) :
-    FolkmanNativeStrongAmalgamCertificate
-      fBL gCL fBR gCR γB γC := by
+    Nonempty (FolkmanNativeStrongAmalgamCertificate
+      fBL gCL fBR gCR γB γC) := by
   classical
   obtain ⟨D, βD, hleft, hright, hpB, hpC, _, hbaseB, hbaseC⟩ :=
     folkmanNativeTwoSort_exists_strongAmalgamPairing
@@ -143,7 +143,7 @@ theorem folkmanNative_exists_language_strong_amalgam
           D.base_commutes _
       _ = folkmanNativeEmbedC D (gCL a.1, gCR a.2) := by
             exact congrArg D.embedC (hc a)
-  refine {
+  refine ⟨{
     diagram := D
     pairing := βD
     additive_left := hleft
@@ -160,7 +160,7 @@ theorem folkmanNative_exists_language_strong_amalgam
     preserves_pairing_C := ?_
     base_commutes := hcomm
     strong_intersection := ?_
-  }
+  }⟩
   · intro x y
     simpa only [folkmanNativeEmbedB, folkmanNativeTwoSortCode] using hpB x y
   · intro x y
