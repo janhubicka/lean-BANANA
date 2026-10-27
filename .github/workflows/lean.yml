@@ -1190,6 +1190,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanFiniteClassDataAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanFiniteClassDataAxiomAudit.lean
 
+      - name: Audit Folkman joint embedding over the two zero rings
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeJEPAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeJEPAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
