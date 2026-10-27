@@ -94,6 +94,7 @@ import BANANA.NonPrecompact.FolkmanIntersectionTransport
 import BANANA.NonPrecompact.FolkmanNativeEmbeddings
 import BANANA.NonPrecompact.FolkmanNativeIntersection
 import BANANA.NonPrecompact.FolkmanNativeStrongAmalgamPackage
+import BANANA.NonPrecompact.FolkmanNativeJEP
 import BANANA.NonPrecompact.FolkmanPairingFromRetractions
 import BANANA.NonPrecompact.FolkmanAtomPivots
 import BANANA.NonPrecompact.FolkmanPivotCrossIdentities
