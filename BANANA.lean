@@ -105,6 +105,7 @@ import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
 import BANANA.NonPrecompact.FolkmanBilinearAllVectors
 import BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
 import BANANA.NonPrecompact.FolkmanPersistence
+import BANANA.NonPrecompact.FolkmanFiniteClassData
 import BANANA.NonPrecompact.FiniteOwnerSums
 import BANANA.NonPrecompact.LinearExtension
 import BANANA.NonPrecompact.LinearBoringInsertion
