@@ -1180,6 +1180,11 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeIntersectionAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeIntersectionAxiomAudit.lean
 
+      - name: Audit full Folkman finite strong amalgamation in original language
+        run: |
+          lake build BANANA.NonPrecompact.FolkmanNativeStrongAmalgamPackageAxiomAudit
+          lake env lean BANANA/NonPrecompact/FolkmanNativeStrongAmalgamPackageAxiomAudit.lean
+
       - name: Regress partial owners of small Folkman ring embeddings
         run: python3 scripts/check_folkman_partial_owner_small.py
 
