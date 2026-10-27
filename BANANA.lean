@@ -108,6 +108,7 @@ import BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
 import BANANA.NonPrecompact.FolkmanPersistence
 import BANANA.NonPrecompact.FolkmanFiniteClassData
 import BANANA.NonPrecompact.FolkmanAtomMatrixReconstruction
+import BANANA.NonPrecompact.FolkmanNativePairingAtomMatrix
 import BANANA.NonPrecompact.FiniteOwnerSums
 import BANANA.NonPrecompact.LinearExtension
 import BANANA.NonPrecompact.LinearBoringInsertion
