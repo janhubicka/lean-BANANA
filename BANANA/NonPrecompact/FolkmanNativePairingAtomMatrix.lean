@@ -50,10 +50,14 @@ theorem folkmanNativeTransportPairing_eq_atomMatrix
   simpa only [folkmanNativePairingAtomMatrix] using
     (folkmanAtomPairing_eq_doubleSum
       (folkmanNativeTransportPairing γ)
-      (fun x x' y =>
-        folkmanNativeTransportPairing_add_left γ hleft x x' y)
-      (fun x y y' =>
-        folkmanNativeTransportPairing_add_right γ hright x y y')
+      (fun x x' y => by
+        convert folkmanNativeTransportPairing_add_left γ hleft x x' y using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
+      (fun x y y' => by
+        convert folkmanNativeTransportPairing_add_right γ hright x y y' using 1
+          <;> first | rfl |
+            (congr 1; ext z; simp only [Finset.mem_symmDiff]))
       s t)
 
 /-- All original native ring pairing values are determined by the
