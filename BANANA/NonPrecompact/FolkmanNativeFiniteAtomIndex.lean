@@ -21,7 +21,7 @@ Fraïssé theorem and building the limit are separate tasks.
 
 namespace SuccessorTree.NonPrecompact
 
-open scoped Classical BigOperators
+open scoped Classical symmDiff BigOperators
 
 local instance folkmanAsBoolAlgFiniteForFinIndex
     (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
