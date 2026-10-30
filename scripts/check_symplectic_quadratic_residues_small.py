@@ -94,6 +94,27 @@ def sampled_affine_products(seed: int = 20261028, trials: int = 400) -> int:
     return checked
 
 
+def high_moment_counterexample() -> None:
+    """Nondegenerate q=4 example where M_4 is not divisible by 2^(d+1).
+
+    The original proof overstates the divisibility of M_k itself when k>d.
+    Only the weighted term (-2)^k M_k must have that divisibility.
+    """
+    dimension = 6
+    values = [
+        3 * ((z >> 0) & 1) * ((z >> 1) & 1)
+        + ((z >> 2) & 1) * ((z >> 3) & 1)
+        + ((z >> 4) & 1) * ((z >> 5) & 1)
+        for z in range(1 << dimension)
+    ]
+    assert polar_rank(values, dimension) == dimension
+    verify_counts(values, 4)
+    moment_four = sum(comb(value, 4) if value >= 4 else 0 for value in values)
+    assert moment_four == 11
+    assert moment_four % 16 != 0
+    assert ((-2) ** 4 * moment_four) % 16 == 0
+
+
 def main() -> None:
     for modulus in (2, 4, 8):
         values, moments = canonical_example(modulus)
@@ -103,6 +124,8 @@ def main() -> None:
     _, m = canonical_example(4)
     assert m[1] == 48 and m[1] % 32 != 0, "lost counterexample to overstated bound"
     print("q=4: M_1=48 disproves the manuscript's 32-divisibility claim")
+    high_moment_counterexample()
+    print("q=4: M_4=11 disproves the high-moment 16-divisibility claim")
     forms = exhaustive_six_dimensional()
     assert forms == 13_888
     print(f"q=4: checked all {forms} nondegenerate alternating six-dimensional forms")
