@@ -1,4 +1,6 @@
 import BANANA.NonPrecompact.FolkmanNativePairingAtomMatrix
+import Mathlib.Data.Fintype.EquivFin
+import Mathlib.Data.Finset.Image
 
 /-!
 # Fin-indexed presentation of an arbitrary native Folkman pairing
@@ -34,12 +36,51 @@ noncomputable def folkmanNativeAtomFinEquiv
   classical
   exact Fintype.equivFin _
 
+/-- A bijection between a native finite Boolean ring and the finite
+powerset ring on an explicitly numbered atom set. The following lemmas
+verify the original ring operations, so this is a ring isomorphism in
+the manuscript's non-unital language. -/
+noncomputable def folkmanNativeFiniteRingCodeEquiv
+    (α : Type*) [BooleanRing α] [Fintype α] :
+    α ≃ Finset (Fin (Fintype.card (PrebananaAbstractAtoms (AsBoolAlg α)))) :=
+  (folkmanNativeRingAtomEquiv α).trans
+    (folkmanNativeAtomFinEquiv α).finsetCongr
+
+/-- The original zero element corresponds to an empty atom support. -/
+theorem folkmanNativeFiniteRingCode_zero
+    (α : Type*) [BooleanRing α] [Fintype α] :
+    folkmanNativeFiniteRingCodeEquiv α (0 : α) = ∅ := by
+  classical
+  simp [folkmanNativeFiniteRingCodeEquiv, folkmanNativeRingAtomEquiv_zero]
+
+/-- Native multiplication is intersection of indexed atom supports. -/
+theorem folkmanNativeFiniteRingCode_mul
+    (α : Type*) [BooleanRing α] [Fintype α] (x y : α) :
+    folkmanNativeFiniteRingCodeEquiv α (x * y) =
+      folkmanNativeFiniteRingCodeEquiv α x ∩
+        folkmanNativeFiniteRingCodeEquiv α y := by
+  classical
+  simp only [folkmanNativeFiniteRingCodeEquiv, Equiv.trans_apply,
+    Equiv.finsetCongr_apply, folkmanNativeRingAtomEquiv_mul,
+    Finset.map_inter]
+
+/-- Native addition is symmetric difference of indexed atom supports. -/
+theorem folkmanNativeFiniteRingCode_add
+    (α : Type*) [BooleanRing α] [Fintype α] (x y : α) :
+    folkmanNativeFiniteRingCodeEquiv α (x + y) =
+      symmDiff (folkmanNativeFiniteRingCodeEquiv α x)
+        (folkmanNativeFiniteRingCodeEquiv α y) := by
+  classical
+  ext i
+  simp only [folkmanNativeFiniteRingCodeEquiv, Equiv.trans_apply,
+    Equiv.finsetCongr_apply, folkmanNativeRingAtomEquiv_add,
+    Finset.mem_map_equiv, Finset.mem_symmDiff]
+
 /-- The atom support of an original ring element, expressed with Fin labels. -/
 noncomputable def folkmanNativeFinSupport
     (α : Type*) [BooleanRing α] [Fintype α] (x : α) :
     Finset (Fin (Fintype.card (PrebananaAbstractAtoms (AsBoolAlg α)))) :=
-  (folkmanNativeRingAtomEquiv α x).map
-    (folkmanNativeAtomFinEquiv α).toEmbedding
+  folkmanNativeFiniteRingCodeEquiv α x
 
 /-- A finite native Folkman pairing in the existing Fin-atom presentation.
 No nonzero or unitality hypotheses are used. -/
@@ -87,7 +128,8 @@ theorem folkmanNativeFinCode_pairing
           (folkmanNativeFinCode γ).edge i j := by
   classical
   rw [folkmanNativePairing_eq_atomMatrix γ hleft hright x y]
-  simp only [folkmanNativeFinSupport, Finset.sum_map]
+  simp only [folkmanNativeFinSupport, folkmanNativeFiniteRingCodeEquiv,
+    Equiv.trans_apply, Equiv.finsetCongr_apply, Finset.sum_map]
   apply Finset.sum_congr rfl
   intro a ha
   apply Finset.sum_congr rfl
