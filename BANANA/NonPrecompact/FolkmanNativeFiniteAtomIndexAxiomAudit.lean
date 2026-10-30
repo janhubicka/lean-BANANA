@@ -10,3 +10,4 @@ import BANANA.NonPrecompact.FolkmanNativeFiniteAtomIndex
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinCode
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinCode_edge
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinCode_pairing
+#print axioms SuccessorTree.NonPrecompact.folkmanNative_exists_finite_index_presentation
