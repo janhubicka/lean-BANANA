@@ -2,6 +2,10 @@ import BANANA.NonPrecompact.FolkmanNativeFiniteAtomIndex
 
 /-! The finite native-to-Fin presentation has no added proof axioms. -/
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeAtomFinEquiv
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCodeEquiv
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCode_zero
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCode_mul
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCode_add
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinSupport
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinCode
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinCode_edge
