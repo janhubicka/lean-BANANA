@@ -136,4 +136,46 @@ theorem folkmanNativeFinCode_pairing
   intro b hb
   exact (folkmanNativeFinCode_edge γ a b).symm
 
+
+/-- Every finite native two-sort Folkman object has a fully faithful
+finite-index presentation: ring addition, ring multiplication, zeros
+and every value of the original pairing are preserved.
+
+Together with countability of FolkmanAtomStructure, this is the
+finite-object isomorphism-type step for the Fraïssé-class argument.
+It is independent of strong amalgamation and of the limit construction. -/
+theorem folkmanNative_exists_finite_index_presentation
+    {L R : Type*}
+    [BooleanRing L] [Fintype L]
+    [BooleanRing R] [Fintype R]
+    (γ : L → R → F2)
+    (hleft : ∀ x x' y, γ (x + x') y = γ x y + γ x' y)
+    (hright : ∀ x y y', γ x (y + y') = γ x y + γ x y') :
+    ∃ A : FolkmanAtomStructure,
+      ∃ eL : L ≃ Finset (Fin A.leftCount),
+        ∃ eR : R ≃ Finset (Fin A.rightCount),
+          (∀ x : L, ∀ y : R,
+            γ x y = ∑ i ∈ eL x, ∑ j ∈ eR y, A.edge i j) ∧
+          (∀ x x' : L, eL (x + x') = symmDiff (eL x) (eL x')) ∧
+          (∀ y y' : R, eR (y + y') = symmDiff (eR y) (eR y')) ∧
+          (∀ x x' : L, eL (x * x') = eL x ∩ eL x') ∧
+          (∀ y y' : R, eR (y * y') = eR y ∩ eR y') ∧
+          eL (0 : L) = ∅ ∧ eR (0 : R) = ∅ := by
+  classical
+  refine ⟨folkmanNativeFinCode γ,
+    folkmanNativeFiniteRingCodeEquiv L,
+    folkmanNativeFiniteRingCodeEquiv R, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro x y
+    exact folkmanNativeFinCode_pairing γ hleft hright x y
+  · intro x x'
+    exact folkmanNativeFiniteRingCode_add L x x'
+  · intro y y'
+    exact folkmanNativeFiniteRingCode_add R y y'
+  · intro x x'
+    exact folkmanNativeFiniteRingCode_mul L x x'
+  · intro y y'
+    exact folkmanNativeFiniteRingCode_mul R y y'
+  · exact folkmanNativeFiniteRingCode_zero L
+  · exact folkmanNativeFiniteRingCode_zero R
+
 end SuccessorTree.NonPrecompact
