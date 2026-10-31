@@ -209,4 +209,75 @@ theorem folkmanNativeFinRingMaps_preserve_pairing
     _ = ∑ i ∈ s, ∑ j ∈ t,
       (folkmanNativeFinCode γA).edge i j := by rw [hx, hy]
 
+
+/-- Numbering the atoms does not change the identity morphism. -/
+theorem folkmanNativeFinRingMap_id
+    (α : Type*) [BooleanRing α] [Fintype α]
+    (s : Finset (Fin (Fintype.card
+      (PrebananaAbstractAtoms (AsBoolAlg α))))) :
+    folkmanNativeFinRingMap (NonUnitalRingHom.id α) s = s := by
+  classical
+  simp [folkmanNativeFinRingMap]
+
+/-- Numbering the atoms respects composition of native non-unital
+homomorphisms. This ensures the finite-index construction is functorial,
+rather than a collection of unrelated object-wise encodings. -/
+theorem folkmanNativeFinRingMap_comp
+    {α β γ : Type*}
+    [BooleanRing α] [Fintype α]
+    [BooleanRing β] [Fintype β]
+    [BooleanRing γ] [Fintype γ]
+    (f : α →ₙ+* β) (g : β →ₙ+* γ)
+    (s : Finset (Fin (Fintype.card
+      (PrebananaAbstractAtoms (AsBoolAlg α))))) :
+    folkmanNativeFinRingMap (g.comp f) s =
+      folkmanNativeFinRingMap g (folkmanNativeFinRingMap f s) := by
+  classical
+  simp [folkmanNativeFinRingMap]
+
+/-- A native two-sort ring map preserves the pairing if and only if its
+finite-index re-encoding preserves every matrix-pairing value. Both
+implications quantify over all elements; neither requires unital maps. -/
+theorem folkmanNativeFinRingMaps_preserve_pairing_iff
+    {AL AR BL BR : Type*}
+    [BooleanRing AL] [Fintype AL]
+    [BooleanRing AR] [Fintype AR]
+    [BooleanRing BL] [Fintype BL]
+    [BooleanRing BR] [Fintype BR]
+    (fL : AL →ₙ+* BL) (fR : AR →ₙ+* BR)
+    (γA : AL → AR → F2) (γB : BL → BR → F2)
+    (hAleft : ∀ x x' y, γA (x + x') y = γA x y + γA x' y)
+    (hAright : ∀ x y y', γA x (y + y') = γA x y + γA x y')
+    (hBleft : ∀ x x' y, γB (x + x') y = γB x y + γB x' y)
+    (hBright : ∀ x y y', γB x (y + y') = γB x y + γB x y') :
+    (∀ x y, γB (fL x) (fR y) = γA x y) ↔
+      (∀ (s : Finset (Fin (Fintype.card
+          (PrebananaAbstractAtoms (AsBoolAlg AL)))))
+         (t : Finset (Fin (Fintype.card
+          (PrebananaAbstractAtoms (AsBoolAlg AR))))),
+          (∑ i ∈ folkmanNativeFinRingMap fL s,
+             ∑ j ∈ folkmanNativeFinRingMap fR t,
+               (folkmanNativeFinCode γB).edge i j) =
+          ∑ i ∈ s, ∑ j ∈ t, (folkmanNativeFinCode γA).edge i j) := by
+  classical
+  constructor
+  · intro hp s t
+    exact folkmanNativeFinRingMaps_preserve_pairing
+      fL fR γA γB hAleft hAright hBleft hBright hp s t
+  · intro hp x y
+    have hcodes := hp (folkmanNativeFiniteRingCodeEquiv AL x)
+      (folkmanNativeFiniteRingCodeEquiv AR y)
+    have heq :
+        (∑ i ∈ folkmanNativeFiniteRingCodeEquiv BL (fL x),
+           ∑ j ∈ folkmanNativeFiniteRingCodeEquiv BR (fR y),
+             (folkmanNativeFinCode γB).edge i j) =
+          ∑ i ∈ folkmanNativeFiniteRingCodeEquiv AL x,
+            ∑ j ∈ folkmanNativeFiniteRingCodeEquiv AR y,
+              (folkmanNativeFinCode γA).edge i j := by
+      simpa only [folkmanNativeFinRingMap_apply] using hcodes
+    exact (folkmanNativeFinCode_pairing
+      γB hBleft hBright (fL x) (fR y)).trans
+      (heq.trans (folkmanNativeFinCode_pairing
+        γA hAleft hAright x y).symm)
+
 end SuccessorTree.NonPrecompact
