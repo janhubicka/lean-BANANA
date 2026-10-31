@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.FolkmanNativeFiniteAtomIndex
+import BANANA.NonPrecompact.FolkmanRingPartialOwners
 
 /-!
 # Native non-unital Folkman maps in finite-index coordinates
@@ -151,6 +152,31 @@ theorem folkmanNativeFinRingMap_injective
   apply hf
   apply (folkmanNativeFiniteRingCodeEquiv β).injective
   exact h
+
+/-- An injective native non-unital Boolean-ring homomorphism is exactly
+a surjective partial-owner map on the explicitly numbered atom sets.
+
+Every source atom owns at least one target atom. An additional target
+atom may be unowned, corresponding to the absence of a top-preservation
+requirement. This also holds when the source is the zero ring. -/
+theorem folkmanNativeFinRingMap_exists_partialOwner
+    {α β : Type*}
+    [BooleanRing α] [Fintype α]
+    [BooleanRing β] [Fintype β]
+    (f : α →ₙ+* β) (hf : Function.Injective f) :
+    ∃ owner :
+        Fin (Fintype.card (PrebananaAbstractAtoms (AsBoolAlg β))) →
+          Option (Fin (Fintype.card (PrebananaAbstractAtoms (AsBoolAlg α)))),
+      (∀ i, ∃ j, owner j = some i) ∧
+      (∀ s, folkmanNativeFinRingMap f s =
+        Finset.univ.filter (fun j => ∃ i ∈ s, owner j = some i)) := by
+  classical
+  exact folkman_exists_partialOwner_of_ringEmbedding
+    (folkmanNativeFinRingMap f)
+    (folkmanNativeFinRingMap_zero f)
+    (folkmanNativeFinRingMap_add f)
+    (folkmanNativeFinRingMap_mul f)
+    (folkmanNativeFinRingMap_injective f hf)
 
 /-- Pairing-preserving native embeddings remain pairing-preserving
 after both sorts have been reindexed.  This is a statement for ALL
