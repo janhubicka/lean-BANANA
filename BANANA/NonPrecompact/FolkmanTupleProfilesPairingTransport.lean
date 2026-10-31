@@ -59,7 +59,8 @@ theorem folkmanTuplePatternFiber_ownerImage_eq
       · intro hb
         apply Finset.mem_biUnion.mpr
         refine ⟨a, ?_, ?_⟩
-        · exact heq.symm.trans hb
+        · exact Finset.mem_filter.mpr
+            ⟨Finset.mem_univ _, heq.symm.trans hb⟩
         · simp [folkmanFiber, hown]
       · intro hb
         obtain ⟨a', ha', hfiber⟩ := Finset.mem_biUnion.mp hb
@@ -67,7 +68,9 @@ theorem folkmanTuplePatternFiber_ownerImage_eq
           (Finset.mem_filter.mp hfiber).2
         have ha : a' = a := Option.some.inj (hown'.symm.trans hown)
         subst a'
-        exact heq.trans ha'
+        have hs : folkmanAtomTupleSignature xs a = p :=
+          (Finset.mem_filter.mp ha').2
+        exact heq.trans hs
 
 /-- Ordinary Folkman incident-edge counts reduce modulo two to
 the bilinear matrix sum. -/
