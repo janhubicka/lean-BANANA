@@ -34,5 +34,21 @@ for n in range(5):
                 right = sum(weights[x] for x in range(n) if owner[x] != m)
                 assert left == right
                 partial_checks += 1
+# Adversarial check: the commuting-base hypothesis cannot be dropped.
+# The global sum is independent of the base labels, but the per-base sum is not.
+bad_f = (0, 1)
+bad_target = (1, 0)
+bad_source = (0, 1)  # different from bad_target after bad_f
+bad_weights = (1, 0)
+left = sum(bad_weights[x] for x in range(2)
+           if bad_target[bad_f[x]] == 0)
+right = sum(bad_weights[x] for x in range(2)
+            if bad_source[x] == 0)
+assert left == 0 and right == 1
+assert sum(bad_weights[x] for x in range(2)
+           if bad_target[bad_f[x]] == 1) == 1
+assert sum(bad_weights[x] for x in range(2)
+           if bad_source[x] == 1) == 0
+
 print(f"Total-owner per-base identities passed: {checks}")
 print(f"Partial-owner retained-fibre identities passed: {partial_checks}")
