@@ -10,6 +10,7 @@ import BANANA.NonPrecompact.FolkmanNativeFiniteIndexMorphisms
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_add
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_mul
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_injective
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_exists_partialOwner
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMaps_preserve_pairing
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_id
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_comp
