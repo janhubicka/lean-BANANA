@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.FolkmanTupleProfilesTransport
+
+/-! Axiom audit for partial-owner invariance of nonzero tuple patterns. -/
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage_mem_some
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage_not_mem_none
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage_signature_some
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage_signature_none
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns_ownerImage_eq
