@@ -1,9 +1,8 @@
 # Track D — coherent EPPA and automorphism-group validation
 
 Internal development note, 1 November 2026. No circulation text changed.
-Parent track-A plan: docs/banana-validation-audit-parallel-tracks-2026-11-01.md
-(if that document is still in draft PR #307, do not import it or create a
-dependency on that PR). Branch base: lean-BANANA main at 7bbfc5846a0223c9028aa50dc442aef88ce3f01a.
+Parent track-A plan: docs/banana-circulation-parallel-validation-plan-2026-11-01.md,
+currently staged in draft PR #307; no dependency on its unmerged branch. Branch base: lean-BANANA main at 7bbfc5846a0223c9028aa50dc442aef88ce3f01a.
 
 ## Exact statement audit
 
