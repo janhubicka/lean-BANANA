@@ -142,8 +142,12 @@ theorem FolkmanAtomEmbedding.leftTupleNonzeroPatterns_eq
     (xs : Fin n → Finset (Fin A.leftCount)) :
     folkmanTupleNonzeroPatterns (folkmanTupleOwnerImage f.leftOwner xs) =
       folkmanTupleNonzeroPatterns xs := by
+  have hsurj : ∀ a, ∃ b, f.leftOwner b = some a := by
+    intro a
+    obtain ⟨b, hb⟩ := f.left_fibre_nonempty a
+    exact ⟨b, (Finset.mem_filter.mp hb).2⟩
   exact folkmanTupleNonzeroPatterns_ownerImage_eq
-    f.leftOwner f.left_fibre_nonempty xs
+    f.leftOwner hsurj xs
 
 /-- The corresponding result for the right sort. -/
 theorem FolkmanAtomEmbedding.rightTupleNonzeroPatterns_eq
@@ -153,7 +157,11 @@ theorem FolkmanAtomEmbedding.rightTupleNonzeroPatterns_eq
     (ys : Fin n → Finset (Fin A.rightCount)) :
     folkmanTupleNonzeroPatterns (folkmanTupleOwnerImage f.rightOwner ys) =
       folkmanTupleNonzeroPatterns ys := by
+  have hsurj : ∀ a, ∃ b, f.rightOwner b = some a := by
+    intro a
+    obtain ⟨b, hb⟩ := f.right_fibre_nonempty a
+    exact ⟨b, (Finset.mem_filter.mp hb).2⟩
   exact folkmanTupleNonzeroPatterns_ownerImage_eq
-    f.rightOwner f.right_fibre_nonempty ys
+    f.rightOwner hsurj ys
 
 end SuccessorTree.NonPrecompact
