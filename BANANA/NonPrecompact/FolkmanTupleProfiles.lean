@@ -84,6 +84,16 @@ theorem folkmanTupleNonzeroPatterns_card_le
     _ = 2 ^ n - 1 := by
       simp [Fintype.card_fun]
 
+/-- Ambient atoms having one prescribed tuple-membership signature.
+For a nonzero signature, this is a generated-ring atom block. -/
+noncomputable def folkmanTuplePatternFiber
+    {n atoms : ℕ}
+    (xs : Fin n → Finset (Fin atoms))
+    (p : Fin n → Bool) : Finset (Fin atoms) := by
+  classical
+  exact (Finset.univ : Finset (Fin atoms)).filter
+    (fun a => folkmanAtomTupleSignature xs a = p)
+
 /-- Parity of all ambient edges between the fibres of two patterns.
 Patterns outside the generated non-unital subrings (the all-zero
 ones) are explicitly ignored. -/
@@ -96,11 +106,8 @@ noncomputable def folkmanTuplePatternPairing
   classical
   exact if p = folkmanZeroTuplePattern nL ∨
       q = folkmanZeroTuplePattern nR then 0 else
-    ∑ a ∈ (Finset.univ : Finset (Fin A.leftCount)).filter
-        (fun a => folkmanAtomTupleSignature xs a = p),
-      ∑ b ∈ (Finset.univ : Finset (Fin A.rightCount)).filter
-        (fun b => folkmanAtomTupleSignature ys b = q),
-        A.edge a b
+    ∑ a ∈ folkmanTuplePatternFiber xs p,
+      ∑ b ∈ folkmanTuplePatternFiber ys q, A.edge a b
 
 /-- The profile never counts pairing values involving outside atoms. -/
 theorem folkmanTuplePatternPairing_zero_left
