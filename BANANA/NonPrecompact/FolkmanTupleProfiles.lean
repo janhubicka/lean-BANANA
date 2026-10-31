@@ -94,6 +94,55 @@ noncomputable def folkmanTuplePatternFiber
   exact (Finset.univ : Finset (Fin atoms)).filter
     (fun a => folkmanAtomTupleSignature xs a = p)
 
+/-- Nonzero atom-membership patterns selecting one named tuple coordinate. -/
+noncomputable def folkmanTupleCoordinatePatterns
+    {n atoms : ℕ}
+    (xs : Fin n → Finset (Fin atoms)) (i : Fin n) :
+    Finset (Fin n → Bool) := by
+  classical
+  exact (folkmanTupleNonzeroPatterns xs).filter (fun p => p i = true)
+
+/-- Every tuple coordinate is the union of exactly its nonzero
+signature fibres. The zero signature makes no contribution.
+
+This is the finite combinatorial reconstruction of the distinguished
+generators of a non-unital Boolean ring.  In particular it works
+for an empty tuple, since there is then no coordinate to check. -/
+theorem folkmanTupleCoordinate_eq_patternUnion
+    {n atoms : ℕ}
+    (xs : Fin n → Finset (Fin atoms)) (i : Fin n) :
+    xs i =
+      (folkmanTupleCoordinatePatterns xs i).biUnion
+        (folkmanTuplePatternFiber xs) := by
+  classical
+  ext a
+  constructor
+  · intro ha
+    let p := folkmanAtomTupleSignature xs a
+    have hp0 : p ≠ folkmanZeroTuplePattern n :=
+      folkmanAtomTupleSignature_ne_zero_of_mem xs a i ha
+    have hreal : p ∈ folkmanTupleNonzeroPatterns xs := by
+      unfold folkmanTupleNonzeroPatterns
+      apply Finset.mem_filter.mpr
+      constructor
+      · exact Finset.mem_image.mpr ⟨a, Finset.mem_univ _, rfl⟩
+      · exact hp0
+    have hp_i : p i = true :=
+      (folkmanAtomTupleSignature_true_iff xs a i).2 ha
+    apply Finset.mem_biUnion.mpr
+    refine ⟨p, ?_, ?_⟩
+    · exact Finset.mem_filter.mpr ⟨hreal, hp_i⟩
+    · exact Finset.mem_filter.mpr ⟨Finset.mem_univ _, rfl⟩
+  · intro ha
+    obtain ⟨p, hp, hfib⟩ := Finset.mem_biUnion.mp ha
+    have hp_i : p i = true := (Finset.mem_filter.mp hp).2
+    have hsig : folkmanAtomTupleSignature xs a = p :=
+      (Finset.mem_filter.mp hfib).2
+    have htrue : folkmanAtomTupleSignature xs a i = true := by
+      rw [hsig]
+      exact hp_i
+    exact (folkmanAtomTupleSignature_true_iff xs a i).1 htrue
+
 /-- Parity of all ambient edges between the fibres of two patterns.
 Patterns outside the generated non-unital subrings (the all-zero
 ones) are explicitly ignored. -/
