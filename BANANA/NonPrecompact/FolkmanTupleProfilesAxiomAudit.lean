@@ -7,6 +7,7 @@ import BANANA.NonPrecompact.FolkmanTupleProfiles
 #print axioms SuccessorTree.NonPrecompact.folkmanAtomTupleSignature_ne_zero_of_mem
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns_card_le
+#print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternFiber
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_zero_left
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_zero_right
