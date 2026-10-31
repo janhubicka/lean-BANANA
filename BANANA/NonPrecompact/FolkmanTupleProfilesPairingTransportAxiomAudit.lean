@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.FolkmanTupleProfilesPairingTransport
+
+/-! Audit full Folkman tuple-profile invariance for non-unital embeddings. -/
+#print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternFiber_ownerImage_eq
+#print axioms SuccessorTree.NonPrecompact.folkmanTuple_edgeCount_cast
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerPairing_sum
+#print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_ownerImage_eq
+#print axioms SuccessorTree.NonPrecompact.FolkmanAtomEmbedding.tupleProfile_preserved
