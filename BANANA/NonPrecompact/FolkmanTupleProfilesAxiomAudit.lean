@@ -8,6 +8,8 @@ import BANANA.NonPrecompact.FolkmanTupleProfiles
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns_card_le
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternFiber
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleCoordinatePatterns
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleCoordinate_eq_patternUnion
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_zero_left
 #print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_zero_right
