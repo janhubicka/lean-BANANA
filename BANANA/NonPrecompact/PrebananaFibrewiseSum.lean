@@ -1,6 +1,5 @@
 import BANANA.NonPrecompact.PrebananaResidualParity
 import BANANA.NonPrecompact.FiniteOwnerSums
-import Mathlib
 
 /-!
 # Per-base sum identity for commuting atom projections
