@@ -1,0 +1,15 @@
+import BANANA.NonPrecompact.FolkmanTupleProfiles
+
+/-! Independent axiom audit for the finite non-unital tuple profile. -/
+#print axioms SuccessorTree.NonPrecompact.folkmanZeroTuplePattern
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomTupleSignature
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomTupleSignature_true_iff
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomTupleSignature_ne_zero_of_mem
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns_card_le
+#print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing
+#print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_zero_left
+#print axioms SuccessorTree.NonPrecompact.folkmanTuplePatternPairing_zero_right
+#print axioms SuccessorTree.NonPrecompact.FolkmanAtomTupleProfile
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomTupleProfile
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomTupleProfileType_finite
