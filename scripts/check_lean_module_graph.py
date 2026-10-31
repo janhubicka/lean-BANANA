@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 import sys
 
+from check_axiom_report import axiom_commands, strip_lean_comments
+
 ROOT = Path(__file__).resolve().parents[1]
 files = sorted((ROOT / "BANANA").rglob("*.lean"))
 entry = ROOT / "BANANA.lean"
@@ -18,7 +20,7 @@ sources = {p.relative_to(ROOT).as_posix(): p for p in files}
 
 def local_imports(file):
     out = set()
-    for line in file.read_text(encoding="utf-8").splitlines():
+    for line in strip_lean_comments(file.read_text(encoding="utf-8")).splitlines():
         match = re.match(r"\s*import\s+(.+)$", line)
         if not match:
             continue
@@ -36,8 +38,7 @@ missing = sorted((name, dep) for name, deps in graph.items()
 audits = {name for name in sources if name.endswith("AxiomAudit.lean")}
 production = set(sources) - audits
 empty_audits = sorted(name for name in audits
-                      if "#print axioms " not in
-                      sources[name].read_text(encoding="utf-8"))
+                      if not axiom_commands(sources[name].read_text(encoding="utf-8")))
 visited = set()
 active = set()
 cycles = []
