@@ -7,3 +7,5 @@ import BANANA.NonPrecompact.FolkmanTupleProfilesTransport
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage_signature_some
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleOwnerImage_signature_none
 #print axioms SuccessorTree.NonPrecompact.folkmanTupleNonzeroPatterns_ownerImage_eq
+#print axioms SuccessorTree.NonPrecompact.FolkmanAtomEmbedding.leftTupleNonzeroPatterns_eq
+#print axioms SuccessorTree.NonPrecompact.FolkmanAtomEmbedding.rightTupleNonzeroPatterns_eq
