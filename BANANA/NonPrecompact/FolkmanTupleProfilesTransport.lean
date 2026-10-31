@@ -132,4 +132,28 @@ theorem folkmanTupleNonzeroPatterns_ownerImage_eq
     refine ⟨Finset.mem_image.mpr ?_, hpnonzero⟩
     exact ⟨b, Finset.mem_univ _, heq.trans ha⟩
 
+
+/-- The left-sort nonzero tuple patterns are preserved by every
+actual Folkman atom embedding, including non-unital embeddings. -/
+theorem FolkmanAtomEmbedding.leftTupleNonzeroPatterns_eq
+    {A B : FolkmanAtomStructure}
+    (f : FolkmanAtomEmbedding A B)
+    {n : ℕ}
+    (xs : Fin n → Finset (Fin A.leftCount)) :
+    folkmanTupleNonzeroPatterns (folkmanTupleOwnerImage f.leftOwner xs) =
+      folkmanTupleNonzeroPatterns xs := by
+  exact folkmanTupleNonzeroPatterns_ownerImage_eq
+    f.leftOwner f.left_fibre_nonempty xs
+
+/-- The corresponding result for the right sort. -/
+theorem FolkmanAtomEmbedding.rightTupleNonzeroPatterns_eq
+    {A B : FolkmanAtomStructure}
+    (f : FolkmanAtomEmbedding A B)
+    {n : ℕ}
+    (ys : Fin n → Finset (Fin A.rightCount)) :
+    folkmanTupleNonzeroPatterns (folkmanTupleOwnerImage f.rightOwner ys) =
+      folkmanTupleNonzeroPatterns ys := by
+  exact folkmanTupleNonzeroPatterns_ownerImage_eq
+    f.rightOwner f.right_fibre_nonempty ys
+
 end SuccessorTree.NonPrecompact
