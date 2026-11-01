@@ -93,4 +93,39 @@ theorem twoSortRepresentativeCode_trans
     simp [twoSortRepresentativeCode, TwoSortRepresentativeIso.trans,
       Equiv.Perm.mul_apply]
 
+
+/-- If the chosen representative identifications and the transported
+isomorphism preserve the same two-sorted pairing, then so does the
+coordinate code on the representative. This statement does not claim
+linearity of the coordinate code. -/
+theorem twoSortRepresentativeCode_preserves_pairing
+    {O : Type*} {L R : O → Type*} {P Q Z : Type*}
+    (pair : ∀ U : O, L U → R U → Z)
+    (pair₀ : P → Q → Z)
+    (iL : ∀ U, P ≃ L U) (iR : ∀ U, Q ≃ R U)
+    (hi : ∀ (U : O) (x : P) (y : Q),
+      pair U (iL U x) (iR U y) = pair₀ x y)
+    {U V : O}
+    (p : TwoSortRepresentativeIso L R U V)
+    (hp : ∀ x y, pair V (p.left x) (p.right y) = pair U x y) :
+    ∀ x y,
+      pair₀ ((twoSortRepresentativeCode iL iR p).1 x)
+        ((twoSortRepresentativeCode iL iR p).2 y) =
+        pair₀ x y := by
+  intro x y
+  let c := twoSortRepresentativeCode iL iR p
+  change pair₀ (c.1 x) (c.2 y) = pair₀ x y
+  have hL : (iL V) (c.1 x) = p.left (iL U x) := by
+    simp [c, twoSortRepresentativeCode]
+  have hR : (iR V) (c.2 y) = p.right (iR U y) := by
+    simp [c, twoSortRepresentativeCode]
+  calc
+    pair₀ (c.1 x) (c.2 y) =
+        pair V (iL V (c.1 x)) (iR V (c.2 y)) :=
+      (hi V (c.1 x) (c.2 y)).symm
+    _ = pair V (p.left (iL U x)) (p.right (iR U y)) := by
+      rw [hL, hR]
+    _ = pair U (iL U x) (iR U y) := hp _ _
+    _ = pair₀ x y := hi U x y
+
 end SuccessorTree.NonPrecompact
