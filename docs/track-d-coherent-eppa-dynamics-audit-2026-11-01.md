@@ -20,9 +20,13 @@ the two sorts whenever (i) rho is a genuine group homomorphism,
 (ii) rho(h) acts correctly on the fixed base copy of both sorts and
 (iii) g_U, g_V carry both base copies to the chosen copies.
 
-This is the missing *pointwise extension calculation*, not the finite
-selection of all U0 and i_U, nor a formal construction of the
-pairing-preserving groups and rho. CoherentConjugation already proves
+CoherentRepresentativeCore.lean separately defines the two-sort
+representative code i_V^{-1} p i_U for arbitrary carrier equivalences,
+and proves the identity and composition law with the correct (reversed)
+permutation multiplication order. These codes are NOT yet known to be
+linear or pairing-preserving, so their membership in Aut(U0) is still
+an independent lemma. The extension bridge is likewise conditional,
+not the finite selection of all U0 and i_U nor the group construction. CoherentConjugation already proves
 identity, inverse and group law. Never infer the full coherent EPPA
 conclusion from the new conditional bridge alone.
 
@@ -91,6 +95,9 @@ spawned reviewers and not a Lean kernel verification.
   20,736 two-sort extension checks, 497,664 noncommutative composition
   checks, 3,456 inverse checks. Negative test for omitting the
   base-copy equivariance hypothesis.
+* scripts/check_coherent_representative_core.py: 15,552 two-sort
+  representative-code composition checks in S3, using independent
+  changes of coordinates on the right sort.
 * scripts/check_coherent_eppa_small_pairings.py: all 17 bilinear
   matrices with l+r<=3, all 1,277 partial two-sorted linear
   isomorphisms, all extend in perfect dimension l+r. This checks
@@ -105,10 +112,12 @@ At the *exact* PR head, run:
 1. python3 scripts/check_lean_module_graph.py
 2. lake env lean BANANA/NonPrecompact/CoherentEppaRepresentativeTransport.lean
 3. lake env lean BANANA/NonPrecompact/CoherentEppaRepresentativeTransportAxiomAudit.lean
-4. lake build BANANA
-5. bash scripts/audit_all_axioms_local.sh
-6. python3 scripts/check_coherent_representative_transport.py
-7. python3 scripts/check_coherent_eppa_small_pairings.py
+4. lake env lean BANANA/NonPrecompact/CoherentRepresentativeCoreAxiomAudit.lean
+5. lake build BANANA
+6. bash scripts/audit_all_axioms_local.sh
+7. python3 scripts/check_coherent_representative_transport.py
+8. python3 scripts/check_coherent_representative_core.py
+9. python3 scripts/check_coherent_eppa_small_pairings.py
 
 Only propext, Classical.choice and Quot.sound are permitted in the
 transitive axiom results. Inspect exact theorem binders and assumptions
