@@ -26,19 +26,27 @@ and proves the identity and composition law with the correct (reversed)
 permutation multiplication order. A separate theorem shows that the code
 preserves the pairing *provided* the selected representative identifications
 and the original two-sorted isomorphism preserve it. Linearity remains a
-separate obligation, as do the concrete BANANA automorphism-group interface
-and finite representative choices. The extension bridge is likewise conditional,
+separate obligation for converting these permutation codes to linear
+automorphisms, as does the finite representative choice.
+
+BananaMatrixAutGroup.lean now stages the actual finite subgroup of the
+product of the two general linear groups consisting of pairing-preserving
+pairs. BananaMatrixCompletionActionHom.lean stages its canonical action on
+the perfect completion as a genuine MonoidHom, including both extension
+identities. These are not yet kernel-checked and do not automatically
+identify the abstract permutation codes with the concrete subgroup. The extension bridge is likewise conditional,
 not the finite selection of all U0 and i_U nor the group construction. CoherentConjugation already proves
 identity, inverse and group law. Never infer the full coherent EPPA
 conclusion from the new conditional bridge alone.
 
 ### Remaining end-to-end work
 
-1. Define the two-sorted pairing-preserving automorphism group of an
-   arbitrary finite representative U0, with multiplication agreeing with
-   the existing LinearEquiv.trans conventions. Include empty left/right
-   sorts, zero pairing and proper subspaces. Connect the existing
-   completion-action identity/composition lemmas to a genuine group hom.
+1. **Kernel check** the staged pairing-preserving automorphism group
+   and canonical completion group homomorphism, including empty sorts,
+   zero pairing, group inverse and the precise multiplication convention.
+   Then relate any abstract two-sorted representative code to this
+   subgroup by proving that the chosen identifications and partial
+   isomorphisms are linear and preserve the pairing.
 2. For every isomorphism class of substructures of fixed finite A, select
    a representative U0 and prove a dimension-bounded aligned embedding
    of its completion in the SAME perfectBanana (l+r) witness. Carry the
@@ -74,6 +82,10 @@ Referee A — statement fidelity:
   standard amenability theorem.
 * JEP and WAP for every n are genuinely stated in
   bananaFiniteSystems_jep_and_wap, not merely as a single n test.
+* The staged concrete automorphism group quantifies over all pairs of
+  invertible F2-linear maps but retains only pairing-preserving ones.
+  A group homomorphism on this subgroup is not yet a coherent groupoid
+  action on all isomorphic substructures of the original A.
 
 Referee B — counterexample and boundary tests:
 * Suppressing base-copy equivariance invalidates the extension claim
@@ -104,6 +116,12 @@ spawned reviewers and not a Lean kernel verification.
   representative-code composition checks in S3, using independent
   changes of coordinates on the right sort, plus a one-dimensional
   counterexample when a coordinate change fails to preserve pairing.
+* scripts/check_banana_finite_aut_completion_group.py: 17 pairing
+  matrices with total dimension at most 3; 377 individual finite group
+  elements; 56,621 ordered products checked for subgroup closure,
+  completion group homomorphism, perfect pairing preservation and
+  correct extension on both sorts. The trivial/dimension-zero and
+  degenerate cases are included.
 * scripts/check_coherent_eppa_small_pairings.py: all 17 bilinear
   matrices with l+r<=3, all 1,277 partial two-sorted linear
   isomorphisms, all extend in perfect dimension l+r. This checks
@@ -119,11 +137,14 @@ At the *exact* PR head, run:
 2. lake env lean BANANA/NonPrecompact/CoherentEppaRepresentativeTransport.lean
 3. lake env lean BANANA/NonPrecompact/CoherentEppaRepresentativeTransportAxiomAudit.lean
 4. lake env lean BANANA/NonPrecompact/CoherentRepresentativeCoreAxiomAudit.lean
-5. lake build BANANA
-6. bash scripts/audit_all_axioms_local.sh
-7. python3 scripts/check_coherent_representative_transport.py
-8. python3 scripts/check_coherent_representative_core.py
-9. python3 scripts/check_coherent_eppa_small_pairings.py
+5. lake env lean BANANA/NonPrecompact/BananaMatrixAutGroupAxiomAudit.lean
+6. lake env lean BANANA/NonPrecompact/BananaMatrixCompletionActionHomAxiomAudit.lean
+7. lake build BANANA
+8. bash scripts/audit_all_axioms_local.sh
+9. python3 scripts/check_coherent_representative_transport.py
+10. python3 scripts/check_coherent_representative_core.py
+11. python3 scripts/check_banana_finite_aut_completion_group.py
+12. python3 scripts/check_coherent_eppa_small_pairings.py
 
 Only propext, Classical.choice and Quot.sound are permitted in the
 transitive axiom results. Inspect exact theorem binders and assumptions
