@@ -57,3 +57,15 @@ C. Kernel proof: run Lean on the exact commit and inspect ALL transitive axioms.
 6. For any manuscript PR, mechanically strip TODO and validation-marker commands from base and head and assert equality of the remaining circulation source; compile locally, inspect PDF and latexdiff. No GitHub Actions.
 
 A PR with finite regressions but no local Lean build remains DRAFT / UNVERIFIED. This audit has not launched any independent model referee and does not claim a complete kernel recheck.
+
+## Track A implementation update (same day)
+
+- `PrebananaFibrewiseSum_identity` now uses `finiteTotalOwner_sum_fibres`; no theorem header, quantifier, typeclass or conclusion was changed. Its direct umbrella `Mathlib` import was dropped because the shared module already imports it. This Lean refactor has **not** yet passed an exact-head kernel build.
+- `scripts/check_finite_owner_base_sums.py` passed 131,022 base-specific total-owner and 31,678 partial-owner finite configurations when run locally. It now also exhibits a noncommuting-base counterexample: the unrestricted global sum remains the same, while the separate base-fibre totals differ. This confirms that the commuting hypothesis is essential.
+- The local axiom-audit runner now checks one result **per active** `#print axioms`, rather than accepting one output for an entire audit file. Unexpected transitive axioms, `sorryAx`, missing and extra results all fail. The parser ignores line and nested block comments.
+- The import-graph checker shares this comment parser, verifies that axiom audit declarations are active, and distinguishes root-reachable production modules from **audit-only** proof modules and genuinely unreachable files. Audit-only does not justify deletion.
+- `python3 -m unittest discover -s scripts -p 'test_*.py'` passed 9 local fixture tests (8 axiom-output checks and 1 synthetic import-graph test). `bash -n` also accepted the revised audit shell script. These are Python/shell checks, not a Lean build.
+- Selective GitHub source inspection found long transitive chains such as `BananaOneSidedCopyDegree -> BananaOneSidedCopyRanges -> BananaCopyDegree -> BananaCopyPalette -> BananaCopyRanges -> BananaEmbeddingDegree -> LinePairExtension` and `BananaTriplePairing -> BananaTripleIntersection -> BananaTripleStrongImages -> BananaTripleCoordinates`. Thus deletion by checking only direct imports is unsafe. The **full** repository import graph must be run locally before removing any candidate.
+- Two separate `folkmanEdgeCount` integer-to-F2 conversion lemmas are still present only in unverified Folkman draft PRs #305 and #306. Consolidate them once those branches are locally checked, retaining the class-specific code elsewhere.
+
+All Track A changes are in the **Lean repository only**. Neither the frozen circulation manuscript nor its appendix was modified.
