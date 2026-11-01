@@ -54,4 +54,5 @@ assert f2_pair(flip[0], 1) != f2_pair(0, 1)
 assert f2_pair(1, 1) == 1
 
 print(f"Two-sort representative-code composition checks: {checks}")
-print("Negative check: arbitrary coordinate changes need not preserve pairing")\nprint("Linearity of the codes remains a separate obligation")
+print("Negative check: arbitrary coordinate changes need not preserve pairing")
+print("Linearity of the codes remains a separate obligation")
