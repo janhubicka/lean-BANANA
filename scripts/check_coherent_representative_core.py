@@ -44,5 +44,14 @@ for il_u in H:
                         mul(core(ir_v, ir_w, q), core(ir_u, ir_v, p))
                     checks += 2
 
+# Pairing preservation is not automatic from an arbitrary change of
+# representative coordinates, even if the underlying p is the identity.
+# On F2, the pairing beta(x,y)=x*y is broken by left-coordinate swap.
+flip = (1, 0)
+def f2_pair(x, y):
+    return x & y
+assert f2_pair(flip[0], 1) != f2_pair(0, 1)
+assert f2_pair(1, 1) == 1
+
 print(f"Two-sort representative-code composition checks: {checks}")
-print("Pairing and linearity of the codes remain independent obligations")
+print("Negative check: arbitrary coordinate changes need not preserve pairing")\nprint("Linearity of the codes remains a separate obligation")
