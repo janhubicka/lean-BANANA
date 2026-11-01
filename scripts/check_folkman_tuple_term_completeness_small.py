@@ -70,6 +70,10 @@ def main():
     assert canonical(0, ())[1] == {0}
     assert 1 not in canonical(1, ())[1]
 
+    # The signature sets alone do not determine the two-sort structure:
+    # changing one bilinear edge must change the complete profile.
+    assert profile(1, 1, 0, (1,), (1,)) != profile(1, 1, 1, (1,), (1,))
+
     single = 0
     for n in range(4):
         for k in range(4):
