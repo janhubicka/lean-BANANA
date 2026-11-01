@@ -23,9 +23,11 @@ the two sorts whenever (i) rho is a genuine group homomorphism,
 CoherentRepresentativeCore.lean separately defines the two-sort
 representative code i_V^{-1} p i_U for arbitrary carrier equivalences,
 and proves the identity and composition law with the correct (reversed)
-permutation multiplication order. These codes are NOT yet known to be
-linear or pairing-preserving, so their membership in Aut(U0) is still
-an independent lemma. The extension bridge is likewise conditional,
+permutation multiplication order. A separate theorem shows that the code
+preserves the pairing *provided* the selected representative identifications
+and the original two-sorted isomorphism preserve it. Linearity remains a
+separate obligation, as do the concrete BANANA automorphism-group interface
+and finite representative choices. The extension bridge is likewise conditional,
 not the finite selection of all U0 and i_U nor the group construction. CoherentConjugation already proves
 identity, inverse and group law. Never infer the full coherent EPPA
 conclusion from the new conditional bridge alone.
@@ -82,6 +84,9 @@ Referee B — counterexample and boundary tests:
 * Two ambient sorts must be tested independently, including a
   contragredient second action, empty sorts, degenerate matrices,
   and representatives U,V with distinct chosen conjugators.
+* Arbitrary changes of representative coordinates need not preserve even
+  the one-dimensional F2 pairing. The new pairing theorem explicitly
+  requires preservation by both selected identifications and p.
 * Coherent partial automorphisms are defined only between isomorphic
   source and range substructures. A class-wide formulation must not
   assume arbitrary independently chosen homomorphisms between objects.
@@ -97,7 +102,8 @@ spawned reviewers and not a Lean kernel verification.
   base-copy equivariance hypothesis.
 * scripts/check_coherent_representative_core.py: 15,552 two-sort
   representative-code composition checks in S3, using independent
-  changes of coordinates on the right sort.
+  changes of coordinates on the right sort, plus a one-dimensional
+  counterexample when a coordinate change fails to preserve pairing.
 * scripts/check_coherent_eppa_small_pairings.py: all 17 bilinear
   matrices with l+r<=3, all 1,277 partial two-sorted linear
   isomorphisms, all extend in perfect dimension l+r. This checks
