@@ -63,6 +63,13 @@ def pairings_from_profile(nl, nr, bits, xs, ys):
 
 
 def main():
+    # Adversarial non-unitality witness: the empty tuple in the
+    # two-element ambient ring generates only zero, *not* the ambient unit.
+    assert canonical(1, ())[1] == {0}
+    assert canonical(1, (0,))[1] == {0}
+    assert canonical(0, ())[1] == {0}
+    assert 1 not in canonical(1, ())[1]
+
     single = 0
     for n in range(4):
         for k in range(4):
