@@ -111,6 +111,8 @@ import BANANA.NonPrecompact.FolkmanTupleProfilesTransport
 import BANANA.NonPrecompact.FolkmanTupleProfilesPairingTransport
 import BANANA.NonPrecompact.FolkmanTupleTermEquations
 import BANANA.NonPrecompact.FolkmanTupleTermEquationsAxiomAudit
+import BANANA.NonPrecompact.FolkmanTupleTermPairing
+import BANANA.NonPrecompact.FolkmanTupleTermPairingAxiomAudit
 import BANANA.NonPrecompact.FolkmanFiniteClassData
 import BANANA.NonPrecompact.FolkmanAtomMatrixReconstruction
 import BANANA.NonPrecompact.FolkmanNativePairingAtomMatrix
