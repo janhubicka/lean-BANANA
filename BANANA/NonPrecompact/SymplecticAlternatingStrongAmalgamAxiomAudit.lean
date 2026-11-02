@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.SymplecticAlternatingStrongAmalgam
 
 /-! Audit the alternating-form coordinate strong amalgam; no new axiom declarations. -/
+#print axioms SuccessorTree.NonPrecompact.symplecticAlternating_submatrix
 #print axioms SuccessorTree.NonPrecompact.symplecticBlockVectorLeft
 #print axioms SuccessorTree.NonPrecompact.symplecticBlockVectorRight
 #print axioms SuccessorTree.NonPrecompact.symplecticBlockVectorLeft_injective
