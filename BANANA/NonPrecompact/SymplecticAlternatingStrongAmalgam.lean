@@ -27,6 +27,23 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical
 
+/-- Hereditary closure of the finite alternating-matrix conditions
+under every choice of subspace coordinates. Injectivity is not needed
+for the identities themselves. -/
+theorem symplecticAlternating_submatrix
+    {I J : Type*}
+    (B : Matrix I I F2)
+    (hdiag : ∀ i, B i i = 0)
+    (hsymm : ∀ i j, B i j = B j i)
+    (f : J → I) :
+    (∀ i, (B.submatrix f f) i i = 0) ∧
+    (∀ i j, (B.submatrix f f) i j = (B.submatrix f f) j i) := by
+  constructor
+  · intro i
+    exact hdiag (f i)
+  · intro i j
+    exact hsymm (f i) (f j)
+
 /-- Include the left source space in the common basis-coordinate
 space, extending by zero on the private right complement. -/
 def symplecticBlockVectorLeft {A X Y : Type*} :
