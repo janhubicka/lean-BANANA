@@ -1,0 +1,43 @@
+{
+  "scope": "Finite regression and source checks only; no Lean elaboration or kernel audit",
+  "base_commit": "3f574899cd0f0b10e902408003dee6c6150f6f59",
+  "python": "3.13.5",
+  "regression_script_sha256": "025c845b75da9e177daf34353c42a7586569ff75607f7251adfaaa5b854d386c",
+  "results": {
+    "composable_pairs": 82697,
+    "identity_checks": 135,
+    "inverse_checks": 1277,
+    "negative_controls": 2,
+    "pairings": 17,
+    "partial_isomorphisms": 1277,
+    "representative_automorphisms": 491,
+    "representative_classes": 81,
+    "subpairs": 135
+  },
+  "python_optimised_mode": "same results, explicit checks remain active",
+  "wrong_order_mutation": "rejected by actual-partial-isomorphism extension check",
+  "lean_kernel_check": "NOT RUN: pinned Lean/Lake unavailable",
+  "independent_model_referees": "NOT RUN: no suitable callable reviewer tool available",
+  "source_checks": {
+    "BananaMatrixCoherentTransport.lean": {
+      "sha256": "75abc663347eba75031e5f9f6d9fef5869ff89a2ea39de7ff7c118b9f5a0715e",
+      "lines": 124
+    },
+    "BananaMatrixCoherentTransportAxiomAudit.lean": {
+      "sha256": "371bc143a27b497952871c67274b112c8e85725f659bf710b9b4c788de8020ba",
+      "lines": 25
+    },
+    "BananaMatrixCompletionActionHom.lean": {
+      "sha256": "f6f0097230d8e62490826a2f727ebd05c65e46671161038fa268a313e19352f0",
+      "lines": 99
+    },
+    "BananaMatrixEmbeddedCompletionHom.lean": {
+      "sha256": "21d1477114d4aec3c1eb9221ef7d9f022c22a890f3b7c07c147b9c888eb050d2",
+      "lines": 112
+    },
+    "BananaMatrixRepresentativeIso.lean": {
+      "sha256": "d1a87183fce373e6038872cd1417938821a6f1b24bd112ec7ed2e4e2211e34e3",
+      "lines": 165
+    }
+  }
+}

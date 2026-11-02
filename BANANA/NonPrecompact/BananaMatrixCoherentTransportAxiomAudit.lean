@@ -1,0 +1,25 @@
+import BANANA.NonPrecompact.BananaMatrixCoherentTransport
+import BANANA.NonPrecompact.BananaMatrixEmbeddedCompletionHom
+
+/-! Track D: run locally on the exact commit before any validation marker. -/
+
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixIso.refl
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixIso.trans
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixIso.symm
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixIso.toEmbedding
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixIso.toAutGroup
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixRepresentativeCode_toPerm
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixRepresentativeCode_left
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixRepresentativeCode_right
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixRepresentativeCode_refl
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixRepresentativeCode_trans
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixRepresentativeCode_symm
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.toAutGroup
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.toAutGroup_left_apply
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.toAutGroup_right_apply
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixEmbeddedCompletionActionHom
+#print axioms SuccessorTree.NonPrecompact.exists_bananaMatrixAlignedCompletionHom
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixCoherentTransport_refl
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixCoherentTransport_trans
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixCoherentTransport_symm
+#print axioms SuccessorTree.NonPrecompact.bananaMatrixCoherentTransport_extends

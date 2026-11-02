@@ -26,7 +26,7 @@ noncomputable def bananaMatrixCompletionActionHom
       BananaMatrixAutGroup (perfectBanana (l + r)) where
   toFun f := by
     refine ⟨⟨BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2,
-      BananaMatrixStructure.dotContragredient
+      dotContragredient
         (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2)⟩, ?_⟩
     intro x y
     exact (BananaMatrixStructure.completionAutomorphism
@@ -34,17 +34,13 @@ noncomputable def bananaMatrixCompletionActionHom
   map_one' := by
     apply Subtype.ext
     apply Prod.ext
-    · change BananaMatrixStructure.completionLeftEquiv
-        (1 : FinitePerfectGL l) (1 : FinitePerfectGL r) = 1
-      simpa only [LinearEquiv.one_eq_refl] using
-        (BananaMatrixStructure.completionLeftEquiv_refl (l := l) (r := r))
-    · change BananaMatrixStructure.dotContragredient
+    · exact BananaMatrixStructure.completionLeftEquiv_refl
+    · change dotContragredient
         (BananaMatrixStructure.completionLeftEquiv
-          (1 : FinitePerfectGL l) (1 : FinitePerfectGL r)) = 1
-      rw [show BananaMatrixStructure.completionLeftEquiv
-          (1 : FinitePerfectGL l) (1 : FinitePerfectGL r) =
-          LinearEquiv.refl F2 (Fin (l + r) → F2) from
-            BananaMatrixStructure.completionLeftEquiv_refl]
+          (LinearEquiv.refl F2 (Fin l → F2))
+          (LinearEquiv.refl F2 (Fin r → F2))) =
+        LinearEquiv.refl F2 (Fin (l + r) → F2)
+      rw [BananaMatrixStructure.completionLeftEquiv_refl]
       exact BananaMatrixStructure.dotContragredient_refl
   map_mul' := by
     intro f g
@@ -53,24 +49,33 @@ noncomputable def bananaMatrixCompletionActionHom
           (f.1.1 * g.1.1) (f.1.2 * g.1.2) =
         BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2 *
           BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2 := by
-      simpa only [LinearEquiv.mul_eq_trans] using
-        (BananaMatrixStructure.completionLeftEquiv_trans
-          g.1.1 f.1.1 g.1.2 f.1.2)
+      change BananaMatrixStructure.completionLeftEquiv
+          (g.1.1.trans f.1.1) (g.1.2.trans f.1.2) =
+        (BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2).trans
+          (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2)
+      exact BananaMatrixStructure.completionLeftEquiv_trans
+        g.1.1 f.1.1 g.1.2 f.1.2
     apply Subtype.ext
     apply Prod.ext
     · exact hleft
-    · change BananaMatrixStructure.dotContragredient
+    · change dotContragredient
         (BananaMatrixStructure.completionLeftEquiv
           (f.1.1 * g.1.1) (f.1.2 * g.1.2)) =
-          BananaMatrixStructure.dotContragredient
+          dotContragredient
             (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2) *
-          BananaMatrixStructure.dotContragredient
+          dotContragredient
             (BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2)
       rw [hleft]
-      simpa only [LinearEquiv.mul_eq_trans] using
-        (BananaMatrixStructure.dotContragredient_trans
-          (BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2)
-          (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2))
+      change dotContragredient
+          ((BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2).trans
+            (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2)) =
+        (dotContragredient
+          (BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2)).trans
+          (dotContragredient
+            (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2))
+      exact BananaMatrixStructure.dotContragredient_trans
+        (BananaMatrixStructure.completionLeftEquiv g.1.1 g.1.2)
+        (BananaMatrixStructure.completionLeftEquiv f.1.1 f.1.2)
 
 /-- The group homomorphism extends its source automorphism on the left. -/
 theorem bananaMatrixCompletionActionHom_extends_left
