@@ -78,3 +78,81 @@ lemma against this corrected class. The separate quadratic-residue
 proof still has recorded corrections to polarisation and moment
 divisibility; this PR does **not** close those issues. No GitHub
 Actions runners and no unapproved manuscript prose edits.
+
+
+## Continuation: full-vector preservation and coordinate changes
+
+**Added 2 November 2026, draft only:** The separate modules
+SymplecticAlternatingBilinPreservation.lean and
+SymplecticAlternatingCoordinateTransport.lean propose proofs of
+the remaining vector-level obligations.
+
+The first gives the equalities
+
+    D(incB(u), incB(v)) = B(u,v)
+    D(incC(u), incC(v)) = C(u,v)
+
+for all coordinate vectors u,v, not merely at basis entries. They
+use the exact Mathlib primitive Matrix.toBilin'_apply from the
+project's pinned Mathlib commit
+5bd58ac291422a21f412ae354c91e7d172255a2c.
+Its expression is the F2-double sum
+sum_i sum_j u_i * matrix_ij * v_j. The inserted zero coordinates
+annihilate all unwanted summands, and the source blocks of D recover
+the source double sums.
+
+**Independent derivation:** Every vector is an F2-linear combination
+of basis vectors and a bilinear pairing is determined by its values
+on pairs of basis vectors. Each source basis vector maps to its
+corresponding coordinate basis vector in the amalgam. The previously
+proved source-block matrix restrictions therefore imply the full-vector
+equalities. This is independent of simplifying the double sum above.
+Neither argument assumes nondegeneracy.
+
+The second module handles arbitrary source carriers VB, VC and a
+common VA, conditional on compatible F2-linear coordinate
+equivalences eA, eB, eC. Given original embeddings iB:VA->VB and
+iC:VA->VC, it requires
+
+    eB(iB(a)) = (eA(a), 0)
+    eC(iC(a)) = (eA(a), 0).
+
+Composing eB and eC with the standard coordinate inclusions
+produces linear maps fB and fC into the common amalgam. Their images
+intersect precisely in pairs of the form (iB(a),iC(a)) for a in VA.
+Both vector-pairing identities are transported.
+
+### Independent change-of-basis adversary
+
+A second reproducible local test, in
+scripts/check_symplectic_alternating_basis_change_small.py, samples
+53 random invertible basis changes for each triple of dimensions
+A,X,Y at most 2 (seed 20261102). It checks the pulled-back forms
+and source embeddings on all vectors. Results:
+
+- 1,431 compatible configurations with random basis changes;
+- 3,339 common-subspace embedding checks;
+- 70,119 full-vector pairing checks on each side;
+- 54,537 exact intersection comparisons.
+
+All passed in the local Python runtime; these are tests, not a
+Lean certificate.
+
+### Remaining arbitrary-embedding bridge
+
+For arbitrary injective isometries iB:A->B, iC:A->C of finite
+alternating spaces, choose a basis a_i of A, extend its image
+iB(a_i) to a basis of B, and independently extend iC(a_i) to
+a basis of C. Since the embeddings preserve the pairing, their
+A-by-A matrix blocks coincide. The resulting coordinate
+equivalences satisfy the conditional theorem above.
+
+This standard basis-extension step still requires an explicit Lean
+theorem with the exact original finite-dimensional bilinear-form
+carriers. A complete AmalgamationSystem instance for the imported
+SuccessorTree/CopyRamsey.lean theorem is also pending. Neither new
+draft module nor the finite tests warrants a green manuscript marker.
+
+**Build gate:** locally run lake build on all three new Lean modules,
+lake env lean on their axiom-audit files, and inspect exact theorem
+types. Do not use GitHub Actions runners.
