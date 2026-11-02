@@ -28,7 +28,9 @@ jobs:
           mkdir -p verification-logs
           git rev-parse HEAD | tee verification-logs/source-sha.txt
           cat lean-toolchain | tee verification-logs/toolchain.txt
-      - uses: actions/cache@v4
+          git archive --format=tar.gz HEAD > verification-logs/source.tar.gz
+      - uses: actions/cache/restore@v4
+        id: workspace
         with:
           path: |
             ~/.elan/toolchains
@@ -44,6 +46,7 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"
       - name: Resolve pinned dependencies and Mathlib cache
+        id: dependencies
         run: |
           set -euo pipefail
           lake update 2>&1 | tee verification-logs/dependencies.log
@@ -54,27 +57,43 @@ jobs:
           python3 scripts/check_folkman_track_b_strong_ap_small.py | tee verification-logs/strong-ap-regression.log
           python3 scripts/check_folkman_native_realisation_small.py | tee verification-logs/native-realisation-regression.log
           python3 scripts/check_folkman_native_heredity_small.py | tee verification-logs/heredity-regression.log
-      - name: Build Track B modules explicitly
+      - name: Build and inspect native hereditary closure
+        id: heredity
+        run: |
+          set -euo pipefail
+          lake build BANANA.NonPrecompact.FolkmanNativeFiniteHeredity 2>&1 | tee verification-logs/heredity-build.log
+          lake env lean BANANA/NonPrecompact/FolkmanNativeFiniteHeredityAxiomAudit.lean 2>&1 | tee verification-logs/FolkmanNativeFiniteHeredity-axioms.log
+      - name: Build other Track B modules explicitly
+        if: ${{ !cancelled() && steps.dependencies.outcome == 'success' }}
+        id: track_b
         run: |
           set -euo pipefail
           lake build \
-            BANANA.NonPrecompact.FolkmanNativeFiniteHeredity \
             BANANA.NonPrecompact.FolkmanNativeFiniteClassInterface \
             BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness \
             BANANA.NonPrecompact.FolkmanNativeFiniteCodeRealisation \
             2>&1 | tee verification-logs/track-b-build.log
       - name: Audit exact Track B transitive axioms
+        if: ${{ !cancelled() && steps.track_b.outcome == 'success' }}
         run: |
           set -euo pipefail
-          for name in FolkmanNativeFiniteHeredity FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation; do
+          for name in FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation; do
             lake env lean "BANANA/NonPrecompact/${name}AxiomAudit.lean" 2>&1 | tee "verification-logs/${name}-axioms.log"
           done
+      - name: Reject missing or non-standard proof axioms
+        if: ${{ !cancelled() && steps.dependencies.outcome == 'success' }}
+        run: |
           python3 - <<'PY'
           import pathlib
           import re
           import sys
           allowed = {'propext', 'Classical.choice', 'Quot.sound'}
-          for path in pathlib.Path('verification-logs').glob('*-axioms.log'):
+          modules = ['FolkmanNativeFiniteHeredity', 'FolkmanNativeFiniteClassInterface',
+                     'FolkmanNativeFiniteClassMorphismWitness', 'FolkmanNativeFiniteCodeRealisation']
+          for module in modules:
+              path = pathlib.Path('verification-logs') / f'{module}-axioms.log'
+              if not path.is_file():
+                  sys.exit(f'{path}: missing axiom audit')
               text = path.read_text()
               groups = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text, re.S)
               none = re.findall(r'does not depend on (?:any )?axioms', text)
@@ -83,12 +102,20 @@ jobs:
               unexpected = {x.strip() for g in groups for x in g.split(',') if x.strip()} - allowed
               if 'sorryAx' in text or unexpected:
                   sys.exit(f'{path}: unexpected axioms {unexpected}')
-          print('Track B axiom audits passed.')
+          print('All four Track B axiom audits passed.')
           PY
       - name: Full module graph, library and axiom audit
         run: |
           set -euo pipefail
           bash scripts/audit_all_axioms_local.sh 2>&1 | tee verification-logs/full-library-audit.log
+      - name: Preserve successful dependencies even after a proof failure
+        if: ${{ always() && steps.dependencies.outcome == 'success' && steps.workspace.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.elan/toolchains
+            .lake
+          key: ${{ steps.workspace.outputs.cache-primary-key }}
       - name: Preserve verification evidence
         if: always()
         uses: actions/upload-artifact@v4

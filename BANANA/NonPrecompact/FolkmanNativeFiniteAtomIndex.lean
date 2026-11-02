@@ -132,6 +132,7 @@ theorem folkmanNativeFinCode_pairing
     Equiv.trans_apply, Equiv.finsetCongr_apply, Finset.sum_map]
   apply Finset.sum_congr rfl
   intro a ha
+  rw [Finset.sum_map]
   apply Finset.sum_congr rfl
   intro b hb
   exact (folkmanNativeFinCode_edge γ a b).symm
