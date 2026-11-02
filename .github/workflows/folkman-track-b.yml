@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: folkman-track-b-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   verify:
@@ -53,10 +53,12 @@ jobs:
           set -euo pipefail
           python3 scripts/check_folkman_track_b_strong_ap_small.py | tee verification-logs/strong-ap-regression.log
           python3 scripts/check_folkman_native_realisation_small.py | tee verification-logs/native-realisation-regression.log
+          python3 scripts/check_folkman_native_heredity_small.py | tee verification-logs/heredity-regression.log
       - name: Build Track B modules explicitly
         run: |
           set -euo pipefail
           lake build \
+            BANANA.NonPrecompact.FolkmanNativeFiniteHeredity \
             BANANA.NonPrecompact.FolkmanNativeFiniteClassInterface \
             BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness \
             BANANA.NonPrecompact.FolkmanNativeFiniteCodeRealisation \
@@ -64,7 +66,7 @@ jobs:
       - name: Audit exact Track B transitive axioms
         run: |
           set -euo pipefail
-          for name in FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation; do
+          for name in FolkmanNativeFiniteHeredity FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation; do
             lake env lean "BANANA/NonPrecompact/${name}AxiomAudit.lean" 2>&1 | tee "verification-logs/${name}-axioms.log"
           done
           python3 - <<'PY'
