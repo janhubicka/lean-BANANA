@@ -192,3 +192,23 @@ The existence and composition of the requisite coordinate
 equivalences are NOT yet kernel-checked in this PR. This note
 is a concrete implementation plan with API names checked in
 the pinned Mathlib source, not a claimed Lean proof.
+
+
+### Counterexample to an orthogonal-complement shortcut
+
+Let B be the two-dimensional hyperbolic plane with basis (e,f),
+form B(e,f)=B(f,e)=1, and zero diagonal. Let A=span(e), which
+carries the zero (degenerate) alternating form. A is a legitimate
+one-dimensional member of the **corrected** hereditary class.
+A is its own orthogonal complement in B:
+
+    A^perp = {v : B(v,e)=0} = span(e) = A.
+
+Consequently B is NOT A + A^perp, let alone their direct sum.
+Any Lean theorem that silently asserts an orthogonal complement for
+arbitrary A is false. The block construction uses an ordinary
+vector-space complement span(f), and retains the nonzero
+cross-pairings B(e,f) in its matrix. This demonstrates concretely
+why the direct-sum proof of the perfect-total BANANA subsystem
+amalgamation cannot be copied without modification to the
+symplectic age containing degenerate subspaces.
