@@ -1,0 +1,97 @@
+name: Folkman Track B verification
+
+on:
+  push:
+    branches: [formalize/folkman-track-b-class-interface-20261101]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: folkman-track-b-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Record exact source
+        run: |
+          mkdir -p verification-logs
+          git rev-parse HEAD | tee verification-logs/source-sha.txt
+          cat lean-toolchain | tee verification-logs/toolchain.txt
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.elan/toolchains
+            .lake
+          key: folkman-b-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            folkman-b-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-
+      - name: Install pinned Lean toolchain
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"
+      - name: Resolve pinned dependencies and Mathlib cache
+        run: |
+          set -euo pipefail
+          lake update 2>&1 | tee verification-logs/dependencies.log
+          lake exe cache get 2>&1 | tee verification-logs/mathlib-cache.log
+      - name: Finite adversarial regressions
+        run: |
+          set -euo pipefail
+          python3 scripts/check_folkman_track_b_strong_ap_small.py | tee verification-logs/strong-ap-regression.log
+          python3 scripts/check_folkman_native_realisation_small.py | tee verification-logs/native-realisation-regression.log
+      - name: Build Track B modules explicitly
+        run: |
+          set -euo pipefail
+          lake build \
+            BANANA.NonPrecompact.FolkmanNativeFiniteClassInterface \
+            BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness \
+            BANANA.NonPrecompact.FolkmanNativeFiniteCodeRealisation \
+            2>&1 | tee verification-logs/track-b-build.log
+      - name: Audit exact Track B transitive axioms
+        run: |
+          set -euo pipefail
+          for name in FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation; do
+            lake env lean "BANANA/NonPrecompact/${name}AxiomAudit.lean" 2>&1 | tee "verification-logs/${name}-axioms.log"
+          done
+          python3 - <<'PY'
+          import pathlib
+          import re
+          import sys
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          for path in pathlib.Path('verification-logs').glob('*-axioms.log'):
+              text = path.read_text()
+              groups = re.findall(r'depends on axioms:\s*\[([^\]]*)\]', text, re.S)
+              none = re.findall(r'does not depend on (?:any )?axioms', text)
+              if not groups and not none:
+                  sys.exit(f'{path}: no axiom audit results')
+              unexpected = {x.strip() for g in groups for x in g.split(',') if x.strip()} - allowed
+              if 'sorryAx' in text or unexpected:
+                  sys.exit(f'{path}: unexpected axioms {unexpected}')
+          print('Track B axiom audits passed.')
+          PY
+      - name: Full module graph, library and axiom audit
+        run: |
+          set -euo pipefail
+          bash scripts/audit_all_axioms_local.sh 2>&1 | tee verification-logs/full-library-audit.log
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: folkman-track-b-${{ github.sha }}
+          path: verification-logs/
+          if-no-files-found: error
+          retention-days: 14
