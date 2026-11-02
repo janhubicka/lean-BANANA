@@ -156,3 +156,39 @@ draft module nor the finite tests warrants a green manuscript marker.
 **Build gate:** locally run lake build on all three new Lean modules,
 lake env lean on their axiom-audit files, and inspect exact theorem
 types. Do not use GitHub Actions runners.
+
+
+## Concrete Lean strategy for the final compatible-basis lemma
+
+The pinned Mathlib code offers a route which does not require a
+custom implementation of Gaussian elimination:
+
+1. For any injective original linear map iB: VA -> VB, the range
+   LinearMap.range iB is a submodule of VB. Use
+   LinearEquiv.ofInjective to identify VA with that range.
+2. Apply the verified Mathlib theorem
+   Submodule.exists_isCompl to obtain a complementary submodule
+   QB of VB. Its associated Submodule.prodEquivOfIsCompl gives
+   a linear equivalence from the product of the image submodule
+   and QB to VB. Repeat independently for VC.
+3. Use a basis of VA and bases of the two complements to make
+   coordinate equivalences to function spaces indexed by
+   Sum A X and Sum A Y. Over finite-dimensional vector spaces,
+   the basis-index types are finite. Mathlib offers
+   Finsupp.linearEquivFunOnFinite and the standard
+   basis coordinate equivalences for this final step.
+4. By construction, both original embeddings of VA have
+   identical A-block coordinates. Their bilinear matrices
+   agree on A-by-A because the original embeddings are
+   isometries, independently of degeneracy. Apply
+   symplecticAlternating_strongAmalgam_of_compatibleCoordinates.
+
+Important: the complement is a *vector-space* complement, not an
+orthogonal complement. Requiring orthogonal complements could fail
+when the common subform is degenerate. Avoid introducing
+nondegeneracy in the Lean hypothesis while extracting this bridge.
+
+The existence and composition of the requisite coordinate
+equivalences are NOT yet kernel-checked in this PR. This note
+is a concrete implementation plan with API names checked in
+the pinned Mathlib source, not a claimed Lean proof.
