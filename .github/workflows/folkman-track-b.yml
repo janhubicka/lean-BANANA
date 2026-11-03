@@ -73,13 +73,14 @@ jobs:
             BANANA.NonPrecompact.FolkmanNativeFiniteIndexMorphisms \
             BANANA.NonPrecompact.FolkmanNativeFiniteClassInterface \
             BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness \
+            BANANA.NonPrecompact.FolkmanNativeFiniteClassCertificate \
             BANANA.NonPrecompact.FolkmanNativeFiniteCodeRealisation \
             2>&1 | tee verification-logs/track-b-build.log
       - name: Audit exact Track B transitive axioms
         if: ${{ !cancelled() && steps.track_b.outcome == 'success' }}
         run: |
           set -euo pipefail
-          for name in FolkmanNativeFiniteAtomIndex FolkmanNativeFiniteIndexMorphisms FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation; do
+          for name in FolkmanNativeFiniteAtomIndex FolkmanNativeFiniteIndexMorphisms FolkmanNativeFiniteClassInterface FolkmanNativeFiniteClassMorphismWitness FolkmanNativeFiniteCodeRealisation FolkmanNativeFiniteClassCertificate; do
             lake env lean "BANANA/NonPrecompact/${name}AxiomAudit.lean" 2>&1 | tee "verification-logs/${name}-axioms.log"
           done
       - name: Reject missing or non-standard proof axioms
@@ -92,7 +93,8 @@ jobs:
           allowed = {'propext', 'Classical.choice', 'Quot.sound'}
           modules = ['FolkmanNativeFiniteHeredity', 'FolkmanNativeFiniteAtomIndex',
                      'FolkmanNativeFiniteIndexMorphisms', 'FolkmanNativeFiniteClassInterface',
-                     'FolkmanNativeFiniteClassMorphismWitness', 'FolkmanNativeFiniteCodeRealisation']
+                     'FolkmanNativeFiniteClassMorphismWitness', 'FolkmanNativeFiniteCodeRealisation',
+                     'FolkmanNativeFiniteClassCertificate']
           for module in modules:
               path = pathlib.Path('verification-logs') / f'{module}-axioms.log'
               if not path.is_file():
@@ -105,7 +107,7 @@ jobs:
               unexpected = {x.strip() for g in groups for x in g.split(',') if x.strip()} - allowed
               if 'sorryAx' in text or unexpected:
                   sys.exit(f'{path}: unexpected axioms {unexpected}')
-          print('All six Track B axiom audits passed.')
+          print('All seven Track B axiom audits passed.')
           PY
       - name: Build existing integration root
         run: |
