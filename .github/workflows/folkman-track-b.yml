@@ -29,15 +29,6 @@ jobs:
           git rev-parse HEAD | tee verification-logs/source-sha.txt
           cat lean-toolchain | tee verification-logs/toolchain.txt
           git archive --format=tar.gz HEAD > verification-logs/source.tar.gz
-      - uses: actions/cache/restore@v4
-        id: workspace
-        with:
-          path: |
-            ~/.elan/toolchains
-            .lake
-          key: folkman-b-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-${{ github.sha }}
-          restore-keys: |
-            folkman-b-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-
       - name: Install pinned Lean toolchain
         run: |
           set -euo pipefail
@@ -114,14 +105,6 @@ jobs:
           set -euo pipefail
           lake build BANANA 2>&1 | tee verification-logs/root-build.log
           echo "Root build passed. Track B remains explicitly built above and is intentionally not added to BANANA.lean on this branch." | tee verification-logs/integration-note.log
-      - name: Preserve successful dependencies even after a proof failure
-        if: ${{ always() && steps.dependencies.outcome == 'success' && steps.workspace.outputs.cache-hit != 'true' }}
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            ~/.elan/toolchains
-            .lake
-          key: ${{ steps.workspace.outputs.cache-primary-key }}
       - name: Preserve verification evidence
         if: always()
         uses: actions/upload-artifact@v4
