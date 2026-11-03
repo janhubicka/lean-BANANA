@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.FolkmanTupleTermPairIso
 import BANANA.NonPrecompact.FolkmanGeneratedNonunitalAxiomAudit
 import BANANA.NonPrecompact.FolkmanNativeRingTermCoordinatesAxiomAudit
+import BANANA.NonPrecompact.FolkmanGeneratedTwoSortProfileIsoAxiomAudit
 
 /-!
 Track C: axiom audit of the combined two-sort term-value pairing
