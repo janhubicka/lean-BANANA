@@ -124,8 +124,9 @@ theorem symplectic_exists_compatible_coordinates
   refine ⟨X, Y, finX, finY, eB, eC, hB, ?_⟩
   intro a
   -- Both common injections use the same source coordinates eA;
-  -- only their private index sets differ.
-  exact hC a
+  -- the common-left and common-right zero-extensions coincide as functions.
+  simpa [symplecticBlockVectorCommonLeft,
+    symplecticBlockVectorCommonRight] using hC a
 
 
 /-- A common basis and compatible complementary coordinates exist
