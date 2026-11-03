@@ -168,12 +168,13 @@ theorem folkmanNativeFinRingMap_exists_partialOwner
       (∀ s, folkmanNativeFinRingMap f s =
         Finset.univ.filter (fun j => ∃ i ∈ s, owner j = some i)) := by
   classical
-  exact folkman_exists_partialOwner_of_ringEmbedding
-    (folkmanNativeFinRingMap f)
-    (folkmanNativeFinRingMap_zero f)
-    (folkmanNativeFinRingMap_add f)
-    (folkmanNativeFinRingMap_mul f)
-    (folkmanNativeFinRingMap_injective f hf)
+  simpa only using
+    (folkman_exists_partialOwner_of_ringEmbedding
+      (folkmanNativeFinRingMap f)
+      (folkmanNativeFinRingMap_zero f)
+      (folkmanNativeFinRingMap_add f)
+      (folkmanNativeFinRingMap_mul f)
+      (folkmanNativeFinRingMap_injective f hf))
 
 /-- Pairing-preserving native embeddings remain pairing-preserving
 after both sorts have been reindexed.  This is a statement for ALL
