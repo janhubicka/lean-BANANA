@@ -72,19 +72,34 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
   · intro i
     obtain ⟨b, hb⟩ := hLnonempty i
     refine ⟨b, ?_⟩
-    simp only [folkmanFiber, Finset.mem_filter, Finset.mem_univ, true_and]
-    exact hb
+    exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, hb⟩
   · intro j
     obtain ⟨b, hb⟩ := hRnonempty j
     refine ⟨b, ?_⟩
-    simp only [folkmanFiber, Finset.mem_filter, Finset.mem_univ, true_and]
-    exact hb
+    exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, hb⟩
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
       ({i} : Finset (Fin (folkmanNativeFinCode γA).leftCount))
       ({j} : Finset (Fin (folkmanNativeFinCode γA).rightCount))
-    rw [hLsingle i, hRsingle j] at hp
+    have hp' :
+        (∑ x ∈ folkmanNativeFinRingMap fL ({i} : Finset _),
+          ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
+            (folkmanNativeFinCode γB).edge x y) =
+          (folkmanNativeFinCode γA).edge i j := by
+      simpa only [Finset.sum_singleton] using hp
+    have hsum :
+        (∑ x ∈ folkmanFiber ownerL i,
+          ∑ y ∈ folkmanFiber ownerR j,
+            (folkmanNativeFinCode γB).edge x y) =
+        ∑ x ∈ folkmanNativeFinRingMap fL ({i} : Finset _),
+          ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
+            (folkmanNativeFinCode γB).edge x y := by
+      apply Finset.sum_congr (hLsingle i).symm
+      intro x hx
+      apply Finset.sum_congr (hRsingle j).symm
+      intro y hy
+      rfl
     calc
       (folkmanEdgeCount (folkmanNativeFinCode γB).edge
         (folkmanFiber ownerL i) (folkmanFiber ownerR j) : F2) =
@@ -92,8 +107,10 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
             ∑ y ∈ folkmanFiber ownerR j,
               (folkmanNativeFinCode γB).edge x y :=
         folkmanNativeFin_edgeCount_cast _ _ _
-      _ = (folkmanNativeFinCode γA).edge i j := by
-        simpa only [Finset.sum_singleton] using hp
+      _ = ∑ x ∈ folkmanNativeFinRingMap fL ({i} : Finset _),
+          ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
+            (folkmanNativeFinCode γB).edge x y := hsum
+      _ = (folkmanNativeFinCode γA).edge i j := hp'
   · intro s
     rw [hLmap]
     ext b
