@@ -128,9 +128,9 @@ theorem folkmanNativeFinCode_pairing
           (folkmanNativeFinCode γ).edge i j := by
   classical
   rw [folkmanNativePairing_eq_atomMatrix γ hleft hright x y]
-  simpa only [folkmanNativeFinSupport, folkmanNativeFiniteRingCodeEquiv,
-    Equiv.trans_apply, Equiv.finsetCongr_apply, Finset.sum_map,
-    folkmanNativeFinCode_edge]
+  simp only [folkmanNativeFinSupport, folkmanNativeFiniteRingCodeEquiv,
+    Equiv.trans_apply, Equiv.finsetCongr_apply, Finset.sum_map]
+  simpa only [Finset.sum_map, folkmanNativeFinCode_edge]
 
 
 /-- Every finite native two-sort Folkman object has a fully faithful
