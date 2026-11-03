@@ -78,7 +78,22 @@ noncomputable def folkmanGeneratedNonunitalRingEquiv_of_termEqualities
       change t.eval xs + u.eval xs = x.val + y.val
       rw [folkmanGeneratedRingTermRepresentative_spec,
         folkmanGeneratedRingTermRepresentative_spec]
-    exact folkmanGeneratedRingTermMap_eval xs ys hEq (x + y) (.add t u) ht
+    have htx : (folkmanGeneratedRingTermMap xs ys x).val = t.eval ys :=
+      folkmanGeneratedRingTermMap_eval xs ys hEq x t
+        (folkmanGeneratedRingTermRepresentative_spec xs x)
+    have huy : (folkmanGeneratedRingTermMap xs ys y).val = u.eval ys :=
+      folkmanGeneratedRingTermMap_eval xs ys hEq y u
+        (folkmanGeneratedRingTermRepresentative_spec xs y)
+    change (folkmanGeneratedRingTermMap xs ys (x + y)).val =
+      (folkmanGeneratedRingTermMap xs ys x).val +
+      (folkmanGeneratedRingTermMap xs ys y).val
+    calc
+      (folkmanGeneratedRingTermMap xs ys (x + y)).val =
+          (.add t u : FolkmanRingTerm n).eval ys :=
+        folkmanGeneratedRingTermMap_eval xs ys hEq (x + y) (.add t u) ht
+      _ = t.eval ys + u.eval ys := rfl
+      _ = (folkmanGeneratedRingTermMap xs ys x).val +
+          (folkmanGeneratedRingTermMap xs ys y).val := by rw [htx, huy]
   map_mul' x y := by
     apply Subtype.ext
     let t := folkmanGeneratedRingTermRepresentative xs x
@@ -87,7 +102,22 @@ noncomputable def folkmanGeneratedNonunitalRingEquiv_of_termEqualities
       change t.eval xs * u.eval xs = x.val * y.val
       rw [folkmanGeneratedRingTermRepresentative_spec,
         folkmanGeneratedRingTermRepresentative_spec]
-    exact folkmanGeneratedRingTermMap_eval xs ys hEq (x * y) (.mul t u) ht
+    have htx : (folkmanGeneratedRingTermMap xs ys x).val = t.eval ys :=
+      folkmanGeneratedRingTermMap_eval xs ys hEq x t
+        (folkmanGeneratedRingTermRepresentative_spec xs x)
+    have huy : (folkmanGeneratedRingTermMap xs ys y).val = u.eval ys :=
+      folkmanGeneratedRingTermMap_eval xs ys hEq y u
+        (folkmanGeneratedRingTermRepresentative_spec xs y)
+    change (folkmanGeneratedRingTermMap xs ys (x * y)).val =
+      (folkmanGeneratedRingTermMap xs ys x).val *
+      (folkmanGeneratedRingTermMap xs ys y).val
+    calc
+      (folkmanGeneratedRingTermMap xs ys (x * y)).val =
+          (.mul t u : FolkmanRingTerm n).eval ys :=
+        folkmanGeneratedRingTermMap_eval xs ys hEq (x * y) (.mul t u) ht
+      _ = t.eval ys * u.eval ys := rfl
+      _ = (folkmanGeneratedRingTermMap xs ys x).val *
+          (folkmanGeneratedRingTermMap xs ys y).val := by rw [htx, huy]
 
 /-- The isomorphism interprets the same term in the target tuple. -/
 theorem folkmanGeneratedNonunitalRingEquiv_eval_term
