@@ -127,4 +127,43 @@ theorem symplectic_exists_compatible_coordinates
   -- only their private index sets differ.
   exact hC a
 
+
+/-- A common basis and compatible complementary coordinates exist
+for ANY two injective linear maps from the same finite-dimensional
+F₂-source, including zero-dimensional and degenerate cases.
+
+The index sets of the private summands may differ. This theorem
+does not refer to a bilinear form: pairing compatibility is a
+separate consequence of the assumed isometry equations. -/
+theorem symplectic_exists_common_adapted_coordinates
+    {VA VB VC : Type u}
+    [AddCommGroup VA] [Module F2 VA]
+    [AddCommGroup VB] [Module F2 VB]
+    [AddCommGroup VC] [Module F2 VC]
+    [FiniteDimensional F2 VA]
+    [FiniteDimensional F2 VB]
+    [FiniteDimensional F2 VC]
+    (iB : VA →ₗ[F2] VB) (iC : VA →ₗ[F2] VC)
+    (hiB : Function.Injective iB)
+    (hiC : Function.Injective iC) :
+    ∃ (A X Y : Type u),
+      ∃ (finA : Fintype A) (finX : Fintype X) (finY : Fintype Y),
+        ∃ (eA : VA ≃ₗ[F2] (A → F2))
+          (eB : VB ≃ₗ[F2] (Sum A X → F2))
+          (eC : VC ≃ₗ[F2] (Sum A Y → F2)),
+          (∀ a : VA,
+            eB (iB a) = symplecticBlockVectorCommonLeft (eA a)) ∧
+          (∀ a : VA,
+            eC (iC a) = symplecticBlockVectorCommonRight (eA a)) := by
+  classical
+  let A : Type u := Basis.ofVectorSpaceIndex F2 VA
+  let bA : Basis A F2 VA := Basis.ofVectorSpace F2 VA
+  let finA : Fintype A := FiniteDimensional.fintypeBasisIndex bA
+  letI : Fintype A := finA
+  let eA : VA ≃ₗ[F2] (A → F2) :=
+    bA.repr.trans (Finsupp.linearEquivFunOnFinite F2 F2 A)
+  obtain ⟨X, Y, finX, finY, eB, eC, hB, hC⟩ :=
+    symplectic_exists_compatible_coordinates eA iB iC hiB hiC
+  exact ⟨A, X, Y, finA, finX, finY, eA, eB, eC, hB, hC⟩
+
 end SuccessorTree.NonPrecompact
