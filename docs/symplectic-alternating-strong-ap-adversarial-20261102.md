@@ -212,3 +212,71 @@ cross-pairings B(e,f) in its matrix. This demonstrates concretely
 why the direct-sum proof of the perfect-total BANANA subsystem
 amalgamation cannot be copied without modification to the
 symplectic age containing degenerate subspaces.
+
+
+## Continuation on 3 November: compatible basis selection
+
+The new draft module SymplecticAlternatingAdaptedCoordinates.lean
+constructs coordinate extensions for a general injective linear map
+i:VA -> VB. It fixes *arbitrary* coordinates eA on VA, takes the
+ordinary range submodule p = range(i), obtains a complement q from
+Submodule.exists_isCompl, and uses
+
+    LinearEquiv.ofInjective,
+    Submodule.prodEquivOfIsCompl,
+    Basis.ofVectorSpace,
+    Finsupp.linearEquivFunOnFinite,
+    LinearEquiv.prodCongr,
+    LinearEquiv.sumArrowLequivProdArrow.
+
+These names were checked against the pinned Mathlib commit
+5bd58ac291422a21f412ae354c91e7d172255a2c.
+
+The resulting coordinate equivalence eB sends the original embedding
+i(a) to (eA(a),0). Applying this independently to iB and iC, while
+keeping eA fixed, produces compatible coordinates for both sides.
+A final existential statement chooses eA from any basis of the
+common source. These statements do not require a bilinear form,
+so cannot silently introduce a nondegeneracy hypothesis.
+
+The next draft module SymplecticAlternatingIsometryCoordinates.lean
+transports the original bilinear forms to coordinate matrices using
+LinearMap.BilinForm.toMatrix' and Matrix.toBilin'. The entries in the
+shared A-block agree because the original maps are isometries, not
+because the complement is orthogonal.
+
+Independently exhaustive finite test:
+scripts/check_symplectic_adapted_coordinates_small.py enumerated EVERY
+injection F2^a -> F2^b and EVERY invertible source-coordinate
+choice for 0 <= a <= b <= 3. It constructed an ordinary extended
+basis and checked the required coordinate identity for every source
+vector. 28,527 adapted bases and 226,970 identities passed.
+
+### One further formal gap: the output is alternating
+
+The existing block construction establishes zero diagonal AND
+symmetry of its matrix. To conclude that the amalgam belongs to
+the hereditary class of all alternating spaces, the eventual Lean
+certificate must also prove the converse implication:
+
+    zero diagonal + symmetric matrix over F2
+      -> bilinear pairing is alternating on every vector.
+
+This follows by writing x as a sum of coordinate vectors. Its
+diagonal pairing is the sum of the diagonal contributions and twice
+the cross contributions, all zero in characteristic two. The reverse
+implication (alternation -> zero diagonal and symmetry) is separately
+proposed in SymplecticAlternatingMatrixCertificate.lean.
+
+An exhaustive independent test checks the equivalence on ALL 66,067
+binary matrices of orders 0 through 4, including nonsymmetric and
+degenerate matrices. Exactly 76 are alternating, all and only those
+satisfying the two matrix conditions. The reproducible test is
+scripts/check_symplectic_alternating_matrix_criterion_small.py.
+
+Do not mark the full Fraisse age proof verified until the criterion,
+coordinate selection, matrix pullback, combined AP statement and
+the successor copy-Ramsey AmalgamationSystem interface are all
+actually elaborated and kernel-checked in the pinned Lean toolchain.
+The manuscript circulation is frozen; no extra TeX TODO should be
+added where an equivalent note already exists.
