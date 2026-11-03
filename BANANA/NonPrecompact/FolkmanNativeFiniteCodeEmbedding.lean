@@ -18,9 +18,6 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForAtomEmbedding
-    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
-  Fintype.ofEquiv α toBoolAlg
 
 /-- Modulo two the ordinary integer incidence count is the
 F₂-bilinear atom-matrix sum. -/

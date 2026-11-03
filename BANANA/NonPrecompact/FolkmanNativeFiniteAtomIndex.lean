@@ -23,7 +23,7 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForFinIndex
+instance folkmanAsBoolAlgFiniteForFinIndex
     (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
   Fintype.ofEquiv α toBoolAlg
 

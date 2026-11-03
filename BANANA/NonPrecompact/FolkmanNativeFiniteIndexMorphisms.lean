@@ -19,9 +19,6 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForFinMaps
-    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
-  Fintype.ofEquiv α toBoolAlg
 
 /-- Inverse finite-index encoding takes the empty support to zero. -/
 theorem folkmanNativeFiniteRingCode_symm_zero

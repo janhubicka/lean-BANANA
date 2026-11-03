@@ -21,9 +21,6 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForCodeRealisation
-    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
-  Fintype.ofEquiv α toBoolAlg
 
 /-- An actual finite Boolean ring on the subsets of `Fin n`.
 For `n = 0` this is the one-element zero ring. -/

@@ -18,9 +18,6 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForFaithfulWitness
-    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
-  Fintype.ofEquiv α toBoolAlg
 
 /-- Every native two-sort embedding has a finite-code representation
 whose actual owner fibres reproduce BOTH original ring maps on all
