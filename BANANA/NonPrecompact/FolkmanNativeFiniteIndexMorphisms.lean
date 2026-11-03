@@ -177,7 +177,11 @@ theorem folkmanNativeFinRingMap_exists_partialOwner
       (folkmanNativeFinRingMap_add f)
       (folkmanNativeFinRingMap_mul f)
       (folkmanNativeFinRingMap_injective f hf)
-  exact ⟨owner, honto, hmap⟩
+  refine ⟨owner, honto, ?_⟩
+  intro s
+  rw [hmap s]
+  ext j
+  simp
 
 /-- Pairing-preserving native embeddings remain pairing-preserving
 after both sorts have been reindexed.  This is a statement for ALL
