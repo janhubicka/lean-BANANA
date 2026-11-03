@@ -130,7 +130,13 @@ theorem folkmanNativeFinCode_pairing
   rw [folkmanNativePairing_eq_atomMatrix γ hleft hright x y]
   simp only [folkmanNativeFinSupport, folkmanNativeFiniteRingCodeEquiv,
     Equiv.trans_apply, Equiv.finsetCongr_apply, Finset.sum_map]
-  simpa only [Finset.sum_map, folkmanNativeFinCode_edge]
+  apply Finset.sum_congr rfl
+  intro a ha
+  refine Finset.sum_equiv (folkmanNativeAtomFinEquiv R) ?_ ?_
+  · intro b
+    simp
+  · intro b hb
+    exact (folkmanNativeFinCode_edge γ a b).symm
 
 
 /-- Every finite native two-sort Folkman object has a fully faithful
