@@ -31,7 +31,13 @@ theorem folkmanNativeFin_edgeCount_cast
   have hbit : ∀ z : F2,
       (if z = 1 then (1 : F2) else 0) = z := by
     decide
-  simp [folkmanEdgeCount, hbit]
+  simp only [folkmanEdgeCount, Nat.cast_sum, Nat.cast_ite,
+    Nat.cast_one, Nat.cast_zero]
+  apply Finset.sum_congr rfl
+  intro i hi
+  apply Finset.sum_congr rfl
+  intro j hj
+  exact hbit (C.edge i j)
 
 /-- Every pair of injective native non-unital ring homomorphisms
 preserving the original two-sort pairing determines a genuine
@@ -85,16 +91,20 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
   }⟩
   · intro i
     obtain ⟨b, hb⟩ := hLnonempty i
-    exact ⟨b, by simp [folkmanFiber, hb]⟩
+    refine ⟨b, ?_⟩
+    simp only [folkmanFiber, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact hb
   · intro j
     obtain ⟨b, hb⟩ := hRnonempty j
-    exact ⟨b, by simp [folkmanFiber, hb]⟩
+    refine ⟨b, ?_⟩
+    simp only [folkmanFiber, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact hb
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
       ({i} : Finset (Fin (folkmanNativeFinCode γA).leftCount))
       ({j} : Finset (Fin (folkmanNativeFinCode γA).rightCount))
-    rw [hLsingle, hRsingle] at hp
+    rw [hLsingle i, hRsingle j] at hp
     calc
       (folkmanEdgeCount (folkmanNativeFinCode γB).edge
         (folkmanFiber ownerL i) (folkmanFiber ownerR j) : F2) =
