@@ -92,6 +92,7 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
   · intro i
     obtain ⟨b, hb⟩ := hLnonempty i
     refine ⟨b, ?_⟩
+    trace_state
     simpa only [folkmanFiber, Finset.mem_filter, Finset.mem_univ,
       true_and, Set.mem_setOf_eq] using hb
   · intro j
@@ -110,6 +111,7 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
             (folkmanNativeFinCode γB).edge x y) =
           (folkmanNativeFinCode γA).edge i j := by
       refine hp.trans ?_
+      trace_state
       simp
     have hsum :
         (∑ x ∈ folkmanFiber ownerL i,
