@@ -29,13 +29,29 @@ lake build BANANA
 bash scripts/audit_all_axioms_local.sh
 
 # These are semantic regressions, not substitutes for the Lean build.
-python3 scripts/check_folkman_tuple_profiles_small.py
-python3 scripts/check_folkman_tuple_term_completeness_small.py
-python3 scripts/check_folkman_nonunital_normalisation.py
-python3 scripts/check_folkman_native_term_coordinate_bridge.py
-python3 scripts/check_folkman_native_presentation_profiles.py
-python3 scripts/check_folkman_presented_embedding_naturality.py
-python3 scripts/check_folkman_profile_common_extension.py
+regressions=(
+  scripts/check_folkman_tuple_profiles_small.py
+  scripts/check_folkman_tuple_term_completeness_small.py
+  scripts/check_folkman_nonunital_normalisation.py
+  scripts/check_folkman_native_term_coordinate_bridge.py
+  scripts/check_folkman_native_presentation_profiles.py
+  scripts/check_folkman_presented_embedding_naturality.py
+  scripts/check_folkman_profile_common_extension.py
+)
+for script in "${regressions[@]}"; do
+  python3 "$script"
+  # Every assert-driven check must refuse -O/PYTHONOPTIMIZE rather
+  # than becoming a silent success when assertions are disabled.
+  if optimised_output="$(python3 -O "$script" 2>&1)"; then
+    echo "Unsafe optimised PASS (assertions skipped): $script" >&2
+    exit 1
+  fi
+  if [[ "$optimised_output" != *"Regression checks require assertions"* ]]; then
+    echo "Optimised test did not fail via the expected assertion guard: $script" >&2
+    printf '%s\n' "$optimised_output" >&2
+    exit 1
+  fi
+done
 
 echo "PASS: local build and regression commands completed at $actual"
 echo "Manually inspect the transitive #print axioms reports and obtain independent proof reviews."
