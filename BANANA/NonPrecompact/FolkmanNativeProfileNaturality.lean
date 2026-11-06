@@ -206,4 +206,53 @@ theorem FolkmanPresentedNativeEmbedding.tupleProfile_preserved
     (fun i => P.leftCode.encode (xs i))
     (fun j => P.rightCode.encode (ys j))
 
+
+/-- The finite tuple profile is independent of a finite stage whenever
+two presentations of the same labelled tuple embed compatibly into
+one common finite extension.
+
+This is the exact finite-stage independence needed for an eventual
+directed construction of the countable Folkman limit. It does not
+construct that limit or assert that arbitrary finite stages have
+already been amalgamated. -/
+theorem folkmanTupleProfile_eq_of_commonPresentedExtension
+    {LA RA LB RB LC RC : Type*}
+    [BooleanRing LA] [BooleanRing RA]
+    [BooleanRing LB] [BooleanRing RB]
+    [BooleanRing LC] [BooleanRing RC]
+    {γA : LA → RA → F2}
+    {γB : LB → RB → F2}
+    {γC : LC → RC → F2}
+    {P : FolkmanFinitePairingPresentation LA RA γA}
+    {Q : FolkmanFinitePairingPresentation LB RB γB}
+    {C : FolkmanFinitePairingPresentation LC RC γC}
+    (E : FolkmanPresentedNativeEmbedding P C)
+    (F : FolkmanPresentedNativeEmbedding Q C)
+    {nL nR : ℕ}
+    (xsA : Fin nL → LA) (ysA : Fin nR → RA)
+    (xsB : Fin nL → LB) (ysB : Fin nR → RB)
+    (hleft : ∀ i, E.left (xsA i) = F.left (xsB i))
+    (hright : ∀ j, E.right (ysA j) = F.right (ysB j)) :
+    P.tupleProfile xsA ysA = Q.tupleProfile xsB ysB := by
+  have hxs :
+      (fun i : Fin nL => E.left (xsA i)) =
+        (fun i => F.left (xsB i)) := by
+    funext i
+    exact hleft i
+  have hys :
+      (fun j : Fin nR => E.right (ysA j)) =
+        (fun j => F.right (ysB j)) := by
+    funext j
+    exact hright j
+  calc
+    P.tupleProfile xsA ysA =
+        C.tupleProfile (fun i => E.left (xsA i))
+          (fun j => E.right (ysA j)) :=
+      (E.tupleProfile_preserved xsA ysA).symm
+    _ = C.tupleProfile (fun i => F.left (xsB i))
+          (fun j => F.right (ysB j)) := by
+        rw [hxs, hys]
+    _ = Q.tupleProfile xsB ysB :=
+      F.tupleProfile_preserved xsB ysB
+
 end SuccessorTree.NonPrecompact
