@@ -111,10 +111,12 @@ def general_linear(n: int) -> tuple[Perm, ...]:
     return result
 
 
-def run() -> dict[str, int]:
+def run(cases: set[tuple[int, int]] | None = None) -> dict[str, int]:
     counts: defaultdict[str, int] = defaultdict(int)
-    for n in range(4):
+    for n in range(5 if cases is not None else 4):
         for l in range(n + 1):
+            if cases is not None and (n, l) not in cases:
+                continue
             r = n - l
             ambient = general_linear(n)
             ident = tuple(range(1 << n))
