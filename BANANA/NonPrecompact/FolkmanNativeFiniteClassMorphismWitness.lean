@@ -81,8 +81,8 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
       have hi : i ∈ (∅ : Finset _) :=
         heq ▸ Finset.mem_singleton_self i
       simpa using hi
-    rw [Finset.nonempty_iff_ne_empty]
-    simpa only [hLsingle i] using hne
+    rw [Finset.nonempty_iff_ne_empty, ← hLsingle i]
+    exact hne
   · intro j
     have hne : folkmanNativeFinRingMap fR ({j} : Finset _) ≠ ∅ := by
       intro hempty
@@ -95,8 +95,8 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
       have hj : j ∈ (∅ : Finset _) :=
         heq ▸ Finset.mem_singleton_self j
       simpa using hj
-    rw [Finset.nonempty_iff_ne_empty]
-    simpa only [hRsingle j] using hne
+    rw [Finset.nonempty_iff_ne_empty, ← hRsingle j]
+    exact hne
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
@@ -108,7 +108,12 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
             (folkmanNativeFinCode γB).edge x y) =
           (folkmanNativeFinCode γA).edge i j := by
       refine hp.trans ?_
-      rw [Finset.sum_singleton, Finset.sum_singleton]
+      change
+        Finset.sum ({i} : Finset _) (fun x =>
+          Finset.sum ({j} : Finset _) (fun y =>
+            (folkmanNativeFinCode γA).edge x y)) =
+          (folkmanNativeFinCode γA).edge i j
+      simp only [Finset.sum_singleton]
     have hsum :
         (∑ x ∈ folkmanFiber ownerL i,
           ∑ y ∈ folkmanFiber ownerR j,
