@@ -70,15 +70,33 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
     pairing_parity := ?_
   }, ?_, ?_⟩
   · intro i
-    obtain ⟨b, hb⟩ := hLnonempty i
-    refine ⟨b, ?_⟩
-    simpa only [folkmanFiber, Finset.mem_filter, Finset.mem_univ,
-      true_and, Set.mem_setOf_eq] using hb
+    have hne : folkmanNativeFinRingMap fL ({i} : Finset _) ≠ ∅ := by
+      intro hempty
+      have hsame : folkmanNativeFinRingMap fL ({i} : Finset _) =
+          folkmanNativeFinRingMap fL ∅ := by
+        rw [folkmanNativeFinRingMap_zero fL]
+        exact hempty
+      have heq : ({i} : Finset _) = ∅ :=
+        folkmanNativeFinRingMap_injective fL hfL hsame
+      have hi : i ∈ (∅ : Finset _) :=
+        heq ▸ Finset.mem_singleton_self i
+      simpa using hi
+    rw [Finset.nonempty_iff_ne_empty]
+    simpa only [hLsingle i] using hne
   · intro j
-    obtain ⟨b, hb⟩ := hRnonempty j
-    refine ⟨b, ?_⟩
-    simpa only [folkmanFiber, Finset.mem_filter, Finset.mem_univ,
-      true_and, Set.mem_setOf_eq] using hb
+    have hne : folkmanNativeFinRingMap fR ({j} : Finset _) ≠ ∅ := by
+      intro hempty
+      have hsame : folkmanNativeFinRingMap fR ({j} : Finset _) =
+          folkmanNativeFinRingMap fR ∅ := by
+        rw [folkmanNativeFinRingMap_zero fR]
+        exact hempty
+      have heq : ({j} : Finset _) = ∅ :=
+        folkmanNativeFinRingMap_injective fR hfR hsame
+      have hj : j ∈ (∅ : Finset _) :=
+        heq ▸ Finset.mem_singleton_self j
+      simpa using hj
+    rw [Finset.nonempty_iff_ne_empty]
+    simpa only [hRsingle j] using hne
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
@@ -90,7 +108,7 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
             (folkmanNativeFinCode γB).edge x y) =
           (folkmanNativeFinCode γA).edge i j := by
       refine hp.trans ?_
-      simp
+      rw [Finset.sum_singleton, Finset.sum_singleton]
     have hsum :
         (∑ x ∈ folkmanFiber ownerL i,
           ∑ y ∈ folkmanFiber ownerR j,
