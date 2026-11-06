@@ -50,6 +50,84 @@ structure FolkmanPresentedNativeEmbedding
       (P.rightCode.encode y).biUnion
         (folkmanFiber atomEmbedding.rightOwner)
 
+/-- An Option-valued owner with a nonempty fibre over every source
+atom induces an injective inverse-image map on finite atom subsets.
+This lemma also covers an empty source atom set. -/
+theorem folkmanOwnerBiUnion_injective
+    {q n : ℕ}
+    (owner : Fin n → Option (Fin q))
+    (hsurj : ∀ a : Fin q, (folkmanFiber owner a).Nonempty) :
+    Function.Injective
+      (fun s : Finset (Fin q) => s.biUnion (folkmanFiber owner)) := by
+  classical
+  intro s t h
+  apply Finset.ext
+  intro a
+  obtain ⟨b, hb⟩ := hsurj a
+  have hown : owner b = some a := (Finset.mem_filter.mp hb).2
+  have hmem (u : Finset (Fin q)) :
+      b ∈ u.biUnion (folkmanFiber owner) ↔ a ∈ u := by
+    constructor
+    · intro hu
+      obtain ⟨a', ha', hb'⟩ := Finset.mem_biUnion.mp hu
+      have hown' : owner b = some a' := (Finset.mem_filter.mp hb').2
+      have heq : a' = a := Option.some.inj (hown'.symm.trans hown)
+      exact heq ▸ ha'
+    · intro ha
+      exact Finset.mem_biUnion.mpr ⟨a, ha, hb⟩
+  have heq :
+      b ∈ s.biUnion (folkmanFiber owner) ↔
+        b ∈ t.biUnion (folkmanFiber owner) := by rw [h]
+  exact (hmem s).symm.trans (heq.trans (hmem t))
+
+/-- The left original-ring map in a presented embedding is genuinely
+injective; this follows from nonempty atom-owner fibres and the
+faithfulness of the finite presentation, rather than being assumed. -/
+theorem FolkmanPresentedNativeEmbedding.left_injective
+    {LA RA LB RB : Type*}
+    [BooleanRing LA] [BooleanRing RA]
+    [BooleanRing LB] [BooleanRing RB]
+    {γA : LA → RA → F2} {γB : LB → RB → F2}
+    {P : FolkmanFinitePairingPresentation LA RA γA}
+    {Q : FolkmanFinitePairingPresentation LB RB γB}
+    (E : FolkmanPresentedNativeEmbedding P Q) :
+    Function.Injective E.left := by
+  intro x y hxy
+  apply P.leftCode.encode.injective
+  apply folkmanOwnerBiUnion_injective
+    E.atomEmbedding.leftOwner E.atomEmbedding.left_fibre_nonempty
+  calc
+    (P.leftCode.encode x).biUnion
+        (folkmanFiber E.atomEmbedding.leftOwner) =
+      Q.leftCode.encode (E.left x) := (E.left_code x).symm
+    _ = Q.leftCode.encode (E.left y) :=
+      congrArg Q.leftCode.encode hxy
+    _ = (P.leftCode.encode y).biUnion
+        (folkmanFiber E.atomEmbedding.leftOwner) := E.left_code y
+
+/-- Right-sort injectivity follows by the same finite-owner argument. -/
+theorem FolkmanPresentedNativeEmbedding.right_injective
+    {LA RA LB RB : Type*}
+    [BooleanRing LA] [BooleanRing RA]
+    [BooleanRing LB] [BooleanRing RB]
+    {γA : LA → RA → F2} {γB : LB → RB → F2}
+    {P : FolkmanFinitePairingPresentation LA RA γA}
+    {Q : FolkmanFinitePairingPresentation LB RB γB}
+    (E : FolkmanPresentedNativeEmbedding P Q) :
+    Function.Injective E.right := by
+  intro x y hxy
+  apply P.rightCode.encode.injective
+  apply folkmanOwnerBiUnion_injective
+    E.atomEmbedding.rightOwner E.atomEmbedding.right_fibre_nonempty
+  calc
+    (P.rightCode.encode x).biUnion
+        (folkmanFiber E.atomEmbedding.rightOwner) =
+      Q.rightCode.encode (E.right x) := (E.right_code x).symm
+    _ = Q.rightCode.encode (E.right y) :=
+      congrArg Q.rightCode.encode hxy
+    _ = (P.rightCode.encode y).biUnion
+        (folkmanFiber E.atomEmbedding.rightOwner) := E.right_code y
+
 /-- The original pairing is preserved automatically by the compatible
 finite atom embedding. No extra unitality or scalar conditions occur. -/
 theorem FolkmanPresentedNativeEmbedding.preserves_pairing
