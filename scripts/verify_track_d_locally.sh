@@ -31,6 +31,8 @@ python3 -O scripts/check_banana_actual_coordinate_functor.py
 python3 scripts/check_banana_coherent_choices.py
 python3 scripts/check_banana_coherent_choice_variants.py
 python3 -O scripts/check_banana_coherent_choice_variants.py
+python3 scripts/check_banana_coherent_choice_variants.py --mixed4
+python3 -O scripts/check_banana_coherent_choice_variants.py --mixed4
 python3 scripts/check_banana_coherent_choices_dimension4.py
 python3 -O scripts/check_banana_coherent_choices_dimension4.py
 python3 scripts/check_banana_zero_pairing_witness_bound.py
