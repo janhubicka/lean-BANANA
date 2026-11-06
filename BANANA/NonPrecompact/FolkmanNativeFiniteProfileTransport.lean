@@ -71,6 +71,42 @@ structure FolkmanFinitePairingPresentation
     ∑ i ∈ leftCode.encode x,
       ∑ j ∈ rightCode.encode y, atom.edge i j
 
+/-- Package the exact finite-index data exported by the native
+presentation interface (Track B), without importing a draft PR.
+Only additive and multiplicative preservation are requested, not
+preservation of units by embeddings. -/
+def FolkmanFinitePairingPresentation.ofCoordinates
+    {L R : Type*} [BooleanRing L] [BooleanRing R]
+    (γ : L → R → F2)
+    (A : FolkmanAtomStructure)
+    (eL : L ≃ Finset (Fin A.leftCount))
+    (eR : R ≃ Finset (Fin A.rightCount))
+    (hpair : ∀ x : L, ∀ y : R,
+      γ x y = ∑ i ∈ eL x, ∑ j ∈ eR y, A.edge i j)
+    (haddL : ∀ x x' : L, eL (x + x') =
+      symmDiff (eL x) (eL x'))
+    (haddR : ∀ y y' : R, eR (y + y') =
+      symmDiff (eR y) (eR y'))
+    (hmulL : ∀ x x' : L, eL (x * x') = eL x ∩ eL x')
+    (hmulR : ∀ y y' : R, eR (y * y') = eR y ∩ eR y')
+    (hzeroL : eL (0 : L) = ∅)
+    (hzeroR : eR (0 : R) = ∅) :
+    FolkmanFinitePairingPresentation L R γ where
+  atom := A
+  leftCode := {
+    encode := eL
+    map_zero := hzeroL
+    map_add := haddL
+    map_mul := hmulL
+  }
+  rightCode := {
+    encode := eR
+    map_zero := hzeroR
+    map_add := haddR
+    map_mul := hmulR
+  }
+  pairing_code := hpair
+
 /-- Complete finite profile of a native two-sort tuple, computed in
 a chosen faithful finite presentation. -/
 noncomputable def FolkmanFinitePairingPresentation.tupleProfile
