@@ -34,6 +34,7 @@ python3 scripts/check_folkman_tuple_term_completeness_small.py
 python3 scripts/check_folkman_nonunital_normalisation.py
 python3 scripts/check_folkman_native_term_coordinate_bridge.py
 python3 scripts/check_folkman_native_presentation_profiles.py
+python3 scripts/check_folkman_presented_embedding_naturality.py
 
 echo "PASS: local build and regression commands completed at $actual"
 echo "Manually inspect the transitive #print axioms reports and obtain independent proof reviews."
