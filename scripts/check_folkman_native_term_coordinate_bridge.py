@@ -153,5 +153,9 @@ def main():
     print("PASS; not a Lean kernel check")
 
 
+# Fail closed rather than silently skipping every Python assert under -O.
+if not __debug__:
+    raise SystemExit("Regression checks require assertions; rerun without -O/PYTHONOPTIMIZE.")
+
 if __name__ == "__main__":
     main()
