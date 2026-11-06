@@ -117,9 +117,10 @@ not an axiom-audit result.
    ring term normalisation, the native-presentation theorem,
    zero-ring and unused-atom cases, and whether the Lean statements
    genuinely match the manuscript's original signature.
-4. **Dependencies:** verify/merge #306 and #305 only after their own
-   exact-head kernel builds. Compose the #305 finite presentation
-   existence statement with the constructor in this track.
+4. **Dependencies:** #306 was merged into main on 6 November, but no
+   new local kernel build or independent axiom audit of that merge was
+   performed here. PR #305 remains an unverified draft. Compose its
+   strengthened finite-index morphism interface with this track.
 5. **Infinite step:** construct the countable homogeneous limit and
    a genuine global automorphism extension theorem, then instantiate
    the conditional orbit finiteness criterion. Ryll–Nardzewski may
@@ -127,3 +128,65 @@ not an axiom-audit result.
 
 **No merge and no manuscript green validation markers before gates
 1–4.** The main circulation prose is frozen.
+
+## 6 November continuation: compatible embeddings and stage independence
+
+Track C now contains
+`BANANA/NonPrecompact/FolkmanNativeProfileNaturality.lean`, with
+`FolkmanPresentedNativeEmbedding`. Unlike a bare assertion that an
+atom embedding exists, this interface records **which** original
+non-unital homomorphisms it represents, through exact partial-owner
+equations on *every* native element in both sorts.
+
+Source-level theorems (not kernel checked):
+
+- `folkmanOwnerBiUnion_injective`: nonempty source-atom fibres make
+  the induced inverse-image map on finite atom subsets injective,
+  including when the source atom set is empty;
+- `FolkmanPresentedNativeEmbedding.left_injective` and
+  `right_injective`: faithfulness of the finite codes transfers
+  this injectivity to the given original ring maps;
+- `preserves_pairing`: the pairings on original native elements
+  agree because the finite representations reconstruct every pairing
+  value and the atom embedding preserves the source matrix;
+- `tupleProfile_preserved`: the complete two-sort nonzero-pattern
+  profile is natural under these *specified* embeddings;
+- `folkmanTupleProfile_eq_of_commonPresentedExtension`: if two
+  finite presentations of the same labelled left/right tuple embed
+  compatibly into a common finite extension, their profiles coincide.
+
+The final theorem is the exact finite-stage independence needed
+before defining profiles in a countable directed Fraïssé construction.
+It does not prove a directed system or the limit exists.
+
+The existence theorem in PR #305 currently concludes only
+`Nonempty (FolkmanAtomEmbedding ...)`, omitting the equations
+identifying its owners with the supplied original maps `fL,fR`.
+The proof of PR #305 already constructs `hLmap` and `hRmap`,
+which could be returned in a strengthened theorem. A precise
+cross-track request was posted to PR #305 rather than modifying
+its unverified draft branch.
+
+Independent finite **semantic**, not kernel, regressions were
+executed in the local container:
+- `scripts/check_folkman_presented_embedding_naturality.py`:
+  810 sampled compatible owner-map configurations, 3,240 complete
+  profile comparisons; 560 configurations include a zero source
+  sort. Full original-ring operation and bilinear-pairing identities
+  were checked for every source subset in those configurations.
+- `scripts/check_folkman_profile_common_extension.py`:
+  1,600 common finite extension configurations, 12,800 equal
+  source-profile comparisons, including 3,589 with a nonzero
+  named element; 1,434 configurations have a zero source sort.
+
+Both scripts are committed and included in the exact-head local
+verification gate. Their counts are regression evidence, not
+formal verification. No independent referee agent was available,
+and none was spawned. The new axiom-audit module is transitively
+imported through the existing Track C audit chain.
+
+**Current gate:** local Lean and Lake still unavailable in this
+runtime; GitHub cannot be cloned via local DNS. No kernel build,
+transitive axiom reports, or independent statement refereeing has
+been performed on the new code. Draft PR #308 remains unmerged.
+No TeX, BibTeX or circulation text was changed.
