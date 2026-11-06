@@ -106,3 +106,41 @@ Only `propext`, `Classical.choice` and `Quot.sound` should occur
 in successful transitive-axiom results. Independent mathematical
 statement and counterexample reviews remain mandatory before merging
 or marking the circulation theorem verified.
+
+
+## Higher-dimensional mixed-sort regression (7 November 2026)
+
+A new independent regression `scripts/check_banana_coherent_choices_dimension4.py`
+reuses the already tested finite-choice implementation but selects precisely
+the three dimension pairs `(4,1)`, `(4,2)`, `(4,3)` in the notation
+`(total dimension, left dimension)`. Thus it enumerates ALL binary
+pairings with left/right dimensions `(1,3)`, `(2,2)` and `(3,1)`,
+including degenerate, rank-one, and nondegenerate matrices where possible.
+
+The old runner was refactored only to accept an optional set of dimension
+pairs; calling `run()` without arguments still runs the original 17 cases
+in total dimension at most three, with identical result counts.
+The expanded checks were executed in both ordinary Python and Python `-O`.
+They contain **no disabled assertions**: the runner calls an unconditional
+`check` function, and the wrapper checks all expected counts explicitly.
+
+Recorded results, all passed:
+
+| Test quantity | Count |
+| --- | ---: |
+| Pairing matrices (all mixed-sort matrices in dimension four) | 32 |
+| Actual subpairs | 912 |
+| Isomorphism classes | 333 |
+| Representative automorphisms | 4,217 |
+| Partial isomorphisms / inverse checks | 12,908 |
+| Identity checks | 912 |
+| Composable pairs, checked on both sorts | 770,480 |
+
+These 32 matrices cover *mixed-sort* dimension four, not the one-sided
+pairs `(4,0)` and `(0,4)`. Those one-sided pairings have very large
+automorphism groups; no exhaustive claim is made for them here.
+The 17 earlier small matrices include one-sided and zero-dimensional cases.
+
+No new Lean module was edited for this larger finite test, and it does
+not address the unavailable kernel verification. The results are
+additional adversarial evidence only.
