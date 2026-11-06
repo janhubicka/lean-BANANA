@@ -255,4 +255,42 @@ theorem folkmanTupleProfile_eq_of_commonPresentedExtension
     _ = Q.tupleProfile xsB ysB :=
       F.tupleProfile_preserved xsB ysB
 
+
+/-- Profile transport through two successive *specified* native
+embeddings. No composition theorem for partial atom-owner maps is
+needed: stage independence follows by applying the existing exact
+naturality theorem twice, with no additional assumptions.
+
+In a directed finite-stage construction this permits refinement
+through an intermediate stage, including the zero ring on either
+sort. -/
+theorem folkmanTupleProfile_preserved_twoStep
+    {LA RA LB RB LC RC : Type*}
+    [BooleanRing LA] [BooleanRing RA]
+    [BooleanRing LB] [BooleanRing RB]
+    [BooleanRing LC] [BooleanRing RC]
+    {γA : LA → RA → F2}
+    {γB : LB → RB → F2}
+    {γC : LC → RC → F2}
+    {P : FolkmanFinitePairingPresentation LA RA γA}
+    {Q : FolkmanFinitePairingPresentation LB RB γB}
+    {C : FolkmanFinitePairingPresentation LC RC γC}
+    (E : FolkmanPresentedNativeEmbedding P Q)
+    (F : FolkmanPresentedNativeEmbedding Q C)
+    {nL nR : ℕ}
+    (xs : Fin nL → LA) (ys : Fin nR → RA) :
+    C.tupleProfile (fun i => F.left (E.left (xs i)))
+        (fun j => F.right (E.right (ys j))) =
+      P.tupleProfile xs ys := by
+  calc
+    C.tupleProfile (fun i => F.left (E.left (xs i)))
+        (fun j => F.right (E.right (ys j))) =
+      Q.tupleProfile (fun i => E.left (xs i))
+        (fun j => E.right (ys j)) :=
+      F.tupleProfile_preserved
+        (fun i => E.left (xs i)) (fun j => E.right (ys j))
+    _ = P.tupleProfile xs ys :=
+      E.tupleProfile_preserved xs ys
+
+
 end SuccessorTree.NonPrecompact
