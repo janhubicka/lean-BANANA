@@ -4,3 +4,4 @@ import BANANA.NonPrecompact.FolkmanPartialOwnerComposition
 
 #print axioms SuccessorTree.NonPrecompact.folkmanFiber_compose
 #print axioms SuccessorTree.NonPrecompact.folkmanComposeOwner_surjective
+#print axioms SuccessorTree.NonPrecompact.FolkmanAtomEmbedding.comp
