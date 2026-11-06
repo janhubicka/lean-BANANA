@@ -9,6 +9,13 @@ composition and restricted pairing under coordinate transport. No Lean claims.
 from collections import defaultdict
 from itertools import permutations, product
 import json
+import sys
+
+
+def check(predicate, description):
+    """Runtime guard, also active under python -O."""
+    if not predicate:
+        raise AssertionError(description)
 
 
 def parity(x):
@@ -104,19 +111,23 @@ def run():
                                            for t in range(1 << len(buL)))
                                 cr = tuple(coordinate(bvR, frmap[expand(buR, t)])
                                            for t in range(1 << len(buR)))
-                                assert len(set(cl)) == len(cl) and len(set(cr)) == len(cr)
-                                assert all(pair(rows, expand(bvL, cl[x]), expand(bvR, cr[y])) ==
-                                           pair(rows, expand(buL, x), expand(buR, y))
-                                           for x in range(len(cl)) for y in range(len(cr)))
+                                check(len(set(cl)) == len(cl) and len(set(cr)) == len(cr),
+                                      "coordinate map is not bijective")
+                                check(all(pair(rows, expand(bvL, cl[x]), expand(bvR, cr[y])) ==
+                                          pair(rows, expand(buL, x), expand(buR, y))
+                                          for x in range(len(cl)) for y in range(len(cr))),
+                                      "coordinate map fails pairing preservation")
                                 aa.append((fl, fr, cl, cr))
                         arrows[u, v] = aa
                         counts['arrows'] += len(aa)
                 for u, (ul, ur) in enumerate(objs):
                     ids = (tuple(sorted(ul)), tuple(sorted(ur)))
                     hits = [a for a in arrows[u, u] if (a[0], a[1]) == ids]
-                    assert len(hits) == 1
-                    assert hits[0][2] == tuple(range(len(hits[0][2])))
-                    assert hits[0][3] == tuple(range(len(hits[0][3])))
+                    check(len(hits) == 1, "actual identity arrow not unique")
+                    check(hits[0][2] == tuple(range(len(hits[0][2]))),
+                          "coordinate functor fails left identity")
+                    check(hits[0][3] == tuple(range(len(hits[0][3]))),
+                          "coordinate functor fails right identity")
                     counts['identities'] += 1
                 for (u, v), ps in arrows.items():
                     if not ps:
@@ -132,7 +143,8 @@ def run():
                                 tuple(invr[y] for y in sorted(vr)))
                         backcode = next((al, ar) for bl, br, al, ar in arrows[v, u]
                                         if (bl, br) == back)
-                        assert backcode == (inverse(cl), inverse(cr))
+                        check(backcode == (inverse(cl), inverse(cr)),
+                              "coordinate functor fails inverse law")
                         counts['inverses'] += 1
                         for w in range(len(objs)):
                             for ql, qr, cql, cqr in arrows[v, w]:
@@ -142,7 +154,8 @@ def run():
                                            tuple(qmR[y] for y in fr))
                                 composedcode = next((al, ar) for bl, br, al, ar in arrows[u, w]
                                                     if (bl, br) == compmap)
-                                assert composedcode == (compose(cql, cl), compose(cqr, cr))
+                                check(composedcode == (compose(cql, cl), compose(cqr, cr)),
+                                      "coordinate functor fails composition law")
                                 counts['compositions'] += 1
     # Explicit mutation: code the identity map from the standard basis to
     # a switched target basis in the middle, then compose with another
@@ -152,10 +165,14 @@ def run():
     wrong_p = tuple(coordinate(changed, expand(standard, x)) for x in range(4))
     q = tuple(coordinate(standard, expand(standard, x)) for x in range(4))
     actual_composite = tuple(range(4))
-    assert compose(q, wrong_p) != actual_composite
+    check(compose(q, wrong_p) != actual_composite,
+          "inconsistent midpoint basis did not falsify composition")
     counts['bad_midpoint_basis_control'] = 1
     return dict(sorted(counts.items()))
 
 
 if __name__ == '__main__':
+    if '--probe-guard' in sys.argv:
+        # Intentionally fail. The process must exit nonzero with and without -O.
+        check(False, 'CHECK_GUARD_ACTIVE')
     print(json.dumps(run(), indent=2))
