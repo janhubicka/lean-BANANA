@@ -1,5 +1,21 @@
 # BANANA Track D — actual-subpair coherent EPPA (6 November 2026)
 
+## Verification correction — 6 November 2026
+
+The ORIGINAL version of `check_banana_actual_coordinate_functor.py` used
+Python `assert` for its eight regression guards. Assertions are disabled
+under `python -O`, so the earlier identical optimised-mode counts were **NOT**
+evidence that those identities had been checked. The normal-mode check was
+valid. This weakness has been corrected in commit `bfcb1a84646e239c7aa87d3f114aaae4152c3b84`:
+all eight guards use an explicit `check` function raising `AssertionError`,
+and the command-line `--probe-guard` intentionally fails in both normal
+and optimised modes. Both genuine runs then pass with 1,277 isomorphisms
+and 82,697 composable pairs. This is still **finite Python testing only**,
+not Lean compilation or an independent mathematical referee.
+
+---
+
+
 INTERNAL ONLY. The circulation text remains frozen and has not been modified.
 This continuation is STAGED SOURCE, NOT a Lean kernel verification.
 
