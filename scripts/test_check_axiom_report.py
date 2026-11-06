@@ -38,6 +38,26 @@ class AxiomReportTests(unittest.TestCase):
             check_report("#print axioms foo\n", "'foo' does not depend on any axioms\n"
                          "'bar' depends on axioms: [propext]\n")
 
+    def test_duplicate_report_does_not_mask_missing_declaration(self):
+        src = "#print axioms A.check\n#print axioms B.check\n"
+        out = ("'A.check' depends on axioms: [propext]\n"
+               "'A.check' depends on axioms: [propext]\n")
+        with self.assertRaisesRegex(ValueError, "mismatched"):
+            check_report(src, out)
+
+    def test_wrong_declaration_name_rejected_despite_matching_count(self):
+        src = "#print axioms Actual.theorem\n"
+        out = "'Different.theorem' does not depend on any axioms\n"
+        with self.assertRaisesRegex(ValueError, "mismatched"):
+            check_report(src, out)
+
+    def test_fully_qualified_axiom_report(self):
+        src = "#print axioms SuccessorTree.NonPrecompact.someTheorem\n"
+        out = ("info: file.lean:12:0: "
+               "'SuccessorTree.NonPrecompact.someTheorem' "
+               "depends on axioms: [propext, Classical.choice, Quot.sound]\n")
+        check_report(src, out)
+
     def test_sorry_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "sorryAx"):
             check_report("#print axioms foo", "'foo' depends on axioms: [sorryAx]\n")
