@@ -92,11 +92,11 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
   · intro i
     obtain ⟨b, hb⟩ := hLnonempty i
     refine ⟨b, ?_⟩
-    exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, hb⟩
+    simpa [folkmanFiber] using hb
   · intro j
     obtain ⟨b, hb⟩ := hRnonempty j
     refine ⟨b, ?_⟩
-    exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, hb⟩
+    simpa [folkmanFiber] using hb
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
@@ -107,7 +107,7 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
           ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
             (folkmanNativeFinCode γB).edge x y) =
           (folkmanNativeFinCode γA).edge i j := by
-      simpa only [Finset.sum_singleton] using hp
+      simpa [Finset.sum_singleton] using hp
     have hsum :
         (∑ x ∈ folkmanFiber ownerL i,
           ∑ y ∈ folkmanFiber ownerR j,
