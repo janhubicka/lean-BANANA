@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.SymplecticAlternatingIsometryCoordinates
+
+/-! Axiom audit: original alternating forms and isometries induce matching matrix blocks. -/
+#print axioms SuccessorTree.NonPrecompact.symplecticCommonLeft_single
+#print axioms SuccessorTree.NonPrecompact.symplecticCommonRight_single
+#print axioms SuccessorTree.NonPrecompact.symplecticFormTransportMatrix
+#print axioms SuccessorTree.NonPrecompact.symplecticFormTransportMatrix_pairing
+#print axioms SuccessorTree.NonPrecompact.symplecticFormTransportMatrix_alternating
+#print axioms SuccessorTree.NonPrecompact.symplecticFormTransportMatrix_commonBlock
