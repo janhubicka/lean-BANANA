@@ -153,3 +153,38 @@ Inspect all transitive axioms and allow only `propext`,
 `Classical.choice` and `Quot.sound`. Do not merge
 or add a full theorem validation marker before those checks
 and actual independent referee reviews have succeeded.
+
+
+## 6. Verification scripts synchronised with main
+
+The PR branch is 37 commits behind main in Git history; the intervening
+mainline changes were inspected and do not alter the mathematical
+dependencies used by Track D. They do, however, upgrade the *local
+verification machinery*. On this branch the following five files were
+copied byte-for-byte from main commit
+`ba5eb4de92bef50708cd226fcda6b2c01baf8051`:
+
+- `scripts/check_axiom_report.py`
+- `scripts/audit_all_axioms_local.sh`
+- `scripts/check_lean_module_graph.py`
+- `scripts/test_check_axiom_report.py`
+- `scripts/test_check_lean_module_graph.py`
+
+The hardened versions strip Lean comments before parsing commands,
+reject missing or unexpected axiom reports and distinguish production
+modules imported only by axiom-audit entry points from genuinely dead
+modules. No mathematical Lean source was altered by this synchronisation.
+
+A new local-only `scripts/verify_track_d_locally.sh` runs both verifier
+self-test suites, the full finite regression suite, the positive and
+negative optimised-mode tests, and (where Lake is installed) the
+targeted module build, root build and transitive-axiom audit. It checks
+a clean Git tree and optionally enforces `EXPECTED_HEAD_SHA`.
+The Bash source passed `bash -n` locally, but the full driver cannot
+be executed in this environment without Lean, Lake and a checkout of
+the pinned dependencies. It does not start GitHub Actions.
+
+Before final integration, bring the PR onto a current mainline commit,
+rerun the exact-head driver and repeat the independent mathematical
+proof review. No PR merge or manuscript validation marker is justified
+by these source checks alone.
