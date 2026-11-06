@@ -9,6 +9,7 @@ and its transitive axiom reports are inspected on the pinned toolchain.
 -/
 
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteRingPresentation.eval_term
+#print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairingPresentation.ofCoordinates
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairingPresentation.tupleProfile
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeRingTerm_equalities_of_presentations
 #print axioms SuccessorTree.NonPrecompact.folkmanNativeRingTerm_pairing_of_profile_eq
