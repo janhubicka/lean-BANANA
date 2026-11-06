@@ -144,3 +144,41 @@ The 17 earlier small matrices include one-sided and zero-dimensional cases.
 No new Lean module was edited for this larger finite test, and it does
 not address the unavailable kernel verification. The results are
 additional adversarial evidence only.
+
+
+## Extended choice-policy regression in mixed dimension four
+
+On 7 November the same reversal of subspace, isomorphism and ambient
+automorphism enumeration was applied to the **entire mixed-sort
+dimension-four collection**, not only the 17 smaller pairings.
+Rather than adding a second large test implementation, the existing
+`scripts/check_banana_coherent_choice_variants.py` now accepts
+`--mixed4` to reuse the same exact finite groupoid validator
+with the reversed fixed choices. Its default small-case interface
+is unchanged.
+
+Executed locally in ordinary and optimised Python 3.13:
+- `python3 scripts/check_banana_coherent_choice_variants.py`
+- `python3 -O scripts/check_banana_coherent_choice_variants.py`
+- `python3 scripts/check_banana_coherent_choice_variants.py --mixed4`
+- `python3 -O scripts/check_banana_coherent_choice_variants.py --mixed4`
+
+Every invocation passed, with explicit checks active. In the
+dimension-four variant: 32 pairing matrices, 912 actual subpairs,
+333 isomorphism classes, 4,217 representative automorphisms,
+12,908 partial isomorphisms and inverse checks, and 770,480
+composable pairs checked on BOTH sorts. The test asserts the
+complete expected count record, so an early-exit or omitted class
+cannot silently produce a passing result.
+
+This tests **robustness of the coherent construction under two
+different fixed-choice policies**, not equality of the resulting
+extension functions. Both policies can yield different automorphisms
+for an individual arrow. One-sided dimension-four classes remain
+outside this exhaustive regression; smaller tests include them.
+
+The verification driver now runs this extended choice-policy test in
+both Python modes. There is still no Lean compiler in the present
+execution environment, and neither proof kernel verification nor
+independent adversarial referee approval has occurred. Do not merge
+or add circulation verification markers.
