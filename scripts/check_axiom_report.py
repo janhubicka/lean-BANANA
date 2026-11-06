@@ -4,6 +4,7 @@
 This validates a completed Lean invocation's output; it does not run Lean.
 """
 from pathlib import Path
+from collections import Counter
 import re
 import sys
 
@@ -64,16 +65,26 @@ def check_report(source: str, output: str) -> None:
     if not commands:
         raise ValueError("Axiom-audit source has no active #print axioms")
 
-    dependencies = re.findall(r"depends on axioms:\s*\[([^\]]*)\]", output, re.S)
-    no_axioms = re.findall(r"does not depend on (?:any )?axioms\b", output)
-    observed = len(dependencies) + len(no_axioms)
-    if observed != len(commands):
+    # A count-only check silently accepts two reports for A while
+    # missing B. Compare qualified declaration names as a multiset.
+    dependencies = re.findall(
+        r"'([^'\n]+)' depends on axioms:\s*\[([^\]]*)\]", output, re.S
+    )
+    no_axioms = re.findall(
+        r"'([^'\n]+)' does not depend on (?:any )?axioms\b", output
+    )
+    expected = Counter(commands)
+    observed = Counter(name for name, _ in dependencies)
+    observed.update(no_axioms)
+    if observed != expected:
+        missing = list((expected - observed).elements())
+        extra = list((observed - expected).elements())
         raise ValueError(
-            f"Incomplete axiom report: {observed} result(s) for "
-            f"{len(commands)} #print axioms command(s): {', '.join(commands)}"
+            "Incomplete or mismatched axiom report: "
+            f"missing={missing!r}, unexpected_or_duplicate={extra!r}"
         )
     unexpected = {name.strip()
-                  for group in dependencies for name in group.split(",")
+                  for _, group in dependencies for name in group.split(",")
                   if name.strip() and name.strip() not in ALLOWED}
     if "sorryAx" in output:
         unexpected.add("sorryAx")
