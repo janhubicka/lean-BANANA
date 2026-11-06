@@ -1,5 +1,18 @@
 # BANANA — Track D: actual-subpair quotient atlas (6 November 2026)
 
+## Optimised-mode regression correction (6 November 2026)
+
+The earlier source of `scripts/check_banana_actual_coordinate_functor.py`
+used eight Python `assert` statements: the previously reported
+`python -O` pass executed NO such checks. The ordinary Python run
+*did* check them. Commit `bfcb1a84646e239c7aa87d3f114aaae4152c3b84`
+replaced all guards with explicit runtime failures that remain active
+under `-O`. Both normal and optimised finite regressions passed
+again, and `--probe-guard` now exits with an intentional
+`AssertionError: CHECK_GUARD_ACTIVE` in both modes.
+The original optimised-run evidence must not be counted separately.
+
+
 Internal development note; NOT circulation prose. No TeX, TODO or
 validation-marker changes. The circulation manuscript remains frozen.
 
