@@ -188,3 +188,29 @@ Before final integration, bring the PR onto a current mainline commit,
 rerun the exact-head driver and repeat the independent mathematical
 proof review. No PR merge or manuscript validation marker is justified
 by these source checks alone.
+
+
+## 7. Source dependency audit (7 November 2026)
+
+The direct import closure of the proposed final declaration
+`exists_bananaActualCoherentEPPA` was recomputed from the pull-request
+diff, not inferred from broad module counts. The final theorem depends
+on **13** new Track D production modules, including the quotient atlas,
+the actual-subpair coordinate functor, the aligned action, and the
+groupoid descent.
+
+Two additional Track D production modules are **audit-only auxiliaries**:
+`BananaMatrixCompletionActionHom.lean` packages the unembedded
+completion action as a homomorphism, and
+`CoherentEppaRepresentativeTransport.lean` supplies a generic
+MulAction transport calculation. They are imported by axiom-audit
+entry points but are not transitive inputs to the final theorem.
+This is not by itself evidence that either file is incorrect or dead:
+the first is a reusable standalone result, and the second is a
+general group-action abstraction. Any later cleanup decision must
+consider their reusable purpose and fully compiled dependent checks,
+not merely their absence from the final theorem's import closure.
+
+The prior static PR audit found all local import paths and printed
+axiom names resolvable. The current GitHub mainline merge remains
+clean. This is still a source-level review, not a Lean kernel audit.
