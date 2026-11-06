@@ -1,4 +1,24 @@
 # BANANA circulation validation: adversarial audit and parallel work plan
+
+## Verification update — 6 November 2026
+
+This document's original 1 November status paragraphs are a historical snapshot.
+The current BANANA manuscript PR #241 has been merged, and its circulation prose
+remains frozen; only TODOs and validation markers may be added without approval.
+The Folkman tuple-profile PR #306 passed a full, exact-head historical Lean build
+and was merged on 6 November as lean-BANANA commit fe4f219ed52b3b041d1a7d02e62ae4b6cb146f6c.
+The earlier PR #305, and its dependent Track B PR #309, have recorded Lean
+build failures. PRs #308, #310 and #311 require their own kernel verification.
+
+The total-owner proof refactor in this PR #307 passed a full exact-head Lean
+build and a separate \`#print axioms\` audit on 1 November at commit
+0dfa4e18014321a46b3d7d85bb26b7f1cbf3a9b9; it uses only propext,
+Classical.choice and Quot.sound. The axiom-report parser has subsequently
+been strengthened to check declaration names, not only report counts; those
+Python-only changes have targeted independent regression tests, but no new
+Lean build was started. The mathematical source and theorem signature are
+unchanged since the successful run.
+
 1 November 2026. Internal development note only; NOT circulation prose.
 
 ## Fixed references and change permissions
