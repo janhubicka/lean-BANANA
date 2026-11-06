@@ -12,3 +12,4 @@ transitive axiom reports are inspected.
 #print axioms SuccessorTree.NonPrecompact.FolkmanPresentedNativeEmbedding.right_injective
 #print axioms SuccessorTree.NonPrecompact.FolkmanPresentedNativeEmbedding.preserves_pairing
 #print axioms SuccessorTree.NonPrecompact.FolkmanPresentedNativeEmbedding.tupleProfile_preserved
+#print axioms SuccessorTree.NonPrecompact.folkmanTupleProfile_eq_of_commonPresentedExtension
