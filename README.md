@@ -86,6 +86,7 @@ Use the toolchain in `lean-toolchain` and the dependencies pinned by
 ```sh
 lake build BANANA
 bash scripts/audit_all_axioms_local.sh
+python3 -m unittest discover -s scripts -p 'test_*.py'
 ```
 
 The first command compiles the library. The second runs
@@ -93,12 +94,17 @@ The first command compiles the library. The second runs
 `*AxiomAudit.lean` entry point, and checks each printed transitive
 axiom set against **exactly** `propext`, `Classical.choice`, and
 `Quot.sound`. Unexpected axioms (including `sorryAx`) make the audit
-fail. This proves neither theorem-statement fidelity nor the
-remaining conditional hypotheses in the manuscript.
+fail. The parser also demands one result for every active `#print axioms`
+command; commented-out commands do not count. Its standalone regression
+tests cover incomplete reports and forbidden axioms. This proves neither
+theorem-statement fidelity nor the remaining conditional hypotheses in the
+manuscript.
 
 Run `python3 scripts/check_lean_module_graph.py` separately to report
-unreachable source modules, missing local imports, import cycles,
-and empty axiom-audit entry points without invoking Lean.
+unreachable source modules, modules used only by axiom-audit entry points,
+missing local imports, import cycles and empty axiom audits without invoking
+Lean. Audit-only modules are review candidates, **not** automatically dead
+code: retain them unless their use and mathematical purpose have been checked.
 
 There are small independent finite regression scripts in `scripts/`;
 these supplement, but do not replace, Lean kernel checks. For the
