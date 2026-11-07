@@ -1,0 +1,22 @@
+import BANANA.NonPrecompact.FolkmanTupleTermPairIso
+import BANANA.NonPrecompact.FolkmanGeneratedNonunitalAxiomAudit
+import BANANA.NonPrecompact.FolkmanNativeRingTermCoordinatesAxiomAudit
+import BANANA.NonPrecompact.FolkmanGeneratedTwoSortProfileIsoAxiomAudit
+import BANANA.NonPrecompact.FolkmanNativeFiniteProfileTransportAxiomAudit
+import BANANA.NonPrecompact.FolkmanFiniteProfileOrbitCriterionAxiomAudit
+import BANANA.NonPrecompact.FolkmanNativeProfileNaturalityAxiomAudit
+import BANANA.NonPrecompact.FolkmanDirectedFiniteStageAtlasAxiomAudit
+import BANANA.NonPrecompact.FolkmanDirectedFiniteOrbitBridgeAxiomAudit
+import BANANA.NonPrecompact.FolkmanGlobalPairAutomorphismOrbitsAxiomAudit
+import BANANA.NonPrecompact.FolkmanGlobalTaggedAutomorphismOrbitsAxiomAudit
+import BANANA.NonPrecompact.FolkmanDirectedFiniteLocalFinitenessAxiomAudit
+import BANANA.NonPrecompact.FolkmanDirectedFiniteBooleanLawsAxiomAudit
+import BANANA.NonPrecompact.FolkmanAmbientGeneratedRingEquivsAxiomAudit
+
+/-!
+Track C: axiom audit of the combined two-sort term-value pairing
+equivalence and its native generated-subring bridge.
+This remains UNVERIFIED until a local Lean kernel run.
+-/
+
+#print axioms SuccessorTree.NonPrecompact.folkmanTermRangeEquivs_preserve_pairing_of_profile_eq
