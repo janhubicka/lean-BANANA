@@ -214,3 +214,49 @@ not merely their absence from the final theorem's import closure.
 The prior static PR audit found all local import paths and printed
 axiom names resolvable. The current GitHub mainline merge remains
 clean. This is still a source-level review, not a Lean kernel audit.
+
+
+## 8. Exact-head gate repair and independently executed orchestration test (7 November)
+
+The earlier `verify_track_d_locally.sh` built only the final
+`BananaActualSubpairUnindexedCoherenceAxiomAudit` target. That target
+reaches 13 new production modules, but it does **not** import two
+standalone auxiliary modules. A successful build of only that target
+would not certify those auxiliaries. This is a genuine verification
+coverage gap, not a counterexample to coherent EPPA.
+
+The local gate now explicitly runs `lake build +Module` and
+`lake env lean` for **all nine** Track D `AxiomAudit.lean` modules
+and checks each resulting report with the repository's strict
+`scripts/check_axiom_report.py`. The list was compared with the
+current PR diff: nine present, nine listed, no omissions or extras.
+The module-target notation is documented by the official Lean/Lake
+manual; it has not been executed here against the actual pinned toolchain.
+
+A new `scripts/test_verify_track_d_driver.py` exercises the exact
+driver in a disposable clean Git checkout, using a fake `lake` binary
+and mock axiom outputs. This executable test was run locally with
+Python 3.13.5; it verified:
+- the Bash driver passes syntax checking;
+- all nine audit modules are individually built and interrogated,
+  and exactly one root build and one global audit are invoked;
+- both normal and optimised negative regression guards are exercised;
+- an incorrect `EXPECTED_HEAD_SHA` is rejected;
+- no GitHub Actions are used.
+
+The local test file is byte-identical to GitHub blob
+`63afb6c52ca069beafafa6acb09fc94ce9672fa9`.
+The final driver, including this test, is byte-identical to GitHub blob
+`20d26566cf72f3c6f205c2578d035792b48ed8f3`.
+This was independently checked using `git hash-object` in the
+execution container. The original finite regression script and
+alternative-choice script were also verified against their exact
+GitHub blobs and rerun.
+
+**Boundary:** the mocked Lake test proves only orchestration and
+failure signalling. No real Lean/Lake executable or compiled Mathlib
+dependencies are present, and no kernel elaboration, transitive-axiom
+inspection, or independent mathematical referee sign-off has occurred.
+The 9-module gate must be rerun on the exact PR head in a real pinned
+Lean environment, and the full end-to-end theorem must compile there
+before any validation marker or merge.
