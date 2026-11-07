@@ -79,16 +79,8 @@ theorem folkmanTuple_edgeCount_cast
     (S : Finset (Fin A.leftCount))
     (T : Finset (Fin A.rightCount)) :
     (folkmanEdgeCount A.edge S T : F2) =
-      ∑ a ∈ S, ∑ b ∈ T, A.edge a b := by
-  classical
-  simp only [folkmanEdgeCount, Nat.cast_sum]
-  apply Finset.sum_congr rfl
-  intro a ha
-  apply Finset.sum_congr rfl
-  intro b hb
-  rcases f2_eq_zero_or_one (A.edge a b) with hzero | hone
-  · simp [hzero]
-  · simp [hone]
+      ∑ a ∈ S, ∑ b ∈ T, A.edge a b :=
+  folkmanEdgeCount_cast A.edge S T
 
 /-- Pairing on unions of owner fibres agrees with the source
 matrix pairing: this is the bilinear content of FolkmanAtomEmbedding. -/
