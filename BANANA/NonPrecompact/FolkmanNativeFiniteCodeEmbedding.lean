@@ -63,7 +63,6 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
     (hcompat : ∀ x y, γB (fL x) (fR y) = γA x y) :
     Nonempty (FolkmanAtomEmbedding
       (folkmanNativeFinCode γA) (folkmanNativeFinCode γB)) := by
-  classical
   obtain ⟨ownerL, hLnonempty, hLmap⟩ :=
     folkmanNativeFinRingMap_exists_partialOwner fL hfL
   obtain ⟨ownerR, hRnonempty, hRmap⟩ :=

@@ -43,7 +43,6 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
         s.biUnion (folkmanFiber E.leftOwner)) ∧
       (∀ t, folkmanNativeFinRingMap fR t =
         t.biUnion (folkmanFiber E.rightOwner)) := by
-  classical
   obtain ⟨ownerL, hLnonempty, hLmap⟩ :=
     folkmanNativeFinRingMap_exists_partialOwner fL hfL
   obtain ⟨ownerR, hRnonempty, hRmap⟩ :=
