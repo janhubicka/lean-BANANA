@@ -11,6 +11,7 @@ import BANANA.NonPrecompact.FolkmanGlobalPairAutomorphismOrbitsAxiomAudit
 import BANANA.NonPrecompact.FolkmanGlobalTaggedAutomorphismOrbitsAxiomAudit
 import BANANA.NonPrecompact.FolkmanDirectedFiniteLocalFinitenessAxiomAudit
 import BANANA.NonPrecompact.FolkmanDirectedFiniteBooleanLawsAxiomAudit
+import BANANA.NonPrecompact.FolkmanAmbientGeneratedRingEquivsAxiomAudit
 
 /-!
 Track C: axiom audit of the combined two-sort term-value pairing
