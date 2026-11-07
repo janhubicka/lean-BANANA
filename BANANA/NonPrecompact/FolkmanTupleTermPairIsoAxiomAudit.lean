@@ -9,6 +9,7 @@ import BANANA.NonPrecompact.FolkmanDirectedFiniteStageAtlasAxiomAudit
 import BANANA.NonPrecompact.FolkmanDirectedFiniteOrbitBridgeAxiomAudit
 import BANANA.NonPrecompact.FolkmanGlobalPairAutomorphismOrbitsAxiomAudit
 import BANANA.NonPrecompact.FolkmanGlobalTaggedAutomorphismOrbitsAxiomAudit
+import BANANA.NonPrecompact.FolkmanDirectedFiniteLocalFinitenessAxiomAudit
 
 /-!
 Track C: axiom audit of the combined two-sort term-value pairing
