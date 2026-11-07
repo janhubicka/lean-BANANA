@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanNativeFiniteClassCertificate
+
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteClassCertificate
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteClass_countable_representatives

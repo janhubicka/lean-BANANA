@@ -18,9 +18,6 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForAtomEmbedding
-    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
-  Fintype.ofEquiv α toBoolAlg
 
 /-- Modulo two the ordinary integer incidence count is the
 F₂-bilinear atom-matrix sum. -/
@@ -34,7 +31,13 @@ theorem folkmanNativeFin_edgeCount_cast
   have hbit : ∀ z : F2,
       (if z = 1 then (1 : F2) else 0) = z := by
     decide
-  simp [folkmanEdgeCount, hbit]
+  simp only [folkmanEdgeCount, Nat.cast_sum, Nat.cast_ite,
+    Nat.cast_one, Nat.cast_zero]
+  apply Finset.sum_congr rfl
+  intro i hi
+  apply Finset.sum_congr rfl
+  intro j hj
+  exact hbit (C.edge i j)
 
 /-- Every pair of injective native non-unital ring homomorphisms
 preserving the original two-sort pairing determines a genuine
@@ -60,7 +63,6 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
     (hcompat : ∀ x y, γB (fL x) (fR y) = γA x y) :
     Nonempty (FolkmanAtomEmbedding
       (folkmanNativeFinCode γA) (folkmanNativeFinCode γB)) := by
-  classical
   obtain ⟨ownerL, hLnonempty, hLmap⟩ :=
     folkmanNativeFinRingMap_exists_partialOwner fL hfL
   obtain ⟨ownerR, hRnonempty, hRmap⟩ :=
@@ -87,17 +89,62 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
     pairing_parity := ?_
   }⟩
   · intro i
-    obtain ⟨b, hb⟩ := hLnonempty i
-    exact ⟨b, by simp [folkmanFiber, hb]⟩
+    have hne : folkmanNativeFinRingMap fL ({i} : Finset _) ≠ ∅ := by
+      intro hempty
+      have hsame : folkmanNativeFinRingMap fL ({i} : Finset _) =
+          folkmanNativeFinRingMap fL ∅ := by
+        rw [folkmanNativeFinRingMap_zero fL]
+        exact hempty
+      have heq : ({i} : Finset _) = ∅ :=
+        folkmanNativeFinRingMap_injective fL hfL hsame
+      have hi : i ∈ (∅ : Finset _) :=
+        heq ▸ Finset.mem_singleton_self i
+      simpa using hi
+    rw [Finset.nonempty_iff_ne_empty, ← hLsingle i]
+    exact hne
   · intro j
-    obtain ⟨b, hb⟩ := hRnonempty j
-    exact ⟨b, by simp [folkmanFiber, hb]⟩
+    have hne : folkmanNativeFinRingMap fR ({j} : Finset _) ≠ ∅ := by
+      intro hempty
+      have hsame : folkmanNativeFinRingMap fR ({j} : Finset _) =
+          folkmanNativeFinRingMap fR ∅ := by
+        rw [folkmanNativeFinRingMap_zero fR]
+        exact hempty
+      have heq : ({j} : Finset _) = ∅ :=
+        folkmanNativeFinRingMap_injective fR hfR hsame
+      have hj : j ∈ (∅ : Finset _) :=
+        heq ▸ Finset.mem_singleton_self j
+      simpa using hj
+    rw [Finset.nonempty_iff_ne_empty, ← hRsingle j]
+    exact hne
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
       ({i} : Finset (Fin (folkmanNativeFinCode γA).leftCount))
       ({j} : Finset (Fin (folkmanNativeFinCode γA).rightCount))
-    rw [hLsingle, hRsingle] at hp
+    have hp' :
+        (∑ x ∈ folkmanNativeFinRingMap fL ({i} : Finset _),
+          ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
+            (folkmanNativeFinCode γB).edge x y) =
+          (folkmanNativeFinCode γA).edge i j := by
+      refine hp.trans ?_
+      change
+        Finset.sum ({i} : Finset _) (fun x =>
+          Finset.sum ({j} : Finset _) (fun y =>
+            (folkmanNativeFinCode γA).edge x y)) =
+          (folkmanNativeFinCode γA).edge i j
+      simp only [Finset.sum_singleton]
+    have hsum :
+        (∑ x ∈ folkmanFiber ownerL i,
+          ∑ y ∈ folkmanFiber ownerR j,
+            (folkmanNativeFinCode γB).edge x y) =
+        ∑ x ∈ folkmanNativeFinRingMap fL ({i} : Finset _),
+          ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
+            (folkmanNativeFinCode γB).edge x y := by
+      apply Finset.sum_congr (hLsingle i).symm
+      intro x hx
+      apply Finset.sum_congr (hRsingle j).symm
+      intro y hy
+      rfl
     calc
       (folkmanEdgeCount (folkmanNativeFinCode γB).edge
         (folkmanFiber ownerL i) (folkmanFiber ownerR j) : F2) =
@@ -105,7 +152,9 @@ theorem folkmanNativeFinCode_exists_atomEmbedding
             ∑ y ∈ folkmanFiber ownerR j,
               (folkmanNativeFinCode γB).edge x y :=
         folkmanNativeFin_edgeCount_cast _ _ _
-      _ = (folkmanNativeFinCode γA).edge i j := by
-        simpa only [Finset.sum_singleton] using hp
+      _ = ∑ x ∈ folkmanNativeFinRingMap fL ({i} : Finset _),
+          ∑ y ∈ folkmanNativeFinRingMap fR ({j} : Finset _),
+            (folkmanNativeFinCode γB).edge x y := hsum
+      _ = (folkmanNativeFinCode γA).edge i j := hp'
 
 end SuccessorTree.NonPrecompact

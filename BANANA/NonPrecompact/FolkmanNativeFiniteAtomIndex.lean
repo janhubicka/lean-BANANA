@@ -23,7 +23,7 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForFinIndex
+instance folkmanAsBoolAlgFiniteForFinIndex
     (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
   Fintype.ofEquiv α toBoolAlg
 
@@ -132,9 +132,11 @@ theorem folkmanNativeFinCode_pairing
     Equiv.trans_apply, Equiv.finsetCongr_apply, Finset.sum_map]
   apply Finset.sum_congr rfl
   intro a ha
-  apply Finset.sum_congr rfl
-  intro b hb
-  exact (folkmanNativeFinCode_edge γ a b).symm
+  refine Finset.sum_equiv (folkmanNativeAtomFinEquiv R) ?_ ?_
+  · intro b
+    simp
+  · intro b hb
+    exact (folkmanNativeFinCode_edge γ a b).symm
 
 
 /-- Every finite native two-sort Folkman object has a fully faithful
