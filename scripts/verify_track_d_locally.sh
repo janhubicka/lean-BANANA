@@ -25,6 +25,7 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 python3 scripts/test_check_axiom_report.py
 python3 scripts/test_check_lean_module_graph.py
+python3 scripts/test_verify_track_d_driver.py
 python3 scripts/check_lean_module_graph.py
 python3 scripts/check_banana_actual_coordinate_functor.py
 python3 -O scripts/check_banana_actual_coordinate_functor.py
