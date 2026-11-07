@@ -69,8 +69,43 @@ if [[ ! -f lean-toolchain || ! -f lakefile.toml ]]; then
   echo 'Pinned Lean project files are missing.' >&2
   exit 2
 fi
-lake build +BANANA.NonPrecompact.BananaActualSubpairUnindexedCoherenceAxiomAudit
-lake env lean BANANA/NonPrecompact/BananaActualSubpairUnindexedCoherenceAxiomAudit.lean
+# The final theorem imports 13 of the 15 new production modules. Two more
+# modules are standalone, imported only by their audit files. Building just
+# the end-to-end theorem would silently omit those two auxiliary modules.
+# Explicitly build and parse ALL nine Track D axiom-audit entry points.
+track_d_audit_modules=(
+  BananaActualSubpairCoordinatesAxiomAudit
+  BananaActualSubpairUnindexedCoherenceAxiomAudit
+  BananaMatrixAutGroupAxiomAudit
+  BananaMatrixCoherentOneClassAxiomAudit
+  BananaMatrixCoherentTransportAxiomAudit
+  BananaMatrixCompletionActionHomAxiomAudit
+  BananaPresentedSubpairAtlasAxiomAudit
+  CoherentEppaRepresentativeTransportAxiomAudit
+  CoherentRepresentativeCoreAxiomAudit
+)
+for module in "${track_d_audit_modules[@]}"; do
+  file="BANANA/NonPrecompact/${module}.lean"
+  if [[ ! -f "$file" ]]; then
+    echo "Missing Track D axiom audit module: $file" >&2
+    exit 1
+  fi
+  lake build "+BANANA.NonPrecompact.${module}"
+  result="$(mktemp)"
+  if ! lake env lean "$file" >"$result" 2>&1; then
+    cat "$result" >&2
+    rm -f "$result"
+    echo "Track D Lean elaboration failed: $file" >&2
+    exit 1
+  fi
+  if ! python3 scripts/check_axiom_report.py "$file" "$result"; then
+    cat "$result" >&2
+    rm -f "$result"
+    echo "Unexpected Track D axiom dependency: $file" >&2
+    exit 1
+  fi
+  rm -f "$result"
+done
 lake build BANANA
 bash scripts/audit_all_axioms_local.sh
 printf 'Local kernel build and transitive-axiom audit passed on %s\n' "$HEAD_SHA"
