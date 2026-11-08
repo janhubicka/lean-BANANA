@@ -115,10 +115,10 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
   · intro s
     rw [hLmap]
     ext b
-    simp [folkmanFiber]
+    simp [Finset.mem_biUnion, folkmanFiber]
   · intro t
     rw [hRmap]
     ext b
-    simp [folkmanFiber]
+    simp [Finset.mem_biUnion, folkmanFiber]
 
 end SuccessorTree.NonPrecompact
