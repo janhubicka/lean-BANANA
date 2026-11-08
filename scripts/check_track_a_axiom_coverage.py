@@ -19,7 +19,7 @@ NS = "SuccessorTree.NonPrecompact."
 def check() -> int:
     source = strip_lean_comments(SRC.read_text(encoding="utf-8"))
     names = re.findall(
-        r"(?m)^\s*(?:noncomputable\s+)?(?:def|theorem)\s+([A-Za-z_][\w'.]*)\b",
+        r"(?m)^[ \t]*(?:noncomputable[ \t]+)?(?:def|theorem)[ \t]+([A-Za-z_][\w'.]*)\b",
         source,
     )
     expected = {NS + name for name in names}
