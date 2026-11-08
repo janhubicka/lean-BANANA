@@ -33,6 +33,14 @@ if ! command -v python3 >/dev/null 2>&1; then
   echo 'Python 3 is required.' >&2
   exit 2
 fi
+# Several older finite regressions use Python assert statements. An ambient
+# PYTHONOPTIMIZE setting would silently skip those assertions even for
+# commands invoking "python3" without -O. Fail closed instead.
+if ! python3 -c 'import sys; sys.exit(0 if sys.flags.optimize == 0 else 1)'; then
+  echo 'Python optimisation is active: standard-mode assertions are disabled.' >&2
+  echo 'Unset PYTHONOPTIMIZE and rerun the exact-head verification.' >&2
+  exit 2
+fi
 python3 scripts/test_check_axiom_report.py
 python3 scripts/test_check_lean_module_graph.py
 python3 scripts/test_verify_track_d_driver.py
