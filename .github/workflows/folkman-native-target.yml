@@ -25,10 +25,18 @@ jobs:
       - name: Install pinned Lean toolchain
         run: |
           set -euo pipefail
-          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
-          sh /tmp/elan-init.sh -y --default-toolchain none
+          curl --retry 4 --retry-all-errors --retry-delay 3 -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          for attempt in 1 2 3; do
+            if sh /tmp/elan-init.sh -y --default-toolchain none; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 5
+          done
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-          "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"
+          for attempt in 1 2 3; do
+            if "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 5
+          done
       - name: Resolve dependencies and Mathlib cache
         run: |
           set -euo pipefail
