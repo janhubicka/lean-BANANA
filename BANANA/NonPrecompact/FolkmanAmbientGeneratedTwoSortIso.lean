@@ -125,14 +125,14 @@ structure FolkmanAmbientGeneratedTwoSortIso
       (y : NonUnitalSubring.closure (Set.range ysA)),
       βB (left x).val (right y).val = βA x.val y.val
 
-/-- A complete finite Folkman tuple profile determines the
-isomorphism type of the *actual ambient finitely generated*
-non-unital two-sort structure with its original pairing.
+/-- A generator-preserving, pairing-preserving isomorphism of
+the two coded generated subrings transports to the original ambient
+generated subrings via the faithful finite stage embeddings.
 
 The finite stage maps need not preserve a greatest element,
 and neither ambient ring is assumed to possess an identity.
-This statement does not imply extension to a global automorphism. -/
-noncomputable def folkmanAmbientGeneratedTwoSortIso_of_profile_eq
+No global automorphism or homogeneity is asserted here. -/
+noncomputable def folkmanAmbientGeneratedTwoSortIso_of_codeIso
     {LA RA LB RB : Type*}
     [NonUnitalRing LA] [NonUnitalRing RA]
     [NonUnitalRing LB] [NonUnitalRing RB]
@@ -142,13 +142,10 @@ noncomputable def folkmanAmbientGeneratedTwoSortIso_of_profile_eq
     {xsB : Fin nL → LB} {ysB : Fin nR → RB}
     (w : FolkmanFiniteTupleStageWitness (β := βA) xsA ysA)
     (v : FolkmanFiniteTupleStageWitness (β := βB) xsB ysB)
-    (h : w.profile = v.profile) :
+    (e : FolkmanGeneratedTwoSortIso
+      w.leftTuple w.rightTuple v.leftTuple v.rightTuple) :
     FolkmanAmbientGeneratedTwoSortIso βA βB xsA ysA xsB ysB := by
   classical
-  let e : FolkmanGeneratedTwoSortIso
-      w.leftTuple w.rightTuple v.leftTuple v.rightTuple :=
-    folkmanGeneratedTwoSortIso_of_profile_eq
-      w.leftTuple w.rightTuple v.leftTuple v.rightTuple h
   refine {
     left := w.left_generatedEquiv.symm.trans
       (e.left.trans v.left_generatedEquiv)
@@ -250,5 +247,28 @@ noncomputable def folkmanAmbientGeneratedTwoSortIso_of_profile_eq
             (ofBoolRing a.val)
             (ofBoolRing b.val)).symm
       _ = βA x.val y.val := by rw [hx, hy]
+
+
+/-- Equality of complete finite profiles therefore gives an
+isomorphism of the actual ambient finitely generated non-unital
+two-sort structures, preserving all named generators and pairing
+values. The sole further step to global orbit completeness is a
+genuine homogeneous extension theorem for the countable limit. -/
+noncomputable def folkmanAmbientGeneratedTwoSortIso_of_profile_eq
+    {LA RA LB RB : Type*}
+    [NonUnitalRing LA] [NonUnitalRing RA]
+    [NonUnitalRing LB] [NonUnitalRing RB]
+    {βA : LA → RA → F2} {βB : LB → RB → F2}
+    {nL nR : ℕ}
+    {xsA : Fin nL → LA} {ysA : Fin nR → RA}
+    {xsB : Fin nL → LB} {ysB : Fin nR → RB}
+    (w : FolkmanFiniteTupleStageWitness (β := βA) xsA ysA)
+    (v : FolkmanFiniteTupleStageWitness (β := βB) xsB ysB)
+    (h : w.profile = v.profile) :
+    FolkmanAmbientGeneratedTwoSortIso βA βB xsA ysA xsB ysB :=
+  folkmanAmbientGeneratedTwoSortIso_of_codeIso w v
+    (folkmanGeneratedTwoSortIso_of_profile_eq
+      w.leftTuple w.rightTuple v.leftTuple v.rightTuple h)
+
 
 end SuccessorTree.NonPrecompact
