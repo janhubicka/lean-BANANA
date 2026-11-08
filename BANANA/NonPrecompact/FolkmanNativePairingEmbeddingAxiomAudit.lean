@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanNativePairingEmbedding
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativePairingEmbedding.id
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativePairingEmbedding.comp
