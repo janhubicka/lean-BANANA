@@ -9,7 +9,17 @@ if ! command -v git >/dev/null 2>&1 || ! git rev-parse --is-inside-work-tree >/d
   exit 2
 fi
 HEAD_SHA="$(git rev-parse HEAD)"
-if [[ -n "${EXPECTED_HEAD_SHA:-}" && "$HEAD_SHA" != "$EXPECTED_HEAD_SHA" ]]; then
+# The expected revision must come from the PR's GitHub head, not from
+# git rev-parse HEAD in this checkout (which would prove nothing).
+if [[ -z "${EXPECTED_HEAD_SHA:-}" ]]; then
+  echo 'EXPECTED_HEAD_SHA is required; copy the 40-hex SHA from PR #310.' >&2
+  exit 2
+fi
+if [[ ! "$EXPECTED_HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+  echo 'EXPECTED_HEAD_SHA must be a full 40-character lowercase Git SHA.' >&2
+  exit 2
+fi
+if [[ "$HEAD_SHA" != "$EXPECTED_HEAD_SHA" ]]; then
   echo "Wrong checkout SHA: $HEAD_SHA (expected $EXPECTED_HEAD_SHA)" >&2
   exit 2
 fi
