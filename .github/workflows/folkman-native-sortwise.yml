@@ -1,0 +1,75 @@
+name: Folkman native sortwise audit
+
+on:
+  push:
+    branches: [audit/folkman-native-sortwise-intersection-20261108]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Record exact head
+        run: |
+          mkdir -p verification-logs
+          git rev-parse HEAD | tee verification-logs/sha.txt
+          cat lean-toolchain | tee verification-logs/toolchain.txt
+      - name: Install pinned Lean
+        run: |
+          set -euo pipefail
+          curl --retry 4 --retry-all-errors --retry-delay 3 -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          for attempt in 1 2 3; do
+            if sh /tmp/elan-init.sh -y --default-toolchain none; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 5
+          done
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          for attempt in 1 2 3; do
+            if "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 5
+          done
+      - name: Resolve pinned dependencies
+        run: |
+          set -euo pipefail
+          lake update 2>&1 | tee verification-logs/dependencies.log
+          lake exe cache get 2>&1 | tee verification-logs/cache.log
+      - name: Build the sortwise language bridge and root
+        run: |
+          set -euo pipefail
+          lake build BANANA.NonPrecompact.FolkmanNativeSortwiseIntersection 2>&1 | tee verification-logs/build.log
+          lake build BANANA 2>&1 | tee verification-logs/root.log
+      - name: Audit exact transitive axioms
+        run: |
+          set -euo pipefail
+          lake env lean BANANA/NonPrecompact/FolkmanNativeSortwiseIntersectionAxiomAudit.lean 2>&1 | tee verification-logs/axioms.log
+          python3 - <<'PY'
+          import pathlib, re, sys
+          expected = set(re.findall(r"#print axioms\s+([^\s]+)", pathlib.Path("BANANA/NonPrecompact/FolkmanNativeSortwiseIntersectionAxiomAudit.lean").read_text()))
+          log = pathlib.Path("verification-logs/axioms.log").read_text()
+          got = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", log, re.S)
+          got += [(name,"") for name in re.findall(r"'([^']+)' does not depend on any axioms",log)]
+          names = [name for name,_ in got]
+          if len(names)!=len(expected) or set(names)!=expected:
+              sys.exit("Mismatch between exact source declarations and audit results")
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          extra = {a.strip() for _, xs in got for a in xs.split(",") if a.strip()} - allowed
+          if extra or "sorryAx" in log or "error:" in log:
+              sys.exit(f"Unexpected axioms/errors: {sorted(extra)}")
+          print(f"Verified {len(names)} exact named transitive axiom reports")
+          PY
+      - name: Preserve evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: folkman-sortwise-${{ github.sha }}
+          path: verification-logs/
+          if-no-files-found: error
+          retention-days: 14
