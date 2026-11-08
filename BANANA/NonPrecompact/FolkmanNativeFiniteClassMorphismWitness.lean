@@ -10,8 +10,8 @@ those equations on EVERY source ring element, making the morphism
 conversion usable in later class-level and limit arguments.
 
 No assumption of a multiplicative unit, nonzero sort or preservation of
-the greatest element occurs here.  This proof is UNVERIFIED until a
-pinned local Lean build and axiom audit.
+the greatest element occurs here.  The conclusion includes the
+original non-unital maps on every finite support.
 -/
 
 namespace SuccessorTree.NonPrecompact
