@@ -12,5 +12,6 @@ Unverified until the pinned exact-head Lean build and axiom reports.
 -/
 
 #print axioms SuccessorTree.NonPrecompact.folkmanBooleanRingOfNonUnitalEquiv
+#print axioms SuccessorTree.NonPrecompact.folkmanBooleanRingOfNonUnitalEquiv_unit_unique
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.left_generatedBooleanRing
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.right_generatedBooleanRing
