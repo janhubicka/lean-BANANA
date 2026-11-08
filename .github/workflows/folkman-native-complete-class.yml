@@ -1,0 +1,75 @@
+name: Folkman complete finite native class
+
+on:
+  push:
+    branches: [formalize/folkman-native-full-finite-class-20261108]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Exact head
+        run: |
+          mkdir -p verification-logs
+          git rev-parse HEAD | tee verification-logs/sha.txt
+          cat lean-toolchain | tee verification-logs/toolchain.txt
+      - name: Pinned Lean
+        run: |
+          set -euo pipefail
+          curl --retry 4 --retry-all-errors --retry-delay 3 -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          for attempt in 1 2 3; do
+            if sh /tmp/elan-init.sh -y --default-toolchain none; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 5
+          done
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          for attempt in 1 2 3; do
+            if "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"; then break; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep 5
+          done
+      - name: Pin dependencies
+        run: |
+          set -euo pipefail
+          lake update 2>&1 | tee verification-logs/dependencies.log
+          lake exe cache get 2>&1 | tee verification-logs/cache.log
+      - name: Build complete native finite class and root
+        run: |
+          set -euo pipefail
+          lake build BANANA.NonPrecompact.FolkmanNativeCompleteFiniteClass 2>&1 | tee verification-logs/complete-class-build.log
+          lake build BANANA 2>&1 | tee verification-logs/root-build.log
+      - name: Check exact transitive axioms
+        run: |
+          set -euo pipefail
+          lake env lean BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClassAxiomAudit.lean 2>&1 | tee verification-logs/axioms.log
+          python3 - <<'PY'
+          import pathlib, re, sys
+          names = set(re.findall(r"#print axioms\s+([^\s]+)", pathlib.Path("BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClassAxiomAudit.lean").read_text()))
+          report = pathlib.Path("verification-logs/axioms.log").read_text()
+          vals = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", report, re.S)
+          vals += [(x, "") for x in re.findall(r"'([^']+)' does not depend on any axioms", report)]
+          got = [x for x,_ in vals]
+          if len(got) != len(names) or set(got) != names:
+              sys.exit(f"Missing/extra/duplicated audit reports: {got}")
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          unexpected = {x.strip() for _, s in vals for x in s.split(",") if x.strip()} - allowed
+          if unexpected or "sorryAx" in report or "error:" in report:
+              sys.exit(f"Unexpected proof axioms/errors: {sorted(unexpected)}")
+          print(f"Validated {len(got)} exact declaration axiom reports")
+          PY
+      - name: Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: folkman-native-complete-${{ github.sha }}
+          path: verification-logs/
+          if-no-files-found: error
+          retention-days: 14
