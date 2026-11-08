@@ -1,0 +1,12 @@
+import BANANA.NonPrecompact.FolkmanNativeFiniteCodeRealisation
+
+/-! Exact-head local audit required; no validation marker before it passes. -/
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCode_sum_symmDiff
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCodeRealisation
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCodeRealisation_singletons
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteCodeRingEquiv
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteCodeIso
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinite_countable_native_representatives
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCodeSingleton
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCodeRing_card_ge
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinite_native_objects_unbounded
