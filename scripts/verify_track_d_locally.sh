@@ -133,5 +133,11 @@ for module in "${track_d_audit_modules[@]}"; do
 done
 lake build BANANA
 bash scripts/audit_all_axioms_local.sh
+# Source fidelity must hold after the build as well as before it.
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo 'Verification changed the Git worktree; refusing an exact-head sign-off.' >&2
+  git status --porcelain >&2
+  exit 1
+fi
 printf 'Local kernel build and transitive-axiom audit passed on %s\n' "$HEAD_SHA"
 echo 'Independent mathematical statement-fidelity and counterexample reviews remain required.'
