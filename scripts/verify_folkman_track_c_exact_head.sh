@@ -37,6 +37,7 @@ regressions=(
   scripts/check_folkman_native_presentation_profiles.py
   scripts/check_folkman_presented_embedding_naturality.py
   scripts/check_folkman_profile_common_extension.py
+  scripts/check_folkman_cofinal_bridge_automorphism.py
   scripts/check_folkman_stage_generated_closures.py
 )
 for script in "${regressions[@]}"; do
