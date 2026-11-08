@@ -1,0 +1,68 @@
+name: Folkman native strong amalgam target
+
+on:
+  push:
+    branches:
+      - formalize/folkman-native-strong-amalgam-target-20261108
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-target:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Record exact source
+        run: |
+          mkdir -p verification-logs
+          git rev-parse HEAD | tee verification-logs/sha.txt
+          cat lean-toolchain | tee verification-logs/toolchain.txt
+      - name: Install pinned Lean toolchain
+        run: |
+          set -euo pipefail
+          curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" toolchain install "$(tr -d '\r\n' < lean-toolchain)"
+      - name: Resolve dependencies and Mathlib cache
+        run: |
+          set -euo pipefail
+          lake update 2>&1 | tee verification-logs/dependencies.log
+          lake exe cache get 2>&1 | tee verification-logs/mathlib-cache.log
+      - name: Build original-language native amalgam target
+        run: |
+          set -euo pipefail
+          lake build BANANA.NonPrecompact.FolkmanNativeStrongAmalgamTarget 2>&1 | tee verification-logs/build.log
+      - name: Audit declaration axioms
+        run: |
+          set -euo pipefail
+          lake env lean BANANA/NonPrecompact/FolkmanNativeStrongAmalgamTargetAxiomAudit.lean 2>&1 | tee verification-logs/axioms.log
+          python3 - <<'PY'
+          import pathlib, re, sys
+          src = pathlib.Path("BANANA/NonPrecompact/FolkmanNativeStrongAmalgamTargetAxiomAudit.lean").read_text()
+          expected = set(re.findall(r"#print axioms\s+([^\s]+)", src))
+          log = pathlib.Path("verification-logs/axioms.log").read_text()
+          results = re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", log, re.S)
+          results += [(x, "") for x in re.findall(r"'([^']+)' does not depend on any axioms", log)]
+          names = [x for x, _ in results]
+          if len(names) != len(expected) or set(names) != expected:
+              sys.exit(f"Incomplete/duplicate reports: expected {len(expected)}, got {len(names)}")
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          unexpected = {a.strip() for _, xs in results for a in xs.split(",") if a.strip()} - allowed
+          if unexpected or "sorryAx" in log or "error:" in log:
+              sys.exit(f"Unexpected axioms: {sorted(unexpected)}")
+          print(f"Axioms checked for {len(expected)} exact declarations")
+          PY
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: folkman-native-target-${{ github.sha }}
+          path: verification-logs/
+          if-no-files-found: error
+          retention-days: 14
