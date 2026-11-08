@@ -95,3 +95,22 @@ Inspect the actual `#print axioms` outputs for each new declaration: only `prope
 - The exact `scripts/check_track_a_local.sh` blob was reproduced locally, Git hash matched and `bash -n` passed. The gate now refuses dirty checkouts and mismatched Lean versions. Both refusal paths passed in a temporary Git checkout with a stub `lake` command; the stub was **not** used to claim Lean success.
 - The `f2_eq_zero_or_one` helper used by the shared cast lemma is defined in `BilinearResidue.lean`, imported transitively by `FolkmanPersistence.lean` through `ColouringWrappers.lean`. This source-level import check does not establish elaboration.
 - The current execution container still has no `lean`, `lake` or `elan`; Github DNS is unavailable from the container. The actual Lean build, transitive-axiom audit, and genuinely independent referee review are **outstanding**. Do not merge or add a full-theorem validation marker on this evidence.
+
+## Further Track A source coverage — 8 November 2026
+
+On the exact draft source, the new atom-coordinate composition module declares
+13 top-level definitions/theorems. Its dedicated axiom-audit module previously
+contained 11 `#print axioms` queries; `folkmanComposeOwner` and
+`folkmanIdentityOwner` were absent. Both queries have now been added.
+
+New `scripts/check_track_a_axiom_coverage.py` compares all declared
+names with all queries, rejects missing/duplicate/extra names, and checks
+the existing audits for the generic, native, and tuple-profile parity lemmas.
+The static comparison against the current GitHub source found exactly
+13 declarations and 13 matching unique queries. The final local gate calls
+this script before compiling Lean. This establishes **static audit coverage**,
+not kernel verification.
+
+The execution container has no Lean/Lake/Elan and cannot resolve the Lean
+release server; the exact-head kernel build and independent proof referee
+remain outstanding. The circulation manuscript is still untouched.
