@@ -36,6 +36,7 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanNativeFiniteProfileTransport
   BANANA.NonPrecompact.FolkmanNativeProfileNaturality
   BANANA.NonPrecompact.FolkmanDirectedFiniteStageAtlas
+  BANANA.NonPrecompact.FolkmanAmbientGeneratedIntrinsicUnits
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
   BANANA.NonPrecompact.FolkmanGlobalGeneratedHomogeneity
   BANANA.NonPrecompact.FolkmanGlobalProfileInvariance
