@@ -11,3 +11,5 @@ extension properties are not asserted by this file.
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeMap.comp
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeMap.preserves_source_pairing
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeMap.preserves_target_pairing
+#print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridge
+#print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeMap
