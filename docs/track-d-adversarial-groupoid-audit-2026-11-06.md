@@ -412,3 +412,57 @@ orchestration regression. No actual Lean compilation is implied.
 The result is a source-integrity guard, not a mathematical proof.
 The full kernel validation and independent adversarial mathematical
 referee checks remain outstanding.
+
+
+## 14. Executed the exact committed full mock-Lake driver test (8 November)
+
+Unlike the previous source-only reports, the **complete current**
+verification-driver test was actually executed this turn in the
+local container.
+
+The following reconstructed files were checked against the
+GitHub blob hashes **before** execution:
+
+- scripts/verify_track_d_locally.sh:
+  `61a5027df5d8deff3a249fec345535da7d40ccbc`
+- scripts/test_verify_track_d_driver.py:
+  `36c705c0ca23a39b33b761a1e228cf09de0dae7b`
+
+Both hashes matched the committed PR #310 blobs exactly.
+The tested environment was x86_64, Python 3.13.5, Git present.
+
+**Actual process exit status: 0.** Output:
+
+    PASS: exact committed local driver syntax and fake-Lake orchestration
+    PASS: all 9 distinct audit modules built and checked
+    PASS: two clean runs; ignored build outputs; source-modification, SHA and optimisation rejection
+    LIMIT: fake Lake and fake Lean outputs; this is NOT kernel verification
+
+The test spawns a disposable clean Git repository and a fake
+Lake executable. It checks all nine per-module build/query calls,
+the global audit, two consecutive clean full runs, ignored
+generated Python and Lake artefacts, and rejection of a deliberately
+source-modifying fake build. It also checks missing, malformed and
+stale expected SHA values and Python optimisation that would disable
+assertions.
+
+A second finite check reproduced **82,697** composable pairs
+across 17 small pairing matrices, with **1,277** partial
+isomorphisms, by running the earlier finite-choice script.
+That script's exact blob was
+`36854b72d8dc8ae64d2becd8e76ac77c20df2b46`.
+The present PR has a newer wrapper-compatible version of that script;
+this second computation is a baseline cross-check, not an assertion
+that the newer variant was executed here.
+
+**Important boundary:** the simulation does **not** install,
+invoke, emulate the logic of, or substitute for the actual Lean
+kernel. Its fake Lake outputs cannot validate the mathematical
+proof, establish compilation of the new declarations, or provide
+transitive-axiom certification. No actual independent adversarial
+mathematical referee has participated. The pinned toolchain
+and dependency cache remain unavailable in this container.
+Therefore the end-to-end coherent-EPPA theorem is **NOT** formally
+verified and PR #310 remains a draft, unmerged.
+
+No circulation prose, existing TODO or validation marker changed.
