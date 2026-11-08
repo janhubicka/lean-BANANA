@@ -23,6 +23,12 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical
 
+-- The amalgam's finite atom types use the Boolean-algebra view of each
+-- finite source ring; the corresponding instance is local to this file.
+local instance folkmanNativeSortwiseAsBoolAlgFintype
+    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
+  Fintype.ofEquiv α toBoolAlg
+
 variable {AL BL CL AR BR CR : Type*}
 variable [BooleanRing AL] [Fintype AL]
 variable [BooleanRing BL] [Fintype BL]
