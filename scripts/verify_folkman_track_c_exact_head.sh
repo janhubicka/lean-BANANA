@@ -67,6 +67,7 @@ regressions=(
   scripts/check_folkman_cofinal_bridge_automorphism.py
   scripts/check_folkman_two_stage_bridge.py
   scripts/check_folkman_stage_generated_closures.py
+  scripts/check_folkman_intrinsic_units.py
 )
 for script in "${regressions[@]}"; do
   python3 "$script"
