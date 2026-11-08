@@ -34,6 +34,7 @@ fi
 printf 'Verified pinned Lean: %s\n' "$actual_version"
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/check_lean_module_graph.py
+python3 scripts/check_track_a_axiom_coverage.py
 for script in \
   check_folkman_edgecount_cast_small.py \
   check_folkman_partial_owner_parity_small.py \
