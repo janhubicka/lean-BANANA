@@ -21,6 +21,8 @@ dynamical assertions are outside this finite-class statement.
 
 namespace SuccessorTree.NonPrecompact
 
+open scoped Classical
+
 variable {AL BL CL AR BR CR : Type*}
 variable [BooleanRing AL] [Fintype AL]
 variable [BooleanRing BL] [Fintype BL]
