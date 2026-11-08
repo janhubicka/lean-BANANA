@@ -128,6 +128,32 @@ theorem preserves_source_pairing (f : FolkmanFinitePairedBridgeMap P Q)
             Q.source.atom.edge i j :=
       Q.source.preserves_pairing _ _
 
+
+/-- The TARGET atom matrix is preserved by the same finite bridge
+extension, using the target commuting square and full target pairing
+reconstruction. This is an independent check from the source-side
+pairing calculation; neither side assumes unit preservation. -/
+theorem preserves_target_pairing (f : FolkmanFinitePairedBridgeMap P Q)
+    (s : Finset (Fin P.source.atom.leftCount))
+    (t : Finset (Fin P.source.atom.rightCount)) :
+    (∑ i ∈ s, ∑ j ∈ t, P.source.atom.edge i j) =
+      ∑ i ∈ ofBoolRing (f.left (toBoolRing s)),
+        ∑ j ∈ ofBoolRing (f.right (toBoolRing t)),
+          Q.source.atom.edge i j := by
+  calc
+    (∑ i ∈ s, ∑ j ∈ t, P.source.atom.edge i j) =
+        β (P.targetLeft (toBoolRing s))
+          (P.targetRight (toBoolRing t)) :=
+      (P.target_pairing s t).symm
+    _ = β (Q.targetLeft (f.left (toBoolRing s)))
+          (Q.targetRight (f.right (toBoolRing t))) := by
+      rw [f.target_left_comm, f.target_right_comm]
+    _ = ∑ i ∈ ofBoolRing (f.left (toBoolRing s)),
+          ∑ j ∈ ofBoolRing (f.right (toBoolRing t)),
+            Q.source.atom.edge i j :=
+      Q.target_pairing _ _
+
+
 end FolkmanFinitePairedBridgeMap
 
 /-- The extension relation remembers genuine finite ring maps and
