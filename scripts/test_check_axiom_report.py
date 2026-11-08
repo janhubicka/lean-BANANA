@@ -22,14 +22,14 @@ class AxiomReportTests(unittest.TestCase):
         self.assertNotIn("Missing.Fake", strip_lean_comments(source))
 
     def test_inline_block_comment_keeps_import_tokens_separate(self):
-        source = "import BANANA.Left/- an inline comment -/BANANA.Right\\n"
+        source = "import BANANA.Left/- an inline comment -/BANANA.Right\n"
         cleaned = strip_lean_comments(source)
         self.assertEqual(cleaned.split(), [
             "import", "BANANA.Left", "BANANA.Right",
         ])
 
     def test_trailing_line_comment_preserves_next_import(self):
-        source = "import BANANA.Left -- comment\\nimport BANANA.Right\\n"
+        source = "import BANANA.Left -- comment\nimport BANANA.Right\n"
         self.assertEqual(
             strip_lean_comments(source).splitlines(),
             ["import BANANA.Left ", "import BANANA.Right"],
