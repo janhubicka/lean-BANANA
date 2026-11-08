@@ -70,4 +70,43 @@ theorem FolkmanFiniteTupleStageWitness.generatedNativePairing_finite
       Finite (NonUnitalSubring.closure (Set.range ys)) :=
   ⟨w.left_generated_finite, w.right_generated_finite⟩
 
+
+/-- A finite generated substructure in the ORIGINAL non-unital
+ambient language has a faithful atom-code presentation, using
+the existing finite native representation theorem from Track B.
+
+The source BooleanRing structures are the intrinsic local ones,
+not a global structure on either ambient sort. The result includes
+zero generated subrings and preserves the actual β pairing on
+all generated elements, not only their distinguished generators. -/
+theorem FolkmanFiniteTupleStageWitness.generatedNativeCode_exists
+    {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
+    {β : L → R → F2}
+    (A : FolkmanDirectedFiniteStageAtlas L R β)
+    {nL nR : ℕ}
+    {xs : Fin nL → L} {ys : Fin nR → R}
+    (w : FolkmanFiniteTupleStageWitness (β := β) xs ys) :
+    letI := w.left_generatedBooleanRing
+    letI := w.right_generatedBooleanRing
+    ∃ C : FolkmanAtomStructure,
+      Nonempty (FolkmanNativeFinitePairingIso
+        (w.generatedNativePairing A)
+        (folkmanNativeCodeRealisation C)) := by
+  classical
+  letI : BooleanRing (NonUnitalSubring.closure (Set.range xs)) :=
+    w.left_generatedBooleanRing
+  letI : BooleanRing (NonUnitalSubring.closure (Set.range ys)) :=
+    w.right_generatedBooleanRing
+  letI : Finite (NonUnitalSubring.closure (Set.range xs)) :=
+    w.left_generated_finite
+  letI : Finite (NonUnitalSubring.closure (Set.range ys)) :=
+    w.right_generated_finite
+  letI : Fintype (NonUnitalSubring.closure (Set.range xs)) :=
+    Fintype.ofFinite _
+  letI : Fintype (NonUnitalSubring.closure (Set.range ys)) :=
+    Fintype.ofFinite _
+  exact (folkmanNativeFinite_countable_native_representatives
+    (w.generatedNativePairing A)).2
+
+
 end SuccessorTree.NonPrecompact
