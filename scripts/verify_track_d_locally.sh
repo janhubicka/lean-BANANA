@@ -33,6 +33,10 @@ if ! command -v python3 >/dev/null 2>&1; then
   echo 'Python 3 is required.' >&2
   exit 2
 fi
+# Prevent finite-test imports from creating untracked scripts/__pycache__ files.
+# The checkout is required to be clean both before and after local verification;
+# without this setting a successful first run could block its own rerun.
+export PYTHONDONTWRITEBYTECODE=1
 # Several older finite regressions use Python assert statements. An ambient
 # PYTHONOPTIMIZE setting would silently skip those assertions even for
 # commands invoking "python3" without -O. Fail closed instead.
