@@ -98,7 +98,7 @@ negative guard probes, targeted new Lean axiom-audit module,
 Use the pinned toolchain from `lean-toolchain` and locally cached
 dependencies, never GitHub Actions:
 
-    EXPECTED_HEAD_SHA=$(git rev-parse HEAD) bash scripts/verify_track_d_locally.sh
+    EXPECTED_HEAD_SHA=<full-40-hex-PR-310-head> bash scripts/verify_track_d_locally.sh
 
 This environment has no `lean`, `lake` or `elan` binary, and direct
 GitHub DNS is unavailable. Thus the exact-head kernel gate has NOT run.
@@ -182,3 +182,8 @@ both Python modes. There is still no Lean compiler in the present
 execution environment, and neither proof kernel verification nor
 independent adversarial referee approval has occurred. Do not merge
 or add circulation verification markers.
+
+The literal expected SHA must be copied from the actual GitHub PR head.
+Never set it to `git rev-parse HEAD` inside the checkout: that comparison
+would be tautological. The verification driver now refuses missing or
+malformed expected revisions, in addition to rejecting stale heads.
