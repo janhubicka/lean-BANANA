@@ -12,6 +12,26 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 printf 'Pinned toolchain: '
 cat lean-toolchain
+if ! command -v git >/dev/null 2>&1; then
+  echo "BLOCKED: git is required for exact-head verification" >&2
+  exit 2
+fi
+if [[ -n "$(git status --porcelain --untracked-files=normal)" ]]; then
+  echo "BLOCKED: checkout is not clean; verification must use exact committed sources" >&2
+  exit 2
+fi
+expected_version="$(sed -n 's@^leanprover/lean4:v@@p' lean-toolchain)"
+if [[ -z "$expected_version" ]]; then
+  echo "BLOCKED: unrecognised lean-toolchain pin" >&2
+  exit 2
+fi
+actual_version="$(lake env lean --version)"
+if [[ "$actual_version" != *"$expected_version"* ]]; then
+  echo "BLOCKED: Lean version does not match pinned $expected_version" >&2
+  echo "Found: $actual_version" >&2
+  exit 2
+fi
+printf 'Verified pinned Lean: %s\\n' "$actual_version"
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/check_lean_module_graph.py
 for script in \
