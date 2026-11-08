@@ -274,3 +274,36 @@ extended to cover all three negative cases.
 it only compares the checkout to itself. The exact PR head is a
 separate externally obtained reference. This correction affects only
 the local verification gate, not any mathematical theorem or TeX.
+
+
+## 10. Legacy finite-group regression and optimisation guard (8 November)
+
+A separate adversarial audit re-executed the **exact committed script**
+`scripts/check_banana_finite_aut_completion_group.py` in local
+ordinary Python (not `-O`). The local script's Git blob was
+`68d5b0d3c8482d590d911ae849760203cb785a5c`, identical to
+the blob in PR #310. It enumerated all 17 binary bilinear forms of
+total dimension at most three, all 377 pairing-preserving
+two-sorted linear automorphisms, and all **56,621** ordered
+automorphism products. Every original-source assertion passed,
+including subgroup closure, identity and inverses, preservation
+of the perfect pairing, restrictions to both original sorts and
+composition of the canonical completion action. This is a
+computer experiment, not a proof in Lean or an independent
+mathematical referee.
+
+**Newly identified verification hazard:** this and several other older
+finite scripts use Python `assert`. A shell environment with
+`PYTHONOPTIMIZE=1` causes even `python3 script.py` to disable
+all their assertions silently. The exact-head shell driver
+now fails at the start if the ordinary `python3` executable
+reports a nonzero `sys.flags.optimize`. Explicit `python3 -O`
+tests are kept for scripts that use unconditional runtime checks.
+The local guard's positive and negative outcomes were reproduced.
+The fake-Lake unit test was extended to assert that a
+`PYTHONOPTIMIZE=1` subprocess fails with the intended diagnostic.
+
+This repair does not eliminate the need for Lean compilation or
+transitive-axiom inspection. It is solely a correction to the
+preflight evidence: `-O` outputs from older `assert`-based
+tests must never count towards validated theorem coverage.
