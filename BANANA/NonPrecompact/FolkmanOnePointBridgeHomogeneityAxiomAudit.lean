@@ -12,3 +12,4 @@ extension properties are not asserted by this file.
 #print axioms SuccessorTree.NonPrecompact.folkmanGeneratedHomogeneous_of_onePoint
 #print axioms SuccessorTree.NonPrecompact.folkmanGlobalTupleOrbits_finite_of_onePoint
 #print axioms SuccessorTree.NonPrecompact.folkmanGlobalTaggedOrbits_finite_of_onePoint
+#print axioms SuccessorTree.NonPrecompact.FolkmanInitialPairedBridgeTupleWitness
