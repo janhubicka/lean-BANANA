@@ -20,6 +20,11 @@ with tempfile.TemporaryDirectory() as td:
     scripts = root / 'scripts'
     scripts.mkdir()
     shutil.copy2(SOURCE, scripts / 'verify_track_d_locally.sh')
+    # The actual checkout ignores generated Lake and Python outputs. Carry
+    # precisely those rules into the mock checkout before committing it.
+    ignore_file = SOURCE.parent.parent / '.gitignore'
+    assert ignore_file.is_file(), 'Missing generated-file ignore rules'
+    shutil.copy2(ignore_file, root / '.gitignore')
     (root / 'lean-toolchain').write_text('fake toolchain\n')
     (root / 'lakefile.toml').write_text('name = "fake"\n')
     (scripts / 'audit_all_axioms_local.sh').write_text('#!/bin/bash\necho global-audit >> "$MOCK_LAKE_LOG"\n')
@@ -47,7 +52,7 @@ with tempfile.TemporaryDirectory() as td:
     sha = subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
     bindir=Path(td)/'bin';bindir.mkdir()
     fake = bindir/'lake'
-    fake.write_text('#!/bin/bash\necho "$*" >> "$MOCK_LAKE_LOG"\nif [[ "$1" == env ]]; then\n echo fake-axioms-allowed\nfi\n')
+    fake.write_text('#!/bin/bash\nmkdir -p .lake/build\nprintf mock > .lake/build/Mock.olean\necho "$*" >> "$MOCK_LAKE_LOG"\nif [[ "$1" == env ]]; then\n echo fake-axioms-allowed\nfi\n')
     fake.chmod(0o755)
     env=os.environ.copy()
     env['PATH']=str(bindir)+os.pathsep+env['PATH']
@@ -67,6 +72,7 @@ with tempfile.TemporaryDirectory() as td:
     status = subprocess.check_output(['git', 'status', '--porcelain'], cwd=root, text=True)
     assert not status, f'First run dirtied the checkout: {status!r}'
     assert not list(scripts.rglob('__pycache__')), 'Bytecode cache created despite the driver guard'
+    assert (root / '.lake/build/Mock.olean').is_file(), 'Fake Lake failed to generate its build artefact'
     # A second full invocation must succeed on precisely the same Git head.
     again=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=env,capture_output=True,text=True)
     assert again.returncode==0, (again.stdout,again.stderr)
@@ -86,5 +92,5 @@ with tempfile.TemporaryDirectory() as td:
     assert result5.returncode==2 and 'Python optimisation is active' in result5.stderr
     print('PASS: exact committed local driver syntax and fake-Lake orchestration')
     print(f'PASS: all {len(modules)} distinct audit modules built and checked')
-    print('PASS: repeatable clean checkout, no bytecode cache, negative guard, SHA and optimisation rejection')
+    print('PASS: repeatable clean checkout, ignored Lake output, no bytecode cache, negative guard, SHA and optimisation rejection')
     print('LIMIT: fake Lake and fake Lean outputs; this is NOT kernel verification')
