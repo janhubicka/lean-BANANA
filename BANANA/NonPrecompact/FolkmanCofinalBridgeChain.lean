@@ -19,7 +19,7 @@ is a *separate* obligation and is not silently assumed here.
 
 namespace SuccessorTree.NonPrecompact
 
-open scoped Classical
+open scoped Classical BigOperators
 
 /-- An exhaustive family of common finite atom presentations,
 embedded twice in the original two-sort non-unital pairing.
@@ -43,11 +43,16 @@ structure FolkmanCofinalBridgeChain
   targetLeft_injective : ∀ n, Function.Injective (targetLeft n)
   sourceRight_injective : ∀ n, Function.Injective (sourceRight n)
   targetRight_injective : ∀ n, Function.Injective (targetRight n)
-  stage_pairing : ∀ n
+  source_stage_pairing : ∀ n
       (a : AsBoolRing (Finset (Fin (code n).leftCount)))
       (b : AsBoolRing (Finset (Fin (code n).rightCount))),
       β (sourceLeft n a) (sourceRight n b) =
-        β (targetLeft n a) (targetRight n b)
+        ∑ i ∈ ofBoolRing a, ∑ j ∈ ofBoolRing b, (code n).edge i j
+  target_stage_pairing : ∀ n
+      (a : AsBoolRing (Finset (Fin (code n).leftCount)))
+      (b : AsBoolRing (Finset (Fin (code n).rightCount))),
+      β (targetLeft n a) (targetRight n b) =
+        ∑ i ∈ ofBoolRing a, ∑ j ∈ ofBoolRing b, (code n).edge i j
   left_forward_coherent : ∀ n m
       (a : AsBoolRing (Finset (Fin (code n).leftCount)))
       (b : AsBoolRing (Finset (Fin (code m).leftCount))),
@@ -107,6 +112,18 @@ namespace FolkmanCofinalBridgeChain
 
 variable {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
 variable {β : L → R → F2}
+
+/-- Both bridge images reconstruct the *same* actual finite atom
+matrix on every input. This equality follows from their respective
+faithful pairing certificates, rather than being postulated. -/
+theorem stage_pairing (C : FolkmanCofinalBridgeChain L R β)
+    (n : ℕ)
+    (a : AsBoolRing (Finset (Fin (C.code n).leftCount)))
+    (b : AsBoolRing (Finset (Fin (C.code n).rightCount))) :
+    β (C.sourceLeft n a) (C.sourceRight n b) =
+      β (C.targetLeft n a) (C.targetRight n b) :=
+  (C.source_stage_pairing n a b).trans
+    (C.target_stage_pairing n a b).symm
 
 /-- Choose a source finite-stage representative of one left element. -/
 noncomputable def chooseLeft (C : FolkmanCofinalBridgeChain L R β)
