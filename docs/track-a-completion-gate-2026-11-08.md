@@ -2,6 +2,40 @@
 
 Internal note only. Do not insert into the frozen circulation manuscript.
 
+
+## Current integration status — 8 November 2026
+
+The references below to #305 and #309 as drafts record the state before the
+latest mainline merges; they are no longer current. PRs #305, #309, #313
+(original-language embedding identity and composition) and #314
+(original-language strong-amalgamation target) have been merged into main.
+This does NOT make the new Track A declarations kernel-checked.
+
+Track A PR #312 has been brought forward to main commit
+`97660c8d0824ef58739e9e42768ce98b164b81c4` by an explicit
+disjoint-file merge. The native and tuple-profile cast theorems now both
+use `folkmanEdgeCount_cast` without changing either statement. The native
+code integration is confined to
+`FolkmanNativeFiniteCodeEmbedding.lean`, with its own existing
+`#print axioms` audit preserved.
+
+`scripts/check_track_a_local.sh` is now the reproducible final gate:
+it runs the seven relevant finite regressions, the Python audit fixtures,
+the import graph scan, explicit builds of the previously audit-only
+composition modules and of the two callers, the root build, and the strict
+transitive-axiom audit. Its shell syntax was checked with `bash -n`;
+the script has **not** been run with Lean. Only the pinned toolchain
+`leanprover/lean4:v4.35.0-rc3` should be used. GitHub Actions must not
+be used as a substitute for the local build.
+
+This integration does not replace the need to check correspondence with
+the native ring-map interface. The pairing-preserving atom-coordinate
+embedding category and the original-language non-unital embedding
+category remain distinct interfaces. An independent adversarial referee
+must check both the exact theorem types and the code that transports
+between these interfaces; this has not yet been obtained.
+
+
 ## Work delivered
 
 The shared finite-owner summation refactor is merged as PR #307.
