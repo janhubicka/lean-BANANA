@@ -1,0 +1,6 @@
+# Generated Lean/Lake build outputs (not source files)
+.lake/
+
+# Generated Python bytecode from local verification scripts
+__pycache__/
+*.py[cod]
