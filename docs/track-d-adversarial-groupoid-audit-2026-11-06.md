@@ -390,3 +390,25 @@ The latest mainline Folkman-only changes were merged into the
 draft at commit eba7b1a429cfc9ee63bdbd3e2efa6d0c096f628b.
 No Track D theorem files, circulation TeX, original TODO notes,
 or validation markers were modified. PR #310 remains draft.
+
+
+## 13. Post-build source fidelity (8 November)
+
+In addition to the clean-working-tree check before verification, the
+local driver now checks Git status AFTER the nine Lean module audits,
+the root Lake build, and the global axiom audit. If any tracked
+source has changed, or if an unexpected untracked artefact appears,
+the driver returns a nonzero status and refuses exact-head sign-off.
+
+The new negative fixture in test_verify_track_d_driver.py instructs
+a mock Lake executable to modify the tracked BANANA.lean during
+the build. It then requires the driver to reject this as a source
+fidelity failure. The mock test also requires two successful clean
+runs with deliberately generated ignored .lake/build artefacts
+and a local Python import. These are staged test assertions and
+must be executed from the exact checkout to count as a complete
+orchestration regression. No actual Lean compilation is implied.
+
+The result is a source-integrity guard, not a mathematical proof.
+The full kernel validation and independent adversarial mathematical
+referee checks remain outstanding.
