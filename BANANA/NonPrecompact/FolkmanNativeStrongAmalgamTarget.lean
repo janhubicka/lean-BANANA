@@ -9,8 +9,8 @@ with symmetric difference, intersection, and a biadditive pairing.
 We equip those carriers with actual Boolean-ring structures and
 represent all four original injections by non-unital homomorphisms.
 
-This module is an unverified internal candidate pending Lean and axiom
-audits; the circulation manuscript is unchanged.
+This construction is internal to the formalisation and does not
+change the circulation manuscript.
 -/
 
 namespace SuccessorTree.NonPrecompact
