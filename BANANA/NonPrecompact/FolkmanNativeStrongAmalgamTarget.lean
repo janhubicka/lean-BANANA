@@ -79,76 +79,96 @@ noncomputable def embedBLeft : BL →ₙ+* S.NativeLeft where
   toFun := fun x => toBoolRing ((folkmanNativeEmbedB S.diagram (x, (0 : BR))).1)
   map_zero' := by
     have h := congrArg (fun z => toBoolRing z.1) S.zero_B
-    simpa only [Prod.fst, toBoolRing_bot] using h
+    change toBoolRing (folkmanNativeEmbedB S.diagram ((0 : BL), (0 : BR))).1 = (0 : S.NativeLeft)
+    exact h.trans (by rfl)
   map_add' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.1)
       (S.add_B (x, (0 : BR)) (y, (0 : BR)))
-    simpa only [add_zero, folkmanTwoSortSymmDiff, Prod.fst,
-      toBoolRing_symmDiff] using h
+    have h' : toBoolRing (folkmanNativeEmbedB S.diagram (x + y, (0 : BR))).1 =
+        toBoolRing (symmDiff (folkmanNativeEmbedB S.diagram (x, (0 : BR))).1 (folkmanNativeEmbedB S.diagram (y, (0 : BR))).1) := by
+      simpa only [add_zero, folkmanTwoSortSymmDiff, Prod.fst] using h
+    exact h'.trans (toBoolRing_symmDiff _ _)
   map_mul' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.1)
       (S.mul_B (x, (0 : BR)) (y, (0 : BR)))
-    simpa only [mul_zero, folkmanTwoSortInter, Prod.fst,
-      toBoolRing_inf] using h
+    have h' : toBoolRing (folkmanNativeEmbedB S.diagram (x * y, (0 : BR))).1 =
+        toBoolRing ((folkmanNativeEmbedB S.diagram (x, (0 : BR))).1 ∩ (folkmanNativeEmbedB S.diagram (y, (0 : BR))).1) := by
+      simpa only [mul_zero, folkmanTwoSortInter, Prod.fst] using h
+    exact h'.trans (toBoolRing_inf _ _)
 
 /-- B-side right-sort injection. -/
 noncomputable def embedBRight : BR →ₙ+* S.NativeRight where
   toFun := fun x => toBoolRing ((folkmanNativeEmbedB S.diagram ((0 : BL), x)).2)
   map_zero' := by
     have h := congrArg (fun z => toBoolRing z.2) S.zero_B
-    simpa only [Prod.snd, toBoolRing_bot] using h
+    change toBoolRing (folkmanNativeEmbedB S.diagram ((0 : BL), (0 : BR))).2 = (0 : S.NativeRight)
+    exact h.trans (by rfl)
   map_add' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.2)
       (S.add_B ((0 : BL), x) ((0 : BL), y))
-    simpa only [zero_add, folkmanTwoSortSymmDiff, Prod.snd,
-      toBoolRing_symmDiff] using h
+    have h' : toBoolRing (folkmanNativeEmbedB S.diagram ((0 : BL), x + y)).2 =
+        toBoolRing (symmDiff (folkmanNativeEmbedB S.diagram ((0 : BL), x)).2 (folkmanNativeEmbedB S.diagram ((0 : BL), y)).2) := by
+      simpa only [zero_add, folkmanTwoSortSymmDiff, Prod.snd] using h
+    exact h'.trans (toBoolRing_symmDiff _ _)
   map_mul' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.2)
       (S.mul_B ((0 : BL), x) ((0 : BL), y))
-    simpa only [zero_mul, folkmanTwoSortInter, Prod.snd,
-      toBoolRing_inf] using h
+    have h' : toBoolRing (folkmanNativeEmbedB S.diagram ((0 : BL), x * y)).2 =
+        toBoolRing ((folkmanNativeEmbedB S.diagram ((0 : BL), x)).2 ∩ (folkmanNativeEmbedB S.diagram ((0 : BL), y)).2) := by
+      simpa only [zero_mul, folkmanTwoSortInter, Prod.snd] using h
+    exact h'.trans (toBoolRing_inf _ _)
 
 /-- C-side left-sort injection. -/
 noncomputable def embedCLeft : CL →ₙ+* S.NativeLeft where
   toFun := fun x => toBoolRing ((folkmanNativeEmbedC S.diagram (x, (0 : CR))).1)
   map_zero' := by
     have h := congrArg (fun z => toBoolRing z.1) S.zero_C
-    simpa only [Prod.fst, toBoolRing_bot] using h
+    change toBoolRing (folkmanNativeEmbedC S.diagram ((0 : CL), (0 : CR))).1 = (0 : S.NativeLeft)
+    exact h.trans (by rfl)
   map_add' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.1)
       (S.add_C (x, (0 : CR)) (y, (0 : CR)))
-    simpa only [add_zero, folkmanTwoSortSymmDiff, Prod.fst,
-      toBoolRing_symmDiff] using h
+    have h' : toBoolRing (folkmanNativeEmbedC S.diagram (x + y, (0 : CR))).1 =
+        toBoolRing (symmDiff (folkmanNativeEmbedC S.diagram (x, (0 : CR))).1 (folkmanNativeEmbedC S.diagram (y, (0 : CR))).1) := by
+      simpa only [add_zero, folkmanTwoSortSymmDiff, Prod.fst] using h
+    exact h'.trans (toBoolRing_symmDiff _ _)
   map_mul' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.1)
       (S.mul_C (x, (0 : CR)) (y, (0 : CR)))
-    simpa only [mul_zero, folkmanTwoSortInter, Prod.fst,
-      toBoolRing_inf] using h
+    have h' : toBoolRing (folkmanNativeEmbedC S.diagram (x * y, (0 : CR))).1 =
+        toBoolRing ((folkmanNativeEmbedC S.diagram (x, (0 : CR))).1 ∩ (folkmanNativeEmbedC S.diagram (y, (0 : CR))).1) := by
+      simpa only [mul_zero, folkmanTwoSortInter, Prod.fst] using h
+    exact h'.trans (toBoolRing_inf _ _)
 
 /-- C-side right-sort injection. -/
 noncomputable def embedCRight : CR →ₙ+* S.NativeRight where
   toFun := fun x => toBoolRing ((folkmanNativeEmbedC S.diagram ((0 : CL), x)).2)
   map_zero' := by
     have h := congrArg (fun z => toBoolRing z.2) S.zero_C
-    simpa only [Prod.snd, toBoolRing_bot] using h
+    change toBoolRing (folkmanNativeEmbedC S.diagram ((0 : CL), (0 : CR))).2 = (0 : S.NativeRight)
+    exact h.trans (by rfl)
   map_add' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.2)
       (S.add_C ((0 : CL), x) ((0 : CL), y))
-    simpa only [zero_add, folkmanTwoSortSymmDiff, Prod.snd,
-      toBoolRing_symmDiff] using h
+    have h' : toBoolRing (folkmanNativeEmbedC S.diagram ((0 : CL), x + y)).2 =
+        toBoolRing (symmDiff (folkmanNativeEmbedC S.diagram ((0 : CL), x)).2 (folkmanNativeEmbedC S.diagram ((0 : CL), y)).2) := by
+      simpa only [zero_add, folkmanTwoSortSymmDiff, Prod.snd] using h
+    exact h'.trans (toBoolRing_symmDiff _ _)
   map_mul' := by
     intro x y
     have h := congrArg (fun z => toBoolRing z.2)
       (S.mul_C ((0 : CL), x) ((0 : CL), y))
-    simpa only [zero_mul, folkmanTwoSortInter, Prod.snd,
-      toBoolRing_inf] using h
+    have h' : toBoolRing (folkmanNativeEmbedC S.diagram ((0 : CL), x * y)).2 =
+        toBoolRing ((folkmanNativeEmbedC S.diagram ((0 : CL), x)).2 ∩ (folkmanNativeEmbedC S.diagram ((0 : CL), y)).2) := by
+      simpa only [zero_mul, folkmanTwoSortInter, Prod.snd] using h
+    exact h'.trans (toBoolRing_inf _ _)
 
 /-- Each of the four original-sort maps is injective. -/
 theorem embedBLeft_injective : Function.Injective S.embedBLeft := by
@@ -192,12 +212,16 @@ theorem native_base_commutes_left (a : AL) :
     S.embedBLeft (fBL a) = S.embedCLeft (gCL a) := by
   have h := congrArg (fun z => toBoolRing z.1)
     (S.base_commutes (a, (0 : AR)))
+  change toBoolRing (folkmanNativeEmbedB S.diagram (fBL a, (0 : BR))).1 =
+    toBoolRing (folkmanNativeEmbedC S.diagram (gCL a, (0 : CR))).1
   simpa only [map_zero] using h
 
 theorem native_base_commutes_right (a : AR) :
     S.embedBRight (fBR a) = S.embedCRight (gCR a) := by
   have h := congrArg (fun z => toBoolRing z.2)
     (S.base_commutes ((0 : AL), a))
+  change toBoolRing (folkmanNativeEmbedB S.diagram ((0 : BL), fBR a)).2 =
+    toBoolRing (folkmanNativeEmbedC S.diagram ((0 : CL), gCR a)).2
   simpa only [map_zero] using h
 
 /-- Original pairings are preserved on arbitrary carrier elements. -/
