@@ -2,9 +2,11 @@ import BANANA.NonPrecompact.FolkmanPartialOwnerComposition
 
 /-! Transitive-axiom checks for shared partial-owner composition. -/
 
+#print axioms SuccessorTree.NonPrecompact.folkmanComposeOwner
 #print axioms SuccessorTree.NonPrecompact.folkmanFiber_compose
 #print axioms SuccessorTree.NonPrecompact.folkmanComposeOwner_surjective
 #print axioms SuccessorTree.NonPrecompact.FolkmanAtomEmbedding.comp
+#print axioms SuccessorTree.NonPrecompact.folkmanIdentityOwner
 #print axioms SuccessorTree.NonPrecompact.folkmanComposeOwner_id_left
 #print axioms SuccessorTree.NonPrecompact.folkmanComposeOwner_id_right
 #print axioms SuccessorTree.NonPrecompact.folkmanComposeOwner_assoc
