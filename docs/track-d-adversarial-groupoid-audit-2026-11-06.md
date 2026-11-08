@@ -353,3 +353,40 @@ GitHub runners are out of budget. Thus this continuation provides
 no kernel compilation or printed transitive-axiom report.
 No independent adversarial mathematical referee has signed off.
 Do not merge Track D or add a circulation validation marker yet.
+
+## 12. Clean-checkout repeatability (8 November)
+
+Another executable preflight defect was identified and reproduced in a
+fresh local Git repository: importing the finite coherent-choice
+Python module creates an untracked __pycache__/ directory when the
+repository has no ignore rules. The verification driver previously
+checked a clean tree only BEFORE running the test suite. The second
+invocation could therefore fail its exact-head cleanliness test,
+despite the first invocation succeeding and without any source edit.
+
+The branch originally had no .gitignore. Its new minimal .gitignore
+ignores only local build products (.lake/) and generated Python
+bytecode (__pycache__/ and *.py[cod]). The driver additionally
+exports PYTHONDONTWRITEBYTECODE=1 before invoking any test scripts.
+Both controls are necessary in practice: ordinary Python imports
+can create caches, while real Lake builds create .lake/ objects.
+
+A separate temp-repository check was executed locally: generated
+.lake/build/Mock.olean and Python cache files were ignored, the
+suppressed-bytecode import left no untracked files, and two
+consecutive dry-run checks had clean Git status. This tests
+Git/bytecode behaviour, not Lean.
+
+The staged fake-Lake driver regression was also extended to
+copy the exact .gitignore into its mock checkout, exercise a
+real sibling-module Python import, simulate .lake/build/Mock.olean,
+assert no bytecode cache is emitted and the Git tree remains clean,
+and run the full mocked verification driver TWICE on the same
+revision. The extended mock test still needs to be executed on
+the exact committed source with a local checkout; do not report
+it as a passed real Lean build.
+
+The latest mainline Folkman-only changes were merged into the
+draft at commit eba7b1a429cfc9ee63bdbd3e2efa6d0c096f628b.
+No Track D theorem files, circulation TeX, original TODO notes,
+or validation markers were modified. PR #310 remains draft.
