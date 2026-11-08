@@ -190,9 +190,15 @@ noncomputable def folkmanCofinalBridgeChain_of_onePointExtensions
     (initial : FolkmanFinitePairedBridge L R β) :
     FolkmanCofinalBridgeChain L R β := by
   classical
-  obtain ⟨chain, hzero, hmono, hSL, hTL, hSR, hTR⟩ :=
-    H.exists_exhaustive_chain initial
+  -- The existential chain is a proposition, whereas the result is
+  -- data in Type. Select its witness explicitly by classical choice.
+  -- Eliminating the existential directly with obtain here would
+  -- incorrectly try to eliminate Prop into Type.
+  let w := H.exists_exhaustive_chain initial
+  let chain := Classical.choose w
+  have hw := Classical.choose_spec w
   exact folkmanCofinalBridgeChain_of_monotone
-    chain hmono hSL hTL hSR hTR
+    chain hw.2.1 hw.2.2.1 hw.2.2.2.1
+      hw.2.2.2.2.1 hw.2.2.2.2.2
 
 end SuccessorTree.NonPrecompact
