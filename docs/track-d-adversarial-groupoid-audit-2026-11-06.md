@@ -307,3 +307,49 @@ This repair does not eliminate the need for Lean compilation or
 transitive-axiom inspection. It is solely a correction to the
 preflight evidence: `-O` outputs from older `assert`-based
 tests must never count towards validated theorem coverage.
+
+## 11. Pinned API and current-main compatibility (8 November)
+
+The pinned toolchain is leanprover/lean4:v4.35.0-rc3. The successor-tree
+dependency pins Mathlib to commit
+5bd58ac291422a21f412ae354c91e7d172255a2c,
+which is the relevant source revision, not Mathlib's current master.
+
+A fresh audit of the pinned Mathlib sources confirmed the following
+exact interfaces used in Track D:
+
+- Mathlib/Algebra/Module/Equiv/Basic.lean defines
+  LinearEquiv.mul_eq_trans as f * g = g.trans f, and
+  LinearEquiv.mul_apply as (f * g) x = f (g x).
+  Therefore the groupoid code's multiplication direction agrees
+  with the finite automorphism subgroup's convention.
+- Mathlib/LinearAlgebra/Dimension/Finrank.lean includes
+  LinearEquiv.finrank_eq, the dimension-of-image step.
+- Mathlib/Data/Fintype/Card.lean provides
+  Finite.injective_iff_surjective, applicable to a self-map
+  of a finite type, not to an arbitrary embedding between
+  different types.
+- The merged BananaFiniteFraisseProperties.lean proves
+  BananaMatrixStructure.exists_substructure_with_ranges.
+  The Track D actual-subpair atlas reuses this theorem;
+  it does not postulate its own hereditary axiom.
+
+These checks eliminate a suspected *missing API name* problem, but
+they do NOT typecheck any new Lean declaration. In particular, the
+dependent quotient transports, nested Subtype inference and
+change/rfl steps remain unverified. No mathematical missing hypothesis
+was found in this targeted API audit.
+
+Merge commit 7de43645a08ac2b73ba1ddcbfa703587201325f1
+incorporates main at 97660c8d0824ef58739e9e42768ce98b164b81c4
+into the draft. All 45 Track-D-only blobs and every mainline blob
+were checked byte-for-byte before the ref update. The one
+main-only overlapping root-file change (BANANA.lean) is taken
+from main. The resulting PR diff has only added files, no TeX.
+
+There is still no Lean/Lake/Elan executable or cached compiler in
+the execution container, and direct GitHub access fails DNS.
+GitHub runners are out of budget. Thus this continuation provides
+no kernel compilation or printed transitive-axiom report.
+No independent adversarial mathematical referee has signed off.
+Do not merge Track D or add a circulation validation marker yet.
