@@ -25,6 +25,32 @@ done
 
 echo "=== Track C: exact commit $actual ==="
 python3 scripts/check_lean_module_graph.py
+# Build theorem modules bottom-up before the full umbrella build.
+# This reports a precise failing Track C dependency when elaboration
+# fails, while still requiring the complete library build afterwards.
+track_c_modules=(
+  BANANA.NonPrecompact.FolkmanNonunitalRingTerms
+  BANANA.NonPrecompact.FolkmanNonunitalTermNormalisation
+  BANANA.NonPrecompact.FolkmanGeneratedNonunitalRingIso
+  BANANA.NonPrecompact.FolkmanGeneratedTwoSortProfileIso
+  BANANA.NonPrecompact.FolkmanNativeFiniteProfileTransport
+  BANANA.NonPrecompact.FolkmanNativeProfileNaturality
+  BANANA.NonPrecompact.FolkmanDirectedFiniteStageAtlas
+  BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
+  BANANA.NonPrecompact.FolkmanGlobalGeneratedHomogeneity
+  BANANA.NonPrecompact.FolkmanGlobalProfileInvariance
+  BANANA.NonPrecompact.FolkmanCofinalBridgeChain
+  BANANA.NonPrecompact.FolkmanCofinalBridgeAutomorphism
+  BANANA.NonPrecompact.FolkmanCofinalBridgeHomogeneity
+  BANANA.NonPrecompact.FolkmanFinitePairedBridgePreorder
+  BANANA.NonPrecompact.FolkmanFinitePairedBridgeCofinal
+  BANANA.NonPrecompact.FolkmanFinitePairedBridgeToCofinalChain
+  BANANA.NonPrecompact.FolkmanOnePointBridgeHomogeneity
+)
+for module in "${track_c_modules[@]}"; do
+  echo "=== Building $module ==="
+  lake build "$module"
+done
 lake build BANANA
 bash scripts/audit_all_axioms_local.sh
 
