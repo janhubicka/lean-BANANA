@@ -85,3 +85,13 @@ Inspect the actual `#print axioms` outputs for each new declaration: only `prope
 ## Track A completion judgement
 
 **Mathematical interface and finite testing: implemented. Kernel verification, independent external refereeing and merge: not complete.** Keep #312 as draft; do not mark manuscripts validated. Do not treat the unresolved native PRs as a Track A blocker for merging the *shared* API once it is independently checked: they are downstream integration obligations.
+
+
+## Audit-runner hardening and latest integration — 8 November 2026
+
+- Synced this draft branch with main SHA `23a6d1a562e1e2ca5ba933c585b4b5d4de107ffb`, which incorporates merged native finite-class PR #315. Mainline and Track A files were disjoint, and both existing cast-theorem statements were compared literally with main: **identical**.
+- Corrected `strip_lean_comments` to retain a lexical space at the start of an inline Lean block comment. Previously `import BANANA.Left/- comment -/BANANA.Right` could be misread as one concatenated name by the static import scanner. Added unit tests for this and line-comment boundaries.
+- The exact checked-out `scripts/check_axiom_report.py` and `scripts/test_check_axiom_report.py` blobs were manually reproduced locally and their Git blob hashes matched the PR branch; **13/13 Python unit tests passed**. This is a parser test, not a Lean proof.
+- The exact `scripts/check_track_a_local.sh` blob was reproduced locally, Git hash matched and `bash -n` passed. The gate now refuses dirty checkouts and mismatched Lean versions. Both refusal paths passed in a temporary Git checkout with a stub `lake` command; the stub was **not** used to claim Lean success.
+- The `f2_eq_zero_or_one` helper used by the shared cast lemma is defined in `BilinearResidue.lean`, imported transitively by `FolkmanPersistence.lean` through `ColouringWrappers.lean`. This source-level import check does not establish elaboration.
+- The current execution container still has no `lean`, `lake` or `elan`; Github DNS is unavailable from the container. The actual Lean build, transitive-axiom audit, and genuinely independent referee review are **outstanding**. Do not merge or add a full-theorem validation marker on this evidence.
