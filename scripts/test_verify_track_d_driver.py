@@ -29,6 +29,10 @@ with tempfile.TemporaryDirectory() as td:
             path.write_text('import sys\nif "--probe-guard" in sys.argv:\n print("CHECK_GUARD_ACTIVE")\n sys.exit(1)\n')
         else:
             path.write_text('pass\n')
+    # Force an actual local import that would create __pycache__ in the mock
+    # checkout unless the driver exports PYTHONDONTWRITEBYTECODE=1.
+    (scripts / 'cache_probe.py').write_text('CACHE_PROBE = 1\n')
+    (scripts / 'check_lean_module_graph.py').write_text('import cache_probe\n')
     # Only the axiom-report parser needs to know how fake Lake wrote output.
     (scripts / 'check_axiom_report.py').write_text('import sys\nsys.exit(0 if "fake-axioms-allowed" in open(sys.argv[2]).read() else 1)\n')
     for name in modules:
@@ -59,6 +63,15 @@ with tempfile.TemporaryDirectory() as td:
         assert lines.count(f'env lean BANANA/NonPrecompact/{module}.lean') == 1, (module,lines)
     assert lines.count('build BANANA')==1
     assert lines.count('global-audit')==1
+    # The normal verification must not leave any untracked bytecode files.
+    status = subprocess.check_output(['git', 'status', '--porcelain'], cwd=root, text=True)
+    assert not status, f'First run dirtied the checkout: {status!r}'
+    assert not list(scripts.rglob('__pycache__')), 'Bytecode cache created despite the driver guard'
+    # A second full invocation must succeed on precisely the same Git head.
+    again=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=env,capture_output=True,text=True)
+    assert again.returncode==0, (again.stdout,again.stderr)
+    status2=subprocess.check_output(['git','status','--porcelain'],cwd=root,text=True)
+    assert not status2, f'Second run dirtied the checkout: {status2!r}'
     bad=env.copy();bad['EXPECTED_HEAD_SHA']='0'*40
     result2=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=bad,capture_output=True,text=True)
     assert result2.returncode==2 and 'Wrong checkout SHA' in result2.stderr
@@ -73,5 +86,5 @@ with tempfile.TemporaryDirectory() as td:
     assert result5.returncode==2 and 'Python optimisation is active' in result5.stderr
     print('PASS: exact committed local driver syntax and fake-Lake orchestration')
     print(f'PASS: all {len(modules)} distinct audit modules built and checked')
-    print('PASS: root/global audit, negative guard, required/invalid/stale SHA, optimisation rejection')
+    print('PASS: repeatable clean checkout, no bytecode cache, negative guard, SHA and optimisation rejection')
     print('LIMIT: fake Lake and fake Lean outputs; this is NOT kernel verification')
