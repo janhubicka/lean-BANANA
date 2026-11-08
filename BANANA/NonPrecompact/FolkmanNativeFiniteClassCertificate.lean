@@ -44,8 +44,8 @@ structure FolkmanNativeFiniteClassCertificate where
       (B : FolkmanNativeFinitePairing BL BR)
       (C : FolkmanNativeFinitePairing CL CR),
       Nonempty (FolkmanNativeStrongAmalgamCertificate
-        (0 : PUnit.{0} →ₙ+* BL) (0 : PUnit.{0} →ₙ+* CL)
-        (0 : PUnit.{0} →ₙ+* BR) (0 : PUnit.{0} →ₙ+* CR)
+        (0 : PUnit.{1} →ₙ+* BL) (0 : PUnit.{1} →ₙ+* CL)
+        (0 : PUnit.{1} →ₙ+* BR) (0 : PUnit.{1} →ₙ+* CR)
         B.pairing C.pairing)
   strong_amalgamation :
     ∀ {AL BL CL AR BR CR : Type}
