@@ -62,7 +62,13 @@ with tempfile.TemporaryDirectory() as td:
     bad=env.copy();bad['EXPECTED_HEAD_SHA']='0'*40
     result2=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=bad,capture_output=True,text=True)
     assert result2.returncode==2 and 'Wrong checkout SHA' in result2.stderr
+    missing=env.copy();missing.pop('EXPECTED_HEAD_SHA')
+    result3=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=missing,capture_output=True,text=True)
+    assert result3.returncode==2 and 'EXPECTED_HEAD_SHA is required' in result3.stderr
+    malformed=env.copy();malformed['EXPECTED_HEAD_SHA']='not-a-git-sha'
+    result4=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=malformed,capture_output=True,text=True)
+    assert result4.returncode==2 and 'full 40-character' in result4.stderr
     print('PASS: exact committed local driver syntax and fake-Lake orchestration')
     print(f'PASS: all {len(modules)} distinct audit modules built and checked')
-    print('PASS: root build, global axiom audit, negative guard, SHA rejection')
+    print('PASS: root/global audit, negative guard, required/invalid/stale SHA rejection')
     print('LIMIT: fake Lake and fake Lean outputs; this is NOT kernel verification')
