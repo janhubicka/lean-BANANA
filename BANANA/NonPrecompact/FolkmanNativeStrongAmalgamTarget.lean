@@ -38,11 +38,11 @@ variable (S : FolkmanNativeStrongAmalgamCertificate
     fBL gCL fBR gCR γB γC)
 
 /-- Actual finite Boolean ring on the left amalgam's atom sets. -/
-abbrev NativeLeft : Type* :=
+abbrev NativeLeft :=
   AsBoolRing (Finset (FolkmanAtomAmalgam S.diagram.fL S.diagram.gL))
 
 /-- Actual finite Boolean ring on the right amalgam's atom sets. -/
-abbrev NativeRight : Type* :=
+abbrev NativeRight :=
   AsBoolRing (Finset (FolkmanAtomAmalgam S.diagram.fR S.diagram.gR))
 
 /-- Both target rings are finite, even when there are no atoms. -/
