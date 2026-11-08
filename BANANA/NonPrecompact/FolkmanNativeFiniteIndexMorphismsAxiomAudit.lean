@@ -1,0 +1,17 @@
+import BANANA.NonPrecompact.FolkmanNativeFiniteIndexMorphisms
+
+/-! Audit the finite-index conjugation of native non-unital Folkman maps. -/
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCode_symm_zero
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCode_symm_add
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRingCode_symm_mul
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_apply
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_zero
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_add
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_mul
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_injective
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_exists_partialOwner
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMaps_preserve_pairing
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_id
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMap_comp
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinRingMaps_preserve_pairing_iff
