@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanNativeCompleteFiniteClass
+
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCompleteFiniteClassCertificate
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCompleteFiniteClass_nonempty
