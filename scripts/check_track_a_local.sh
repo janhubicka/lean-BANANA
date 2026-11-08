@@ -31,7 +31,7 @@ if [[ "$actual_version" != *"$expected_version"* ]]; then
   echo "Found: $actual_version" >&2
   exit 2
 fi
-printf 'Verified pinned Lean: %s\\n' "$actual_version"
+printf 'Verified pinned Lean: %s\n' "$actual_version"
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/check_lean_module_graph.py
 for script in \
