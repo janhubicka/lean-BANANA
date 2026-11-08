@@ -19,9 +19,6 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical symmDiff BigOperators
 
-local instance folkmanAsBoolAlgFiniteForFinMaps
-    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
-  Fintype.ofEquiv α toBoolAlg
 
 /-- Inverse finite-index encoding takes the empty support to zero. -/
 theorem folkmanNativeFiniteRingCode_symm_zero
@@ -171,12 +168,20 @@ theorem folkmanNativeFinRingMap_exists_partialOwner
       (∀ s, folkmanNativeFinRingMap f s =
         Finset.univ.filter (fun j => ∃ i ∈ s, owner j = some i)) := by
   classical
-  exact folkman_exists_partialOwner_of_ringEmbedding
-    (folkmanNativeFinRingMap f)
-    (folkmanNativeFinRingMap_zero f)
-    (folkmanNativeFinRingMap_add f)
-    (folkmanNativeFinRingMap_mul f)
-    (folkmanNativeFinRingMap_injective f hf)
+  obtain ⟨owner, honto, hmap⟩ :=
+    folkman_exists_partialOwner_of_ringEmbedding
+      (ι := Fin (Fintype.card (PrebananaAbstractAtoms (AsBoolAlg α))))
+      (κ := Fin (Fintype.card (PrebananaAbstractAtoms (AsBoolAlg β))))
+      (folkmanNativeFinRingMap f)
+      (folkmanNativeFinRingMap_zero f)
+      (folkmanNativeFinRingMap_add f)
+      (folkmanNativeFinRingMap_mul f)
+      (folkmanNativeFinRingMap_injective f hf)
+  refine ⟨owner, honto, ?_⟩
+  intro s
+  rw [hmap s]
+  ext j
+  simp
 
 /-- Pairing-preserving native embeddings remain pairing-preserving
 after both sorts have been reindexed.  This is a statement for ALL

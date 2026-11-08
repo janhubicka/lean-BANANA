@@ -1,0 +1,13 @@
+import BANANA.NonPrecompact.FolkmanNativeFiniteHeredity
+
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubringOfClosed
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubring_finiteJoin_mem
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubringUnit
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubring_mul_unit
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubring_unit_mul
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubring_unit_unique
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubring_unit_eq_ambient_iff
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubringBooleanRing
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSubringInclusion
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFiniteRestriction
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinite_hereditary
