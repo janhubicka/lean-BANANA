@@ -9,3 +9,4 @@ These queries must be inspected after a pinned local Lean kernel build.
 
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.generatedNativePairing
 #print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.generatedNativePairing_finite
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.generatedNativeCode_exists
