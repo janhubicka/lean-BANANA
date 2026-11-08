@@ -68,7 +68,10 @@ with tempfile.TemporaryDirectory() as td:
     malformed=env.copy();malformed['EXPECTED_HEAD_SHA']='not-a-git-sha'
     result4=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=malformed,capture_output=True,text=True)
     assert result4.returncode==2 and 'full 40-character' in result4.stderr
+    optimised=env.copy();optimised['PYTHONOPTIMIZE']='1'
+    result5=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=optimised,capture_output=True,text=True)
+    assert result5.returncode==2 and 'Python optimisation is active' in result5.stderr
     print('PASS: exact committed local driver syntax and fake-Lake orchestration')
     print(f'PASS: all {len(modules)} distinct audit modules built and checked')
-    print('PASS: root/global audit, negative guard, required/invalid/stale SHA rejection')
+    print('PASS: root/global audit, negative guard, required/invalid/stale SHA, optimisation rejection')
     print('LIMIT: fake Lake and fake Lean outputs; this is NOT kernel verification')
