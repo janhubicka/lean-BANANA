@@ -52,7 +52,7 @@ with tempfile.TemporaryDirectory() as td:
     sha = subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
     bindir=Path(td)/'bin';bindir.mkdir()
     fake = bindir/'lake'
-    fake.write_text('#!/bin/bash\nmkdir -p .lake/build\nprintf mock > .lake/build/Mock.olean\necho "$*" >> "$MOCK_LAKE_LOG"\nif [[ "$1" == env ]]; then\n echo fake-axioms-allowed\nfi\n')
+    fake.write_text('#!/bin/bash\nmkdir -p .lake/build\nprintf mock > .lake/build/Mock.olean\nif [[ "${MOCK_DIRTY_WORKTREE:-}" == 1 ]]; then\n echo modified >> BANANA.lean\nfi\necho "$*" >> "$MOCK_LAKE_LOG"\nif [[ "$1" == env ]]; then\n echo fake-axioms-allowed\nfi\n')
     fake.chmod(0o755)
     env=os.environ.copy()
     env['PATH']=str(bindir)+os.pathsep+env['PATH']
@@ -90,7 +90,10 @@ with tempfile.TemporaryDirectory() as td:
     optimised=env.copy();optimised['PYTHONOPTIMIZE']='1'
     result5=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=optimised,capture_output=True,text=True)
     assert result5.returncode==2 and 'Python optimisation is active' in result5.stderr
+    dirty=env.copy();dirty['MOCK_DIRTY_WORKTREE']='1'
+    result6=subprocess.run(['bash','scripts/verify_track_d_locally.sh'],cwd=root,env=dirty,capture_output=True,text=True)
+    assert result6.returncode==1 and 'Verification changed the Git worktree' in result6.stderr
     print('PASS: exact committed local driver syntax and fake-Lake orchestration')
     print(f'PASS: all {len(modules)} distinct audit modules built and checked')
-    print('PASS: repeatable clean checkout, ignored Lake output, no bytecode cache, negative guard, SHA and optimisation rejection')
+    print('PASS: two clean runs; ignored build outputs; source-modification, SHA and optimisation rejection')
     print('LIMIT: fake Lake and fake Lean outputs; this is NOT kernel verification')
