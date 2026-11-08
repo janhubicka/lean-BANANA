@@ -69,33 +69,9 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
     pairing_parity := ?_
   }, ?_, ?_⟩
   · intro i
-    have hne : folkmanNativeFinRingMap fL ({i} : Finset _) ≠ ∅ := by
-      intro hempty
-      have hsame : folkmanNativeFinRingMap fL ({i} : Finset _) =
-          folkmanNativeFinRingMap fL ∅ := by
-        rw [folkmanNativeFinRingMap_zero fL]
-        exact hempty
-      have heq : ({i} : Finset _) = ∅ :=
-        folkmanNativeFinRingMap_injective fL hfL hsame
-      have hi : i ∈ (∅ : Finset _) :=
-        heq ▸ Finset.mem_singleton_self i
-      simpa using hi
-    rw [Finset.nonempty_iff_ne_empty, ← hLsingle i]
-    exact hne
+    exact folkmanNativeFin_fibre_nonempty ownerL i (hLnonempty i)
   · intro j
-    have hne : folkmanNativeFinRingMap fR ({j} : Finset _) ≠ ∅ := by
-      intro hempty
-      have hsame : folkmanNativeFinRingMap fR ({j} : Finset _) =
-          folkmanNativeFinRingMap fR ∅ := by
-        rw [folkmanNativeFinRingMap_zero fR]
-        exact hempty
-      have heq : ({j} : Finset _) = ∅ :=
-        folkmanNativeFinRingMap_injective fR hfR hsame
-      have hj : j ∈ (∅ : Finset _) :=
-        heq ▸ Finset.mem_singleton_self j
-      simpa using hj
-    rw [Finset.nonempty_iff_ne_empty, ← hRsingle j]
-    exact hne
+    exact folkmanNativeFin_fibre_nonempty ownerR j (hRnonempty j)
   · intro i j
     have hp := folkmanNativeFinRingMaps_preserve_pairing
       fL fR γA γB hAleft hAright hBleft hBright hcompat
