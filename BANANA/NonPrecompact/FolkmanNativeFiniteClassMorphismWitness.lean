@@ -115,10 +115,30 @@ theorem folkmanNativeFinCode_exists_atomEmbedding_with_maps
   · intro s
     rw [hLmap]
     ext b
-    simp [Finset.mem_biUnion, folkmanFiber]
+    constructor
+    · intro hb
+      obtain ⟨i, hi, he⟩ := (Finset.mem_filter.mp hb).2
+      refine Finset.mem_biUnion.mpr ⟨i, hi, ?_⟩
+      change b ∈ Finset.univ.filter (fun z => ownerL z = some i)
+      exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, he⟩
+    · intro hb
+      obtain ⟨i, hi, he⟩ := Finset.mem_biUnion.mp hb
+      have he' : ownerL b = some i := (Finset.mem_filter.mp he).2
+      exact Finset.mem_filter.mpr
+        ⟨Finset.mem_univ b, ⟨i, hi, he'⟩⟩
   · intro t
     rw [hRmap]
     ext b
-    simp [Finset.mem_biUnion, folkmanFiber]
+    constructor
+    · intro hb
+      obtain ⟨i, hi, he⟩ := (Finset.mem_filter.mp hb).2
+      refine Finset.mem_biUnion.mpr ⟨i, hi, ?_⟩
+      change b ∈ Finset.univ.filter (fun z => ownerR z = some i)
+      exact Finset.mem_filter.mpr ⟨Finset.mem_univ b, he⟩
+    · intro hb
+      obtain ⟨i, hi, he⟩ := Finset.mem_biUnion.mp hb
+      have he' : ownerR b = some i := (Finset.mem_filter.mp he).2
+      exact Finset.mem_filter.mpr
+        ⟨Finset.mem_univ b, ⟨i, hi, he'⟩⟩
 
 end SuccessorTree.NonPrecompact
