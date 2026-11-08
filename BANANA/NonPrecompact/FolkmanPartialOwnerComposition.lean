@@ -7,8 +7,9 @@ For non-unital embeddings, target atoms can be unowned.  Composition
 must propagate `none`, and the fibre of a composed owner is the union
 of its intermediate owner fibres.
 
-This is a shared combinatorial interface only.  It does not, by itself,
-construct an embedding or establish pairing preservation.
+This module constructs composition of actual atom-coordinate Folkman
+embeddings, preserving their pairing.  It does not construct or classify
+embeddings of the original non-unital Boolean rings.
 -/
 
 namespace SuccessorTree.NonPrecompact
