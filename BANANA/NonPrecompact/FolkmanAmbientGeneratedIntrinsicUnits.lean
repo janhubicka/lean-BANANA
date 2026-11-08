@@ -65,6 +65,28 @@ noncomputable def folkmanBooleanRingOfNonUnitalEquiv
         rw [BooleanRing.mul_self]
       _ = x := e.apply_symm_apply x
 
+/-- Two non-unital ring equivalences from (possibly different)
+Boolean rings into the same fixed non-unital ring determine the
+SAME intrinsic identity on the target.
+
+This is the coherence statement needed when two finite atom stages
+represent the same generated subring in the ambient Folkman limit.
+It does not assume the whole ambient ring has a unit. -/
+theorem folkmanBooleanRingOfNonUnitalEquiv_unit_unique
+    {S U T : Type*}
+    [BooleanRing S] [BooleanRing U] [NonUnitalRing T]
+    (e : S ≃+* T) (f : U ≃+* T) :
+    e (1 : S) = f (1 : U) := by
+  have he (x : T) : e (1 : S) * x = x := by
+    letI : BooleanRing T := folkmanBooleanRingOfNonUnitalEquiv e
+    exact one_mul x
+  have hf (x : T) : x * f (1 : U) = x := by
+    letI : BooleanRing T := folkmanBooleanRingOfNonUnitalEquiv f
+    exact mul_one x
+  calc
+    e (1 : S) = e (1 : S) * f (1 : U) := (hf _).symm
+    _ = f (1 : U) := he _
+
 /-- The actual ambient left generated subring of a finite stage
 witness is a finite Boolean ring with its own intrinsic unit,
 even if the ambient left sort has no multiplicative identity.
