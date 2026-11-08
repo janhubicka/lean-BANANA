@@ -12,3 +12,4 @@ extension properties are not asserted by this file.
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeOnePointExtension.sourceRightCofinal
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeOnePointExtension.targetRightCofinal
 #print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeOnePointExtension.exists_exhaustive_chain
+#print axioms SuccessorTree.NonPrecompact.FolkmanFinitePairedBridgeOnePointExtension
