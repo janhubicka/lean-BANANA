@@ -21,25 +21,7 @@ while IFS= read -r -d '' file; do
     echo "Failed axiom audit: $file" >&2
     exit 1
   fi
-  if ! python3 - "$result" <<'PY'
-import pathlib
-import re
-import sys
-
-output = pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")
-matches = re.findall(r"depends on axioms:\s*\[([^\]]*)\]", output, re.S)
-no_axioms = re.findall(r"does not depend on (?:any )?axioms", output)
-if not matches and not no_axioms:
-    sys.exit("Axiom audit produced no '#print axioms' result")
-allowed = {"propext", "Classical.choice", "Quot.sound"}
-unexpected = sorted({name.strip()
-                     for group in matches for name in group.split(",")
-                     if name.strip() and name.strip() not in allowed})
-if "sorryAx" in output or unexpected:
-    sys.exit("Non-standard proof axiom(s): " +
-             ", ".join(unexpected or ["sorryAx"]))
-PY
-  then
+  if ! python3 scripts/check_axiom_report.py "$file" "$result"; then
     cat "$result" >&2
     rm -f "$result"
     echo "Unexpected axiom dependency in: $file" >&2

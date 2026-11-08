@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.PrebananaResidualParity
-import Mathlib
+import BANANA.NonPrecompact.FiniteOwnerSums
 
 /-!
 # Per-base sum identity for commuting atom projections
@@ -10,6 +10,8 @@ marking separately above *each base atom*. Global parity alone does
 not suffice for the local finite-extension argument.
 
 This statement requires no injection or surjection hypothesis on f.
+The proof uses the shared total-owner fibre-sum calculation, also used
+by Folkman--BANANA in its partial-owner form.
 -/
 
 namespace SuccessorTree.NonPrecompact
@@ -26,28 +28,22 @@ theorem prebananaFibrewiseSum_identity
       if target b = a ∧ f x = b then mark x else 0) =
     ∑ x : α, if source x = a then mark x else 0 := by
   classical
-  rw [Finset.sum_comm]
-  apply Finset.sum_congr rfl
-  intro x hx
-  have hiff (b : β) :
-      (target b = a ∧ f x = b) ↔
-        (source x = a ∧ f x = b) := by
-    constructor
-    · rintro ⟨ht, heq⟩
-      refine ⟨?_, heq⟩
-      calc
-        source x = target (f x) := (hcomm x).symm
-        _ = target b := congrArg target heq
-        _ = a := ht
-    · rintro ⟨hs, heq⟩
-      refine ⟨?_, heq⟩
-      calc
-        target b = target (f x) := congrArg target heq.symm
-        _ = source x := hcomm x
-        _ = a := hs
-  simp_rw [hiff]
-  by_cases hsa : source x = a
-  · simp [hsa]
-  · simp [hsa]
+  calc
+    (∑ b : β, ∑ x : α,
+      if target b = a ∧ f x = b then mark x else 0) =
+      ∑ b : β, ∑ x : α,
+        if f x = b then (if source x = a then mark x else 0) else 0 := by
+          apply Finset.sum_congr rfl
+          intro b hb
+          apply Finset.sum_congr rfl
+          intro x hx
+          by_cases hfb : f x = b
+          · have hbase : target b = source x := by
+              simpa [hfb] using hcomm x
+            simp [hfb, hbase]
+          · simp [hfb]
+    _ = ∑ x : α, if source x = a then mark x else 0 :=
+      finiteTotalOwner_sum_fibres f
+        (fun x : α => if source x = a then mark x else 0)
 
 end SuccessorTree.NonPrecompact

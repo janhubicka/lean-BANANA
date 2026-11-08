@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.FolkmanNativeFiniteClassInterface
+
+/-! Track B original-language class facts; exact-head local audit required. -/
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativeFinitePairing.finiteAtomCode_pairing
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativeFinitePairing.exists_exact_finite_code
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinite_codes_countable
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinite_codes_unbounded
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinitePairing_joint_embedding
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeFinitePairing_strong_amalgamation

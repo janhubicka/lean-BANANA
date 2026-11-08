@@ -118,6 +118,9 @@ import BANANA.NonPrecompact.FolkmanTupleTermPairIsoAxiomAudit
 import BANANA.NonPrecompact.FolkmanFiniteClassData
 import BANANA.NonPrecompact.FolkmanAtomMatrixReconstruction
 import BANANA.NonPrecompact.FolkmanNativePairingAtomMatrix
+import BANANA.NonPrecompact.FolkmanNativeFiniteAtomIndex
+import BANANA.NonPrecompact.FolkmanNativeFiniteIndexMorphisms
+import BANANA.NonPrecompact.FolkmanNativeFiniteCodeEmbedding
 import BANANA.NonPrecompact.FiniteOwnerSums
 import BANANA.NonPrecompact.LinearExtension
 import BANANA.NonPrecompact.LinearBoringInsertion
