@@ -260,3 +260,17 @@ inspection, or independent mathematical referee sign-off has occurred.
 The 9-module gate must be rerun on the exact PR head in a real pinned
 Lean environment, and the full end-to-end theorem must compile there
 before any validation marker or merge.
+
+## 9. Required external PR-head identity (8 November)
+
+The verification driver previously allowed no `EXPECTED_HEAD_SHA`,
+which could certify an unintended checkout. This is now a hard failure:
+`EXPECTED_HEAD_SHA` must be provided as a 40-character lowercase SHA
+copied from the GitHub PR head. A missing, malformed, or different SHA
+is rejected before any tests execute. The fake-Lake unit test was
+extended to cover all three negative cases.
+
+**Do not** use `EXPECTED_HEAD_SHA=$(git rev-parse HEAD)` for this purpose:
+it only compares the checkout to itself. The exact PR head is a
+separate externally obtained reference. This correction affects only
+the local verification gate, not any mathematical theorem or TeX.
