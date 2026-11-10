@@ -29,6 +29,12 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical
 
+-- The pinned Mathlib atom presentation requires finite Boolean-algebra
+-- coordinates while each original Boolean-ring carrier is finite.
+local instance folkmanAsBoolAlgFiniteForInitial
+    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
+  Fintype.ofEquiv α toBoolAlg
+
 /-- A directed finite-stage atlas already supplies the initial
 paired bridge for every isomorphism of the actual finitely generated
 Folkman substructures. The ONLY remaining countable homogeneity
