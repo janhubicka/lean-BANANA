@@ -22,6 +22,12 @@ namespace SuccessorTree.NonPrecompact
 
 open scoped Classical BigOperators
 
+-- The pinned Mathlib atom presentation requires finite Boolean-algebra
+-- coordinates while each original Boolean-ring carrier is finite.
+local instance folkmanAsBoolAlgFiniteForInitial
+    (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
+  Fintype.ofEquiv α toBoolAlg
+
 /-- Any two faithful representations of one finite native Folkman
 object in an ambient non-unital pairing produce a finite paired
 bridge. The native code equivalence is supplied explicitly so that
