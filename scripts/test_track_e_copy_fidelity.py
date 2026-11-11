@@ -92,6 +92,15 @@ def induced_palette(C: Pairing, D: tuple[frozenset, frozenset], b: int):
 
 def run() -> dict[str, int]:
     structures = all_pairings(2)
+    # Negative controls: embedding-count is not copy-count, and
+    # two nonisomorphic pairings cannot be identified by dimension.
+    nonrigid = Pairing(2, 0, (0, 0))
+    assert len(embeddings(nonrigid, nonrigid)) == 6
+    assert len(copies(nonrigid, nonrigid)) == 1
+    A_zero = Pairing(1, 1, (0,))
+    A_one = Pairing(1, 1, (1,))
+    assert not copies(A_zero, A_one)
+    assert len(copies(A_one, A_one)) == 1
     counts = dict(structures=len(structures), source_target_pairs=0,
                   source_basis_changes=0, source_basis_checks=0,
                   one_sided_checks=0, palette_checks=0,
