@@ -1185,6 +1185,27 @@ jobs:
           lake build BANANA.NonPrecompact.FolkmanNativeStrongAmalgamPackageAxiomAudit
           lake env lean BANANA/NonPrecompact/FolkmanNativeStrongAmalgamPackageAxiomAudit.lean
 
+      - name: Verify complete native Folkman finite class and sortwise strong AP
+        run: |
+          set -euo pipefail
+          lake build BANANA.NonPrecompact.FolkmanNativeCompleteFiniteClass \
+            BANANA.NonPrecompact.FolkmanNativeSortwiseIntersection
+          for module in FolkmanNativeCompleteFiniteClass FolkmanNativeSortwiseIntersection; do
+            audit="BANANA/NonPrecompact/${module}AxiomAudit.lean"
+            report="$(mktemp)"
+            if ! lake env lean "$audit" > "$report" 2>&1; then
+              cat "$report"
+              rm -f "$report"
+              exit 1
+            fi
+            if ! python3 scripts/check_axiom_report.py "$audit" "$report"; then
+              cat "$report"
+              rm -f "$report"
+              exit 1
+            fi
+            rm -f "$report"
+          done
+
       - name: Audit finite Folkman codes and hereditary pairing restriction
         run: |
           lake build BANANA.NonPrecompact.FolkmanFiniteClassDataAxiomAudit
