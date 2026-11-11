@@ -81,6 +81,7 @@ regressions=(
   scripts/check_folkman_initial_bridge_semantics.py
   scripts/check_folkman_bridge_swap.py
   scripts/check_folkman_firstorder_encoding.py
+  scripts/check_folkman_firstorder_embedding_converse.py
 )
 for script in "${regressions[@]}"; do
   python3 "$script"
