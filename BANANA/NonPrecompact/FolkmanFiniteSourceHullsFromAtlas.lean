@@ -54,7 +54,7 @@ noncomputable def folkmanNonUnitalRingHomLiftOfRange
       calc
         g (lift (a + b)) = f (a + b) := hlift _
         _ = f a + f b := map_add f a b
-        _ = g (lift a) + g (lift b) := by rw [hlift, hlift]
+        _ = g (lift a) + g (lift b) := by rw [hlift a, hlift b]
         _ = g (lift a + lift b) := (map_add g _ _).symm
     map_mul' := by
       intro a b
@@ -62,7 +62,7 @@ noncomputable def folkmanNonUnitalRingHomLiftOfRange
       calc
         g (lift (a * b)) = f (a * b) := hlift _
         _ = f a * f b := map_mul f a b
-        _ = g (lift a) * g (lift b) := by rw [hlift, hlift]
+        _ = g (lift a) * g (lift b) := by rw [hlift a, hlift b]
         _ = g (lift a * lift b) := (map_mul g _ _).symm
   }
 
