@@ -72,23 +72,25 @@ private theorem univ_image_comp_equiv
 /-- Precomposing an embedding by a coordinate isomorphism changes
 neither of its two image sets. -/
 private theorem ranges_comp_sourceIso
-    {X : BananaMatrixStructure lB rB}
-    {Y : BananaMatrixStructure lC rC}
-    (e : BananaMatrixEmbedding X Y)
-    (i : BananaCopySourceIso A X) :
-    ((Finset.univ : Finset (Fin lB → F2)).image e.left,
-       (Finset.univ : Finset (Fin rB → F2)).image e.right) =
-      ((Finset.univ : Finset (Fin l → F2)).image
+    {a b a' b' c d : ℕ}
+    {X : BananaMatrixStructure a b}
+    {Y : BananaMatrixStructure a' b'}
+    {C : BananaMatrixStructure c d}
+    (e : BananaMatrixEmbedding Y C)
+    (i : BananaCopySourceIso X Y) :
+    ((Finset.univ : Finset (Fin a' → F2)).image e.left,
+       (Finset.univ : Finset (Fin b' → F2)).image e.right) =
+      ((Finset.univ : Finset (Fin a → F2)).image
           (BananaMatrixEmbedding.comp e i.toEmbedding).left,
-       (Finset.univ : Finset (Fin r → F2)).image
+       (Finset.univ : Finset (Fin b → F2)).image
           (BananaMatrixEmbedding.comp e i.toEmbedding).right) := by
   apply Prod.ext
-  · change (Finset.univ : Finset (Fin lB → F2)).image e.left =
-      (Finset.univ : Finset (Fin l → F2)).image
+  · change (Finset.univ : Finset (Fin a' → F2)).image e.left =
+      (Finset.univ : Finset (Fin a → F2)).image
         (fun x => e.left (i.left x))
     exact (univ_image_comp_equiv i.left.toEquiv e.left).symm
-  · change (Finset.univ : Finset (Fin rB → F2)).image e.right =
-      (Finset.univ : Finset (Fin r → F2)).image
+  · change (Finset.univ : Finset (Fin b' → F2)).image e.right =
+      (Finset.univ : Finset (Fin b → F2)).image
         (fun x => e.right (i.right x))
     exact (univ_image_comp_equiv i.right.toEquiv e.right).symm
 
