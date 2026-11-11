@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.CoherentConjugation
+import Mathlib.Algebra.Group.Action.Defs
 
 /-!
 # Representative transport: extension on the selected copies
