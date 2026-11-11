@@ -16,3 +16,5 @@ exact-head pinned Lean kernel build; they have not run here.
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRelationsFintype
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLanguage
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderFunctionSymbolsCountable
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRelationSymbolsCountable
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderSymbolsCountable
