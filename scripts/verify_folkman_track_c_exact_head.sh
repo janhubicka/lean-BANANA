@@ -41,6 +41,7 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanInitialBridgeFromAtlas
   BANANA.NonPrecompact.FolkmanFinitePairedBridgeSwap
   BANANA.NonPrecompact.FolkmanForthBridgeHomogeneity
+  BANANA.NonPrecompact.FolkmanFiniteHullEPPBridge
   BANANA.NonPrecompact.FolkmanDirectedFinitePairingLaws
   BANANA.NonPrecompact.FolkmanAmbientGeneratedNativePairing
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
@@ -76,6 +77,7 @@ regressions=(
   scripts/check_folkman_intrinsic_units.py
   scripts/check_folkman_generated_native_pairing.py
   scripts/check_folkman_initial_bridge_semantics.py
+  scripts/check_folkman_bridge_swap.py
 )
 for script in "${regressions[@]}"; do
   python3 "$script"
