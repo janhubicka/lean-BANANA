@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.GroupTheory.Perm.Basic
 
 /-!
 # Codes for two-sorted changes of finite representatives
