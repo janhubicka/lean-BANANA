@@ -68,4 +68,19 @@ noncomputable instance folkmanFirstOrderFunctionSymbolsCountable :
   change Countable (Σ n, folkmanFirstOrderFunctions n)
   infer_instance
 
+
+/-- The tagged sort and pairing-relation symbols form a
+countable family as well. -/
+noncomputable instance folkmanFirstOrderRelationSymbolsCountable :
+    Countable (Σ n, folkmanFirstOrderLanguage.Relations n) := by
+  change Countable (Σ n, folkmanFirstOrderRelations n)
+  infer_instance
+
+/-- The full original-language signature is countable. This
+includes its two sort tags and pairing relation, not just
+the ring-operation symbols used in Fraïssé existence. -/
+noncomputable instance folkmanFirstOrderSymbolsCountable :
+    Countable folkmanFirstOrderLanguage.Symbols := by
+  infer_instance
+
 end SuccessorTree.NonPrecompact
