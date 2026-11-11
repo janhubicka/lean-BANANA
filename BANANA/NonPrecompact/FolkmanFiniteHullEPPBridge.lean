@@ -177,4 +177,67 @@ theorem folkmanGeneratedHomogeneous_of_hulls_EPP
   folkmanGeneratedHomogeneous_of_atlas_forth A
     (folkmanFinitePairedBridgeForth_of_hulls_EPP Hulls EPP)
 
+/-- Under finite hulls and EPP, equality of the complete finite
+two-sort profile is equivalent to the action of a *genuine* global
+pairing-preserving automorphism. Neither a spurious group action
+nor a separate homogeneity axiom occurs in the conclusion. -/
+theorem folkmanGlobalTupleRelated_iff_profile_eq_of_hulls_EPP
+    {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
+    [Countable L] [Countable R]
+    {β : L → R → F2}
+    (A : FolkmanDirectedFiniteStageAtlas L R β)
+    (Hulls : FolkmanPairedBridgeSourceHullProperty L R β)
+    (EPP : FolkmanFiniteCodeEPP L R β)
+    {nL nR : ℕ}
+    (p q : (Fin nL → L) × (Fin nR → R)) :
+    folkmanGlobalTupleRelated β p q ↔
+      A.tupleProfile p.1 p.2 = A.tupleProfile q.1 q.2 :=
+  folkmanGlobalTupleRelated_iff_profile_eq A
+    (folkmanGeneratedHomogeneous_of_hulls_EPP A Hulls EPP) p q
+
+/-- The same exact profile classification for arbitrary mixed-sort
+tuples, retaining their original sort labels. -/
+theorem folkmanGlobalTaggedRelated_iff_profile_eq_of_hulls_EPP
+    {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
+    [Countable L] [Countable R]
+    {β : L → R → F2}
+    (A : FolkmanDirectedFiniteStageAtlas L R β)
+    (Hulls : FolkmanPairedBridgeSourceHullProperty L R β)
+    (EPP : FolkmanFiniteCodeEPP L R β)
+    {n : ℕ}
+    (p q : FolkmanTaggedStageTuple L R n) :
+    folkmanGlobalTaggedRelated β p q ↔
+      A.taggedProfile p = A.taggedProfile q :=
+  folkmanGlobalTaggedRelated_iff_profile_eq A
+    (folkmanGeneratedHomogeneous_of_hulls_EPP A Hulls EPP) p q
+
+/-- Finite genuine two-sort global orbit quotients, conditional
+on finite hulls and the ordinary finite EPP of the ambient model. -/
+theorem folkmanGlobalTupleOrbits_finite_of_hulls_EPP
+    {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
+    [Countable L] [Countable R]
+    {β : L → R → F2}
+    (A : FolkmanDirectedFiniteStageAtlas L R β)
+    (Hulls : FolkmanPairedBridgeSourceHullProperty L R β)
+    (EPP : FolkmanFiniteCodeEPP L R β)
+    (nL nR : ℕ) :
+    Finite (Quotient (folkmanGlobalTupleSetoid β nL nR)) :=
+  folkmanGlobalTupleOrbits_finite_of_generatedHomogeneity A
+    (folkmanGeneratedHomogeneous_of_hulls_EPP A Hulls EPP) nL nR
+
+/-- Finite genuine mixed-sort global automorphism orbits under
+exactly the same two finite extension/hull hypotheses. -/
+theorem folkmanGlobalTaggedOrbits_finite_of_hulls_EPP
+    {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
+    [Countable L] [Countable R]
+    {β : L → R → F2}
+    (A : FolkmanDirectedFiniteStageAtlas L R β)
+    (Hulls : FolkmanPairedBridgeSourceHullProperty L R β)
+    (EPP : FolkmanFiniteCodeEPP L R β)
+    (n : ℕ) :
+    Finite (Quotient (folkmanGlobalTaggedSetoid β n)) :=
+  folkmanGlobalTaggedOrbits_finite_of_generatedHomogeneity A
+    (folkmanGeneratedHomogeneous_of_hulls_EPP A Hulls EPP) n
+
+
 end SuccessorTree.NonPrecompact
