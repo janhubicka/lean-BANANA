@@ -266,8 +266,7 @@ theorem FolkmanDirectedFiniteStageAtlas.sourceHullProperty
     {L R : Type*} [NonUnitalRing L] [NonUnitalRing R]
     {β : L → R → F2}
     (A : FolkmanDirectedFiniteStageAtlas L R β) :
-    FolkmanPairedBridgeSourceHullProperty L R β where
-  left := A.sourceLeft_hull
-  right := A.sourceRight_hull
+    FolkmanPairedBridgeSourceHullProperty L R β := by
+  exact ⟨A.sourceLeft_hull, A.sourceRight_hull⟩
 
 end SuccessorTree.NonPrecompact
