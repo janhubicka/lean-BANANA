@@ -42,6 +42,8 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanFinitePairedBridgeSwap
   BANANA.NonPrecompact.FolkmanForthBridgeHomogeneity
   BANANA.NonPrecompact.FolkmanFiniteHullEPPBridge
+  BANANA.NonPrecompact.FolkmanFiniteSourceHullsFromAtlas
+  BANANA.NonPrecompact.FolkmanGlobalEPPCompletion
   BANANA.NonPrecompact.FolkmanDirectedFinitePairingLaws
   BANANA.NonPrecompact.FolkmanAmbientGeneratedNativePairing
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
