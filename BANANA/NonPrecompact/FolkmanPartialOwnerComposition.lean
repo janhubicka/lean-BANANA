@@ -48,7 +48,7 @@ theorem folkmanFiber_compose
     | some j =>
         refine ⟨j, ?_, ?_⟩
         · simpa [folkmanComposeOwner, hg] using hx
-        · exact hg
+        · rfl
   · rintro ⟨j, hj, hx⟩
     simpa [folkmanComposeOwner, hx] using hj
 
