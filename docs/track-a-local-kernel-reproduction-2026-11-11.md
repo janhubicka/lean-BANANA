@@ -64,6 +64,14 @@ composition, identity, associativity, and equality of embedding records
 from their owner maps. The test also includes zero-dimensional sorts
 because no non-emptiness assumption is inserted.
 
+A final isolated kernel run also compiled **exact statement-preserving
+wrappers** for `folkmanTuple_edgeCount_cast` and
+`folkmanNativeFin_edgeCount_cast`, both delegating to
+`folkmanEdgeCount_cast`. The resulting source contained **20 active
+`#print axioms` queries**: 20/20 matched reports, 18 with only the three
+allowed axioms and two axiom-free definitions. No `sorryAx` or external
+axiom occurred. The run exited 0 in 3.52 seconds.
+
 ## Strict limitation / remaining gate
 
 **This is real kernel validation of a stand-alone reproduction, NOT an
