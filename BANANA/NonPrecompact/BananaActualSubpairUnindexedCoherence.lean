@@ -120,7 +120,7 @@ theorem bananaActualClassAction_descend_trans
       Θ c (U := v0) (V := w0) q := by
     have he := bananaActualClassAction_changeIndex Θ hUV.symm
       (U := V) (V := W) rfl hVW.symm q
-    exact he.symm
+    exact he
   rw [hq]
   exact hComp c u0 v0 w0 p q
 
@@ -149,7 +149,7 @@ theorem bananaActualClassAction_descend_symm
       Θ c (U := v0) (V := u0) p.symm := by
     have he := bananaActualClassAction_changeIndex Θ hUV.symm
       (U := V) (V := U) rfl hUV p.symm
-    exact he.symm
+    exact he
   rw [hback]
   exact hInv c u0 v0 p
 
