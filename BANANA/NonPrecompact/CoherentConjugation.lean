@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Algebra.Group.Hom.Basic
 
 /-!
 # Conjugated coherent transport
