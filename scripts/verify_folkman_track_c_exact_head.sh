@@ -39,6 +39,8 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanAmbientGeneratedIntrinsicUnits
   BANANA.NonPrecompact.FolkmanNativeInitialPairedBridge
   BANANA.NonPrecompact.FolkmanInitialBridgeFromAtlas
+  BANANA.NonPrecompact.FolkmanFinitePairedBridgeSwap
+  BANANA.NonPrecompact.FolkmanForthBridgeHomogeneity
   BANANA.NonPrecompact.FolkmanDirectedFinitePairingLaws
   BANANA.NonPrecompact.FolkmanAmbientGeneratedNativePairing
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
