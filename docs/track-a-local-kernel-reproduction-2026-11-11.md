@@ -56,7 +56,7 @@ status 0. The full 13-declaration set compiled, and every active
 - Remaining definitions/theorems: subsets of `propext`,
   `Classical.choice`, and `Quot.sound`.
 - No `sorryAx` or custom axioms were reported.
-- The final isolated axiom-report run took 8.54 seconds.
+- A further isolated run checked five shared prerequisites as well: `f2_eq_zero_or_one`, `folkmanEdgeCount_cast`, `folkmanFiber_pairwiseDisjoint`, and both `folkmanEdgeCount_biUnion_*` identities. All 18 reports contained only the same three allowed axioms (or none), with status 0. The extended run took 4.44 seconds.
 
 These statements cover exact `Option.none` propagation, composite fibre
 unions, non-empty source fibres, pairing-preserving atom-coordinate
