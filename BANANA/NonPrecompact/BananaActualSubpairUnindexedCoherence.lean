@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.BananaActualSubpairClassCoherence
+import BANANA.NonPrecompact.CoherentGroupoidDescent
 
 /-!
 # Coherent EPPA on unindexed actual partial automorphisms of finite BANANA
@@ -64,9 +65,9 @@ noncomputable def bananaActualClassAction_descend
     {U V : BananaActualSubpair A}
     (p : BananaActualSubpairIso U V) :
     BananaMatrixAutGroup (perfectBanana (l + r)) :=
-  Θ (bananaActualSubpairClass U)
-    (U := ⟨U, rfl⟩)
-    (V := ⟨V, p.same_presented_class.symm⟩) p
+  classAction_descend bananaActualSubpairClass
+    (fun {_ _} q => q.same_presented_class)
+    (fun c U V q => Θ c (U := U) (V := V) q) p
 
 /-- The descended action fixes identity arrows: the target-class proof
 may differ from reflexivity, but all such proofs are proposition-irrelevant. -/
