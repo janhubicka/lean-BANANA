@@ -95,16 +95,17 @@ private theorem ranges_comp_sourceIso
     exact (univ_image_comp_equiv i.right.toEquiv e.right).symm
 
 /-- Precomposition by a pairing-preserving source isomorphism
-does not change an unlabelled copy. In particular this works for
-nonrigid sources: it is about images, not embedding parameters. -/
+does not change the *underlying range pair* of an unlabelled copy.
+The two copy subtypes have different source indices, so equality is
+correctly asserted after taking their common underlying range type.
+This also works for nonrigid sources. -/
 theorem copyRanges_precompose
     (i : BananaCopySourceIso A A')
     {C : BananaMatrixStructure lC rC}
     (e : BananaMatrixEmbedding A' C) :
-    (BananaMatrixEmbedding.comp e i.toEmbedding).copyRanges =
-      e.copyRanges := by
+    (BananaMatrixEmbedding.comp e i.toEmbedding).copyRanges.1 =
+      e.copyRanges.1 := by
   classical
-  apply Subtype.ext
   exact (ranges_comp_sourceIso e i).symm
 
 /-- A pair of ambient ranges is an A-copy if and only if it is
