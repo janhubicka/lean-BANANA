@@ -1,0 +1,24 @@
+import BANANA.NonPrecompact.FolkmanGlobalProfileInvariance
+
+/-!
+Exact-declaration audit for transport of finite atom stages under
+genuine global pairing automorphisms, tagged tuple naturality and
+if-and-only-if classification of actual global orbits by profiles.
+
+Both exact classifications require an explicit generated-homogeneity
+hypothesis. No actual countable Folkman limit or its homogeneity is
+constructed here. No kernel verification has run in this environment.
+-/
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanGlobalPairAutomorphism.mapStage
+#print axioms SuccessorTree.NonPrecompact.FolkmanGlobalPairAutomorphism.mapStageWitness
+#print axioms SuccessorTree.NonPrecompact.FolkmanGlobalPairAutomorphism.mapStageWitness_profile
+#print axioms SuccessorTree.NonPrecompact.FolkmanDirectedFiniteStageAtlas.tupleProfile_global_invariant
+#print axioms SuccessorTree.NonPrecompact.FolkmanDirectedFiniteStageAtlas.tupleProfile_eq_of_globalRelated
+#print axioms SuccessorTree.NonPrecompact.folkmanGlobalTupleRelated_iff_profile_eq
+#print axioms SuccessorTree.NonPrecompact.FolkmanGlobalPairAutomorphism.mapTagged_pattern
+#print axioms SuccessorTree.NonPrecompact.FolkmanGlobalPairAutomorphism.mapTagged_leftMask
+#print axioms SuccessorTree.NonPrecompact.FolkmanGlobalPairAutomorphism.mapTagged_rightMask
+#print axioms SuccessorTree.NonPrecompact.FolkmanDirectedFiniteStageAtlas.taggedProfile_global_invariant
+#print axioms SuccessorTree.NonPrecompact.FolkmanDirectedFiniteStageAtlas.taggedProfile_eq_of_globalRelated
+#print axioms SuccessorTree.NonPrecompact.folkmanGlobalTaggedRelated_iff_profile_eq

@@ -1,0 +1,15 @@
+import BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
+
+/-!
+Exact-statement/axiom audit for the complete isomorphism of the
+original ambient finitely generated non-unital Folkman structures.
+Global homogeneity/automorphism extension is NOT asserted here.
+-/
+
+#print axioms SuccessorTree.NonPrecompact.folkmanAmbientGeneratedTupleCoordinate
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.left_generatedEquiv_apply
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.right_generatedEquiv_apply
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.left_generatedEquiv_generator
+#print axioms SuccessorTree.NonPrecompact.FolkmanFiniteTupleStageWitness.right_generatedEquiv_generator
+#print axioms SuccessorTree.NonPrecompact.folkmanAmbientGeneratedTwoSortIso_of_codeIso
+#print axioms SuccessorTree.NonPrecompact.folkmanAmbientGeneratedTwoSortIso_of_profile_eq

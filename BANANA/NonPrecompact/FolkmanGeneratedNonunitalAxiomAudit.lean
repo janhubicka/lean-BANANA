@@ -1,0 +1,26 @@
+import BANANA.NonPrecompact.FolkmanGeneratedNonunitalPairing
+
+/-! Draft exact-statement audit. No kernel certification is claimed by this file. -/
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.evalPattern_zero
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.mem_evalSet_iff
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.eval_toBoolRing
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.eval_mem_generated
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedNonunitalSubring_mem_iff_ringTerm
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.eval_map
+#print axioms SuccessorTree.NonPrecompact.PrebananaBooleanTerm.centredRingTerm_evalPattern
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.toBooleanTerm_evalPattern
+#print axioms SuccessorTree.NonPrecompact.FolkmanRingTerm.toNonunitalTerm_evalSet
+#print axioms SuccessorTree.NonPrecompact.FolkmanNonunitalTerm.centredRingTerm_evalSet
+#print axioms SuccessorTree.NonPrecompact.folkmanNonunitalTermRange_iff_ringTerm
+#print axioms SuccessorTree.NonPrecompact.folkmanNonunitalTermRange_iff_nativeClosure
+#print axioms SuccessorTree.NonPrecompact.folkmanNonunitalTermRangeEquivGenerated
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedRingTermRepresentative_spec
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedRingTermMap_eval
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedNonunitalRingEquiv_of_termEqualities
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedNonunitalRingEquiv_eval_term
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedNonunitalRingEquiv_generator
+#print axioms SuccessorTree.NonPrecompact.folkmanRingTerm_equalities_of_patterns_eq
+#print axioms SuccessorTree.NonPrecompact.folkmanRingTerm_nativeEqualities_of_patterns_eq
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedNonunitalRingEquiv_of_patterns_eq
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedNonunitalRingEquivs_preserve_pairing
