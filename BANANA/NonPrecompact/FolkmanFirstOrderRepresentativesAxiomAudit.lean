@@ -11,7 +11,7 @@ are still outstanding.
 
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentative
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentativeFinite
-#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentativeCountable
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentative_countable
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentative_fg
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentativeIndexNonempty
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderRepresentative_index_countable
