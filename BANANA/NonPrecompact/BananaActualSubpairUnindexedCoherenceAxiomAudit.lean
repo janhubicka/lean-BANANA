@@ -1,0 +1,29 @@
+import BANANA.NonPrecompact.BananaActualSubpairUnindexedCoherence
+
+/-!
+# Track D exact-head transitive axiom audit
+
+Do NOT interpret these query declarations as successful kernel checks.
+Run them with the repository's pinned Lean toolchain, inspect every printed
+axiom, and obtain independent statement-fidelity and counterexample reviews.
+-/
+
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixIso.eq_of_components
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.refl
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.trans
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.symm
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.toPresentedIso_refl
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.toPresentedIso_trans
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.toPresentedIso_symm
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.toPresentedIso_left_coordinates
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpairIso.toPresentedIso_right_coordinates
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpair.leftCoordinateEquiv_val
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpair.rightCoordinateEquiv_val
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpair.left_completion_coordinate
+#print axioms SuccessorTree.NonPrecompact.BananaActualSubpair.right_completion_coordinate
+#print axioms SuccessorTree.NonPrecompact.exists_bananaActualClassCoherentExtension
+#print axioms SuccessorTree.NonPrecompact.bananaActualClassAction_changeIndex
+#print axioms SuccessorTree.NonPrecompact.bananaActualClassAction_descend_refl
+#print axioms SuccessorTree.NonPrecompact.bananaActualClassAction_descend_trans
+#print axioms SuccessorTree.NonPrecompact.bananaActualClassAction_descend_symm
+#print axioms SuccessorTree.NonPrecompact.exists_bananaActualCoherentEPPA
