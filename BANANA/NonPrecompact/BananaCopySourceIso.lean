@@ -154,6 +154,19 @@ noncomputable def copyRangesEquiv
     apply Subtype.ext
     rfl
 
+/-- The correctly typed source-reparametrisation equation:
+the copy types are compared through their explicit equivalence,
+rather than by equating differently indexed subtypes. -/
+theorem copyRangesEquiv_precompose
+    (i : BananaCopySourceIso A A')
+    {C : BananaMatrixStructure lC rC}
+    (e : BananaMatrixEmbedding A' C) :
+    i.copyRangesEquiv C
+      ((BananaMatrixEmbedding.comp e i.toEmbedding).copyRanges) =
+        e.copyRanges := by
+  apply Subtype.ext
+  exact i.copyRanges_precompose e
+
 /-- Changing the coordinates of the *ambient* structure also
 gives a bijection of unlabelled copies. Its inverse is induced by the
 inverse pairing isomorphism, and it preserves the two image subspaces
