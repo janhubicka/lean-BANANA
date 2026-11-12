@@ -51,6 +51,7 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanFirstOrderSubstructure
   BANANA.NonPrecompact.FolkmanFirstOrderSubstructureConverse
   BANANA.NonPrecompact.FolkmanFirstOrderGeneratedClosure
+  BANANA.NonPrecompact.FolkmanFirstOrderRepresentatives
   BANANA.NonPrecompact.FolkmanDirectedFinitePairingLaws
   BANANA.NonPrecompact.FolkmanAmbientGeneratedNativePairing
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
