@@ -99,7 +99,8 @@ does not change an unlabelled copy. In particular this works for
 nonrigid sources: it is about images, not embedding parameters. -/
 theorem copyRanges_precompose
     (i : BananaCopySourceIso A A')
-    (e : BananaMatrixEmbedding A' (C : BananaMatrixStructure lC rC)) :
+    {C : BananaMatrixStructure lC rC}
+    (e : BananaMatrixEmbedding A' C) :
     (BananaMatrixEmbedding.comp e i.toEmbedding).copyRanges =
       e.copyRanges := by
   classical
