@@ -48,6 +48,9 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanFirstOrderInterpretation
   BANANA.NonPrecompact.FolkmanFirstOrderNativeEmbedding
   BANANA.NonPrecompact.FolkmanFirstOrderEmbeddingConverse
+  BANANA.NonPrecompact.FolkmanFirstOrderSubstructure
+  BANANA.NonPrecompact.FolkmanFirstOrderSubstructureConverse
+  BANANA.NonPrecompact.FolkmanFirstOrderGeneratedClosure
   BANANA.NonPrecompact.FolkmanDirectedFinitePairingLaws
   BANANA.NonPrecompact.FolkmanAmbientGeneratedNativePairing
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
@@ -86,6 +89,7 @@ regressions=(
   scripts/check_folkman_bridge_swap.py
   scripts/check_folkman_firstorder_encoding.py
   scripts/check_folkman_firstorder_embedding_converse.py
+  scripts/check_folkman_firstorder_substructures.py
 )
 for script in "${regressions[@]}"; do
   python3 "$script"
