@@ -82,11 +82,11 @@ theorem bananaActualClassAction_descend_refl
       Θ c (BananaActualSubpairIso.refl U.1) = 1)
     (U : BananaActualSubpair A) :
     bananaActualClassAction_descend Θ (BananaActualSubpairIso.refl U) = 1 := by
-  change Θ (bananaActualSubpairClass U)
-    (U := ⟨U, rfl⟩)
-    (V := ⟨U, (BananaActualSubpairIso.refl U).same_presented_class.symm⟩)
-    (BananaActualSubpairIso.refl U) = 1
-  exact hId (bananaActualSubpairClass U) (bananaActualClassObjectOf U)
+  exact classAction_descend_refl bananaActualSubpairClass
+    (fun {_ _} p => p.same_presented_class)
+    (fun c U V p => Θ c (U := U) (V := V) p)
+    (fun U => BananaActualSubpairIso.refl U)
+    (fun c U => hId c U) U
 
 /-- A descended action preserves composition on ACTUAL partial
 isomorphisms, including the change in the chosen source class index. -/
@@ -107,23 +107,11 @@ theorem bananaActualClassAction_descend_trans
     bananaActualClassAction_descend Θ q *
         bananaActualClassAction_descend Θ p =
       bananaActualClassAction_descend Θ (p.trans q) := by
-  let c := bananaActualSubpairClass U
-  let hUV : bananaActualSubpairClass U = bananaActualSubpairClass V :=
-    p.same_presented_class
-  let hVW : bananaActualSubpairClass V = bananaActualSubpairClass W :=
-    q.same_presented_class
-  let hUW : bananaActualSubpairClass U = bananaActualSubpairClass W :=
-    (p.trans q).same_presented_class
-  let u0 : BananaActualClassObject A c := ⟨U, rfl⟩
-  let v0 : BananaActualClassObject A c := ⟨V, hUV.symm⟩
-  let w0 : BananaActualClassObject A c := ⟨W, hUW.symm⟩
-  have hq : bananaActualClassAction_descend Θ q =
-      Θ c (U := v0) (V := w0) q := by
-    have he := bananaActualClassAction_changeIndex Θ hUV.symm
-      (U := V) (V := W) rfl hVW.symm q
-    exact he
-  rw [hq]
-  exact hComp c u0 v0 w0 p q
+  exact classAction_descend_trans bananaActualSubpairClass
+    (fun {_ _} p => p.same_presented_class)
+    (fun c U V p => Θ c (U := U) (V := V) p)
+    (fun {_ _ _} p q => p.trans q)
+    (fun c U V W p q => hComp c U V W p q) p q
 
 /-- Inverses of actual partial isomorphisms descend to inverses of the
 same ambient group element. -/
@@ -141,18 +129,11 @@ theorem bananaActualClassAction_descend_symm
     (p : BananaActualSubpairIso U V) :
     (bananaActualClassAction_descend Θ p)⁻¹ =
       bananaActualClassAction_descend Θ p.symm := by
-  let c := bananaActualSubpairClass U
-  let hUV : bananaActualSubpairClass U = bananaActualSubpairClass V :=
-    p.same_presented_class
-  let u0 : BananaActualClassObject A c := ⟨U, rfl⟩
-  let v0 : BananaActualClassObject A c := ⟨V, hUV.symm⟩
-  have hback : bananaActualClassAction_descend Θ p.symm =
-      Θ c (U := v0) (V := u0) p.symm := by
-    have he := bananaActualClassAction_changeIndex Θ hUV.symm
-      (U := V) (V := U) rfl hUV p.symm
-    exact he
-  rw [hback]
-  exact hInv c u0 v0 p
+  exact classAction_descend_symm bananaActualSubpairClass
+    (fun {_ _} p => p.same_presented_class)
+    (fun c U V p => Θ c (U := U) (V := V) p)
+    (fun {_ _} p => p.symm)
+    (fun c U V p => hInv c U V p) p
 
 /-- End-to-end coherent EPPA for an arbitrary finite BANANA pairing:
 there exists a SINGLE automorphism of the perfect completion for each
