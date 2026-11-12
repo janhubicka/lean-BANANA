@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.FolkmanFirstOrderInterpretation
+import Mathlib.Tactic.FinCases
 
 /-!
 # Native non-unital Folkman embeddings as first-order embeddings
