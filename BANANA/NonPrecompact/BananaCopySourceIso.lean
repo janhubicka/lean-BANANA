@@ -153,6 +153,36 @@ noncomputable def copyRangesEquiv
     apply Subtype.ext
     rfl
 
+/-- Changing the coordinates of the *ambient* structure also
+gives a bijection of unlabelled copies. Its inverse is induced by the
+inverse pairing isomorphism, and it preserves the two image subspaces
+under the prescribed ambient coordinate change. -/
+noncomputable def copyRangesAmbientEquiv
+    {a b a' b' s t : ℕ}
+    {X : BananaMatrixStructure a b}
+    {Y : BananaMatrixStructure a' b'}
+    {S : BananaMatrixStructure s t}
+    (j : BananaCopySourceIso X Y) :
+    BananaCopyRanges S X ≃ BananaCopyRanges S Y where
+  toFun := fun D => D.map j.toEmbedding
+  invFun := fun D => D.map j.symm.toEmbedding
+  left_inv := by
+    intro D
+    apply Subtype.ext
+    apply Prod.ext
+    · change (D.1.1.image j.left).image j.left.symm = D.1.1
+      simp [Finset.image_image, Function.comp_def]
+    · change (D.1.2.image j.right).image j.right.symm = D.1.2
+      simp [Finset.image_image, Function.comp_def]
+  right_inv := by
+    intro D
+    apply Subtype.ext
+    apply Prod.ext
+    · change (D.1.1.image j.left.symm).image j.left = D.1.1
+      simp [Finset.image_image, Function.comp_def]
+    · change (D.1.2.image j.right.symm).image j.right = D.1.2
+      simp [Finset.image_image, Function.comp_def]
+
 /-- Changing source coordinates commutes with embeddings of the
 ambient structure, so the colour-transport argument is natural. -/
 theorem copyRangesEquiv_map
