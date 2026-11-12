@@ -103,6 +103,7 @@ def run() -> dict[str, int]:
     assert len(copies(A_one, A_one)) == 1
     counts = dict(structures=len(structures), source_target_pairs=0,
                   source_basis_changes=0, source_basis_checks=0,
+                  basis_pairing_checks=0, precomposition_checks=0,
                   one_sided_checks=0, palette_checks=0,
                   embedding_composition_checks=0)
     for A in structures:
@@ -129,9 +130,20 @@ def run() -> dict[str, int]:
             for g in injections(A.right, A.right):
                 A_prime = change_basis(A, f, g)
                 counts['source_basis_changes'] += 1
+                for x in range(1 << A.left):
+                    for y in range(1 << A.right):
+                        assert A_prime.evaluate(apply_map(f, x), apply_map(g, y)) == A.evaluate(x, y), (A, A_prime, f, g, x, y)
+                        counts['basis_pairing_checks'] += 1
                 for C in structures:
                     assert copies(A, C) == copies(A_prime, C), (A, A_prime, C)
                     counts['source_basis_checks'] += 1
+                    for eL, eR in embeddings(A_prime, C):
+                        preL = tuple(apply_map(eL, v) for v in f)
+                        preR = tuple(apply_map(eR, v) for v in g)
+                        assert copy_of_embedding(A, preL, preR) == copy_of_embedding(A_prime, eL, eR)
+                        assert all(C.evaluate(preL[i], preR[j]) == ((A.rows[i] >> j) & 1)
+                                   for i in range(A.left) for j in range(A.right))
+                        counts['precomposition_checks'] += 1
     # Check composition for all small sources/targets in sorts of dimension <= 1.
     small = tuple(A for A in structures if A.left <= 1 and A.right <= 1)
     for A in small:
