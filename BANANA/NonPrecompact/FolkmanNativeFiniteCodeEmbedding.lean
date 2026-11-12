@@ -37,18 +37,8 @@ theorem folkmanNativeFin_edgeCount_cast
     (X : Finset (Fin C.leftCount))
     (Y : Finset (Fin C.rightCount)) :
     (folkmanEdgeCount C.edge X Y : F2) =
-      ∑ i ∈ X, ∑ j ∈ Y, C.edge i j := by
-  classical
-  have hbit : ∀ z : F2,
-      (if z = 1 then (1 : F2) else 0) = z := by
-    decide
-  simp only [folkmanEdgeCount, Nat.cast_sum, Nat.cast_ite,
-    Nat.cast_one, Nat.cast_zero]
-  apply Finset.sum_congr rfl
-  intro i hi
-  apply Finset.sum_congr rfl
-  intro j hj
-  exact hbit (C.edge i j)
+      ∑ i ∈ X, ∑ j ∈ Y, C.edge i j :=
+  folkmanEdgeCount_cast C.edge X Y
 
 /-- Every pair of injective native non-unital ring homomorphisms
 preserving the original two-sort pairing determines a genuine

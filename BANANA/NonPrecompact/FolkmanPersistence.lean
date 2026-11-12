@@ -32,6 +32,25 @@ def folkmanEdgeCount
     (X : Finset (Fin l)) (Y : Finset (Fin r)) : ℕ :=
   ∑ x ∈ X, ∑ y ∈ Y, if edge x y = 1 then 1 else 0
 
+/-- Counting incident edges in ℕ and then reducing modulo two agrees with
+summing the matrix entries in `F2`. This is independent of any owner map
+or unitality assumption. -/
+theorem folkmanEdgeCount_cast
+    {l r : ℕ}
+    (edge : Fin l → Fin r → F2)
+    (X : Finset (Fin l)) (Y : Finset (Fin r)) :
+    (folkmanEdgeCount edge X Y : F2) =
+      ∑ x ∈ X, ∑ y ∈ Y, edge x y := by
+  classical
+  simp only [folkmanEdgeCount, Nat.cast_sum]
+  apply Finset.sum_congr rfl
+  intro x hx
+  apply Finset.sum_congr rfl
+  intro y hy
+  rcases f2_eq_zero_or_one (edge x y) with hzero | hone
+  · simp [hzero]
+  · simp [hone]
+
 /-- The atom block owned by source atom `j`. -/
 def folkmanFiber
     {q n : ℕ}

@@ -43,6 +43,8 @@ def strip_lean_comments(source: str) -> str:
             if i == -1:
                 break
         elif source.startswith("/-", i):
+            # A block comment is lexical whitespace, not token concatenation.
+            out.append(" ")
             depth = 1
             i += 2
         else:

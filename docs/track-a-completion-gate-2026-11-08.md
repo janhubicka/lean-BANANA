@@ -1,0 +1,116 @@
+# Track A close-out review — 8 November 2026
+
+Internal note only. Do not insert into the frozen circulation manuscript.
+
+
+## Current integration status — 8 November 2026
+
+The references below to #305 and #309 as drafts record the state before the
+latest mainline merges; they are no longer current. PRs #305, #309, #313
+(original-language embedding identity and composition) and #314
+(original-language strong-amalgamation target) have been merged into main.
+This does NOT make the new Track A declarations kernel-checked.
+
+Track A PR #312 has been brought forward to main commit
+`97660c8d0824ef58739e9e42768ce98b164b81c4` by an explicit
+disjoint-file merge. The native and tuple-profile cast theorems now both
+use `folkmanEdgeCount_cast` without changing either statement. The native
+code integration is confined to
+`FolkmanNativeFiniteCodeEmbedding.lean`, with its own existing
+`#print axioms` audit preserved.
+
+`scripts/check_track_a_local.sh` is now the reproducible final gate:
+it runs the seven relevant finite regressions, the Python audit fixtures,
+the import graph scan, explicit builds of the previously audit-only
+composition modules and of the two callers, the root build, and the strict
+transitive-axiom audit. Its shell syntax was checked with `bash -n`;
+the script has **not** been run with Lean. Only the pinned toolchain
+`leanprover/lean4:v4.35.0-rc3` should be used. GitHub Actions must not
+be used as a substitute for the local build.
+
+This integration does not replace the need to check correspondence with
+the native ring-map interface. The pairing-preserving atom-coordinate
+embedding category and the original-language non-unital embedding
+category remain distinct interfaces. An independent adversarial referee
+must check both the exact theorem types and the code that transports
+between these interfaces; this has not yet been obtained.
+
+
+## Work delivered
+
+The shared finite-owner summation refactor is merged as PR #307.
+The following work is staged together in draft PR #312:
+
+1. Shared edge count to F2 conversion (`folkmanEdgeCount_cast`) in FolkmanPersistence, re-used by the existing tuple-profile theorem without changing its signature.
+2. `folkmanComposeOwner` and exact fibre formula, with preservation of nonempty fibres.
+3. `FolkmanAtomEmbedding.comp`, including the matrix pairing-preservation field, not merely a partial-map composition.
+4. Identity owner and identity embedding, left/right identity and associativity, and embedding equality from its two owners.
+5. Dedicated axiom audits and independent finite regressions. The new `check_folkman_owner_category_surjective_small.py` checks actual nonempty-fibre maps (1,113 composable triples, including 847 four-positive-sort triples).
+
+No circulation text, appendix, TODO, marker or root `BANANA.lean` import was changed. All source changes are Lean modules, internal notes or regression scripts.
+
+## Adversarial mathematical checks
+
+- **Owner direction:** `f : A → B` is represented by `B.atom → Option A.atom`. Composition is `g(x).bind f`. This order matches embedding composition.
+- **Missing owners:** `Option.none` propagates through composition. No element of a source fibre is contributed by an unowned final or intermediate atom.
+- **Surjectivity/nonempty fibres:** For each source atom `i`, choose an intermediate atom with owner `i`, then a final atom owned by that intermediate atom.
+- **Pairing:** The composite fibre is a disjoint union of intermediate fibres. Apply existing `folkmanEdgeCount_biUnion_left/right`, then cast each finite sum to `F2`, use `g.pairing_parity` pointwise, the shared edge-count conversion, and finally `f.pairing_parity`.
+- **Identity:** The `some` identity owner's fibre at `i` is the singleton `{i}`, so pairing is the corresponding matrix entry.
+- **Associativity:** Associativity of `Option.bind`; equality of records follows because the other fields are propositions and their owner maps agree.
+- **Degenerate cases:** Empty left or right sorts give vacuous requirements, not a hidden positive-dimension assumption.
+- **Statement scope:** This is an atom-coordinate category of pairing-preserving embeddings. It is **not yet** a proof that original-language non-unital ring embeddings are represented faithfully and compositionally. That native interface belongs to draft PRs #305 and #309.
+
+## Verification still missing — non-negotiable merge gate
+
+Local container inspection on 8 November found no `lean`, `lake` or `elan`. `git ls-remote https://github.com/janhubicka/lean-BANANA.git HEAD` failed with `Could not resolve host: github.com`. GitHub connector access was used only to inspect and edit the PR; no GitHub runner was invoked. **No Lean build or transitive-axiom audit of this head has been executed here.**
+
+Run on the exact head commit:
+```sh
+python3 -m unittest discover -s scripts -p 'test_*.py'
+python3 scripts/check_lean_module_graph.py
+python3 scripts/check_folkman_edgecount_cast_small.py
+python3 scripts/check_folkman_partial_owner_parity_small.py
+python3 scripts/check_folkman_owner_composition_small.py
+python3 scripts/check_folkman_embedding_composition_small.py
+python3 scripts/check_folkman_owner_category_laws_small.py
+python3 scripts/check_folkman_owner_category_surjective_small.py
+lake build BANANA.NonPrecompact.FolkmanPartialOwnerComposition
+lake build BANANA.NonPrecompact.FolkmanPartialOwnerCompositionAxiomAudit
+lake build BANANA
+bash scripts/audit_all_axioms_local.sh
+```
+
+Inspect the actual `#print axioms` outputs for each new declaration: only `propext`, `Classical.choice`, and `Quot.sound` are allowed. An **independent** adversarial reviewer must compare every exact theorem type against the intended claim and independently look for a missing hypothesis; the implementing assistant's inspection is not independent referee verification. If Lean flags elaboration, repair locally and repeat the exact-head gates.
+
+## Track A completion judgement
+
+**Mathematical interface and finite testing: implemented. Kernel verification, independent external refereeing and merge: not complete.** Keep #312 as draft; do not mark manuscripts validated. Do not treat the unresolved native PRs as a Track A blocker for merging the *shared* API once it is independently checked: they are downstream integration obligations.
+
+
+## Audit-runner hardening and latest integration — 8 November 2026
+
+- Synced this draft branch with main SHA `23a6d1a562e1e2ca5ba933c585b4b5d4de107ffb`, which incorporates merged native finite-class PR #315. Mainline and Track A files were disjoint, and both existing cast-theorem statements were compared literally with main: **identical**.
+- Corrected `strip_lean_comments` to retain a lexical space at the start of an inline Lean block comment. Previously `import BANANA.Left/- comment -/BANANA.Right` could be misread as one concatenated name by the static import scanner. Added unit tests for this and line-comment boundaries.
+- The exact checked-out `scripts/check_axiom_report.py` and `scripts/test_check_axiom_report.py` blobs were manually reproduced locally and their Git blob hashes matched the PR branch; **13/13 Python unit tests passed**. This is a parser test, not a Lean proof.
+- The exact `scripts/check_track_a_local.sh` blob was reproduced locally, Git hash matched and `bash -n` passed. The gate now refuses dirty checkouts and mismatched Lean versions. Both refusal paths passed in a temporary Git checkout with a stub `lake` command; the stub was **not** used to claim Lean success.
+- The `f2_eq_zero_or_one` helper used by the shared cast lemma is defined in `BilinearResidue.lean`, imported transitively by `FolkmanPersistence.lean` through `ColouringWrappers.lean`. This source-level import check does not establish elaboration.
+- The current execution container still has no `lean`, `lake` or `elan`; Github DNS is unavailable from the container. The actual Lean build, transitive-axiom audit, and genuinely independent referee review are **outstanding**. Do not merge or add a full-theorem validation marker on this evidence.
+
+## Further Track A source coverage — 8 November 2026
+
+On the exact draft source, the new atom-coordinate composition module declares
+13 top-level definitions/theorems. Its dedicated axiom-audit module previously
+contained 11 `#print axioms` queries; `folkmanComposeOwner` and
+`folkmanIdentityOwner` were absent. Both queries have now been added.
+
+New `scripts/check_track_a_axiom_coverage.py` compares all declared
+names with all queries, rejects missing/duplicate/extra names, and checks
+the existing audits for the generic, native, and tuple-profile parity lemmas.
+The static comparison against the current GitHub source found exactly
+13 declarations and 13 matching unique queries. The final local gate calls
+this script before compiling Lean. This establishes **static audit coverage**,
+not kernel verification.
+
+The execution container has no Lean/Lake/Elan and cannot resolve the Lean
+release server; the exact-head kernel build and independent proof referee
+remain outstanding. The circulation manuscript is still untouched.

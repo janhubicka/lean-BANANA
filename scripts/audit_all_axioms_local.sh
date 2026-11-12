@@ -14,6 +14,14 @@ python3 scripts/check_lean_module_graph.py
 lake build BANANA
 count=0
 while IFS= read -r -d '' file; do
+  # The root library need not import every audit-only proof module.
+  # Build this audit target and its transitive imports before querying axioms.
+  module="${file%.lean}"
+  module="${module//\//.}"
+  if ! lake build "$module"; then
+    echo "Failed to build axiom audit module: $module" >&2
+    exit 1
+  fi
   result="$(mktemp)"
   if ! lake env lean "$file" >"$result" 2>&1; then
     cat "$result" >&2
