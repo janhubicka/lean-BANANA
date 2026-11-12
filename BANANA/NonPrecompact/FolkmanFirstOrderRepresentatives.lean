@@ -70,7 +70,7 @@ instance folkmanFirstOrderRepresentativeIndexNonempty :
 
 /-- The same indexed family has only countably many representatives
 (no uniqueness of codes or atom numberings is required). -/
-noncomputable instance folkmanFirstOrderRepresentativeIndexCountable :
+theorem folkmanFirstOrderRepresentative_index_countable :
     Countable FolkmanAtomStructure := by
   infer_instance
 
