@@ -154,6 +154,24 @@ its own local Lean checks before being counted as formal evidence.
 These are separate proof-obligation desk checks, **not** independent
 human/agent referee certifications.
 
+### Adversarial type-level correction (12 November)
+
+The first staged statement of `copyRanges_precompose` mistakenly
+asserted an equality between `BananaCopyRanges A C` and
+`BananaCopyRanges A' C`. These are **different Lean types** when
+`A` and `A'` are distinct source indices, even though the copy
+ranges are identical. This was detected by an independent typing
+review before any kernel-verification claim. The statement was
+repaired to assert equality **after projecting to the common pair
+of ambient image sets** via `.1`. The separate
+`copyRangesEquiv` is the correctly typed equivalence between the
+two source-indexed copy types.
+
+This is not a counterexample to the mathematical source-invariance
+claim, but it is a concrete reason why an uncompiled Lean script
+must not be labelled validated. The amended declaration still
+requires a local Lean elaboration and axiom check.
+
 ## Locally executed independent regression
 
 Run:
