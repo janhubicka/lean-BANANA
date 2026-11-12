@@ -94,6 +94,18 @@ private theorem ranges_comp_sourceIso
         (fun x => e.right (i.right x))
     exact (univ_image_comp_equiv i.right.toEquiv e.right).symm
 
+/-- Precomposition by a pairing-preserving source isomorphism
+does not change an unlabelled copy. In particular this works for
+nonrigid sources: it is about images, not embedding parameters. -/
+theorem copyRanges_precompose
+    (i : BananaCopySourceIso A A')
+    (e : BananaMatrixEmbedding A' (C : BananaMatrixStructure lC rC)) :
+    (BananaMatrixEmbedding.comp e i.toEmbedding).copyRanges =
+      e.copyRanges := by
+  classical
+  apply Subtype.ext
+  exact (ranges_comp_sourceIso e i).symm
+
 /-- A pair of ambient ranges is an A-copy if and only if it is
 an A'-copy when the two sources are isomorphic. -/
 private theorem copyPredicate_iff
@@ -195,6 +207,26 @@ theorem copyRamseyDegreeLE_iff
     A.copyRamseyDegreeLE t ↔ A'.copyRamseyDegreeLE t := by
   exact ⟨i.copyRamseyDegreeLE_imp t,
     i.symm.copyRamseyDegreeLE_imp t⟩
+
+/-- The already formalised two-case classification transports
+without loss along *any* source change of coordinates. Its cases are
+indexed by the dimensions of `A`; an isomorphism preserves them. -/
+theorem copyRamseyDegree_classification_transport
+    (i : BananaCopySourceIso A A') :
+    ((r = 0 ∨ l = 0) →
+       A'.copyRamseyDegreeLE 1 ∧ ¬ A'.copyRamseyDegreeLE 0) ∧
+    ((0 < l ∧ 0 < r) →
+       ∀ t : ℕ, ¬ A'.copyRamseyDegreeLE t) := by
+  obtain ⟨hone, hinfinite⟩ := A.copyRamseyDegree_classification
+  constructor
+  · intro hzero
+    obtain ⟨hdegree, hnonzero⟩ := hone hzero
+    constructor
+    · exact (i.copyRamseyDegreeLE_iff 1).mp hdegree
+    · intro hz
+      exact hnonzero ((i.copyRamseyDegreeLE_iff 0).mpr hz)
+  · intro hboth t ht
+    exact hinfinite hboth t ((i.copyRamseyDegreeLE_iff t).mpr ht)
 
 end BananaCopySourceIso
 
