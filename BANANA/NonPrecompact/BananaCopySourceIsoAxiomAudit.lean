@@ -8,6 +8,7 @@ required before any claim of kernel verification or root integration.
 -/
 
 #print axioms SuccessorTree.NonPrecompact.BananaCopySourceIso.copyRanges_precompose
+#print axioms SuccessorTree.NonPrecompact.BananaCopySourceIso.copyRangesEquiv_precompose
 #print axioms SuccessorTree.NonPrecompact.BananaCopySourceIso.copyRangesAmbientEquiv
 #print axioms SuccessorTree.NonPrecompact.BananaCopySourceIso.copyRangesEquiv_map
 #print axioms SuccessorTree.NonPrecompact.BananaCopySourceIso.copyRamseyDegreeLE_imp
