@@ -45,6 +45,9 @@ track_c_modules=(
   BANANA.NonPrecompact.FolkmanFiniteSourceHullsFromAtlas
   BANANA.NonPrecompact.FolkmanGlobalEPPCompletion
   BANANA.NonPrecompact.FolkmanFirstOrderSignature
+  BANANA.NonPrecompact.FolkmanFirstOrderInterpretation
+  BANANA.NonPrecompact.FolkmanFirstOrderNativeEmbedding
+  BANANA.NonPrecompact.FolkmanFirstOrderEmbeddingConverse
   BANANA.NonPrecompact.FolkmanDirectedFinitePairingLaws
   BANANA.NonPrecompact.FolkmanAmbientGeneratedNativePairing
   BANANA.NonPrecompact.FolkmanAmbientGeneratedTwoSortIso
