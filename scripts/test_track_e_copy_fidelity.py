@@ -78,6 +78,41 @@ def change_basis(A: Pairing, f: tuple[int, ...], g: tuple[int, ...]) -> Pairing:
     return Pairing(A.left, A.right, rows)
 
 
+def matrix_rank(rows: tuple[int, ...]) -> int:
+    """Independent Gaussian-elimination invariant for a rectangular F_2 matrix."""
+    pivots: dict[int, int] = {}
+    for row in rows:
+        while row:
+            p = row.bit_length() - 1
+            if p not in pivots:
+                pivots[p] = row
+                break
+            row ^= pivots[p]
+    return len(pivots)
+
+
+@lru_cache(maxsize=None)
+def subspaces_with_bases(d: int, n: int):
+    """Enumerate each d-plane exactly once, independently of pairing data."""
+    result = {}
+    for basis in injections(d, n):
+        result.setdefault(span(basis), basis)
+    return tuple(result.items())
+
+
+def rank_copies(A: Pairing, C: Pairing):
+    """A restricted pairing is isomorphic to A iff its rank agrees."""
+    expected = set()
+    for U, f in subspaces_with_bases(A.left, C.left):
+        for V, g in subspaces_with_bases(A.right, C.right):
+            restricted = tuple(
+                sum(C.evaluate(x, y) << j for j, y in enumerate(g))
+                for x in f)
+            if matrix_rank(restricted) == matrix_rank(A.rows):
+                expected.add((U, V))
+    return frozenset(expected)
+
+
 def line_pairs(A: Pairing, b: int) -> tuple[tuple[int, int], ...]:
     return tuple((x, y) for x in range(1, 1 << A.left)
                  for y in range(1, 1 << A.right) if A.evaluate(x, y) == b)
@@ -105,11 +140,14 @@ def run() -> dict[str, int]:
                   source_basis_changes=0, source_basis_checks=0,
                   basis_pairing_checks=0, precomposition_checks=0,
                   ambient_basis_checks=0, ambient_copy_bijection_checks=0,
+                  rank_classification_checks=0,
                   one_sided_checks=0, palette_checks=0,
                   embedding_composition_checks=0)
     for A in structures:
         for C in structures:
             copy_set = copies(A, C)
+            assert copy_set == rank_copies(A, C), (A, C, copy_set, rank_copies(A, C))
+            counts['rank_classification_checks'] += 1
             counts['source_target_pairs'] += 1
             for f, g in embeddings(A, C):
                 assert copy_of_embedding(A, f, g) in copy_set
