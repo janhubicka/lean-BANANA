@@ -104,6 +104,7 @@ def run() -> dict[str, int]:
     counts = dict(structures=len(structures), source_target_pairs=0,
                   source_basis_changes=0, source_basis_checks=0,
                   basis_pairing_checks=0, precomposition_checks=0,
+                  ambient_basis_checks=0, ambient_copy_bijection_checks=0,
                   one_sided_checks=0, palette_checks=0,
                   embedding_composition_checks=0)
     for A in structures:
@@ -144,6 +145,20 @@ def run() -> dict[str, int]:
                         assert all(C.evaluate(preL[i], preR[j]) == ((A.rows[i] >> j) & 1)
                                    for i in range(A.left) for j in range(A.right))
                         counts['precomposition_checks'] += 1
+    # Independent ambient-coordinate refactor: image sets move under a
+    # pairing-preserving invertible change of coordinates, bijectively.
+    for B in structures:
+        for f in injections(B.left, B.left):
+            for g in injections(B.right, B.right):
+                B_prime = change_basis(B, f, g)
+                counts['ambient_basis_checks'] += 1
+                for A in structures:
+                    transported = frozenset(
+                        (frozenset(apply_map(f, x) for x in D[0]),
+                         frozenset(apply_map(g, y) for y in D[1]))
+                        for D in copies(A, B))
+                    assert transported == copies(A, B_prime), (A, B, B_prime, f, g)
+                    counts['ambient_copy_bijection_checks'] += 1
     # Check composition for all small sources/targets in sorts of dimension <= 1.
     small = tuple(A for A in structures if A.left <= 1 and A.right <= 1)
     for A in small:
