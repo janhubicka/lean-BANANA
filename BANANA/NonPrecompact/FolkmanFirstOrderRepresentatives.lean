@@ -49,7 +49,7 @@ noncomputable instance folkmanFirstOrderRepresentativeFinite
   infer_instance
 
 /-- Every finite tagged representative is also countable. -/
-noncomputable instance folkmanFirstOrderRepresentativeCountable
+theorem folkmanFirstOrderRepresentative_countable
     (A : FolkmanAtomStructure) :
     Countable (folkmanFirstOrderRepresentative A) := by
   infer_instance
