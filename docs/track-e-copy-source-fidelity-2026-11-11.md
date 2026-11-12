@@ -27,13 +27,16 @@ the source-coordinate fidelity obligation isolated here.
    preserving the same pair of underlying image sets.
 3. `copyRangesEquiv_map`: naturality with respect to ambient
    embeddings.
-4. `copyRanges_precompose`: explicit invariance of the image sets
-   after precomposing an embedding with the source isomorphism.
-5. `copyRangesAmbientEquiv`: equivalence of unlabelled copy types
+4. `copyRanges_precompose`: explicit invariance of the *underlying*
+   image sets after precomposing an embedding with a source isomorphism.
+5. `copyRangesEquiv_precompose`: the resulting **well-typed equality of
+   copies**, after applying the equivalence between the different
+   source-indexed copy types.
+6. `copyRangesAmbientEquiv`: equivalence of unlabelled copy types
    after **ambient** changes of coordinate bases.
-6. `copyRamseyDegreeLE_iff`: invariance of every finite copy
+7. `copyRamseyDegreeLE_iff`: invariance of every finite copy
    Ramsey-degree bound under source-coordinate changes.
-7. `copyRamseyDegree_classification_transport`: the terminal
+8. `copyRamseyDegree_classification_transport`: the terminal
    finite-matrix classification transported through an arbitrary
    source pairing isomorphism. The source and ambient transports are
    separate to avoid silently equating parametrised embeddings
@@ -165,7 +168,9 @@ review before any kernel-verification claim. The statement was
 repaired to assert equality **after projecting to the common pair
 of ambient image sets** via `.1`. The separate
 `copyRangesEquiv` is the correctly typed equivalence between the
-two source-indexed copy types.
+two source-indexed copy types. The added
+`copyRangesEquiv_precompose` now states the original mathematical
+identity as a well-typed equality *after applying this equivalence*.
 
 This is not a counterexample to the mathematical source-invariance
 claim, but it is a concrete reason why an uncompiled Lean script
