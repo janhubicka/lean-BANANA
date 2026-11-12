@@ -58,7 +58,8 @@ This small finite fact is needed to recover the ORIGINAL full
 pairing from reflection of the one-valued relation. -/
 theorem folkmanF2_eq_of_one_iff_one
     (a b : F2) (h : (a = 1 ↔ b = 1)) : a = b := by
-  have hcases (x : F2) : x = 0 ∨ x = 1 := by decide
+  have hcases (x : F2) : x = 0 ∨ x = 1 := by
+    fin_cases x <;> decide
   rcases hcases a with ha | ha
   · rcases hcases b with hb | hb
     · exact ha.trans hb.symm
