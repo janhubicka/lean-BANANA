@@ -69,6 +69,63 @@ new result is a **source-coordinate invariance component**, not yet
 a formal Lean equivalence for a separately defined category of
 abstract finite pairings. That last packaging remains to be done.
 
+## Exact transfer to the abstract finite pairing class (desk proof)
+
+Let `K_abs` consist of arbitrary finite-dimensional vector-space pairs
+over F₂, each equipped with an arbitrary bilinear pairing; let `K_mat`
+consist of the matrix presentations in `BananaMatrixStructure`.
+Forgetful interpretation of the standard coordinate spaces defines a
+functor `U:K_mat→K_abs`.
+
+1. **Essential surjectivity.** For any `A∈K_abs`, choose bases of
+   its two vector spaces. Evaluating its pairing on those bases gives
+   a rectangular matrix `A₀∈K_mat`. The two basis maps form an
+   original-language isomorphism `α:U(A₀)≅A`. This also covers
+   zero-dimensional sorts and degenerate pairings.
+2. **Fully faithful on embeddings.** Once source and target bases are
+   fixed, any pair of linear maps is represented by its coordinate
+   matrices. The maps are injective and preserve the pairing in
+   `K_abs` exactly when they satisfy the two injectivity fields and
+   `pairing_apply` in `BananaMatrixEmbedding`. Conversely, every
+   such Lean matrix embedding is an abstract-language embedding.
+3. **Unlabelled-copy fidelity.** A copy is the pair of image
+   subspaces with its pairing inherited from the ambient object.
+   Source automorphisms do not produce distinct copies. The staged
+   `copyRangesEquiv` preserves the actual ambient image sets;
+   `copyRangesAmbientEquiv` transports those sets by the ambient
+   coordinate isomorphism.
+4. **Ramsey quantifiers.** Assume the matrix statement
+   `A₀.copyRamseyDegreeLE t`. Fix arbitrary `B∈K_abs` and
+   `r≥1`; choose coordinates `B₀≅B`, then apply the matrix
+   statement to the **already chosen** `B₀,r` to obtain `C₀`.
+   Use `U(C₀)` as the abstract witness. For every colouring of
+   `A`-copies in it, pull back along `α`, apply the matrix
+   statement to find `f₀:B₀→C₀`, then postcompose
+   `f₀` with the inverse coordinate isomorphism `B→B₀`.
+   Naturality shows that the same set of at most `t` colours
+   occurs on the `A`-copies inside this image. Crucially, the
+   witness `C₀` was selected **before** the colouring.
+5. **Reverse implication.** If the abstract statement holds,
+   apply it to the underlying abstract source and any matrix target
+   `B₀`; choose coordinate bases on the abstract witness `C`.
+   Transport arbitrary copy colourings and the resulting embedding
+   across this ambient isomorphism. This produces a matrix witness
+   for `A₀,B₀,r`.
+
+This proves equality of the abstract and matrix copy-degree
+predicates, including the lack of any finite bound. The argument
+does **not** rely on rigid sources, canonical bases, nondegeneracy,
+or an unproved Ramsey theorem. Its only mathematical inputs beyond
+the staged Lean components are elementary finite-dimensional
+linear algebra and the equivalence of finite pairings with their
+coordinate matrices.
+
+**Formalisation boundary:** the abstract class `K_abs` has not been
+declared as an independent Lean category, and Steps 1–5 above are
+not yet a Lean theorem. The finite-matrix theorem on `main` was
+previously kernel-checked; the staged coordinate transport must pass
+its own local Lean checks before being counted as formal evidence.
+
 ## Independent adversarial desk checks
 
 - **Semantic check:** colouring embeddings instead of ranges would be
