@@ -12,7 +12,7 @@ source = SOURCE.read_text()
 modules_block = re.search(r'track_d_audit_modules=\(\n(.*?)\n\)', source, re.S)
 assert modules_block, 'No audit module manifest'
 modules = modules_block.group(1).split()
-assert len(modules) == len(set(modules)) == 9
+assert len(modules) == len(set(modules)) == 10
 
 with tempfile.TemporaryDirectory() as td:
     root = Path(td) / 'repo'

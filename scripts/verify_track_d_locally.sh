@@ -95,12 +95,13 @@ fi
 # The final theorem imports 13 of the 15 new production modules. Two more
 # modules are standalone, imported only by their audit files. Building just
 # the end-to-end theorem would silently omit those two auxiliary modules.
-# Explicitly build and parse ALL nine Track D axiom-audit entry points.
+# Explicitly build and parse ALL ten Track D axiom-audit entry points.
 # Dependency-respecting order, from small independent lemmas to the
 # full actual-subpair coherent-EPPA theorem. Stop at the first failure.
 track_d_audit_modules=(
   BananaMatrixAutGroupAxiomAudit
   CoherentRepresentativeCoreAxiomAudit
+  CoherentGroupoidDescentAxiomAudit
   CoherentEppaRepresentativeTransportAxiomAudit
   BananaMatrixCompletionActionHomAxiomAudit
   BananaMatrixCoherentTransportAxiomAudit
