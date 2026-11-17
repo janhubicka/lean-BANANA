@@ -61,8 +61,43 @@ theorem BananaMatrixEmbedding.isometry_bilinearMap
   change B.eval (e.left x) (e.right y) = A.eval x y
   exact e.pairing_apply x y
 
+
+/-- The ordinary matrix-pullback operation is functorial after
+bundling, by mathlib's standard composition law. This gives an
+independent downstream use beyond the definition of the interface. -/
+theorem bananaPairingPullback_twice_toBilinearMap
+    {aL aR bL bR cL cR : ℕ}
+    (C : BananaMatrixStructure cL cR)
+    (fL : (Fin bL → F2) →ₗ[F2] (Fin cL → F2))
+    (fR : (Fin bR → F2) →ₗ[F2] (Fin cR → F2))
+    (gL : (Fin aL → F2) →ₗ[F2] (Fin bL → F2))
+    (gR : (Fin aR → F2) →ₗ[F2] (Fin bR → F2)) :
+    (bananaPairingPullback (bananaPairingPullback C fL fR) gL gR).toBilinearMap =
+      C.toBilinearMap.compl₁₂ (fL.comp gL) (fR.comp gR) := by
+  rw [bananaPairingPullback_toBilinearMap,
+      bananaPairingPullback_toBilinearMap,
+      LinearMap.compl₁₂_comp_comp]
+
+/-- The bundled isometry property of two successive finite embeddings
+follows immediately from the same composition law. -/
+theorem BananaMatrixEmbedding.comp_isometry_bilinearMap
+    {aL aR bL bR cL cR : ℕ}
+    {A : BananaMatrixStructure aL aR}
+    {B : BananaMatrixStructure bL bR}
+    {C : BananaMatrixStructure cL cR}
+    (f : BananaMatrixEmbedding A B)
+    (g : BananaMatrixEmbedding B C) :
+    C.toBilinearMap.compl₁₂ (g.comp f).left (g.comp f).right =
+      A.toBilinearMap := by
+  change C.toBilinearMap.compl₁₂ (g.left.comp f.left)
+    (g.right.comp f.right) = A.toBilinearMap
+  rw [LinearMap.compl₁₂_comp_comp,
+      g.isometry_bilinearMap, f.isometry_bilinearMap]
+
 end SuccessorTree.NonPrecompact
 
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.toBilinearMap
 #print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_toBilinearMap
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.isometry_bilinearMap
+#print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_twice_toBilinearMap
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.comp_isometry_bilinearMap
