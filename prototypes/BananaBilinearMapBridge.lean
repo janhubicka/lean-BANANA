@@ -81,3 +81,6 @@ theorem bananaLimitPairingBilinear_invariant
   exact h x y
 
 end SuccessorTree.NonPrecompact
+
+#print axioms SuccessorTree.NonPrecompact.bananaLimitPairingBilinear
+#print axioms SuccessorTree.NonPrecompact.bananaLimitPairingBilinear_invariant
