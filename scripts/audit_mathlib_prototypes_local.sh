@@ -36,3 +36,5 @@ do
   rm -f "$result"
   echo "Checked $file (Lean + permitted transitive axioms)"
 done
+
+python3 scripts/check_banana_bilinear_bridge_small.py
