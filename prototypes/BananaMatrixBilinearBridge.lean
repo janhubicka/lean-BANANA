@@ -62,3 +62,7 @@ theorem BananaMatrixEmbedding.isometry_bilinearMap
   exact e.pairing_apply x y
 
 end SuccessorTree.NonPrecompact
+
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.toBilinearMap
+#print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_toBilinearMap
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.isometry_bilinearMap
