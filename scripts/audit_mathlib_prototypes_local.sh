@@ -38,3 +38,4 @@ do
 done
 
 python3 scripts/check_banana_bilinear_bridge_small.py
+python3 scripts/check_banana_bilinear_composition_small.py
