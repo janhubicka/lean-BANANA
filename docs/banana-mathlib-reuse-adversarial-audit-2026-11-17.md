@@ -56,6 +56,23 @@ The repository's own `PrebananaFiniteBooleanRepresentation.lean` already uses th
 5. **P5 (adversarial regression):** preserve and rerun: per-base parity counterexample; empty/zero ring and non-unital image tests; both-sort pairing preservation; true strong image intersection; WAP system morphisms rather than only carrier embeddings; source size with one sort zero versus both nonzero in Ramsey-degree statements.
 6. Before accepting proof refactors: `lake build BANANA`; `bash scripts/audit_all_axioms_local.sh`; regression tests; compare `#print axioms`, theorem type (`#check` / `#print`) and import graph against the exact base commit. GitHub Actions are unavailable by policy; use local Lean. None of these commands was run during the present inspection.
 
+
+## Follow-up: isolated Lean prototypes (17 November 2026)
+
+* `prototypes/BananaBilinearMapBridge.lean` packages the already proved countable pairing bilinearity using `LinearMap.mk₂` and checks API equations for fixing an argument, restricting to submodules, pulling back along arbitrary linear maps, and automorphism invariance.
+* `prototypes/BananaMatrixBilinearBridge.lean` gives the more promising **finite rectangular pairing** interface. The pinned mathlib's `Matrix.dotProductBilin` and `Matrix.mulVecLin` directly bundle the existing coordinate evaluation, without independently proving bilinearity. The prototype derives bundled equalities corresponding to `bananaPairingPullback_eval` and `BananaMatrixEmbedding.pairing_apply`. The two sorts may have different dimensions (including zero); it does not use square-matrix `BilinForm`.
+* `scripts/audit_mathlib_prototypes_local.sh` builds the production root, checks the local import graph, compiles each isolated prototype with the pinned toolchain, and invokes `scripts/check_axiom_report.py` on its explicit `#print axioms` targets. **Not executed in this session**: the shell has neither Lean/Lake nor working DNS access.
+* The current branch deliberately does not import these prototype files from `BANANA.lean`. They are unvalidated experimental material, not new validation markers in the frozen manuscript and not proved contributions to the circulating paper.
+* The `README.md` Folkman strong-AP status has been corrected **on this branch only**, with a one-line documentation change. Full class-level consequences are still distinct.
+
+Adversarial type/API checks before merging the prototypes:
+
+1. Verify that `LinearMap.mk₂ F2` accepts the existing left/right scalar laws without any change of coercion or hidden extra hypotheses.
+2. Verify that `Matrix.dotProductBilin (m := Fin l) F2 F2` and `A.pairing.mulVecLin` elaborate for **all** `l,r : ℕ`, including a zero-dimensional sort.
+3. Verify that `LinearMap.compl₁₂` preserves the argument order for the distinct sorts and that `LinearMap.ext₂` matches the existing pointwise matrix-pullback and embedding equations.
+4. Confirm `#print axioms` reports only `propext`, `Classical.choice` and `Quot.sound`; run the all-module axiom audit again before adding any production imports.
+5. Check at least two downstream simplifications before replacing the concrete APIs. Existing proofs stay in place until this benefit is established.
+
 ## Review verdict
 
 There is **no demonstrated new mathematical inconsistency** in the inspected theorem statements. The highest-priority risk is overstatement during translation from concrete Lean certificates to manuscript-level class and topological theorems. The closure interface is already implemented; the strongest *new* local experiment is the `LinearMap.mk₂`/`compl₁₂` interface for pairings. A faithful `PartialEquiv` bridge is a more expensive medium-term experiment. Retain the explicit BANANA/Folkman finite diagrams and pairing-specific proofs.
