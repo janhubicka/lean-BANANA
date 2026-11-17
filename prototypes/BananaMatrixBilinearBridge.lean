@@ -26,7 +26,7 @@ mathlib, so no new bilinearity calculations are required. -/
 noncomputable def BananaMatrixStructure.toBilinearMap
     {l r : ℕ} (A : BananaMatrixStructure l r) :
     (Fin l → F2) →ₗ[F2] (Fin r → F2) →ₗ[F2] F2 :=
-  (Matrix.dotProductBilin (m := Fin l) F2 F2).compl₂ A.pairing.mulVecLin
+  (dotProductBilin (m := Fin l) F2 F2).compl₂ A.pairing.mulVecLin
 
 @[simp] theorem BananaMatrixStructure.toBilinearMap_apply
     {l r : ℕ} (A : BananaMatrixStructure l r)
