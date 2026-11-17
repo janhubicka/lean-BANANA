@@ -74,6 +74,16 @@ Adversarial type/API checks before merging the prototypes:
 4. Confirm `#print axioms` reports only `propext`, `Classical.choice` and `Quot.sound`; run the all-module axiom audit again before adding any production imports.
 5. Check at least two downstream simplifications before replacing the concrete APIs. Existing proofs stay in place until this benefit is established.
 
+## Further adversarial checks and composition prototype
+
+The finite pairing bridge now includes two **additional experimental downstream theorems**, `bananaPairingPullback_twice_toBilinearMap` and `BananaMatrixEmbedding.comp_isometry_bilinearMap`. They are stated as equalities of bilinear maps and their source proofs use the exact pinned mathlib lemma `LinearMap.compl₁₂_comp_comp`. Unlike pointwise matrix calculations, the proofs should require only the two earlier isometry/pullback wrappers and the standard composition identity. Their Lean compilation is **still pending**.
+
+An independently written Python check of pullback functoriality passed on (a) every three-stage F₂ matrix diagram when each of six sort dimensions is 0 or 1 (233 diagrams, of which 201 have a zero-dimensional sort), and (b) 10,000 seeded arbitrary three-stage diagrams with each dimension 0 through 3. A reproducible copy is `scripts/check_banana_bilinear_composition_small.py`; the local prototype audit script invokes it after compiling the proof prototypes. The finite experiment checks the *mathematical identity*, not the elaborated Lean theorem statement.
+
+**Negative reuse finding:** `PrebananaGeneratedProfileEmbedding.lean` already upgrades the existing term-range equivalence to a genuine injective, surjective marked Boolean embedding. Repackaging that result into an additional abstract `OrderIso` or inventing a parallel first-order coding before downstream demand is demonstrated would probably **increase** the code surface. The near-term goal is instead to identify redundant callers and delete none without import/usage analysis.
+
+**Fraïssé translation caveat:** `FiniteBananaPresentation` enumerates standard-coordinate matrices; it is not itself the isomorphism-invariant class of all first-order structures required by the mathlib Fraïssé interface. For pre-BANANA, the F₂ mark may be a unary predicate. For BANANA, the two vector-space sorts require a faithful multi-sorted encoding (or a tagged one-sorted model), preserving both zero/addition operations and the cross-sort relation. Without an equivalence of structure and embedding notions, directly using `IsFraisse` would risk silently proving a different theorem.
+
 ## Review verdict
 
 There is **no demonstrated new mathematical inconsistency** in the inspected theorem statements. The highest-priority risk is overstatement during translation from concrete Lean certificates to manuscript-level class and topological theorems. The closure interface is already implemented; the strongest *new* local experiment is the `LinearMap.mk₂`/`compl₁₂` interface for pairings. A faithful `PartialEquiv` bridge is a more expensive medium-term experiment. Retain the explicit BANANA/Folkman finite diagrams and pairing-specific proofs.
