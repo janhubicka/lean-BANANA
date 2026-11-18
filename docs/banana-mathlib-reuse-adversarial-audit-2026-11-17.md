@@ -89,3 +89,38 @@ An independently written Python check of pullback functoriality passed on (a) ev
 ## Review verdict
 
 There is **no demonstrated new mathematical inconsistency** in the inspected theorem statements. The highest-priority risk is overstatement during translation from concrete Lean certificates to manuscript-level class and topological theorems. The closure interface is already implemented; the strongest *new* local experiment is the `LinearMap.mk₂`/`compl₁₂` interface for pairings. A faithful `PartialEquiv` bridge is a more expensive medium-term experiment. Retain the explicit BANANA/Folkman finite diagrams and pairing-specific proofs.
+
+## Follow-up: verified finite bilinear calculus promoted (18 November 2026)
+
+At the exact prototype head `15517cf88aeb5b24b6e5057e7d664284a0ca6578`, the focused GitHub Actions run
+`44405222111` passed Lean compilation, every explicit transitive-axiom
+check (only `propext`, `Classical.choice`, `Quot.sound`), and both
+finite regressions. In particular, the two new theorems
+`BananaMatrixStructure.toBilinearMap_injective` and
+`bananaPairingPullback_comp` compile and are axiom-clean.
+Proof independent of finite enumeration: a rectangular matrix is
+recovered from evaluation on pairs of standard basis vectors;
+`LinearMap.compl₁₂_comp_comp` then gives functoriality of pullback.
+
+These declarations have now been moved without substantive proof changes to
+`BANANA/NonPrecompact/BananaMatrixBilinearMap.lean`, imported by
+`BANANA.lean`. A dedicated `BananaMatrixBilinearMapAxiomAudit.lean`
+and the focused CI smoke test both audit the same seven declarations.
+The old prototype path now imports that production module instead of
+duplicating its definitions. The countable-pairing prototype remains
+isolated pending evidence of downstream simplification. The new
+production import and axiom audit require a fresh exact-head CI pass;
+do not mark those new root checks successful before they finish.
+
+**Further status correction:** `FolkmanNativeCompleteFiniteClass.lean` already
+packages all five finite-class ingredients in the original non-unital
+two-sorted language, with actual finite Boolean-ring targets; its axiom
+audit is invoked explicitly by `.github/workflows/lean.yml`.
+The older README statement that finite-class bookkeeping remains to
+be done was therefore stale. Only the countable Fraïssé limit,
+orbit-finiteness and topological consequences are outside this
+particular certificate. Neither this correction nor the bilinear-map
+module changes any circulation TeX.
+
+Historical notes above describe preliminary status and proposals as of
+17 November; the verified current state is given in this section.

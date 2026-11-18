@@ -5,6 +5,8 @@ on:
     paths:
       - ".github/workflows/banana-mathlib-prototypes.yml"
       - "prototypes/**"
+      - "BANANA/NonPrecompact/BananaMatrixBilinearMap*.lean"
+      - "BANANA.lean"
       - "scripts/audit_mathlib_prototypes_ci.sh"
       - "scripts/check_banana_bilinear_bridge_small.py"
       - "scripts/check_banana_bilinear_composition_small.py"

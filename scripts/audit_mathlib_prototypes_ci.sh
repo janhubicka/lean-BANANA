@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-lake build BANANA.NonPrecompact.BananaLimitBilinearity BANANA.NonPrecompact.BananaArbitraryAmalgamTools
+lake build BANANA.NonPrecompact.BananaLimitBilinearity BANANA.NonPrecompact.BananaArbitraryAmalgamTools BANANA.NonPrecompact.BananaMatrixBilinearMap
 
 for file in \
   prototypes/BananaBilinearMapBridge.lean \
