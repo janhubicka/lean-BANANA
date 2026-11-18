@@ -110,7 +110,7 @@ theorem BananaMatrixStructure.toBilinearMap_injective
         F (Pi.single i 1) (Pi.single j 1)) h
     simpa only [BananaMatrixStructure.toBilinearMap_apply,
       BananaMatrixStructure.eval, Matrix.mulVec_single_one,
-      Matrix.single_one_dotProduct, Matrix.col_apply] using hij
+      single_one_dotProduct, Matrix.col_apply] using hij
   cases A with
   | mk MA =>
     cases B with
@@ -133,6 +133,9 @@ theorem bananaPairingPullback_comp
     bananaPairingPullback (bananaPairingPullback C fL fR) gL gR =
       bananaPairingPullback C (fL.comp gL) (fR.comp gR) := by
   apply BananaMatrixStructure.toBilinearMap_injective
+  change
+    (bananaPairingPullback (bananaPairingPullback C fL fR) gL gR).toBilinearMap =
+      (bananaPairingPullback C (fL.comp gL) (fR.comp gR)).toBilinearMap
   rw [bananaPairingPullback_twice_toBilinearMap,
     bananaPairingPullback_toBilinearMap]
 
