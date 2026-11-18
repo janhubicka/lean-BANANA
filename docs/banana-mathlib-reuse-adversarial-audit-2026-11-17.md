@@ -1,0 +1,126 @@
+# Adversarial review of mathlib reuse for BANANA — 17 November 2026
+
+**Scope:** source-level review of selected current `main` proof modules, the root import list, README, existing October adversarial audit, the local audit scripts, and corresponding mathlib interfaces. This is an **internal formalisation note**, not circulation prose. No Lean declarations or manuscript files have been changed.
+
+**Repository head examined:** `17f58354aa28a3b1affd79307452e40250277654`.
+The `lean-BANANA` package pins `lean-successors` at `d9be105f73ca5a0f3f411b87d4c2419d0eb94753`, which in turn pins mathlib at `5bd58ac291422a21f412ae354c91e7d172255a2c`; the suggested mathlib module files below were confirmed to exist at this **pinned revision**. The toolchain is `leanprover/lean4:v4.35.0-rc3`.
+
+**Verification boundary:** the current execution environment has neither Lean/Lake nor network access from its shell. There was **no new local kernel build**, no new axiom audit, no independent referee process, and no exhaustive line-by-line audit of all 591 Lean source files. Existing checked theorems are not downgraded by this limitation. Findings below labelled as *candidates* must not be promoted to the manuscript as validated.
+
+## Three independent adversarial lenses
+
+### I. Statement fidelity and missing end-to-end consequences
+
+1. **pre-BANANA finite and infinite model.** `PrebananaFiniteBooleanModelStrongAP.lean` proves genuine finite strong AP for nontrivial *unital* Boolean algebras with a disjoint-additive mark, including exact image intersection. `PrebananaCountableOnePointExtension.lean`, `PrebananaFiveAryCylinderUltrahomogeneity.lean` and `PrebananaFiveAryCylinderMarkedOrbitFiniteness.lean` provide the relevant finite-extension, global automorphism and genuine finite-tuple orbit conclusions. The Ryll–Nardzewski implication and the topological/measure deductions remain separate; finite orbit counts alone are not a Lean proof of omega-categoricity.
+2. **BANANA age and homogeneity.** `BananaFiniteFraisseProperties.lean` gives concrete hereditary closure in matrix coordinates and JEP, while `BananaLimitFiniteAge.lean` and `BananaLimitGlobalHomogeneity.lean` establish corresponding concrete age and global automorphism statements. They are *not* yet presented as a `FirstOrder.Language.IsFraisseLimit` theorem; introducing such a theorem requires a faithful first-order coding of the two sorts, vector operations and the cross-sort pairing.
+3. **Folkman–BANANA strong AP documentation mismatch.** `FolkmanNativeStrongAmalgamPackage.lean` already exports `folkmanNative_exists_language_strong_amalgam`, a concrete pairing-preserving two-sort strong-amalgamation certificate with exact intersection, using **non-unital** ring embeddings. The README's assertion that the combined two-sorted pairing-preserving strong-amalgamation *integration* still remains outstanding needs qualification. This is a documentation-scope issue, **not** a proved defect in the theorem. Full finite-class/limit consequences remain distinct, as that source itself states.
+4. **Coherent EPPA.** `CoherentEppaPackage.lean` checks a finite ambient coherent action for automorphisms of a fixed matrix structure after alignment; class-wide coherent EPPA still requires representatives and transport of *partial* automorphisms. Do not identify the certificate with the final class theorem.
+5. **Ample generics and amenability.** `BananaFiniteSystemsJepWap.lean` establishes finite-system JEP/WAP, not the final topological Kechris–Rosendal criterion. Finite-GL density is likewise not itself a Lean theorem that the topological group is amenable.
+6. **Quantifier traps remain:** do not infer ordinary AP from two individual sort APs unless the pairing extends compatibly; do not infer finite copy-Ramsey degree from a colouring theorem only proved for nonzero sorts; do not replace per-fibre marking agreement by total parity agreement (explicit finite counterexample recorded in `docs/formalisation-adversarial-audit-2026-10-15.md`).
+
+**No new false lemma or counterexample was established by this scoped review.** These are distinctions between proved statements and stronger claims that must not be silently inferred.
+
+### II. Library reuse candidates (checked against the pinned mathlib source)
+
+| Priority | Mathlib module and API | Proposed local target | Caveat |
+| --- | --- | --- | --- |
+| **Already used** | `Mathlib.Order.BooleanSubalgebra`: `BooleanSubalgebra.closure`, `closure_le`, `subset_closure` | `PrebananaGeneratedBooleanClosure.lean`, `PrebananaActualGeneratedBooleanOps.lean` | The exact term-range/closure equivalence **is already proved** by `prebananaGeneratedBooleanSubalgebra_mem_iff`. Investigate opportunities to remove redundant *downstream* operation wrappers only after checking callers |
+| **High** | `Mathlib.LinearAlgebra.BilinearMap`: `LinearMap.mk₂`, `ext₂`, `compl₁₂`, `domRestrict₁₂`, `flip` | BANANA finite and infinite pairing, pairing pullbacks, Folkman pairing extension | A genuinely two-sorted bilinear map `L →ₗ[F2] R →ₗ[F2] F2` is the relevant object; `BilinForm` is single-space and is not a faithful replacement for a cross-sort form |
+| **Medium/high** | `Mathlib.ModelTheory.PartialEquiv`: `FGEquiv`, `IsExtensionPair`, `equiv_between_cg` | Generic back-and-forth across finite marked Boolean subalgebras | Requires a faithful first-order language and verified equivalence with existing finite marked embeddings; first test for pre-BANANA, not BANANA |
+| **Medium** | `Mathlib.ModelTheory.Fraisse`: `IsFraisse`, `IsFraisseLimit`, `age`, `IsUltrahomogeneous` | Final abstract class, age, uniqueness and homogeneity wrappers | The module explicitly does **not** yet prove general Fraïssé-limit existence. Keep explicit limit constructions. Ordinary AP is not strong AP or WAP |
+| **Medium** | `Mathlib.Order.Atoms`: `CompleteAtomicBooleanAlgebra.toSetOfIsAtom`; `Mathlib.Data.Fintype.Order` | Abstract finite Boolean algebra representation | **Already correctly reused** in `PrebananaFiniteBooleanRepresentation.lean`; do not rebuild or redundantly wrap |
+| **Medium** | `Mathlib.Algebra.Ring.BooleanRing`: `AsBoolAlg`, `AsBoolRing`, `RingHom.asBoolAlg`, `BoundedLatticeHom.asBoolRing` | Pre-BANANA unital ring/algebra conversion; Folkman representation lemmas | `RingHom` conversion assumes unital morphisms, so **not** a replacement for Folkman's `NonUnitalRingHom` |
+| **Medium/low** | `Mathlib.ModelTheory.DirectLimit`: directed-system and limit API | Five-ary cylinder limit from its finite stages | The existing explicit cylinder model is verified; an abstract direct-limit bridge may require more code than it removes. Prototype off the critical path |
+| **Medium/low** | `Mathlib.LinearAlgebra.BilinearForm.Orthogonal`, `Mathlib.LinearAlgebra.Projection` | Perfect pairing orthogonal-complement and block projection lemmas | `BilinForm` assumes a common sort; use a faithful derived perfect form on a suitable identified space only, not on the original arbitrary two sorts |
+| **Low/experimental** | `Mathlib.Order.Booleanisation` | Some non-unital Boolean-ring representations | Unitisation changes the available morphisms; only use after proving full faithfulness for the chosen morphisms |
+| **Low/experimental** | `Mathlib.MeasureTheory.Group.Action`: `SMulInvariantMeasure` | Explicitly formulated invariant-measure consequences | Does not supply existence of invariant probability measures, nor topological amenability |
+| **Avoid as drop-in** | `Mathlib.Algebra.Category.BoolRing` | Category of unital Boolean rings | Its morphisms are **unital**; using it naively for Folkman would change the class |
+| **Avoid until needed** | General categorical colimits | Finite/limit embeddings | Abstraction likely obscures finite fibres, strong intersection and the two-sort pairing compatibility |
+
+The repository's own `PrebananaFiniteBooleanRepresentation.lean` already uses the finite Boolean-atom representation; `PrebananaCountableOnePointExtension.lean` already uses `BooleanSubalgebra` for ambient finite subalgebras. Reuse should target **specific missing lemmas**, not replace these valid uses.
+
+### III. Dead-end, import-graph and audit-scope review
+
+- `BANANA.lean` directly imports **314** modules, including **four `*AxiomAudit` entry points**: `BananaCopyDegreeClassificationAxiomAudit`, `FolkmanStrongAmalgamAxiomAudit`, `GLRAxiomAudit`, `PrebananaCopyDegreeAxiomAudit`. Axiom audits should ideally be run as separate checks instead of being direct dependencies of the production root. **Candidate only**: first check none of those audit files exports a declaration needed by the root; then remove direct root imports if harmless.
+- `scripts/check_lean_module_graph.py` checks reachability, missing local imports, import cycles, and empty axiom audit entry points, and distinguishes audit-only from dead proof modules. It is a static graph check, not semantic proof verification.
+- `scripts/audit_all_axioms_local.sh` builds `BANANA` and runs every `*AxiomAudit.lean` through Lean. `scripts/check_axiom_report.py` compares exact printed declaration names and rejects unexpected axioms. These are valuable tests but establish **kernel dependency integrity only for the declarations actually printed**, not fidelity to English quantifiers or completion of topological corollaries.
+- Preserve the mathematically important distinction between total surjective atom-owner maps in pre-BANANA and partial `Option`-valued owner maps in Folkman–BANANA. A common finite-fibre lemma should be extracted only after two actual callers are identified.
+- Source-level review is insufficient to label dead modules: run `python3 scripts/check_lean_module_graph.py` locally with all sources before deletion, then inspect each unreachable module and its theorem usages.
+
+## Controlled experiments and pass/fail gates
+
+1. **P1 (already satisfied, follow-up only):** `PrebananaGeneratedBooleanClosure.lean` **already** proves `prebananaGeneratedBooleanSubalgebra_mem_iff` and `prebananaAbstractTermRangeEquivGenerated`; `PrebananaActualGeneratedBooleanOps.lean` transports actual operation laws. Audit call sites to identify genuinely redundant wrappers. Do not duplicate the closure theorem merely to claim simplification.
+2. **P2 (bilinear wrapper):** package one existing matrix pairing as `LinearMap.mk₂ F2` and prove evaluation equality and pullback equivalence in a separate test module. Use `ext₂` to replace one repeated pointwise bilinearity argument, without changing any theorem statement.
+3. **P3 (Fraïssé/partial equiv bridge):** encode the *one-sorted* pre-BANANA marked Boolean model in a countable first-order language. Prove concrete embeddings correspond to `FirstOrder.Language.Embedding`, **including** zero, unit, complement, and marking; next derive `IsExtensionPair` and reuse `equiv_between_cg`. Do not attempt the cross-sort BANANA port before P3 is economical.
+4. **P4 (source/README reconciliation):** update only internal Lean README/docs to say native two-sort Folkman strong AP is exported by `folkmanNative_exists_language_strong_amalgam`, while finite class bookkeeping and limit deductions are distinct. No manuscript prose changes.
+5. **P5 (adversarial regression):** preserve and rerun: per-base parity counterexample; empty/zero ring and non-unital image tests; both-sort pairing preservation; true strong image intersection; WAP system morphisms rather than only carrier embeddings; source size with one sort zero versus both nonzero in Ramsey-degree statements.
+6. Before accepting proof refactors: `lake build BANANA`; `bash scripts/audit_all_axioms_local.sh`; regression tests; compare `#print axioms`, theorem type (`#check` / `#print`) and import graph against the exact base commit. GitHub Actions are unavailable by policy; use local Lean. None of these commands was run during the present inspection.
+
+
+## Follow-up: isolated Lean prototypes (17 November 2026)
+
+* `prototypes/BananaBilinearMapBridge.lean` packages the already proved countable pairing bilinearity using `LinearMap.mk₂` and checks API equations for fixing an argument, restricting to submodules, pulling back along arbitrary linear maps, and automorphism invariance.
+* `prototypes/BananaMatrixBilinearBridge.lean` gives the more promising **finite rectangular pairing** interface. The pinned mathlib's `Matrix.dotProductBilin` and `Matrix.mulVecLin` directly bundle the existing coordinate evaluation, without independently proving bilinearity. The prototype derives bundled equalities corresponding to `bananaPairingPullback_eval` and `BananaMatrixEmbedding.pairing_apply`. The two sorts may have different dimensions (including zero); it does not use square-matrix `BilinForm`.
+* `scripts/audit_mathlib_prototypes_local.sh` builds the production root, checks the local import graph, compiles each isolated prototype with the pinned toolchain, and invokes `scripts/check_axiom_report.py` on its explicit `#print axioms` targets. **Not executed in this session**: the shell has neither Lean/Lake nor working DNS access.
+* A separate Python regression `scripts/check_banana_bilinear_bridge_small.py` **was executed locally and passed**: 8,507 arbitrary finite binary matrix/linear-map diagrams, 99,775 evaluations on all source vector pairs, and 1,075 diagrams with at least one zero-dimensional sort. Dimensions were 0, 1, or 2 independently on all four sorts. This checks that the two-sided matrix pullback has the intended orientation; it is finite evidence, not Lean verification.
+* The current branch deliberately does not import these prototype files from `BANANA.lean`. They are unvalidated experimental material, not new validation markers in the frozen manuscript and not proved contributions to the circulating paper.
+* The `README.md` Folkman strong-AP status has been corrected **on this branch only**, with a one-line documentation change. Full class-level consequences are still distinct.
+
+Adversarial type/API checks before merging the prototypes:
+
+1. Verify that `LinearMap.mk₂ F2` accepts the existing left/right scalar laws without any change of coercion or hidden extra hypotheses.
+2. Verify that `Matrix.dotProductBilin (m := Fin l) F2 F2` and `A.pairing.mulVecLin` elaborate for **all** `l,r : ℕ`, including a zero-dimensional sort.
+3. Verify that `LinearMap.compl₁₂` preserves the argument order for the distinct sorts and that `LinearMap.ext₂` matches the existing pointwise matrix-pullback and embedding equations.
+4. Confirm `#print axioms` reports only `propext`, `Classical.choice` and `Quot.sound`; run the all-module axiom audit again before adding any production imports.
+5. Check at least two downstream simplifications before replacing the concrete APIs. Existing proofs stay in place until this benefit is established.
+
+## Further adversarial checks and composition prototype
+
+The finite pairing bridge now includes two **additional experimental downstream theorems**, `bananaPairingPullback_twice_toBilinearMap` and `BananaMatrixEmbedding.comp_isometry_bilinearMap`. They are stated as equalities of bilinear maps and their source proofs use the exact pinned mathlib lemma `LinearMap.compl₁₂_comp_comp`. Unlike pointwise matrix calculations, the proofs should require only the two earlier isometry/pullback wrappers and the standard composition identity. Their Lean compilation is **still pending**.
+
+An independently written Python check of pullback functoriality passed on (a) every three-stage F₂ matrix diagram when each of six sort dimensions is 0 or 1 (233 diagrams, of which 201 have a zero-dimensional sort), and (b) 10,000 seeded arbitrary three-stage diagrams with each dimension 0 through 3. A reproducible copy is `scripts/check_banana_bilinear_composition_small.py`; the local prototype audit script invokes it after compiling the proof prototypes. The finite experiment checks the *mathematical identity*, not the elaborated Lean theorem statement.
+
+**Negative reuse finding:** `PrebananaGeneratedProfileEmbedding.lean` already upgrades the existing term-range equivalence to a genuine injective, surjective marked Boolean embedding. Repackaging that result into an additional abstract `OrderIso` or inventing a parallel first-order coding before downstream demand is demonstrated would probably **increase** the code surface. The near-term goal is instead to identify redundant callers and delete none without import/usage analysis.
+
+**Fraïssé translation caveat:** `FiniteBananaPresentation` enumerates standard-coordinate matrices; it is not itself the isomorphism-invariant class of all first-order structures required by the mathlib Fraïssé interface. For pre-BANANA, the F₂ mark may be a unary predicate. For BANANA, the two vector-space sorts require a faithful multi-sorted encoding (or a tagged one-sorted model), preserving both zero/addition operations and the cross-sort relation. Without an equivalence of structure and embedding notions, directly using `IsFraisse` would risk silently proving a different theorem.
+
+**Independent back-and-forth inspection:** `PrebananaFiniteBridgeLimitBijection.lean` (209 lines) constructs the global equivalence by *both* left and right exhaustive bridge images and checks representative coherence and preservation of the mark. `PrebananaFiniteBridgeGlobalAutomorphism.lean` (147 lines) establishes preservation of joins and upgrades this bijection to an `OrderIso` using both implications of order reflection. The direction of `map_rel_iff'` was checked specifically; its first branch reflects order and its second branch preserves order. The source-level proof architecture has the correct quantifiers, and no missing surjectivity premise was found in these statements. This does not replace a fresh kernel run. On these concrete files, using `Mathlib.ModelTheory.PartialEquiv` is **not an immediate simplification**: it would first require a faithful language/embedding translation and could add more code than the approximately 356 lines of currently verified generic bridge machinery.
+
+## Review verdict
+
+There is **no demonstrated new mathematical inconsistency** in the inspected theorem statements. The highest-priority risk is overstatement during translation from concrete Lean certificates to manuscript-level class and topological theorems. The closure interface is already implemented; the strongest *new* local experiment is the `LinearMap.mk₂`/`compl₁₂` interface for pairings. A faithful `PartialEquiv` bridge is a more expensive medium-term experiment. Retain the explicit BANANA/Folkman finite diagrams and pairing-specific proofs.
+
+## Follow-up: verified finite bilinear calculus promoted (18 November 2026)
+
+At the exact prototype head `15517cf88aeb5b24b6e5057e7d664284a0ca6578`, the focused GitHub Actions run
+`44405222111` passed Lean compilation, every explicit transitive-axiom
+check (only `propext`, `Classical.choice`, `Quot.sound`), and both
+finite regressions. In particular, the two new theorems
+`BananaMatrixStructure.toBilinearMap_injective` and
+`bananaPairingPullback_comp` compile and are axiom-clean.
+Proof independent of finite enumeration: a rectangular matrix is
+recovered from evaluation on pairs of standard basis vectors;
+`LinearMap.compl₁₂_comp_comp` then gives functoriality of pullback.
+
+These declarations have now been moved without substantive proof changes to
+`BANANA/NonPrecompact/BananaMatrixBilinearMap.lean`, imported by
+`BANANA.lean`. A dedicated `BananaMatrixBilinearMapAxiomAudit.lean`
+and the focused CI smoke test both audit the same seven declarations.
+The old prototype path now imports that production module instead of
+duplicating its definitions. The countable-pairing prototype remains
+isolated pending evidence of downstream simplification. The new
+production import and axiom audit require a fresh exact-head CI pass;
+do not mark those new root checks successful before they finish.
+
+**Further status correction:** `FolkmanNativeCompleteFiniteClass.lean` already
+packages all five finite-class ingredients in the original non-unital
+two-sorted language, with actual finite Boolean-ring targets; its axiom
+audit is invoked explicitly by `.github/workflows/lean.yml`.
+The older README statement that finite-class bookkeeping remains to
+be done was therefore stale. Only the countable Fraïssé limit,
+orbit-finiteness and topological consequences are outside this
+particular certificate. Neither this correction nor the bilinear-map
+module changes any circulation TeX.
+
+Historical notes above describe preliminary status and proposals as of
+17 November; the verified current state is given in this section.

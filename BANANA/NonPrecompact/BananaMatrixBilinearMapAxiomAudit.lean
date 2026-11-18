@@ -1,0 +1,11 @@
+import BANANA.NonPrecompact.BananaMatrixBilinearMap
+
+/-! Transitive axiom audit of the faithful finite pairing and pullback calculus. -/
+
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.toBilinearMap
+#print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_toBilinearMap
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.isometry_bilinearMap
+#print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_twice_toBilinearMap
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.comp_isometry_bilinearMap
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.toBilinearMap_injective
+#print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_comp

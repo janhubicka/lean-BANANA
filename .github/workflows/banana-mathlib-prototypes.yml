@@ -1,0 +1,63 @@
+name: BANANA mathlib prototypes
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/banana-mathlib-prototypes.yml"
+      - "prototypes/**"
+      - "BANANA/NonPrecompact/BananaMatrixBilinearMap*.lean"
+      - "BANANA.lean"
+      - "scripts/audit_mathlib_prototypes_ci.sh"
+      - "scripts/check_banana_bilinear_bridge_small.py"
+      - "scripts/check_banana_bilinear_composition_small.py"
+      - "lakefile.toml"
+      - "lean-toolchain"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: banana-mathlib-prototypes-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bilinear-bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Lean toolchain
+        uses: actions/cache@v5
+        with:
+          path: ~/.elan/toolchains
+          key: banana-bilinear-toolchain-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}
+
+      - name: Cache Lake packages
+        uses: actions/cache@v5
+        with:
+          path: .lake
+          key: banana-bilinear-lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            banana-bilinear-lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-
+            lake-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lakefile.toml') }}-
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned dependencies
+        run: lake update
+
+      - name: Download mathlib cache
+        run: lake exe cache get
+
+      - name: Check bilinear prototypes with Lean kernel and axiom parser
+        run: bash scripts/audit_mathlib_prototypes_ci.sh
+
+      - name: Run finite bilinear regressions
+        run: |
+          python3 scripts/check_banana_bilinear_bridge_small.py
+          python3 scripts/check_banana_bilinear_composition_small.py

@@ -3,6 +3,7 @@ import BANANA.NonPrecompact.AlignedCompletionEmbedding
 import BANANA.NonPrecompact.BananaAmalgam
 import BANANA.NonPrecompact.BananaStrongBlockAmalgam
 import BANANA.NonPrecompact.BananaArbitraryAmalgamTools
+import BANANA.NonPrecompact.BananaMatrixBilinearMap
 import BANANA.NonPrecompact.BananaTriplePairing
 import BANANA.NonPrecompact.BananaEquivariantTripleAmalgam
 import BANANA.NonPrecompact.BananaPerfectTotalEquivariantDiagram
