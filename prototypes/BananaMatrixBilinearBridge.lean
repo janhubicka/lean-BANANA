@@ -94,6 +94,48 @@ theorem BananaMatrixEmbedding.comp_isometry_bilinearMap
   rw [LinearMap.compl₁₂_comp_comp,
       g.isometry_bilinearMap, f.isometry_bilinearMap]
 
+
+/-- A rectangular matrix pairing is uniquely determined by its bundled
+bilinear map. Both sorts may be zero-dimensional or have different
+dimensions; no nondegeneracy hypothesis is needed. -/
+theorem BananaMatrixStructure.toBilinearMap_injective
+    {l r : ℕ} :
+    Function.Injective
+      (fun A : BananaMatrixStructure l r => A.toBilinearMap) := by
+  intro A B h
+  have hmatrix : A.pairing = B.pairing := by
+    ext i j
+    have hij := congrArg
+      (fun F : (Fin l → F2) →ₗ[F2] (Fin r → F2) →ₗ[F2] F2 =>
+        F (Pi.single i 1) (Pi.single j 1)) h
+    simpa only [BananaMatrixStructure.toBilinearMap_apply,
+      BananaMatrixStructure.eval, Matrix.mulVec_single_one,
+      Matrix.single_one_dotProduct, Matrix.col_apply] using hij
+  cases A with
+  | mk MA =>
+    cases B with
+    | mk MB =>
+      cases hmatrix
+      rfl
+
+/-- Composition of finite rectangular pairing pullbacks holds as an
+exact equality of matrix structures, not merely on evaluations.
+
+This avoids expanding the two nested matrix products and works for
+arbitrary linear maps, including degenerate and zero-dimensional sorts. -/
+theorem bananaPairingPullback_comp
+    {aL aR bL bR cL cR : ℕ}
+    (C : BananaMatrixStructure cL cR)
+    (fL : (Fin bL → F2) →ₗ[F2] (Fin cL → F2))
+    (fR : (Fin bR → F2) →ₗ[F2] (Fin cR → F2))
+    (gL : (Fin aL → F2) →ₗ[F2] (Fin bL → F2))
+    (gR : (Fin aR → F2) →ₗ[F2] (Fin bR → F2)) :
+    bananaPairingPullback (bananaPairingPullback C fL fR) gL gR =
+      bananaPairingPullback C (fL.comp gL) (fR.comp gR) := by
+  apply BananaMatrixStructure.toBilinearMap_injective
+  rw [bananaPairingPullback_twice_toBilinearMap,
+    bananaPairingPullback_toBilinearMap]
+
 end SuccessorTree.NonPrecompact
 
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.toBilinearMap
@@ -101,3 +143,5 @@ end SuccessorTree.NonPrecompact
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.isometry_bilinearMap
 #print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_twice_toBilinearMap
 #print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.comp_isometry_bilinearMap
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixStructure.toBilinearMap_injective
+#print axioms SuccessorTree.NonPrecompact.bananaPairingPullback_comp
