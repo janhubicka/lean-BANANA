@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.SymplecticCopyDegree
+
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.Embedding.exists_factor
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.copySystem
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.exists_amalgam
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.lineCopyEquiv
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.hyperbolicTarget_nondegenerate
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.line_copyRamseyDegree_infinite
+#print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.copyRamseyDegree_classification

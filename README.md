@@ -10,7 +10,7 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 | Boolean–BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. Lean checks the copy-degree obstruction and the failure of precompact Ramsey expansions in the shared expansion interface. The Stone action witnesses nonamenability of the actual pointwise automorphism group. | The deduction of ω-categoricity uses Ryll–Nardzewski. The 2-adic flow and positive-mass subgroup dynamics require further arguments. |
 | Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation. Lean checks the first-order Fraïssé class. Its encoded countable limit was checked separately against the external Lean existence theorem. Lean checks the persistent colouring, infinite copy Ramsey degree and the failure of precompact Ramsey expansions in the shared expansion interface on native paired Boolean rings. | Recover the native two-sorted limit and check its finite tuple-orbit bounds. The Stone-space argument also requires further work. |
 | BANANA | The explicit countable pairing has the stated finite age, homogeneity and finite tuple-orbit bounds. Lean checks the copy Ramsey degree classification, coherent EPPA, finite-system JEP and WAP, and topological amenability from the dense increasing union of finite GL subgroups. | The passage from finite-system JEP and WAP to ample generics, the nonmetrisability deduction, and the canonical-amalgamation deduction of DEERP require further arguments. |
-| Symplectic application | Lean checks the concrete countable orthogonal sum, its finite age and homogeneity, the quadratic residue lemma and the finite persistent colouring of line subspaces. | The infinite copy-degree classification still needs the bridge to the generic copy system. |
+| Symplectic application | Lean checks the countable orthogonal sum, its finite age and homogeneity, amalgamation of finite alternating spaces, the persistent colouring of lines and the full classification of copy Ramsey degrees. | The classification uses actual image subspaces as copies, including degenerate and zero-dimensional spaces. |
 
 All paths in the following table are relative to the repository root. The
 declarations are in the namespace `SuccessorTree.NonPrecompact`.
@@ -44,6 +44,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Symplectic finite persistent line colouring | [`exists_symplecticPointColouring`](BANANA/NonPrecompact/SymplecticPointColouring.lean) |
 | Symplectic homogeneity under the ambient hypotheses | [`exists_wittCountableIsometry`](BANANA/NonPrecompact/WittCountable.lean) |
 | Concrete symplectic age and homogeneity | [`countableSymplectic_finite_age` and `exists_countableSymplectic_automorphism`](BANANA/NonPrecompact/SymplecticCountableModel.lean) |
+| Symplectic amalgamation and copy Ramsey degrees | [`FiniteAlternatingSpace.exists_amalgam`](BANANA/NonPrecompact/SymplecticCopySystem.lean) and [`FiniteAlternatingSpace.copyRamseyDegree_classification`](BANANA/NonPrecompact/SymplecticCopyDegree.lean) |
 
 ## Manuscript notation
 
