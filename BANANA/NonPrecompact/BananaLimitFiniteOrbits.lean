@@ -51,10 +51,6 @@ theorem bananaLimit_exists_finite_tuple_orbit_representatives
   classical
   letI : Finite (BananaLimitTupleSignature l r) :=
     bananaLimitTupleSignature_finite l r
-  letI : Fintype (BananaLimitTupleSignature l r) :=
-    Fintype.ofFinite (BananaLimitTupleSignature l r)
-  letI : Inhabited (BananaLimitTuplePair l r) :=
-    ⟨(fun _ => 0, fun _ => 0)⟩
   exact exists_finite_representatives_of_invariant
     (fun p : BananaLimitTuplePair l r =>
       bananaLimitTupleSignature p.1 p.2)

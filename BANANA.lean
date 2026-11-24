@@ -30,6 +30,7 @@ import BANANA.NonPrecompact.BananaLimitGlobalHomogeneity
 import BANANA.NonPrecompact.BananaLimitSubspaceHomogeneity
 import BANANA.NonPrecompact.BananaLimitTupleSignatures
 import BANANA.NonPrecompact.FiniteInvariantRepresentatives
+import BANANA.NonPrecompact.FirstOrderFiniteExtension
 import BANANA.NonPrecompact.BananaLimitTupleKernelRange
 import BANANA.NonPrecompact.BananaLimitBlockProjection
 import BANANA.NonPrecompact.BananaRetractionLiftEquiv

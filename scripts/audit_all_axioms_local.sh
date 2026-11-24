@@ -11,9 +11,16 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 2
 fi
 python3 scripts/check_lean_module_graph.py
-lake build BANANA
-count=0
+audit_files=()
+audit_deps=()
 while IFS= read -r -d '' file; do
+  audit_files+=("$file")
+  audit_deps+=("$file:deps")
+done < <(find BANANA -type f -name '*AxiomAudit.lean' -print0 | sort -z)
+
+# Compile imports that are only reachable from audit entry points as well.
+lake build BANANA "${audit_deps[@]}"
+for file in "${audit_files[@]}"; do
   result="$(mktemp)"
   if ! lake env lean "$file" >"$result" 2>&1; then
     cat "$result" >&2
@@ -28,6 +35,5 @@ while IFS= read -r -d '' file; do
     exit 1
   fi
   rm -f "$result"
-  count=$((count + 1))
-done < <(find BANANA -type f -name '*AxiomAudit.lean' -print0 | sort -z)
-echo "Passed $count axiom-audit modules: only propext, Classical.choice and Quot.sound."
+done
+echo "Passed ${#audit_files[@]} axiom-audit modules: only propext, Classical.choice and Quot.sound."

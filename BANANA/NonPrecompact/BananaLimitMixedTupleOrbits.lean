@@ -144,10 +144,6 @@ theorem bananaLimit_exists_finite_tagged_tuple_orbit_representatives
   classical
   letI : Finite (BananaLimitTaggedSignature n) :=
     bananaLimitTaggedSignature_finite n
-  letI : Fintype (BananaLimitTaggedSignature n) :=
-    Fintype.ofFinite (BananaLimitTaggedSignature n)
-  letI : Inhabited (BananaLimitTaggedTuple n) :=
-    ⟨fun _ => .inl 0⟩
   exact exists_finite_representatives_of_invariant
     (fun t : BananaLimitTaggedTuple n =>
       bananaLimitTaggedSignature t)

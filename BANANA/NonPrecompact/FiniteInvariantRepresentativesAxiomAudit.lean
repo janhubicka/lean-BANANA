@@ -5,3 +5,4 @@ import BANANA.NonPrecompact.FiniteInvariantRepresentatives
 -/
 
 #print axioms SuccessorTree.NonPrecompact.exists_finite_representatives_of_invariant
+#print axioms SuccessorTree.NonPrecompact.finiteQuotient_of_completeFiniteInvariant

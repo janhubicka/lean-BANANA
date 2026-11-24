@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FirstOrderFiniteExtension
+
+#print axioms SuccessorTree.NonPrecompact.isUltrahomogeneous_of_finite_extension

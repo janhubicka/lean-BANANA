@@ -1,133 +1,74 @@
 # lean-BANANA
 
-Lean 4 formalisation supporting the **BANANA** manuscript. The circulation
-manuscript is maintained separately in [janhubicka/BANANA](https://github.com/janhubicka/BANANA).
-Its circulation text is frozen: mathematical corrections should be proposed
-as TODOs, not silently applied.
+Lean 4 formalisation accompanying the BANANA manuscript.
+[Manuscript source](https://github.com/janhubicka/BANANA)
 
-The library is organised around three related, but **different**, classes.
-In particular, unital Boolean-algebra embeddings in pre-BANANA must not be
-confused with non-unital Boolean-ring embeddings in Folkman–BANANA.
+## Proof coverage
 
-## Source map and proof status
-
-The following is a guide to the proof statements, not a claim that every
-consequence in the paper is already a theorem of Lean.
-
-| Development | Established in the Lean sources | Further obligations |
+| Development | Lean endpoints | Further steps in the manuscript |
 | --- | --- | --- |
-| **pre-BANANA** | Finite marked Boolean-algebra class, strong amalgamation, hereditary and joint embedding properties, EPPA obstruction, persistent colourings and finite-stage universality; unconditional finite-extension theorem; explicit countably infinite marked Boolean cylinder algebra, exact finite age, local finiteness and countable extension property; global marking-preserving Boolean automorphisms, ultrahomogeneity, finite-valued tuple profiles and their actual global automorphism completeness; finitely many genuine marked automorphism orbits on tuples of every fixed length | Infer ω-categoricity via the standard Ryll–Nardzewski theorem, which is not formalised in this library; keep Stone actions, invariant measures and topological conclusions as separate obligations |
-| **Folkman–BANANA** | Non-unital atom-owner representation; individual Boolean-ring-sort amalgamation and exact image intersection; bilinear block-extension calculations; persistent copy colourings and infinite copy Ramsey degree | Combined two-sorted, pairing-preserving strong amalgamation and finite-age/limit conclusions need the remaining integration work |
-| **BANANA** | Bilinear-pairing matrix models, perfect completion and finite amalgamation; explicit countable pairing, finite age, finite-substructure homogeneity and finite tuple-orbit criteria; locally finite finite-GL approximation; algebraic constituents of coherent EPPA; persistent colourings and copy Ramsey degrees | Final group-theoretic deductions (including topological amenability and ample generics) and the finite representative bookkeeping for a fully packaged coherent-EPPA assertion are not all expressed as end-to-end Lean theorems |
+| pre-BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. The persistence proof uses finite atom coordinates. | The deduction of ω-categoricity uses Ryll–Nardzewski. The Stone action and the topological dynamics conclusions require separate arguments. |
+| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation with native paired Boolean rings and non-unital embeddings. The persistent colouring and copy degree are checked in atom coordinates. | Transport of copy colourings to the native rings, construction of the countable limit and passage from finite tuple profiles to its global orbits remain open. The Stone-space argument is external. |
+| BANANA | The explicit countable pairing has the stated finite age, homogeneity and finite tuple-orbit bounds. Lean checks the copy Ramsey degree classification, finite-system JEP and WAP, finite-stage GL approximation and the algebraic coherent-EPPA construction. | The passage from finite-system JEP and WAP to ample generics, the topological amenability and nonmetrisability deductions, the canonical-amalgamation deduction of DEERP and the full coherent-EPPA packaging are separate from these certificates. |
+| Symplectic application | Lean checks the quadratic residue lemma, polar-form identities and the nondegenerate slice construction. | Assembly of the persistent colouring and the resulting copy-degree classification remains open. |
 
-Some theorems are stated in standard finite coordinates or as conditional
-interfaces. Their hypotheses must be checked when using them to justify a
-manuscript proposition. In particular, a theorem about an invariant
-probability mass is not itself an existence theorem for a Stone action.
+All paths in the following table are relative to the repository root. The
+declarations are in the namespace `SuccessorTree.NonPrecompact`.
 
-The principal files are under `BANANA/NonPrecompact/`:
-`PrebananaFiniteBooleanModelStrongAP.lean`,
-`PrebananaCopyDegree.lean`,
-`PrebananaExplicitFiveAryTower.lean`,
-`PrebananaFiveAryCylinderMarkedModel.lean`,
-`PrebananaFiveAryCylinderFiniteFamily.lean`,
-`PrebananaFiveAryCylinderUltrahomogeneity.lean`,
-`PrebananaFiveAryCylinderTupleProfileCompleteness.lean`,
-`PrebananaFiveAryCylinderMarkedOrbitFiniteness.lean`,
-`PrebananaFiveAryCylinderInfinite.lean`,
-`FolkmanAtomAmalgam.lean`,
-`FolkmanPersistence.lean`,
-`BananaStructure.lean`,
-`BananaLimitGlobalHomogeneity.lean`,
-`BananaLimitLocallyFiniteDense.lean`,
-`CoherentEppaPackage.lean`, and
-`BananaCopyDegree.lean`.
+| Claim | Declaration and source |
+| --- | --- |
+| pre-BANANA finite age | [`prebananaCylinder_allFiniteModels_embed` and `prebananaCylinder_finiteSubmodel_factor`](BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteAge.lean) |
+| pre-BANANA homogeneity | [`prebananaCylinder_exists_global_marked_boolean_automorphism`](BANANA/NonPrecompact/PrebananaFiveAryCylinderUltrahomogeneity.lean) |
+| pre-BANANA finite tuple orbits | [`prebananaCylinderMarkedOrbit_finite`](BANANA/NonPrecompact/PrebananaFiveAryCylinderMarkedOrbitFiniteness.lean) |
+| pre-BANANA atom-coordinate obstruction | [`prebananaTwoMarkedCopyRamseyDegree_infinite`](BANANA/NonPrecompact/PrebananaCopyDegree.lean) |
+| Folkman–BANANA finite class | [`folkmanNativeCompleteFiniteClass_nonempty`](BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean) |
+| Folkman–BANANA atom-coordinate obstruction | [`folkmanAxCopyRamseyDegree_infinite`](BANANA/NonPrecompact/FolkmanPersistence.lean) |
+| BANANA finite age and homogeneity | [`banana_limit_finite_age_two_directions`](BANANA/NonPrecompact/BananaLimitFiniteAge.lean), [`exists_global_pair_automorphism_extends`](BANANA/NonPrecompact/BananaLimitGlobalHomogeneity.lean) |
+| BANANA finite tuple orbits | [`bananaLimit_exists_finite_tuple_orbit_representatives`](BANANA/NonPrecompact/BananaLimitFiniteOrbits.lean) |
+| BANANA copy Ramsey degrees | [`BananaMatrixStructure.copyRamseyDegree_classification`](BANANA/NonPrecompact/BananaOneSidedCopyDegree.lean) |
+| BANANA algebraic EPPA construction | [`BananaMatrixStructure.exists_alignedCoherentAmbientAction`](BANANA/NonPrecompact/CoherentEppaPackage.lean) |
+| BANANA finite-system JEP and WAP | [`bananaFiniteSystems_jep_and_wap`](BANANA/NonPrecompact/BananaFiniteSystemsJepWap.lean) |
+| BANANA finite-stage GL approximation | [`bananaLimitFiniteGLUnion_pointwise_approximates`](BANANA/NonPrecompact/BananaLimitLocallyFiniteDense.lean) |
+| BANANA canonical zero-base amalgamation | [`BananaMatrixStructure.exists_canonical_zero_amalgam`](BANANA/NonPrecompact/BananaDirectSumCanonical.lean) |
+| Symplectic residue lemma | [`quadraticAffineWeight_residueFibres_odd`](BANANA/NonPrecompact/QuadraticResidueStandard.lean) |
 
-For the explicit pre-BANANA Fraïssé construction, see
-`docs/prebanana-five-ary-fraisse-construction.md` and the adversarial
-proof checklist `docs/prebanana-explicit-limit-audit-2026-10-17.md`.
+The pre-BANANA embeddings are unital. The Folkman–BANANA embeddings
+preserve the ring operations and zero separately in each sort, with
+preservation of the pairing as an additional condition.
 
-The actual five-ary finite stages, their marked embeddings, the
-arbitrary finite-extension theorem and finite-stage universality
-are kernel-checked in the corresponding modules. The countable marked Boolean
-cylinder algebra, exact finite age, local finiteness, factorisation
-of finite marked embeddings and unconditional countable extension
-property are verified in the corresponding Lean modules and axiom audits.
+## Shared model-theory infrastructure
 
-The global marked Boolean automorphism and explicit embedding-form
-ultrahomogeneity results are now present on `main` in
-[PR #267](https://github.com/janhubicka/lean-BANANA/pull/267).
-The finite-valued profiles of countable tuples are verified in
-[PR #266](https://github.com/janhubicka/lean-BANANA/pull/266),
-and full marked Boolean embeddings between finite subalgebras
-generated by equal-profile tuples are verified in
-[PR #268](https://github.com/janhubicka/lean-BANANA/pull/268).
+The [finite extension adapter](BANANA/NonPrecompact/FirstOrderFiniteExtension.lean)
+uses mathlib's Fraïssé back-and-forth result to derive ultrahomogeneity from
+finite extensions in a countable, locally finite first-order model.
+Applying it to the existing native presentations requires a structure and
+embedding bridge. For Folkman this bridge must preserve both sorts and their
+pairing and allow non-unital embeddings. The countable model still needs to
+be constructed with the finite extension property.
 
-The orbit argument is now complete and merged into `main`.
-[PR #269](https://github.com/janhubicka/lean-BANANA/pull/269)
-transports equality of finite marked profiles to an **actual**
-global marked Boolean automorphism, using the independently verified
-ultrahomogeneity theorem. [PR #270](https://github.com/janhubicka/lean-BANANA/pull/270)
-defines the genuine automorphism-orbit setoid and proves its quotient
-finite for every tuple length, **unconditionally**, discharging
-the homogeneity premise with [PR #267](https://github.com/janhubicka/lean-BANANA/pull/267).
-The full build and transitive-axiom audit passed before #270 was merged
-as commit `82cf7d660fc9d2284c53cb1e99e947fd78c83986`.
-The countable cylinder carrier is proved infinite in
-[PR #271](https://github.com/janhubicka/lean-BANANA/pull/271).
-The final deduction of ω-categoricity is the standard external
-Ryll–Nardzewski implication, not a theorem claimed in this library.
+The BANANA and pre-BANANA orbit proofs share
+[finite invariant counting](BANANA/NonPrecompact/FiniteInvariantRepresentatives.lean).
+Their class-specific tuple profiles still prove that equal signatures lie
+in the same automorphism orbit. The concrete cylinder construction and
+the native strong amalgamation certificates also retain their separate
+mathematical roles.
 
 ## Local verification
 
-Use the toolchain in `lean-toolchain` and the dependencies pinned by
-`lakefile.toml`. From a checkout with Lean/Lake installed:
+The commands below use the Lean version in `lean-toolchain` and the exact
+dependency revisions in `lake-manifest.json`.
 
 ```sh
-lake build BANANA
+lake env lean --version
+lake exe cache get
 bash scripts/audit_all_axioms_local.sh
 python3 -m unittest discover -s scripts -p 'test_*.py'
 ```
 
-The first command compiles the library. The second runs
-`scripts/check_lean_module_graph.py`, compiles every
-`*AxiomAudit.lean` entry point, and checks each printed transitive
-axiom set against **exactly** `propext`, `Classical.choice`, and
-`Quot.sound`. Unexpected axioms (including `sorryAx`) make the audit
-fail. The parser also demands one result for every active `#print axioms`
-command; commented-out commands do not count. Its standalone regression
-tests cover incomplete reports and forbidden axioms. This proves neither
-theorem-statement fidelity nor the remaining conditional hypotheses in the
-manuscript.
+The cache command is optional. The audit builds `BANANA`, checks the module
+graph, runs every `*AxiomAudit.lean` file and requires one result for each
+requested declaration. Its permitted transitive axioms are `propext`,
+`Classical.choice`, and `Quot.sound`. The theorem statements record the
+hypotheses of each certificate.
 
-Run `python3 scripts/check_lean_module_graph.py` separately to report
-unreachable source modules, modules used only by axiom-audit entry points,
-missing local imports, import cycles and empty axiom audits without invoking
-Lean. Audit-only modules are review candidates, **not** automatically dead
-code: retain them unless their use and mathematical purpose have been checked.
-
-There are small independent finite regression scripts in `scripts/`;
-these supplement, but do not replace, Lean kernel checks. For the
-current adversarial findings, scope restrictions and maintenance
-decisions see
-`docs/formalisation-adversarial-audit-2026-10-15.md`.
-
-## Reusable tools
-
-The existing development already shares the `F2` residue palette,
-subset-sum arguments and copy-colouring definitions. The Folkman
-bilinear extension also reuses the BANANA zero-cross-block matrix
-amalgamation rather than maintaining a second matrix construction.
-
-A worthwhile further extraction is a **finite-fibre calculus** for
-disjoint blocks, inverse-image maps, sum decomposition and preservation
-of prescribed markings. It should accommodate both total surjective
-owner maps (pre-BANANA) and partial `Option`-valued owner maps
-(Folkman–BANANA). The `Option.none` fibres are essential and cannot
-be erased by declaring the two classes' embeddings equivalent.
-Matrix pairing preservation is a further condition, not a consequence
-of marked finite-set allocation.
-
-Keep the small, concrete instances in use until a common lemma has at
-least two genuine downstream applications. Historical attempts can be
-recovered from Git rather than retained as unused parallel APIs.
+[arXiv release preparation](docs/arxiv-release.md)
