@@ -9,11 +9,33 @@ The local checks used Lean 4.35.0-rc3 and mathlib
 
 | Result needed | Coverage and next use |
 | --- | --- |
-| Fraïssé existence and uniqueness for the finite classes | Mathlib's Fraïssé API provides age, hereditary property, joint embedding, ordinary amalgamation, back-and-forth and uniqueness. Its countable age-realisation result does not itself give homogeneity. Cameron Freer's existence theorem was compiled from four unmodified files on BANANA's mathlib pin. Its axiom report lists only propext, Classical.choice and Quot.sound. It takes an IsFraisse class in a language with countably many function symbols and returns a countable Fraïssé limit. The first-order Folkman product encoding uses coordinate projections, ring operations, zero and the pairing. Lean proves that embeddings between encoded structures are exactly the native non-unital pairing-preserving maps. The next step is to transfer the finite class certificate and instantiate the existence theorem. [Folkman embedding correspondence](../BANANA/NonPrecompact/FolkmanFirstOrder.lean) [External Fraïssé existence theorem](https://github.com/cameronfreer/computable-model-theory/blob/cafefc908d8537008f26951b7b197bff7ad0001e/ComputableModelTheory/ModelTheory/FraisseExistence.lean#L282) |
+| Fraïssé existence and uniqueness for the finite classes | Mathlib's Fraïssé API provides age, hereditary property, joint embedding, ordinary amalgamation, back-and-forth and uniqueness. Its countable age-realisation result does not itself give homogeneity. Cameron Freer's existence theorem was compiled from four unmodified files on BANANA's mathlib pin. Its axiom report lists only propext, Classical.choice and Quot.sound. It takes an IsFraisse class in a language with countably many function symbols and returns a countable Fraïssé limit. The first-order Folkman product encoding uses coordinate projections, ring operations, zero and the pairing. Lean proves that embeddings between encoded structures are exactly the native non-unital pairing-preserving maps. Lean transfers the finite class certificate to mathlib's first-order interface. The external theorem then gives the encoded countable limit in a separately checked instantiation. Decoding the limit and proving the finite tuple-orbit bounds remain separate. [Folkman first-order Fraïssé class](../BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean) [External Fraïssé existence theorem](https://github.com/cameronfreer/computable-model-theory/blob/cafefc908d8537008f26951b7b197bff7ad0001e/ComputableModelTheory/ModelTheory/FraisseExistence.lean#L282) |
 | Ryll–Nardzewski | The class proofs use that finitely many automorphism orbits at each tuple length imply omega-categoricity. The equivalence also enters the group and expansion formulations of Ivanov's question. No matching full Lean theorem was found in the audited sources. The shortest target for the class proofs is the forward direction for the explicit homogeneous locally finite models. Use finite atomic diagrams to isolate the tuple types, transfer the extension sentences, then apply the existing first-order back-and-forth. Freer's orbit-isolation and countable-atomic model lemmas also compiled unchanged on the current pin. They give a one-point extension step for matching formula types, which supports this route. [Orbit isolation](https://github.com/cameronfreer/computable-model-theory/blob/cafefc908d8537008f26951b7b197bff7ad0001e/ComputableModelTheory/ModelTheory/OrbitIsolation.lean) |
 | Binary Graham–Leeb–Rothschild theorem | The one-sided degree-one argument needs monochromatic subspaces of fixed dimension inside a larger subspace over the two-element field. The binary version and its applications to both sides already follow from the formal successor-tree theorem. [Binary GLR and one-sided degrees](../BANANA/NonPrecompact/LinearBinaryRepresentability.lean) |
 | Witt extension for the alternating form over the two-element field | Lean proves the extension from any finite-dimensional subspace, including a degenerate one, to a global isometric automorphism of a countable infinite-dimensional nondegenerate alternating space over any field. The proof uses mathlib's duality for prescribed pairings and its first-order back-and-forth theorem. Lean also constructs the concrete countable orthogonal sum of hyperbolic planes, identifies its finite age and instantiates the extension theorem there. [Countable Witt extension](../BANANA/NonPrecompact/WittCountable.lean) · [Concrete symplectic model](../BANANA/NonPrecompact/SymplecticCountableModel.lean) |
 | Hrushovski–Krupiński–Pillay Proposition 2.17 and Krupiński–Lee–Moconja Theorem 3.16(ii) | To derive DEERP, use the forward implications from omega-categoricity and canonical amalgamation over the empty-generated base to first-order extreme amenability, and from first-order extreme amenability to DEERP. No matching Lean endpoints were found. BANANA has a native canonical zero-base amalgamation theorem. Keep the model-theoretic implications explicit as hypotheses of a partial validation. [Canonical zero-base amalgamation](../BANANA/NonPrecompact/BananaDirectSumCanonical.lean) · [HKP](https://doi.org/10.1007/s00029-026-01125-1) · [KLM](https://doi.org/10.1090/tran/8594) |
+
+To reproduce the external Folkman instantiation, add the compiled modules
+from the pinned Freer revision above to the Lean search path and check:
+
+```lean
+import BANANA.NonPrecompact.FolkmanFirstOrderFraisse
+import ComputableModelTheory.ModelTheory.FraisseExistence
+
+open FirstOrder CategoryTheory SuccessorTree.NonPrecompact
+
+theorem exists_folkmanFirstOrderLimit :
+    ∃ (M : Bundled.{0} folkmanLanguage.Structure) (_ : Countable M),
+      Language.IsFraisseLimit folkmanFirstOrderClass M := by
+  letI := folkmanFirstOrderClass_isFraisse
+  obtain ⟨M, hM, hF⟩ := Language.exists_isFraisseLimit_of_isFraisse folkmanFirstOrderClass
+  exact ⟨M, hM, hF⟩
+```
+
+The four required modules are `ExtensionRichFamily`,
+`ExtensionRichDirectLimit`, `RepresentativeAge` and `FraisseExistence`.
+The checked instantiation depends only on the three standard Lean axioms
+listed in the audit. The BANANA build uses its existing mathlib pin.
 
 ## Topological dynamics and measures
 

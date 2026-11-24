@@ -324,4 +324,4 @@ import BANANA.NonPrecompact.OrbitCover
 import BANANA.NonPrecompact.PrebananaBaireOrbit
 import BANANA.NonPrecompact.BooleanBanana
 import BANANA.NonPrecompact.BooleanBananaCopyTransport
-import BANANA.NonPrecompact.FolkmanFirstOrderSubstructure
+import BANANA.NonPrecompact.FolkmanFirstOrderFraisse

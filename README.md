@@ -8,7 +8,7 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 | Development | Lean endpoints | Further steps in the manuscript |
 | --- | --- | --- |
 | Boolean–BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. Lean checks persistent colouring and infinite copy Ramsey degree on the original Boolean carriers, and rules out a precompact Ramsey expansion in the shared expansion interface. | The deduction of ω-categoricity uses Ryll–Nardzewski. The Stone action and the topological dynamics conclusions require separate arguments. |
-| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation. The persistent colouring and failure of each proposed finite copy bound hold on native paired Boolean rings. The first-order product encoding recovers the native embeddings and substructures. | Transfer the native finite class certificate to the first-order interface, then construct the countable limit and check its finite tuple-orbit bounds. The expansion interface and Stone-space argument also require further work. |
+| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation. Lean checks the first-order Fraïssé class. Its encoded countable limit was checked separately against the external Lean existence theorem. The persistent colouring and failure of each proposed finite copy bound hold on native paired Boolean rings. | Recover the native two-sorted limit and check its finite tuple-orbit bounds. The expansion interface and Stone-space argument also require further work. |
 | BANANA | The explicit countable pairing has the stated finite age, homogeneity and finite tuple-orbit bounds. Lean checks the copy Ramsey degree classification, coherent EPPA, finite-system JEP and WAP, and finite-stage GL approximation. | The passage from finite-system JEP and WAP to ample generics, the topological amenability and nonmetrisability deductions, and the canonical-amalgamation deduction of DEERP require further arguments. |
 | Symplectic application | Lean checks the concrete countable orthogonal sum, its finite age and homogeneity, the quadratic residue lemma and the finite persistent colouring of line subspaces. | The infinite copy-degree classification still needs the bridge to the generic copy system. |
 
@@ -25,6 +25,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Folkman–BANANA finite class | [`folkmanNativeCompleteFiniteClass_nonempty`](BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean) |
 | Folkman–BANANA first-order embedding correspondence | [`folkmanNativePairingEmbeddingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrder.lean) |
 | Folkman–BANANA first-order substructure correspondence | [`folkmanProductSubstructureEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderSubstructure.lean) |
+| Folkman–BANANA first-order Fraïssé class | [`folkmanFirstOrderClass_isFraisse`](BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean) |
 | Folkman–BANANA native obstruction | [`folkmanNativeAxCopy_not_bounded`](BANANA/NonPrecompact/FolkmanNativeCopyTransport.lean) |
 | Folkman–BANANA atom-coordinate obstruction | [`folkmanAxCopyRamseyDegree_infinite`](BANANA/NonPrecompact/FolkmanPersistence.lean) |
 | BANANA finite age and homogeneity | [`banana_limit_finite_age_two_directions`](BANANA/NonPrecompact/BananaLimitFiniteAge.lean), [`exists_global_pair_automorphism_extends`](BANANA/NonPrecompact/BananaLimitGlobalHomogeneity.lean) |
@@ -64,8 +65,10 @@ finite extensions in a countable, locally finite first-order model.
 For Folkman–BANANA, the first-order product presentation uses coordinate
 projections to distinguish the sorts and recovers the original non-unital
 ring embeddings with their pairing. Its substructures are products of
-non-unital subrings with the restricted pairing. The countable model still
-needs to be constructed with the finite extension property.
+non-unital subrings with the restricted pairing. The encoded countable
+limit was checked by instantiating Freer's Fraïssé existence theorem.
+See the [classical dependency audit](docs/classical-dependencies.md) for the
+external revision and reproduction details.
 
 The BANANA and Boolean–BANANA orbit proofs share
 [finite invariant counting](BANANA/NonPrecompact/FiniteInvariantRepresentatives.lean).

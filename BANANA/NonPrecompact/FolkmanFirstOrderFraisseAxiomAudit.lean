@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderFraisse
+
+#print axioms SuccessorTree.NonPrecompact.folkmanProductBundle_mem
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderClass_isFraisse
