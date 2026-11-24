@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FiniteColouringCompactness
+
+#print axioms SuccessorTree.NonPrecompact.exists_finite_support_of_colourings

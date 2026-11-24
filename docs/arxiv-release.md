@@ -54,7 +54,7 @@ release_rev=$(git rev-parse --verify 'arxiv-v1^{commit}')
 git archive --format=tar.gz --prefix=lean-banana/ \
   --output=../lean-banana-source.tar.gz "$release_rev" \
   LICENSE README.md lean-toolchain lakefile.toml lake-manifest.json \
-  BANANA.lean BANANA scripts docs/arxiv-release.md
+  BANANA.lean BANANA scripts docs/arxiv-release.md docs/classical-dependencies.md
 (
   cd ..
   sha256sum lean-banana-source.tar.gz > lean-banana-source.tar.gz.sha256

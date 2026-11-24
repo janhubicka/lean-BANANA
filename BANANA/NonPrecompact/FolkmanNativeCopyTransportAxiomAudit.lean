@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.FolkmanNativeCopyTransport
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativeAxCopy.inside_iff_generator_ranges
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativeAxCopy.equivAtomCode
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeRealisation_atomEmbedding
+#print axioms SuccessorTree.NonPrecompact.exists_folkmanNativePersistentColouring
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeAxCopy_not_bounded

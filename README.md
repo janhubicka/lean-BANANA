@@ -8,7 +8,7 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 | Development | Lean endpoints | Further steps in the manuscript |
 | --- | --- | --- |
 | pre-BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. The persistence proof uses finite atom coordinates. | The deduction of ω-categoricity uses Ryll–Nardzewski. The Stone action and the topological dynamics conclusions require separate arguments. |
-| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation with native paired Boolean rings and non-unital embeddings. The persistent colouring and copy degree are checked in atom coordinates. | Transport of copy colourings to the native rings, construction of the countable limit and passage from finite tuple profiles to its global orbits remain open. The Stone-space argument is external. |
+| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation with native paired Boolean rings and non-unital embeddings. The persistent colouring and failure of each proposed finite copy bound now hold on the native rings. | Connecting the native obstruction to the abstract expansion interface, constructing the countable limit, and applying the finite tuple profiles to its global orbits remain open. The Stone-space argument is external. |
 | BANANA | The explicit countable pairing has the stated finite age, homogeneity and finite tuple-orbit bounds. Lean checks the copy Ramsey degree classification, finite-system JEP and WAP, finite-stage GL approximation and the algebraic coherent-EPPA construction. | The passage from finite-system JEP and WAP to ample generics, the topological amenability and nonmetrisability deductions, the canonical-amalgamation deduction of DEERP and the full coherent-EPPA packaging are separate from these certificates. |
 | Symplectic application | Lean checks the quadratic residue lemma, polar-form identities and the nondegenerate slice construction. | Assembly of the persistent colouring and the resulting copy-degree classification remains open. |
 
@@ -22,6 +22,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | pre-BANANA finite tuple orbits | [`prebananaCylinderMarkedOrbit_finite`](BANANA/NonPrecompact/PrebananaFiveAryCylinderMarkedOrbitFiniteness.lean) |
 | pre-BANANA atom-coordinate obstruction | [`prebananaTwoMarkedCopyRamseyDegree_infinite`](BANANA/NonPrecompact/PrebananaCopyDegree.lean) |
 | Folkman–BANANA finite class | [`folkmanNativeCompleteFiniteClass_nonempty`](BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean) |
+| Folkman–BANANA native obstruction | [`folkmanNativeAxCopy_not_bounded`](BANANA/NonPrecompact/FolkmanNativeCopyTransport.lean) |
 | Folkman–BANANA atom-coordinate obstruction | [`folkmanAxCopyRamseyDegree_infinite`](BANANA/NonPrecompact/FolkmanPersistence.lean) |
 | BANANA finite age and homogeneity | [`banana_limit_finite_age_two_directions`](BANANA/NonPrecompact/BananaLimitFiniteAge.lean), [`exists_global_pair_automorphism_extends`](BANANA/NonPrecompact/BananaLimitGlobalHomogeneity.lean) |
 | BANANA finite tuple orbits | [`bananaLimit_exists_finite_tuple_orbit_representatives`](BANANA/NonPrecompact/BananaLimitFiniteOrbits.lean) |
@@ -72,3 +73,5 @@ requested declaration. Its permitted transitive axioms are `propext`,
 hypotheses of each certificate.
 
 [arXiv release preparation](docs/arxiv-release.md)
+
+[Classical dependency audit](docs/classical-dependencies.md)

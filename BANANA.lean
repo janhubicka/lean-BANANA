@@ -313,3 +313,8 @@ import BANANA.NonPrecompact.PrebananaAbstractEncodedNaturality
 import BANANA.NonPrecompact.PrebananaAbstractStrongAmalgamation
 import BANANA.NonPrecompact.BananaLimitMixedTupleOrbits
 import BANANA.NonPrecompact.PrebananaBooleanTerms
+import BANANA.NonPrecompact.BooleanSpectrum
+import BANANA.NonPrecompact.FiniteColouringCompactness
+import BANANA.NonPrecompact.FolkmanNativeCopyTransport
+import BANANA.NonPrecompact.OrbitCover
+import BANANA.NonPrecompact.PrebananaBaireOrbit
