@@ -287,6 +287,7 @@ import BANANA.NonPrecompact.SubsetSums
 import BANANA.NonPrecompact.SymplecticAmalgam
 import BANANA.NonPrecompact.SymplecticQuadraticPolar
 import BANANA.NonPrecompact.SymplecticSlice
+import BANANA.NonPrecompact.WittCountable
 import BANANA.NonPrecompact.PrebananaAbstractEncodedEmbeddings
 import BANANA.NonPrecompact.PrebananaAbstractCodeOperations
 import BANANA.NonPrecompact.PrebananaAbstractTermEvaluation

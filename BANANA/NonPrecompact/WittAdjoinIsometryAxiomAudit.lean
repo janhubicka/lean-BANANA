@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.WittAdjoinIsometry
+
+#print axioms SuccessorTree.NonPrecompact.exists_wittAdjoinIsometry
+#print axioms SuccessorTree.NonPrecompact.exists_wittOnePointIsometry

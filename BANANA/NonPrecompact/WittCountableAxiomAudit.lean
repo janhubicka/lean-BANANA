@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.WittCountable
+
+#print axioms SuccessorTree.NonPrecompact.exists_wittCountableIsometry

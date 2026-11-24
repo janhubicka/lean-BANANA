@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.WittAlternatingExtension
+
+#print axioms SuccessorTree.NonPrecompact.exists_wittStage_pairing
+#print axioms SuccessorTree.NonPrecompact.exists_wittExtension_pairing
+#print axioms SuccessorTree.NonPrecompact.exists_witt_pairing_outside
