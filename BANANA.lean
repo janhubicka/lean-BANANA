@@ -325,6 +325,7 @@ import BANANA.NonPrecompact.PrebananaBaireOrbit
 import BANANA.NonPrecompact.BooleanBanana
 import BANANA.NonPrecompact.BooleanBananaCopyTransport
 import BANANA.NonPrecompact.FolkmanFirstOrderFraisse
+import BANANA.NonPrecompact.FolkmanRamseyExpansionObstruction
 import BANANA.NonPrecompact.FiniteSubgroupAmenability
 import BANANA.NonPrecompact.BananaLimitTopologicalAmenability
 import BANANA.NonPrecompact.FixedPointColouring

@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.FolkmanRamseyExpansionObstruction
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanNativeFiniteModel.embedding_exists_factor
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCopySystem
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeSourceCopyEquiv
+#print axioms SuccessorTree.NonPrecompact.exists_folkmanNativeCopyRangeColouring
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeCopyRamseyDegree_infinite
+#print axioms SuccessorTree.NonPrecompact.folkmanNative_noPrecompactRamseyExpansion
