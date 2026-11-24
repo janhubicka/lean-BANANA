@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.SymplecticCountableModel
+
+#print axioms SuccessorTree.NonPrecompact.countableSymplecticForm_coordinate_pairings
+#print axioms SuccessorTree.NonPrecompact.countableSymplecticForm_isAlt
+#print axioms SuccessorTree.NonPrecompact.countableSymplecticForm_nondegenerate
+#print axioms SuccessorTree.NonPrecompact.countableSymplectic_not_finiteDimensional
+#print axioms SuccessorTree.NonPrecompact.exists_countableSymplectic_automorphism
+#print axioms SuccessorTree.NonPrecompact.countableSymplectic_finite_age

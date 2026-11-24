@@ -286,6 +286,8 @@ import BANANA.NonPrecompact.QuadraticResidueStandard
 import BANANA.NonPrecompact.ResidueAlgebra
 import BANANA.NonPrecompact.SubsetSums
 import BANANA.NonPrecompact.SymplecticAmalgam
+import BANANA.NonPrecompact.SymplecticCountableModel
+import BANANA.NonPrecompact.SymplecticPointColouring
 import BANANA.NonPrecompact.SymplecticQuadraticPolar
 import BANANA.NonPrecompact.SymplecticSlice
 import BANANA.NonPrecompact.WittCountable

@@ -10,7 +10,7 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 | Boolean–BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. The persistence proof uses finite atom coordinates. | The deduction of ω-categoricity uses Ryll–Nardzewski. The Stone action and the topological dynamics conclusions require separate arguments. |
 | Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation with native paired Boolean rings and non-unital embeddings. The persistent colouring and failure of each proposed finite copy bound now hold on the native rings. | Connecting the native obstruction to the abstract expansion interface, constructing the countable limit, and applying the finite tuple profiles to its global orbits remain open. The Stone-space argument is external. |
 | BANANA | The explicit countable pairing has the stated finite age, homogeneity and finite tuple-orbit bounds. Lean checks the copy Ramsey degree classification, coherent EPPA, finite-system JEP and WAP, and finite-stage GL approximation. | The passage from finite-system JEP and WAP to ample generics, the topological amenability and nonmetrisability deductions, and the canonical-amalgamation deduction of DEERP require further arguments. |
-| Symplectic application | Lean checks the quadratic residue lemma, polar-form identities, the nondegenerate slice and countable Witt extension. | Identification of the concrete age and assembly of the persistent colouring and copy-degree classification remain open. |
+| Symplectic application | Lean checks the concrete countable orthogonal sum, its finite age and homogeneity, the quadratic residue lemma and the finite persistent colouring of line subspaces. | The infinite copy-degree classification still needs the bridge to the generic copy system. |
 
 All paths in the following table are relative to the repository root. The
 declarations are in the namespace `SuccessorTree.NonPrecompact`.
@@ -33,7 +33,9 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | BANANA finite-stage GL approximation | [`bananaLimitFiniteGLUnion_pointwise_approximates`](BANANA/NonPrecompact/BananaLimitLocallyFiniteDense.lean) |
 | BANANA canonical zero-base amalgamation | [`BananaMatrixStructure.exists_canonical_zero_amalgam`](BANANA/NonPrecompact/BananaDirectSumCanonical.lean) |
 | Symplectic residue lemma | [`quadraticAffineWeight_residueFibres_odd`](BANANA/NonPrecompact/QuadraticResidueStandard.lean) |
+| Symplectic finite persistent line colouring | [`exists_symplecticPointColouring`](BANANA/NonPrecompact/SymplecticPointColouring.lean) |
 | Symplectic homogeneity under the ambient hypotheses | [`exists_wittCountableIsometry`](BANANA/NonPrecompact/WittCountable.lean) |
+| Concrete symplectic age and homogeneity | [`countableSymplectic_finite_age` and `exists_countableSymplectic_automorphism`](BANANA/NonPrecompact/SymplecticCountableModel.lean) |
 
 ## Manuscript notation
 

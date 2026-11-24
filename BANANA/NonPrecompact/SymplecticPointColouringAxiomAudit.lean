@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.SymplecticPointColouring
+
+#print axioms SuccessorTree.NonPrecompact.exists_symplecticPointColouring
