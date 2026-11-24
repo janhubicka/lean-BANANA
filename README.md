@@ -28,6 +28,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Folkman–BANANA first-order embedding correspondence | [`folkmanNativePairingEmbeddingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrder.lean) |
 | Folkman–BANANA first-order substructure correspondence | [`folkmanProductSubstructureEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderSubstructure.lean) |
 | Folkman–BANANA first-order Fraïssé class | [`folkmanFirstOrderClass_isFraisse`](BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean) |
+| Native finite diagrams in the encoded Folkman–BANANA limit | [`folkmanFirstOrderLimit_nativeExtension` and `folkmanFirstOrderLimit_tuple_factors`](BANANA/NonPrecompact/FolkmanFirstOrderLimit.lean) |
 | Folkman–BANANA native copies and expansion obstruction | [`exists_folkmanNativeCopyRangeColouring`, `folkmanNativeCopyRamseyDegree_infinite`, `folkmanNative_noPrecompactRamseyExpansion`](BANANA/NonPrecompact/FolkmanRamseyExpansionObstruction.lean) |
 | Folkman–BANANA atom-coordinate obstruction | [`folkmanAxCopyRamseyDegree_infinite`](BANANA/NonPrecompact/FolkmanPersistence.lean) |
 | BANANA finite age and homogeneity | [`banana_limit_finite_age_two_directions`](BANANA/NonPrecompact/BananaLimitFiniteAge.lean), [`exists_global_pair_automorphism_extends`](BANANA/NonPrecompact/BananaLimitGlobalHomogeneity.lean) |
