@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FixedPointColouring
+
+#print axioms SuccessorTree.NonPrecompact.exists_fixed_colouring_in_orbit_closure
+#print axioms SuccessorTree.NonPrecompact.exists_finite_support_of_orbit_fixed_colourings

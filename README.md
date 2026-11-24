@@ -22,6 +22,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Boolean–BANANA homogeneity | [`BooleanBanana.limit_automorphism_extends`](BANANA/NonPrecompact/BooleanBanana.lean) |
 | Boolean–BANANA finite tuple orbits | [`BooleanBanana.limit_tupleOrbits_finite`](BANANA/NonPrecompact/BooleanBanana.lean) |
 | Boolean–BANANA native copies and expansion obstruction | [`exists_booleanBananaPersistentColouring`, `booleanBananaTwoMarkedCopyRamseyDegree_infinite`, `booleanBanana_noPrecompactRamseyExpansion`](BANANA/NonPrecompact/BooleanBananaCopyTransport.lean) |
+| Boolean–BANANA positive integer grid | [`BooleanBanana.exists_positive_integer_grid`](BANANA/NonPrecompact/BooleanBananaPositiveMassMargins.lean) |
 | Folkman–BANANA finite class | [`folkmanNativeCompleteFiniteClass_nonempty`](BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean) |
 | Folkman–BANANA first-order embedding correspondence | [`folkmanNativePairingEmbeddingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrder.lean) |
 | Folkman–BANANA first-order substructure correspondence | [`folkmanProductSubstructureEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderSubstructure.lean) |
@@ -34,6 +35,8 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | BANANA coherent EPPA | [`BananaMatrixStructure.exists_coherentEppaWitness`](BANANA/NonPrecompact/CoherentEppaWitness.lean), a single perfect witness with both sides of dimension `l+r` and a coherent assignment for all partial isomorphisms |
 | BANANA finite-system JEP and WAP | [`bananaFiniteSystems_jep_and_wap`](BANANA/NonPrecompact/BananaFiniteSystemsJepWap.lean) |
 | BANANA finite-stage GL approximation | [`bananaLimitFiniteGLUnion_pointwise_approximates`](BANANA/NonPrecompact/BananaLimitLocallyFiniteDense.lean) |
+| Amenability of a dense directed union of finite subgroups | [`exists_invariant_probability_of_dense_finite_subgroups`](BANANA/NonPrecompact/FiniteSubgroupAmenability.lean) |
+| Fixed-point method for finite colour palettes | [`exists_fixed_colouring_in_orbit_closure` and `exists_finite_support_of_orbit_fixed_colourings`](BANANA/NonPrecompact/FixedPointColouring.lean) |
 | BANANA canonical zero-base amalgamation | [`BananaMatrixStructure.exists_canonical_zero_amalgam`](BANANA/NonPrecompact/BananaDirectSumCanonical.lean) |
 | Symplectic residue lemma | [`quadraticAffineWeight_residueFibres_odd`](BANANA/NonPrecompact/QuadraticResidueStandard.lean) |
 | Symplectic finite persistent line colouring | [`exists_symplecticPointColouring`](BANANA/NonPrecompact/SymplecticPointColouring.lean) |
