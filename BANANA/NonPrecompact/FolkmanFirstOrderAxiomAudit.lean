@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanFirstOrder
+
+#print axioms SuccessorTree.NonPrecompact.folkmanNativePairingEmbeddingEquiv
+#print axioms SuccessorTree.NonPrecompact.folkmanProductEmbedding_preserves_pairing

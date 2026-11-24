@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderSubstructure
+
+#print axioms SuccessorTree.NonPrecompact.folkmanProductSubstructureEquiv
