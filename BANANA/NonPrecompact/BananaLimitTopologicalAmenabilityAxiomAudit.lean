@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.BananaLimitTopologicalAmenability
+
+#print axioms SuccessorTree.NonPrecompact.bananaLimitFiniteGLSubgroup_finite
+#print axioms SuccessorTree.NonPrecompact.bananaLimitFiniteGLSubgroup_directed
+#print axioms SuccessorTree.NonPrecompact.bananaLimitFiniteGLSubgroup_dense
+#print axioms SuccessorTree.NonPrecompact.exists_bananaLimitFiniteGLSequence
+#print axioms SuccessorTree.NonPrecompact.bananaLimitAutomorphismGroup_amenable
