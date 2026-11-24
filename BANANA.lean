@@ -330,3 +330,4 @@ import BANANA.NonPrecompact.FiniteSubgroupAmenability
 import BANANA.NonPrecompact.BananaLimitTopologicalAmenability
 import BANANA.NonPrecompact.FixedPointColouring
 import BANANA.NonPrecompact.BooleanBananaPositiveMassMargins
+import BANANA.NonPrecompact.BooleanBananaStoneNonamenability
