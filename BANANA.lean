@@ -53,6 +53,7 @@ import BANANA.NonPrecompact.BinaryAffineRamseyInterface
 import BANANA.NonPrecompact.CauchyBinet
 import BANANA.NonPrecompact.CoherentConjugation
 import BANANA.NonPrecompact.CoherentEppaPackage
+import BANANA.NonPrecompact.CoherentEppaWitness
 import BANANA.NonPrecompact.ColouringWrappers
 import BANANA.NonPrecompact.Completion
 import BANANA.NonPrecompact.CompletionAmbientAction
