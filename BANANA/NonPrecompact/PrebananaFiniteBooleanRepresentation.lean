@@ -6,7 +6,7 @@ import Mathlib.Order.Atoms
 # Finite Boolean algebras as powersets of their atoms
 
 This is the representation interface between the abstract Boolean
-algebras used in the pre-BANANA manuscript and the atom-coordinate
+algebras used in the Boolean–BANANA manuscript and the atom-coordinate
 Lean implementation.
 
 Mathlib supplies both the canonical representation theorem for

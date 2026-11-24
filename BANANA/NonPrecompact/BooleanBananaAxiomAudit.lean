@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.BooleanBanana
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.strongAmalgamation
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.finiteModel_embeds_limit
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.finiteSubmodel_factors
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.limit_automorphism_extends
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.limit_tupleOrbits_finite
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.atomCoordinate_copyDegree_infinite

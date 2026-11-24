@@ -44,7 +44,7 @@ attribute [instance] PrebananaFiniteBooleanModel.booleanAlgebra
   PrebananaFiniteBooleanModel.nontrivial
 
 /-- A marking-preserving embedding of arbitrary finite
-pre-BANANA Boolean algebras. -/
+Boolean–BANANA Boolean algebras. -/
 structure PrebananaFiniteBooleanEmbedding
     (A B : PrebananaFiniteBooleanModel) where
   hom : BoundedLatticeHom A.carrier B.carrier

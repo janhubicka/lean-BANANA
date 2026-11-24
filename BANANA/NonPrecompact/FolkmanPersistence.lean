@@ -42,7 +42,7 @@ def folkmanFiber
 /-- Total incidence count over all *assigned* left atoms. Unused
 atoms are excluded, as required for non-unital embeddings.
 This is the partial-owner counterpart of the F₂ fibre sum in
-pre-BANANA, using the same additive-monoid identity. -/
+Boolean–BANANA, using the same additive-monoid identity. -/
 theorem folkmanEdgeCount_ownedLeft
     {q l r : ℕ}
     (edge : Fin l → Fin r → F2)
@@ -144,7 +144,7 @@ structure FolkmanAtomEmbedding
 
 namespace FolkmanAtomStructure
 
-/-- The `q`-atom diagonal target `B_q^{FU}`. -/
+/-- The diagonal target `B_folk(q)` with `q` atoms on each side. -/
 def diagonal (q : ℕ) : FolkmanAtomStructure where
   leftCount := q
   rightCount := q
@@ -152,7 +152,7 @@ def diagonal (q : ℕ) : FolkmanAtomStructure where
 
 end FolkmanAtomStructure
 
-/-- A copy of the one-atom-per-side source `A_×`.
+/-- A copy of the one-atom-per-side source `A_folk`.
 
 The copy is determined by nonempty left and right atom blocks.  Pairing one
 is equivalent to the ordinary incident-pair count being odd. -/

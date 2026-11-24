@@ -1,12 +1,12 @@
 import BANANA.NonPrecompact.PrebananaPersistence
 
 /-!
-# Copy Ramsey degree of the two-marked-atom pre-BANANA source
+# Copy Ramsey degree of the two-marked-atom Boolean–BANANA source
 
 This file adds the abstract degree layer to the fixed-ambient colouring in
 `PrebananaPersistence.lean`.
 
-Finite pre-BANANA structures are written in standard atom coordinates.
+Finite Boolean–BANANA structures are written in standard atom coordinates.
 A structure is therefore a nonempty finite atom set together with a marking
 whose total marked count is even.  A unital Boolean-algebra embedding is
 represented by the induced partition of the target atoms into nonempty
@@ -22,7 +22,7 @@ that its selected block is a union of target fibres.
 
 namespace SuccessorTree.NonPrecompact
 
-/-- A finite pre-BANANA structure in standard atom coordinates. -/
+/-- A finite Boolean–BANANA structure in standard atom coordinates. -/
 structure PrebananaAtomStructure where
   atomCount : ℕ
   atomCount_pos : 0 < atomCount
@@ -48,7 +48,7 @@ def allMarkedPower (k : ℕ) : PrebananaAtomStructure where
 
 end PrebananaAtomStructure
 
-/-- A unital pre-BANANA embedding in atom coordinates.
+/-- A unital Boolean–BANANA embedding in atom coordinates.
 
 `part b = a` means that the target atom `b` lies below the image of
 source atom `a`. -/
@@ -85,7 +85,7 @@ def toAllMarkedTargetCopy
 end PrebananaAtomEmbedding
 
 /-- The actual copy-range type of the two-atom, both-marked source in a
-standard-coordinate pre-BANANA structure. -/
+standard-coordinate Boolean–BANANA structure. -/
 abbrev PrebananaTwoMarkedCopy (A : PrebananaAtomStructure) :=
   PrebananaTwoAtomCopy A.mark A.zeroAtom
 
@@ -104,7 +104,7 @@ def Inside
 end PrebananaTwoAtomCopy
 
 /-- Copy Ramsey degree at most `t` for the two-marked-atom source, in the
-standard atom-coordinate presentation of the pre-BANANA class. -/
+standard atom-coordinate presentation of the Boolean–BANANA class. -/
 def prebananaTwoMarkedCopyRamseyDegreeLE (t : ℕ) : Prop :=
   ∀ (B : PrebananaAtomStructure)
       (numColours : ℕ), 0 < numColours →

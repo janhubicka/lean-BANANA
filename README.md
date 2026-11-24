@@ -7,20 +7,21 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 
 | Development | Lean endpoints | Further steps in the manuscript |
 | --- | --- | --- |
-| pre-BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. The persistence proof uses finite atom coordinates. | The deduction of ω-categoricity uses Ryll–Nardzewski. The Stone action and the topological dynamics conclusions require separate arguments. |
+| Boolean–BANANA | The explicit cylinder algebra has the required finite age, is ultrahomogeneous and has finitely many automorphism orbits on tuples of each fixed length. The persistence proof uses finite atom coordinates. | The deduction of ω-categoricity uses Ryll–Nardzewski. The Stone action and the topological dynamics conclusions require separate arguments. |
 | Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation with native paired Boolean rings and non-unital embeddings. The persistent colouring and failure of each proposed finite copy bound now hold on the native rings. | Connecting the native obstruction to the abstract expansion interface, constructing the countable limit, and applying the finite tuple profiles to its global orbits remain open. The Stone-space argument is external. |
 | BANANA | The explicit countable pairing has the stated finite age, homogeneity and finite tuple-orbit bounds. Lean checks the copy Ramsey degree classification, finite-system JEP and WAP, finite-stage GL approximation and the algebraic coherent-EPPA construction. | The passage from finite-system JEP and WAP to ample generics, the topological amenability and nonmetrisability deductions, the canonical-amalgamation deduction of DEERP and the full coherent-EPPA packaging are separate from these certificates. |
-| Symplectic application | Lean checks the quadratic residue lemma, polar-form identities and the nondegenerate slice construction. | Assembly of the persistent colouring and the resulting copy-degree classification remains open. |
+| Symplectic application | Lean checks the quadratic residue lemma, polar-form identities, the nondegenerate slice and countable Witt extension. | Identification of the concrete age and assembly of the persistent colouring and copy-degree classification remain open. |
 
 All paths in the following table are relative to the repository root. The
 declarations are in the namespace `SuccessorTree.NonPrecompact`.
 
 | Claim | Declaration and source |
 | --- | --- |
-| pre-BANANA finite age | [`prebananaCylinder_allFiniteModels_embed` and `prebananaCylinder_finiteSubmodel_factor`](BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteAge.lean) |
-| pre-BANANA homogeneity | [`prebananaCylinder_exists_global_marked_boolean_automorphism`](BANANA/NonPrecompact/PrebananaFiveAryCylinderUltrahomogeneity.lean) |
-| pre-BANANA finite tuple orbits | [`prebananaCylinderMarkedOrbit_finite`](BANANA/NonPrecompact/PrebananaFiveAryCylinderMarkedOrbitFiniteness.lean) |
-| pre-BANANA atom-coordinate obstruction | [`prebananaTwoMarkedCopyRamseyDegree_infinite`](BANANA/NonPrecompact/PrebananaCopyDegree.lean) |
+| Boolean–BANANA strong amalgamation | [`BooleanBanana.strongAmalgamation`](BANANA/NonPrecompact/BooleanBanana.lean) |
+| Boolean–BANANA finite age | [`BooleanBanana.finiteModel_embeds_limit` and `BooleanBanana.finiteSubmodel_factors`](BANANA/NonPrecompact/BooleanBanana.lean) |
+| Boolean–BANANA homogeneity | [`BooleanBanana.limit_automorphism_extends`](BANANA/NonPrecompact/BooleanBanana.lean) |
+| Boolean–BANANA finite tuple orbits | [`BooleanBanana.limit_tupleOrbits_finite`](BANANA/NonPrecompact/BooleanBanana.lean) |
+| Boolean–BANANA atom-coordinate obstruction | [`BooleanBanana.atomCoordinate_copyDegree_infinite`](BANANA/NonPrecompact/BooleanBanana.lean) |
 | Folkman–BANANA finite class | [`folkmanNativeCompleteFiniteClass_nonempty`](BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean) |
 | Folkman–BANANA native obstruction | [`folkmanNativeAxCopy_not_bounded`](BANANA/NonPrecompact/FolkmanNativeCopyTransport.lean) |
 | Folkman–BANANA atom-coordinate obstruction | [`folkmanAxCopyRamseyDegree_infinite`](BANANA/NonPrecompact/FolkmanPersistence.lean) |
@@ -32,10 +33,23 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | BANANA finite-stage GL approximation | [`bananaLimitFiniteGLUnion_pointwise_approximates`](BANANA/NonPrecompact/BananaLimitLocallyFiniteDense.lean) |
 | BANANA canonical zero-base amalgamation | [`BananaMatrixStructure.exists_canonical_zero_amalgam`](BANANA/NonPrecompact/BananaDirectSumCanonical.lean) |
 | Symplectic residue lemma | [`quadraticAffineWeight_residueFibres_odd`](BANANA/NonPrecompact/QuadraticResidueStandard.lean) |
+| Symplectic homogeneity under the ambient hypotheses | [`exists_wittCountableIsometry`](BANANA/NonPrecompact/WittCountable.lean) |
 
-The pre-BANANA embeddings are unital. The Folkman–BANANA embeddings
+## Manuscript notation
+
+| Manuscript notation | Lean representation |
+| --- | --- |
+| `𝒦_bool`, `M_bool` | [`BooleanBanana.FiniteModel`, `BooleanBanana.limit`](BANANA/NonPrecompact/BooleanBanana.lean) |
+| `A_bool`-copies and `B_bool(q)` | [`PrebananaTwoMarkedCopy`](BANANA/NonPrecompact/PrebananaCopyDegree.lean) and [`BooleanBanana.allMarkedTarget k`](BANANA/NonPrecompact/BooleanBanana.lean) for `q = 2^(k+1)` |
+| `𝒦_folk`, `A_folk`-copies and `B_folk(q)` | [Native finite class](BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean), [`FolkmanNativeAxCopy`](BANANA/NonPrecompact/FolkmanNativeCopyTransport.lean) and [`FolkmanAtomStructure.diagonal q`](BANANA/NonPrecompact/FolkmanPersistence.lean) |
+| `A_b` and `B_D` for BANANA | [`linePairSource b`](BANANA/NonPrecompact/LinePairSourceEmbedding.lean) and [`perfectBanana D`](BANANA/NonPrecompact/BananaStructure.lean) |
+
+Boolean join and meet are `⊔` and `⊓` in Lean. In atom-set coordinates
+they become union and intersection. The Boolean–BANANA embeddings are
+unital. The Folkman–BANANA embeddings
 preserve the ring operations and zero separately in each sort, with
-preservation of the pairing as an additional condition.
+preservation of the pairing as an additional condition. The Boolean–BANANA
+entry point reuses the existing `Prebanana*` modules cited by pinned manuscript links.
 
 ## Shared model-theory infrastructure
 
@@ -47,7 +61,7 @@ embedding bridge. For Folkman this bridge must preserve both sorts and their
 pairing and allow non-unital embeddings. The countable model still needs to
 be constructed with the finite extension property.
 
-The BANANA and pre-BANANA orbit proofs share
+The BANANA and Boolean–BANANA orbit proofs share
 [finite invariant counting](BANANA/NonPrecompact/FiniteInvariantRepresentatives.lean).
 Their class-specific tuple profiles still prove that equal signatures lie
 in the same automorphism orbit. The concrete cylinder construction and

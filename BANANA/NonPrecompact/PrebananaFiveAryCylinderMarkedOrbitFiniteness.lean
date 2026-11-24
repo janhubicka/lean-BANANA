@@ -84,7 +84,7 @@ theorem prebananaCylinderMarkedOrbit_finite_of_homogeneity
     (fun xs ys hp =>
       prebananaCylinder_profile_eq_implies_automorphism hhom xs ys hp)
 
-/-- The concrete countable pre-BANANA cylinder algebra has finitely many
+/-- The concrete countable Boolean–BANANA cylinder algebra has finitely many
 orbits of n-tuples under its genuine F₂-mark-preserving Boolean
 automorphism group.  No homogeneity hypothesis remains: the proof
 uses the previously verified global back-and-forth theorem. -/

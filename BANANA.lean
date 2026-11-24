@@ -319,3 +319,4 @@ import BANANA.NonPrecompact.FiniteColouringCompactness
 import BANANA.NonPrecompact.FolkmanNativeCopyTransport
 import BANANA.NonPrecompact.OrbitCover
 import BANANA.NonPrecompact.PrebananaBaireOrbit
+import BANANA.NonPrecompact.BooleanBanana

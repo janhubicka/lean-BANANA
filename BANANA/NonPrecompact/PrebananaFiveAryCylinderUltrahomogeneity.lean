@@ -3,7 +3,7 @@ import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAmbient
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderExtensionProperty
 
 /-!
-# Ultrahomogeneity of the explicit countable pre-BANANA algebra
+# Ultrahomogeneity of the explicit countable Boolean–BANANA algebra
 
 The countable cylinder Boolean algebra is locally finite, and
 each finite marked embedding into it extends along every finite
@@ -42,7 +42,7 @@ theorem prebananaCylinder_hasFiniteExtensionProperty_forHomogeneity :
   intro A B f e
   exact prebananaCylinder_finiteExtensionProperty A B f e
 
-/-- Every two marked embeddings of an arbitrary finite pre-BANANA
+/-- Every two marked embeddings of an arbitrary finite Boolean–BANANA
 structure into the explicit countable cylinder algebra are
 conjugate by an actual Boolean automorphism preserving the
 F₂ marking. This is the embedding formulation of ultrahomogeneity. -/

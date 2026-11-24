@@ -4,7 +4,7 @@ import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteEmbeddingFactor
 import Mathlib.Order.BooleanSubalgebra
 
 /-!
-# The finite age of the countable pre-BANANA cylinder algebra
+# The finite age of the countable Boolean–BANANA cylinder algebra
 
 A finite Boolean subalgebra of the countable cylinder algebra inherits
 its admissible F₂ marking and embeds by inclusion. Conversely, every
@@ -38,7 +38,7 @@ def PrebananaFiniteToCountableEmbedding.comp
     intro x
     exact (g.preserves_μ (f.hom x)).trans (f.preserves_μ x)
 
-/-- Every finite pre-BANANA model embeds into the countable
+/-- Every finite Boolean–BANANA model embeds into the countable
 marked Boolean cylinder model. -/
 theorem prebananaCylinder_allFiniteModels_embed
     (B : PrebananaFiniteBooleanModel) :
@@ -48,7 +48,7 @@ theorem prebananaCylinder_allFiniteModels_embed
   exact ⟨(prebananaCylinderCountableStageEmbedding n).comp g⟩
 
 /-- Every finite Boolean subalgebra of the cylinder model inherits
-the original marking and belongs to the finite pre-BANANA class. -/
+the original marking and belongs to the finite Boolean–BANANA class. -/
 noncomputable def prebananaCylinder_finiteSubmodel
     (S : BooleanSubalgebra PrebananaFiveAryCylinderLimitCarrier)
     [Fintype S] : PrebananaFiniteBooleanModel where
