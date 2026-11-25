@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.TopologicalAmenability
 import BANANA.NonPrecompact.BooleanBananaStoneAction
 import BANANA.NonPrecompact.PrebananaActualGeneratedBooleanOps
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAge
@@ -92,13 +93,6 @@ theorem no_invariantStoneProbability
   exact prebanana_no_invariantPresentedProbability_of_threeAtom
     (G := LimitAutomorphisms) prebananaFiveAryCylinderMark ν ι hmeas
     properZeroMark_transitive hmass f.hom f.injective f.preserves_μ
-
-/-- A topological group is amenable when each of its nonempty compact
-Hausdorff flows has an invariant Borel probability measure. -/
-def IsTopologicallyAmenable (G : Type*) [Group G] [TopologicalSpace G] : Prop :=
-  ∀ (X : Type) [TopologicalSpace X] [CompactSpace X] [T2Space X] [Nonempty X]
-    [MeasurableSpace X] [BorelSpace X] [MulAction G X] [ContinuousSMul G X],
-      ∃ ν : Measure X, IsProbabilityMeasure ν ∧ ∀ g : G, ν.map (fun x => g • x) = ν
 
 /-- The automorphism group of the concrete Boolean–BANANA limit with the
 pointwise topology is not amenable. -/

@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BooleanBananaMassRangeRealisation
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_positiveMass_element_of_age
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_element_fraction_of_finiteCover
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_prime_mem_iff_of_age
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_even_marked_mass_sequence_of_age

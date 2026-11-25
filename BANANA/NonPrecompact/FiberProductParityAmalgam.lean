@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.ParityStarMatrix
 import BANANA.NonPrecompact.FiberProductStrong
+import BANANA.NonPrecompact.FiberGridCoordinates
 
 /-!
 # Parity amalgamation on fibre-product atom grids
@@ -15,35 +16,6 @@ star matrix with the prescribed B-row and C-column F₂ marks.
 namespace SuccessorTree.NonPrecompact
 
 open scoped BigOperators
-
-/-- Left fibre over one base atom. -/
-abbrev LeftFiber
-    {A B : Type*} (f : B → A) (a : A) :=
-  {b : B // f b = a}
-
-/-- Right fibre over one base atom. -/
-abbrev RightFiber
-    {A C : Type*} (g : C → A) (a : A) :=
-  {c : C // g c = a}
-
-/-- Atom grid of the fibre-product amalgam, indexed by the common base atom. -/
-abbrev FiberGrid
-    {A B C : Type*} (f : B → A) (g : C → A) :=
-  Σ a : A, LeftFiber f a × RightFiber g a
-
-/-- A chosen row in every nonempty left fibre. -/
-noncomputable def leftFiberBase
-    {A B : Type*}
-    (f : B → A) (hf : Function.Surjective f) (a : A) :
-    LeftFiber f a :=
-  ⟨Classical.choose (hf a), Classical.choose_spec (hf a)⟩
-
-/-- A chosen column in every nonempty right fibre. -/
-noncomputable def rightFiberBase
-    {A C : Type*}
-    (g : C → A) (hg : Function.Surjective g) (a : A) :
-    RightFiber g a :=
-  ⟨Classical.choose (hg a), Classical.choose_spec (hg a)⟩
 
 /-- Marking on the fibre-product atom grid obtained by putting the explicit
 star matrix on each source-atom rectangle. -/
@@ -112,49 +84,5 @@ theorem sum_fiberGridMark_left
       (rightFiberBase g hg (g c))
       (htotal (g c))
       (⟨c, rfl⟩ : RightFiber g (g c))
-
-/-- Forgetting the explicit base coordinate identifies the sigma-type atom
-grid with the usual compatible-pair fibre product. -/
-noncomputable def fiberGridEquivCompatiblePair
-    {A B C : Type*}
-    (f : B → A) (g : C → A) :
-    FiberGrid f g ≃ CompatiblePair f g where
-  toFun p :=
-    ⟨(p.2.1.1, p.2.2.1),
-      p.2.1.2.trans p.2.2.2.symm⟩
-  invFun p :=
-    ⟨f p.1.1,
-      (⟨p.1.1, rfl⟩,
-        ⟨p.1.2, p.2.symm⟩)⟩
-  left_inv p := by
-    rcases p with ⟨a, ⟨b, c⟩⟩
-    rcases b with ⟨b, hb⟩
-    rcases c with ⟨c, hc⟩
-    subst a
-    rfl
-  right_inv p := by
-    apply Subtype.ext
-    apply Prod.ext <;> rfl
-
-/-- Strong intersection for the sigma-type atom grid.  If membership pulled
-back from B agrees with membership pulled back from C on every grid atom,
-then both subsets come from one common subset of A. -/
-theorem exists_common_subset_of_fiberGrid
-    {A B C : Type*}
-    (f : B → A) (g : C → A)
-    (hf : Function.Surjective f)
-    (hg : Function.Surjective g)
-    (SB : Set B) (SC : Set C)
-    (hcompat :
-      ∀ p : FiberGrid f g,
-        p.2.1.1 ∈ SB ↔ p.2.2.1 ∈ SC) :
-    ∃ SA : Set A,
-      (∀ b, b ∈ SB ↔ f b ∈ SA) ∧
-      (∀ c, c ∈ SC ↔ g c ∈ SA) := by
-  apply exists_common_subset_of_fiberProduct
-    f g hf hg SB SC
-  intro p
-  let q := (fiberGridEquivCompatiblePair f g).symm p
-  simpa [q, fiberGridEquivCompatiblePair] using hcompat q
 
 end SuccessorTree.NonPrecompact

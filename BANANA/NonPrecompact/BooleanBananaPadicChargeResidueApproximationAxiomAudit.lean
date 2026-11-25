@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BooleanBananaPadicChargeResidueApproximation
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.HasChargeResiduePartition
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_padicChargeResidueApproximation_of_partitions
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.dense_padicChargeOrbit_of_partitions
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.finiteAmbient

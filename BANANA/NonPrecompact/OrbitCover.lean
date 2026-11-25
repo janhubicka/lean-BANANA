@@ -1,5 +1,6 @@
 import Mathlib.Data.Finset.Image
 import Mathlib.GroupTheory.GroupAction.Defs
+import Mathlib.Topology.Neighborhoods
 
 /-!
 # Finite double-coset covers and orbit representatives
@@ -11,7 +12,7 @@ the orbit of the point.
 
 namespace SuccessorTree.NonPrecompact
 
-open MulAction
+open MulAction Set Filter Topology
 
 variable {G X : Type*} [Group G] [MulAction G X]
 
@@ -65,5 +66,39 @@ theorem exists_finset_doubleCosetCover_iff_orbit_representatives
     apply (inverse_smul_mem_subgroup_orbit_iff H a g (representative r)).1
     rw [hrep]
     exact hgr
+
+/-- Co-precompactness in the finite `UFH` form of the manuscript. -/
+def CoPrecompact (G : Type*) [Group G] [TopologicalSpace G] (H : Subgroup G) : Prop :=
+  ∀ U : Set G, U ∈ 𝓝 (1 : G) → ∃ F : Finset G, ∀ g : G,
+    ∃ f ∈ F, ∃ u ∈ U, ∃ h : H, g = u * f * (h : G)
+
+/-- The double-coset bound for a transitive discrete action with open
+point stabiliser. Here the group topology is arbitrary. -/
+theorem exists_finset_orbitRepresentatives_of_coprecompact
+    {G X : Type*} [Group G] [TopologicalSpace G] [MulAction G X]
+    (H : Subgroup G) (hH : CoPrecompact G H) (a : X)
+    (haOpen : IsOpen (stabilizer G a : Set G))
+    (htrans : ∀ x : X, ∃ g : G, g • a = x) :
+    ∃ R : Finset X, ∀ x : X, ∃ r ∈ R, ∃ h : H, h • r = x := by
+  classical
+  obtain ⟨F, hF⟩ := hH (stabilizer G a : Set G)
+    (haOpen.mem_nhds (stabilizer G a).one_mem)
+  let r (f : G) := f⁻¹ • a
+  refine ⟨F.image r, fun x => ?_⟩
+  obtain ⟨g, hg⟩ := htrans x
+  obtain ⟨f, hf, u, hu, h, hcover⟩ := hF g⁻¹
+  obtain ⟨k, hk⟩ := (inverse_smul_mem_subgroup_orbit_iff H a g⁻¹ f).mpr
+    ⟨⟨u, hu⟩, h, hcover⟩
+  exact ⟨r f, Finset.mem_image.mpr ⟨f, hf, rfl⟩, k, by simpa [r, hg] using hk⟩
+
+/-- The finite covering property passes to larger subgroups, in
+particular to the topological closure of a subgroup. -/
+theorem CoPrecompact.mono {G : Type*} [Group G] [TopologicalSpace G]
+    {H K : Subgroup G} (hH : CoPrecompact G H) (hHK : H ≤ K) : CoPrecompact G K := by
+  intro U hU
+  obtain ⟨F, hF⟩ := hH U hU
+  refine ⟨F, fun g => ?_⟩
+  obtain ⟨f, hf, u, hu, h, heq⟩ := hF g
+  exact ⟨f, hf, u, hu, ⟨h, hHK h.property⟩, heq⟩
 
 end SuccessorTree.NonPrecompact

@@ -75,20 +75,19 @@ theorem exists_fixed_colouring_in_orbit_closure
   change d.val ((g⁻¹)⁻¹ • x) = d.val x at heq
   simpa only [inv_inv] using heq
 
-/-- Fixed points in colouring orbit closures give a uniform finite
-set of coordinates containing a translate with a bounded palette. -/
-theorem exists_finite_support_of_orbit_fixed_colourings
+/-- The uniform finite collection of translates can be chosen before the
+colouring. Consequently an ambient structure can contain all points of
+each moved target, even when its small copies do not cover the target. -/
+theorem exists_finite_translates_of_orbit_fixed_colourings
     [TopologicalSpace Colour] [CompactSpace Colour] [DiscreteTopology Colour]
-    [Nonempty Colour]
     (T reps : Finset X)
     (hrep : ∀ x : X, ∃ r ∈ reps, ∃ g : G, g • r = x)
     (hfixed : ∀ c : X → Colour,
       ∃ d ∈ closure (range fun g : G => fun x => c (g⁻¹ • x)),
         ∀ (g : G) (x : X), d (g • x) = d x) :
-    ∃ S : Finset X, ∀ c : S → Colour,
-      ∃ (g : G) (h : ∀ x ∈ T, g • x ∈ S) (palette : Finset Colour),
-        palette.card ≤ reps.card ∧
-        ∀ (x : X) (hx : x ∈ T), c ⟨g • x, h x hx⟩ ∈ palette := by
+    ∃ K : Finset G, ∀ c : X → Colour,
+      ∃ g ∈ K, ∃ palette : Finset Colour, palette.card ≤ reps.card ∧
+        ∀ x ∈ T, c (g • x) ∈ palette := by
   classical
   let support (g : G) : Finset X := T.image (fun x => g • x)
   let good (g : G) (c : support g → Colour) : Prop :=
@@ -107,10 +106,36 @@ theorem exists_finite_support_of_orbit_fixed_colourings
     refine Finset.mem_image.mpr ⟨r, hr, ?_⟩
     change d r = c x.val
     rw [← hyx, heq, ← hk, hdFixed]
-  obtain ⟨S, hS⟩ := exists_finite_support_of_colourings support good hglobal
+  obtain ⟨K, hK⟩ := exists_finite_witnesses_of_colourings support good hglobal
+  refine ⟨K, fun c => ?_⟩
+  obtain ⟨g, hg, palette, hp, hpalette⟩ := hK c
+  refine ⟨g, hg, palette, hp, fun x hx => ?_⟩
+  exact hpalette ⟨g • x, Finset.mem_image.mpr ⟨x, hx, rfl⟩⟩
+
+/-- Fixed points in colouring orbit closures give a uniform finite
+set of coordinates containing a translate with a bounded palette. -/
+theorem exists_finite_support_of_orbit_fixed_colourings
+    [TopologicalSpace Colour] [CompactSpace Colour] [DiscreteTopology Colour]
+    [Nonempty Colour]
+    (T reps : Finset X)
+    (hrep : ∀ x : X, ∃ r ∈ reps, ∃ g : G, g • r = x)
+    (hfixed : ∀ c : X → Colour,
+      ∃ d ∈ closure (range fun g : G => fun x => c (g⁻¹ • x)),
+        ∀ (g : G) (x : X), d (g • x) = d x) :
+    ∃ S : Finset X, ∀ c : S → Colour,
+      ∃ (g : G) (h : ∀ x ∈ T, g • x ∈ S) (palette : Finset Colour),
+        palette.card ≤ reps.card ∧
+        ∀ (x : X) (hx : x ∈ T), c ⟨g • x, h x hx⟩ ∈ palette := by
+  classical
+  obtain ⟨K, hK⟩ := exists_finite_translates_of_orbit_fixed_colourings T reps hrep hfixed
+  let S := K.biUnion fun g => T.image fun x => g • x
   refine ⟨S, fun c => ?_⟩
-  obtain ⟨g, h, palette, hp, hpalette⟩ := hS c
-  have hin (x : X) (hx : x ∈ T) : g • x ∈ support g := Finset.mem_image.mpr ⟨x, hx, rfl⟩
-  exact ⟨g, fun x hx => h (hin x hx), palette, hp, fun x hx => hpalette ⟨_, hin x hx⟩⟩
+  let padded : X → Colour := fun x =>
+    if hx : x ∈ S then c ⟨x, hx⟩ else Classical.choice ‹Nonempty Colour›
+  obtain ⟨g, hg, palette, hp, hpalette⟩ := hK padded
+  have hin (x : X) (hx : x ∈ T) : g • x ∈ S :=
+    Finset.mem_biUnion.mpr ⟨g, hg, Finset.mem_image.mpr ⟨x, hx, rfl⟩⟩
+  refine ⟨g, hin, palette, hp, fun x hx => ?_⟩
+  simpa only [padded, dite_eq_left (hin x hx)] using hpalette x hx
 
 end SuccessorTree.NonPrecompact

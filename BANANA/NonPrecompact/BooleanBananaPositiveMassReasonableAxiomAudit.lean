@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.BooleanBananaPositiveMassReasonable
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_restrict
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_reasonable

@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.OpenSubgroupAmenability
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.continuousSMul_coinducedFlow
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.isTopologicallyAmenable_openSubgroup

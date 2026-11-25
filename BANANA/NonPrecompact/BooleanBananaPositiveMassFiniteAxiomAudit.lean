@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.BooleanBananaPositiveMassEPPA
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_positiveMass_atomCoordinates
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_element_fraction
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_preserves_mark
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.weightedPowerset_isFinitePositiveMass
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_eppa

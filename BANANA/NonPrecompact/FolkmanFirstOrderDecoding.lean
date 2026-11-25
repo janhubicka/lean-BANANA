@@ -352,4 +352,24 @@ noncomputable def encodingEquiv :
         fin_cases i <;> rfl
       exact h ▸ (pair_eq_iff M hM (xs 0) (xs 1) a)
 
+/-- The restriction of an encoded automorphism to the decoded left sort. -/
+def leftSortRingEquivOf (e : M ≃[folkmanLanguage] M) :
+    letI := productRing M hM
+    leftSort M hM ≃+* leftSort M hM := by
+  letI := productRing M hM
+  let lift (e : M ≃[folkmanLanguage] M) (x : leftSort M hM) : leftSort M hM :=
+    ⟨e x.val, by
+      rcases x.property with ⟨y, hy⟩
+      exact ⟨e y, (map_left e.toEmbedding y).trans (congrArg e hy)⟩⟩
+  refine {
+    toFun := lift e
+    invFun := lift e.symm
+    left_inv := fun x => Subtype.ext (e.symm_apply_apply x.val)
+    right_inv := fun x => Subtype.ext (e.apply_symm_apply x.val)
+    map_add' := fun x y => Subtype.ext (map_add e.toEmbedding x.val y.val).symm
+    map_mul' := fun x y => Subtype.ext (map_mul e.toEmbedding x.val y.val).symm }
+
+theorem leftSortRingEquivOf_apply (e : M ≃[folkmanLanguage] M) (x : leftSort M hM) :
+    ((leftSortRingEquivOf M hM e x : leftSort M hM) : M) = e x.val := rfl
+
 end SuccessorTree.NonPrecompact.FolkmanDecoding

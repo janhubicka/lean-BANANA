@@ -168,7 +168,7 @@ theorem nonempty_padicCharge_of_finiteAmbient [Nontrivial B] (mark : B → ZMod 
     obtain ⟨S, hs⟩ := existsAmbient {a}
     exact (localCharge S).parity ⟨a, hs (by simp)⟩
 
-private theorem finiteAmbient (s : Finset B) :
+theorem finiteAmbient (s : Finset B) :
     ∃ S : BooleanSubalgebra B, Finite S ∧ (s : Set B) ⊆ S := by
   classical
   let signature (u : BooleanSpectrum.Space B) (a : s) : Bool :=

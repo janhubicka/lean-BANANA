@@ -1,0 +1,12 @@
+import BANANA.NonPrecompact.BooleanBananaMassStoneDynamics
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.isTopologicallyAmenable_of_dense_finite_subgroups
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.isClosed_massSubgroup
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.stoneMass_eq_of_uniformMassCover
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.stoneProbability_ext
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.invariantStoneProbability_unique
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massSubgroup_eq_of_amenable_supergroup
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massSubgroup_no_stone_fixedPoint
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massRange_eq_of_conjugate
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massSubgroup_no_doubleCosetCover
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massSubgroup_not_coprecompact

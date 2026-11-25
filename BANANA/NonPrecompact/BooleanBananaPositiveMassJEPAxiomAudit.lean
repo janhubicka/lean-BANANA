@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BooleanBananaPositiveMassJEP
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_strongAmalgamation
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_jointEmbedding
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_admitsExpansion

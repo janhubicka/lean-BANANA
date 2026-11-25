@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderInterval
+
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomSumHom
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomSumHom_apply_singleton
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomSumHom_apply_one
+#print axioms SuccessorTree.NonPrecompact.folkmanAtomSumHom_injective
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanLeftInterval_stabilizer_transitive
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanLeftElement_exists_finiteIntervalEmbedding
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanLeftElement_exists_partition
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanLeftSort_exists_nonzero

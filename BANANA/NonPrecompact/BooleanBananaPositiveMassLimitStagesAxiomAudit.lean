@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BooleanBananaPositiveMassLimitStages
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_uniformStage
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_positiveMass_uniformStageEmbedding
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_uniformStage_permutation
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMass_uniformTower_extension

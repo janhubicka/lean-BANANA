@@ -1,0 +1,14 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderLimitNonamenability
+
+#print axioms SuccessorTree.NonPrecompact.folkmanIntervalBooleanRing
+#print axioms SuccessorTree.NonPrecompact.folkmanIntervalRingEquiv
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.leftSortRingEquivOf
+#print axioms SuccessorTree.NonPrecompact.prebanana_no_uniformMass_of_threeAtom_copy
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.leftIntervalStabilizer_isOpen
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.not_amenable_of_leftInterval
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanFirstOrderLimit_not_amenable
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.amenability_of_continuousSurjectiveHom
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.not_amenable_of_transitiveBooleanSubgroup
+#print axioms SuccessorTree.NonPrecompact.nativePairedToEncoded_surjective
+#print axioms SuccessorTree.NonPrecompact.nativePairedToEncoded_continuous
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanNativeLimit_not_amenable

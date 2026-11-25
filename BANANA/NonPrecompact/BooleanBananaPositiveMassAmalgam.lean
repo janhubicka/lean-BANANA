@@ -1,5 +1,5 @@
-import BANANA.NonPrecompact.BooleanBananaPositiveMassArithmetic
-import BANANA.NonPrecompact.FiberProductParityAmalgam
+import BANANA.NonPrecompact.BooleanBananaPositiveMassWeights
+import BANANA.NonPrecompact.FiberGridCoordinates
 
 /-!
 # Positive-mass amalgams in Boolean–BANANA atom coordinates
@@ -12,19 +12,6 @@ pair, so the existing strong-intersection result applies to the whole grid.
 namespace SuccessorTree.NonPrecompact.BooleanBanana
 
 open scoped BigOperators
-
-/-- A positive rational weight presented over an allowed odd denominator. -/
-structure PositiveMassWeight (S : Set ℕ) where
-  numerator : ℕ
-  denominator : ℕ
-  positive : 0 < numerator
-  allowed : denominator ∈ positiveMassDenominators S
-
-def PositiveMassWeight.mass {S : Set ℕ} (w : PositiveMassWeight S) : ℚ :=
-  (w.numerator : ℚ) / (w.denominator : ℚ)
-
-def PositiveMassWeight.parity {S : Set ℕ} (w : PositiveMassWeight S) : ZMod 2 :=
-  w.numerator
 
 private theorem exists_positive_weight_grid {I J : Type*} [Fintype I] [Fintype J]
     {S : Set ℕ} {p : ℕ} (hpS : p ∈ S) (hp : p.Prime) (hpOdd : Odd p)

@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BooleanBananaPadicChargeResiduePartition
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.hasChargeResiduePartition
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.dense_padicChargeOrbit_of_homogeneous_allMarked
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.padicChargeOrbit_dense_meagre_of_homogeneous_allMarked

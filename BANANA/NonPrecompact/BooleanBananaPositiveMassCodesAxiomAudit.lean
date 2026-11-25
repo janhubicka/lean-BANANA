@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BooleanBananaPositiveMassCodes
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMassAtomCode_countable
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMassAtomCode_isFinite
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMassAtomCode_represents
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.positiveMassAtomCode_unbounded

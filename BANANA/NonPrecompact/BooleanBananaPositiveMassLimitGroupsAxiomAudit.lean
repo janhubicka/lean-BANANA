@@ -1,0 +1,12 @@
+import BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.orderAut
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.automorphismHom
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.automorphismHom_lift
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.automorphismHom_injective
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.finite_finiteStage
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.finiteStage_mono
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.uniformMassCover
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.finiteStage_pointwise_approximates
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.finiteStage_dense
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.UniformMassTower.massSubgroup_amenable

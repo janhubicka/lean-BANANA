@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.PrebananaFiniteBooleanCoordinates
 import BANANA.NonPrecompact.BooleanBananaPadicChargeNonempty
 import BANANA.NonPrecompact.BooleanBananaPadicChargeOrbit
 
@@ -14,26 +15,6 @@ namespace SuccessorTree.NonPrecompact.BooleanBanana
 open Set
 open scoped BigOperators
 
-/-- A disjoint-additive function on a finite Boolean algebra is the sum of its atom values. -/
-theorem finiteAtomSum {S I V : Type*}
-    [BooleanAlgebra S] [Fintype I] [DecidableEq I] [AddCommMonoid V]
-    (e : S ≃o Finset I) (f : S → V)
-    (hbot : f ⊥ = 0) (hadd : ∀ a b, Disjoint a b → f (a ⊔ b) = f a + f b)
-    (s : Finset I) :
-    ∑ i ∈ s, f (e.symm {i}) = f (e.symm s) := by
-  induction s using Finset.induction_on with
-  | empty =>
-    change (∑ i ∈ (⊥ : Finset I), f (e.symm {i})) = f (e.symm ⊥)
-    rw [e.symm.map_bot, hbot]
-    exact Finset.sum_empty
-  | @insert i s hi ih =>
-    have hd : Disjoint ({i} : Finset I) s :=
-      Finset.disjoint_singleton_left.mpr hi
-    have hd' : Disjoint (e.symm {i}) (e.symm s) := by
-      rw [disjoint_iff, ← e.symm.map_inf, hd.eq_bot, e.symm.map_bot]
-    rw [Finset.sum_insert hi, ih, ← Finset.singleton_union, ← Finset.sup_eq_union,
-      e.symm.map_sup, hadd _ _ hd']
-
 variable {B : Type*} [BooleanAlgebra B]
 
 /-- Any charge on a finite Boolean subalgebra extends to the whole
@@ -45,9 +26,7 @@ theorem exists_padicCharge_extension_of_global {mark : B → ZMod 2}
   classical
   let I := {a : S // IsAtom a}
   let : Fintype I := inferInstanceAs (Fintype {a : S // IsAtom a})
-  let e : S ≃o Finset I :=
-    letI : CompleteAtomicBooleanAlgebra S := Fintype.toCompleteAtomicBooleanAlgebra S
-    CompleteAtomicBooleanAlgebra.toSetOfIsAtom.trans Fintype.finsetOrderIsoSet.symm
+  let e : S ≃o Finset I := prebananaFiniteBooleanAtomFinsetOrderIso S
   let atom (i : I) : B := (e.symm {i}).val
   have atom_ne_bot (i : I) : atom i ≠ ⊥ := by
     intro h
