@@ -59,7 +59,7 @@ theorem isOpen_bananaLimitTaggedTupleEval {n : ℕ} (a b : BananaLimitTaggedTupl
       simp only [mem_ofPred_eq, mem_iInter, funext_iff, Pi.smul_apply]]
   exact isOpen_iInter_of_finite fun i => isOpen_bananaLimitTaggedEval (a i) (b i)
 
-local instance : TopologicalSpace BananaLimitVector := ⊥
+local instance orbitVectorTopology : TopologicalSpace BananaLimitVector := ⊥
 
 /-- Every pointwise neighbourhood contains the fibre of evaluation on a
 finite mixed-sort tuple. -/

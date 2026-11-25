@@ -1,3 +1,5 @@
 import BANANA.NonPrecompact.FolkmanFirstOrderCategoricity
 
 #print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_categorical_completeTheory
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_infinite
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_card_aleph0

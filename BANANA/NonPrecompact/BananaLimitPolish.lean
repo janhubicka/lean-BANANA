@@ -13,10 +13,10 @@ namespace SuccessorTree.NonPrecompact
 
 open Function Set TopologicalSpace Topology
 
-local instance : TopologicalSpace BananaLimitVector := ⊥
-local instance : DiscreteTopology BananaLimitVector := ⟨rfl⟩
-local instance : TopologicalSpace F2 := ⊥
-local instance : DiscreteTopology F2 := ⟨rfl⟩
+local instance polishVectorTopology : TopologicalSpace BananaLimitVector := ⊥
+local instance polishVectorDiscrete : DiscreteTopology BananaLimitVector := ⟨rfl⟩
+local instance polishFieldTopology : TopologicalSpace F2 := ⊥
+local instance polishFieldDiscrete : DiscreteTopology F2 := ⟨rfl⟩
 
 private abbrev Evaluation := (BananaLimitVector ⊕ BananaLimitVector) → BananaLimitVector
 private abbrev EvaluationPair := Evaluation × Evaluation

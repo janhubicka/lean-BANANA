@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.BananaLimitFirstOrder
+
+#print axioms SuccessorTree.NonPrecompact.bananaTaggedStructure
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_firstOrderAut_apply
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_firstOrder_finite_tuple_orbit_representatives
+#print axioms SuccessorTree.NonPrecompact.bananaTaggedCarrier_card
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_firstOrder_aleph0_categorical
