@@ -133,62 +133,64 @@ private structure MatchedTuple (n : ℕ) where
   right : Fin n → B
   same : SameFormulaType (L := L) left right
 
-/-- If matching tuple types have one-point extensions to either side, the
-countable nonempty structures are isomorphic. -/
-theorem nonempty_equiv_of_formulaType_backAndForth [Countable A] [Countable B]
+/-- A matching pair of finite tuples extends to an isomorphism if
+matching tuple types have one-point extensions on either side. -/
+theorem exists_equiv_of_formulaType_backAndForth [Countable A] [Countable B]
     [Nonempty A] [Nonempty B]
-    (hzero : SameFormulaType (L := L) (Fin.elim0 : Fin 0 → A) (Fin.elim0 : Fin 0 → B))
+    {k : ℕ} {a₀ : Fin k → A} {b₀ : Fin k → B}
+    (seed : SameFormulaType (L := L) a₀ b₀)
     (forth : ∀ {n} {a : Fin n → A} {b : Fin n → B}, SameFormulaType (L := L) a b →
       ∀ x, ∃ y, SameFormulaType (L := L) (Fin.snoc a x) (Fin.snoc b y))
     (back : ∀ {n} {a : Fin n → A} {b : Fin n → B}, SameFormulaType (L := L) a b →
       ∀ y, ∃ x, SameFormulaType (L := L) (Fin.snoc a x) (Fin.snoc b y)) :
-    Nonempty (A ≃[L] B) := by
+    ∃ e : A ≃[L] B, ∀ i, e (a₀ i) = b₀ i := by
   classical
   obtain ⟨u, hu⟩ := exists_surjective_nat A
   obtain ⟨v, hv⟩ := exists_surjective_nat B
-  let step (n : ℕ) (p : MatchedTuple (L := L) (A := A) (B := B) n) :
-      MatchedTuple (L := L) (A := A) (B := B) (n + 1) :=
+  let step (n : ℕ) (p : MatchedTuple (L := L) (A := A) (B := B) (k + n)) :
+      MatchedTuple (L := L) (A := A) (B := B) (k + (n + 1)) :=
     if n % 2 = 0 then
       let h := forth p.same (u (n / 2))
       ⟨Fin.snoc p.left (u (n / 2)), Fin.snoc p.right h.choose, h.choose_spec⟩
     else
       let h := back p.same (v (n / 2))
       ⟨Fin.snoc p.left h.choose, Fin.snoc p.right (v (n / 2)), h.choose_spec⟩
-  let chain : ∀ n, MatchedTuple (L := L) (A := A) (B := B) n :=
-    Nat.rec ⟨Fin.elim0, Fin.elim0, hzero⟩ step
-  have extend {n m : ℕ} (h : n ≤ m) (i : Fin n) :
-      (chain m).left (i.castLE h) = (chain n).left i ∧
-        (chain m).right (i.castLE h) = (chain n).right i := by
+  let chain : ∀ n, MatchedTuple (L := L) (A := A) (B := B) (k + n) :=
+    Nat.rec ⟨a₀, b₀, seed⟩ step
+  have extend {n m : ℕ} (h : n ≤ m) (i : Fin (k + n)) :
+      (chain m).left (i.castLE (Nat.add_le_add_left h k)) = (chain n).left i ∧
+        (chain m).right (i.castLE (Nat.add_le_add_left h k)) = (chain n).right i := by
     induction m, h using Nat.le_induction with
     | base => simp
     | succ m h ih =>
-      have he : i.castLE (Nat.le.step h) = (i.castLE h).castSucc := Fin.ext rfl
+      have he : i.castLE (Nat.add_le_add_left (Nat.le.step h) k) =
+          (i.castLE (Nat.add_le_add_left h k)).castSucc := Fin.ext rfl
       rw [he]
       change (step m (chain m)).left _ = _ ∧ (step m (chain m)).right _ = _
       unfold step
       split <;> simpa only [Fin.snoc_castSucc] using ih
-  have left_total (x : A) : ∃ (n : ℕ) (i : Fin n), (chain n).left i = x := by
-    obtain ⟨k, rfl⟩ := hu x
-    refine ⟨2 * k + 1, Fin.last _, ?_⟩
-    change (step (2 * k) (chain (2 * k))).left (Fin.last _) = _
-    have hdiv : 2 * k / 2 = k := by omega
+  have left_total (x : A) : ∃ (n : ℕ) (i : Fin (k + n)), (chain n).left i = x := by
+    obtain ⟨j, rfl⟩ := hu x
+    refine ⟨2 * j + 1, Fin.last _, ?_⟩
+    change (step (2 * j) (chain (2 * j))).left (Fin.last _) = _
+    have hdiv : 2 * j / 2 = j := by omega
     simp [step, hdiv]
-  have right_total (y : B) : ∃ (n : ℕ) (i : Fin n), (chain n).right i = y := by
-    obtain ⟨k, rfl⟩ := hv y
-    refine ⟨2 * k + 1 + 1, Fin.last _, ?_⟩
-    change (step (2 * k + 1) (chain (2 * k + 1))).right (Fin.last _) = _
-    have hdiv : (2 * k + 1) / 2 = k := by omega
+  have right_total (y : B) : ∃ (n : ℕ) (i : Fin (k + n)), (chain n).right i = y := by
+    obtain ⟨j, rfl⟩ := hv y
+    refine ⟨2 * j + 1 + 1, Fin.last _, ?_⟩
+    change (step (2 * j + 1) (chain (2 * j + 1))).right (Fin.last _) = _
+    have hdiv : (2 * j + 1) / 2 = j := by omega
     simp [step, hdiv]
-  have eq_at {n m : ℕ} (i : Fin n) (j : Fin m) :
+  have eq_at {n m : ℕ} (i : Fin (k + n)) (j : Fin (k + m)) :
       (chain n).left i = (chain m).left j ↔ (chain n).right i = (chain m).right j := by
-    let a := i.castLE (le_max_left n m)
-    let b := j.castLE (le_max_right n m)
+    let a := i.castLE (Nat.add_le_add_left (le_max_left n m) k)
+    let b := j.castLE (Nat.add_le_add_left (le_max_right n m) k)
     have ht := (chain (max n m)).same ((Language.Term.var a).equal (Language.Term.var b))
     simpa only [Language.Formula.realize_equal, Language.Term.realize_var,
       a, b, (extend (le_max_left n m) i).1, (extend (le_max_left n m) i).2,
       (extend (le_max_right n m) j).1, (extend (le_max_right n m) j).2] using ht
   let f (x : A) : B := (chain (left_total x).choose).right (left_total x).choose_spec.choose
-  have f_apply {n : ℕ} (i : Fin n) : f ((chain n).left i) = (chain n).right i :=
+  have f_apply {n : ℕ} (i : Fin (k + n)) : f ((chain n).left i) = (chain n).right i :=
     (eq_at _ _).mp (left_total _).choose_spec.choose_spec
   have hf : Function.Surjective f := by
     intro b
@@ -200,9 +202,12 @@ theorem nonempty_equiv_of_formulaType_backAndForth [Countable A] [Countable B]
       intro m φ x
       choose n i hi using fun j : Fin m => left_total (x j)
       let N := Finset.univ.sup n
-      let j (k : Fin m) : Fin N := (i k).castLE (Finset.le_sup (Finset.mem_univ k))
-      have hleft : (chain N).left ∘ j = x :=
-        funext fun k => ((extend _ (i k)).1).trans (hi k)
+      let j (t : Fin m) : Fin (k + N) :=
+        (i t).castLE (Nat.add_le_add_left (Finset.le_sup (Finset.mem_univ t)) k)
+      have hleft : (chain N).left ∘ j = x := by
+        funext t
+        have ht : n t ≤ N := Finset.le_sup (Finset.mem_univ t)
+        exact ((extend ht (i t)).1).trans (hi t)
       have hright : (chain N).right ∘ j = f ∘ x := by
         funext k
         rw [Function.comp_apply, ← hleft]
@@ -215,7 +220,20 @@ theorem nonempty_equiv_of_formulaType_backAndForth [Countable A] [Countable B]
     toEquiv := _root_.Equiv.ofBijective e ⟨e.injective, hf⟩
     map_fun' := e.toEmbedding.map_fun'
     map_rel' := e.toEmbedding.map_rel'
-  }⟩
+  }, fun i => f_apply (n := 0) i⟩
+
+/-- If matching tuple types have one-point extensions to either side, the
+countable nonempty structures are isomorphic. -/
+theorem nonempty_equiv_of_formulaType_backAndForth [Countable A] [Countable B]
+    [Nonempty A] [Nonempty B]
+    (hzero : SameFormulaType (L := L) (Fin.elim0 : Fin 0 → A) (Fin.elim0 : Fin 0 → B))
+    (forth : ∀ {n} {a : Fin n → A} {b : Fin n → B}, SameFormulaType (L := L) a b →
+      ∀ x, ∃ y, SameFormulaType (L := L) (Fin.snoc a x) (Fin.snoc b y))
+    (back : ∀ {n} {a : Fin n → A} {b : Fin n → B}, SameFormulaType (L := L) a b →
+      ∀ y, ∃ x, SameFormulaType (L := L) (Fin.snoc a x) (Fin.snoc b y)) :
+    Nonempty (A ≃[L] B) := by
+  obtain ⟨e, _⟩ := exists_equiv_of_formulaType_backAndForth hzero forth back
+  exact ⟨e⟩
 
 section Categoricity
 
@@ -249,6 +267,41 @@ private theorem exists_snoc_sameFormulaType
     ⟨x, (isolates_formula_type_of_elementarilyEquivalent hMN hφ _).mpr hx⟩
   obtain ⟨y, hy⟩ := (realize_quantifyLast φ b).mp ((same ψ).mp hn)
   exact ⟨y, hx.symm.trans ((isolates_formula_type_of_elementarilyEquivalent hMP hφ _).mp hy)⟩
+
+/-- In a countable nonempty structure whose realised tuple types admit finite
+covers, tuples with the same complete formula type lie in the same automorphism orbit. -/
+theorem exists_aut_of_sameFormulaType_of_finite_formula_type_covers
+    [Countable M] [Nonempty M]
+    (cover : ∀ n : ℕ, ∃ R : Finset (Fin n → M),
+      ∀ b : Fin n → M, ∃ a : R, SameFormulaType (L := L) a.val b)
+    {k : ℕ} {a b : Fin k → M} (same : SameFormulaType (L := L) a b) :
+    ∃ g : FirstOrderAut L M, g • a = b := by
+  have extension {n : ℕ} {xs ys : Fin n → M}
+      (h : SameFormulaType (L := L) xs ys) (x : M) :
+      ∃ y, SameFormulaType (L := L) (Fin.snoc xs x) (Fin.snoc ys y) := by
+    obtain ⟨R, hR⟩ := cover (n + 1)
+    exact exists_snoc_sameFormulaType (show M ≅[L] M from rfl) (show M ≅[L] M from rfl)
+      (fun i : R => i.val) hR h x
+  have back {n : ℕ} {xs ys : Fin n → M}
+      (h : SameFormulaType (L := L) xs ys) (y : M) :
+      ∃ x, SameFormulaType (L := L) (Fin.snoc xs x) (Fin.snoc ys y) := by
+    obtain ⟨x, hx⟩ := extension h.symm y
+    exact ⟨x, hx.symm⟩
+  obtain ⟨e, he⟩ := exists_equiv_of_formulaType_backAndForth same extension back
+  exact ⟨FirstOrderAut.ofEquiv e, funext he⟩
+
+/-- For a countable oligomorphic first-order structure, equality of full
+finite tuple types implies conjugacy by a structure automorphism. -/
+theorem exists_aut_of_sameFormulaType_of_finite_tupleOrbitRepresentatives
+    [Countable M] [Nonempty M]
+    (hG : ∀ n : ℕ, ∃ R : Finset (Fin n → M), ∀ x : Fin n → M,
+      ∃ r ∈ R, ∃ g : FirstOrderAut L M, g • r = x)
+    {k : ℕ} {a b : Fin k → M} (same : SameFormulaType (L := L) a b) :
+    ∃ g : FirstOrderAut L M, g • a = b := by
+  apply exists_aut_of_sameFormulaType_of_finite_formula_type_covers _ same
+  intro n
+  obtain ⟨R, hR⟩ := hG n
+  exact ⟨R, formula_type_cover_of_finset_automorphism_orbit_representatives R hR⟩
 
 /-- Countable models of the same complete theory as a structure with
 finitely many realised types at each arity are isomorphic. -/

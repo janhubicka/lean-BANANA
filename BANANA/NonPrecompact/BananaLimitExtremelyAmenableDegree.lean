@@ -116,25 +116,20 @@ end BananaMatrixEmbeddingToLimit
 
 open BananaMatrixEmbeddingToLimit
 
-/-- The finite age of the actual BANANA limit would have finite copy degrees
-if its pointwise automorphism group had a co-precompact extremely amenable
-subgroup. The colours here are on genuine two-sort ranges. -/
-theorem BananaMatrixStructure.finiteCopyDegree_of_coprecompactExtremelyAmenable
-    {l r : ℕ} (A : BananaMatrixStructure l r)
-    (H : Subgroup BananaLimitAutomorphism) (hH : CoPrecompact BananaLimitAutomorphism H)
-    (hfixed : CompactFlowFixedPoint.{0, 0} H) : ∃ d : ℕ, A.copyRamseyDegreeLE d := by
+/-- A uniform collection of translations with bounded palettes yields a
+copy degree bound in the native finite age. -/
+theorem BananaMatrixStructure.copyRamseyDegreeLE_of_finite_translates
+    {l r : ℕ} (A : BananaMatrixStructure l r) (d : ℕ)
+    (htranslate : ∀ (numColours : ℕ), 0 < numColours →
+      ∀ T : Finset (BananaMatrixEmbeddingToLimit A),
+        ∃ K : Finset BananaLimitAutomorphism,
+          ∀ c : BananaMatrixEmbeddingToLimit A → Fin numColours,
+            ∃ g ∈ K, ∃ palette : Finset (Fin numColours), palette.card ≤ d ∧
+              ∀ x ∈ T, c (g • x) ∈ palette) :
+    A.copyRamseyDegreeLE d := by
   classical
-  obtain ⟨e⟩ := A.embeds_in_explicit_limit
-  obtain ⟨R, hR⟩ := exists_finset_orbitRepresentatives_of_coprecompact H hH e
-    (e.isOpen_automorphism_eval e) e.exists_automorphism_smul_eq
-  refine ⟨R.card, fun lB rB B numColours hColours => ?_⟩
+  intro lB rB B numColours hColours
   obtain ⟨b⟩ := B.embeds_in_explicit_limit
-  letI : TopologicalSpace (BananaMatrixEmbeddingToLimit A) := ⊥
-  letI : DiscreteTopology (BananaMatrixEmbeddingToLimit A) := ⟨rfl⟩
-  letI : ContinuousSMul BananaLimitAutomorphism (BananaMatrixEmbeddingToLimit A) :=
-    continuous_automorphism_smul
-  letI : TopologicalSpace (Fin numColours) := ⊥
-  letI : DiscreteTopology (Fin numColours) := ⟨rfl⟩
   letI : Finite (BananaMatrixEmbedding A B) :=
     Finite.of_injective (fun f : BananaMatrixEmbedding A B =>
       ((f.left : (Fin l → F2) → (Fin lB → F2)), (f.right : (Fin r → F2) → (Fin rB → F2))))
@@ -142,12 +137,11 @@ theorem BananaMatrixStructure.finiteCopyDegree_of_coprecompactExtremelyAmenable
         (congrFun (congrArg Prod.snd h)))
   letI : Fintype (BananaMatrixEmbedding A B) := Fintype.ofFinite _
   let T : Finset (BananaMatrixEmbeddingToLimit A) := Finset.univ.image b.comp
-  obtain ⟨K, hK⟩ := exists_finite_translates_of_orbit_fixed_colourings (G := H)
-    (Colour := Fin numColours) T R hR (fun c => exists_fixed_colouring_in_orbit_closure hfixed c)
+  obtain ⟨K, hK⟩ := htranslate numColours hColours T
   let left : Finset BananaLimitVector := K.biUnion fun g =>
-    (Finset.univ : Finset (Fin lB → F2)).image ((g : BananaLimitAutomorphism) • b).left
+    (Finset.univ : Finset (Fin lB → F2)).image (g • b).left
   let right : Finset BananaLimitVector := K.biUnion fun g =>
-    (Finset.univ : Finset (Fin rB → F2)).image ((g : BananaLimitAutomorphism) • b).right
+    (Finset.univ : Finset (Fin rB → F2)).image (g • b).right
   let S := bananaLimitCommonSupport left right
   refine ⟨S.card, S.card, perfectBanana S.card, fun c => ?_⟩
   let padded (f : BananaMatrixEmbeddingToLimit A) : Fin numColours :=
@@ -155,7 +149,7 @@ theorem BananaMatrixStructure.finiteCopyDegree_of_coprecompactExtremelyAmenable
       c (f.factorToPerfectBlock S h.1 h.2).copyRanges
     else ⟨0, hColours⟩
   obtain ⟨g, hg, palette, hCard, hPalette⟩ := hK padded
-  let moved : BananaMatrixEmbeddingToLimit B := (g : BananaLimitAutomorphism) • b
+  let moved : BananaMatrixEmbeddingToLimit B := g • b
   have hL (x : Fin lB → F2) : moved.left x ∈ bananaLimitBlock S :=
     bananaLimit_left_mem_common_block left right (moved.left x)
       (Finset.mem_biUnion.mpr ⟨g, hg, Finset.mem_image.mpr ⟨x, Finset.mem_univ _, rfl⟩⟩)
@@ -167,7 +161,7 @@ theorem BananaMatrixStructure.finiteCopyDegree_of_coprecompactExtremelyAmenable
   obtain ⟨p, hpL, hpR⟩ := D.property
   have hD : D = p.copyRanges := Subtype.ext (Prod.ext hpL hpR)
   have hp := hPalette (b.comp p) (Finset.mem_image.mpr ⟨p, Finset.mem_univ _, rfl⟩)
-  change padded ((g : BananaLimitAutomorphism) • b.comp p) ∈ palette at hp
+  change padded (g • b.comp p) ∈ palette at hp
   rw [automorphism_smul_comp] at hp
   have hS : (∀ x, (moved.comp p).left x ∈ bananaLimitBlock S) ∧
       (∀ y, (moved.comp p).right y ∈ bananaLimitBlock S) :=
@@ -178,6 +172,31 @@ theorem BananaMatrixStructure.finiteCopyDegree_of_coprecompactExtremelyAmenable
   rw [hD, p.copyRanges_comp]
   rw [factor_comp moved p S hL hR'] at hp
   exact hp
+
+/-- The finite age of the actual BANANA limit would have finite copy degrees
+if its pointwise automorphism group had a co-precompact extremely amenable
+subgroup. The colours here are on genuine two-sort ranges. -/
+theorem BananaMatrixStructure.finiteCopyDegree_of_coprecompactExtremelyAmenable
+    {l r : ℕ} (A : BananaMatrixStructure l r)
+    (H : Subgroup BananaLimitAutomorphism) (hH : CoPrecompact BananaLimitAutomorphism H)
+    (hfixed : CompactFlowFixedPoint.{0, 0} H) : ∃ d : ℕ, A.copyRamseyDegreeLE d := by
+  classical
+  obtain ⟨e⟩ := A.embeds_in_explicit_limit
+  obtain ⟨R, hR⟩ := exists_finset_orbitRepresentatives_of_coprecompact H hH e
+    (e.isOpen_automorphism_eval e) e.exists_automorphism_smul_eq
+  refine ⟨R.card, A.copyRamseyDegreeLE_of_finite_translates R.card ?_⟩
+  intro numColours _ T
+  letI : TopologicalSpace (BananaMatrixEmbeddingToLimit A) := ⊥
+  letI : DiscreteTopology (BananaMatrixEmbeddingToLimit A) := ⟨rfl⟩
+  letI : ContinuousSMul BananaLimitAutomorphism (BananaMatrixEmbeddingToLimit A) :=
+    continuous_automorphism_smul
+  letI : TopologicalSpace (Fin numColours) := ⊥
+  letI : DiscreteTopology (Fin numColours) := ⟨rfl⟩
+  obtain ⟨K, hK⟩ := exists_finite_translates_of_orbit_fixed_colourings (G := H)
+    (Colour := Fin numColours) T R hR (fun c => exists_fixed_colouring_in_orbit_closure hfixed c)
+  refine ⟨K.image Subtype.val, fun c => ?_⟩
+  obtain ⟨g, hg, palette, hCard, hPalette⟩ := hK c
+  exact ⟨g.val, Finset.mem_image.mpr ⟨g, hg, rfl⟩, palette, hCard, hPalette⟩
 
 /-- The actual pointwise automorphism group of the native BANANA pairing
 has no co-precompact extremely amenable subgroup. -/

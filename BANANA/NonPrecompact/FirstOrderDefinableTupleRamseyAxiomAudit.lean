@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FirstOrderDefinableTupleRamsey
+
+#print axioms SuccessorTree.NonPrecompact.SameFormulaType.comp_indices
+#print axioms SuccessorTree.NonPrecompact.HasDefinableTupleRamsey
+#print axioms SuccessorTree.NonPrecompact.HasDefinableTupleRamsey.of_elementarilyEquivalent

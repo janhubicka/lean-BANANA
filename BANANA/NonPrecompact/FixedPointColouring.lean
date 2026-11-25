@@ -22,7 +22,7 @@ universe uX uColour
 variable {G : Type*} {X : Type uX} {Colour : Type uColour} [Group G] [MulAction G X]
 
 /-- The action on colourings obtained by pulling back by the inverse. -/
-@[instance_reducible] private def colouringAction : MulAction G (X → Colour) where
+@[instance_reducible] def colouringAction : MulAction G (X → Colour) where
   smul g c x := c (g⁻¹ • x)
   one_smul c := by
     funext x
@@ -32,6 +32,27 @@ variable {G : Type*} {X : Type uX} {Colour : Type uColour} [Group G] [MulAction 
     funext x
     change c ((g * h)⁻¹ • x) = c (h⁻¹ • g⁻¹ • x)
     rw [mul_inv_rev, mul_smul]
+
+/-- Joint continuity of the inverse-reindexing action on a product indexed
+by a discrete continuous group action. -/
+theorem continuous_colouringAction
+    [TopologicalSpace G] [ContinuousInv G]
+    [TopologicalSpace X] [DiscreteTopology X] [ContinuousSMul G X]
+    [TopologicalSpace Colour] :
+    @ContinuousSMul G (X → Colour) (colouringAction (G := G) (X := X) (Colour := Colour)).toSMul _ _ := by
+  letI : MulAction G (X → Colour) := colouringAction
+  refine ⟨continuous_pi fun x => ?_⟩
+  rw [continuous_iff_continuousAt]
+  intro p
+  have hindex : ContinuousAt (fun q : G × (X → Colour) => q.1⁻¹ • x) p :=
+    (continuous_fst.inv.smul continuous_const).continuousAt
+  rw [ContinuousAt, nhds_discrete X, Filter.tendsto_pure] at hindex
+  have hvalue : ContinuousAt (fun q : G × (X → Colour) => q.2 (p.1⁻¹ • x)) p :=
+    ((continuous_apply (p.1⁻¹ • x)).comp continuous_snd).continuousAt
+  apply hvalue.congr
+  filter_upwards [hindex] with q hq
+  change q.2 (p.1⁻¹ • x) = q.2 (q.1⁻¹ • x)
+  rw [hq]
 
 /-- The orbit closure of a colouring under a continuous action on a discrete
 set acquires a fixed point from the compact-flow fixed-point property. -/
@@ -46,18 +67,7 @@ theorem exists_fixed_colouring_in_orbit_closure
     ∃ d ∈ closure (range fun g : G => fun x => c (g⁻¹ • x)),
       ∀ (g : G) (x : X), d (g • x) = d x := by
   letI : MulAction G (X → Colour) := colouringAction
-  letI : ContinuousSMul G (X → Colour) := ⟨continuous_pi fun x => by
-    rw [continuous_iff_continuousAt]
-    intro p
-    have hindex : ContinuousAt (fun q : G × (X → Colour) => q.1⁻¹ • x) p :=
-      (continuous_fst.inv.smul continuous_const).continuousAt
-    rw [ContinuousAt, nhds_discrete X, Filter.tendsto_pure] at hindex
-    have hvalue : ContinuousAt (fun q : G × (X → Colour) => q.2 (p.1⁻¹ • x)) p :=
-      ((continuous_apply (p.1⁻¹ • x)).comp continuous_snd).continuousAt
-    apply hvalue.congr
-    filter_upwards [hindex] with q hq
-    change q.2 (p.1⁻¹ • x) = q.2 (q.1⁻¹ • x)
-    rw [hq]⟩
+  letI : ContinuousSMul G (X → Colour) := continuous_colouringAction
   let Y : Set (X → Colour) := closure (MulAction.orbit G c)
   letI : CompactSpace Y := isCompact_iff_compactSpace.mp isClosed_closure.isCompact
   letI : Nonempty Y := ⟨⟨c, subset_closure (MulAction.mem_orbit_self c)⟩⟩
@@ -75,6 +85,33 @@ theorem exists_fixed_colouring_in_orbit_closure
   change d.val ((g⁻¹)⁻¹ • x) = d.val x at heq
   simpa only [inv_inv] using heq
 
+/-- If every colouring admits a translate with a bounded palette then a
+finite family of candidate translations suffices for all colourings. -/
+theorem exists_finite_translates_of_bounded_colour_palettes
+    [TopologicalSpace Colour] [CompactSpace Colour] [DiscreteTopology Colour]
+    (T : Finset X) (d : ℕ)
+    (hbounded : ∀ c : X → Colour, ∃ (g : G) (palette : Finset Colour), palette.card ≤ d ∧
+      ∀ x ∈ T, c (g • x) ∈ palette) :
+    ∃ K : Finset G, ∀ c : X → Colour,
+      ∃ g ∈ K, ∃ palette : Finset Colour, palette.card ≤ d ∧
+        ∀ x ∈ T, c (g • x) ∈ palette := by
+  classical
+  let support (g : G) := T.image (fun x => g • x)
+  let good (g : G) (c : support g → Colour) :=
+    ∃ palette : Finset Colour, palette.card ≤ d ∧ ∀ x, c x ∈ palette
+  have hglobal (c : X → Colour) : ∃ g, good g ((support g).restrict c) := by
+    obtain ⟨g, palette, hc, hmem⟩ := hbounded c
+    refine ⟨g, palette, hc, fun x => ?_⟩
+    obtain ⟨y, hy, hyx⟩ := Finset.mem_image.mp x.property
+    change c x.val ∈ palette
+    rw [← hyx]
+    exact hmem y hy
+  obtain ⟨K, hK⟩ := exists_finite_witnesses_of_colourings support good hglobal
+  refine ⟨K, fun c => ?_⟩
+  obtain ⟨g, hg, ⟨palette, hp, hpalette⟩⟩ := hK c
+  exact ⟨g, hg, palette, hp, fun x hx =>
+    hpalette ⟨g • x, Finset.mem_image.mpr ⟨x, hx, rfl⟩⟩⟩
+
 /-- The uniform finite collection of translates can be chosen before the
 colouring. Consequently an ambient structure can contain all points of
 each moved target, even when its small copies do not cover the target. -/
@@ -89,28 +126,18 @@ theorem exists_finite_translates_of_orbit_fixed_colourings
       ∃ g ∈ K, ∃ palette : Finset Colour, palette.card ≤ reps.card ∧
         ∀ x ∈ T, c (g • x) ∈ palette := by
   classical
-  let support (g : G) : Finset X := T.image (fun x => g • x)
-  let good (g : G) (c : support g → Colour) : Prop :=
-    ∃ palette : Finset Colour, palette.card ≤ reps.card ∧ ∀ x, c x ∈ palette
-  have hglobal (c : X → Colour) : ∃ g, good g ((support g).restrict c) := by
-    obtain ⟨d, hd, hdFixed⟩ := hfixed c
-    let U : Set (X → Colour) := (T.restrict) ⁻¹' {T.restrict d}
-    have hU : IsOpen U := (isOpen_discrete _).preimage T.continuous_restrict
-    obtain ⟨_, hmatch, g, rfl⟩ := mem_closure_iff.mp hd U hU rfl
-    refine ⟨g⁻¹, reps.image d, Finset.card_image_le, ?_⟩
-    intro x
-    obtain ⟨y, hy, hyx⟩ := Finset.mem_image.mp x.property
-    obtain ⟨r, hr, k, hk⟩ := hrep y
-    have heq : c (g⁻¹ • y) = d y :=
-      congrFun (show T.restrict (fun x => c (g⁻¹ • x)) = T.restrict d from hmatch) ⟨y, hy⟩
-    refine Finset.mem_image.mpr ⟨r, hr, ?_⟩
-    change d r = c x.val
-    rw [← hyx, heq, ← hk, hdFixed]
-  obtain ⟨K, hK⟩ := exists_finite_witnesses_of_colourings support good hglobal
-  refine ⟨K, fun c => ?_⟩
-  obtain ⟨g, hg, palette, hp, hpalette⟩ := hK c
-  refine ⟨g, hg, palette, hp, fun x hx => ?_⟩
-  exact hpalette ⟨g • x, Finset.mem_image.mpr ⟨x, hx, rfl⟩⟩
+  apply exists_finite_translates_of_bounded_colour_palettes T reps.card
+  intro c
+  obtain ⟨d, hd, hdFixed⟩ := hfixed c
+  let U : Set (X → Colour) := T.restrict ⁻¹' {T.restrict d}
+  have hU : IsOpen U := (isOpen_discrete _).preimage T.continuous_restrict
+  obtain ⟨_, hmatch, g, rfl⟩ := mem_closure_iff.mp hd U hU rfl
+  refine ⟨g⁻¹, reps.image d, Finset.card_image_le, fun x hx => ?_⟩
+  obtain ⟨r, hr, k, hk⟩ := hrep x
+  have heq : c (g⁻¹ • x) = d x :=
+    congrFun (show T.restrict (fun x => c (g⁻¹ • x)) = T.restrict d from hmatch) ⟨x, hx⟩
+  refine Finset.mem_image.mpr ⟨r, hr, ?_⟩
+  rw [heq, ← hk, hdFixed]
 
 /-- Fixed points in colouring orbit closures give a uniform finite
 set of coordinates containing a translate with a bounded palette. -/

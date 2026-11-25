@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BananaLimitDefinableColouring
+
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_definableColouring_on_tupleOrbits
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_nativeOrbit_of_sameFormulaType
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_hasDefinableTupleRamsey
+#print axioms SuccessorTree.NonPrecompact.bananaTagged_completeTheory_hasDefinableTupleRamsey

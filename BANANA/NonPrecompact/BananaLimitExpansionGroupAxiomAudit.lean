@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaLimitExpansionGroup
+
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.continuous_reductHom
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_expansion_not_extremelyAmenable_of_finite_tupleOrbitRepresentatives
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_expansion_not_extremelyAmenable_of_countablyCategorical

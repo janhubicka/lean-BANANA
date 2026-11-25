@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.BananaLimitGenericExtension
+
+#print axioms SuccessorTree.NonPrecompact.exists_bananaPerfectSystem_neighbourhood
+#print axioms SuccessorTree.NonPrecompact.BananaNativeTuple.isClopen_realises
+#print axioms SuccessorTree.NonPrecompact.BananaNativeTuple.isOpen_coverageCondition
+#print axioms SuccessorTree.NonPrecompact.BananaNativeTuple.dense_coverageCondition
+#print axioms SuccessorTree.NonPrecompact.BananaNativeTuple.isOpen_extensionCondition
+#print axioms SuccessorTree.NonPrecompact.BananaNativeTuple.dense_extensionCondition
+#print axioms SuccessorTree.NonPrecompact.BananaNativeTuple.rich_mem_residual
