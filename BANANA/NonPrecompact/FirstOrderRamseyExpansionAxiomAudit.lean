@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FirstOrderRamseyExpansion
+
+#print axioms SuccessorTree.NonPrecompact.FirstOrderRamseyExpansion.toRamseyExpansion
+#print axioms SuccessorTree.NonPrecompact.FirstOrderRamseyExpansion.copyRamseyDegreeLE_card_expansionTypes_of_closed_ranges
+#print axioms SuccessorTree.NonPrecompact.FirstOrderRamseyExpansion.copyRamseyDegreeLE_card_expansionTypes_of_relational

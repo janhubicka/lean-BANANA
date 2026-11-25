@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FirstOrderFunctionalRamseyAge
+
+#print axioms SuccessorTree.NonPrecompact.firstOrder_exists_namedFunctionalRamseyAge
+#print axioms SuccessorTree.NonPrecompact.firstOrder_exists_namedFunctionalRamseyAge_of_oligomorphic

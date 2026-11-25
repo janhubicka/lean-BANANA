@@ -1,0 +1,11 @@
+import BANANA.NonPrecompact.FirstOrderNamedClosureExpansion
+
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.countable_expandedSymbols
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.finite_substructure_iff
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.ultrahomogeneous
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.isFraisseLimit_age
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.finite_of_mem_age
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.finite_labelledStructures
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.age_embeddingRamsey
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.exists_expansion_lift
+#print axioms SuccessorTree.NonPrecompact.FiniteClosureFamily.exists_expandedStructure_of_selected_range

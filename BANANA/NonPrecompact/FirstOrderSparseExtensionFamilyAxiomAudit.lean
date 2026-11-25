@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FirstOrderSparseExtensionFamily
+
+#print axioms SuccessorTree.NonPrecompact.firstOrder_exists_embedding_inter_of_strongAmalgamation
+#print axioms SuccessorTree.NonPrecompact.firstOrder_exists_sparse_extension_family
+#print axioms SuccessorTree.NonPrecompact.firstOrder_sparse_extension_family_lifts

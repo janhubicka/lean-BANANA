@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BananaNativePerfectPairing
+
+#print axioms SuccessorTree.NonPrecompact.BananaNative.completePairing_nondegenerate
+#print axioms SuccessorTree.NonPrecompact.BananaNative.exists_native_perfectCompletion
+#print axioms SuccessorTree.NonPrecompact.BananaNative.nondegenerate_iff_bijective_dual_maps
+#print axioms SuccessorTree.NonPrecompact.BananaNative.exists_native_perfectAutomorphism_extends

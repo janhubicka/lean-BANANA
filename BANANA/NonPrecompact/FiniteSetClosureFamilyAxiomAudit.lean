@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FiniteSetClosureFamily
+
+#print axioms SuccessorTree.NonPrecompact.FiniteSetClosureFamily.exists_least_member
+#print axioms SuccessorTree.NonPrecompact.FiniteSetClosureFamily.UnaryGenerators.mem_iff_closed

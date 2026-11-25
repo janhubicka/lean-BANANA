@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FirstOrderGradedAgeRepresentatives
+
+#print axioms SuccessorTree.NonPrecompact.firstOrder_exists_graded_age_representatives
