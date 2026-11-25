@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BananaFirstOrderFunctional
+
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.map_pairing
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.leftLinear_injective
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.rightLinear_injective
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.substructureEquiv

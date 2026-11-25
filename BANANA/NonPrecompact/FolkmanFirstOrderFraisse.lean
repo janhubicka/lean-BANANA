@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.FirstOrderSparseExtensionFamily
 import BANANA.NonPrecompact.FolkmanFirstOrderSubstructure
 import BANANA.NonPrecompact.FolkmanNativeCompleteFiniteClass
 import Mathlib.ModelTheory.Fraisse
@@ -85,8 +86,12 @@ private theorem folkmanFirstOrderClass_jointEmbedding :
   exact ⟨folkmanProductBundle S.nativePairing, folkmanProductBundle_mem _,
     ⟨a.comp e.toEmbedding⟩, ⟨b.comp f.toEmbedding⟩⟩
 
-private theorem folkmanFirstOrderClass_amalgamation :
-    Language.Amalgamation folkmanFirstOrderClass := by
+set_option maxHeartbeats 800000 in
+/-- The encoded first-order embeddings have strong amalgamation. The
+intersection assertion transfers the exact intersection in the native
+non-unital Boolean-ring amalgam on both sorts. -/
+theorem folkmanFirstOrderClass_strongAmalgamation :
+    FirstOrderStrongAmalgamation folkmanFirstOrderClass := by
   classical
   rintro M N T f g ⟨A, ⟨i⟩⟩ ⟨B, ⟨j⟩⟩ ⟨C, ⟨k⟩⟩
   let P := folkmanNativeCodeRealisation A
@@ -106,22 +111,38 @@ private theorem folkmanFirstOrderClass_amalgamation :
   let gS : folkmanFirstOrderRepresentative C ↪[folkmanLanguage] folkmanProductBundle S.nativePairing :=
     folkmanProductEmbedding R.pairing S.nativePairing.pairing S.embedCLeft S.embedCRight
       S.embedCLeft_injective S.embedCRight_injective S.native_preserves_pairing_C
-  refine ⟨folkmanProductBundle S.nativePairing, fS.comp j.toEmbedding, gS.comp k.toEmbedding,
-    folkmanProductBundle_mem _, ?_⟩
-  apply Language.Embedding.ext
-  intro x
-  have hfx : f' (i x) = j (f x) := by simp [f']
-  have hgx : g' (i x) = k (g x) := by simp [g']
-  change fS (j (f x)) = gS (k (g x))
-  rw [← hfx, ← hgx]
+  have hfx (x : M) : f' (i x) = j (f x) := by simp [f']
+  have hgx (x : M) : g' (i x) = k (g x) := by simp [g']
   have ha : (folkmanNativePairingEmbeddingEquiv P Q) a = f' := Equiv.apply_symm_apply _ _
   have hb : (folkmanNativePairingEmbeddingEquiv P R) b = g' := Equiv.apply_symm_apply _ _
-  rw [← ha, ← hb]
-  exact Prod.ext (S.native_base_commutes_left (i x).1)
-    (S.native_base_commutes_right (i x).2)
+  refine ⟨folkmanProductBundle S.nativePairing, fS.comp j.toEmbedding, gS.comp k.toEmbedding,
+    folkmanProductBundle_mem _, ?_, ?_⟩
+  · apply Language.Embedding.ext
+    intro x
+    change fS (j (f x)) = gS (k (g x))
+    rw [← hfx, ← hgx, ← ha, ← hb]
+    exact Prod.ext (S.native_base_commutes_left (i x).1)
+      (S.native_base_commutes_right (i x).2)
+  · intro c n h
+    change (S.embedCLeft (k c).1, S.embedCRight (k c).2) =
+      (S.embedBLeft (j n).1, S.embedBRight (j n).2) at h
+    obtain ⟨x, _, hc⟩ := (S.native_strong_intersection
+      (j n).1 (j n).2 (k c).1 (k c).2).mp (Prod.mk.inj h.symm)
+    let z : folkmanFirstOrderRepresentative A := x
+    have hLift : k (g (i.symm z)) = g' z :=
+      (hgx (i.symm z)).symm.trans (congrArg g' (i.apply_symm_apply z))
+    have hNative : g' z = (b.left z.1, b.right z.2) := DFunLike.congr_fun hb.symm z
+    have hImage : g' z = k c := hNative.trans hc.symm
+    exact ⟨i.symm z, k.injective (hLift.trans hImage)⟩
+
+private theorem folkmanFirstOrderClass_amalgamation :
+    Language.Amalgamation folkmanFirstOrderClass := by
+  intro M N T f g hM hN hT
+  obtain ⟨Q, j, k, hQ, h, -⟩ := folkmanFirstOrderClass_strongAmalgamation M N T f g hM hN hT
+  exact ⟨Q, j, k, hQ, h⟩
 
 /-- The encoded native finite Folkman class satisfies mathlib's Fraïssé
-class interface. The native certificate separately records strong AP. -/
+class interface. -/
 theorem folkmanFirstOrderClass_isFraisse : Language.IsFraisse folkmanFirstOrderClass where
   is_nonempty := by
     let A : FolkmanAtomStructure := ⟨0, 0, fun x _ => Fin.elim0 x⟩

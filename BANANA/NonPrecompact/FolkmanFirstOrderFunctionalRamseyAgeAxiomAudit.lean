@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderFunctionalRamseyAge
+
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderClass_strongAmalgamation
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_exists_namedFunctionalRamseyAge
+#print axioms SuccessorTree.NonPrecompact.exists_folkmanFirstOrderLimit_namedFunctionalRamseyAge

@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.BananaNativeStrongAmalgamation
+
+#print axioms SuccessorTree.NonPrecompact.BananaNative.exists_strongAmalgam
+#print axioms SuccessorTree.NonPrecompact.BananaNative.IsStrongAmalgam.range_inter_left
+#print axioms SuccessorTree.NonPrecompact.BananaNative.IsStrongAmalgam.range_inter_right
+#print axioms SuccessorTree.NonPrecompact.BananaNative.exists_jointEmbedding
+#print axioms SuccessorTree.NonPrecompact.BananaNative.exists_finiteStrongAmalgam

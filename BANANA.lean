@@ -2,6 +2,7 @@ import BANANA.NonPrecompact.AffineParity
 import BANANA.NonPrecompact.AlignedCompletionEmbedding
 import BANANA.NonPrecompact.BananaAmalgam
 import BANANA.NonPrecompact.BananaStrongBlockAmalgam
+import BANANA.NonPrecompact.BananaNativeStrongAmalgamation
 import BANANA.NonPrecompact.BananaArbitraryAmalgamTools
 import BANANA.NonPrecompact.BananaTriplePairing
 import BANANA.NonPrecompact.BananaEquivariantTripleAmalgam
@@ -56,6 +57,8 @@ import BANANA.NonPrecompact.CoherentEppaPackage
 import BANANA.NonPrecompact.CoherentEppaWitness
 import BANANA.NonPrecompact.BananaNativeCoherentEppa
 import BANANA.NonPrecompact.BananaNativePerfectPairing
+import BANANA.NonPrecompact.BananaNativePerfectSystemAmalgam
+import BANANA.NonPrecompact.BananaNativePerfectSystems
 import BANANA.NonPrecompact.ColouringWrappers
 import BANANA.NonPrecompact.Completion
 import BANANA.NonPrecompact.CompletionAmbientAction
@@ -362,6 +365,7 @@ import BANANA.NonPrecompact.FirstOrderOligomorphicCategoricity
 import BANANA.NonPrecompact.FirstOrderOrbitExpansion
 import BANANA.NonPrecompact.FolkmanFirstOrderCategoricity
 import BANANA.NonPrecompact.FolkmanFirstOrderExistence
+import BANANA.NonPrecompact.FolkmanFirstOrderFunctionalRamseyAge
 import BANANA.NonPrecompact.FolkmanFirstOrderInterval
 import BANANA.NonPrecompact.BooleanBananaPadicChargeResiduePartition
 import BANANA.NonPrecompact.BooleanBananaPositiveMassJEP
@@ -373,14 +377,18 @@ import BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups
 import BANANA.NonPrecompact.BooleanBananaCylinderPadicCharge
 import BANANA.NonPrecompact.BooleanBananaCylinderMassSubgroups
 import BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity
+import BANANA.NonPrecompact.BooleanBananaFirstOrderAge
 import BANANA.NonPrecompact.BananaLimitExtremelyAmenableDegree
 import BANANA.NonPrecompact.BananaLimitPolish
 import BANANA.NonPrecompact.BananaLimitFirstOrder
+import BANANA.NonPrecompact.BananaFunctionalLimit
+import BANANA.NonPrecompact.BananaFunctionalStrongAge
 import BANANA.NonPrecompact.BananaTaggedModelDecoding
 import BANANA.NonPrecompact.BananaSortedSyntax
 import BANANA.NonPrecompact.BananaTaggedSyntaxReverse
 import BANANA.NonPrecompact.BananaSortedDefinableTupleRamsey
 import BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism
+import BANANA.NonPrecompact.BananaBoundedArityObstruction
 import BANANA.NonPrecompact.BananaLimitDenseConjugacy
 import BANANA.NonPrecompact.BananaNativeCopySystem
 import BANANA.NonPrecompact.BananaLimitParameterColouring

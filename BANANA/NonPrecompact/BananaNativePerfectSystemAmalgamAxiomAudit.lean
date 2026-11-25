@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaNativePerfectSystemAmalgam
+
+#print axioms SuccessorTree.NonPrecompact.BananaNative.perfectPairingEquiv
+#print axioms SuccessorTree.NonPrecompact.BananaNative.standardPairing_nondegenerate
+#print axioms SuccessorTree.NonPrecompact.BananaNative.exists_native_perfectTotalAmalgam

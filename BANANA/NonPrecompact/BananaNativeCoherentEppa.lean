@@ -61,11 +61,13 @@ abbrev Subpair (L R : Type*) [AddCommGroup L] [AddCommGroup R] [Module F2 L] [Mo
 abbrev PartialIso (β : L → R → F2) (U V : Subpair L R) :=
   PairingEquiv (fun (x : U.1) (y : U.2) => β x y) (fun (x : V.1) (y : V.2) => β x y)
 
-private noncomputable def coordinates {l r : ℕ} (β : L →ₗ[F2] R →ₗ[F2] F2)
+/-- The pairing matrix obtained from bases of the two native sorts. -/
+noncomputable def coordinates {l r : ℕ} (β : L →ₗ[F2] R →ₗ[F2] F2)
     (bL : Basis (Fin l) F2 L) (bR : Basis (Fin r) F2 R) : BananaMatrixStructure l r :=
   ⟨fun i j => β (bL i) (bR j)⟩
 
-private theorem coordinates_eval {l r : ℕ} (β : L →ₗ[F2] R →ₗ[F2] F2)
+/-- Evaluating that matrix on coordinate vectors recovers the native pairing. -/
+theorem coordinates_eval {l r : ℕ} (β : L →ₗ[F2] R →ₗ[F2] F2)
     (bL : Basis (Fin l) F2 L) (bR : Basis (Fin r) F2 R) (x : L) (y : R) :
     (coordinates β bL bR).eval (bL.equivFun x) (bR.equivFun y) = β x y := by
   symm

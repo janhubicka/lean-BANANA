@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaFunctionalStrongAge
+
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.native_mem_age
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.strong_age
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.exists_namedFunctionalRamseyAge

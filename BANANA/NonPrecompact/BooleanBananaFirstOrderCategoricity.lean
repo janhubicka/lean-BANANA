@@ -76,13 +76,11 @@ noncomputable instance cylinderMarkedBooleanStructure :
     markedBooleanLanguage.Structure PrebananaFiveAryCylinderLimitCarrier :=
   markedBooleanStructure _ prebananaFiveAryCylinderMark
 
-/-- Any two countably infinite models of the complete theory of the
-first-order marked Boolean structure are isomorphic. -/
-theorem cylinderMarkedBoolean_categorical_completeTheory :
-    Cardinal.Categorical Cardinal.aleph0
-      (markedBooleanLanguage.completeTheory PrebananaFiveAryCylinderLimitCarrier) := by
-  apply categorical_completeTheory_of_finite_tupleOrbitQuotients
-  intro n
+/-- The functional first-order cylinder presentation has finitely many
+automorphism orbits at each tuple length. -/
+theorem cylinderMarkedBoolean_finite_tupleOrbitQuotients (n : ℕ) :
+    Finite (Quotient (firstOrderTupleOrbit markedBooleanLanguage
+      PrebananaFiveAryCylinderLimitCarrier n)) := by
   have : Finite (Quotient (prebananaCylinderMarkedOrbitSetoid n)) :=
     prebananaCylinderMarkedOrbit_finite n
   let f : Quotient (prebananaCylinderMarkedOrbitSetoid n) →
@@ -92,6 +90,14 @@ theorem cylinderMarkedBoolean_categorical_completeTheory :
       exact ⟨markedBooleanAutomorphism E hμ, hcoord⟩
   exact Finite.of_surjective f fun q =>
     Quotient.inductionOn q fun a => ⟨⟦a⟧, rfl⟩
+
+/-- Any two countably infinite models of the complete theory of the
+first-order marked Boolean structure are isomorphic. -/
+theorem cylinderMarkedBoolean_categorical_completeTheory :
+    Cardinal.Categorical Cardinal.aleph0
+      (markedBooleanLanguage.completeTheory PrebananaFiveAryCylinderLimitCarrier) :=
+  categorical_completeTheory_of_finite_tupleOrbitQuotients
+    cylinderMarkedBoolean_finite_tupleOrbitQuotients
 
 /-- The concrete cylinder structure itself has countably infinite size,
 so its complete theory has a model at the categorical cardinality. -/

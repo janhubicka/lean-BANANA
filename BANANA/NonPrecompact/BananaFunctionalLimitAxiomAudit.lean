@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.BananaFunctionalLimit
+
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.finite_of_fg
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.age_member_native
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.limit_ultrahomogeneous
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.categorical
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.limit_isFraisseLimit
