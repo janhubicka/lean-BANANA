@@ -267,6 +267,34 @@ theorem copyRamseyDegreeLE_card_expansionTypes_of_relational
   let : φ.IsExpansionOn B.val := b.property.2
   exact expandedRangeClosed_of_onFunction_surjective φ hFunctions e
 
+
+/-- A hereditary precompact Ramsey expansion formed by adding only relations.
+The language map is bijective on function symbols, including constants, and
+injective on relation symbols. Every reduct class member admits an expansion
+on the same carrier, and every expanded class member has its reduct in the
+original class. These hypotheses suffice for the degree argument and are
+satisfied by every reasonable precompact relational Ramsey expansion. -/
+def HasPrecompactRelationalRamseyExpansion (K : Class.{u,v,w} L) : Prop :=
+  ∃ (L' : Language.{u',v'}) (φ : L →ᴸ L') (K' : Class.{u',v',w} L'),
+    (∀ n, Bijective (fun f : L.Functions n => φ.onFunction f)) ∧
+    (∀ n, Injective (fun r : L.Relations n => φ.onRelation r)) ∧
+    Language.Hereditary K' ∧
+    FirstOrderEmbeddingRamsey K' ∧
+    (∀ C ∈ K', firstOrderBundledReduct φ C ∈ K) ∧
+    (∀ A : K, Nonempty (firstOrderCompatibleExpansions φ K' A.val)) ∧
+    ∀ A : K, Finite
+      (Quotient (firstOrderStructureIsomorphismSetoid (firstOrderCompatibleExpansions φ K' A.val)))
+
+/-- An infinite copy Ramsey degree excludes precompact Ramsey expansions
+of the actual first-order class by added relations. -/
+theorem not_hasPrecompactRelationalRamseyExpansion
+    (hK : ∀ B ∈ K, Finite B) (A : K)
+    (hInfinite : ∀ t : ℕ, ¬ (firstOrderFiniteCopySystem K hK).CopyRamseyDegreeLE A t) :
+    ¬ HasPrecompactRelationalRamseyExpansion K := by
+  rintro ⟨L', φ, K', hFunctions, -, hHer, hRamsey, hReduct, hExpansion, hPrecompact⟩
+  exact hInfinite _ (copyRamseyDegreeLE_card_expansionTypes_of_relational φ hK hHer
+    (fun n => (hFunctions n).surjective) hRamsey hReduct hExpansion hPrecompact A)
+
 end FirstOrderRamseyExpansion
 
 end SuccessorTree.NonPrecompact

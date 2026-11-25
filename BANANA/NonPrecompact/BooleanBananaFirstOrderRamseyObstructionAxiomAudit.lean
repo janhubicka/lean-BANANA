@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BooleanBananaFirstOrderRamseyObstruction
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_cylinderPersistentColouring
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinderTwoMarkedCopyRamseyDegree_infinite
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinder_noPrecompactRelationalRamseyExpansion

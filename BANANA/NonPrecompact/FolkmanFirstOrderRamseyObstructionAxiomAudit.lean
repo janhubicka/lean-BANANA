@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderRamseyObstruction
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanFirstOrder.copyRamseyDegree_infinite
+#print axioms SuccessorTree.NonPrecompact.FolkmanFirstOrder.not_hasPrecompactRelationalRamseyExpansion
+#print axioms SuccessorTree.NonPrecompact.FolkmanFirstOrder.not_hasPrecompactRelationalRamseyExpansion_age

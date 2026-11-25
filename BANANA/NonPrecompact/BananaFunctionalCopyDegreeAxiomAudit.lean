@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaFunctionalCopyDegree
+
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.matrixCopyRamseyDegreeLE_of_ageCopyRamseyDegreeLE
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.linePair_infinite_copyRamseyDegree
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.functionalAge_noPrecompactRelationalRamseyExpansion
