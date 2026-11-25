@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.ResidueParityReduction
+import Mathlib.Algebra.BigOperators.Ring.Nat
 import BANANA.NonPrecompact.BilinearResidue
 
 /-!

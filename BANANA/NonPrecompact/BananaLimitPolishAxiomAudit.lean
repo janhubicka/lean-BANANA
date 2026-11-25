@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.BananaLimitPolish
+
+#print axioms SuccessorTree.NonPrecompact.isClosedEmbedding_bananaLimitAutomorphismEvaluations
+#print axioms SuccessorTree.NonPrecompact.bananaLimitAutomorphism_polishSpace

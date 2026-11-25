@@ -1,4 +1,6 @@
-import BANANA.NonPrecompact.AffineParity
+import BANANA.NonPrecompact.AffineParityCore
+import Mathlib.LinearAlgebra.Determinant
+import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!
 # Matrix affine fibres over F₂

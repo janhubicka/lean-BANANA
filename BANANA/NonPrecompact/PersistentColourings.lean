@@ -1,4 +1,5 @@
-import BANANA.NonPrecompact.SubsetSums
+import BANANA.NonPrecompact.IndexedSubsetSums
+import Mathlib.Tactic.Abel
 
 /-!
 # Persistent-colouring consequences of the subset-sum lemma

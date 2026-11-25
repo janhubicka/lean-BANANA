@@ -1,5 +1,11 @@
 import BANANA.NonPrecompact.MatrixAffineParity
-import BANANA.NonPrecompact.SubsetSums
+import BANANA.NonPrecompact.IndexedSubsetSums
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.Algebra.CharP.Lemmas
+import Mathlib.Algebra.MonoidAlgebra.Basic
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Data.Nat.Choose.Sum
+import Mathlib.Tactic.NormNum
 
 /-!
 # The residue group algebra for BANANA

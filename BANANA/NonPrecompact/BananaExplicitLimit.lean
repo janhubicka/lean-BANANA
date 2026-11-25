@@ -1,5 +1,7 @@
 import BANANA.NonPrecompact.BananaFiniteCountability
 import Mathlib.LinearAlgebra.Finsupp.Pi
+import Mathlib.Data.Finsupp.Encodable
+import Mathlib.Data.Rat.Encodable
 
 /-!
 # The explicit countable BANANA pairing

@@ -1,4 +1,6 @@
-import BANANA.NonPrecompact.AffineParity
+import BANANA.NonPrecompact.AffineParityCore
+import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+import Mathlib.LinearAlgebra.Projection
 
 /-!
 # Extending partial linear equivalences over a fixed quotient

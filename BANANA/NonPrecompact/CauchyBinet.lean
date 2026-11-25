@@ -1,4 +1,6 @@
-import BANANA.NonPrecompact.AffineParity
+import BANANA.NonPrecompact.AffineParityCore
+import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
+import Mathlib.LinearAlgebra.Matrix.SchurComplement
 
 /-!
 # The Cauchy--Binet aggregate needed by BANANA

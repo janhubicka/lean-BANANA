@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.QuadraticGauss
+import Mathlib.LinearAlgebra.QuadraticForm.Basic
 
 /-!
 # Quadratic refinements of alternating binary matrices

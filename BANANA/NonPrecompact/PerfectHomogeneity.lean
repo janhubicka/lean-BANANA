@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.LinearExtension
 import Mathlib.LinearAlgebra.Matrix.Dual
+import Mathlib.LinearAlgebra.Matrix.DotProduct
 
 /-!
 # Homogeneity of finite perfect BANANA pairings

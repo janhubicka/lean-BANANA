@@ -52,7 +52,8 @@ theorem bananaLimitFiniteGLSubgroup_directed :
   obtain ⟨hS, hT⟩ := bananaLimitFiniteGLStage_directed S T
   exact ⟨S ∪ T, fun _ h => hS h, fun _ h => hT h⟩
 
-private def bananaLimitEvaluation (g : BananaLimitAutomorphism) :
+/-- Evaluation of a native automorphism at a tagged point. -/
+def bananaLimitEvaluation (g : BananaLimitAutomorphism) :
     BananaLimitVector ⊕ BananaLimitVector → BananaLimitVector
   | .inl x => g.val.1 x
   | .inr y => g.val.2 y
@@ -63,10 +64,22 @@ local instance : DiscreteTopology BananaLimitVector := ⟨rfl⟩
 instance : TopologicalSpace BananaLimitAutomorphism :=
   TopologicalSpace.induced bananaLimitEvaluation inferInstance
 
-private theorem continuous_bananaLimitEvaluation (x : BananaLimitVector ⊕ BananaLimitVector) :
+theorem continuous_bananaLimitEvaluation (x : BananaLimitVector ⊕ BananaLimitVector) :
     Continuous (fun g : BananaLimitAutomorphism => bananaLimitEvaluation g x) := by
   have h : Continuous bananaLimitEvaluation := continuous_induced_dom
   exact (continuous_apply x).comp h
+
+/-- Prescribing one left-sort value is open in the pointwise topology. -/
+theorem isOpen_bananaLimitEvaluation_left (x y : BananaLimitVector) :
+    IsOpen {g : BananaLimitAutomorphism | g.val.1 x = y} :=
+  (isOpen_discrete ({y} : Set BananaLimitVector)).preimage
+    (continuous_bananaLimitEvaluation (.inl x))
+
+/-- Prescribing one right-sort value is open in the pointwise topology. -/
+theorem isOpen_bananaLimitEvaluation_right (x y : BananaLimitVector) :
+    IsOpen {g : BananaLimitAutomorphism | g.val.2 x = y} :=
+  (isOpen_discrete ({y} : Set BananaLimitVector)).preimage
+    (continuous_bananaLimitEvaluation (.inr x))
 
 private theorem continuous_eval_comp
     (side : BananaLimitAutomorphism → BananaLimitVector ≃ₗ[F2] BananaLimitVector)
