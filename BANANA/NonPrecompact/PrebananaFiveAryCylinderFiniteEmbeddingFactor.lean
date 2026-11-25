@@ -1,6 +1,6 @@
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteFamily
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderBooleanAlgebra
-import BANANA.NonPrecompact.PrebananaAbstractClassEPPA
+import BANANA.NonPrecompact.PrebananaMarkedBooleanModels
 
 /-!
 # Factor finite marked embeddings of cylinders through a finite stage

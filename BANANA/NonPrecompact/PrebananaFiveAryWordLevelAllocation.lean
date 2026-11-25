@@ -30,7 +30,7 @@ theorem prebananaFiveAryWordLevel_markedAllocation
     (target : β → δ)
     (hsource : Function.Surjective source)
     (htarget : Function.Surjective target)
-    (markB : β → F2)
+    (markB : β → ZMod 2)
     (hlocal : ∀ d : δ,
       (∑ w : PrebananaFiveAryWord n,
         if source w = d then prebananaFiveAryWordMark n w else 0) =

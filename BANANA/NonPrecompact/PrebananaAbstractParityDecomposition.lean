@@ -1,10 +1,11 @@
-import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
+import Mathlib.Data.ZMod.Basic
+import BANANA.NonPrecompact.PrebananaFiniteBooleanCoordinates
 
 /-!
 # Finitely additive markings on arbitrary finite Boolean algebras
 
 The circulation definition of pre-BANANA starts with a function
-`mu : α → F2` additive on disjoint joins, not with atom markings.
+`mu : α → ZMod 2` additive on disjoint joins, not with atom markings.
 
 This module proves that such a function is uniquely determined by
 its values on the singleton atoms of the finite Boolean-powerset
@@ -23,7 +24,7 @@ open scoped BigOperators Classical
 determined by its singleton values. -/
 theorem prebanana_disjointAdditiveFinset_sum
     {ι : Type*} [DecidableEq ι]
-    (ν : Finset ι → F2)
+    (ν : Finset ι → ZMod 2)
     (hzero : ν ∅ = 0)
     (hadd : ∀ s t : Finset ι, Disjoint s t →
       ν (s ∪ t) = ν s + ν t)
@@ -48,7 +49,7 @@ of its values on the singleton atoms in the canonical powerset
 representation. -/
 theorem prebananaAbstractParity_atomSum
     (α : Type*) [BooleanAlgebra α] [Fintype α]
-    (μ : α → F2)
+    (μ : α → ZMod 2)
     (hzero : μ ⊥ = 0)
     (hadd : ∀ x y : α, x ⊓ y = ⊥ →
       μ (x ⊔ y) = μ x + μ y)
@@ -59,7 +60,7 @@ theorem prebananaAbstractParity_atomSum
           ({a} : Finset (PrebananaAbstractAtoms α))) := by
   classical
   let e := prebananaFiniteBooleanAtomFinsetOrderIso α
-  let ν : Finset (PrebananaAbstractAtoms α) → F2 :=
+  let ν : Finset (PrebananaAbstractAtoms α) → ZMod 2 :=
     fun s => μ (e.symm s)
   have he_bot : e.symm (∅ : Finset (PrebananaAbstractAtoms α)) =
       (⊥ : α) := e.symm.map_bot
@@ -96,7 +97,7 @@ theorem prebananaAbstractParity_atomSum
 single-atom parities in its finite representation is zero. -/
 theorem prebananaAbstractParity_total_even
     (α : Type*) [BooleanAlgebra α] [Fintype α]
-    (μ : α → F2)
+    (μ : α → ZMod 2)
     (hzero : μ ⊥ = 0)
     (htop : μ ⊤ = 0)
     (hadd : ∀ x y : α, x ⊓ y = ⊥ →

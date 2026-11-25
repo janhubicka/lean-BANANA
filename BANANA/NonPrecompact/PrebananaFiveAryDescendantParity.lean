@@ -1,4 +1,4 @@
-import BANANA.NonPrecompact.PrebananaFiveAryWordStage
+import BANANA.NonPrecompact.PrebananaFiveAryWordBasics
 
 /-!
 # Parity of descendants of an arbitrary five-ary atom
@@ -17,8 +17,8 @@ finite-extension property.
 namespace SuccessorTree.NonPrecompact
 
 /-- The mark of a length-k refinement word below a parent of mark p. -/
-def prebananaFiveAryDescendantMark (p : F2) :
-    (k : ℕ) → PrebananaFiveAryWord k → F2
+def prebananaFiveAryDescendantMark (p : ZMod 2) :
+    (k : ℕ) → PrebananaFiveAryWord k → ZMod 2
   | 0, _ => p
   | k + 1, w =>
       prebananaFiveAryChildMark
@@ -27,7 +27,7 @@ def prebananaFiveAryDescendantMark (p : F2) :
 
 /-- Extending a suffix by one letter applies the child-marking rule. -/
 theorem prebananaFiveAryDescendantMark_snoc
-    (p : F2) (k : ℕ) (w : PrebananaFiveAryWord k) (c : Fin 5) :
+    (p : ZMod 2) (k : ℕ) (w : PrebananaFiveAryWord k) (c : Fin 5) :
     prebananaFiveAryDescendantMark p (k + 1) (Fin.snoc w c) =
       prebananaFiveAryChildMark
         (prebananaFiveAryDescendantMark p k w) c := by
@@ -36,7 +36,7 @@ theorem prebananaFiveAryDescendantMark_snoc
 /-- All immediate descendants of an arbitrary marked suffix
 have the same total parity as their common parent. -/
 theorem prebananaFiveAryDescendantMark_sum_children
-    (p : F2) (k : ℕ) (w : PrebananaFiveAryWord k) :
+    (p : ZMod 2) (k : ℕ) (w : PrebananaFiveAryWord k) :
     (∑ c : Fin 5,
       prebananaFiveAryDescendantMark p (k + 1) (Fin.snoc w c)) =
         prebananaFiveAryDescendantMark p k w := by
@@ -45,7 +45,7 @@ theorem prebananaFiveAryDescendantMark_sum_children
 
 /-- At every depth, descendants of a single parent have
 total F₂ mark equal to the original parent mark. -/
-theorem prebananaFiveAryDescendantMark_total (p : F2) (k : ℕ) :
+theorem prebananaFiveAryDescendantMark_total (p : ZMod 2) (k : ℕ) :
     (∑ w : PrebananaFiveAryWord k,
       prebananaFiveAryDescendantMark p k w) = p := by
   induction k with

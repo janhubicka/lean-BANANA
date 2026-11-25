@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.PrebananaFiveAryWordMark
 import BANANA.NonPrecompact.PrebananaIndexedParity
+import BANANA.NonPrecompact.PrebananaFiveAryWordBasics
 
 /-!
 # The actual finite stages of the five-ary pre-BANANA tower
@@ -15,44 +16,6 @@ modules. The direct limit and extension property remain open.
 -/
 
 namespace SuccessorTree.NonPrecompact
-
-/-- At every length the total parity of all word atoms is zero. -/
-theorem prebananaFiveAryWordMark_total (n : ℕ) :
-    (∑ w : PrebananaFiveAryWord n, prebananaFiveAryWordMark n w) = 0 := by
-  induction n with
-  | zero =>
-      simp [prebananaFiveAryWordMark]
-  | succ n ih =>
-      classical
-      let e : (Fin 5 × PrebananaFiveAryWord n) ≃
-          PrebananaFiveAryWord (n + 1) :=
-        Fin.snocEquiv (fun _ : Fin (n + 1) => Fin 5)
-      have hs :
-          (∑ w : PrebananaFiveAryWord (n + 1),
-            prebananaFiveAryWordMark (n + 1) w) =
-          ∑ p : Fin 5 × PrebananaFiveAryWord n,
-            prebananaFiveAryWordMark (n + 1) (Fin.snoc p.2 p.1) := by
-        exact (Fintype.sum_equiv e
-          (fun p => prebananaFiveAryWordMark (n + 1)
-            (Fin.snoc p.2 p.1))
-          (prebananaFiveAryWordMark (n + 1))
-          (fun p => rfl)).symm
-      calc
-        (∑ w : PrebananaFiveAryWord (n + 1),
-          prebananaFiveAryWordMark (n + 1) w) =
-            ∑ p : Fin 5 × PrebananaFiveAryWord n,
-              prebananaFiveAryWordMark (n + 1)
-                (Fin.snoc p.2 p.1) := hs
-        _ = ∑ c : Fin 5, ∑ w : PrebananaFiveAryWord n,
-              prebananaFiveAryWordMark (n + 1) (Fin.snoc w c) := by
-              rw [Fintype.sum_prod_type]
-        _ = ∑ w : PrebananaFiveAryWord n, ∑ c : Fin 5,
-              prebananaFiveAryWordMark (n + 1) (Fin.snoc w c) := by
-              rw [Finset.sum_comm]
-        _ = ∑ w : PrebananaFiveAryWord n,
-              prebananaFiveAryWordMark n w := by
-              simp only [prebananaFiveAryWordMark_sum_children]
-        _ = 0 := ih
 
 /-- The standard indexed finite pre-BANANA atom presentation
 of all length-n five-ary words. -/

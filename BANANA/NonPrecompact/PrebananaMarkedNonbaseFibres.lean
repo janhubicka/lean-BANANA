@@ -19,7 +19,7 @@ namespace SuccessorTree.NonPrecompact
 the prescribed F₂ mark. -/
 theorem prebananaWitnessAllocation_nonbaseMark
     {α β : Type*} [Fintype α] [DecidableEq β]
-    (markA : α → F2) (markB : β → F2)
+    (markA : α → ZMod 2) (markB : β → ZMod 2)
     (witness : β → α) (hinj : Function.Injective witness)
     (hmark : ∀ b : β, markA (witness b) = markB b)
     (base b : β) (hb : b ≠ base) :

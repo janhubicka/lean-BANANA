@@ -23,16 +23,16 @@ open scoped Classical
 
 /-- Swap the two marked embeddings of a finite bridge. -/
 def PrebananaFiniteBridge.swap
-    {M : PrebananaCountableBooleanModel}
-    (p : PrebananaFiniteBridge M) : PrebananaFiniteBridge M where
+    {M N : PrebananaCountableBooleanModel}
+    (p : PrebananaFiniteBridge M N) : PrebananaFiniteBridge N M where
   base := p.base
   left := p.right
   right := p.left
 
 /-- Swapping both maps preserves the extension preorder. -/
 theorem PrebananaFiniteBridge.swap_monotone
-    {M : PrebananaCountableBooleanModel}
-    {chain : ℕ → PrebananaFiniteBridge M}
+    {M N : PrebananaCountableBooleanModel}
+    {chain : ℕ → PrebananaFiniteBridge M N}
     (hmono : Monotone chain) :
     Monotone (fun n => (chain n).swap) := by
   intro n m hnm
@@ -43,8 +43,8 @@ theorem PrebananaFiniteBridge.swap_monotone
 the left necessarily agree on the right. Both representatives are
 compared in a common later bridge. -/
 theorem PrebananaFiniteBridge.right_eq_of_left_eq
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hmono : Monotone chain)
     (n m : ℕ)
     (a : (chain n).base.carrier)
@@ -69,8 +69,8 @@ theorem PrebananaFiniteBridge.right_eq_of_left_eq
 
 /-- Choose one finite left-hand representative of each element. -/
 noncomputable def PrebananaFiniteBridge.chooseLeft
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
     (x : M.carrier) : Σ n : ℕ, (chain n).base.carrier :=
@@ -78,8 +78,8 @@ noncomputable def PrebananaFiniteBridge.chooseLeft
     Classical.choose (Classical.choose_spec (hleft x))⟩
 
 theorem PrebananaFiniteBridge.chooseLeft_spec
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
     (x : M.carrier) :
@@ -89,11 +89,11 @@ theorem PrebananaFiniteBridge.chooseLeft_spec
 
 /-- Coherent map determined by all finite bridge images. -/
 noncomputable def PrebananaFiniteBridge.forward
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
-    (x : M.carrier) : M.carrier :=
+    (x : M.carrier) : N.carrier :=
   let c := PrebananaFiniteBridge.chooseLeft chain hleft x
   (chain c.1).right.hom c.2
 
@@ -101,8 +101,8 @@ noncomputable def PrebananaFiniteBridge.forward
 every represented finite-stage element, not only on the chosen
 representative. -/
 theorem PrebananaFiniteBridge.forward_of_left
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hmono : Monotone chain)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
@@ -120,14 +120,14 @@ theorem PrebananaFiniteBridge.forward_of_left
 /-- Two-sided exhaustion provides an actual global bijection:
 the inverse is the same construction with left and right exchanged. -/
 noncomputable def PrebananaFiniteBridge.limitEquiv
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hmono : Monotone chain)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
-    (hright : ∀ x : M.carrier, ∃ n : ℕ,
+    (hright : ∀ x : N.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).right.hom a = x) :
-    M.carrier ≃ M.carrier where
+    M.carrier ≃ N.carrier where
   toFun := PrebananaFiniteBridge.forward chain hleft
   invFun := PrebananaFiniteBridge.forward
     (fun n => (chain n).swap) hright
@@ -160,7 +160,7 @@ noncomputable def PrebananaFiniteBridge.limitEquiv
       _ = x := hrepresent
   right_inv := by
     intro x
-    let chain' : ℕ → PrebananaFiniteBridge M :=
+    let chain' : ℕ → PrebananaFiniteBridge N M :=
       fun n => (chain n).swap
     let c := PrebananaFiniteBridge.chooseLeft chain' hright x
     have hrepresent :
@@ -183,23 +183,23 @@ noncomputable def PrebananaFiniteBridge.limitEquiv
 /-- The global bijection preserves the F₂ marking, because each
 finite bridge preserves that marking on both sides. -/
 theorem PrebananaFiniteBridge.limitEquiv_preserves_mark
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hmono : Monotone chain)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
-    (hright : ∀ x : M.carrier, ∃ n : ℕ,
+    (hright : ∀ x : N.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).right.hom a = x)
     (x : M.carrier) :
-    M.μ (PrebananaFiniteBridge.limitEquiv chain hmono hleft hright x) =
+    N.μ (PrebananaFiniteBridge.limitEquiv chain hmono hleft hright x) =
       M.μ x := by
   let c := PrebananaFiniteBridge.chooseLeft chain hleft x
   have hrep :
       (chain c.1).left.hom c.2 = x :=
     PrebananaFiniteBridge.chooseLeft_spec chain hleft x
   calc
-    M.μ (PrebananaFiniteBridge.limitEquiv chain hmono hleft hright x) =
-      M.μ ((chain c.1).right.hom c.2) := rfl
+    N.μ (PrebananaFiniteBridge.limitEquiv chain hmono hleft hright x) =
+      N.μ ((chain c.1).right.hom c.2) := rfl
     _ = (chain c.1).base.μ c.2 := (chain c.1).right.preserves_μ c.2
     _ = M.μ ((chain c.1).left.hom c.2) :=
       ((chain c.1).left.preserves_μ c.2).symm

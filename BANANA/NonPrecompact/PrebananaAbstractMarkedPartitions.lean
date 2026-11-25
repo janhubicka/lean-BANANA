@@ -56,7 +56,7 @@ theorem prebananaAbstractEmbedding_exists_markedAtomPartition
     (α β : Type*)
     [BooleanAlgebra α] [Fintype α]
     [BooleanAlgebra β] [Fintype β]
-    (μA : α → F2) (μB : β → F2)
+    (μA : α → ZMod 2) (μB : β → ZMod 2)
     (hzeroB : μB ⊥ = 0)
     (haddB : ∀ x y : β, x ⊓ y = ⊥ →
       μB (x ⊔ y) = μB x + μB y)
@@ -126,7 +126,7 @@ theorem prebananaAbstractEmbedding_exists_literalMarkedAtomPartition
     (α β : Type*)
     [BooleanAlgebra α] [Fintype α]
     [BooleanAlgebra β] [Fintype β]
-    (μA : α → F2) (μB : β → F2)
+    (μA : α → ZMod 2) (μB : β → ZMod 2)
     (hzeroB : μB ⊥ = 0)
     (haddB : ∀ x y : β, x ⊓ y = ⊥ →
       μB (x ⊔ y) = μB x + μB y)

@@ -45,7 +45,7 @@ over atoms of the *original* Boolean algebra, not just powerset
 representatives. -/
 theorem prebananaAbstractParity_atomSum_on_atoms
     (α : Type*) [BooleanAlgebra α] [Fintype α]
-    (μ : α → F2)
+    (μ : α → ZMod 2)
     (hzero : μ ⊥ = 0)
     (hadd : ∀ x y : α, x ⊓ y = ⊥ →
       μ (x ⊔ y) = μ x + μ y)
@@ -60,7 +60,7 @@ theorem prebananaAbstractParity_atomSum_on_atoms
 the actual abstract atoms is zero. -/
 theorem prebananaAbstractParity_total_even_on_atoms
     (α : Type*) [BooleanAlgebra α] [Fintype α]
-    (μ : α → F2)
+    (μ : α → ZMod 2)
     (hzero : μ ⊥ = 0)
     (htop : μ ⊤ = 0)
     (hadd : ∀ x y : α, x ⊓ y = ⊥ →
@@ -68,5 +68,22 @@ theorem prebananaAbstractParity_total_even_on_atoms
     (∑ a : PrebananaAbstractAtoms α, μ (a : α)) = 0 := by
   simpa only [prebananaFiniteBoolean_singleton_represents_atom] using
     (prebananaAbstractParity_total_even α μ hzero htop hadd)
+
+/-- Every nontrivial finite Boolean algebra has an atom. -/
+theorem prebananaAbstractAtoms_nonempty
+    (α : Type*) [BooleanAlgebra α] [Fintype α] [Nontrivial α] :
+    Nonempty (PrebananaAbstractAtoms α) := by
+  classical
+  letI : CompleteAtomicBooleanAlgebra α :=
+    Fintype.toCompleteAtomicBooleanAlgebra α
+  obtain ⟨a, ha⟩ := (IsAtomic.exists_atom (α := α))
+  exact ⟨⟨a, ha⟩⟩
+
+/-- Its finite atom count is positive. -/
+theorem prebananaAbstractAtoms_card_pos
+    (α : Type*) [BooleanAlgebra α] [Fintype α] [Nontrivial α] :
+    0 < Fintype.card (PrebananaAbstractAtoms α) := by
+  classical
+  exact Fintype.card_pos_iff.mpr (prebananaAbstractAtoms_nonempty α)
 
 end SuccessorTree.NonPrecompact

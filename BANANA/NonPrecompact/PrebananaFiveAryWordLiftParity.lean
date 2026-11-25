@@ -1,5 +1,6 @@
+import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
+import Mathlib.Data.Fintype.Prod
 import BANANA.NonPrecompact.PrebananaFiveAryWordLift
-import Mathlib
 
 /-!
 # Marking preservation for the five-ary word lift

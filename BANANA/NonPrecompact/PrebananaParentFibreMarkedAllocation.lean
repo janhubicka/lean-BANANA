@@ -30,7 +30,7 @@ with the same total F₂ mark, using nonempty correctly marked bins. -/
 theorem prebananaParentFibre_markedAllocation
     (δ β : Type*) [Fintype δ] [Fintype β]
     [Nonempty δ] [Nonempty β] [DecidableEq β]
-    (markD : δ → F2) (markB : β → F2)
+    (markD : δ → ZMod 2) (markB : β → ZMod 2)
     (htotal : (∑ d : δ, markD d) = ∑ b : β, markB b) :
     ∃ part : (δ × PrebananaFiveAryWord (Fintype.card β)) → β,
       Function.Surjective part ∧

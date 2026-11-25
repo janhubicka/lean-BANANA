@@ -301,7 +301,7 @@ theorem uniformMassCover : UniformMassCover mark mass := by
     change ({e.symm i} : Finset (J n)).map π.toEmbedding = {e.symm j}
     simp [π]
 
-private theorem factor_toStage {A : Type} [BooleanAlgebra A] {n : ℕ}
+theorem factor_toStage {A : Type} [BooleanAlgebra A] {n : ℕ}
     (f : BoundedLatticeHom A B) (hf : Function.Injective f)
     (h : ∀ a, ∃ s, T.stage n s = f a) :
     ∃ g : BoundedLatticeHom A (Finset (J n)), Function.Injective g ∧

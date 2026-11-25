@@ -18,7 +18,7 @@ namespace SuccessorTree.NonPrecompact
 
 /-- One marked length-card(β) descendant for each target atom b : β. -/
 noncomputable def prebananaTargetSuffix
-    (β : Type*) [Fintype β] (mark : β → F2) (b : β) :
+    (β : Type*) [Fintype β] (mark : β → ZMod 2) (b : β) :
     PrebananaFiveAryWord (Fintype.card β) := by
   classical
   let e : β ≃ Fin (Fintype.card β) := Fintype.equivFin β
@@ -29,7 +29,7 @@ noncomputable def prebananaTargetSuffix
 an arbitrary parent marked p. -/
 theorem prebananaTargetSuffix_mark
     (β : Type*) [Fintype β]
-    (mark : β → F2) (p : F2) (b : β) :
+    (mark : β → ZMod 2) (p : ZMod 2) (b : β) :
     prebananaFiveAryDescendantMark p (Fintype.card β)
       (prebananaTargetSuffix β mark b) = mark b := by
   classical
@@ -39,7 +39,7 @@ theorem prebananaTargetSuffix_mark
 /-- Witness suffixes indexed by an arbitrary finite target type
 are injective, even when different atoms prescribe different marks. -/
 theorem prebananaTargetSuffix_injective
-    (β : Type*) [Fintype β] (mark : β → F2) :
+    (β : Type*) [Fintype β] (mark : β → ZMod 2) :
     Function.Injective (prebananaTargetSuffix β mark) := by
   classical
   let e : β ≃ Fin (Fintype.card β) := Fintype.equivFin β

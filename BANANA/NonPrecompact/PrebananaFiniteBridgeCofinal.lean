@@ -28,15 +28,16 @@ open scoped Classical
 /-- A finite marked Boolean model embedded twice into a countable
 marked Boolean model. This representation records the two embeddings
 without choosing a presentation of their images as subalgebras. -/
-structure PrebananaFiniteBridge (M : PrebananaCountableBooleanModel) where
+structure PrebananaFiniteBridge (M : PrebananaCountableBooleanModel)
+    (N : PrebananaCountableBooleanModel := M) where
   base : PrebananaFiniteBooleanModel
   left : PrebananaFiniteToCountableEmbedding base M
-  right : PrebananaFiniteToCountableEmbedding base M
+  right : PrebananaFiniteToCountableEmbedding base N
 
 /-- One bridge extends another when one marked embedding of their
 finite carriers makes both diagrams commute on all elements. -/
-instance (M : PrebananaCountableBooleanModel) :
-    LE (PrebananaFiniteBridge M) where
+instance (M N : PrebananaCountableBooleanModel) :
+    LE (PrebananaFiniteBridge M N) where
   le p q :=
     ∃ f : PrebananaFiniteBooleanEmbedding p.base q.base,
       (∀ a : p.base.carrier,
@@ -47,8 +48,8 @@ instance (M : PrebananaCountableBooleanModel) :
 /-- Bridge extension is reflexive and transitive. Two different
 finite presentations may represent the same maps, so use a preorder,
 not an artificial antisymmetry axiom. -/
-instance (M : PrebananaCountableBooleanModel) :
-    Preorder (PrebananaFiniteBridge M) where
+instance (M N : PrebananaCountableBooleanModel) :
+    Preorder (PrebananaFiniteBridge M N) where
   le_refl p := by
     exact ⟨PrebananaFiniteBooleanEmbedding.id p.base,
       (fun _ => rfl), (fun _ => rfl)⟩
@@ -66,59 +67,59 @@ instance (M : PrebananaCountableBooleanModel) :
 /-- The generic finite marked one-point forth theorem makes the
 left-hand image contain any specified new point while preserving
 the two maps on the original finite base. -/
-theorem PrebananaFiniteBridge.exists_forth
-    {M : PrebananaCountableBooleanModel}
+theorem PrebananaFiniteBridge.exists_forthBetween
+    {M N : PrebananaCountableBooleanModel}
     (hfinite : M.HasFiniteAmbients)
-    (hext : M.HasFiniteExtensionProperty)
-    (p : PrebananaFiniteBridge M) (x : M.carrier) :
-    ∃ q : PrebananaFiniteBridge M,
+    (hext : N.HasFiniteExtensionProperty)
+    (p : PrebananaFiniteBridge M N) (x : M.carrier) :
+    ∃ q : PrebananaFiniteBridge M N,
       p ≤ q ∧
       ∃ y : q.base.carrier, q.left.hom y = x := by
   obtain ⟨B, f, i, h, y, hy, hleft, hright⟩ :=
-    M.onePointForth hfinite hext p.base p.left p.right x
+    M.onePointForthBetween N hfinite hext p.base p.left p.right x
   refine ⟨⟨B, i, h⟩, ?_, ⟨y, hy⟩⟩
   exact ⟨f, hleft, hright⟩
 
 /-- Reversing the two embeddings gives the corresponding back step,
 in which the right-hand image contains any prescribed point. -/
-theorem PrebananaFiniteBridge.exists_back
-    {M : PrebananaCountableBooleanModel}
-    (hfinite : M.HasFiniteAmbients)
+theorem PrebananaFiniteBridge.exists_backBetween
+    {M N : PrebananaCountableBooleanModel}
+    (hfinite : N.HasFiniteAmbients)
     (hext : M.HasFiniteExtensionProperty)
-    (p : PrebananaFiniteBridge M) (x : M.carrier) :
-    ∃ q : PrebananaFiniteBridge M,
+    (p : PrebananaFiniteBridge M N) (x : N.carrier) :
+    ∃ q : PrebananaFiniteBridge M N,
       p ≤ q ∧
       ∃ y : q.base.carrier, q.right.hom y = x := by
   obtain ⟨B, f, i, h, y, hy, hright, hleft⟩ :=
-    M.onePointForth hfinite hext p.base p.right p.left x
+    N.onePointForthBetween M hfinite hext p.base p.right p.left x
   refine ⟨⟨B, h, i⟩, ?_, ⟨y, hy⟩⟩
   exact ⟨f, hleft, hright⟩
 
 /-- The bridges whose left image contains x form a cofinal
 subset of the bridge preorder. -/
-noncomputable def PrebananaFiniteBridge.leftCofinal
-    {M : PrebananaCountableBooleanModel}
+noncomputable def PrebananaFiniteBridge.leftCofinalBetween
+    {M N : PrebananaCountableBooleanModel}
     (hfinite : M.HasFiniteAmbients)
-    (hext : M.HasFiniteExtensionProperty)
-    (x : M.carrier) : Order.Cofinal (PrebananaFiniteBridge M) where
+    (hext : N.HasFiniteExtensionProperty)
+    (x : M.carrier) : Order.Cofinal (PrebananaFiniteBridge M N) where
   carrier := {p | ∃ y : p.base.carrier, p.left.hom y = x}
   isCofinal := by
     intro p
     obtain ⟨q, hpq, hx⟩ :=
-      PrebananaFiniteBridge.exists_forth hfinite hext p x
+      PrebananaFiniteBridge.exists_forthBetween hfinite hext p x
     exact ⟨q, hx, hpq⟩
 
 /-- Similarly the bridges whose right image contains x are cofinal. -/
-noncomputable def PrebananaFiniteBridge.rightCofinal
-    {M : PrebananaCountableBooleanModel}
-    (hfinite : M.HasFiniteAmbients)
+noncomputable def PrebananaFiniteBridge.rightCofinalBetween
+    {M N : PrebananaCountableBooleanModel}
+    (hfinite : N.HasFiniteAmbients)
     (hext : M.HasFiniteExtensionProperty)
-    (x : M.carrier) : Order.Cofinal (PrebananaFiniteBridge M) where
+    (x : N.carrier) : Order.Cofinal (PrebananaFiniteBridge M N) where
   carrier := {p | ∃ y : p.base.carrier, p.right.hom y = x}
   isCofinal := by
     intro p
     obtain ⟨q, hpq, hx⟩ :=
-      PrebananaFiniteBridge.exists_back hfinite hext p x
+      PrebananaFiniteBridge.exists_backBetween hfinite hext p x
     exact ⟨q, hx, hpq⟩
 
 /-- The cofinal-chain form of marked Boolean back-and-forth.
@@ -127,6 +128,75 @@ Starting at any finite bridge, construct a monotonically enlarging
 sequence that exhausts the model simultaneously in the ranges of
 the left and right embeddings. This statement is independent of
 any first-order model-theoretic language encoding. -/
+theorem PrebananaFiniteBridge.exists_exhaustive_chainBetween
+    {M N : PrebananaCountableBooleanModel}
+    (hfiniteM : M.HasFiniteAmbients) (hfiniteN : N.HasFiniteAmbients)
+    (hextM : M.HasFiniteExtensionProperty) (hextN : N.HasFiniteExtensionProperty)
+    (p : PrebananaFiniteBridge M N) :
+    ∃ chain : ℕ → PrebananaFiniteBridge M N,
+      chain 0 = p ∧
+      Monotone chain ∧
+      (∀ x : M.carrier, ∃ n : ℕ,
+        ∃ a : (chain n).base.carrier, (chain n).left.hom a = x) ∧
+      (∀ x : N.carrier, ∃ n : ℕ,
+        ∃ a : (chain n).base.carrier, (chain n).right.hom a = x) := by
+  classical
+  letI : Encodable (Sum M.carrier N.carrier) :=
+    Encodable.ofCountable _
+  let D : Sum M.carrier N.carrier →
+      Order.Cofinal (PrebananaFiniteBridge M N) :=
+    Sum.elim
+      (PrebananaFiniteBridge.leftCofinalBetween hfiniteM hextN)
+      (PrebananaFiniteBridge.rightCofinalBetween hfiniteN hextM)
+  let chain : ℕ → PrebananaFiniteBridge M N :=
+    Order.sequenceOfCofinals p D
+  refine ⟨chain, rfl, Order.sequenceOfCofinals.monotone p D, ?_, ?_⟩
+  · intro x
+    have h :=
+      Order.sequenceOfCofinals.encode_mem p D (Sum.inl x)
+    exact ⟨Encodable.encode (Sum.inl x : Sum M.carrier N.carrier) + 1, h⟩
+  · intro x
+    have h :=
+      Order.sequenceOfCofinals.encode_mem p D (Sum.inr x)
+    exact ⟨Encodable.encode (Sum.inr x : Sum M.carrier N.carrier) + 1, h⟩
+
+
+/-! Same-model specialisations used for ultrahomogeneity. -/
+
+theorem PrebananaFiniteBridge.exists_forth
+    {M : PrebananaCountableBooleanModel}
+    (hfinite : M.HasFiniteAmbients)
+    (hext : M.HasFiniteExtensionProperty)
+    (p : PrebananaFiniteBridge M) (x : M.carrier) :
+    ∃ q : PrebananaFiniteBridge M,
+      p ≤ q ∧
+      ∃ y : q.base.carrier, q.left.hom y = x :=
+  PrebananaFiniteBridge.exists_forthBetween hfinite hext p x
+
+theorem PrebananaFiniteBridge.exists_back
+    {M : PrebananaCountableBooleanModel}
+    (hfinite : M.HasFiniteAmbients)
+    (hext : M.HasFiniteExtensionProperty)
+    (p : PrebananaFiniteBridge M) (x : M.carrier) :
+    ∃ q : PrebananaFiniteBridge M,
+      p ≤ q ∧
+      ∃ y : q.base.carrier, q.right.hom y = x :=
+  PrebananaFiniteBridge.exists_backBetween hfinite hext p x
+
+noncomputable def PrebananaFiniteBridge.leftCofinal
+    {M : PrebananaCountableBooleanModel}
+    (hfinite : M.HasFiniteAmbients)
+    (hext : M.HasFiniteExtensionProperty)
+    (x : M.carrier) : Order.Cofinal (PrebananaFiniteBridge M) :=
+  PrebananaFiniteBridge.leftCofinalBetween hfinite hext x
+
+noncomputable def PrebananaFiniteBridge.rightCofinal
+    {M : PrebananaCountableBooleanModel}
+    (hfinite : M.HasFiniteAmbients)
+    (hext : M.HasFiniteExtensionProperty)
+    (x : M.carrier) : Order.Cofinal (PrebananaFiniteBridge M) :=
+  PrebananaFiniteBridge.rightCofinalBetween hfinite hext x
+
 theorem PrebananaFiniteBridge.exists_exhaustive_chain
     {M : PrebananaCountableBooleanModel}
     (hfinite : M.HasFiniteAmbients)
@@ -138,25 +208,7 @@ theorem PrebananaFiniteBridge.exists_exhaustive_chain
       (∀ x : M.carrier, ∃ n : ℕ,
         ∃ a : (chain n).base.carrier, (chain n).left.hom a = x) ∧
       (∀ x : M.carrier, ∃ n : ℕ,
-        ∃ a : (chain n).base.carrier, (chain n).right.hom a = x) := by
-  classical
-  letI : Encodable (Sum M.carrier M.carrier) :=
-    Encodable.ofCountable _
-  let D : Sum M.carrier M.carrier →
-      Order.Cofinal (PrebananaFiniteBridge M) :=
-    Sum.elim
-      (PrebananaFiniteBridge.leftCofinal hfinite hext)
-      (PrebananaFiniteBridge.rightCofinal hfinite hext)
-  let chain : ℕ → PrebananaFiniteBridge M :=
-    Order.sequenceOfCofinals p D
-  refine ⟨chain, rfl, Order.sequenceOfCofinals.monotone p D, ?_, ?_⟩
-  · intro x
-    have h :=
-      Order.sequenceOfCofinals.encode_mem p D (Sum.inl x)
-    exact ⟨Encodable.encode (Sum.inl x : Sum M.carrier M.carrier) + 1, h⟩
-  · intro x
-    have h :=
-      Order.sequenceOfCofinals.encode_mem p D (Sum.inr x)
-    exact ⟨Encodable.encode (Sum.inr x : Sum M.carrier M.carrier) + 1, h⟩
+        ∃ a : (chain n).base.carrier, (chain n).right.hom a = x) :=
+  PrebananaFiniteBridge.exists_exhaustive_chainBetween hfinite hfinite hext hext p
 
 end SuccessorTree.NonPrecompact

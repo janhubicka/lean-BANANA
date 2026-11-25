@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.PrebananaMarkedBooleanModels
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkedModel
 
 /-!
@@ -16,32 +17,6 @@ definition; they are separate mathematical obligations.
 -/
 
 namespace SuccessorTree.NonPrecompact
-
-/-- A countable, nontrivial Boolean algebra with an admissible
-disjoint-additive F₂ marking. -/
-structure PrebananaCountableBooleanModel where
-  carrier : Type
-  [booleanAlgebra : BooleanAlgebra carrier]
-  [countable : Countable carrier]
-  [nontrivial : Nontrivial carrier]
-  μ : carrier → F2
-  μ_bot : μ ⊥ = 0
-  μ_top : μ ⊤ = 0
-  μ_add : ∀ x y : carrier, x ⊓ y = ⊥ →
-    μ (x ⊔ y) = μ x + μ y
-
-attribute [instance] PrebananaCountableBooleanModel.booleanAlgebra
-  PrebananaCountableBooleanModel.countable
-  PrebananaCountableBooleanModel.nontrivial
-
-/-- An actual marked embedding from an arbitrary finite
-pre-BANANA algebra into a countable marked Boolean algebra. -/
-structure PrebananaFiniteToCountableEmbedding
-    (A : PrebananaFiniteBooleanModel)
-    (M : PrebananaCountableBooleanModel) where
-  hom : BoundedLatticeHom A.carrier M.carrier
-  injective : Function.Injective hom
-  preserves_μ : ∀ x : A.carrier, M.μ (hom x) = A.μ x
 
 /-- The countable cylinder algebra with its stage-independent
 F₂ marking is an actual countable pre-BANANA structure. -/

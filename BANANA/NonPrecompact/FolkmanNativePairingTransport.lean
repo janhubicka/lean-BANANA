@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.FolkmanNativeRingMapCoordinates
+import Mathlib.Data.ZMod.Basic
 
 /-!
 # Transporting native bilinear Folkman pairings to atom coordinates
@@ -22,9 +23,9 @@ noncomputable def folkmanNativeTransportPairing
     {L R : Type*}
     [BooleanRing L] [Fintype L]
     [BooleanRing R] [Fintype R]
-    (γ : L → R → F2) :
+    (γ : L → R → ZMod 2) :
     Finset (PrebananaAbstractAtoms (AsBoolAlg L)) →
-      Finset (PrebananaAbstractAtoms (AsBoolAlg R)) → F2 :=
+      Finset (PrebananaAbstractAtoms (AsBoolAlg R)) → ZMod 2 :=
   fun x y =>
     γ ((folkmanNativeRingAtomEquiv L).symm x)
       ((folkmanNativeRingAtomEquiv R).symm y)
@@ -35,7 +36,7 @@ theorem folkmanNativeTransportPairing_add_left
     {L R : Type*}
     [BooleanRing L] [Fintype L]
     [BooleanRing R] [Fintype R]
-    (γ : L → R → F2)
+    (γ : L → R → ZMod 2)
     (hleft : ∀ x x' y, γ (x + x') y = γ x y + γ x' y)
     (s s' : Finset (PrebananaAbstractAtoms (AsBoolAlg L)))
     (t : Finset (PrebananaAbstractAtoms (AsBoolAlg R))) :
@@ -51,7 +52,7 @@ theorem folkmanNativeTransportPairing_add_right
     {L R : Type*}
     [BooleanRing L] [Fintype L]
     [BooleanRing R] [Fintype R]
-    (γ : L → R → F2)
+    (γ : L → R → ZMod 2)
     (hright : ∀ x y y', γ x (y + y') = γ x y + γ x y')
     (s : Finset (PrebananaAbstractAtoms (AsBoolAlg L)))
     (t t' : Finset (PrebananaAbstractAtoms (AsBoolAlg R))) :
@@ -68,7 +69,7 @@ theorem folkmanNativeTransportPairing_apply_codes
     {L R : Type*}
     [BooleanRing L] [Fintype L]
     [BooleanRing R] [Fintype R]
-    (γ : L → R → F2)
+    (γ : L → R → ZMod 2)
     (x : L) (y : R) :
     folkmanNativeTransportPairing γ
         (folkmanNativeRingAtomEquiv L x)

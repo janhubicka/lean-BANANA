@@ -1,4 +1,5 @@
-import BANANA.NonPrecompact.PrebananaAbstractParityDecomposition
+import BANANA.NonPrecompact.PrebananaAmalgamBridge
+import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 
 /-!
 # Coding arbitrary nontrivial finite Boolean parity structures by Fin-atoms
@@ -17,23 +18,6 @@ Translation of arbitrary *embeddings* is a separate task.
 namespace SuccessorTree.NonPrecompact
 
 open scoped Classical BigOperators
-
-/-- Every nontrivial finite Boolean algebra has an atom. -/
-theorem prebananaAbstractAtoms_nonempty
-    (α : Type*) [BooleanAlgebra α] [Fintype α] [Nontrivial α] :
-    Nonempty (PrebananaAbstractAtoms α) := by
-  classical
-  letI : CompleteAtomicBooleanAlgebra α :=
-    Fintype.toCompleteAtomicBooleanAlgebra α
-  obtain ⟨a, ha⟩ := (IsAtomic.exists_atom (α := α))
-  exact ⟨⟨a, ha⟩⟩
-
-/-- Its finite atom count is positive. -/
-theorem prebananaAbstractAtoms_card_pos
-    (α : Type*) [BooleanAlgebra α] [Fintype α] [Nontrivial α] :
-    0 < Fintype.card (PrebananaAbstractAtoms α) := by
-  classical
-  exact Fintype.card_pos_iff.mpr (prebananaAbstractAtoms_nonempty α)
 
 /-- Canonical finite enumeration of the abstract atoms. -/
 noncomputable def prebananaAbstractAtomIndex

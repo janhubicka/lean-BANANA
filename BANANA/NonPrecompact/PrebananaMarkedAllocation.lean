@@ -27,7 +27,7 @@ prescribed F₂ marking, provided total source and target markings
 agree. -/
 theorem prebananaWitnessAllocation_preserves_mark
     {α β : Type*} [Fintype α] [Fintype β] [DecidableEq β]
-    (markA : α → F2) (markB : β → F2)
+    (markA : α → ZMod 2) (markB : β → ZMod 2)
     (witness : β → α) (hinj : Function.Injective witness)
     (hmark : ∀ b : β, markA (witness b) = markB b)
     (htotal : (∑ x : α, markA x) = ∑ b : β, markB b)
@@ -38,7 +38,7 @@ theorem prebananaWitnessAllocation_preserves_mark
   classical
   by_cases hb : b = base
   · subst b
-    let F : β → F2 := fun y =>
+    let F : β → ZMod 2 := fun y =>
       ∑ x : α,
         if prebananaAllocateWitnesses witness base x = y
         then markA x else 0

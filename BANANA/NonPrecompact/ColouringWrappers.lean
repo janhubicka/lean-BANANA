@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.ResidueParityReduction
 import BANANA.NonPrecompact.BilinearResidue
 
 /-!
@@ -263,13 +264,6 @@ theorem exists_snoc_bilinearWeight_eq_residue
   · simpa [d] using hylast
   · rw [← hweight]
     exact huv
-
-/-- Reduction modulo two from a power-of-two residue ring. -/
-def residueParityHom (k : ℕ) :
-    ZMod (2 ^ (k + 1)) →+* F2 :=
-  ZMod.castHom
-    (dvd_pow_self 2 (Nat.succ_ne_zero k))
-    (ZMod 2)
 
 /-- Full BANANA target-copy wrapper.
 

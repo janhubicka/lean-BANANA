@@ -1,4 +1,4 @@
-import BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculus
+import BANANA.NonPrecompact.PrebananaMarkedBooleanModels
 
 /-!
 # Finite marked Boolean towers

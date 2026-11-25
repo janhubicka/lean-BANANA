@@ -48,7 +48,7 @@ theorem prebananaFibrewiseAllocate_nonbase
 theorem prebananaFibrewiseAllocate_nonbase_mark
     {α β δ : Type*} [Fintype α] [Nonempty β] [DecidableEq β]
     (source : α → δ) (target : β → δ)
-    (markA : α → F2) (markB : β → F2)
+    (markA : α → ZMod 2) (markB : β → ZMod 2)
     (witness : β → α) (hinj : Function.Injective witness)
     (hcompat : ∀ b : β, source (witness b) = target b)
     (hmark : ∀ b : β, markA (witness b) = markB b)

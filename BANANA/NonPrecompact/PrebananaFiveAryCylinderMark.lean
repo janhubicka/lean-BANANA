@@ -130,7 +130,7 @@ theorem prebananaFiveAryCylinder_equal_marks
 /-- The unique F₂ marking of a finite-prefix cylinder, obtained
 from any finite-stage presentation. -/
 noncomputable def prebananaFiveAryCylinderMark
-    (X : PrebananaFiveAryCylinderLimitCarrier) : F2 :=
+    (X : PrebananaFiveAryCylinderLimitCarrier) : ZMod 2 :=
   let n := Classical.choose X.property
   let s := Classical.choose (Classical.choose_spec X.property)
   (prebananaFiveAryBooleanStage n).μ s

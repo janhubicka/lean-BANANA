@@ -1,4 +1,3 @@
-import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
 import BANANA.NonPrecompact.PrebananaFiniteBooleanCoordinates
 
 /-!

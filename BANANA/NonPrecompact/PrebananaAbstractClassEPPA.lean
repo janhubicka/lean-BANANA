@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.PrebananaMarkedBooleanModels
 import BANANA.NonPrecompact.PrebananaClassEPPA
 import BANANA.NonPrecompact.PrebananaOneGeneratorMarkedIso
 import BANANA.NonPrecompact.PrebananaThreeAtomEppaExtension
@@ -25,31 +26,6 @@ abstract carriers. No circulation manuscript text is changed.
 -/
 
 namespace SuccessorTree.NonPrecompact
-
-/-- A nontrivial finite Boolean algebra equipped with an admissible
-disjoint-additive parity marking. -/
-structure PrebananaFiniteBooleanModel where
-  carrier : Type
-  [booleanAlgebra : BooleanAlgebra carrier]
-  [finite : Fintype carrier]
-  [nontrivial : Nontrivial carrier]
-  μ : carrier → F2
-  μ_bot : μ ⊥ = 0
-  μ_top : μ ⊤ = 0
-  μ_add : ∀ x y : carrier, x ⊓ y = ⊥ →
-    μ (x ⊔ y) = μ x + μ y
-
-attribute [instance] PrebananaFiniteBooleanModel.booleanAlgebra
-  PrebananaFiniteBooleanModel.finite
-  PrebananaFiniteBooleanModel.nontrivial
-
-/-- A marking-preserving embedding of arbitrary finite
-Boolean–BANANA Boolean algebras. -/
-structure PrebananaFiniteBooleanEmbedding
-    (A B : PrebananaFiniteBooleanModel) where
-  hom : BoundedLatticeHom A.carrier B.carrier
-  injective : Function.Injective hom
-  preserves_μ : ∀ x : A.carrier, B.μ (hom x) = A.μ x
 
 /-- The ordinary finite-functional-language EPPA property, expressed
 through the canonical generated-subalgebra descriptions of partial

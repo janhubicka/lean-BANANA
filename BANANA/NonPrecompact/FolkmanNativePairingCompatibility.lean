@@ -31,7 +31,7 @@ theorem folkmanNativeTransportPairing_compatible
     [BooleanRing AR] [Fintype AR]
     [BooleanRing BR] [Fintype BR]
     (fL : AL →ₙ+* BL) (fR : AR →ₙ+* BR)
-    (γA : AL → AR → F2) (γB : BL → BR → F2)
+    (γA : AL → AR → ZMod 2) (γB : BL → BR → ZMod 2)
     (hcompat : ∀ a r, γB (fL a) (fR r) = γA a r)
     (s : Finset (PrebananaAbstractAtoms (AsBoolAlg AL)))
     (t : Finset (PrebananaAbstractAtoms (AsBoolAlg AR))) :

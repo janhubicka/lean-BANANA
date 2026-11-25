@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.BooleanBananaCylinderPadicCharge
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.nonempty_cylinderPadicCharge
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_cylinderPadicCharge_extension
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_cylinderPadicChargeResidueApproximation
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinderPadicChargeOrbit_dense_meagre
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinderPadicCharge_minimal_no_comeagre
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinderMarkedGroup_failsGenericPointProperty

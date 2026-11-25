@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.BooleanBananaMassCardinalityConsequences
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massSubgroup_not_extremelyAmenable_of_age
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.massSubgroup_not_coprecompact_of_age

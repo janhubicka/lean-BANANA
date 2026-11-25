@@ -38,7 +38,7 @@ theorem prebananaFiveAryRefinement_markedAllocation
     (source : α → δ) (target : β → δ)
     (hsource : Function.Surjective source)
     (htarget : Function.Surjective target)
-    (markA : α → F2) (markB : β → F2)
+    (markA : α → ZMod 2) (markB : β → ZMod 2)
     (hlocal : ∀ d : δ,
       (∑ a : α, if source a = d then markA a else 0) =
         ∑ b : β, if target b = d then markB b else 0) :

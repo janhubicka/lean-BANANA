@@ -1,4 +1,4 @@
-import BANANA.NonPrecompact.PrebananaCountableMarkedBooleanModel
+import BANANA.NonPrecompact.PrebananaMarkedBooleanModels
 import Mathlib.Order.BooleanSubalgebra
 
 /-!
@@ -82,16 +82,18 @@ and `e` specifies how it is matched in the target model. The
 conclusion contains both an inclusion `i` of an enlarged finite
 domain (including `x`) and a matching marked embedding `h`
 into the target model. No bijective global extension is asserted. -/
-theorem PrebananaCountableBooleanModel.onePointForth
-    (M : PrebananaCountableBooleanModel)
+theorem PrebananaCountableBooleanModel.onePointForthBetween
+    (M N : PrebananaCountableBooleanModel)
     (hfinite : M.HasFiniteAmbients)
-    (hext : M.HasFiniteExtensionProperty)
+    (hext : N.HasFiniteExtensionProperty)
     (A : PrebananaFiniteBooleanModel)
-    (j e : PrebananaFiniteToCountableEmbedding A M)
+    (j : PrebananaFiniteToCountableEmbedding A M)
+    (e : PrebananaFiniteToCountableEmbedding A N)
     (x : M.carrier) :
     ∃ B : PrebananaFiniteBooleanModel,
       ∃ f : PrebananaFiniteBooleanEmbedding A B,
-      ∃ i h : PrebananaFiniteToCountableEmbedding B M,
+      ∃ i : PrebananaFiniteToCountableEmbedding B M,
+      ∃ h : PrebananaFiniteToCountableEmbedding B N,
       ∃ y : B.carrier,
         i.hom y = x ∧
         (∀ a : A.carrier, i.hom (f.hom a) = j.hom a) ∧
@@ -139,5 +141,22 @@ theorem PrebananaCountableBooleanModel.onePointForth
   refine ⟨B, f, i, h, ⟨x, hxS⟩, rfl, ?_, hh⟩
   intro a
   rfl
+
+/-- The one-point forth step between two embeddings into the same model. -/
+theorem PrebananaCountableBooleanModel.onePointForth
+    (M : PrebananaCountableBooleanModel)
+    (hfinite : M.HasFiniteAmbients)
+    (hext : M.HasFiniteExtensionProperty)
+    (A : PrebananaFiniteBooleanModel)
+    (j e : PrebananaFiniteToCountableEmbedding A M)
+    (x : M.carrier) :
+    ∃ B : PrebananaFiniteBooleanModel,
+      ∃ f : PrebananaFiniteBooleanEmbedding A B,
+      ∃ i h : PrebananaFiniteToCountableEmbedding B M,
+      ∃ y : B.carrier,
+        i.hom y = x ∧
+        (∀ a : A.carrier, i.hom (f.hom a) = j.hom a) ∧
+        (∀ a : A.carrier, h.hom (f.hom a) = e.hom a) :=
+  M.onePointForthBetween M hfinite hext A j e x
 
 end SuccessorTree.NonPrecompact

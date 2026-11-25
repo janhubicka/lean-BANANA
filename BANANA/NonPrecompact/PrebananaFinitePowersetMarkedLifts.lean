@@ -62,7 +62,7 @@ theorem finiteOwner_sum_subset
 marking and zero total mark. -/
 noncomputable def prebananaFiniteMarkedPowerset
     (β : Type) [Fintype β] [Nonempty β] [DecidableEq β]
-    (mark : β → F2)
+    (mark : β → ZMod 2)
     (htotal : (∑ b : β, mark b) = 0) :
     PrebananaFiniteBooleanModel where
   carrier := Finset β
@@ -89,7 +89,7 @@ from the corresponding target powerset into the word stage. -/
 noncomputable def prebananaFiveAryOwnerMarkedEmbedding
     (n : ℕ) (β : Type) [Fintype β]
     [DecidableEq β] [Nonempty β]
-    (markB : β → F2)
+    (markB : β → ZMod 2)
     (htotal : (∑ b : β, markB b) = 0)
     (part : PrebananaFiveAryWord n → β)
     (hsurj : Function.Surjective part)

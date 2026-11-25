@@ -1,4 +1,4 @@
-import BANANA.NonPrecompact.PrebananaFiveAryWordStage
+import BANANA.NonPrecompact.PrebananaFiveAryWordBasics
 
 /-!
 # The residual parity argument for finite marked-atom allocation
@@ -21,11 +21,11 @@ namespace SuccessorTree.NonPrecompact
 marked fibre, and the selected atoms have the same total parity as
 the fibre, then the residual atoms have zero total parity. -/
 theorem prebananaResidualMark_zero
-    {ι : Type*} [DecidableEq ι] (mark : ι → F2)
+    {ι : Type*} [DecidableEq ι] (mark : ι → ZMod 2)
     (whole selected residual : Finset ι)
     (hdisjoint : Disjoint selected residual)
     (hcover : selected ∪ residual = whole)
-    (p : F2)
+    (p : ZMod 2)
     (hwhole : (∑ x ∈ whole, mark x) = p)
     (hselected : (∑ x ∈ selected, mark x) = p) :
     (∑ x ∈ residual, mark x) = 0 := by
@@ -46,7 +46,7 @@ theorem prebananaResidualMark_zero
 /-- Adding a disjoint collection of total parity zero to a bin
 does not change the total mark of the bin. -/
 theorem prebananaAddZeroMarkedResidual
-    {ι : Type*} [DecidableEq ι] (mark : ι → F2)
+    {ι : Type*} [DecidableEq ι] (mark : ι → ZMod 2)
     (bin residual : Finset ι)
     (hdisjoint : Disjoint bin residual)
     (hzero : (∑ x ∈ residual, mark x) = 0) :

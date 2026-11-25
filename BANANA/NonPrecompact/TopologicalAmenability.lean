@@ -14,6 +14,22 @@ def IsTopologicallyAmenable (G : Type*) [Group G] [TopologicalSpace G] : Prop :=
     [MeasurableSpace X] [BorelSpace X] [MulAction G X] [ContinuousSMul G X],
       ∃ ν : Measure X, IsProbabilityMeasure ν ∧ ∀ g : G, ν.map (fun x => g • x) = ν
 
+/-- On compact Hausdorff flows, amenability supplies a regular Borel
+probability. The result needs no metrisability hypothesis. -/
+theorem IsTopologicallyAmenable.exists_invariant_regular_probability
+    {G : Type*} [Group G] [TopologicalSpace G] (h : IsTopologicallyAmenable G)
+    (X : Type) [TopologicalSpace X] [CompactSpace X] [T2Space X] [Nonempty X]
+    [MeasurableSpace X] [BorelSpace X] [MulAction G X] [ContinuousSMul G X] :
+    ∃ μ : Measure X, μ.Regular ∧ IsProbabilityMeasure μ ∧
+      ∀ g : G, MeasurePreserving (fun x : X => g • x) μ μ := by
+  obtain ⟨ν, hprob, hinv⟩ := h X
+  let p : ProbabilityMeasure X := ⟨ν, hprob⟩
+  apply exists_regular_invariant_probability_of_integral_invariant p
+  intro f g
+  change (∫ x, f (g • x) ∂ν) = ∫ x, f x ∂ν
+  rw [← integral_map (continuous_const_smul g).aemeasurable
+    f.continuous.aestronglyMeasurable, hinv g]
+
 /-- A dense directed union of finite subgroups is topologically amenable. -/
 theorem isTopologicallyAmenable_of_dense_finite_subgroups
     {G : Type*} [Group G] [TopologicalSpace G] {ι : Type*} [Nonempty ι]

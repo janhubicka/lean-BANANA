@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.PrebananaResidualParity
-import BANANA.NonPrecompact.FiniteOwnerSums
+import BANANA.NonPrecompact.FiniteOwnerSumIdentities
 
 /-!
 # Per-base sum identity for commuting atom projections
@@ -23,7 +23,7 @@ theorem prebananaFibrewiseSum_identity
     [DecidableEq β] [DecidableEq δ]
     (source : α → δ) (target : β → δ) (f : α → β)
     (hcomm : ∀ x, target (f x) = source x)
-    (mark : α → F2) (a : δ) :
+    (mark : α → ZMod 2) (a : δ) :
     (∑ b : β, ∑ x : α,
       if target b = a ∧ f x = b then mark x else 0) =
     ∑ x : α, if source x = a then mark x else 0 := by

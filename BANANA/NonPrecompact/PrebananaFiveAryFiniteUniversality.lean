@@ -33,7 +33,7 @@ theorem prebananaFiveAry_everyFiniteModel_embeds
   classical
   let β := PrebananaAbstractAtoms B.carrier
   letI : Nonempty β := prebananaAbstractAtoms_nonempty B.carrier
-  let markB : β → F2 := fun b => B.μ (b : B.carrier)
+  let markB : β → ZMod 2 := fun b => B.μ (b : B.carrier)
   have htotal : (∑ b : β, markB b) = 0 :=
     prebananaAbstractParity_total_even_on_atoms
       B.carrier B.μ B.μ_bot B.μ_top B.μ_add

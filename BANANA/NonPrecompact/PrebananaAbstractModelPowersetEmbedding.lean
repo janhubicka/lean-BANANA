@@ -1,6 +1,5 @@
 import BANANA.NonPrecompact.PrebananaFinitePowersetMarkedLifts
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
-import BANANA.NonPrecompact.PrebananaAbstractAtomCodes
 
 /-!
 # The canonical marked atom-powerset embedding of a finite Boolean algebra

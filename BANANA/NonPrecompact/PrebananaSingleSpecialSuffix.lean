@@ -37,7 +37,7 @@ theorem prebananaSingleSpecialSuffix_injective
 
 /-- Appending the inherited-mark letter 4 repeatedly leaves
 the parent's mark unchanged. -/
-theorem prebananaFiveAryDescendantMark_all4 (p : F2) (k : ℕ) :
+theorem prebananaFiveAryDescendantMark_all4 (p : ZMod 2) (k : ℕ) :
     prebananaFiveAryDescendantMark p k (fun _ => 4) = p := by
   induction k with
   | zero => rfl
@@ -49,7 +49,7 @@ theorem prebananaFiveAryDescendantMark_all4 (p : F2) (k : ℕ) :
 /-- A single exceptional letter has exactly the mark dictated by
 the five-ary child rule, independently of its position. -/
 theorem prebananaSingleSpecialSuffix_mark
-    (p : F2) (c : Fin 5) (k : ℕ) (j : Fin k) :
+    (p : ZMod 2) (c : Fin 5) (k : ℕ) (j : Fin k) :
     prebananaFiveAryDescendantMark p k
         (prebananaSingleSpecialSuffix k j c) =
       prebananaFiveAryChildMark p c := by
@@ -84,7 +84,7 @@ theorem prebananaSingleSpecialSuffix_mark
 /-- The chosen letters 0 and 2 give unmarked and marked
 descendants respectively, for every parent mark. -/
 theorem prebananaSingleSpecialSuffix_both_marks
-    (p : F2) (k : ℕ) (j : Fin k) :
+    (p : ZMod 2) (k : ℕ) (j : Fin k) :
     prebananaFiveAryDescendantMark p k
       (prebananaSingleSpecialSuffix k j 0) = 0 ∧
     prebananaFiveAryDescendantMark p k

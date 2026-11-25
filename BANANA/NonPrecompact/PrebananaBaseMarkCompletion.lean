@@ -27,7 +27,7 @@ theorem prebananaBaseMarkCompletion
     [DecidableEq β] [DecidableEq δ]
     (source : α → δ) (target : β → δ) (f : α → β)
     (hcomm : ∀ x, target (f x) = source x)
-    (markA : α → F2) (markB : β → F2)
+    (markA : α → ZMod 2) (markB : β → ZMod 2)
     (base : δ → β) (hbase : ∀ a, target (base a) = a)
     (hlocal : ∀ a : δ,
       (∑ x : α, if source x = a then markA x else 0) =
@@ -37,7 +37,7 @@ theorem prebananaBaseMarkCompletion
     (b : β) :
     (∑ x : α, if f x = b then markA x else 0) = markB b := by
   classical
-  let F : β → F2 := fun c =>
+  let F : β → ZMod 2 := fun c =>
     ∑ x : α, if f x = c then markA x else 0
   change F b = markB b
   let a : δ := target b

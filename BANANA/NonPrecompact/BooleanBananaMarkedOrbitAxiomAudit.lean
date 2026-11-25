@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.BooleanBananaMarkedOrbit
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.properZeroMark_transitive_of_finiteExtension

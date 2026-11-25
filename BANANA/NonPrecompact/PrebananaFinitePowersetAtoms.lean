@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.PrebananaFiveAryBooleanStage
-import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
+import BANANA.NonPrecompact.PrebananaFiniteBooleanCoordinates
 import Mathlib.Data.Finset.Grade
 
 /-!

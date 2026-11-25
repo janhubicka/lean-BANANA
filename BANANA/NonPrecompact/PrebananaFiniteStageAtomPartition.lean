@@ -45,7 +45,7 @@ theorem prebananaFiniteStageEmbedding_exists_wordPartition
           source w ∈ prebananaFiniteBooleanAtomFinsetOrderIso A.carrier x) := by
   classical
   let W := PrebananaFiveAryWord n
-  let μW : Finset W → F2 :=
+  let μW : Finset W → ZMod 2 :=
     fun s => ∑ w ∈ s, prebananaFiveAryWordMark n w
   let φ : A.carrier → Finset W := fun x => f.hom x
   have hbot : φ ⊥ = ⊥ := by

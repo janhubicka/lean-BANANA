@@ -18,7 +18,7 @@ open scoped FirstOrder
 section
 
 variable {L R : Type*} [BooleanRing L] [BooleanRing R]
-variable (p : L → R → F2)
+variable (p : L → R → ZMod 2)
 variable (S : @Language.Substructure folkmanLanguage (L × R) (folkmanProductStructure p))
 
 /-- The left coordinate subring of a first-order substructure. -/

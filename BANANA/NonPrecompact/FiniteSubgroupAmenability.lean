@@ -68,6 +68,33 @@ private theorem subgroupOrbitAverage_invariant (K : Subgroup G) [Fintype K]
     _ = ∑ j : K, Measure.dirac ((j : G) • x) :=
       Equiv.sum_comp (Equiv.mulLeft k) (fun j : K => Measure.dirac ((j : G) • x))
 
+/-- The regular probability with the same continuous integrals inherits
+all the invariance equations of the original probability. -/
+theorem exists_regular_invariant_probability_of_integral_invariant
+    (p : ProbabilityMeasure X)
+    (hp : ∀ (f : C(X, ℝ)) (g : G),
+      (∫ x, f (g • x) ∂(p : Measure X)) = ∫ x, f x ∂(p : Measure X)) :
+    ∃ μ : Measure X, Measure.Regular μ ∧ IsProbabilityMeasure μ ∧
+      ∀ g : G, MeasurePreserving (fun x : X => g • x) μ μ := by
+  obtain ⟨μ, hreg, hfinμ, hμ⟩ := (p : Measure X).exists_regular_eq_of_compactSpace
+  have hprob : IsProbabilityMeasure μ := by
+    apply isProbabilityMeasure_iff_real.mpr
+    simpa using (hμ (BoundedContinuousFunction.const X 1)).symm
+  refine ⟨μ, hreg, hprob, fun g => ⟨(continuous_const_smul g).measurable, ?_⟩⟩
+  have : (μ.map (fun x : X => g • x)).Regular := by
+    have := Measure.InnerRegularCompactLTTop.map_of_continuous
+      (continuous_const_smul g) (μ := μ)
+    infer_instance
+  apply Measure.ext_of_integral_eq_on_compactlySupported
+  intro f
+  change (∫ x, f.toContinuousMap x ∂(μ.map (fun x => g • x))) =
+    ∫ x, f.toContinuousMap x ∂μ
+  rw [integral_map (continuous_const_smul g).aemeasurable f.continuous.aestronglyMeasurable]
+  let q : C(X, ℝ) := f.toContinuousMap
+  let t : C(X, ℝ) := ⟨fun x => f (g • x), f.continuous.comp (continuous_const_smul g)⟩
+  exact (hμ (BoundedContinuousFunction.mkOfCompact t)).symm.trans
+    ((hp q g).trans (hμ (BoundedContinuousFunction.mkOfCompact q)))
+
 /-- Every nonempty compact Hausdorff flow of a group with a dense
 directed union of finite subgroups carries an invariant regular
 Borel probability measure. -/
@@ -107,23 +134,6 @@ theorem exists_invariant_probability_of_dense_finite_subgroups
     intro h hh
     obtain ⟨i, hi⟩ := Set.mem_iUnion.mp hh
     exact (Set.mem_iInter.mp hp i) ⟨h, hi⟩ f
-  obtain ⟨μ, hreg, hfinμ, hμ⟩ := (p : Measure X).exists_regular_eq_of_compactSpace
-  have hprob : IsProbabilityMeasure μ := by
-    apply isProbabilityMeasure_iff_real.mpr
-    simpa using (hμ (BoundedContinuousFunction.const X 1)).symm
-  refine ⟨μ, hreg, hprob, fun g => ⟨(continuous_const_smul g).measurable, ?_⟩⟩
-  have : (μ.map (fun x : X => g • x)).Regular := by
-    have := Measure.InnerRegularCompactLTTop.map_of_continuous
-      (continuous_const_smul g) (μ := μ)
-    infer_instance
-  apply Measure.ext_of_integral_eq_on_compactlySupported
-  intro f
-  change (∫ x, f.toContinuousMap x ∂(μ.map (fun x => g • x))) =
-    ∫ x, f.toContinuousMap x ∂μ
-  rw [integral_map (continuous_const_smul g).aemeasurable f.continuous.aestronglyMeasurable]
-  let q : C(X, ℝ) := f.toContinuousMap
-  let t : C(X, ℝ) := ⟨fun x => f (g • x), f.continuous.comp (continuous_const_smul g)⟩
-  exact (hμ (BoundedContinuousFunction.mkOfCompact t)).symm.trans
-    ((hp' q g).trans (hμ (BoundedContinuousFunction.mkOfCompact q)))
+  exact exists_regular_invariant_probability_of_integral_invariant p hp'
 
 end SuccessorTree.NonPrecompact

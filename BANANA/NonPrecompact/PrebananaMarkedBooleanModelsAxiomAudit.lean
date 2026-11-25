@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.PrebananaFiniteBridgeGlobalAutomorphism
+
+#print axioms SuccessorTree.NonPrecompact.PrebananaCountableBooleanModel.onePointForthBetween
+#print axioms SuccessorTree.NonPrecompact.PrebananaFiniteBridge.exists_exhaustive_chainBetween
+#print axioms SuccessorTree.NonPrecompact.PrebananaFiniteBridge.exists_global_marked_orderIso
+#print axioms SuccessorTree.NonPrecompact.PrebananaCountableBooleanModel.exists_marked_orderIso
+#print axioms SuccessorTree.NonPrecompact.PrebananaFiniteBridge.exists_global_marked_automorphism

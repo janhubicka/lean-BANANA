@@ -25,8 +25,8 @@ open scoped Classical
 /-- Coherence plus the finite Boolean homomorphism laws imply
 preservation of joins by the global bridge map. -/
 theorem PrebananaFiniteBridge.forward_map_sup
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hmono : Monotone chain)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
@@ -73,14 +73,14 @@ theorem PrebananaFiniteBridge.forward_map_sup
 /-- A two-sided exhaustive bridge chain yields an order isomorphism
 of the ambient Boolean algebra (hence a genuine Boolean automorphism). -/
 noncomputable def PrebananaFiniteBridge.limitOrderIso
-    {M : PrebananaCountableBooleanModel}
-    (chain : ℕ → PrebananaFiniteBridge M)
+    {M N : PrebananaCountableBooleanModel}
+    (chain : ℕ → PrebananaFiniteBridge M N)
     (hmono : Monotone chain)
     (hleft : ∀ x : M.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).left.hom a = x)
-    (hright : ∀ x : M.carrier, ∃ n : ℕ,
+    (hright : ∀ x : N.carrier, ∃ n : ℕ,
       ∃ a : (chain n).base.carrier, (chain n).right.hom a = x) :
-    M.carrier ≃o M.carrier where
+    M.carrier ≃o N.carrier where
   toEquiv := PrebananaFiniteBridge.limitEquiv chain hmono hleft hright
   map_rel_iff' := by
     intro x y
@@ -114,18 +114,18 @@ noncomputable def PrebananaFiniteBridge.limitOrderIso
 marked Boolean algebra satisfying finite ambient subalgebras and
 the unconditional finite marked extension property. It extends
 both embeddings of an arbitrary prescribed finite bridge. -/
-theorem PrebananaFiniteBridge.exists_global_marked_automorphism
-    {M : PrebananaCountableBooleanModel}
-    (hfinite : M.HasFiniteAmbients)
-    (hext : M.HasFiniteExtensionProperty)
-    (p : PrebananaFiniteBridge M) :
-    ∃ E : M.carrier ≃o M.carrier,
-      (∀ x : M.carrier, M.μ (E x) = M.μ x) ∧
+theorem PrebananaFiniteBridge.exists_global_marked_orderIso
+    {M N : PrebananaCountableBooleanModel}
+    (hfiniteM : M.HasFiniteAmbients) (hfiniteN : N.HasFiniteAmbients)
+    (hextM : M.HasFiniteExtensionProperty) (hextN : N.HasFiniteExtensionProperty)
+    (p : PrebananaFiniteBridge M N) :
+    ∃ E : M.carrier ≃o N.carrier,
+      (∀ x : M.carrier, N.μ (E x) = M.μ x) ∧
       ∀ a : p.base.carrier, E (p.left.hom a) = p.right.hom a := by
   classical
   obtain ⟨chain, hfirst, hmono, hleft, hright⟩ :=
-    PrebananaFiniteBridge.exists_exhaustive_chain hfinite hext p
-  let E : M.carrier ≃o M.carrier :=
+    PrebananaFiniteBridge.exists_exhaustive_chainBetween hfiniteM hfiniteN hextM hextN p
+  let E : M.carrier ≃o N.carrier :=
     PrebananaFiniteBridge.limitOrderIso chain hmono hleft hright
   refine ⟨E, ?_, ?_⟩
   · intro x
@@ -142,5 +142,65 @@ theorem PrebananaFiniteBridge.exists_global_marked_automorphism
         PrebananaFiniteBridge.forward_of_left
           chain hmono hleft 0 (f.hom a)
       _ = p.right.hom a := hfR a
+
+/-- Same-model specialisation yielding ultrahomogeneity. -/
+theorem PrebananaFiniteBridge.exists_global_marked_automorphism
+    {M : PrebananaCountableBooleanModel}
+    (hfinite : M.HasFiniteAmbients)
+    (hext : M.HasFiniteExtensionProperty)
+    (p : PrebananaFiniteBridge M) :
+    ∃ E : M.carrier ≃o M.carrier,
+      (∀ x : M.carrier, M.μ (E x) = M.μ x) ∧
+      ∀ a : p.base.carrier, E (p.left.hom a) = p.right.hom a :=
+  p.exists_global_marked_orderIso hfinite hfinite hext hext
+
+private def twoElementMarkedBooleanModel : PrebananaFiniteBooleanModel where
+  carrier := Bool
+  μ := fun _ => 0
+  μ_bot := rfl
+  μ_top := rfl
+  μ_add := fun _ _ _ => by simp
+
+private def twoElementEmbedding (M : PrebananaCountableBooleanModel) :
+    PrebananaFiniteToCountableEmbedding twoElementMarkedBooleanModel M where
+  hom := {
+    toFun := fun b : Bool => if b then ⊤ else ⊥
+    map_bot' := rfl
+    map_top' := rfl
+    map_sup' := fun a b => by
+      cases a <;> cases b
+      · change (⊥ : M.carrier) = ⊥ ⊔ ⊥; simp
+      · change (⊤ : M.carrier) = ⊥ ⊔ ⊤; simp
+      · change (⊤ : M.carrier) = ⊤ ⊔ ⊥; simp
+      · change (⊤ : M.carrier) = ⊤ ⊔ ⊤; simp
+    map_inf' := fun a b => by
+      cases a <;> cases b
+      · change (⊥ : M.carrier) = ⊥ ⊓ ⊥; simp
+      · change (⊥ : M.carrier) = ⊥ ⊓ ⊤; simp
+      · change (⊥ : M.carrier) = ⊤ ⊓ ⊥; simp
+      · change (⊤ : M.carrier) = ⊤ ⊓ ⊤; simp }
+  injective := by
+    intro a b h
+    cases a <;> cases b
+    · rfl
+    · exact (bot_ne_top h).elim
+    · exact (top_ne_bot h).elim
+    · rfl
+  preserves_μ := fun b => by
+    cases b
+    · exact M.μ_bot
+    · exact M.μ_top
+
+/-- Any two countable locally finite marked Boolean models with the
+finite marked extension property have isomorphic marked reducts. -/
+theorem PrebananaCountableBooleanModel.exists_marked_orderIso
+    {M N : PrebananaCountableBooleanModel}
+    (hfiniteM : M.HasFiniteAmbients) (hfiniteN : N.HasFiniteAmbients)
+    (hextM : M.HasFiniteExtensionProperty) (hextN : N.HasFiniteExtensionProperty) :
+    ∃ E : M.carrier ≃o N.carrier, ∀ x : M.carrier, N.μ (E x) = M.μ x := by
+  let p : PrebananaFiniteBridge M N :=
+    ⟨twoElementMarkedBooleanModel, twoElementEmbedding M, twoElementEmbedding N⟩
+  obtain ⟨E, hmark, _⟩ := p.exists_global_marked_orderIso hfiniteM hfiniteN hextM hextN
+  exact ⟨E, hmark⟩
 
 end SuccessorTree.NonPrecompact

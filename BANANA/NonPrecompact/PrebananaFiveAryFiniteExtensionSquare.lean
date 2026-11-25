@@ -34,7 +34,7 @@ theorem prebananaFiveAry_finiteExtensionSquare
     (target : β → δ)
     (hsource : Function.Surjective source)
     (htarget : Function.Surjective target)
-    (markB : β → F2)
+    (markB : β → ZMod 2)
     (htotal : (∑ b : β, markB b) = 0)
     (hlocal : ∀ d : δ,
       (∑ w : PrebananaFiveAryWord n,

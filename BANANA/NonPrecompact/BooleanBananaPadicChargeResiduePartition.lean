@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.BooleanBananaPadicChargeResidueApproximation
-import BANANA.NonPrecompact.PrebananaResidueRealisation
+import BANANA.NonPrecompact.PrebananaResidueBlocks
 
 /-!
 # Realisation of two-adic residues on finite atom partitions

@@ -1,3 +1,4 @@
+import BANANA.NonPrecompact.PrebananaFiniteBooleanTower
 import BANANA.NonPrecompact.PrebananaFiveAryWordLiftParity
 
 /-!

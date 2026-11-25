@@ -1,5 +1,7 @@
-import BANANA.NonPrecompact.PrebananaFiveAryWordPrefix
-import BANANA.NonPrecompact.PrebananaAbstractClassEPPA
+import Mathlib.Data.Finset.BooleanAlgebra
+import Mathlib.Data.Fintype.Powerset
+import BANANA.NonPrecompact.PrebananaFiveAryWordBasics
+import BANANA.NonPrecompact.PrebananaMarkedBooleanModels
 
 /-!
 # Actual finite Boolean stages of the five-ary construction
