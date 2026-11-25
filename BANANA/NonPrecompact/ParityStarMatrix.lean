@@ -1,5 +1,4 @@
-import Mathlib
-import BANANA.NonPrecompact.AffineParity
+import BANANA.NonPrecompact.AffineParityCore
 
 /-!
 # A binary matrix with prescribed row and column parities

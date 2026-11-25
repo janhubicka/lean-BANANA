@@ -368,6 +368,7 @@ import BANANA.NonPrecompact.FolkmanFirstOrderLimitNonamenability
 import BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups
 import BANANA.NonPrecompact.BooleanBananaCylinderPadicCharge
 import BANANA.NonPrecompact.BooleanBananaCylinderMassSubgroups
+import BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity
 import BANANA.NonPrecompact.BananaLimitExtremelyAmenableDegree
 import BANANA.NonPrecompact.BananaLimitPolish
 import BANANA.NonPrecompact.BananaLimitFirstOrder

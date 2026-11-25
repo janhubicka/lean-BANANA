@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.markedBooleanAutomorphism
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinderMarkedBoolean_categorical_completeTheory
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinderMarkedBoolean_card_aleph0

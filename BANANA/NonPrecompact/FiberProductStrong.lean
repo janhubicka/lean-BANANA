@@ -1,4 +1,3 @@
-import Mathlib
 import BANANA.NonPrecompact.FiberGridCoordinates
 
 /-!

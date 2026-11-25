@@ -1,7 +1,5 @@
 import BANANA.NonPrecompact.PrebananaPartitionEmbedding
-import BANANA.NonPrecompact.ParityStarMatrix
-import BANANA.NonPrecompact.FiberProductStrong
-import BANANA.NonPrecompact.QuadraticGauss
+import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-!
 # Bridges for the pre-BANANA atom amalgam
