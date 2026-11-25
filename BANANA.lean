@@ -376,6 +376,7 @@ import BANANA.NonPrecompact.BananaLimitFirstOrder
 import BANANA.NonPrecompact.BananaTaggedModelDecoding
 import BANANA.NonPrecompact.BananaSortedSyntax
 import BANANA.NonPrecompact.BananaTaggedSyntaxReverse
+import BANANA.NonPrecompact.BananaSortedDefinableTupleRamsey
 import BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism
 import BANANA.NonPrecompact.BananaLimitDenseConjugacy
 import BANANA.NonPrecompact.BananaNativeCopySystem
@@ -387,6 +388,7 @@ import BANANA.NonPrecompact.BananaLimitDefinableColouring
 import BANANA.NonPrecompact.BananaLimitInvariantTypes
 import BANANA.NonPrecompact.FirstOrderCanonicalAmalgamation
 import BANANA.NonPrecompact.FirstOrderInvariantEnumerationRamseySaturated
+import BANANA.NonPrecompact.BananaLimitEnumerationEllis
 import BANANA.NonPrecompact.BananaLimitUniversalMinimalFlow
 import BANANA.NonPrecompact.UniversalMinimalFlowUniqueness
 import BANANA.NonPrecompact.BananaLimitExpansionGroup

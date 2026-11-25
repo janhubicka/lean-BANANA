@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.FirstOrderCompleteTypeReindex
+
+#print axioms SuccessorTree.NonPrecompact.continuous_completeTypePullback
+#print axioms SuccessorTree.NonPrecompact.continuous_completeTypeReindex
+#print axioms SuccessorTree.NonPrecompact.completeTypeReindex_typeOf
+#print axioms SuccessorTree.NonPrecompact.formula_mem_completeTypeReindex
+#print axioms SuccessorTree.NonPrecompact.IsAutomorphismInvariantType.reindex
+#print axioms SuccessorTree.NonPrecompact.exists_finite_parameter_formula

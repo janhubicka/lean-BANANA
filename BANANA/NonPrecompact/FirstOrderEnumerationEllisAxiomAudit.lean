@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.FirstOrderEnumerationEllis
+
+#print axioms SuccessorTree.NonPrecompact.enumerationTypeAction_typeOf
+#print axioms SuccessorTree.NonPrecompact.isAutomorphismInvariantType_iff_fixedEnumerationType
+#print axioms SuccessorTree.NonPrecompact.enumerationExtension_mem_closure_automorphismTypes
+#print axioms SuccessorTree.NonPrecompact.enumerationTypeSpaceAction_refl
+#print axioms SuccessorTree.NonPrecompact.enumerationTypeSpaceAction_comp
+#print axioms SuccessorTree.NonPrecompact.comp_mem_enumerationEllisSemigroup
+#print axioms SuccessorTree.NonPrecompact.exists_invariantEnumerationType_iff_exists_ellisMap
+#print axioms SuccessorTree.NonPrecompact.hasDefinableTupleRamsey_iff_exists_ellisMap

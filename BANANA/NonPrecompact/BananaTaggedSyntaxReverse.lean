@@ -18,7 +18,7 @@ universe u v
 
 variable {α : Type u} {sort : α → BananaSort}
 
-local instance : DecidableEq BananaSort
+instance : DecidableEq BananaSort
   | .left, .left => isTrue rfl
   | .right, .right => isTrue rfl
   | .left, .right => isFalse (by nofun)
@@ -330,11 +330,15 @@ private def leftZeroWitness : bananaTaggedLanguage.Formula (α ⊕ Fin 2) :=
 private def rightZeroWitness : bananaTaggedLanguage.Formula (α ⊕ Fin 2) :=
   Language.Relations.formula₁ (L := bananaTaggedLanguage) .rightZero (.var (.inr 1))
 
-private noncomputable def translateWithZeros (φ : Formula (syntaxSort sort)) :
+/-- Translate a sorted formula with zero-valued auxiliary variables into a tagged
+formula whose free variables are just the given tuple coordinates. -/
+noncomputable def translateWithZeros (φ : Formula (syntaxSort sort)) :
     bananaTaggedLanguage.Formula α :=
   ((φ.translate.relabel collapseAux ⊓ leftZeroWitness) ⊓ rightZeroWitness).iExs (Fin 2)
 
-private theorem realize_translateWithZeros (φ : Formula (syntaxSort sort)) (a : ∀ i, V (sort i)) :
+/-- Realization of the tagged translation agrees with evaluation at the
+zero-extended sorted tuple. -/
+theorem realize_translateWithZeros (φ : Formula (syntaxSort sort)) (a : ∀ i, V (sort i)) :
     letI := bananaTaggedPairingStructure pair
     (translateWithZeros φ).Realize (fun i => tag (a i)) ↔ φ.realize pair (zeroExtend a) := by
   let _ := bananaTaggedPairingStructure pair

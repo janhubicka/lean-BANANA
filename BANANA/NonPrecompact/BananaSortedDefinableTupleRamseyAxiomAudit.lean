@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaSortedDefinableTupleRamsey
+
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.HasSortedDefinableTupleRamsey.of_tagged
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.bananaLimit_hasSortedDefinableTupleRamsey
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.bananaTagged_completeTheory_hasSortedDefinableTupleRamsey

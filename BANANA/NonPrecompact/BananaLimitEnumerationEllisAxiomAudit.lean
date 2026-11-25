@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaLimitEnumerationEllis
+
+#print axioms SuccessorTree.NonPrecompact.realizesFiniteParameterTypes_of_finite_type_covers
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_realizesFiniteParameterTypes
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_exists_invariantEnumerationEllisMap
