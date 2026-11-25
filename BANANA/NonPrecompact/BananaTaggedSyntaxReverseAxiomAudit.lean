@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaTaggedSyntaxReverse
+
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.realize_fromTagged
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.sameFormulaType_iff_sorted
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.realize_fromTagged_decoded

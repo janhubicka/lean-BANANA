@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FirstOrderCanonicalAmalgamation
+
+#print axioms SuccessorTree.NonPrecompact.HasCanonicalAgeAmalgamation.hasDefinableTupleRamsey
+#print axioms SuccessorTree.NonPrecompact.HasCanonicalAgeAmalgamation.hasDefinableTupleRamsey_of_finite_type_covers
+#print axioms SuccessorTree.NonPrecompact.exists_invariantExtension_of_canonicalAgeAmalgamation

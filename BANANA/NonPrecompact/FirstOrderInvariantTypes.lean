@@ -169,22 +169,31 @@ def formulaWithParameters {α : Type a} {β : Type*} (φ : L.Formula (β ⊕ α)
     (b : β → M) : L[[M]].Formula α :=
   Language.BoundedFormula.constantsVarsEquiv.symm (φ.relabel (Sum.map b id))
 
-@[simp]
-theorem realize_formulaWithParameters {α : Type a} {β : Type*} (φ : L.Formula (β ⊕ α))
-    (b : β → M) (x : α → M) :
-    (formulaWithParameters φ b).Realize x ↔ φ.Realize (Sum.elim b x) := by
+omit [L.Structure M] in
+/-- Substitution of named parameters in a structure interpreting these constants. -/
+theorem realize_formulaWithParameters_of_expansion {N : Type*} [L.Structure N] [L[[M]].Structure N]
+    [(L.lhomWithConstants M).IsExpansionOn N] {α β : Type*}
+    (φ : L.Formula (β ⊕ α)) (b : β → M) (x : α → N) :
+    (formulaWithParameters φ b).Realize x ↔
+      φ.Realize (Sum.elim (fun i => (L.con (b i) : N)) x) := by
   have h : (φ.relabel (Sum.map b id)).Realize
-      (Sum.elim (fun a : M => (L.con a : M)) x) ↔
+      (Sum.elim (fun a : M => (L.con a : N)) x) ↔
       (formulaWithParameters φ b).Realize x := by
     simpa only [formulaWithParameters, _root_.Equiv.apply_symm_apply, Language.Formula.Realize] using
       (Language.BoundedFormula.realize_constantsVarsEquiv
         (φ := formulaWithParameters φ b) (v := x) (xs := default))
   have hAssignment :
-      Sum.elim (fun a : M => (L.con a : M)) x ∘ Sum.map b id = Sum.elim b x := by
-    funext t
-    cases t <;> rfl
+      Sum.elim (fun a : M => (L.con a : N)) x ∘ Sum.map b id =
+        Sum.elim (fun i => (L.con (b i) : N)) x :=
+    funext fun x => by cases x <;> rfl
   rw [Language.Formula.realize_relabel, hAssignment] at h
   exact h.symm
+
+@[simp]
+theorem realize_formulaWithParameters {α : Type a} {β : Type*} (φ : L.Formula (β ⊕ α))
+    (b : β → M) (x : α → M) :
+    (formulaWithParameters φ b).Realize x ↔ φ.Realize (Sum.elim b x) :=
+  realize_formulaWithParameters_of_expansion φ b x
 
 /-- Invariance under matching finite parameter types in the model.
 On a strongly finitely homogeneous model this is automorphism invariance. -/
@@ -225,8 +234,7 @@ private theorem exists_finite_preimages {A B : Type*} [DecidableEq B]
 
 private theorem exists_invariantType_of_finitely_realized
     (hRamsey : HasDefinableTupleRamsey L M)
-    (hIsolate : ∀ r (b : Fin r → M), ∃ θ : L.Formula (Fin r),
-      ∀ z : Fin r → M, θ.Realize z ↔ SameFormulaType (L := L) b z)
+    (hExtend : FiniteTypeExtension L M)
     {α : Type a} [Nonempty M] (S : Set (L.Formula α))
     (hBase : ∀ Δ : Finset S, ∃ x : α → M,
       (Language.Formula.iInf fun d : Δ => d.val.val).Realize x) :
@@ -253,8 +261,7 @@ private theorem exists_invariantType_of_finitely_realized
     obtain ⟨x, hδ⟩ := hBase D
     let e : Fin (Fintype.card Q) ≃ Q := (Fintype.equivFin Q).symm
     let q (j : Fin (Fintype.card Q)) := (e j).val
-    obtain ⟨y, hy, hm⟩ := exists_realize_invariance hRamsey
-      (finiteTypeExtension_of_isolated hIsolate) x δ hδ
+    obtain ⟨y, hy, hm⟩ := exists_realize_invariance hRamsey hExtend x δ hδ
       (fun j => (q j).arity) (fun j => (q j).left) (fun j => (q j).right)
       (fun j => (q j).matchType) (fun j => (q j).formula)
     let : (Language.constantsOn α).Structure M := Language.constantsOn.structure y
@@ -307,7 +314,27 @@ theorem HasDefinableTupleRamsey.exists_invariantType
     ∃ p : (L.elementaryDiagram M).CompleteType α, IsInvariantType p ∧
       ∀ (φ : L.Formula α), φ.Realize x →
         Language.Formula.equivSentence ((L.lhomWithConstants M).onFormula φ) ∈ p :=
-  exists_invariantType_of_finitely_realized hRamsey hIsolate {φ | φ.Realize x}
+  exists_invariantType_of_finitely_realized hRamsey
+    (finiteTypeExtension_of_isolated hIsolate) {φ | φ.Realize x}
+    fun _ => ⟨x, Language.Formula.realize_iInf.mpr fun s => s.val.property⟩
+
+/-- In a strongly finitely homogeneous model, definable tuple Ramsey gives
+an invariant extension of the parameter-free type of every realised tuple. -/
+theorem HasDefinableTupleRamsey.exists_invariantType_of_finiteHomogeneity
+    (hRamsey : HasDefinableTupleRamsey L M)
+    (hHom : ∀ n (s t : Fin n → M), SameFormulaType (L := L) s t →
+      ∃ g : M ≃[L] M, g ∘ s = t)
+    {α : Type a} [Nonempty M] (x : α → M) :
+    ∃ p : (L.elementaryDiagram M).CompleteType α, IsInvariantType p ∧
+      ∀ (φ : L.Formula α), φ.Realize x →
+        Language.Formula.equivSentence ((L.lhomWithConstants M).onFormula φ) ∈ p := by
+  have hExtend : FiniteTypeExtension L M := by
+    intro r k b i d h
+    obtain ⟨g, hg⟩ := hHom k (b ∘ i) d h
+    refine ⟨g ∘ b, ?_, hg⟩
+    intro ψ
+    exact (Language.StrongHomClass.realize_formula g ψ).symm
+  exact exists_invariantType_of_finitely_realized hRamsey hExtend {φ | φ.Realize x}
     fun _ => ⟨x, Language.Formula.realize_iInf.mpr fun s => s.val.property⟩
 
 private theorem exists_realize_iff_realize_exClosure {α : Type a} [DecidableEq α] [Nonempty M]
@@ -330,8 +357,8 @@ theorem HasDefinableTupleRamsey.exists_invariantExtension
       ∀ (φ : L.Formula α), Language.Formula.equivSentence φ ∈ p₀ →
         Language.Formula.equivSentence ((L.lhomWithConstants M).onFormula φ) ∈ p := by
   classical
-  apply exists_invariantType_of_finitely_realized (α := α) hRamsey hIsolate
-    {φ | Language.Formula.equivSentence φ ∈ p₀}
+  apply exists_invariantType_of_finitely_realized (α := α) hRamsey
+    (finiteTypeExtension_of_isolated hIsolate) {φ | Language.Formula.equivSentence φ ∈ p₀}
   intro Δ
   let δ : L.Formula α := Language.Formula.iInf fun d : Δ => d.val.val
   obtain ⟨N, x, hx⟩ := Language.Theory.exists_modelType_is_realized_in (L.completeTheory M) p₀

@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BananaSortedSyntax
+
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.Term.realize_graph
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.Formula.realize_translate
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.Formula.realize_translate_limit
+#print axioms SuccessorTree.NonPrecompact.BananaSorted.Formula.realize_translate_decoded

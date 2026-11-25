@@ -38,11 +38,13 @@ def HasDefinableTupleRamsey (L : Language.{u, v}) (M : Type w) [L.Structure M] :
         SameFormulaType (L := L) a (b ∘ i) → SameFormulaType (L := L) a (b ∘ j) →
         ∀ t, (φ t).Realize (Sum.elim (b' ∘ i) p) ↔ (φ t).Realize (Sum.elim (b' ∘ j) p)
 
-private def onTargetIndices {l r k : ℕ} (φ : L.Formula (Fin l ⊕ Fin k))
+/-- Evaluate a source formula on a tuple selected from the target, keeping
+the shared colouring parameters. -/
+def onTargetIndices {l r k : ℕ} (φ : L.Formula (Fin l ⊕ Fin k))
     (i : Fin l → Fin r) : L.Formula (Fin k ⊕ Fin r) :=
   φ.relabel (Sum.elim (Sum.inr ∘ i) Sum.inl)
 
-private theorem realize_onTargetIndices {l r k : ℕ} (φ : L.Formula (Fin l ⊕ Fin k))
+theorem realize_onTargetIndices {l r k : ℕ} (φ : L.Formula (Fin l ⊕ Fin k))
     (i : Fin l → Fin r) (p : Fin k → M) (d : Fin r → M) :
     (onTargetIndices φ i).Realize (Sum.elim p d) ↔ φ.Realize (Sum.elim (d ∘ i) p) := by
   rw [onTargetIndices, Language.Formula.realize_relabel]
@@ -95,5 +97,21 @@ theorem HasDefinableTupleRamsey.of_elementarilyEquivalent
     (Language.Formula.realize_iInf.mp hmono (i', j', t))
   exact (realize_onTargetIndices (φ t) i' p d).symm.trans
     (hmono'.trans (realize_onTargetIndices (φ t) j' p d))
+
+/-- The finite-type covers of one model isolate every realised finite
+tuple type in an elementarily equivalent model. -/
+theorem exists_formula_isolates_of_elementarilyEquivalent_of_finite_type_covers
+    {N : Type w'} [L.Structure N] (hMN : M ≅[L] N)
+    (cover : ∀ n : ℕ, ∃ R : Finset (Fin n → M),
+      ∀ b : Fin n → M, ∃ a : R, SameFormulaType (L := L) a.val b)
+    (n : ℕ) (b : Fin n → N) :
+    ∃ θ : L.Formula (Fin n),
+      ∀ z : Fin n → N, θ.Realize z ↔ SameFormulaType (L := L) b z := by
+  obtain ⟨R, hR⟩ := cover n
+  obtain ⟨i, hi⟩ := finite_formula_type_cover_of_elementarilyEquivalent hMN
+    (fun s : R => s.val) hR b
+  obtain ⟨θ, hθ⟩ := exists_formula_isolates_in_finite_type_cover (fun s : R => s.val) hR i.val
+  refine ⟨θ, fun z => (isolates_formula_type_of_elementarilyEquivalent hMN hθ z).trans ?_⟩
+  exact ⟨fun h => hi.symm.trans h, fun h => hi.trans h⟩
 
 end SuccessorTree.NonPrecompact

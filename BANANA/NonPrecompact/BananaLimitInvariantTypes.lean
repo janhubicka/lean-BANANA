@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.BananaLimitDefinableColouring
-import BANANA.NonPrecompact.FirstOrderInvariantTypes
+import BANANA.NonPrecompact.FirstOrderInvariantEnumerationRamsey
 
 /-!
 # Invariant types for the tagged BANANA theory
@@ -24,14 +24,10 @@ private theorem bananaTagged_model_finiteTupleTypes_isolated
   have hM : BananaTaggedCarrier ≅[bananaTaggedLanguage] M :=
     Language.elementarilyEquivalent_iff.mpr fun φ =>
       (Language.realize_iff_of_model_completeTheory BananaTaggedCarrier M φ).symm
-  obtain ⟨R, hR⟩ := bananaLimit_firstOrder_finite_tuple_orbit_representatives n
-  have hCover := formula_type_cover_of_finset_automorphism_orbit_representatives R hR
-  obtain ⟨i, hi⟩ := finite_formula_type_cover_of_elementarilyEquivalent hM
-    (fun s : R => s.val) hCover b
-  obtain ⟨θ, hθ⟩ := exists_formula_isolates_in_finite_type_cover
-    (fun s : R => s.val) hCover i.val
-  refine ⟨θ, fun z => (isolates_formula_type_of_elementarilyEquivalent hM hθ z).trans ?_⟩
-  exact ⟨fun h => hi.symm.trans h, fun h => hi.trans h⟩
+  refine exists_formula_isolates_of_elementarilyEquivalent_of_finite_type_covers hM ?_ n b
+  intro r
+  obtain ⟨R, hR⟩ := bananaLimit_firstOrder_finite_tuple_orbit_representatives r
+  exact ⟨R, formula_type_cover_of_finset_automorphism_orbit_representatives R hR⟩
 
 /-- Every type over the empty set in the complete tagged BANANA theory
 has an invariant complete extension over each model of the theory. -/
@@ -64,5 +60,18 @@ theorem bananaTagged_completeTheory_exists_invariantEnumerationType
   exact HasDefinableTupleRamsey.exists_invariantType
     (bananaTagged_completeTheory_hasDefinableTupleRamsey M)
     (bananaTagged_model_finiteTupleTypes_isolated M) id
+
+/-- For models of the tagged BANANA theory, the definable tuple Ramsey
+property is equivalent to the existence of an invariant extension of the
+type of the full enumeration. -/
+theorem bananaTagged_completeTheory_definableTupleRamsey_iff_invariantEnumerationType
+    (M : Type*) [bananaTaggedLanguage.Structure M] [Nonempty M]
+    [M ⊨ bananaTaggedLanguage.completeTheory BananaTaggedCarrier] :
+    HasDefinableTupleRamsey bananaTaggedLanguage M ↔
+      ∃ p : (bananaTaggedLanguage.elementaryDiagram M).CompleteType M, IsInvariantType p ∧
+        ∀ (φ : bananaTaggedLanguage.Formula M), φ.Realize (id : M → M) →
+          Language.Formula.equivSentence ((bananaTaggedLanguage.lhomWithConstants M).onFormula φ) ∈ p :=
+  hasDefinableTupleRamsey_iff_exists_invariantEnumerationType
+    (bananaTagged_model_finiteTupleTypes_isolated M)
 
 end SuccessorTree.NonPrecompact
