@@ -42,6 +42,39 @@ def CompactFlowFixedPoint (G : Type*) [Group G] [TopologicalSpace G] : Prop :=
 
 variable {B : Type uB} [L.Structure B]
 
+omit [Finite A] in
+/-- If finitely many candidate translates suffice for every colouring of the
+limit embeddings, a single finite ambient substructure works for all
+colourings. It contains each entire candidate target. -/
+theorem firstOrderEmbeddingPalette_in_finite_ambient [Finite B]
+    (b : B ↪[L] M) (hLoc : ∀ s : Finset M, Finite (Language.Substructure.closure L (s : Set M)))
+    {d r : ℕ} (hr : 0 < r) {Γ : Type*} (groupElement : Γ → FirstOrderAut L M) (K : Finset Γ)
+    (hK : ∀ c : (A ↪[L] M) → Fin r, ∃ g ∈ K, ∃ palette : Finset (Fin r),
+      palette.card ≤ d ∧ ∀ p : A ↪[L] B, c (groupElement g • b.comp p) ∈ palette) :
+    ∃ C : L.Substructure M, Finite C ∧
+      ∀ c : (A ↪[L] C) → Fin r,
+        ∃ f : B ↪[L] C, ∃ palette : Finset (Fin r), palette.card ≤ d ∧
+          ∀ p : A ↪[L] B, c (f.comp p) ∈ palette := by
+  classical
+  let : Fintype B := Fintype.ofFinite _
+  let S : Finset M := K.biUnion fun g => Finset.univ.image fun x : B => groupElement g • b x
+  let C := Language.Substructure.closure L (S : Set M)
+  refine ⟨C, hLoc S, fun c => ?_⟩
+  let padded (p : A ↪[L] M) : Fin r :=
+    if hs : ∀ a, p a ∈ C then c (p.codRestrict C hs) else ⟨0, hr⟩
+  obtain ⟨g, hg, palette, hp, hpalette⟩ := hK padded
+  let fM : B ↪[L] M := (groupElement g).toEquiv.toEmbedding.comp b
+  have hf (x : B) : fM x ∈ C := Language.Substructure.subset_closure
+    (Finset.mem_biUnion.mpr ⟨g, hg, Finset.mem_image.mpr ⟨x, Finset.mem_univ x, rfl⟩⟩)
+  let f : B ↪[L] C := fM.codRestrict C hf
+  refine ⟨f, palette, hp, fun p => ?_⟩
+  have hgood := hpalette p
+  have hin : ∀ a, (groupElement g • b.comp p) a ∈ C := fun a => hf (p a)
+  change (if hs : ∀ a, (groupElement g • b.comp p) a ∈ C then
+    c ((groupElement g • b.comp p).codRestrict C hs) else ⟨0, hr⟩) ∈ palette at hgood
+  rw [dite_eq_left hin] at hgood
+  exact hgood
+
 /-- In the finite age of a locally finite ultrahomogeneous first-order
 structure, the orbit bound gives an embedding Ramsey-degree bound. The
 finite ambient structure contains the entire moved target in every
@@ -70,27 +103,13 @@ theorem firstOrderFiniteEmbeddingDegree_of_coprecompactExtremelyAmenable
   let : Finite (A ↪[L] B) := Finite.of_injective (fun p : A ↪[L] B => (p : A → B))
     DFunLike.coe_injective
   let : Fintype (A ↪[L] B) := Fintype.ofFinite _
-  let : Fintype B := Fintype.ofFinite _
   let T : Finset (A ↪[L] M) := Finset.univ.image fun p : A ↪[L] B => b.comp p
   obtain ⟨K, hK⟩ := exists_finite_translates_of_orbit_fixed_colourings (G := H)
     (Colour := Fin r) T R hR (fun c => exists_fixed_colouring_in_orbit_closure hfixed c)
-  let S : Finset M := K.biUnion fun g => Finset.univ.image fun x : B => (g : FirstOrderAut L M) • b x
-  let C := Language.Substructure.closure L (S : Set M)
-  refine ⟨C, hLoc S, fun c => ?_⟩
-  let padded (p : A ↪[L] M) : Fin r :=
-    if hs : ∀ a, p a ∈ C then c (p.codRestrict C hs) else ⟨0, hr⟩
-  obtain ⟨g, hg, palette, hp, hpalette⟩ := hK padded
-  let fM : B ↪[L] M := (g : FirstOrderAut L M).toEquiv.toEmbedding.comp b
-  have hf (x : B) : fM x ∈ C := Language.Substructure.subset_closure
-    (Finset.mem_biUnion.mpr ⟨g, hg, Finset.mem_image.mpr ⟨x, Finset.mem_univ x, rfl⟩⟩)
-  let f : B ↪[L] C := fM.codRestrict C hf
-  refine ⟨f, palette, hp, fun p => ?_⟩
-  have hgood := hpalette (b.comp p) (Finset.mem_image.mpr ⟨p, Finset.mem_univ p, rfl⟩)
-  have hin : ∀ a, (g • (b.comp p)) a ∈ C := fun a => hf (p a)
-  change (if hs : ∀ a, (g • (b.comp p)) a ∈ C then
-    c ((g • (b.comp p)).codRestrict C hs) else ⟨0, hr⟩) ∈ palette at hgood
-  rw [dite_eq_left hin] at hgood
-  exact hgood
+  exact firstOrderEmbeddingPalette_in_finite_ambient b hLoc hr H.subtype K fun c => by
+    obtain ⟨g, hg, palette, hp, hpalette⟩ := hK c
+    exact ⟨g, hg, palette, hp, fun p =>
+      hpalette (b.comp p) (Finset.mem_image.mpr ⟨p, Finset.mem_univ _, rfl⟩)⟩
 
 /-- Actual unlabelled copies of a first-order structure are precisely the
 substructure ranges of embeddings. -/
@@ -122,6 +141,33 @@ omit [Finite A] in
 
 end FirstOrderCopy
 
+omit [Finite A] in
+/-- A uniform bound on embedding palettes bounds palettes on unlabelled
+copies, by ignoring the labelling of each embedding. -/
+theorem firstOrderFiniteCopyDegree_of_embeddingDegree
+    (h : ∃ d : ℕ, ∀ (B : Type uM) [L.Structure B] [Finite B]
+      (_ : B ↪[L] M) (r : ℕ), 0 < r →
+      ∃ C : L.Substructure M, Finite C ∧
+        ∀ c : (A ↪[L] C) → Fin r,
+          ∃ f : B ↪[L] C, ∃ palette : Finset (Fin r), palette.card ≤ d ∧
+            ∀ p : A ↪[L] B, c (f.comp p) ∈ palette) :
+    ∃ d : ℕ, ∀ (B : Type uM) [L.Structure B] [Finite B]
+      (_ : B ↪[L] M) (r : ℕ), 0 < r →
+      ∃ C : L.Substructure M, Finite C ∧
+        ∀ c : FirstOrderCopy L A C → Fin r,
+          ∃ f : B ↪[L] C, ∃ palette : Finset (Fin r), palette.card ≤ d ∧
+            ∀ p : FirstOrderCopy L A B, c (FirstOrderCopy.map f p) ∈ palette := by
+  obtain ⟨d, hd⟩ := h
+  refine ⟨d, fun B _ _ b r hr => ?_⟩
+  obtain ⟨C, hfC, hC⟩ := hd B b r hr
+  refine ⟨C, hfC, fun c => ?_⟩
+  obtain ⟨f, palette, hp, hpalette⟩ := hC (fun q => c (FirstOrderCopy.ofEmbedding q))
+  refine ⟨f, palette, hp, fun p => ?_⟩
+  obtain ⟨q, hq⟩ := p.property
+  have heq : FirstOrderCopy.ofEmbedding q = p := Subtype.ext hq
+  rw [← heq, FirstOrderCopy.map_ofEmbedding]
+  exact hpalette q
+
 /-- In the finite age of the locally finite ultrahomogeneous structure,
 the existence of a co-precompact extremely amenable subgroup gives a
 finite copy Ramsey degree. The source and target may have nontrivial
@@ -138,16 +184,8 @@ theorem firstOrderFiniteCopyDegree_of_coprecompactExtremelyAmenable
         ∀ c : FirstOrderCopy L A C → Fin r,
           ∃ f : B ↪[L] C, ∃ palette : Finset (Fin r), palette.card ≤ d ∧
             ∀ p : FirstOrderCopy L A B, c (FirstOrderCopy.map f p) ∈ palette := by
-  obtain ⟨d, hd⟩ := firstOrderFiniteEmbeddingDegree_of_coprecompactExtremelyAmenable hM e hLoc H hH hfixed
-  refine ⟨d, fun B _ _ b r hr => ?_⟩
-  obtain ⟨C, hfC, hC⟩ := hd B b r hr
-  refine ⟨C, hfC, fun c => ?_⟩
-  obtain ⟨f, palette, hp, hpalette⟩ := hC (fun q => c (FirstOrderCopy.ofEmbedding q))
-  refine ⟨f, palette, hp, fun p => ?_⟩
-  obtain ⟨q, hq⟩ := p.property
-  have heq : FirstOrderCopy.ofEmbedding q = p := Subtype.ext hq
-  rw [← heq, FirstOrderCopy.map_ofEmbedding]
-  exact hpalette q
+  exact firstOrderFiniteCopyDegree_of_embeddingDegree
+    (firstOrderFiniteEmbeddingDegree_of_coprecompactExtremelyAmenable hM e hLoc H hH hfixed)
 
 /-- A continuous homomorphism with dense range transfers extreme
 amenability to its codomain. -/

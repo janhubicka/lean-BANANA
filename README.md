@@ -64,6 +64,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Folkman–BANANA native nonamenability | [`FolkmanDecoding.folkmanNativeLimit_not_amenable`](BANANA/NonPrecompact/FolkmanFirstOrderLimitNonamenability.lean) |
 | Amenability of open subgroups | [`BooleanBanana.isTopologicallyAmenable_openSubgroup`](BANANA/NonPrecompact/OpenSubgroupAmenability.lean) |
 | Copy Ramsey-degree bound from co-precompact extreme amenability | [`firstOrderFiniteCopyDegree_of_coprecompactExtremelyAmenable`](BANANA/NonPrecompact/FirstOrderExtremelyAmenableDegree.lean) |
+| Copy Ramsey-degree bound via metrisability of the universal minimal flow | [`firstOrderFiniteCopyDegree_of_coprecompactExtremelyAmenable_via_universalMinimalFlow`](BANANA/NonPrecompact/FirstOrderMetrizableFlowRamseyDegree.lean) |
 | Tuple-orbit co-precompactness and closure criteria | [`FirstOrderAut.coprecompact_iff_finset_tupleOrbitRepresentatives` and `FirstOrderAut.mem_topologicalClosure_iff_preserves_tupleOrbits`](BANANA/NonPrecompact/FirstOrderOrbitCoPrecompact.lean) |
 | Countable categoricity from oligomorphicity | [`categorical_completeTheory_of_finite_tupleOrbitRepresentatives`](BANANA/NonPrecompact/FirstOrderOligomorphicCategoricity.lean) |
 | Oligomorphicity from countable categoricity | [`finite_tupleOrbitRepresentatives_of_categorical_completeTheory`](BANANA/NonPrecompact/FirstOrderOmittingTypes.lean) |
@@ -74,9 +75,11 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | BANANA finite tuple orbits | [`bananaLimit_exists_finite_tuple_orbit_representatives`](BANANA/NonPrecompact/BananaLimitFiniteOrbits.lean) |
 | Countable categoricity of the tagged BANANA limit | [`bananaLimit_firstOrder_aleph0_categorical`](BANANA/NonPrecompact/BananaLimitFirstOrder.lean) |
 | BANANA copy Ramsey degrees | [`BananaMatrixStructure.copyRamseyDegree_classification`](BANANA/NonPrecompact/BananaOneSidedCopyDegree.lean) |
-| BANANA precompact Ramsey expansion obstruction | [`banana_noPrecompactRamseyExpansion`](BANANA/NonPrecompact/BananaNativeCopySystem.lean) uses the genuine BANANA copy ranges and the shared hereditary expansion interface |
+| BANANA precompact Ramsey expansion obstruction | [`banana_noPrecompactRamseyExpansion`](BANANA/NonPrecompact/BananaNativeCopySystem.lean) uses genuine BANANA copy ranges and the hereditary expansion interface with restriction along reduct embeddings |
 | Copy degrees bounded by expansion isomorphism types | [`copyRamseyDegreeLE_card_expansionIsomorphismTypes`](BANANA/NonPrecompact/ExpansionDegreeByIsomorphismTypes.lean) quotients labelled expansions by reduct automorphisms |
-| BANANA coherent EPPA | [`BananaMatrixStructure.exists_coherentEppaWitness`](BANANA/NonPrecompact/CoherentEppaWitness.lean), a single perfect witness with both sides of dimension `l+r` and a coherent assignment for all partial isomorphisms |
+| Pullback of hereditary first-order expansions | [`exists_hereditary_restriction_of_onFunction_surjective`](BANANA/NonPrecompact/FirstOrderHereditaryExpansionRestriction.lean) combines [the carrier-closure criterion](BANANA/NonPrecompact/FirstOrderExpansionRestriction.lean) with heredity |
+| First-order copy-degree bound and the need for restrictions | [The bound for first-order image copies](BANANA/NonPrecompact/FirstOrderExpansionDegree.lean) assumes restrictions along all reduct embeddings. [The predecessor counterexample](BANANA/NonPrecompact/PredecessorExpansionCounterexample.lean) has one expansion type for a marked singleton and copy Ramsey degree two. |
+| Native BANANA coherent EPPA | [`BananaNative.exists_coherentEppaWitness`](BANANA/NonPrecompact/BananaNativeCoherentEppa.lean) applies to arbitrary finite-dimensional pairings and gives one perfect witness with both side dimensions equal to the sum of the input dimensions |
 | BANANA finite-system JEP and WAP | [`bananaFiniteSystems_jep_and_wap`](BANANA/NonPrecompact/BananaFiniteSystemsJepWap.lean) |
 | BANANA dense diagonal conjugacy orbits | [`bananaLimit_exists_dense_diagonalConjugacyOrbit`](BANANA/NonPrecompact/BananaLimitDenseConjugacy.lean) gives a dense orbit in each finite power |
 | BANANA ample generics | [`bananaLimit_exists_comeagre_diagonalConjugacyOrbit`](BANANA/NonPrecompact/BananaLimitGenericBackAndForth.lean) gives one comeagre orbit in each finite power |

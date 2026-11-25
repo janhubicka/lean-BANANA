@@ -1,0 +1,10 @@
+import BANANA.NonPrecompact.PredecessorExpansionCounterexample
+
+
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.finite_reduct_age_representatives
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.finite_expanded_age_representatives
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.expanded_amalgamation
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.expanded_ramsey
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.expanded_reasonable_from_any_prescribed
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.unique_expansionType_of_embeddable
+#print axioms SuccessorTree.NonPrecompact.PredecessorExpansion.markedSingleton_copyRamseyDegree_two

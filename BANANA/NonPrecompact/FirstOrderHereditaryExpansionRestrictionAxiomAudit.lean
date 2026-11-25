@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FirstOrderHereditaryExpansionRestriction
+
+#print axioms SuccessorTree.NonPrecompact.restrictFirstOrderExpansion_mem_of_hereditary
+#print axioms SuccessorTree.NonPrecompact.exists_hereditary_restriction_of_onFunction_surjective

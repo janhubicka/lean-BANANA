@@ -54,6 +54,7 @@ import BANANA.NonPrecompact.CauchyBinet
 import BANANA.NonPrecompact.CoherentConjugation
 import BANANA.NonPrecompact.CoherentEppaPackage
 import BANANA.NonPrecompact.CoherentEppaWitness
+import BANANA.NonPrecompact.BananaNativeCoherentEppa
 import BANANA.NonPrecompact.ColouringWrappers
 import BANANA.NonPrecompact.Completion
 import BANANA.NonPrecompact.CompletionAmbientAction
@@ -354,6 +355,7 @@ import BANANA.NonPrecompact.BooleanBananaMassStoneDynamics
 import BANANA.NonPrecompact.BooleanBananaMassPrimeRange
 import BANANA.NonPrecompact.OpenSubgroupAmenability
 import BANANA.NonPrecompact.FirstOrderExtremelyAmenableDegree
+import BANANA.NonPrecompact.FirstOrderMetrizableFlowRamseyDegree
 import BANANA.NonPrecompact.FirstOrderOrbitCoPrecompact
 import BANANA.NonPrecompact.FirstOrderOligomorphicCategoricity
 import BANANA.NonPrecompact.FirstOrderOrbitExpansion
@@ -383,6 +385,10 @@ import BANANA.NonPrecompact.BananaNativeCopySystem
 import BANANA.NonPrecompact.BananaLimitParameterColouring
 import BANANA.NonPrecompact.ClopenProbabilityExtension
 import BANANA.NonPrecompact.ExpansionDegreeByIsomorphismTypes
+import BANANA.NonPrecompact.FirstOrderHereditaryExpansionRestriction
+import BANANA.NonPrecompact.FirstOrderExpansionDegree
+import BANANA.NonPrecompact.FirstOrderFiniteExpansionTypes
+import BANANA.NonPrecompact.PredecessorExpansionCounterexample
 import BANANA.NonPrecompact.BananaLimitGenericBackAndForth
 import BANANA.NonPrecompact.BananaLimitDefinableColouring
 import BANANA.NonPrecompact.BananaLimitInvariantTypes

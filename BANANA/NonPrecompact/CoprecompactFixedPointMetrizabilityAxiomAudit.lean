@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.CoprecompactFixedPointMetrizability
+
+#print axioms SuccessorTree.NonPrecompact.metrizableSpace_of_dense_orbit_coprecompact_fixedPoint
+#print axioms SuccessorTree.NonPrecompact.metrizableSpace_of_coprecompact_extremelyAmenable

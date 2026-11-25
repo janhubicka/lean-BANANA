@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FirstOrderFiniteExpansionTypes
+
+#print axioms SuccessorTree.NonPrecompact.finite_firstOrderStructures_of_finite_isomorphism_types

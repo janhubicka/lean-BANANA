@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.FirstOrderExpansionRestriction
+
+#print axioms SuccessorTree.NonPrecompact.expandedRangeClosed_iff_exists_substructure
+#print axioms SuccessorTree.NonPrecompact.expandedRangeClosed_of_onFunction_surjective
+#print axioms SuccessorTree.NonPrecompact.expandedRangeClosed_iff_exists_restriction
+#print axioms SuccessorTree.NonPrecompact.restrictFirstOrderExpansion_refl
+#print axioms SuccessorTree.NonPrecompact.restrictFirstOrderExpansion_comp

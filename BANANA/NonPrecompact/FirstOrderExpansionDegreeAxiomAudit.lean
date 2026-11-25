@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FirstOrderExpansionDegree
+
+#print axioms SuccessorTree.NonPrecompact.firstOrderFiniteCopySystem_range_comp_automorphism
+#print axioms SuccessorTree.NonPrecompact.firstOrderCopyRamseyDegreeLE_card_expansionIsomorphismTypes
