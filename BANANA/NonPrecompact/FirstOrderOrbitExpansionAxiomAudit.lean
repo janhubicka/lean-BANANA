@@ -1,0 +1,9 @@
+import BANANA.NonPrecompact.FirstOrderOrbitExpansion
+
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.tupleOrbitLanguage
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.restrictOrbitExpansionAut_mem_closure
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.range_restrictOrbitExpansionAut
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.orbit_orbitExpansion_eq
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.finite_tupleOrbitLanguage_relations
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.countable_tupleOrbitLanguage_symbols
+#print axioms SuccessorTree.NonPrecompact.FirstOrderAut.categorical_orbitExpansion_of_coprecompact

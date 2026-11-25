@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderCategoricity
+
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_categorical_completeTheory
