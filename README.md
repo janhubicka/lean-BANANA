@@ -36,6 +36,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Folkman–BANANA first-order embedding correspondence | [`folkmanNativePairingEmbeddingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrder.lean) |
 | Folkman–BANANA first-order substructure correspondence | [`folkmanProductSubstructureEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderSubstructure.lean) |
 | Folkman–BANANA first-order Fraïssé class | [`folkmanFirstOrderClass_isFraisse`](BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean) |
+| First-order tuple orbits from a finite pointed cover | [`finite_firstOrderTupleOrbits_of_pointedCover`](BANANA/NonPrecompact/FirstOrderTupleOrbits.lean) uses mathlib's ultrahomogeneity interface |
 | Native finite diagrams in the encoded Folkman–BANANA limit | [`folkmanFirstOrderLimit_nativeExtension` and `folkmanFirstOrderLimit_tuple_factors`](BANANA/NonPrecompact/FolkmanFirstOrderLimit.lean) |
 | Folkman–BANANA original language recovered from finite tuple factorisations | [`FolkmanDecoding.encodingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderDecoding.lean) |
 | Folkman–BANANA mixed-sorted orbit transfer | [`FolkmanDecoding.exists_finite_tagged_tuple_orbit_representatives_of_invariant`](BANANA/NonPrecompact/FolkmanFirstOrderTaggedOrbits.lean) transfers finite orbit data from encoded tuples to tuples with specified sorts |

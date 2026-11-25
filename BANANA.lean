@@ -341,5 +341,6 @@ import BANANA.NonPrecompact.BooleanBananaPadicChargeNonempty
 import BANANA.NonPrecompact.BooleanBananaPadicChargeOrbit
 import BANANA.NonPrecompact.BooleanBananaPadicChargeMinimality
 import BANANA.NonPrecompact.FolkmanFiniteBooleanEPPA
+import BANANA.NonPrecompact.FirstOrderTupleOrbits
 import BANANA.NonPrecompact.FolkmanFirstOrderDecoding
 import BANANA.NonPrecompact.FolkmanFirstOrderTaggedOrbits

@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FirstOrderTupleOrbits
+
+#print axioms SuccessorTree.NonPrecompact.firstOrderTupleOrbit
+#print axioms SuccessorTree.NonPrecompact.finite_firstOrderTupleOrbits_of_pointedCover
