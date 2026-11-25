@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.FolkmanFirstOrderSubstructure
 import BANANA.NonPrecompact.FolkmanNativeCompleteFiniteClass
 import Mathlib.ModelTheory.Fraisse
+import BANANA.NonPrecompact.FolkmanFirstOrderClass
 
 /-!
 # The first-order Folkman Fraïssé class
@@ -18,28 +19,6 @@ open scoped FirstOrder
 
 private local instance (α : Type*) [Fintype α] : Fintype (AsBoolAlg α) :=
   Fintype.ofEquiv α toBoolAlg
-
-/-- Bundle a native paired ring product for the mathlib Fraïssé API. -/
-def folkmanProductBundle {L R : Type} [BooleanRing L] [BooleanRing R]
-    (P : FolkmanNativeFinitePairing L R) : Bundled.{0} folkmanLanguage.Structure :=
-  ⟨L × R, folkmanProductStructure P.pairing⟩
-
-/-- The first-order structure attached to a finite atom code. -/
-noncomputable def folkmanFirstOrderRepresentative (A : FolkmanAtomStructure) :
-    Bundled.{0} folkmanLanguage.Structure :=
-  folkmanProductBundle (folkmanNativeCodeRealisation A)
-
-instance (A : FolkmanAtomStructure) : Finite (folkmanFirstOrderRepresentative A) := by
-  change Finite (FolkmanNativeCodeRing A.leftCount × FolkmanNativeCodeRing A.rightCount)
-  infer_instance
-
-/-- The isomorphism closure of the finite Folkman atom representatives. -/
-def folkmanFirstOrderClass : Set (Bundled.{0} folkmanLanguage.Structure) :=
-  {M | ∃ A : FolkmanAtomStructure, Nonempty (M ≃[folkmanLanguage] folkmanFirstOrderRepresentative A)}
-
-theorem folkmanFirstOrderRepresentative_mem (A : FolkmanAtomStructure) :
-    folkmanFirstOrderRepresentative A ∈ folkmanFirstOrderClass :=
-  ⟨A, ⟨Language.Equiv.refl _ _⟩⟩
 
 theorem folkmanProductBundle_mem
     {L R : Type} [BooleanRing L] [BooleanRing R] [Fintype L] [Fintype R]

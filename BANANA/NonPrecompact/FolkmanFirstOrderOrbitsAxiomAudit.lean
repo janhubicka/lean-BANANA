@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderOrbits
+
+#print axioms SuccessorTree.NonPrecompact.folkmanGeneratedRepresentative_atomCounts_le
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderTupleOrbit
+#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_tupleOrbits_finite

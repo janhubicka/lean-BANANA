@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderDecodingLimit
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.folkmanFirstOrderLimit_factorsThroughPairedProducts

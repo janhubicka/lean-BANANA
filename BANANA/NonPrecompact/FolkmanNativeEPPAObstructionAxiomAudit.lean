@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanNativeEPPAObstruction
+
+#print axioms SuccessorTree.NonPrecompact.folkmanRingEquiv_cannot_enlarge
+#print axioms SuccessorTree.NonPrecompact.folkmanNativeEPPA_fails

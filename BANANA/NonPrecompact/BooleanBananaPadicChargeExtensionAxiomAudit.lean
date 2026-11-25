@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BooleanBananaPadicChargeExtension
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.finiteAtomSum
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_padicCharge_extension_of_global
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.exists_padicCharge_extension

@@ -38,11 +38,11 @@ private theorem exists_stonePoints (a : B) (ha : a ≠ ⊥) (ht : a ≠ ⊤) :
   obtain ⟨v, hv⟩ := hc
   exact ⟨u, v, hu, hv⟩
 
-private noncomputable def pointMass (u : BooleanSpectrum.Space B) (a : B) : ℤ_[2] := by
+noncomputable def pointMass (u : BooleanSpectrum.Space B) (a : B) : ℤ_[2] := by
   classical
   exact if u ∈ BooleanSpectrum.toSets a then 1 else 0
 
-private theorem pointMass_add (u : BooleanSpectrum.Space B) (a b : B) (h : Disjoint a b) :
+theorem pointMass_add (u : BooleanSpectrum.Space B) (a b : B) (h : Disjoint a b) :
     pointMass u (a ⊔ b) = pointMass u a + pointMass u b := by
   classical
   have hd : Disjoint (BooleanSpectrum.toSets a) (BooleanSpectrum.toSets b) := by

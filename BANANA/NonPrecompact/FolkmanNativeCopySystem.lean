@@ -11,23 +11,7 @@ A copy is the pair of image sets on the original ring carriers.
 
 namespace SuccessorTree.NonPrecompact
 
-/-- A finite object in the original two-sorted Folkman language. -/
-structure FolkmanNativeFiniteModel where
-  Left : Type
-  Right : Type
-  [leftRing : BooleanRing Left]
-  [rightRing : BooleanRing Right]
-  [leftFinite : Fintype Left]
-  [rightFinite : Fintype Right]
-  pairing : FolkmanNativeFinitePairing Left Right
-
-attribute [instance] FolkmanNativeFiniteModel.leftRing FolkmanNativeFiniteModel.rightRing
-  FolkmanNativeFiniteModel.leftFinite FolkmanNativeFiniteModel.rightFinite
-
 namespace FolkmanNativeFiniteModel
-
-abbrev Embedding (A B : FolkmanNativeFiniteModel) :=
-  FolkmanNativePairingEmbedding A.pairing B.pairing
 
 private theorem embedding_ext {A B : FolkmanNativeFiniteModel} {f g : Embedding A B}
     (hL : ∀ x, f.left x = g.left x) (hR : ∀ y, f.right y = g.right y) : f = g := by

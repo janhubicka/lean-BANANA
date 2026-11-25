@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.FolkmanNativeCopySystem
 import BANANA.NonPrecompact.FolkmanNativeCopyTransport
+import BANANA.NonPrecompact.FolkmanNativeOneAtom
 
 /-!
 # The Folkman–BANANA Ramsey expansion obstruction
@@ -18,31 +19,6 @@ noncomputable def folkmanNativeDiagonal (q : ℕ) : FolkmanNativeFiniteModel whe
   Left := FolkmanNativeCodeRing q
   Right := FolkmanNativeCodeRing q
   pairing := folkmanNativeCodeRealisation (FolkmanAtomStructure.diagonal q)
-
-private abbrev OneAtomRing := FolkmanNativeCodeRing 1
-
-private theorem oneAtom_eq_zero_or_one (x : OneAtomRing) : x = 0 ∨ x = 1 := by
-  by_cases h : (0 : Fin 1) ∈ ofBoolRing x
-  · right
-    apply ofBoolRing.injective
-    ext i
-    have hi : i = 0 := Subsingleton.elim _ _
-    subst i
-    change (0 : Fin 1) ∈ ofBoolRing x ↔ (0 : Fin 1) ∈ (Finset.univ : Finset (Fin 1))
-    simp [h]
-  · left
-    apply ofBoolRing.injective
-    ext i
-    have hi : i = 0 := Subsingleton.elim _ _
-    subst i
-    change (0 : Fin 1) ∈ ofBoolRing x ↔ (0 : Fin 1) ∈ (∅ : Finset (Fin 1))
-    simp [h]
-
-private theorem oneAtom_one_ne_zero : (1 : OneAtomRing) ≠ 0 := by
-  intro h
-  have eq := congrArg ofBoolRing h
-  change (Finset.univ : Finset (Fin 1)) = ∅ at eq
-  exact (Finset.notMem_empty _) (eq ▸ Finset.mem_univ (0 : Fin 1))
 
 private theorem source_pairing_one : (folkmanNativeDiagonal 1).pairing.pairing 1 1 = 1 := by
   have h : ({0} : Finset (Fin 1)) = Finset.univ := by
@@ -71,62 +47,19 @@ private theorem pairing_zero_right {L R : Type*} [BooleanRing L] [BooleanRing R]
   rw [add_zero] at h
   exact add_left_cancel (h.symm.trans (add_zero _).symm)
 
-private noncomputable def oneAtomHom {R : Type*} [BooleanRing R] (x : R) :
-    OneAtomRing →ₙ+* R := by
-  classical
-  exact
-    { toFun := fun t => if t = 0 then 0 else x
-      map_zero' := ite_eq_left rfl
-      map_add' := fun a b => by
-        rcases oneAtom_eq_zero_or_one a with rfl | rfl <;>
-          rcases oneAtom_eq_zero_or_one b with rfl | rfl <;>
-          simp [oneAtom_one_ne_zero, BooleanRing.add_self]
-      map_mul' := fun a b => by
-        rcases oneAtom_eq_zero_or_one a with rfl | rfl <;>
-          rcases oneAtom_eq_zero_or_one b with rfl | rfl <;>
-          simp [oneAtom_one_ne_zero, BooleanRing.mul_self] }
-
-@[simp] private theorem oneAtomHom_one {R : Type*} [BooleanRing R] (x : R) :
-    oneAtomHom x 1 = x := by
-  classical
-  change (if (1 : OneAtomRing) = 0 then 0 else x) = x
-  exact ite_eq_right oneAtom_one_ne_zero
-
-private theorem oneAtomHom_injective {R : Type*} [BooleanRing R] {x : R} (hx : x ≠ 0) :
-    Function.Injective (oneAtomHom x) := by
-  intro a b hab
-  rcases oneAtom_eq_zero_or_one a with rfl | rfl <;>
-    rcases oneAtom_eq_zero_or_one b with rfl | rfl
-  · rfl
-  · exact (hx (by simpa using hab.symm)).elim
-  · exact (hx (by simpa using hab)).elim
-  · rfl
-
-private theorem oneAtomHom_range {R : Type*} [BooleanRing R]
-    (f : OneAtomRing →ₙ+* R) : Set.range f = {0, f 1} := by
-  ext x
-  constructor
-  · rintro ⟨a, rfl⟩
-    rcases oneAtom_eq_zero_or_one a with rfl | rfl <;> simp
-  · intro h
-    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at h
-    rcases h with rfl | rfl
-    · exact ⟨0, map_zero _⟩
-    · exact Set.mem_range_self _
-
 private noncomputable def embedSource {C : FolkmanNativeFiniteModel}
     (X : FolkmanNativeAxCopy C.pairing) : Embedding (folkmanNativeDiagonal 1) C where
-  left := oneAtomHom X.left
-  right := oneAtomHom X.right
-  left_injective := oneAtomHom_injective X.left_ne_zero
-  right_injective := oneAtomHom_injective X.right_ne_zero
+  left := folkmanOneAtomHom X.left
+  right := folkmanOneAtomHom X.right
+  left_injective := folkmanOneAtomHom_injective X.left_ne_zero
+  right_injective := folkmanOneAtomHom_injective X.right_ne_zero
   preserves_pairing := by
     intro a b
-    change C.pairing.pairing (oneAtomHom X.left a) (oneAtomHom X.right b) =
+    change C.pairing.pairing (folkmanOneAtomHom X.left a) (folkmanOneAtomHom X.right b) =
       (folkmanNativeDiagonal 1).pairing.pairing a b
-    rcases oneAtom_eq_zero_or_one a with rfl | rfl <;>
-      rcases oneAtom_eq_zero_or_one b with rfl | rfl <;>
-      simp only [map_zero, oneAtomHom_one]
+    rcases folkmanOneAtom_eq_zero_or_one a with rfl | rfl <;>
+      rcases folkmanOneAtom_eq_zero_or_one b with rfl | rfl <;>
+      simp only [map_zero, folkmanOneAtomHom_one]
     · exact (pairing_zero_left C.pairing _).trans
         (pairing_zero_left (folkmanNativeDiagonal 1).pairing _).symm
     · exact (pairing_zero_left C.pairing _).trans
@@ -139,12 +72,12 @@ private theorem embedSource_ranges {C : FolkmanNativeFiniteModel}
     (X : FolkmanNativeAxCopy C.pairing) :
     (Copy.ofEmbedding (embedSource X)).val = ({0, X.left}, {0, X.right}) := by
   apply Prod.ext
-  · change Set.range (oneAtomHom X.left) = _
-    exact (oneAtomHom_range (oneAtomHom X.left)).trans
-      (congrArg (fun x => ({0, x} : Set C.Left)) (oneAtomHom_one X.left))
-  · change Set.range (oneAtomHom X.right) = _
-    exact (oneAtomHom_range (oneAtomHom X.right)).trans
-      (congrArg (fun x => ({0, x} : Set C.Right)) (oneAtomHom_one X.right))
+  · change Set.range (folkmanOneAtomHom X.left) = _
+    exact (folkmanOneAtomHom_range (folkmanOneAtomHom X.left)).trans
+      (congrArg (fun x => ({0, x} : Set C.Left)) (folkmanOneAtomHom_one X.left))
+  · change Set.range (folkmanOneAtomHom X.right) = _
+    exact (folkmanOneAtomHom_range (folkmanOneAtomHom X.right)).trans
+      (congrArg (fun x => ({0, x} : Set C.Right)) (folkmanOneAtomHom_one X.right))
 
 /-- Pairing-one generators parametrise exactly the unlabelled copies of
 the canonical source `A_folk = B_folk(1)` on the original carriers. -/
@@ -174,7 +107,7 @@ noncomputable def folkmanNativeSourceCopyEquiv (C : FolkmanNativeFiniteModel) :
     let X : FolkmanNativeAxCopy C.pairing :=
       ⟨f.left 1, f.right 1, (f.preserves_pairing 1 1).trans source_pairing_one⟩
     refine ⟨X, Subtype.ext ((embedSource_ranges X).trans (?_ : _ = p.val))⟩
-    exact (Prod.ext (oneAtomHom_range f.left).symm (oneAtomHom_range f.right).symm).trans hf
+    exact (Prod.ext (folkmanOneAtomHom_range f.left).symm (folkmanOneAtomHom_range f.right).symm).trans hf
 
 /-- One colouring of the original copy ranges in an arbitrary ambient
 structure attains all colours inside every diagonal target copy. -/

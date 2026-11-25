@@ -1,6 +1,7 @@
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.ColouringWrappers
 import BANANA.NonPrecompact.FiniteOwnerSums
+import BANANA.NonPrecompact.FolkmanAtomCode
 
 /-!
 # Persistent copy colourings for Folkman--BANANA
@@ -114,12 +115,6 @@ theorem folkmanEdgeCount_biUnion_right
         ∑ y ∈ folkmanFiber owner j,
           if edge x y = 1 then 1 else 0 := by
         rw [Finset.sum_comm]
-
-/-- A finite Folkman--BANANA structure in atom coordinates. -/
-structure FolkmanAtomStructure where
-  leftCount : ℕ
-  rightCount : ℕ
-  edge : Fin leftCount → Fin rightCount → F2
 
 /-- A non-unital Boolean-ring embedding in atom coordinates.
 
