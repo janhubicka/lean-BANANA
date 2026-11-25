@@ -116,4 +116,34 @@ theorem cylinderMarkedGroup_failsGenericPointProperty :
   obtain ⟨c, hc⟩ := h (PadicCharge prebananaFiveAryCylinderMark)
   exact cylinderPadicCharge_minimal_no_comeagre.2 c hc
 
+open scoped BigOperators Classical in
+/-- Realise a zero-sum assignment of charge residues to every atom of an
+arbitrary finite marked Boolean algebra by a marked cylinder embedding. -/
+theorem exists_cylinderPadicChargeResidueEmbedding
+    (c : PadicCharge prebananaFiveAryCylinderMark) (A : PrebananaFiniteBooleanModel)
+    (k : ℕ) (r : PrebananaAbstractAtoms A.carrier → ZMod (2 ^ (k + 1)))
+    (rtotal : (∑ i, r i) = 0)
+    (rparity : ∀ i, (ZMod.cast (r i) : ZMod 2) = A.μ i.val) :
+    ∃ f : PrebananaFiniteToCountableEmbedding A prebananaCylinderCountableModel,
+      ∀ i : PrebananaAbstractAtoms A.carrier,
+        PadicInt.toZModPow (k + 1) (c.val (f.hom i.val)) = r i := by
+  classical
+  have := prebananaAbstractAtoms_nonempty A.carrier
+  obtain ⟨a, hainj, hares, hamark⟩ := exists_padicChargeResidueEmbedding_of_partitions
+    hasChargeResiduePartition cylinder_has_allMarkedAmbients c k r rtotal
+  let e := prebananaFiniteBooleanAtomFinsetOrderIso A.carrier
+  let f := a.comp (e : BoundedLatticeHom A.carrier _)
+  have hfinj : Function.Injective f := hainj.comp e.injective
+  have hfmark (x : A.carrier) : prebananaFiveAryCylinderMark (f x) = A.μ x := by
+    change prebananaFiveAryCylinderMark (a (e x)) = A.μ x
+    rw [hamark]
+    simp only [rparity]
+    exact (prebananaAbstractParity_atomSum_on_atoms A.carrier A.μ A.μ_bot A.μ_add x).symm
+  refine ⟨⟨f, hfinj, hfmark⟩, fun i => ?_⟩
+  change PadicInt.toZModPow (k + 1) (c.val (a (e i.val))) = r i
+  have hs : e i.val = {i} := by
+    rw [← prebananaFiniteBoolean_singleton_represents_atom A.carrier i]
+    exact e.apply_symm_apply _
+  rw [hs, hares, Finset.sum_singleton]
+
 end SuccessorTree.NonPrecompact.BooleanBanana

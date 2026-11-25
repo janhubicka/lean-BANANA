@@ -81,7 +81,67 @@ private theorem chargeSum {S I B R : Type*} [BooleanAlgebra S] [BooleanAlgebra B
         rw [disjoint_iff, ← map_inf, huv.eq_bot, map_bot]
       rw [map_sup, c.property.add _ _ hdisj, map_add]) s
 
-variable {B : Type*} [BooleanAlgebra B] [Nontrivial B]
+variable {B : Type*} [BooleanAlgebra B]
+
+/-- Arbitrary zero-sum residues on a nonempty set of target atoms are
+realised by a Boolean embedding of the target powerset. -/
+theorem exists_padicChargeResidueEmbedding_of_partitions {mark : B → ZMod 2}
+    (hpartition : HasChargeResiduePartition)
+    (hamb : ∀ m k : ℕ,
+      ∃ f : BoundedLatticeHom (Finset (ChargeAmbientIndex m k)) B,
+        Function.Injective f ∧ ∀ j, mark (f {j}) = 1)
+    (c : PadicCharge mark) (k : ℕ) {I : Type*} [Fintype I] [Nonempty I] [DecidableEq I]
+    (r : I → ZMod (2 ^ (k + 1))) (rtotal : (∑ i, r i) = 0) :
+    ∃ f : BoundedLatticeHom (Finset I) B, Function.Injective f ∧
+      (∀ s : Finset I, PadicInt.toZModPow (k + 1) (c.val (f s)) = ∑ i ∈ s, r i) ∧
+      ∀ s : Finset I, mark (f s) = ∑ i ∈ s, (ZMod.cast (r i) : ZMod 2) := by
+  classical
+  have hcardpos : 0 < Fintype.card I := Fintype.card_pos
+  let m := Fintype.card I - 1
+  have hcard : Fintype.card I = Fintype.card (ChargeTargetIndex m) := by
+    simp [ChargeTargetIndex, m]
+    omega
+  let e : I ≃ ChargeTargetIndex m := Fintype.equivOfCardEq hcard
+  let ef : Finset I ≃o Finset (ChargeTargetIndex m) :=
+    { toEquiv := e.finsetCongr
+      map_rel_iff' := Finset.map_subset_map }
+  let rr (i : ChargeTargetIndex m) := r (e.symm i)
+  have rrtotal : (∑ i, rr i) = 0 := by
+    rw [← Equiv.sum_comp e rr]
+    simpa [rr] using rtotal
+  obtain ⟨a, hainj, hamark⟩ := hamb m k
+  let rz := PadicInt.toZModPow (p := 2) (k + 1)
+  let z (j : ChargeAmbientIndex m k) := rz (c.val (a {j}))
+  have zpar (j : ChargeAmbientIndex m k) : (ZMod.cast (z j) : ZMod 2) = 1 := by
+    simp only [z, rz, padic_residue_cast, c.property.parity, hamark]
+  have hamass (s : Finset (ChargeAmbientIndex m k)) :
+      rz (c.val (a s)) = ∑ j ∈ s, z j :=
+    (chargeSum c a (OrderIso.refl _) rz s).symm
+  have ztotal : (∑ j, z j) = 0 := by
+    rw [← hamass Finset.univ, ← Finset.top_eq_univ, map_top, c.property.top, map_zero]
+  obtain ⟨owner, hsurj, howner⟩ := hpartition m k z rr zpar ztotal rrtotal
+  let f : BoundedLatticeHom (Finset I) B :=
+    a.comp ((ownerPullback owner).comp (ef : BoundedLatticeHom (Finset I) _))
+  have hfinj : Function.Injective f :=
+    hainj.comp ((ownerPullback_injective owner hsurj).comp ef.injective)
+  have hfatom (i : I) : rz (c.val (f {i})) = r i := by
+    change rz (c.val (a (ownerPullback owner (ef {i})))) = r i
+    have hs : ef {i} = {e i} := by
+      change ({i} : Finset I).map e.toEmbedding = {e i}
+      exact Finset.map_singleton _ _
+    rw [hs, ownerPullback_singleton, hamass, howner]
+    simp [rr]
+  have hfres (s : Finset I) : rz (c.val (f s)) = ∑ i ∈ s, r i := by
+    calc
+      _ = ∑ i ∈ s, rz (c.val (f {i})) := (chargeSum c f (OrderIso.refl _) rz s).symm
+      _ = _ := Finset.sum_congr rfl (fun i _ => hfatom i)
+  refine ⟨f, hfinj, hfres, fun s => ?_⟩
+  let reduce := ZMod.castHom (dvd_pow_self 2 (Nat.succ_ne_zero k)) (ZMod 2)
+  have h := congrArg reduce (hfres s)
+  rw [map_sum] at h
+  simpa only [reduce, rz, ZMod.castHom_apply, padic_residue_cast, c.property.parity] using h
+
+variable [Nontrivial B]
 
 set_option maxHeartbeats 1000000 in
 /-- Every admissible charge on a homogeneous Boolean algebra having
@@ -114,51 +174,22 @@ theorem exists_padicChargeResidueApproximation_of_partitions
     exact htop_ne_bot (e₀.injective (h.trans e₀.map_bot.symm))
   obtain ⟨i₀, _⟩ := hnonempty
   let : Nonempty I := ⟨i₀⟩
-  have hcardpos : 0 < Fintype.card I := Fintype.card_pos
-  let m := Fintype.card I - 1
-  have hcard : Fintype.card I = Fintype.card (ChargeTargetIndex m) := by
-    simp [ChargeTargetIndex, m]
-    omega
-  let ei : I ≃ ChargeTargetIndex m := Fintype.equivOfCardEq hcard
-  let ef : Finset I ≃o Finset (ChargeTargetIndex m) :=
-    { toEquiv := ei.finsetCongr
-      map_rel_iff' := Finset.map_subset_map }
-  let e : S ≃o Finset (ChargeTargetIndex m) := e₀.trans ef
-  obtain ⟨a, hainj, hamark⟩ := hamb m k
   let rz := PadicInt.toZModPow (p := 2) (k + 1)
-  let z (j : ChargeAmbientIndex m k) := rz (c.val (a {j}))
-  let r (i : ChargeTargetIndex m) := rz (d.val (e.symm {i}).val)
-  have zpar (j : ChargeAmbientIndex m k) : (ZMod.cast (z j) : ZMod 2) = 1 := by
-    simp only [z, rz, padic_residue_cast, c.property.parity, hamark]
-  have hamass (s : Finset (ChargeAmbientIndex m k)) :
-      rz (c.val (a s)) = ∑ j ∈ s, z j := by
-    symm
-    exact chargeSum c a (OrderIso.refl _) rz s
-  have ztotal : (∑ j, z j) = 0 := by
-    rw [← hamass Finset.univ, ← Finset.top_eq_univ, map_top, c.property.top, map_zero]
-  have rsum (s : Finset (ChargeTargetIndex m)) :
-      (∑ i ∈ s, r i) = rz (d.val (e.symm s).val) := by
-    exact chargeSum d S.subtype e rz s
+  let r (i : I) := rz (d.val (e₀.symm {i}).val)
+  have rsum (s : Finset I) :
+      (∑ i ∈ s, r i) = rz (d.val (e₀.symm s).val) := by
+    exact chargeSum d S.subtype e₀ rz s
   have rtotal : (∑ i, r i) = 0 := by
-    rw [rsum Finset.univ, ← Finset.top_eq_univ, e.symm.map_top]
+    rw [rsum Finset.univ, ← Finset.top_eq_univ, e₀.symm.map_top]
     change rz (d.val ⊤) = 0
     rw [d.property.top, map_zero]
-  obtain ⟨owner, hsurj, howner⟩ := hpartition m k z r zpar ztotal rtotal
-  let f : BoundedLatticeHom S B :=
-    a.comp ((ownerPullback owner).comp (e : BoundedLatticeHom S _))
-  have hfinj : Function.Injective f :=
-    hainj.comp ((ownerPullback_injective owner hsurj).comp e.injective)
-  have hfatom (i : ChargeTargetIndex m) :
-      rz (c.val (f (e.symm {i}))) = r i := by
-    change rz (c.val (a (ownerPullback owner (e (e.symm {i}))))) = r i
-    rw [e.apply_symm_apply, ownerPullback_singleton, hamass, howner]
+  obtain ⟨a, hainj, hares, _⟩ :=
+    exists_padicChargeResidueEmbedding_of_partitions hpartition hamb c k r rtotal
+  let f := a.comp (e₀ : BoundedLatticeHom S (Finset I))
+  have hfinj : Function.Injective f := hainj.comp e₀.injective
   have hfres (x : S) : rz (c.val (f x)) = rz (d.val x.val) := by
-    have hsum := chargeSum c f e rz (e x)
-    rw [e.symm_apply_apply] at hsum
-    calc
-      rz (c.val (f x)) = ∑ i ∈ e x, rz (c.val (f (e.symm {i}))) := hsum.symm
-      _ = ∑ i ∈ e x, r i := Finset.sum_congr rfl (fun i _ => hfatom i)
-      _ = rz (d.val x.val) := by simpa only [e.symm_apply_apply] using rsum (e x)
+    change rz (c.val (a (e₀ x))) = rz (d.val x.val)
+    rw [hares, rsum, e₀.symm_apply_apply]
   have hfmark (x : S) : mark (f x) = mark x.val := by
     have h := congrArg (fun v : ZMod (2 ^ (k + 1)) => (ZMod.cast v : ZMod 2)) (hfres x)
     simpa only [rz, padic_residue_cast, c.property.parity, d.property.parity] using h
