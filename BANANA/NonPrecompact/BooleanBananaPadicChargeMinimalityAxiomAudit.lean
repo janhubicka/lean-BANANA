@@ -1,0 +1,3 @@
+import BANANA.NonPrecompact.BooleanBananaPadicChargeMinimality
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.dense_padicChargeOrbit_of_finiteResidues

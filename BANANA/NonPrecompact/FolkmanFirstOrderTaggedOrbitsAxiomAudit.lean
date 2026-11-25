@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderTaggedOrbits
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.TaggedTuple
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.TaggedOrbit
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.exists_finite_tagged_tuple_orbit_representatives_of_invariant

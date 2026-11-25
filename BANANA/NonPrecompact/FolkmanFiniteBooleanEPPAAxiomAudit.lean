@@ -1,0 +1,4 @@
+import BANANA.NonPrecompact.FolkmanFiniteBooleanEPPA
+
+#print axioms SuccessorTree.NonPrecompact.folkmanRingEquiv_cannot_enlarge
+#print axioms SuccessorTree.NonPrecompact.folkmanTwoAtom_partialIso_obstructed

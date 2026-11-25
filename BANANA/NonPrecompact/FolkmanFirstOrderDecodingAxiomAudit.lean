@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderDecoding
+
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.productRing_mul_self
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.productEquiv
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.pairing_add_left
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.pairing_add_right
+#print axioms SuccessorTree.NonPrecompact.FolkmanDecoding.encodingEquiv

@@ -1,0 +1,13 @@
+import BANANA.NonPrecompact.BooleanBananaPadicChargeNonempty
+import BANANA.NonPrecompact.BooleanBananaPadicChargeOrbit
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.isClosed_setOf_isPadicCharge
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.padicCharge_compactSpace
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.padicCharge_metrizableSpace
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.continuous_padicChargeEvaluation
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.markedAutomorphisms_padicChargeAction_continuous
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.interior_padicChargeEvaluation_fibre
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.padicChargeOrbit_meagre
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.nonempty_padicCharge_of_fintype
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.nonempty_padicCharge_of_finiteAmbient
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.nonempty_padicCharge
