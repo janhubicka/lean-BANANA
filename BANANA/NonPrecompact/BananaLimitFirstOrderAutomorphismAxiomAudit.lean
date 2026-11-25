@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism
+
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_nativeAut_smul
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_firstOrderAutIso
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_firstOrderAutIso_apply
+#print axioms SuccessorTree.NonPrecompact.CoPrecompact.map_continuousMulEquiv
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_categorical_nativeOrbitExpansion
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_range_restrict_nativeOrbitExpansionAut

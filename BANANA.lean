@@ -372,3 +372,9 @@ import BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity
 import BANANA.NonPrecompact.BananaLimitExtremelyAmenableDegree
 import BANANA.NonPrecompact.BananaLimitPolish
 import BANANA.NonPrecompact.BananaLimitFirstOrder
+import BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism
+import BANANA.NonPrecompact.BananaLimitDenseConjugacy
+import BANANA.NonPrecompact.BananaNativeCopySystem
+import BANANA.NonPrecompact.BananaLimitParameterColouring
+import BANANA.NonPrecompact.ClopenProbabilityExtension
+import BANANA.NonPrecompact.ExpansionDegreeByIsomorphismTypes

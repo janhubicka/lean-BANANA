@@ -43,6 +43,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Boolean–BANANA cylinder charge flow and failure of the generic point property | [`BooleanBanana.cylinderPadicChargeOrbit_dense_meagre` and `BooleanBanana.cylinderMarkedGroup_failsGenericPointProperty`](BANANA/NonPrecompact/BooleanBananaCylinderPadicCharge.lean) |
 | Boolean–BANANA realised mass values and parity | [`BooleanBanana.exists_positiveMass_element_of_age`, `BooleanBanana.positiveMass_prime_mem_iff_of_age`, `BooleanBanana.exists_even_marked_mass_sequence_of_age`](BANANA/NonPrecompact/BooleanBananaMassRangeRealisation.lean) |
 | Boolean–BANANA positive-mass subgroup dynamics | [`BooleanBanana.massSubgroup_eq_of_amenable_supergroup`, `BooleanBanana.invariantStoneProbability_unique`, `BooleanBanana.massSubgroup_no_stone_fixedPoint`, `BooleanBanana.massRange_eq_of_conjugate` and `BooleanBanana.massSubgroup_not_coprecompact`](BANANA/NonPrecompact/BooleanBananaMassStoneDynamics.lean) |
+| Extension of clopen probability charges | [`existsUnique_regularProbability_of_clopenCharge`](BANANA/NonPrecompact/ClopenProbabilityExtension.lean) |
 | Boolean–BANANA prime detection from mass values | [`BooleanBanana.prime_mem_iff_normalizedMass_mem_range`](BANANA/NonPrecompact/BooleanBananaMassPrimeRange.lean) |
 | Boolean–BANANA concrete positive-mass expansions | [Weighted extension and reduct identification](BANANA/NonPrecompact/BooleanBananaPositiveMassOnMarkedLimit.lean) and [the mass-preserving subgroups of the fixed limit](BANANA/NonPrecompact/BooleanBananaCylinderMassSubgroups.lean) |
 | Boolean–BANANA continuum many conjugacy classes of closed maximal amenable subgroups | [`BooleanBanana.mk_cylinderClosedMaximalAmenableConjugacyClass`](BANANA/NonPrecompact/BooleanBananaCylinderMassSubgroups.lean) |
@@ -72,14 +73,19 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | BANANA finite tuple orbits | [`bananaLimit_exists_finite_tuple_orbit_representatives`](BANANA/NonPrecompact/BananaLimitFiniteOrbits.lean) |
 | Countable categoricity of the tagged BANANA limit | [`bananaLimit_firstOrder_aleph0_categorical`](BANANA/NonPrecompact/BananaLimitFirstOrder.lean) |
 | BANANA copy Ramsey degrees | [`BananaMatrixStructure.copyRamseyDegree_classification`](BANANA/NonPrecompact/BananaOneSidedCopyDegree.lean) |
+| BANANA precompact Ramsey expansion obstruction | [`banana_noPrecompactRamseyExpansion`](BANANA/NonPrecompact/BananaNativeCopySystem.lean) uses the genuine BANANA copy ranges and the shared hereditary expansion interface |
+| Copy degrees bounded by expansion isomorphism types | [`copyRamseyDegreeLE_card_expansionIsomorphismTypes`](BANANA/NonPrecompact/ExpansionDegreeByIsomorphismTypes.lean) quotients labelled expansions by reduct automorphisms |
 | BANANA coherent EPPA | [`BananaMatrixStructure.exists_coherentEppaWitness`](BANANA/NonPrecompact/CoherentEppaWitness.lean), a single perfect witness with both sides of dimension `l+r` and a coherent assignment for all partial isomorphisms |
 | BANANA finite-system JEP and WAP | [`bananaFiniteSystems_jep_and_wap`](BANANA/NonPrecompact/BananaFiniteSystemsJepWap.lean) |
+| BANANA dense diagonal conjugacy orbits | [`bananaLimit_exists_dense_diagonalConjugacyOrbit`](BANANA/NonPrecompact/BananaLimitDenseConjugacy.lean) gives a dense orbit in each finite power |
 | BANANA dense finite GL approximation and amenability | [`exists_bananaLimitFiniteGLSequence` and `bananaLimitAutomorphismGroup_amenable`](BANANA/NonPrecompact/BananaLimitTopologicalAmenability.lean) |
 | BANANA pointwise topology | [Polishness](BANANA/NonPrecompact/BananaLimitPolish.lean) and [native tuple-orbit criteria for co-precompactness and closure](BANANA/NonPrecompact/BananaLimitOrbitCoPrecompact.lean) |
+| BANANA native and tagged automorphism groups | [Continuous group isomorphism and countable categoricity of canonical orbit expansions](BANANA/NonPrecompact/BananaLimitFirstOrderAutomorphism.lean) |
 | BANANA has no co-precompact extremely amenable subgroup | [`bananaLimit_no_coprecompact_extremelyAmenable`](BANANA/NonPrecompact/BananaLimitExtremelyAmenableDegree.lean) |
 | Amenability of a dense directed union of finite subgroups | [`exists_invariant_probability_of_dense_finite_subgroups`](BANANA/NonPrecompact/FiniteSubgroupAmenability.lean) |
 | Fixed-point method for finite colour palettes | [`exists_fixed_colouring_in_orbit_closure` and `exists_finite_support_of_orbit_fixed_colourings`](BANANA/NonPrecompact/FixedPointColouring.lean) |
 | BANANA canonical zero-base amalgamation | [`BananaMatrixStructure.exists_canonical_zero_amalgam`](BANANA/NonPrecompact/BananaDirectSumCanonical.lean) |
+| Finite parameter colourings in the native BANANA limit | [`exists_bananaLimit_monochromatic_target_of_finite_parameters`](BANANA/NonPrecompact/BananaLimitParameterColouring.lean) |
 | Symplectic residue lemma | [`quadraticAffineWeight_residueFibres_odd`](BANANA/NonPrecompact/QuadraticResidueStandard.lean) |
 | Symplectic finite persistent line colouring | [`exists_symplecticPointColouring`](BANANA/NonPrecompact/SymplecticPointColouring.lean) |
 | Symplectic homogeneity under the ambient hypotheses | [`exists_wittCountableIsometry`](BANANA/NonPrecompact/WittCountable.lean) |

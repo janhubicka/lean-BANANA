@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.ExpansionDegreeByIsomorphismTypes
+
+#print axioms SuccessorTree.RamseyExpansion.expansionIsomorphismSetoid
+#print axioms SuccessorTree.RamseyExpansion.copyRamseyDegreeLE_card_expansionRepresentatives
+#print axioms SuccessorTree.RamseyExpansion.copyRamseyDegreeLE_card_expansionIsomorphismTypes

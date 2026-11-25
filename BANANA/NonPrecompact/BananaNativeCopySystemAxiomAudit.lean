@@ -1,0 +1,6 @@
+import BANANA.NonPrecompact.BananaNativeCopySystem
+
+#print axioms SuccessorTree.NonPrecompact.BananaMatrixEmbedding.exists_factor_of_range_le
+#print axioms SuccessorTree.NonPrecompact.bananaCopySystem
+#print axioms SuccessorTree.NonPrecompact.bananaCopySystem_copyRamseyDegreeLE_iff
+#print axioms SuccessorTree.NonPrecompact.banana_noPrecompactRamseyExpansion

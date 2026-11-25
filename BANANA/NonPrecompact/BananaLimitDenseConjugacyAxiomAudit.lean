@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaLimitDenseConjugacy
+
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_diagonalConjugation_topologicallyTransitive
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_exists_dense_diagonalConjugacyOrbit
+#print axioms SuccessorTree.NonPrecompact.bananaLimit_dense_diagonalConjugacyOrbit_points_mem_residual

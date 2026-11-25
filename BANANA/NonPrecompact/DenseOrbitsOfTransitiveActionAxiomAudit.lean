@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.DenseOrbitsOfTransitiveAction
+
+#print axioms SuccessorTree.NonPrecompact.dense_orbit_points_isGδ_and_dense
+#print axioms SuccessorTree.NonPrecompact.dense_orbit_points_mem_residual
+#print axioms SuccessorTree.NonPrecompact.exists_dense_orbit_of_topologicallyTransitive
