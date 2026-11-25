@@ -1,4 +1,5 @@
 import Mathlib.Dynamics.Minimal
+import Mathlib.GroupTheory.GroupAction.SubMulAction
 import Mathlib.Topology.Algebra.MulAction
 import Mathlib.Topology.ExtremallyDisconnected
 import Mathlib.Topology.Sequences
@@ -51,6 +52,22 @@ theorem exists_minimal_closed_subflow (G : Type u) (X : Type v)
   apply hY.eq_of_subset
   · exact ⟨isClosed_closure, (nonempty_orbit _).closure, fun g => smul_closure_orbit_subset g y⟩
   · exact closure_minimal (by rintro _ ⟨g, rfl⟩; exact hInv g ⟨y, hy, rfl⟩) hclosed
+
+/-- A nonempty compact Hausdorff flow has a compact, nonempty minimal subaction. -/
+theorem exists_compact_minimal_subaction (G : Type u) (X : Type v)
+    [Group G] [TopologicalSpace G] [TopologicalSpace X] [CompactSpace X] [T2Space X]
+    [Nonempty X] [MulAction G X] [ContinuousSMul G X] :
+    ∃ Y : SubMulAction G X, CompactSpace Y ∧ Nonempty Y ∧
+      ContinuousSMul G Y ∧ IsMinimal G Y := by
+  obtain ⟨Y, hclosed, hne, hinv, hminimal⟩ := exists_minimal_closed_subflow G X
+  let S : SubMulAction G X := ⟨Y, fun g x hx => hinv g ⟨x, hx, rfl⟩⟩
+  refine ⟨S, isCompact_iff_compactSpace.mp hclosed.isCompact, hne.coe_sort, ?_, ?_⟩
+  · exact ⟨(continuous_fst.smul (continuous_subtype_val.comp continuous_snd)).subtype_mk _⟩
+  · refine ⟨fun x => ?_⟩
+    rw [dense_iff_closure_eq]
+    ext z
+    rw [closure_subtype, SubMulAction.val_image_orbit, hminimal x.val x.property]
+    exact iff_of_true z.property (mem_univ z)
 
 /-- The universal mapping property among nonempty compact Hausdorff minimal flows. -/
 def UniversalAmongMinimalFlows (G : Type u) (M : Type v)

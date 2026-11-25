@@ -1,0 +1,8 @@
+import BANANA.NonPrecompact.BananaLimitInvariantTypes
+
+#print axioms SuccessorTree.NonPrecompact.SameFormulaType.exists_extend_of_isolates
+#print axioms SuccessorTree.NonPrecompact.IsInvariantType.mem_formulaWithParameters_iff_aut
+#print axioms SuccessorTree.NonPrecompact.HasDefinableTupleRamsey.exists_invariantType
+#print axioms SuccessorTree.NonPrecompact.HasDefinableTupleRamsey.exists_invariantExtension
+#print axioms SuccessorTree.NonPrecompact.bananaTagged_completeTheory_exists_invariantExtension
+#print axioms SuccessorTree.NonPrecompact.bananaTagged_completeTheory_exists_invariantEnumerationType

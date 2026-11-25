@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.FolkmanFirstOrderExistence
+
+#print axioms SuccessorTree.NonPrecompact.exists_finiteFraisseLimit
+#print axioms SuccessorTree.NonPrecompact.exists_folkmanFirstOrderLimit
+#print axioms SuccessorTree.NonPrecompact.exists_folkmanFirstOrderLimit_categorical

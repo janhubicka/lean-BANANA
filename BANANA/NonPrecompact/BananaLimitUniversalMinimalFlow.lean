@@ -1,5 +1,6 @@
 import BANANA.NonPrecompact.BananaLimitExtremelyAmenableDegree
 import BANANA.NonPrecompact.StoneCechOrbitFlow
+import BANANA.NonPrecompact.UniversalMinimalFlowExistence
 
 /-!
 # The universal minimal flow of the native BANANA group is not metrisable
@@ -36,5 +37,18 @@ theorem bananaLimit_universalMinimalFlow_not_metrizable
   letI : TopologicalSpace (Fin r) := ⊥
   letI : DiscreteTopology (Fin r) := ⟨rfl⟩
   exact exists_finite_translates_of_bounded_colour_palettes T d fun c => hd T c
+
+/-- The native BANANA group has a nonmetrisable universal minimal flow. -/
+theorem bananaLimit_exists_nonmetrizable_universalMinimalFlow :
+    ∃ (M : Type) (_ : TopologicalSpace M) (_ : CompactSpace M) (_ : T2Space M)
+      (_ : Nonempty M) (_ : MulAction BananaLimitAutomorphism M)
+      (_ : ContinuousSMul BananaLimitAutomorphism M)
+      (_ : MulAction.IsMinimal BananaLimitAutomorphism M),
+      UniversalAmongMinimalFlows.{0,0,0} BananaLimitAutomorphism M ∧
+        ¬ MetrizableSpace M := by
+  obtain ⟨M, ht, hc, hT2, hne, hact, hcont, hmin, hU⟩ :=
+    exists_universalMinimalFlow.{0,0} BananaLimitAutomorphism
+  exact ⟨M, ht, hc, hT2, hne, hact, hcont, hmin, hU,
+    bananaLimit_universalMinimalFlow_not_metrizable hU⟩
 
 end SuccessorTree.NonPrecompact

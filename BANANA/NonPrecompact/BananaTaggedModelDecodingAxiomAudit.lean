@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.BananaTaggedModelDecoding
+
+#print axioms SuccessorTree.NonPrecompact.exists_bananaTagged_elementaryEmbedding_covering
+#print axioms SuccessorTree.NonPrecompact.BananaSort.carrierModule
+#print axioms SuccessorTree.NonPrecompact.bananaTaggedModelPairing
+#print axioms SuccessorTree.NonPrecompact.bananaTaggedNativePairingEquiv
+#print axioms SuccessorTree.NonPrecompact.bananaTaggedModelPairingEquiv

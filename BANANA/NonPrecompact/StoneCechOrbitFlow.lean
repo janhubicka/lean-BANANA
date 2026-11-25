@@ -45,31 +45,11 @@ theorem exists_bounded_colour_palettes_of_seqCompact_universalMinimalFlow
     mul_smul := fun g h x => Subtype.ext (mul_smul g h x.val) }
   letI : ContinuousSMul G Ω := ⟨(continuous_fst.smul
     (continuous_subtype_val.comp continuous_snd)).subtype_mk _⟩
-  obtain ⟨Y, hYcl, hYne, hYinv, hYmin⟩ := exists_minimal_closed_subflow G Ω
-  letI : CompactSpace Y := isCompact_iff_compactSpace.mp hYcl.isCompact
-  letI : Nonempty Y := hYne.coe_sort
-  letI : MulAction G Y := {
-    smul := fun g y => ⟨g • y.val, hYinv g ⟨y.val, y.property, rfl⟩⟩
-    one_smul := fun y => Subtype.ext (one_smul G y.val)
-    mul_smul := fun g h y => Subtype.ext (mul_smul g h y.val) }
-  letI : ContinuousSMul G Y := ⟨(continuous_fst.smul
-    (continuous_subtype_val.comp continuous_snd)).subtype_mk _⟩
-  letI : IsMinimal G Y := by
-    constructor
-    intro y
-    rw [dense_iff_closure_eq]
-    ext z
-    rw [closure_subtype]
-    simp only [mem_univ, iff_true]
-    have hImage : Subtype.val '' orbit G y = orbit G y.val := by
-      ext t
-      constructor
-      · rintro ⟨_, ⟨g, rfl⟩, rfl⟩
-        exact ⟨g, rfl⟩
-      · rintro ⟨g, rfl⟩
-        exact ⟨g • y, ⟨g, rfl⟩, rfl⟩
-    rw [hImage, hYmin y.val y.property]
-    exact z.property
+  obtain ⟨Y, hYcompact, hYne, hYcont, hYmin⟩ := exists_compact_minimal_subaction G Ω
+  let _ := hYcompact
+  let _ := hYne
+  let _ := hYcont
+  let _ := hYmin
   obtain ⟨φ, hφ, hs, _⟩ := hU Y
   let F := range fun y : Y => y.val.val x₀
   have hFinite : F.Finite := by

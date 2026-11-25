@@ -358,6 +358,7 @@ import BANANA.NonPrecompact.FirstOrderOrbitCoPrecompact
 import BANANA.NonPrecompact.FirstOrderOligomorphicCategoricity
 import BANANA.NonPrecompact.FirstOrderOrbitExpansion
 import BANANA.NonPrecompact.FolkmanFirstOrderCategoricity
+import BANANA.NonPrecompact.FolkmanFirstOrderExistence
 import BANANA.NonPrecompact.FolkmanFirstOrderInterval
 import BANANA.NonPrecompact.BooleanBananaPadicChargeResiduePartition
 import BANANA.NonPrecompact.BooleanBananaPositiveMassJEP
@@ -372,6 +373,7 @@ import BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity
 import BANANA.NonPrecompact.BananaLimitExtremelyAmenableDegree
 import BANANA.NonPrecompact.BananaLimitPolish
 import BANANA.NonPrecompact.BananaLimitFirstOrder
+import BANANA.NonPrecompact.BananaTaggedModelDecoding
 import BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism
 import BANANA.NonPrecompact.BananaLimitDenseConjugacy
 import BANANA.NonPrecompact.BananaNativeCopySystem
@@ -380,5 +382,6 @@ import BANANA.NonPrecompact.ClopenProbabilityExtension
 import BANANA.NonPrecompact.ExpansionDegreeByIsomorphismTypes
 import BANANA.NonPrecompact.BananaLimitGenericBackAndForth
 import BANANA.NonPrecompact.BananaLimitDefinableColouring
+import BANANA.NonPrecompact.BananaLimitInvariantTypes
 import BANANA.NonPrecompact.BananaLimitUniversalMinimalFlow
 import BANANA.NonPrecompact.BananaLimitExpansionGroup

@@ -8,8 +8,8 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 | Development | Lean endpoints | Further steps in the manuscript |
 | --- | --- | --- |
 | Boolean–BANANA | Lean checks the concrete cylinder model and its finite age, homogeneity, tuple-orbit bounds and copy-degree obstruction. It proves nonamenability and builds a compact metrisable minimal two-adic charge flow with no comeagre orbit. For every nonempty set of odd primes, Lean constructs a positive-mass expansion of the fixed marked limit, proves its unique invariant regular Stone probability and verifies the continuum count of conjugacy classes of closed maximal amenable subgroups. | Lean also proves that the complete theory of the concrete marked Boolean cylinder is countably categorical. |
-| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation. Lean checks the first-order Fraïssé class. Its encoded countable limit was checked separately against the external Lean existence theorem. Lean recovers the native rings and pairing of that limit and proves finite mixed-sort tuple-orbit bounds. The native finite class fails EPPA. Lean checks the persistent colouring, infinite copy Ramsey degree and the failure of precompact Ramsey expansions in the shared expansion interface on native paired Boolean rings. Lean proves nonamenability of the native paired automorphism group in its pointwise topology, using the open interval stabiliser and Stone-space contradiction. | Given the encoded countable Fraïssé limit, Lean proves countable categoricity of its complete theory. Countable Fraïssé existence was checked in a separate Lean development. |
-| BANANA | Lean verifies the finite age, homogeneity and tuple-orbit bounds of the explicit countable pairing, along with copy Ramsey degrees, coherent EPPA, and finite-system JEP and WAP. The tagged relational presentation is countably categorical. The native pointwise automorphism group is Polish and amenable and has no co-precompact extremely amenable subgroup. | Lean proves ample generics and nonmetrisability of the universal minimal flow directly, and DEERP for the complete tagged theory. The general implication from canonical amalgamation to first-order extreme amenability is cited. |
+| Folkman–BANANA | The finite class certificate covers heredity, countable representatives, unbounded sizes, joint embedding and strong amalgamation. Lean checks the first-order Fraïssé class. Lean constructs its countable encoded Fraïssé limit using mathlib’s direct limits and back-and-forth. Lean recovers the native rings and pairing of that limit and proves finite mixed-sort tuple-orbit bounds. The native finite class fails EPPA. Lean checks the persistent colouring, infinite copy Ramsey degree and the failure of precompact Ramsey expansions in the shared expansion interface on native paired Boolean rings. Lean proves nonamenability of the native paired automorphism group in its pointwise topology, using the open interval stabiliser and Stone-space contradiction. | The constructed encoded limit is countably infinite and its complete theory is countably categorical. |
+| BANANA | Lean verifies the finite age, homogeneity and tuple-orbit bounds of the explicit countable pairing, along with copy Ramsey degrees, coherent EPPA, and finite-system JEP and WAP. The tagged relational presentation is countably categorical, and every model of its theory recovers its two vector spaces and bilinear pairing. The native pointwise automorphism group is Polish and amenable and has no co-precompact extremely amenable subgroup. | Lean proves ample generics, constructs a nonmetrisable universal minimal flow, and verifies DEERP and first-order extreme amenability for the complete tagged theory. The general implication from canonical amalgamation to first-order extreme amenability is cited. |
 | Symplectic application | Lean checks the countable orthogonal sum, its finite age and homogeneity, amalgamation of finite alternating spaces, the persistent colouring of lines and the full classification of copy Ramsey degrees. | The classification uses actual image subspaces as copies, including degenerate and zero-dimensional spaces. |
 
 All paths in the following table are relative to the repository root. The
@@ -52,7 +52,7 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | Folkman–BANANA first-order embedding correspondence | [`folkmanNativePairingEmbeddingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrder.lean) |
 | Folkman–BANANA first-order substructure correspondence | [`folkmanProductSubstructureEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderSubstructure.lean) |
 | Folkman–BANANA first-order Fraïssé class | [`folkmanFirstOrderClass_isFraisse`](BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean) |
-| Countable categoricity of the encoded Folkman–BANANA limit | [`folkmanFirstOrderLimit_categorical_completeTheory`](BANANA/NonPrecompact/FolkmanFirstOrderCategoricity.lean) |
+| Existence and countable categoricity of the encoded Folkman–BANANA limit | [`exists_folkmanFirstOrderLimit_categorical`](BANANA/NonPrecompact/FolkmanFirstOrderExistence.lean) |
 | First-order tuple orbits from a finite pointed cover | [`finite_firstOrderTupleOrbits_of_pointedCover`](BANANA/NonPrecompact/FirstOrderTupleOrbits.lean) uses mathlib's ultrahomogeneity interface |
 | Native finite diagrams in the encoded Folkman–BANANA limit | [`folkmanFirstOrderLimit_nativeExtension` and `folkmanFirstOrderLimit_tuple_factors`](BANANA/NonPrecompact/FolkmanFirstOrderLimit.lean) |
 | Folkman–BANANA original language recovered from finite tuple factorisations | [`FolkmanDecoding.encodingEquiv`](BANANA/NonPrecompact/FolkmanFirstOrderDecoding.lean) |
@@ -84,13 +84,14 @@ declarations are in the namespace `SuccessorTree.NonPrecompact`.
 | BANANA pointwise topology | [Polishness](BANANA/NonPrecompact/BananaLimitPolish.lean) and [native tuple-orbit criteria for co-precompactness and closure](BANANA/NonPrecompact/BananaLimitOrbitCoPrecompact.lean) |
 | BANANA native and tagged automorphism groups | [Continuous group isomorphism and countable categoricity of canonical orbit expansions](BANANA/NonPrecompact/BananaLimitFirstOrderAutomorphism.lean) |
 | BANANA has no co-precompact extremely amenable subgroup | [`bananaLimit_no_coprecompact_extremelyAmenable`](BANANA/NonPrecompact/BananaLimitExtremelyAmenableDegree.lean) |
-| Nonmetrisability of the BANANA universal minimal flow | [`bananaLimit_universalMinimalFlow_not_metrizable`](BANANA/NonPrecompact/BananaLimitUniversalMinimalFlow.lean) |
+| Existence and nonmetrisability of the BANANA universal minimal flow | [`bananaLimit_exists_nonmetrizable_universalMinimalFlow`](BANANA/NonPrecompact/BananaLimitUniversalMinimalFlow.lean) |
 | No countably categorical tagged BANANA expansion has an extremely amenable group | [`bananaLimit_expansion_not_extremelyAmenable_of_countablyCategorical`](BANANA/NonPrecompact/BananaLimitExpansionGroup.lean) |
 | Amenability of a dense directed union of finite subgroups | [`exists_invariant_probability_of_dense_finite_subgroups`](BANANA/NonPrecompact/FiniteSubgroupAmenability.lean) |
 | Fixed-point method for finite colour palettes | [`exists_fixed_colouring_in_orbit_closure` and `exists_finite_support_of_orbit_fixed_colourings`](BANANA/NonPrecompact/FixedPointColouring.lean) |
 | BANANA canonical zero-base amalgamation | [`BananaMatrixStructure.exists_canonical_zero_amalgam`](BANANA/NonPrecompact/BananaDirectSumCanonical.lean) |
 | Finite parameter colourings in the native BANANA limit | [`exists_bananaLimit_monochromatic_target_of_finite_parameters`](BANANA/NonPrecompact/BananaLimitParameterColouring.lean) |
-| DEERP for the complete tagged BANANA theory | [`bananaTagged_completeTheory_hasDefinableTupleRamsey`](BANANA/NonPrecompact/BananaLimitDefinableColouring.lean) |
+| DEERP and first-order extreme amenability of the complete tagged BANANA theory | [`bananaTagged_completeTheory_hasDefinableTupleRamsey`](BANANA/NonPrecompact/BananaLimitDefinableColouring.lean) and [`bananaTagged_completeTheory_exists_invariantEnumerationType`](BANANA/NonPrecompact/BananaLimitInvariantTypes.lean) |
+| Two-sorted pairing decoded from any model of the complete tagged BANANA theory | [`bananaTaggedModelPairingEquiv`](BANANA/NonPrecompact/BananaTaggedModelDecoding.lean) |
 | Symplectic residue lemma | [`quadraticAffineWeight_residueFibres_odd`](BANANA/NonPrecompact/QuadraticResidueStandard.lean) |
 | Symplectic finite persistent line colouring | [`exists_symplecticPointColouring`](BANANA/NonPrecompact/SymplecticPointColouring.lean) |
 | Symplectic homogeneity under the ambient hypotheses | [`exists_wittCountableIsometry`](BANANA/NonPrecompact/WittCountable.lean) |
@@ -122,10 +123,9 @@ finite extensions in a countable, locally finite first-order model.
 For Folkman–BANANA, the first-order product presentation uses coordinate
 projections to distinguish the sorts and recovers the original non-unital
 ring embeddings with their pairing. Its substructures are products of
-non-unital subrings with the restricted pairing. The encoded countable
-limit was checked by instantiating Freer's Fraïssé existence theorem.
-See the [classical dependency audit](docs/classical-dependencies.md) for the
-external revision and reproduction details.
+non-unital subrings with the restricted pairing. The construction of the
+encoded countable limit schedules finite embedding requests and uses
+mathlib's direct-limit and back-and-forth API.
 
 The BANANA and Boolean–BANANA orbit proofs share
 [finite invariant counting](BANANA/NonPrecompact/FiniteInvariantRepresentatives.lean).
