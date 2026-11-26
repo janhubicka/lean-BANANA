@@ -1,52 +1,41 @@
-name: Publish mathematical formalisation guide to Wiki
+name: Read public Wiki templates
 on:
   push:
     branches: [publish-formalisation-wiki-20261126]
 permissions:
-  contents: write
+  contents: read
 jobs:
-  publish:
+  inspect:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Publish guide without replacing existing Wiki material
+      - name: Read the two public Wiki repositories
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          # Use only the repository-scoped Actions token. Do not disclose credentials.
-          wiki_url="https://github.com/janhubicka/lean-BANANA.wiki.git"
-          wiki_dir="$RUNNER_TEMP/lean-banana-wiki"
           export GIT_TERMINAL_PROMPT=0
-          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
-          echo "::add-mask::$auth"
-          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" clone --depth=1 "$wiki_url" "$wiki_dir"
-          cp docs/wiki-formalisation-guide.md "$wiki_dir/ArXiv-v1-formalisation.md"
-          cd "$wiki_dir"
-          # Preserve the existing Home page and every other existing Wiki page.
-          if [ -f Home.md ]; then
-            if ! grep -Fq '[[ArXiv-v1-formalisation]]' Home.md; then
-              { printf '**Start here: [[ArXiv-v1-formalisation]]** — the mathematical representations, verified results and reproduction instructions for the first arXiv version.\n\n'; cat Home.md; } > Home.md.new
-              mv Home.md.new Home.md
+          for project in lean-milliken lean-BANANA; do
+            path="$RUNNER_TEMP/$project-wiki"
+            url="https://github.com/janhubicka/$project.wiki.git"
+            if ! git clone --depth=1 "$url" "$path"; then
+              if [ "$project" = lean-BANANA ]; then
+                auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+                echo "::add-mask::$auth"
+                git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" clone --depth=1 "$url" "$path" || { echo "Cannot clone $project wiki"; continue; }
+              else
+                echo "Cannot clone $project wiki"
+                continue
+              fi
             fi
-          else
-            cp ArXiv-v1-formalisation.md Home.md
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add Home.md ArXiv-v1-formalisation.md
-          if git diff --cached --quiet; then
-            echo 'Wiki already up to date.'
-            exit 0
-          fi
-          git commit -m 'Explain the Lean formalisation for arXiv v1'
-          # Use the normal GitHub authentication header for this repository only.
-          # Mask the encoded token as well as the original token.
-          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin HEAD
-          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" fetch origin
-          test "$(git rev-parse HEAD)" = "$(git rev-parse '@{upstream}')"
-          echo "Published Wiki revision $(git rev-parse HEAD)"
+            echo "WIKI-BEGIN $project"
+            git -C "$path" rev-parse HEAD
+            find "$path" -maxdepth 2 -type f -name '*.md' -printf '%P\n' | sort
+            if [ -f "$path/Home.md" ]; then
+              echo "HOME-BEGIN $project"
+              cat "$path/Home.md"
+              echo "HOME-END $project"
+            fi
+            echo "WIKI-END $project"
+          done
