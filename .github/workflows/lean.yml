@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Cache Lean toolchain
         uses: actions/cache@v5
@@ -42,6 +44,15 @@ jobs:
       - name: Comprehensive release candidate audit (release PR)
         if: github.event_name == 'workflow_dispatch' || github.head_ref == 'arxiv-v1-release-validation' || github.ref_name == 'arxiv-v1-release-validation'
         run: bash scripts/verify_release_candidate.sh
+
+      - name: Archive exact-head release verification logs
+        if: ${{ always() && (github.event_name == 'workflow_dispatch' || github.head_ref == 'arxiv-v1-release-validation' || github.ref_name == 'arxiv-v1-release-validation') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: banana-release-audit-${{ github.event.pull_request.head.sha || github.sha }}
+          path: .lake/banana-release-audit/
+          include-hidden-files: true
+          if-no-files-found: warn
 
       - name: Audit three-atom pre-BANANA partial isomorphism
         run: |
