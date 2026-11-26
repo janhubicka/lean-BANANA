@@ -22,7 +22,9 @@ jobs:
           wiki_url="https://github.com/janhubicka/lean-BANANA.wiki.git"
           wiki_dir="$RUNNER_TEMP/lean-banana-wiki"
           export GIT_TERMINAL_PROMPT=0
-          git clone --depth=1 "$wiki_url" "$wiki_dir"
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          echo "::add-mask::$auth"
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" clone --depth=1 "$wiki_url" "$wiki_dir"
           cp docs/wiki-formalisation-guide.md "$wiki_dir/ArXiv-v1-formalisation.md"
           cd "$wiki_dir"
           # Preserve the existing Home page and every other existing Wiki page.
@@ -44,9 +46,7 @@ jobs:
           git commit -m 'Explain the Lean formalisation for arXiv v1'
           # Use the normal GitHub authentication header for this repository only.
           # Mask the encoded token as well as the original token.
-          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
-          echo "::add-mask::$auth"
           git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" push origin HEAD
-          git fetch origin
+          git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth" fetch origin
           test "$(git rev-parse HEAD)" = "$(git rev-parse '@{upstream}')"
           echo "Published Wiki revision $(git rev-parse HEAD)"
