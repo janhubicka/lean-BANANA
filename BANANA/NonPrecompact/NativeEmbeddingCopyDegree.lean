@@ -102,6 +102,43 @@ theorem bananaEmbeddingRamseyDegreeLE_iff_copyRamseyDegreeLE_div
     (bananaUniformEmbeddingFibres A).embeddingRamseyDegreeLE_iff_copyRamseyDegreeLE_div,
     bananaCopySystem_copyRamseyDegreeLE_iff A]
 
+/-- Transfer the native BANANA copy-degree classification to embeddings.
+A structure with a zero side has embedding degree
+equal to the number of its automorphisms, and otherwise its degree
+has no finite bound. -/
+theorem bananaEmbeddingRamseyDegree_classification_of_copy
+    (A : BananaFiniteCopyObject) (t : ℕ)
+    (hcopy :
+      ((A.rightDim = 0 ∨ A.leftDim = 0) →
+        A.matrix.copyRamseyDegreeLE 1 ∧ ¬ A.matrix.copyRamseyDegreeLE 0) ∧
+      ((0 < A.leftDim ∧ 0 < A.rightDim) →
+        ∀ d : ℕ, ¬ A.matrix.copyRamseyDegreeLE d)) :
+    A.matrix.embeddingRamseyDegreeLE t ↔
+      (A.rightDim = 0 ∨ A.leftDim = 0) ∧
+        Nat.card (bananaCopySystem.ReductAutomorphism A) ≤ t := by
+  rw [bananaEmbeddingRamseyDegreeLE_iff_copyRamseyDegreeLE_div]
+  set m := Nat.card (bananaCopySystem.ReductAutomorphism A)
+  have hm : 0 < m := (bananaUniformEmbeddingFibres A).size_pos
+  constructor
+  · intro h
+    have hside : A.rightDim = 0 ∨ A.leftDim = 0 := by
+      by_contra hn
+      simp only [not_or] at hn
+      exact (hcopy.2
+        ⟨Nat.pos_of_ne_zero hn.2, Nat.pos_of_ne_zero hn.1⟩) _ h
+    have hpos : 1 ≤ t / m := by
+      by_contra hn
+      rw [Nat.eq_zero_of_not_pos hn] at h
+      exact (hcopy.1 hside).2 h
+    exact ⟨hside, by simpa using (Nat.le_div_iff_mul_le hm).mp hpos⟩
+  · rintro ⟨hside, hcard⟩ lB rB B r hr
+    have hpos : 1 ≤ t / m := (Nat.le_div_iff_mul_le hm).mpr (by simpa using hcard)
+    obtain ⟨lC, rC, C, hC⟩ :=
+      (hcopy.1 hside).1 lB rB B r hr
+    exact ⟨lC, rC, C, fun c => by
+      obtain ⟨f, colours, hc, hcolours⟩ := hC c
+      exact ⟨f, colours, hc.trans hpos, hcolours⟩⟩
+
 namespace FiniteAlternatingSpace
 
 /-- Range fibres for the ordinary linear isometric embeddings of

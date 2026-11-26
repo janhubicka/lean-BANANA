@@ -4,3 +4,4 @@ import BANANA.NonPrecompact.RamseyDegreeClassifications
 #print axioms SuccessorTree.NonPrecompact.isLeast_firstOrderEmbeddingRamseyDegree
 #print axioms SuccessorTree.NonPrecompact.firstOrderEmbeddingRamseyDegree_infinite_iff
 #print axioms SuccessorTree.NonPrecompact.FiniteAlternatingSpace.embeddingRamseyDegree_classification
+#print axioms SuccessorTree.NonPrecompact.bananaEmbeddingRamseyDegree_classification_of_copy
