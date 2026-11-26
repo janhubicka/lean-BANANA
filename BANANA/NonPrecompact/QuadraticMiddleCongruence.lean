@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Algebra.BigOperators.ModEq
+import Mathlib.Algebra.Divisibility.Basic
+import Mathlib.Tactic.NormNum
 
 /-!
 # Modular truncation of the quadratic binomial moment expansion

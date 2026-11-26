@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.Algebra.Ring.Commute
+import Mathlib.Algebra.Ring.Int.Defs
 
 /-!
 # Integer arithmetic for the quadratic Gauss sum

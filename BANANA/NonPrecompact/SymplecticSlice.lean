@@ -1,4 +1,8 @@
-import Mathlib
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.LinearAlgebra.BilinearForm.Orthogonal
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.Push
 import BANANA.NonPrecompact.QuadraticGauss
 
 /-!

@@ -1,4 +1,7 @@
-import Mathlib
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Ring
 
 /-!
 # Parity consequence of the quadratic Gauss congruence

@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.Data.Nat.Choose.Sum
+import Mathlib.Data.Int.Cast.Lemmas
 
 /-!
 # Binomial expansion for the quadratic residue argument

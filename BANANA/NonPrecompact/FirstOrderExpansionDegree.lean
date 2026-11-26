@@ -23,7 +23,8 @@ private abbrev Class (L : Language.{u, v}) := Set (Bundled.{w} L.Structure)
 private abbrev FirstOrderRangeCopy (A B : Bundled.{w} L.Structure) :=
   {s : Set B // ∃ e : A ↪[L] B, Set.range e = s}
 
-private theorem embedding_factor_of_range_subset {A B C : Bundled.{w} L.Structure}
+/-- An embedding factors through any embedding whose range contains its own. -/
+theorem embedding_factor_of_range_subset {A B C : Bundled.{w} L.Structure}
     (f : A ↪[L] C) (g : B ↪[L] C) (h : Set.range f ⊆ Set.range g) :
     ∃ e : A ↪[L] B, g.comp e = f := by
   let f' := f.codRestrict g.toHom.range fun x => h ⟨x, rfl⟩
