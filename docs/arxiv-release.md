@@ -9,9 +9,9 @@ and statement mapping used for [EPPA III](https://github.com/janhubicka/EPPA-III
 ## Verify a candidate
 
 The preparation starts from manuscript commit
-[`dfdaae4`](https://github.com/janhubicka/BANANA/commit/dfdaae4e3a636357e54c5f5c00bda0de0ae70526)
+[`a4fd4ee`](https://github.com/janhubicka/BANANA/commit/a4fd4ee350bb88c210e1c017c1ed4a82e19b53f2)
 and Lean commit
-[`17f5835`](https://github.com/janhubicka/lean-BANANA/commit/17f58354aa28a3b1affd79307452e40250277654).
+[`56d30d1`](https://github.com/janhubicka/lean-BANANA/commit/56d30d168d104a4005062dc8ab961e27e302acd2).
 Record the final commits after the release changes have been reviewed. In a
 clean checkout of the intended Lean commit, run the following and retain the
 logs with the commit, toolchain and dependency manifest.
@@ -20,12 +20,10 @@ logs with the commit, toolchain and dependency manifest.
 git rev-parse HEAD
 lake env lean --version
 lake exe cache get
-bash scripts/audit_all_axioms_local.sh
-python3 -m unittest discover -s scripts -p 'test_*.py'
-git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
+bash scripts/verify_release_candidate.sh
 ```
 
-The cache command is optional. The committed lockfile fixes mathlib and the
+The cache command is optional. Do not run `lake update` in the release verification checkout. The verification script records the exact head, rejects a dirty tracked tree, and retains individual axiom reports under `.lake/banana-release-audit/<SHA>/`. The committed lockfile fixes mathlib and the
 successor-tree dependencies transitively. Leave its revisions in place when
 reproducing the candidate. The axiom audit builds the library, checks every
 audit entry point and rejects unexpected transitive axioms. The proof
@@ -55,7 +53,7 @@ release_rev=$(git rev-parse --verify 'arxiv-v1^{commit}')
 git archive --format=tar.gz --prefix=lean-banana/ \
   --output=../lean-banana-source.tar.gz "$release_rev" \
   LICENSE README.md lean-toolchain lakefile.toml lake-manifest.json \
-  BANANA.lean BANANA scripts docs/arxiv-release.md docs/classical-dependencies.md
+  BANANA.lean BANANA scripts docs
 (
   cd ..
   sha256sum lean-banana-source.tar.gz > lean-banana-source.tar.gz.sha256
@@ -79,3 +77,9 @@ git archive --format=tar.gz --prefix=lean-banana/ \
    directory. Keep the TeX package independent of that directory and use
    the versioned source URL in the article. arXiv associates ancillary files
    with the specific submitted version. [arXiv ancillary files](https://info.arxiv.org/help/ancillary_files.html)
+
+## Release tracking and generated-expansion correspondence
+
+The [master release checklist](https://github.com/janhubicka/BANANA/issues/247) records the exact manuscript and Lean revisions. The general first-order generated-expansion theorem counts isomorphism types of a generated expanded substructure together with its distinguished generating copy; it does not assume that added functions preserve the original copy carrier. The marked Boolean language is native. BANANA's functional sum encoding preserves the two sorts and actual embedding ranges. Folkman's product encoding has genuine native embedding/copy correspondence, but the product carrier is not literally the two-sorted carrier.
+
+The native pointed-cover interface avoids that last encoding issue for the degree-bound argument: in any finite hereditary expanded class, take the generated expanded substructure for each native copy, and choose representatives of its pointed isomorphism types. Reducts and reduct embeddings are native and composition is preserved. The pointed-cover condition follows by the expanded isomorphism and the inclusion of the generated substructure. The native obstruction theorems use this interface directly. The passage from arbitrary many-sorted first-order syntax to this interface remains an English correspondence argument, not a separately checked Lean syntax translation. Preserve this distinction in the proof map and manuscript annotations until independent review.

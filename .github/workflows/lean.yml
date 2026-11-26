@@ -34,11 +34,10 @@ jobs:
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
 
-      - name: Resolve dependencies
-        run: lake update
-
-      - name: Download Mathlib cache
-        run: lake exe cache get
+      - name: Download Mathlib cache using committed dependency pins
+        run: |
+          lake exe cache get
+          git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
 
       - name: Audit three-atom pre-BANANA partial isomorphism
         run: |
@@ -1272,3 +1271,20 @@ jobs:
         run: |
           lake build BANANA.NonPrecompact.BananaStrongBlockAmalgamAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaStrongBlockAmalgamAxiomAudit.lean
+
+      - name: Strict audit of the final degree and native pointed-cover results
+        run: |
+          set -euo pipefail
+          for module in RamseyDegreeClassifications NativePointedRamseyExpansion FirstOrderGeneratedRamseyExpansion BananaGeneratedRamseyObstructions; do
+            audit="BANANA/NonPrecompact/${module}AxiomAudit.lean"
+            report="$(mktemp)"
+            lake env lean "$audit" > "$report" 2>&1 || { cat "$report"; exit 1; }
+            cat "$report"
+            python3 scripts/check_axiom_report.py "$audit" "$report"
+            rm -f "$report"
+          done
+          git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
+
+      - name: Comprehensive release candidate audit
+        if: github.event_name == 'workflow_dispatch'
+        run: bash scripts/verify_release_candidate.sh

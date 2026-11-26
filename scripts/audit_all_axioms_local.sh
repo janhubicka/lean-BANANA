@@ -20,20 +20,19 @@ done < <(find BANANA -type f -name '*AxiomAudit.lean' -print0 | sort -z)
 
 # Compile imports that are only reachable from audit entry points as well.
 lake build BANANA "${audit_deps[@]}"
+logdir="${BANANA_AXIOM_LOGDIR:-.lake/banana-axiom-audit}"
+mkdir -p "$logdir"
 for file in "${audit_files[@]}"; do
-  result="$(mktemp)"
+  result="$logdir/${file//\//_}.log"
   if ! lake env lean "$file" >"$result" 2>&1; then
     cat "$result" >&2
-    rm -f "$result"
     echo "Failed axiom audit: $file" >&2
     exit 1
   fi
   if ! python3 scripts/check_axiom_report.py "$file" "$result"; then
     cat "$result" >&2
-    rm -f "$result"
     echo "Unexpected axiom dependency in: $file" >&2
     exit 1
   fi
-  rm -f "$result"
 done
 echo "Passed ${#audit_files[@]} axiom-audit modules: only propext, Classical.choice and Quot.sound."

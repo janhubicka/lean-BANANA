@@ -1,0 +1,7 @@
+import BANANA.NonPrecompact.NativePointedRamseyExpansion
+
+#print axioms SuccessorTree.PointedRamseyExpansion.copyRamseyDegreeLE_of_pointedCover
+#print axioms SuccessorTree.PointedRamseyExpansion.not_exists_pointedCover
+#print axioms SuccessorTree.NonPrecompact.booleanBanana_noFinitePointedCover
+#print axioms SuccessorTree.NonPrecompact.folkmanNative_noFinitePointedCover
+#print axioms SuccessorTree.NonPrecompact.banana_noFinitePointedCover

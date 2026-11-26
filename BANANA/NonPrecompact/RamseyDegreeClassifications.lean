@@ -1,4 +1,5 @@
 import BANANA.NonPrecompact.NativeEmbeddingCopyDegree
+import BANANA.NonPrecompact.BananaOneSidedCopyDegree
 import BANANA.NonPrecompact.SymplecticCopyDegree
 
 /-!
@@ -8,6 +9,16 @@ import BANANA.NonPrecompact.SymplecticCopyDegree
 namespace SuccessorTree.NonPrecompact
 
 open Module
+
+/-- The native BANANA embedding Ramsey degree is the order of the source
+    automorphism group when either sort is zero, and is infinite otherwise. -/
+theorem bananaEmbeddingRamseyDegree_classification
+    (A : BananaFiniteCopyObject) (t : ℕ) :
+    A.matrix.embeddingRamseyDegreeLE t ↔
+      (A.rightDim = 0 ∨ A.leftDim = 0) ∧
+        Nat.card (bananaCopySystem.ReductAutomorphism A) ≤ t :=
+  bananaEmbeddingRamseyDegree_classification_of_copy A t
+    A.matrix.copyRamseyDegree_classification
 
 namespace FiniteAlternatingSpace
 
