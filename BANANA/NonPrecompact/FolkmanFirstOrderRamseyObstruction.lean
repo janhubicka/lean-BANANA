@@ -20,7 +20,8 @@ namespace FolkmanFirstOrder
 
 open FolkmanNativeFiniteModel
 
-private theorem finite_of_mem (B : Bundled.{0} folkmanLanguage.Structure)
+/-- Each structure in the product-encoded Folkman class is finite. -/
+theorem finite_of_mem (B : Bundled.{0} folkmanLanguage.Structure)
     (hB : B ∈ folkmanFirstOrderClass) : Finite B := by
   obtain ⟨A, ⟨e⟩⟩ := hB
   exact Finite.of_injective e e.injective
@@ -30,7 +31,8 @@ private noncomputable abbrev copySystem :=
 
 private abbrev bundle (A : FolkmanNativeFiniteModel) := folkmanProductBundle A.pairing
 
-private noncomputable def diagonal (q : ℕ) : folkmanFirstOrderClass :=
+/-- The diagonal Folkman pairing on `q` atoms, in the product encoding. -/
+noncomputable def diagonal (q : ℕ) : folkmanFirstOrderClass :=
   ⟨bundle (folkmanNativeDiagonal q), folkmanProductBundle_mem _⟩
 
 private noncomputable def nativeOfCode (B : FolkmanAtomStructure) : FolkmanNativeFiniteModel where

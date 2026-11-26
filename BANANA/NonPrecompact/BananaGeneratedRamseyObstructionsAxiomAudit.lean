@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BananaGeneratedRamseyObstructions
+
+#print axioms SuccessorTree.NonPrecompact.BooleanBanana.cylinder_noPrecompactGeneratedRamseyExpansion
+#print axioms SuccessorTree.NonPrecompact.FolkmanFirstOrder.not_hasPrecompactGeneratedRamseyExpansion
+#print axioms SuccessorTree.NonPrecompact.BananaFunctional.functionalAge_noPrecompactGeneratedRamseyExpansion
