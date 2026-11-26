@@ -401,6 +401,7 @@ import BANANA.NonPrecompact.FirstOrderHereditaryExpansionRestriction
 import BANANA.NonPrecompact.FirstOrderExpansionDegree
 import BANANA.NonPrecompact.FirstOrderRamseyExpansion
 import BANANA.NonPrecompact.BananaGeneratedRamseyObstructions
+import BANANA.NonPrecompact.NativePointedRamseyExpansion
 import BANANA.NonPrecompact.FirstOrderEmbeddingCopyDegree
 import BANANA.NonPrecompact.RamseyDegreeClassifications
 import BANANA.NonPrecompact.FirstOrderExpansionTermClosure

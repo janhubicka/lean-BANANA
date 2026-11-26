@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Cache Lean toolchain
         uses: actions/cache@v5
@@ -34,11 +36,23 @@ jobs:
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
 
-      - name: Resolve dependencies
-        run: lake update
+      - name: Download Mathlib cache using committed dependency pins
+        run: |
+          lake exe cache get
+          git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
 
-      - name: Download Mathlib cache
-        run: lake exe cache get
+      - name: Comprehensive release candidate audit (release PR)
+        if: github.event_name == 'workflow_dispatch' || github.head_ref == 'arxiv-v1-release-validation' || github.ref_name == 'arxiv-v1-release-validation'
+        run: bash scripts/verify_release_candidate.sh
+
+      - name: Archive exact-head release verification logs
+        if: ${{ always() && (github.event_name == 'workflow_dispatch' || github.head_ref == 'arxiv-v1-release-validation' || github.ref_name == 'arxiv-v1-release-validation') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: banana-release-audit-${{ github.event.pull_request.head.sha || github.sha }}
+          path: .lake/banana-release-audit/
+          include-hidden-files: true
+          if-no-files-found: warn
 
       - name: Audit three-atom pre-BANANA partial isomorphism
         run: |
@@ -1272,3 +1286,17 @@ jobs:
         run: |
           lake build BANANA.NonPrecompact.BananaStrongBlockAmalgamAxiomAudit
           lake env lean BANANA/NonPrecompact/BananaStrongBlockAmalgamAxiomAudit.lean
+
+      - name: Strict audit of the final degree and native pointed-cover results
+        run: |
+          set -euo pipefail
+          for module in RamseyDegreeClassifications NativePointedRamseyExpansion FirstOrderGeneratedRamseyExpansion BananaGeneratedRamseyObstructions; do
+            audit="BANANA/NonPrecompact/${module}AxiomAudit.lean"
+            report="$(mktemp)"
+            lake env lean "$audit" > "$report" 2>&1 || { cat "$report"; exit 1; }
+            cat "$report"
+            python3 scripts/check_axiom_report.py "$audit" "$report"
+            rm -f "$report"
+          done
+          git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
+

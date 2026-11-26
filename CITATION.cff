@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the BANANA manuscript and the exact version of this Lean formalisation when using this work."
+title: "lean-BANANA: Lean formalisation of parity obstructions to precompact Ramsey expansions"
+type: software
+authors:
+  - name: "BANANA formalisation contributors"
+repository-code: "https://github.com/janhubicka/lean-BANANA"
+license: Apache-2.0
+preferred-citation:
+  type: unpublished
+  title: "Parity obstructions to precompact Ramsey expansions"
+  authors:
+    - family-names: Brenner
+      given-names: Sofia
+    - family-names: Hubička
+      given-names: Jan
+    - family-names: Jahel
+      given-names: Colin
+    - family-names: Nešetřil
+      given-names: Jaroslav
