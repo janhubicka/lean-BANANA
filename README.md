@@ -173,3 +173,7 @@ hypotheses of each certificate.
 [arXiv release preparation](docs/arxiv-release.md)
 
 [Classical dependency audit](docs/classical-dependencies.md)
+
+## Licence
+
+The project-owned Lean formalisation and software verification scripts are licensed under [Apache-2.0](LICENSE). This does not change the licence of the separate article. Third-party material retains its existing notices and licence terms.

@@ -40,8 +40,9 @@ logs, archive, and article’s versioned citation. Keep the version citation
 distinct from the repository landing page. Add a version DOI if an archive
 service issues one.
 
-The starting Lean commit has no software licence file. Record the authors’
-software licence choice in the archived source before distributing it.
+The Lean software is licensed under Apache-2.0. Include the committed
+`LICENSE` in the archived source; preserve third-party notices. The article
+has its own publication licence.
 
 After the release commit includes the licence, the commands below make an
 archive from its tracked files. Substitute the approved tag for
