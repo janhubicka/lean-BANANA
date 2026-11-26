@@ -46,7 +46,7 @@ def HasPointedCover (A : S.Obj) (t : ℕ) : Prop :=
       ∀ q : S.Copy A (E.reduct B),
         ∃ (i : Fin t) (e : T.Emb (D i) B), q = S.mapCopy (E.mapEmb e) (p i)
 
-private theorem simultaneous {I : Type*} (D : I → T.Obj)
+private theorem simultaneous (expansion : PointedRamseyExpansion S T) {I : Type*} (D : I → T.Obj)
     (types : Finset I) (B : T.Obj) (r : ℕ) (hr : 0 < r) :
     ∃ C : T.Obj, ∀ colour : ∀ i, T.Emb (D i) C → Fin r,
       ∃ g : T.Emb B C, ∀ i ∈ types, ∀ e₁ e₂ : T.Emb (D i) B,
@@ -57,7 +57,7 @@ private theorem simultaneous {I : Type*} (D : I → T.Obj)
       exact ⟨B, fun _ => ⟨T.idEmb B, by simp⟩⟩
   | @insert i types _ ih =>
       obtain ⟨C₀, hC₀⟩ := ih
-      obtain ⟨C, hC⟩ := E.ramsey (D i) C₀ r hr
+      obtain ⟨C, hC⟩ := expansion.ramsey (D i) C₀ r hr
       refine ⟨C, fun colour => ?_⟩
       obtain ⟨h, hh⟩ := hC (colour i)
       obtain ⟨g, hg⟩ := hC₀ (fun j e => colour j (T.compEmb e h))
@@ -75,7 +75,7 @@ theorem copyRamseyDegreeLE_of_pointedCover (A : S.Obj) (t : ℕ)
   intro B r hr
   obtain ⟨B', ⟨iB⟩⟩ := E.liftObj B
   obtain ⟨D, p, hB⟩ := hCover B'
-  obtain ⟨C', hC'⟩ := E.simultaneous D Finset.univ B' r hr
+  obtain ⟨C', hC'⟩ := simultaneous E D Finset.univ B' r hr
   refine ⟨E.reduct C', fun colouring => ?_⟩
   let colour (i : Fin t) (e : T.Emb (D i) C') : Fin r :=
     colouring (S.mapCopy (E.mapEmb e) (p i))

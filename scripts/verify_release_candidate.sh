@@ -7,7 +7,13 @@ if ! command -v lake >/dev/null 2>&1; then
   exit 2
 fi
 git diff --exit-code HEAD --
+# Ignore only files deliberately excluded by Git (e.g. the Lake workspace).
+if test -n "$(git ls-files --others --exclude-standard)"; then
+  echo "Untracked files in the release checkout; verify a clean clone." >&2
+  exit 1
+fi
 head=$(git rev-parse HEAD)
+export PYTHONDONTWRITEBYTECODE=1
 export BANANA_AXIOM_LOGDIR=".lake/banana-release-audit/$head/axioms"
 logdir=".lake/banana-release-audit/$head"
 mkdir -p "$logdir"

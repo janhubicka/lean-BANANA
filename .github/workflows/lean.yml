@@ -39,6 +39,10 @@ jobs:
           lake exe cache get
           git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
 
+      - name: Comprehensive release candidate audit (release PR)
+        if: github.event_name == 'workflow_dispatch' || github.head_ref == 'arxiv-v1-release-validation' || github.ref_name == 'arxiv-v1-release-validation'
+        run: bash scripts/verify_release_candidate.sh
+
       - name: Audit three-atom pre-BANANA partial isomorphism
         run: |
           lake build BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphismAxiomAudit
@@ -1285,6 +1289,3 @@ jobs:
           done
           git diff --exit-code HEAD -- lean-toolchain lakefile.toml lake-manifest.json
 
-      - name: Comprehensive release candidate audit
-        if: github.event_name == 'workflow_dispatch'
-        run: bash scripts/verify_release_candidate.sh

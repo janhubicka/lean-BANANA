@@ -23,7 +23,7 @@ lake exe cache get
 bash scripts/verify_release_candidate.sh
 ```
 
-The cache command is optional. Do not run `lake update` in the release verification checkout. The verification script records the exact head, rejects a dirty tracked tree, and retains individual axiom reports under `.lake/banana-release-audit/<SHA>/`. The committed lockfile fixes mathlib and the
+The cache command is optional. Do not run `lake update` in the release verification checkout. The verification script records the exact head, requires a clean checkout, and retains individual axiom reports under `.lake/banana-release-audit/<SHA>/`. The committed lockfile fixes mathlib and the
 successor-tree dependencies transitively. Leave its revisions in place when
 reproducing the candidate. The axiom audit builds the library, checks every
 audit entry point and rejects unexpected transitive axioms. The proof
@@ -52,7 +52,7 @@ set -eu
 release_rev=$(git rev-parse --verify 'arxiv-v1^{commit}')
 git archive --format=tar.gz --prefix=lean-banana/ \
   --output=../lean-banana-source.tar.gz "$release_rev" \
-  LICENSE README.md lean-toolchain lakefile.toml lake-manifest.json \
+  LICENSE README.md CITATION.cff lean-toolchain lakefile.toml lake-manifest.json \
   BANANA.lean BANANA scripts docs
 (
   cd ..
@@ -83,3 +83,5 @@ git archive --format=tar.gz --prefix=lean-banana/ \
 The [master release checklist](https://github.com/janhubicka/BANANA/issues/247) records the exact manuscript and Lean revisions. The general first-order generated-expansion theorem counts isomorphism types of a generated expanded substructure together with its distinguished generating copy; it does not assume that added functions preserve the original copy carrier. The marked Boolean language is native. BANANA's functional sum encoding preserves the two sorts and actual embedding ranges. Folkman's product encoding has genuine native embedding/copy correspondence, but the product carrier is not literally the two-sorted carrier.
 
 The native pointed-cover interface avoids that last encoding issue for the degree-bound argument: in any finite hereditary expanded class, take the generated expanded substructure for each native copy, and choose representatives of its pointed isomorphism types. Reducts and reduct embeddings are native and composition is preserved. The pointed-cover condition follows by the expanded isomorphism and the inclusion of the generated substructure. The native obstruction theorems use this interface directly. The passage from arbitrary many-sorted first-order syntax to this interface remains an English correspondence argument, not a separately checked Lean syntax translation. Preserve this distinction in the proof map and manuscript annotations until independent review.
+
+The [release review](arxiv-release-review.md) records the manuscript correspondence audit and disposition of older draft branches. Confirm the collective software author attribution and add the arXiv identifier to `CITATION.cff` before publication.

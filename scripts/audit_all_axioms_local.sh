@@ -12,14 +12,15 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 python3 scripts/check_lean_module_graph.py
 audit_files=()
-audit_deps=()
+audit_modules=()
 while IFS= read -r -d '' file; do
   audit_files+=("$file")
-  audit_deps+=("$file:deps")
+  module="${file%.lean}"
+  audit_modules+=("${module//\//.}")
 done < <(find BANANA -type f -name '*AxiomAudit.lean' -print0 | sort -z)
 
 # Compile imports that are only reachable from audit entry points as well.
-lake build BANANA "${audit_deps[@]}"
+lake build BANANA "${audit_modules[@]}"
 logdir="${BANANA_AXIOM_LOGDIR:-.lake/banana-axiom-audit}"
 mkdir -p "$logdir"
 for file in "${audit_files[@]}"; do
