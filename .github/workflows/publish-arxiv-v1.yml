@@ -1,0 +1,115 @@
+name: Publish approved arxiv-v1 Lean release
+
+# One-time publication of the author-approved release. Never publish a PR or
+# an unrelated main revision, or change an existing tag or release.
+on:
+  workflow_run:
+    workflows: [Lean]
+    types: [completed]
+    branches: [main]
+
+concurrency:
+  group: publish-approved-arxiv-v1
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == github.repository && github.repository == 'janhubicka/lean-BANANA' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: read
+    env:
+      VERIFIED_SHA: ${{ github.event.workflow_run.head_sha }}
+      VERIFIED_RUN: ${{ github.event.workflow_run.id }}
+      APPROVED_METADATA: cbe25d358b7f319e03620e99ede06424607f7f31
+      APPROVED_METADATA_TREE: 61790ba4062f7e06f86f47d043e0c3f43aab2d77
+      PROOF_SNAPSHOT: fc0972fda0cc25ab94ab7315f6f57b7eed9127b9
+      TAG: arxiv-v1
+    steps:
+      - name: Check out exact successful main revision
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Restrict publication to the approved metadata and proof snapshot
+        id: gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$VERIFIED_SHA"
+          # A previously running main job may finish after this workflow is added.
+          if ! git cat-file -e "$APPROVED_METADATA^{commit}" 2>/dev/null ||
+             ! git merge-base --is-ancestor "$APPROVED_METADATA" "$VERIFIED_SHA"; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "Not the approved release candidate."
+            exit 0
+          fi
+          test "$(git rev-parse "$APPROVED_METADATA^{tree}")" = "$APPROVED_METADATA_TREE"
+          git diff --exit-code "$APPROVED_METADATA" "$VERIFIED_SHA" -- . ':(exclude).github/workflows/publish-arxiv-v1.yml'
+          git diff --exit-code "$PROOF_SNAPSHOT" "$VERIFIED_SHA" -- BANANA.lean BANANA/ scripts/ lean-toolchain lakefile.toml lakefile.lean lake-manifest.json LICENSE
+          grep -Fxq 'version: arxiv-v1' CITATION.cff
+          grep -Fxq '  - family-names: Hubička' CITATION.cff
+          grep -Fxq '    given-names: Jan' CITATION.cff
+          if git show-ref --verify --quiet "refs/tags/$TAG"; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "The release tag already exists; never move or overwrite it."
+            exit 0
+          fi
+          echo "publish=true" >> "$GITHUB_OUTPUT"
+
+      - name: Package exact verified source and audit evidence
+        if: steps.gate.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/arxiv-v1-release"
+          mkdir -p "$out/audit"
+          # Only the artifact of the exact successful strict run is accepted.
+          gh run download "$VERIFIED_RUN" --repo "$GITHUB_REPOSITORY" --name "banana-release-audit-$VERIFIED_SHA" --dir "$out/audit"
+          evidence="$out/audit/$VERIFIED_SHA"
+          test -s "$evidence/verification.log"
+          test -s "$evidence/project-axioms.log"
+          test -f "$evidence/kernel-replay.log"
+          grep -Fxq "STRICT RELEASE AUDIT PASSED: $VERIFIED_SHA" "$evidence/verification.log"
+          grep -Fq '363 manuscript source declaration references resolve uniquely to 363 directly audited compiled declarations' "$evidence/verification.log"
+          grep -Fq 'Passed 387 axiom-audit modules' "$evidence/verification.log"
+          test "$(find "$evidence/axioms" -type f -name '*.log' | wc -l)" -eq 387
+          python3 scripts/check_project_axiom_inventory.py "$evidence/project-axioms.log"
+          git archive --format=tar --prefix=lean-BANANA-arxiv-v1/ "$VERIFIED_SHA" | gzip -n > "$out/lean-BANANA-arxiv-v1.tar.gz"
+          tar -C "$out/audit" -cf - "$VERIFIED_SHA" | gzip -n > "$out/lean-BANANA-arxiv-v1-verification.tar.gz"
+          printf 'Release: %s\nSoftware author: Jan Hubička\nAI assistance: ChatGPT 6 and 6.2\nLicense: Apache-2.0\nExact verified commit: %s\nGit tree: %s\nPrevious proof-identical checked snapshot: %s\nStrict verification: https://github.com/%s/actions/runs/%s\n' "$TAG" "$VERIFIED_SHA" "$(git rev-parse "$VERIFIED_SHA^{tree}")" "$PROOF_SNAPSHOT" "$GITHUB_REPOSITORY" "$VERIFIED_RUN" > "$out/RELEASE-VERIFICATION.txt"
+          (cd "$out" && sha256sum lean-BANANA-arxiv-v1.tar.gz lean-BANANA-arxiv-v1-verification.tar.gz RELEASE-VERIFICATION.txt > SHA256SUMS && sha256sum --check SHA256SUMS)
+          cat > "$out/notes.md" <<EOF
+          Lean companion to *Parity obstructions to precompact Ramsey expansions*.
+
+          Formalisation by **Jan Hubička**, using OpenAI's ChatGPT 6 and 6.2. Article authors: Sofia Brenner, Jan Hubička, Colin Jahel and Jaroslav Nešetřil. Software licence: Apache-2.0.
+
+          Exact release source: `$VERIFIED_SHA`. [Strict verification run](https://github.com/$GITHUB_REPOSITORY/actions/runs/$VERIFIED_RUN) passed the complete library build, fresh kernel replay, direct manuscript declaration checks and all 387 named axiom audits. The mathematical proof sources and dependency pins agree with the checked snapshot `$PROOF_SNAPSHOT`.
+
+          Attached archives contain the release source, verification evidence and SHA-256 checksums. Dependencies are identified by the committed manifest. The documented representation boundaries remain in force. This release does not submit the manuscript to arXiv.
+          EOF
+
+      - name: Publish the approved tag and immutable-source release
+        if: steps.gate.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/arxiv-v1-release"
+          # Create the tag atomically. A pre-existing or concurrent tag is an
+          # error here, never an instruction to move it.
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/$TAG" -f sha="$VERIFIED_SHA" >/dev/null
+          actual=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq .object.sha)
+          test "$actual" = "$VERIFIED_SHA"
+          gh release create "$TAG" "$out/lean-BANANA-arxiv-v1.tar.gz" "$out/lean-BANANA-arxiv-v1-verification.tar.gz" "$out/SHA256SUMS" "$out/RELEASE-VERIFICATION.txt" --repo "$GITHUB_REPOSITORY" --verify-tag --title "lean-BANANA arxiv-v1" --notes-file "$out/notes.md"
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,url,assets
