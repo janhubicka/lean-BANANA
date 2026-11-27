@@ -1,6 +1,0 @@
-import BANANA.NonPrecompact.FolkmanFirstOrderLimit
-
-#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_nativeEmbeds
-#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_substructure_native
-#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_tuple_factors
-#print axioms SuccessorTree.NonPrecompact.folkmanFirstOrderLimit_nativeExtension

@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.SymplecticCountableModel
-import SuccessorTree.CopyRamsey
+import BANANA.CopyRamsey
 
 /-!
 # The finite age of the countable symplectic space as a copy system

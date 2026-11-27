@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.BananaCopyDegree
-import BANANA.NonPrecompact.LinearBinaryRepresentability
+import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
 
 /-!
 # Subspace descriptions of one-sided unlabelled BANANA copies
@@ -10,11 +10,9 @@ for a source whose left sort is zero. We give both descriptions and
 check functoriality under embeddings of the ambient structures.
 
 These are the representation lemmas needed to transport the
-already formalised unconditional binary GLR Ramsey theorem to the
+classical binary GLR Ramsey theorem cited by the manuscript to the
 unlabelled-copy notion `BananaCopyRanges`.
 
-This file is staged for a local Lean kernel build: the root package
-must not import it until that build succeeds.
 -/
 
 namespace SuccessorTree.NonPrecompact

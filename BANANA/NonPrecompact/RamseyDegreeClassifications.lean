@@ -11,14 +11,15 @@ namespace SuccessorTree.NonPrecompact
 open Module
 
 /-- The native BANANA embedding Ramsey degree is the order of the source
-    automorphism group when either sort is zero, and is infinite otherwise. -/
+    automorphism group when either sort is zero, and is infinite otherwise,
+    using the classical GLR theorem cited by the manuscript as a premise. -/
 theorem bananaEmbeddingRamseyDegree_classification
-    (A : BananaFiniteCopyObject) (t : ℕ) :
+    (hGLR : BinarySubspaceRamsey) (A : BananaFiniteCopyObject) (t : ℕ) :
     A.matrix.embeddingRamseyDegreeLE t ↔
       (A.rightDim = 0 ∨ A.leftDim = 0) ∧
         Nat.card (bananaCopySystem.ReductAutomorphism A) ≤ t :=
   bananaEmbeddingRamseyDegree_classification_of_copy A t
-    A.matrix.copyRamseyDegree_classification
+    (A.matrix.copyRamseyDegree_classification hGLR)
 
 namespace FiniteAlternatingSpace
 

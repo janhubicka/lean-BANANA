@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.FolkmanNativePairingEmbedding
-import SuccessorTree.CopyRamsey
+import BANANA.CopyRamsey
 
 /-!
 # The native Folkman–BANANA copy system

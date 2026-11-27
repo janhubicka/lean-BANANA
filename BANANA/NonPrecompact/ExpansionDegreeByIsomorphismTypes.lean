@@ -1,4 +1,4 @@
-import SuccessorTree.CopyRamsey
+import BANANA.CopyRamsey
 import Mathlib.SetTheory.Cardinal.Finite
 
 /-!

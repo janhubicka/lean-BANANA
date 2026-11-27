@@ -1,6 +1,6 @@
 import BANANA.NonPrecompact.BananaCopyDegree
 import Mathlib.Algebra.Module.Submodule.Equiv
-import SuccessorTree.CopyRamsey
+import BANANA.CopyRamsey
 
 /-!
 # The native BANANA copy system

@@ -1,0 +1,5 @@
+import BANANA.NonPrecompact.BinarySubspaceRamseyInterface
+
+#print axioms SuccessorTree.NonPrecompact.BinarySubspaceRamsey
+#print axioms SuccessorTree.NonPrecompact.leftOneSidedCopyRamseyOne_of_binarySubspaceRamsey
+#print axioms SuccessorTree.NonPrecompact.rightOneSidedCopyRamseyOne_of_binarySubspaceRamsey

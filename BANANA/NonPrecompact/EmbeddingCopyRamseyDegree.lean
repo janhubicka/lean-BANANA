@@ -1,4 +1,4 @@
-import SuccessorTree.CopyRamsey
+import BANANA.CopyRamsey
 
 /-!
 # Embedding and copy Ramsey degrees

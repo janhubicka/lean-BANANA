@@ -1,6 +1,0 @@
-import BANANA.NonPrecompact.FirstOrderExpansionTermClosure
-
-#print axioms SuccessorTree.NonPrecompact.expandedFunctionsInReductClosure_iff_term_values
-#print axioms SuccessorTree.NonPrecompact.expandedRangeClosed_of_functionsInReductClosure
-#print axioms SuccessorTree.NonPrecompact.expandedFunctionsInReductClosure_iff_finite_reduct_embeddings
-#print axioms SuccessorTree.NonPrecompact.exists_hereditary_restriction_of_functionsInReductClosure

@@ -1,5 +1,5 @@
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculus
-import SuccessorTree.CopyRamsey
+import BANANA.CopyRamsey
 
 /-!
 # Copies in finite Boolean–BANANA structures

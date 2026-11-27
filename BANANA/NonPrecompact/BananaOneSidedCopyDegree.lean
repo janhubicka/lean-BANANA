@@ -3,9 +3,9 @@ import BANANA.NonPrecompact.BananaOneSidedCopyRanges
 /-!
 # The one-sided BANANA copy Ramsey theorem in the unlabelled-copy language
 
-The unconditional binary GLR theorem already formalised via
-`lean-successors` supplies degree one for colourings of fixed-dimensional
-subspaces. The preceding module identifies one-sided BANANA copies with
+The classical binary GLR theorem cited by the circulation paper supplies
+degree one for colourings of fixed-dimensional subspaces. Its statement
+`BinarySubspaceRamsey` is an explicit premise, not an additional Lean axiom. The preceding module identifies one-sided BANANA copies with
 their nonzero-sort image subspaces, compatibly with embeddings.
 
 We extend a colouring of the realised copy subspaces arbitrarily to
@@ -15,8 +15,7 @@ original colouring exactly. This avoids a choice of bases and also
 avoids needing to prove that *every* subspace is realised by a copy
 in each arbitrary ambient bilinear system.
 
-No part of the frozen circulation manuscript is changed here.
-This file is staged pending a local Lean kernel and axiom audit.
+The proof of GLR itself is outside the circulation-only release.
 -/
 
 namespace SuccessorTree.NonPrecompact
@@ -54,14 +53,14 @@ private theorem extendFiniteColour_apply
 
 /-- Every left-only finite BANANA source has unlabelled copy
 Ramsey degree at most one. This is the fixed-subspace Ramsey
-theorem obtained directly from the successor-tree formalisation. -/
+theorem cited in the paper as an explicit premise. -/
 theorem BananaMatrixStructure.copyRamseyDegreeLE_one_leftOnly
-    {a : ℕ} (A : BananaMatrixStructure a 0) :
+    {a : ℕ} (A : BananaMatrixStructure a 0) (hGLR : BinarySubspaceRamsey) :
     A.copyRamseyDegreeLE 1 := by
   classical
   intro lB rB B colours hcolours
   obtain ⟨n, hRamsey⟩ :=
-    (BinaryWord.leftOneSidedCopyRamseyOne_via_successors a)
+    (leftOneSidedCopyRamseyOne_of_binarySubspaceRamsey hGLR a)
       lB rB B colours hcolours
   refine ⟨n, n, perfectBanana n, ?_⟩
   intro colouring
@@ -88,12 +87,12 @@ theorem BananaMatrixStructure.copyRamseyDegreeLE_one_leftOnly
 
 /-- The symmetric degree-one statement for right-only sources. -/
 theorem BananaMatrixStructure.copyRamseyDegreeLE_one_rightOnly
-    {a : ℕ} (A : BananaMatrixStructure 0 a) :
+    {a : ℕ} (A : BananaMatrixStructure 0 a) (hGLR : BinarySubspaceRamsey) :
     A.copyRamseyDegreeLE 1 := by
   classical
   intro lB rB B colours hcolours
   obtain ⟨n, hRamsey⟩ :=
-    (BinaryWord.rightOneSidedCopyRamseyOne_via_successors a)
+    (rightOneSidedCopyRamseyOne_of_binarySubspaceRamsey hGLR a)
       lB rB B colours hcolours
   refine ⟨n, n, perfectBanana n, ?_⟩
   intro colouring
@@ -153,9 +152,11 @@ theorem BananaMatrixStructure.not_copyRamseyDegreeLE_zero
 
 /-- The complete copy Ramsey-degree classification, in the same
 unlabelled-copy formalisation used for the two-sided obstruction.
-The assertions together distinguish degree one from infinity. -/
+The assertions distinguish degree one from infinity using the cited GLR
+premise for the upper bounds. The mixed-source infinite-degree theorem
+`BananaMatrixStructure.copyRamseyDegree_infinite_of_positive` is unconditional. -/
 theorem BananaMatrixStructure.copyRamseyDegree_classification
-    {l r : ℕ} (A : BananaMatrixStructure l r) :
+    {l r : ℕ} (A : BananaMatrixStructure l r) (hGLR : BinarySubspaceRamsey) :
     ((r = 0 ∨ l = 0) →
       A.copyRamseyDegreeLE 1 ∧ ¬ A.copyRamseyDegreeLE 0) ∧
     ((0 < l ∧ 0 < r) →
@@ -164,10 +165,10 @@ theorem BananaMatrixStructure.copyRamseyDegree_classification
   · intro h
     rcases h with hr | hl
     · subst r
-      exact ⟨A.copyRamseyDegreeLE_one_leftOnly,
+      exact ⟨A.copyRamseyDegreeLE_one_leftOnly hGLR,
         A.not_copyRamseyDegreeLE_zero⟩
     · subst l
-      exact ⟨A.copyRamseyDegreeLE_one_rightOnly,
+      exact ⟨A.copyRamseyDegreeLE_one_rightOnly hGLR,
         A.not_copyRamseyDegreeLE_zero⟩
   · rintro ⟨hl, hr⟩
     exact A.copyRamseyDegree_infinite_of_positive hl hr
