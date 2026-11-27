@@ -1,5 +1,5 @@
 {
-  "description": "Public Lean source declaration references required by the circulation validation markers. No manuscript prose or internal review metadata. Source identities must remain unchanged or the crosswalk must be reviewed.",
+  "description": "Circulation-linked declarations, including the unchanged vendored GLR proof. Exact source identity and direct axiom coverage required.",
   "source_reference": "4fabdd7cf1bf1206912cd0d6c92e685b04e769cf",
   "successor_pin": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
   "required": [

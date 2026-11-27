@@ -1,2 +1,0 @@
-import Mathlib
-import BANANA.NonPrecompact.AffineParityCore

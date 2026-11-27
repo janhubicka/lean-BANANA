@@ -10,7 +10,10 @@ import sys
 from check_axiom_report import axiom_commands, strip_lean_comments
 
 ROOT = Path(__file__).resolve().parents[1]
-files = sorted((ROOT / "BANANA").rglob("*.lean"))
+files = sorted(p for ns in ("BANANA", "SuccessorTree", "RamseySpace")
+               for p in (ROOT / ns).rglob("*.lean"))
+files.extend(p for ns in ("SuccessorTree", "RamseySpace")
+             if (p := ROOT / (ns + ".lean")).is_file())
 entry = ROOT / "BANANA.lean"
 if not entry.is_file():
     sys.exit("Missing BANANA.lean entry point")
@@ -21,13 +24,11 @@ sources = {p.relative_to(ROOT).as_posix(): p for p in files}
 def local_imports(file):
     out = set()
     for line in strip_lean_comments(file.read_text(encoding="utf-8")).splitlines():
-        match = re.match(r"\s*import\s+(.+)$", line)
+        match = re.match(r"\s*(?:(?:public|private|meta)\s+)*import\s+(.+)$", line)
         if not match:
             continue
         for name in match.group(1).split():
-            if name == "BANANA":
-                out.add("BANANA.lean")
-            elif name.startswith("BANANA."):
+            if name.split(".")[0] in {"BANANA", "SuccessorTree", "RamseySpace"}:
                 out.add(name.replace(".", "/") + ".lean")
     return out
 

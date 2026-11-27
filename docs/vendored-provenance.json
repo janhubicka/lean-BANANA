@@ -1,0 +1,380 @@
+{
+  "source_snapshot": "0cdbf99cbc208e9f8a50ed46af255540993f91e4",
+  "previous_strict_proof_snapshot": "fc0972fda0cc25ab94ab7315f6f57b7eed9127b9",
+  "previous_strict_run": 46049836518,
+  "scope": "Module-level transitive import closure of the manuscript-linked declaration requirements. The GLR proof is retained unconditionally. No source proof edits.",
+  "upstream_files": [
+    {
+      "path": "RamseySpace/Basic.lean",
+      "repo": "https://github.com/janhubicka/lean-ramsey-space-todorcevic",
+      "commit": "54a9eb02f7f7bd2e942e95f7b44fc6f04f48892c",
+      "blob": "c6f9af978bf7f40217facc9983575aad6fec3946"
+    },
+    {
+      "path": "RamseySpace/Finitization.lean",
+      "repo": "https://github.com/janhubicka/lean-ramsey-space-todorcevic",
+      "commit": "54a9eb02f7f7bd2e942e95f7b44fc6f04f48892c",
+      "blob": "41241677c1f193873659472e1b0e3d2e060e444b"
+    },
+    {
+      "path": "SuccessorTree/Approximation.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "26b5aeb0d8bee1c7aff2c27b896c5874fb9ea682"
+    },
+    {
+      "path": "SuccessorTree/Canonical.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "22d602169996edd7d43849fd12f024f58fe47a1d"
+    },
+    {
+      "path": "SuccessorTree/CopyRamsey.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "88ae3feeed2eeb7fc6a56d68d5b2934c03b2537e"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/AlphabetEquiv.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "e89ec7be50d4601743d97a9df67481e46c3314cf"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/AlphabetInduction.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "3eb322e4158d17596db321a1b41738a3fcf6a79d"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/AlphabetLift.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "a98cf1a66d532f3adf694366f5fbc56a73859830"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/Composition.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "e6eb73ce1062085ecfe8c74fa1024afaa07af000"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/FiniteVariableWord.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "e884d31d508a9d7a369ad0953c6e1376505a6a96"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/Forcing.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "347eccfd00b8ac5cd46ebabe0e01f72c33b80872"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "9afc53468f51737c8f7af177569432ed7c01a8eb"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingFusionLimit.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "5e558557c6c912382ade34d48867fcbf62221850"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingLemmaOne.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "f18deb3f526ca0f845e0d2871ecdcef94c64405e"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingLemmaTwo.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "6347e2e03539ca7d38d523011fe6889c6abf1a52"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingMaximal.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "86657a1cb9c8fd15b4aaf97f08365948eaa4d150"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingProposition.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "18261c9e9f6adadd0dcda1b8e2b213be055fb3c8"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/ForcingReduction.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "88a7e49f2cdaecc02755c4cf98abbf1c8de14dac"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/GreedyLimit.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "10d1ce7cc1f4eb7ea976291e98a9c525e0d574f2"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/LineSchedule.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "786c585ea1011264f999d0b9bd2e6f9e7b42e4f7"
+    },
+    {
+      "path": "SuccessorTree/HalesJewett/VariableWord.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "b8f4e520b4b14587092162be6a076a1d7a42664c"
+    },
+    {
+      "path": "SuccessorTree/Monoid.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "566c7f7867bb587daae7ebe2848b433667dc9d71"
+    },
+    {
+      "path": "SuccessorTree/Pigeonhole.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "6f16f7c7f3e93f69f445cc353ed62eca6f516dd0"
+    },
+    {
+      "path": "SuccessorTree/RamseySpace/Basic.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "5066875b712729f282f7932f34c76666ac2b60c1"
+    },
+    {
+      "path": "SuccessorTree/RamseySpace/Finitization.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "c67044a76be91243f98174884efe4f5ea324031e"
+    },
+    {
+      "path": "SuccessorTree/RamseySpace/Nonempty.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "606602997aa3aa287381bb0fabc8cd9ca94c734a"
+    },
+    {
+      "path": "SuccessorTree/Replay.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "9d5417115ae31e09b23497d16827b89e90c402ab"
+    },
+    {
+      "path": "SuccessorTree/ShapeAction.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "6efdd1b5c4cd9fd1d49cce9bc80204b56355e519"
+    },
+    {
+      "path": "SuccessorTree/ShapeBlockForcing.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "ab3c69006514147768e20eaccd9bc3fc863a8704"
+    },
+    {
+      "path": "SuccessorTree/ShapeBlockLine.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "50edfba67799d09c5cbea2c4074d084f8e359ee1"
+    },
+    {
+      "path": "SuccessorTree/ShapeDirectLine.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "837e58b756073b9601ba5743f2e4b8245412dfce"
+    },
+    {
+      "path": "SuccessorTree/ShapeExactFactor.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "81ec9c6ebce519ddaa6859c4c9d053c72b44e882"
+    },
+    {
+      "path": "SuccessorTree/ShapeFiniteBounds.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "5b7336a8850b80d7265921a2ef03d6e9411a27d6"
+    },
+    {
+      "path": "SuccessorTree/ShapeFiniteCorollaries.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "02353d89983c902daeadf3929aba6fb509f1e211"
+    },
+    {
+      "path": "SuccessorTree/ShapeFiniteInduction.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "06af67c8b231b20a76d9b45396827f2ae2798390"
+    },
+    {
+      "path": "SuccessorTree/ShapeFiniteProduct.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "5d789cba184bfe7a4f2ad686383ad152a26b0dde"
+    },
+    {
+      "path": "SuccessorTree/ShapeFiniteRamsey.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "07364a235f9a4c168873f1e6446252a296c27ced"
+    },
+    {
+      "path": "SuccessorTree/ShapeFrontFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "6c7ec6068bb73faa648f0ab664271064d70c1bfd"
+    },
+    {
+      "path": "SuccessorTree/ShapeFrontPigeonhole.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "eb1d1ff044e0a0b43c30e9cd18845985b6b9de7b"
+    },
+    {
+      "path": "SuccessorTree/ShapeFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "87a0eb5d84c3a65742c95c3d720d01a57da6ba4c"
+    },
+    {
+      "path": "SuccessorTree/ShapeFusionExcess.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "0b336be3c12477fe4cac5bc37e9d8e2eb4214d2a"
+    },
+    {
+      "path": "SuccessorTree/ShapeGoodTails.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "11241aa0f58495e73a3908d252a92e11afaa384d"
+    },
+    {
+      "path": "SuccessorTree/ShapeLarge.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "5e8876527c6dd5d8b70a10f627533844e8112167"
+    },
+    {
+      "path": "SuccessorTree/ShapeLargeFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "128bc825a0890264b8174dd1b088326c14efbaff"
+    },
+    {
+      "path": "SuccessorTree/ShapeLargeLine.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "c6defdcb9290267872a341e21a769244949d3b38"
+    },
+    {
+      "path": "SuccessorTree/ShapeLargeShapeLine.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "9beb04de7359f2f256d1260cbf43a09478170b9d"
+    },
+    {
+      "path": "SuccessorTree/ShapeLocalPigeonhole.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "1e7755a96c8d5a0826e794aa208440b04d937311"
+    },
+    {
+      "path": "SuccessorTree/ShapeMillikenFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "52ec8c7c3c27a6696b5044c33efa990e4de42cdf"
+    },
+    {
+      "path": "SuccessorTree/ShapePigeonhole.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "94ddf44bc0fadf80db43b23a6748d8f6e81ec692"
+    },
+    {
+      "path": "SuccessorTree/ShapePrefixPigeonhole.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "bd439f7f899c64e3c052ea2fd9c3c04421016f67"
+    },
+    {
+      "path": "SuccessorTree/ShapePreserving.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "eb6b7fb5421edb23da8ec354276b8f6692389487"
+    },
+    {
+      "path": "SuccessorTree/ShapeRamseyFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "a885e7421bed2ec44ea242719fccb5ea296d02aa"
+    },
+    {
+      "path": "SuccessorTree/ShapeReplayFusion.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "62d58084448497ea9d39150cab6a04690069aaec"
+    },
+    {
+      "path": "SuccessorTree/ShapeSplit.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "32dd076f659f0ae3bfe9a5f8f7df2783a1368154"
+    },
+    {
+      "path": "SuccessorTree/ShapeTransport.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "610b5a10310e0d209e1e3759ebfe4bbde46797c2"
+    },
+    {
+      "path": "SuccessorTree/ShapeTransportAlphabet.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "cd53b30293bf0dfa54dbd842ab0d2433bd5e9620"
+    },
+    {
+      "path": "SuccessorTree/ShapeTwoBlock.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "0ffd5f3f8799ce879365c0e6a0fc13482177e903"
+    },
+    {
+      "path": "SuccessorTree/ShapeWordFactor.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "173edb15d194199c7fd4b6f829441eb46716fdf9"
+    },
+    {
+      "path": "SuccessorTree/StarLine.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "87e355f9a053c6fc73905194b1e8a211f737c84b"
+    },
+    {
+      "path": "SuccessorTree/Successor.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "17a0a464c1bf18c774ec433aaaa7699a0c4fdc24"
+    },
+    {
+      "path": "SuccessorTree/Support.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "6350fc7dd6caa55cd93a40589ade9576e04dcb35"
+    },
+    {
+      "path": "SuccessorTree/Tree.lean",
+      "repo": "https://github.com/janhubicka/lean-successors",
+      "commit": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+      "blob": "098be63cb4d91a4a414da439cd01dd6006daa8e0"
+    }
+  ]
+}

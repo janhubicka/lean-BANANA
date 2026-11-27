@@ -56,16 +56,10 @@ def main():
     if len(sys.argv) != 2:
         sys.exit("Usage: check_manuscript_linked_declarations.py <project-axioms.log>")
     data = json.loads((ROOT / "scripts/manuscript_linked_declarations.json").read_text())
-    manifest = json.loads((ROOT / "lake-manifest.json").read_text())
-    pkgs = [p for p in manifest["packages"]
-            if p["url"].rstrip("/").removesuffix(".git").endswith("/lean-successors")]
-    if len(pkgs) != 1 or pkgs[0]["rev"] != data["successor_pin"]:
-        raise ValueError("successor manifest pin changed; review linked declarations")
-    dep = ROOT / manifest["packagesDir"] / pkgs[0]["name"].strip("«»")
-    if git(dep, "rev-parse", "HEAD").decode().strip() != data["successor_pin"]:
-        raise ValueError("successor checkout pin mismatch")
+    # The imported upstream proof modules are now part of the archived source tree.
+    tree = blobs(ROOT)
     inventory = check_inventory(Path(sys.argv[1]).read_text(encoding="utf-8"))
-    count, distinct = check_requirements(data["required"], inventory, blobs(ROOT), blobs(dep))
+    count, distinct = check_requirements(data["required"], inventory, tree, tree)
     print(f"PASS: {count} manuscript source declaration references resolve uniquely "
           f"to {distinct} directly audited compiled declarations at the checked source blobs")
 
