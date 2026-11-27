@@ -6,7 +6,7 @@ A formalisation of a class of finite structures must specify the objects, embedd
 
 A finite object is a nontrivial Boolean algebra with a parity map into the two-element field, additive on disjoint elements and zero on the greatest element. An atom has mark zero or one, and the sum of all atom marks is zero. An embedding is unital and preserves the parity map. In atom coordinates an embedding is described by a partition of the target atoms into nonempty fibres over the source atoms with the correct parity sums.
 
-The [BooleanBanana entry point](https://github.com/janhubicka/lean-BANANA/blob/4fabdd7cf1bf1206912cd0d6c92e685b04e769cf/BANANA/NonPrecompact/BooleanBanana.lean#L20) names the native finite objects, embeddings and the explicit countable cylinder limit. [Native copy transport](https://github.com/janhubicka/lean-BANANA/blob/4fabdd7cf1bf1206912cd0d6c92e685b04e769cf/BANANA/NonPrecompact/BooleanBananaCopyTransport.lean) concerns genuine image copies, not embeddings with named atoms.
+The [BooleanBanana entry point](https://github.com/janhubicka/lean-BANANA/blob/4fabdd7cf1bf1206912cd0d6c92e685b04e769cf/BANANA/NonPrecompact/BooleanBanana.lean#L21) names the native finite objects, embeddings and the explicit countable cylinder limit. [Native copy transport](https://github.com/janhubicka/lean-BANANA/blob/4fabdd7cf1bf1206912cd0d6c92e685b04e769cf/BANANA/NonPrecompact/BooleanBananaCopyTransport.lean) concerns genuine image copies, not embeddings with named atoms.
 
 ## Folkman–BANANA
 

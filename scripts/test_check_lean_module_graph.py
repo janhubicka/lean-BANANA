@@ -41,15 +41,23 @@ class LeanModuleGraphTests(unittest.TestCase):
 
             first = graph()
             self.assertNotEqual(first.returncode, 0)
-            self.assertIn("Audit-only proof modules (review before deletion): 1", first.stdout)
+            self.assertIn("Audit-only proof modules (must be reachable from root): 1", first.stdout)
             self.assertIn("AUDIT-ONLY PROOF MODULE: BANANA/C.lean", first.stderr)
             self.assertIn("DEAD MODULE CANDIDATE: BANANA/Dead.lean", first.stderr)
             self.assertNotIn("MISSING IMPORT", first.stderr)
 
             dead.unlink()
             second = graph()
-            self.assertEqual(second.returncode, 0, second.stderr)
-            self.assertIn("Unreachable production modules: 0", second.stdout)
+            self.assertNotEqual(second.returncode, 0)
+            self.assertIn("AUDIT-ONLY PROOF MODULE: BANANA/C.lean", second.stderr)
+            (root / "BANANA.lean").write_text("import BANANA.A\nimport BANANA.C\n")
+            third = graph()
+            self.assertEqual(third.returncode, 0, third.stderr)
+            self.assertIn("Unreachable production modules: 0", third.stdout)
+            (root / "BANANA.lean").write_text("import BANANA.A\nimport BANANA.CAxiomAudit\n")
+            fourth = graph()
+            self.assertNotEqual(fourth.returncode, 0)
+            self.assertIn("AUDIT IMPORTED BY PRODUCTION ROOT: BANANA/CAxiomAudit.lean", fourth.stderr)
 
 
 if __name__ == "__main__":
