@@ -1,11 +1,12 @@
+import BANANA
+import Lean
+
 /-!
 Audit-only entry point: apply Lean's own collectAxioms (the implementation
 used by #print axioms) separately to every visible project-owned constant
 in the compiled BANANA import closure. This is not imported into BANANA.
 The archived inventory is also the coverage oracle for manuscript links.
 -/
-import BANANA
-import Lean
 
 open Lean Elab Command
 
