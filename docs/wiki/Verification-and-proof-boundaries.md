@@ -2,22 +2,22 @@
 
 ## Evidence
 
-The verified proof snapshot is [`4fabdd7cf1bf1206912cd0d6c92e685b04e769cf`](https://github.com/janhubicka/lean-BANANA/commit/4fabdd7cf1bf1206912cd0d6c92e685b04e769cf), Git tree `c4abf542fe7d09006f035694cda5f14f82ecd088`. The integrated commit [`4205b301a5960dbabe5bdf7fa226db85307ea87a`](https://github.com/janhubicka/lean-BANANA/commit/4205b301a5960dbabe5bdf7fa226db85307ea87a) has the identical tree. Documentation changes after this proof snapshot do not change that evidence.
+The release proof snapshot is [`fc0972fd`](https://github.com/janhubicka/lean-BANANA/commit/fc0972fda0cc25ab94ab7315f6f57b7eed9127b9). Its [strict CI run 46049836518](https://github.com/janhubicka/lean-BANANA/actions/runs/46049836518) passed all verification gates, including fresh kernel replay, 10,230 directly audited visible declarations in 559 modules, all 363 manuscript-linked declarations (covering 299 markers), 387 named axiom-audit modules, and 29 Python tests. All 515 production modules are reachable. Only `propext`, `Classical.choice` and `Quot.sound` occur in the audited transitive dependencies. The direct inventory excludes 2,676 inaccessible private constants; fresh kernel replay nevertheless passed. The [audit archive](https://github.com/janhubicka/lean-BANANA/actions/runs/46049836518/artifacts/15227531922) was re-parsed locally and its SHA-256 checked: `d7b6b35d64c2a780765a762d4474170afd882f7c33634d672324a122ab0b0b8c`. The correspondence acceptance does not assert that every sentence of the article is formalised.
 
 | Verification measure | Result |
 | --- | ---: |
 | Lean files | 902 |
-| Production modules | 515 |
-| Production modules reachable from the public root | 511 |
-| Audit-only proof modules | 4 |
-| Unreachable production modules | 0 |
-| Strict axiom-audit modules passed | 387/387 |
-| Declaration queries | 1,435 |
-| Distinct named declarations audited | 1,422 |
-| Python unit tests | 12/12 |
-| Exact-head CI steps | 261/261 |
+| Production modules reachable | 515/515 |
+| Audit-only or unreachable production modules | 0 |
+| Visible declarations directly audited | 10,230 |
+| Direct manuscript declaration requirements | 363/363 |
+| Fresh kernel replay | Passed |
+| Named axiom-audit modules | 387/387 |
+| Named declaration queries | 1,435 |
+| Distinct named declarations | 1,422 |
+| Python tests | 29/29 |
 
-The [strict CI run](https://github.com/janhubicka/lean-BANANA/actions/runs/45844957074) used the committed manifest, and the [post-merge CI](https://github.com/janhubicka/lean-BANANA/actions/runs/45854123551) passed 259 applicable steps. The strict audit parser accepts only `propext`, `Classical.choice` and `Quot.sound` in the audited transitive dependencies and checks that the declarations printed are exactly those requested. The [original audit artifact](https://github.com/janhubicka/lean-BANANA/actions/runs/45844957074/artifacts/15132656205) was also downloaded and its reports were rechecked against the exact source locally. Re-parsing archived logs is not a new Lean kernel run.
+The integrated main commit `15a4468591f703bf55cadf9f7fefa7890a7e1f54` has the identical Git tree as the checked proof snapshot. The earlier verified revision `4fabdd7cf1` remains valid historical evidence. Documentation changes after the proof snapshot do not change the Lean proof sources or dependency pins; distinguish them from exact-head kernel verification. Re-parsing archived logs is not a new Lean kernel run.
 
 ## Reading the paper's markers
 
@@ -25,7 +25,7 @@ The [strict CI run](https://github.com/janhubicka/lean-BANANA/actions/runs/45844
 - **Lean rel.**: the linked theorem is checked in a related representation or under an explicit interface; the reader must also examine the correspondence and discharge any premises.
 - **Lean part**: a checked component of a larger argument, not certification of every step of that argument.
 
-A theorem passing the kernel and axiom audit can still have a different statement from the intended theorem. Statement fidelity is reviewed separately. The paper's human mathematical review is distinct from the final human review of the AI-produced Lean formalisation; the latter is pending at this snapshot.
+A theorem passing the kernel and axiom audit can still have a different statement from the intended theorem. Statement fidelity is reviewed separately. Jan Hubička accepted the statement-to-Lean correspondence on 27 November 2026 on the basis of the adversarial audit and verified declaration crosswalk, subject to the documented representation boundaries. This records acceptance, not a claim that every declaration was independently inspected by the author.
 
 ## Main representation boundaries
 
@@ -34,7 +34,7 @@ A theorem passing the kernel and axiom audit can still have a different statemen
 | Finite classes | Atom and matrix presentations must preserve all operations, pairings, and actual image copies. The native finite-class theorems include arbitrary finite carriers in their stated representations. |
 | Folkman limit | The first-order categorical limit is a product encoding; native rings, pairing and mixed-sort orbits are decoded from it. |
 | BANANA model theory | The tagged relational complete theory and the functional age are not the same literal structure language. Sorted formula translation and decoding are explicit developments. |
-| Generated expansion types | The native finite pointed-cover theorem is checked; the general many-sorted syntax-to-interface passage is an English mathematical argument. |
+| Generated expansion types | The native finite pointed-cover theorem is checked; the general many-sorted syntax-to-interface passage is established in the manuscript but has not been formalised in Lean. |
 | General classical implications | The formalised instantiations and general theorems have their explicit hypotheses. Do not infer a general theorem from an instance or a conditional implication alone. |
 
 The [mathematical representations chapter](Mathematical-representations.md) explains these choices.
@@ -47,7 +47,7 @@ The [classical-dependency audit](https://github.com/janhubicka/lean-BANANA/blob/
 
 Review the three finite Fraïssé-class theorems on equal terms, the native expansion cover, exact copy/embedding degree statements, native coherent EPPA, and the dynamical/model-theoretic representation boundaries. Check quantifiers and assumptions, not just the theorem names. Important edge cases include zero rings, non-unital embeddings, degenerate pairings, zero-dimensional alternating spaces, and generated expanded domains larger than the distinguished copy.
 
-No separate Folkman-specific mathematical proof obligation remains. No external journal referee report or completed final human Lean sign-off is claimed here.
+No separate Folkman-specific mathematical proof obligation remains. The author correspondence acceptance is recorded above; no external journal referee report is claimed.
 
 ## Two notions of finite expansion types
 
