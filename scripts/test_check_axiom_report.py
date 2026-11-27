@@ -21,6 +21,15 @@ class AxiomReportTests(unittest.TestCase):
         source = "import Real.Theorem\n/- import Missing.Fake -/\n"
         self.assertNotIn("Missing.Fake", strip_lean_comments(source))
 
+    def test_char_literal_quote_does_not_hide_commands(self):
+        source = "def c : Char := '\"'\n-- #print axioms fake\n#print axioms Real.theorem'\n"
+        self.assertEqual(axiom_commands(source), ["Real.theorem'"])
+        check_report(source, "'Real.theorem'' depends on axioms: [propext]\n")
+
+    def test_multiline_string_is_not_an_axiom_command(self):
+        source = 'def s := "text\n#print axioms fake\nend"\n#print axioms actual\n'
+        self.assertEqual(axiom_commands(source), ["actual"])
+
     def test_every_command_has_a_report(self):
         source = "#print axioms foo\n#print axioms bar\n"
         with self.assertRaisesRegex(ValueError, "Incomplete"):

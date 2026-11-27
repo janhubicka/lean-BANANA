@@ -2,7 +2,7 @@
 
 ## AI assistance
 
-The Lean formalisation in this repository was produced by **OpenAI's ChatGPT**, referred to in the manuscript as **Řehořek**, under the direction of the authors. ChatGPT was used to develop the mathematical representations, Lean definitions and proofs, auxiliary lemmas, verification scripts, and documentation. Lean's kernel checks the resulting declarations. The human authors are responsible for the paper and for reviewing the correspondence between its statements and the formalised theorems; final human review of the formalisation is pending. This disclosure concerns the Lean development, and does not replace the article's separate AI-assistance statement.
+The Lean formalisation in this repository was produced by **OpenAI's ChatGPT** under the direction of the authors. ChatGPT was used to develop the mathematical representations, Lean definitions and proofs, auxiliary lemmas, verification scripts, and documentation. Lean's kernel checks the resulting declarations. The human authors are responsible for the paper and for reviewing the correspondence between its statements and the formalised theorems; final human review of the formalisation is pending. This disclosure concerns the Lean development, and does not replace the article's separate AI-assistance statement.
 
 The verification evidence is the actual checked Lean code and its kernel/axiom reports, not an assertion of correctness by the language model. The source-level representation and statement boundaries are described in [Verification and proof boundaries](Verification-and-proof-boundaries.md).
 

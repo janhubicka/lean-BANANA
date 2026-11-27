@@ -74,7 +74,6 @@ import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.BananaOneSidedCopyDegree
-import BANANA.NonPrecompact.BananaCopyDegreeClassificationAxiomAudit
 import BANANA.NonPrecompact.BananaOneSidedSubspaceEquiv
 import BANANA.NonPrecompact.BananaCopyFunctor
 import BANANA.NonPrecompact.TwoSidedLinePair
@@ -111,7 +110,6 @@ import BANANA.NonPrecompact.FolkmanFiniteStrongAmalgamPairing
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
 import BANANA.NonPrecompact.FolkmanBilinearAllVectors
-import BANANA.NonPrecompact.FolkmanStrongAmalgamAxiomAudit
 import BANANA.NonPrecompact.FolkmanPersistence
 import BANANA.NonPrecompact.FolkmanTupleProfiles
 import BANANA.NonPrecompact.FolkmanTupleProfilesTransport
@@ -135,7 +133,6 @@ import BANANA.NonPrecompact.LinearBinaryExactCoordinates
 import BANANA.NonPrecompact.LinearBinaryRangeTransfer
 import BANANA.NonPrecompact.LinearBinaryBoringExtension
 import BANANA.NonPrecompact.LinearBinaryRepresentability
-import BANANA.NonPrecompact.GLRAxiomAudit
 import BANANA.NonPrecompact.LinearBinaryM2
 import BANANA.NonPrecompact.LinearBinarySMTree
 import BANANA.NonPrecompact.LinearBinaryRanges
@@ -209,7 +206,6 @@ import BANANA.NonPrecompact.PrebananaGeneratedBooleanOperations
 import BANANA.NonPrecompact.PrebananaGeneratedMarkedIsomorphism
 import BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral
 import BANANA.NonPrecompact.PrebananaCopyDegree
-import BANANA.NonPrecompact.PrebananaCopyDegreeAxiomAudit
 import BANANA.NonPrecompact.PrebananaEppaObstruction
 import BANANA.NonPrecompact.PrebananaAbstractEppaFiniteObstruction
 import BANANA.NonPrecompact.PrebananaThreeAtomPartialIsomorphism
@@ -243,7 +239,6 @@ import BANANA.NonPrecompact.PrebananaFiveAryFiniteExtensionSquare
 import BANANA.NonPrecompact.PrebananaFiveAryFiniteUniversality
 import BANANA.NonPrecompact.PrebananaFiveAryTowerLongPrefix
 import BANANA.NonPrecompact.PrebananaFiveAryAbstractExtensionFromPartitions
-import BANANA.NonPrecompact.PrebananaFiniteStageAtomPartition
 import BANANA.NonPrecompact.PrebananaFiveAryFiniteExtensionTheorem
 import BANANA.NonPrecompact.PrebananaFiveAryConcatenation
 import BANANA.NonPrecompact.PrebananaFiveAryWordPrefix
@@ -417,3 +412,7 @@ import BANANA.NonPrecompact.BananaLimitEnumerationEllis
 import BANANA.NonPrecompact.BananaLimitUniversalMinimalFlow
 import BANANA.NonPrecompact.UniversalMinimalFlowUniqueness
 import BANANA.NonPrecompact.BananaLimitExpansionGroup
+import BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness
+import BANANA.NonPrecompact.FolkmanNativeSortwiseIntersection
+import BANANA.NonPrecompact.PrebananaGridMarginals
+import BANANA.NonPrecompact.PrebananaGridReindex

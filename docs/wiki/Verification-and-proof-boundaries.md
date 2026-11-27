@@ -48,3 +48,7 @@ The [classical-dependency audit](https://github.com/janhubicka/lean-BANANA/blob/
 Review the three finite Fraïssé-class theorems on equal terms, the native expansion cover, exact copy/embedding degree statements, native coherent EPPA, and the dynamical/model-theoretic representation boundaries. Check quantifiers and assumptions, not just the theorem names. Important edge cases include zero rings, non-unital embeddings, degenerate pairings, zero-dimensional alternating spaces, and generated expanded domains larger than the distinguished copy.
 
 No separate Folkman-specific mathematical proof obligation remains. No external journal referee report or completed final human Lean sign-off is claimed here.
+
+## Two notions of finite expansion types
+
+Some earlier parts of the library, including `IsReasonablePrecompactRamseyAge` in `FirstOrderFunctionalRamseyAge.lean` and `cylinder_exists_namedFunctionalRamseyAge` in `BooleanBananaFirstOrderAge.lean`, use **same-carrier** finite expansion counts. With added functions or constants, a finite reduct copy may generate a larger expanded domain. The paper instead counts isomorphism types of those generated domains with the reduct copy distinguished. The older named functional expansion theorem does not assert finiteness of these generated types and is not a counterexample to the non-precompactness theorems. The generated-type and native pointed-cover results, not the legacy same-carrier name, specify the circulation claims.

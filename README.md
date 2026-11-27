@@ -7,7 +7,7 @@ Lean 4 formalisation accompanying the BANANA manuscript.
 
 ## AI disclosure
 
-The Lean formalisation in this repository was produced by **OpenAI's ChatGPT**, referred to in the manuscript as **Řehořek**, under the direction of the authors. ChatGPT was used to develop the mathematical representations, Lean definitions and proofs, auxiliary lemmas, verification scripts, and documentation. Lean's kernel checks the resulting declarations. The human authors are responsible for the paper and for reviewing the correspondence between its statements and the formalised theorems; final human review of the formalisation is pending. This disclosure concerns the Lean development, and does not replace the article's separate AI-assistance statement.
+The Lean formalisation in this repository was produced by **OpenAI's ChatGPT** under the direction of the authors. ChatGPT was used to develop the mathematical representations, Lean definitions and proofs, auxiliary lemmas, verification scripts, and documentation. Lean's kernel checks the resulting declarations. The human authors are responsible for the paper and for reviewing the correspondence between its statements and the formalised theorems; final human review of the formalisation is pending. This disclosure concerns the Lean development, and does not replace the article's separate AI-assistance statement.
 
 ## Proof coverage
 
@@ -183,3 +183,7 @@ hypotheses of each certificate.
 ## Licence
 
 The project-owned Lean formalisation and software verification scripts are licensed under [Apache-2.0](LICENSE). This does not change the licence of the separate article. Third-party material retains its existing notices and licence terms.
+
+## Two notions of finite expansion types
+
+Some earlier parts of the library, including `IsReasonablePrecompactRamseyAge` in `FirstOrderFunctionalRamseyAge.lean` and `cylinder_exists_namedFunctionalRamseyAge` in `BooleanBananaFirstOrderAge.lean`, use **same-carrier** finite expansion counts. With added functions or constants, a finite reduct copy may generate a larger expanded domain. The paper instead counts isomorphism types of those generated domains with the reduct copy distinguished. The older named functional expansion theorem does not assert finiteness of these generated types and is not a counterexample to the non-precompactness theorems. The generated-type and native pointed-cover results, not the legacy same-carrier name, specify the circulation claims.

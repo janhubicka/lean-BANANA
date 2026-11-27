@@ -11,51 +11,86 @@ import sys
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
 
-def strip_lean_comments(source: str) -> str:
-    """Remove nested block and line comments, preserving line boundaries."""
+# A quote at the end of a Lean identifier (e.g. f') is not a character literal.
+_CHAR = re.compile(r"'(?:[^'\\\n]|\\(?:u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|[^\n]))'")
+
+def lexical_code(source: str, *, mask_literals: bool = False) -> str:
+    """Mask comments, and optionally strings/chars, retaining line positions.
+
+    This is a source hygiene lexer, not an implementation of Lean's parser.
+    Nested block comments, escaped quotes and character literals are handled.
+    """
     out = []
     i = 0
     depth = 0
     in_string = False
+
+    def masked(chunk: str) -> str:
+        return "".join("\n" if c == "\n" else " " for c in chunk)
+
     while i < len(source):
+        c = source[i]
+        pair = source[i:i + 2]
         if depth:
-            if source.startswith("/-", i):
+            if pair == "/-":
                 depth += 1
+                out.append("  ")
                 i += 2
-            elif source.startswith("-/", i):
+            elif pair == "-/":
                 depth -= 1
+                out.append("  ")
                 i += 2
             else:
-                if source[i] == "\n":
-                    out.append("\n")
+                out.append(masked(c))
                 i += 1
         elif in_string:
-            if source[i] == "\\" and i + 1 < len(source):
-                out.extend(source[i:i + 2])
+            if c == "\\" and i + 1 < len(source):
+                chunk = source[i:i + 2]
+                out.append(masked(chunk) if mask_literals else chunk)
                 i += 2
             else:
-                out.append(source[i])
-                if source[i] == '"':
+                out.append(masked(c) if mask_literals else c)
+                if c == '"':
                     in_string = False
                 i += 1
-        elif source.startswith("--", i):
-            i = source.find("\n", i)
-            if i == -1:
-                break
-        elif source.startswith("/-", i):
+        elif pair == "--":
+            stop = source.find("\n", i)
+            stop = len(source) if stop < 0 else stop
+            out.append(masked(source[i:stop]))
+            i = stop
+        elif pair == "/-":
             depth = 1
+            out.append("  ")
             i += 2
-        else:
-            out.append(source[i])
-            if source[i] == '"':
-                in_string = True
+        elif c == '"':
+            in_string = True
+            out.append(" " if mask_literals else c)
             i += 1
+        elif c == "'" and (i == 0 or not (source[i - 1].isalnum() or source[i - 1] in "_'")):
+            literal = _CHAR.match(source, i)
+            if literal:
+                chunk = literal.group()
+                out.append(masked(chunk) if mask_literals else chunk)
+                i = literal.end()
+            else:
+                out.append(c)
+                i += 1
+        else:
+            out.append(c)
+            i += 1
+    if depth or in_string:
+        raise ValueError("Unterminated Lean comment or string")
     return "".join(out)
+
+
+def strip_lean_comments(source: str) -> str:
+    """Mask comments, retaining literals and line positions."""
+    return lexical_code(source)
 
 
 def axiom_commands(source: str) -> list[str]:
     """Get active, line-initial '#print axioms' targets (not comments)."""
-    cleaned = strip_lean_comments(source)
+    cleaned = lexical_code(source, mask_literals=True)
     return re.findall(r"(?m)^[ \t]*#print[ \t]+axioms[ \t]+([^\s]+)", cleaned)
 
 
@@ -68,10 +103,10 @@ def check_report(source: str, output: str) -> None:
     # A count-only check silently accepts two reports for A while
     # missing B. Compare qualified declaration names as a multiset.
     dependencies = re.findall(
-        r"'([^'\n]+)' depends on axioms:\s*\[([^\]]*)\]", output, re.S
+        r"'([^\n]+?)' depends on axioms:\s*\[([^\]]*)\]", output, re.S
     )
     no_axioms = re.findall(
-        r"'([^'\n]+)' does not depend on (?:any )?axioms\b", output
+        r"'([^\n]+?)' does not depend on (?:any )?axioms\b", output
     )
     expected = Counter(commands)
     observed = Counter(name for name, _ in dependencies)

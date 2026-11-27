@@ -1,0 +1,2548 @@
+{
+  "description": "Public Lean source declaration references required by the circulation validation markers. No manuscript prose or internal review metadata. Source identities must remain unchanged or the crosswalk must be reviewed.",
+  "source_reference": "4fabdd7cf1bf1206912cd0d6c92e685b04e769cf",
+  "successor_pin": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
+  "required": [
+    {
+      "module": "BANANA.NonPrecompact.AlignedCompletionEmbedding",
+      "name": "exists_alignedCompletionEmbedding",
+      "path": "BANANA/NonPrecompact/AlignedCompletionEmbedding.lean",
+      "blob": "a407e3b6fe692078573f8bb821dcc37034c8dc08",
+      "line": 23
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaAmalgam",
+      "name": "sumAmalgam_eq_iff_common",
+      "path": "BANANA/NonPrecompact/BananaAmalgam.lean",
+      "blob": "bf4b8bd0644f8bba7a010908843ca8d5b7b6981c",
+      "line": 132
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaAmalgam",
+      "name": "bananaBlockAmalgam_left",
+      "path": "BANANA/NonPrecompact/BananaAmalgam.lean",
+      "blob": "bf4b8bd0644f8bba7a010908843ca8d5b7b6981c",
+      "line": 191
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaAmalgam",
+      "name": "bananaBlockAmalgam_right",
+      "path": "BANANA/NonPrecompact/BananaAmalgam.lean",
+      "blob": "bf4b8bd0644f8bba7a010908843ca8d5b7b6981c",
+      "line": 203
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaCopyDegree",
+      "name": "BananaMatrixStructure.copyRamseyDegree_infinite_of_positive",
+      "path": "BANANA/NonPrecompact/BananaCopyDegree.lean",
+      "blob": "4a77c7238427300c9c140dea17b40b63aeb5fd8d",
+      "line": 170
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSum",
+      "name": "directSumInlEmbedding",
+      "path": "BANANA/NonPrecompact/BananaDirectSum.lean",
+      "blob": "c0a028c8afcf73fdbe6ab7e4b2183590ac38d309",
+      "line": 181
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSum",
+      "name": "directSum_cross_pairing_left_right",
+      "path": "BANANA/NonPrecompact/BananaDirectSum.lean",
+      "blob": "c0a028c8afcf73fdbe6ab7e4b2183590ac38d309",
+      "line": 199
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSum",
+      "name": "directSumEmbedding",
+      "path": "BANANA/NonPrecompact/BananaDirectSum.lean",
+      "blob": "c0a028c8afcf73fdbe6ab7e4b2183590ac38d309",
+      "line": 367
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSum",
+      "name": "directSumEmbedding_comp_left",
+      "path": "BANANA/NonPrecompact/BananaDirectSum.lean",
+      "blob": "c0a028c8afcf73fdbe6ab7e4b2183590ac38d309",
+      "line": 424
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSum",
+      "name": "directSumEmbedding_comp_right",
+      "path": "BANANA/NonPrecompact/BananaDirectSum.lean",
+      "blob": "c0a028c8afcf73fdbe6ab7e4b2183590ac38d309",
+      "line": 447
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSumCanonical",
+      "name": "directSum_natural_inl_left",
+      "path": "BANANA/NonPrecompact/BananaDirectSumCanonical.lean",
+      "blob": "59d200f8633f3a9a4b01567ecb048ade9e3aa76b",
+      "line": 92
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSumCanonical",
+      "name": "directSum_natural_inl_right",
+      "path": "BANANA/NonPrecompact/BananaDirectSumCanonical.lean",
+      "blob": "59d200f8633f3a9a4b01567ecb048ade9e3aa76b",
+      "line": 113
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSumCanonical",
+      "name": "directSum_natural_inr_left",
+      "path": "BANANA/NonPrecompact/BananaDirectSumCanonical.lean",
+      "blob": "59d200f8633f3a9a4b01567ecb048ade9e3aa76b",
+      "line": 134
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSumCanonical",
+      "name": "directSum_natural_inr_right",
+      "path": "BANANA/NonPrecompact/BananaDirectSumCanonical.lean",
+      "blob": "59d200f8633f3a9a4b01567ecb048ade9e3aa76b",
+      "line": 155
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaDirectSumCanonical",
+      "name": "exists_canonical_zero_amalgam",
+      "path": "BANANA/NonPrecompact/BananaDirectSumCanonical.lean",
+      "blob": "59d200f8633f3a9a4b01567ecb048ade9e3aa76b",
+      "line": 177
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFiniteCountability",
+      "name": "finiteBananaPresentationCountable",
+      "path": "BANANA/NonPrecompact/BananaFiniteCountability.lean",
+      "blob": "dca879899bf85a24a75940ca55ef4d0ff0c254fb",
+      "line": 44
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFiniteCountability",
+      "name": "BananaMatrixStructure.exists_arbitrarily_large_dimensions",
+      "path": "BANANA/NonPrecompact/BananaFiniteCountability.lean",
+      "blob": "dca879899bf85a24a75940ca55ef4d0ff0c254fb",
+      "line": 52
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFiniteFraisseProperties",
+      "name": "BananaMatrixStructure.exists_substructure_with_ranges",
+      "path": "BANANA/NonPrecompact/BananaFiniteFraisseProperties.lean",
+      "blob": "ce24e94a9e013e29e9d515b9d21fe28f73e5f41d",
+      "line": 27
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFiniteFraisseProperties",
+      "name": "BananaMatrixStructure.exists_joint_embedding",
+      "path": "BANANA/NonPrecompact/BananaFiniteFraisseProperties.lean",
+      "blob": "ce24e94a9e013e29e9d515b9d21fe28f73e5f41d",
+      "line": 86
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFiniteSystemPerfectTotalCofinality",
+      "name": "bananaFiniteSystem_exists_perfect_total_extension",
+      "path": "BANANA/NonPrecompact/BananaFiniteSystemPerfectTotalCofinality.lean",
+      "blob": "9f7b0bdfa6e8b91c2ef7b6c28676ae55df1bacfb",
+      "line": 40
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFiniteSystemsJepWap",
+      "name": "bananaFiniteSystems_jep_and_wap",
+      "path": "BANANA/NonPrecompact/BananaFiniteSystemsJepWap.lean",
+      "blob": "58792b522981ff4f53d63a56898fc33d857d85d9",
+      "line": 167
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFunctionalLimit",
+      "name": "categorical",
+      "path": "BANANA/NonPrecompact/BananaFunctionalLimit.lean",
+      "blob": "55a00d38fcb31cabd78b8012118f4903846779f0",
+      "line": 187
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFunctionalLimit",
+      "name": "limit_isFraisseLimit",
+      "path": "BANANA/NonPrecompact/BananaFunctionalLimit.lean",
+      "blob": "55a00d38fcb31cabd78b8012118f4903846779f0",
+      "line": 204
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaFunctionalStrongAge",
+      "name": "strong_age",
+      "path": "BANANA/NonPrecompact/BananaFunctionalStrongAge.lean",
+      "blob": "e52cd58d7594b3372352f57a83487a12645ed1ae",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaGeneratedRamseyObstructions",
+      "name": "cylinder_noPrecompactGeneratedRamseyExpansion",
+      "path": "BANANA/NonPrecompact/BananaGeneratedRamseyObstructions.lean",
+      "blob": "d206f1355bb110bf2dc5019fc6cc2c0260e084c5",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaGeneratedRamseyObstructions",
+      "name": "not_hasPrecompactGeneratedRamseyExpansion",
+      "path": "BANANA/NonPrecompact/BananaGeneratedRamseyObstructions.lean",
+      "blob": "d206f1355bb110bf2dc5019fc6cc2c0260e084c5",
+      "line": 33
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaGeneratedRamseyObstructions",
+      "name": "functionalAge_noPrecompactGeneratedRamseyExpansion",
+      "path": "BANANA/NonPrecompact/BananaGeneratedRamseyObstructions.lean",
+      "blob": "d206f1355bb110bf2dc5019fc6cc2c0260e084c5",
+      "line": 44
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitDefinableColouring",
+      "name": "bananaTagged_completeTheory_hasDefinableTupleRamsey",
+      "path": "BANANA/NonPrecompact/BananaLimitDefinableColouring.lean",
+      "blob": "4dd84d62a49ec02c599a184be8177b1703f0906b",
+      "line": 190
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitDenseConjugacy",
+      "name": "bananaLimit_exists_dense_diagonalConjugacyOrbit",
+      "path": "BANANA/NonPrecompact/BananaLimitDenseConjugacy.lean",
+      "blob": "3790f6b029a2f1ec0e4f298bc94806b2904b6f71",
+      "line": 187
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitDenseConjugacy",
+      "name": "bananaLimit_dense_diagonalConjugacyOrbit_points_mem_residual",
+      "path": "BANANA/NonPrecompact/BananaLimitDenseConjugacy.lean",
+      "blob": "3790f6b029a2f1ec0e4f298bc94806b2904b6f71",
+      "line": 196
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitDirectedGLUnion",
+      "name": "bananaLimitFiniteGLUnion_finite_family_common_stage",
+      "path": "BANANA/NonPrecompact/BananaLimitDirectedGLUnion.lean",
+      "blob": "a6e127e6b4cd131c3d999a790d15534f6a79c883",
+      "line": 75
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitEnumerationEllis",
+      "name": "bananaLimit_exists_invariantEnumerationEllisMap",
+      "path": "BANANA/NonPrecompact/BananaLimitEnumerationEllis.lean",
+      "blob": "1ce30e7fbdb9914c4529891bac89767eab4440c4",
+      "line": 43
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitExpansionGroup",
+      "name": "bananaLimit_expansion_not_extremelyAmenable_of_countablyCategorical",
+      "path": "BANANA/NonPrecompact/BananaLimitExpansionGroup.lean",
+      "blob": "15bd12804ab125c3dc0ba426df47f0a4046ef35a",
+      "line": 96
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitExtremelyAmenableDegree",
+      "name": "bananaLimit_no_coprecompact_extremelyAmenable",
+      "path": "BANANA/NonPrecompact/BananaLimitExtremelyAmenableDegree.lean",
+      "blob": "733a002b476306547e679e4b850d1d6a7f5369ee",
+      "line": 203
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFiniteAge",
+      "name": "banana_limit_finite_age_two_directions",
+      "path": "BANANA/NonPrecompact/BananaLimitFiniteAge.lean",
+      "blob": "663497212b54ce5c19b212d1ff32a61dd3134128",
+      "line": 108
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFiniteGLDensity",
+      "name": "exists_finiteGLAction_agree_on_finite_sets",
+      "path": "BANANA/NonPrecompact/BananaLimitFiniteGLDensity.lean",
+      "blob": "d14ae5ee2bb29571e3a23bffc8d3f4eacf8990ca",
+      "line": 25
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFirstOrder",
+      "name": "bananaTaggedCarrier_card",
+      "path": "BANANA/NonPrecompact/BananaLimitFirstOrder.lean",
+      "blob": "2aab7e7a13eaff64c677f15b3dded9f1c2b804db",
+      "line": 129
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFirstOrder",
+      "name": "bananaLimit_firstOrder_aleph0_categorical",
+      "path": "BANANA/NonPrecompact/BananaLimitFirstOrder.lean",
+      "blob": "2aab7e7a13eaff64c677f15b3dded9f1c2b804db",
+      "line": 138
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism",
+      "name": "bananaLimit_firstOrderAutIso",
+      "path": "BANANA/NonPrecompact/BananaLimitFirstOrderAutomorphism.lean",
+      "blob": "0038b9ee4fc3dec5f0512a311c7f50d390639395",
+      "line": 135
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism",
+      "name": "bananaLimit_categorical_nativeOrbitExpansion",
+      "path": "BANANA/NonPrecompact/BananaLimitFirstOrderAutomorphism.lean",
+      "blob": "0038b9ee4fc3dec5f0512a311c7f50d390639395",
+      "line": 188
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism",
+      "name": "bananaLimit_range_restrict_nativeOrbitExpansionAut",
+      "path": "BANANA/NonPrecompact/BananaLimitFirstOrderAutomorphism.lean",
+      "blob": "0038b9ee4fc3dec5f0512a311c7f50d390639395",
+      "line": 200
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitGenericBackAndForth",
+      "name": "bananaLimit_exists_diagonalConjugator_of_perfectSystemExtension",
+      "path": "BANANA/NonPrecompact/BananaLimitGenericBackAndForth.lean",
+      "blob": "3e1bcf8fef3f56561f09658511910564a4ad33ef",
+      "line": 220
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitGenericBackAndForth",
+      "name": "bananaLimit_exists_comeagre_diagonalConjugacyOrbit",
+      "path": "BANANA/NonPrecompact/BananaLimitGenericBackAndForth.lean",
+      "blob": "3e1bcf8fef3f56561f09658511910564a4ad33ef",
+      "line": 285
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitGenericExtension",
+      "name": "rich_mem_residual",
+      "path": "BANANA/NonPrecompact/BananaLimitGenericExtension.lean",
+      "blob": "52b2bbb7bfe384b4e0191fdffe83ffc63ad92a7d",
+      "line": 273
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitGlobalHomogeneity",
+      "name": "exists_global_pair_automorphism_extends",
+      "path": "BANANA/NonPrecompact/BananaLimitGlobalHomogeneity.lean",
+      "blob": "f3a61e75c16b873010bf8c5968a965506fda7d6e",
+      "line": 31
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitInvariantTypes",
+      "name": "bananaTagged_completeTheory_exists_invariantExtension",
+      "path": "BANANA/NonPrecompact/BananaLimitInvariantTypes.lean",
+      "blob": "ee7bcf8d63deb138fbe726858c69ad463329bcc5",
+      "line": 34
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitLocalFiniteness",
+      "name": "bananaLimit_finitely_generated_span_finite",
+      "path": "BANANA/NonPrecompact/BananaLimitLocalFiniteness.lean",
+      "blob": "8a97778bcaf9043e90e664d5a3679e2e96808b4c",
+      "line": 47
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitLocallyFiniteDense",
+      "name": "bananaLimitFiniteGLUnion_pointwise_approximates",
+      "path": "BANANA/NonPrecompact/BananaLimitLocallyFiniteDense.lean",
+      "blob": "f04f6fc424d9603abda18d25c40ef207492f67ad",
+      "line": 24
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitMixedTupleOrbits",
+      "name": "bananaLimitTaggedOrbitRelated_of_signature_eq",
+      "path": "BANANA/NonPrecompact/BananaLimitMixedTupleOrbits.lean",
+      "blob": "90ee8711fc8952f0854de56dd5c393c01ee60432",
+      "line": 93
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitMixedTupleOrbits",
+      "name": "bananaLimit_exists_finite_tagged_tuple_orbit_representatives",
+      "path": "BANANA/NonPrecompact/BananaLimitMixedTupleOrbits.lean",
+      "blob": "90ee8711fc8952f0854de56dd5c393c01ee60432",
+      "line": 139
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitOrbitCoPrecompact",
+      "name": "bananaLimit_coprecompact_iff_finset_taggedTupleOrbitRepresentatives",
+      "path": "BANANA/NonPrecompact/BananaLimitOrbitCoPrecompact.lean",
+      "blob": "eb861e4dd58a90331ec5ba2e53baa3df61a480de",
+      "line": 91
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitOrbitCoPrecompact",
+      "name": "bananaLimit_mem_topologicalClosure_iff_preserves_taggedTupleOrbits",
+      "path": "BANANA/NonPrecompact/BananaLimitOrbitCoPrecompact.lean",
+      "blob": "eb861e4dd58a90331ec5ba2e53baa3df61a480de",
+      "line": 118
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitParameterColouring",
+      "name": "exists_bananaLimit_monochromatic_target_of_finite_parameters",
+      "path": "BANANA/NonPrecompact/BananaLimitParameterColouring.lean",
+      "blob": "b3f55f84b4ca0268849fee9ebd69c0b8613cc4c1",
+      "line": 106
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitPolish",
+      "name": "bananaLimitAutomorphism_polishSpace",
+      "path": "BANANA/NonPrecompact/BananaLimitPolish.lean",
+      "blob": "30e71debb72f9324bbbba2fcd2661b861e549d19",
+      "line": 134
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitTopologicalAmenability",
+      "name": "exists_bananaLimitFiniteGLSequence",
+      "path": "BANANA/NonPrecompact/BananaLimitTopologicalAmenability.lean",
+      "blob": "e5c33d36bdd3e46fcda07900285b68bcd7acf7b4",
+      "line": 165
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitTopologicalAmenability",
+      "name": "bananaLimitAutomorphismGroup_amenable",
+      "path": "BANANA/NonPrecompact/BananaLimitTopologicalAmenability.lean",
+      "blob": "e5c33d36bdd3e46fcda07900285b68bcd7acf7b4",
+      "line": 196
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaLimitUniversalMinimalFlow",
+      "name": "bananaLimit_exists_nonmetrizable_universalMinimalFlow",
+      "path": "BANANA/NonPrecompact/BananaLimitUniversalMinimalFlow.lean",
+      "blob": "2c7ede8721690cec0f2e5ecc998e11c3296b5a5f",
+      "line": 42
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativeCoherentEppa",
+      "name": "exists_coherentEppaWitness",
+      "path": "BANANA/NonPrecompact/BananaNativeCoherentEppa.lean",
+      "blob": "d6da2b1aff6f00a50d604db986a72f7ec7de4cb8",
+      "line": 161
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativePerfectPairing",
+      "name": "exists_native_perfectCompletion",
+      "path": "BANANA/NonPrecompact/BananaNativePerfectPairing.lean",
+      "blob": "0a72518dcd1732fb916b56de18a8b37127b223c9",
+      "line": 62
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativePerfectPairing",
+      "name": "exists_native_perfectAutomorphism_extends",
+      "path": "BANANA/NonPrecompact/BananaNativePerfectPairing.lean",
+      "blob": "0a72518dcd1732fb916b56de18a8b37127b223c9",
+      "line": 89
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativePerfectSystemAmalgam",
+      "name": "exists_native_perfectTotalAmalgam",
+      "path": "BANANA/NonPrecompact/BananaNativePerfectSystemAmalgam.lean",
+      "blob": "397f4e3e8f8fc49a3dfaddb657d806e65c00db48",
+      "line": 115
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativePerfectSystems",
+      "name": "exists_native_perfectTotalExtension",
+      "path": "BANANA/NonPrecompact/BananaNativePerfectSystems.lean",
+      "blob": "5c5ebfcd3202c7b4377a9e13417f128303ee07fb",
+      "line": 69
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativeStrongAmalgamation",
+      "name": "exists_strongAmalgam",
+      "path": "BANANA/NonPrecompact/BananaNativeStrongAmalgamation.lean",
+      "blob": "a9d3793ed5fc6f61bb239c8efc92b2aec7dfc2d9",
+      "line": 136
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaNativeStrongAmalgamation",
+      "name": "exists_jointEmbedding",
+      "path": "BANANA/NonPrecompact/BananaNativeStrongAmalgamation.lean",
+      "blob": "a9d3793ed5fc6f61bb239c8efc92b2aec7dfc2d9",
+      "line": 208
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaOneSidedCopyDegree",
+      "name": "BananaMatrixStructure.copyRamseyDegree_classification",
+      "path": "BANANA/NonPrecompact/BananaOneSidedCopyDegree.lean",
+      "blob": "ea33253eb5c295fba48834ba071d7f304d4f333a",
+      "line": 157
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaPerfectComplementPairing",
+      "name": "perfectComplementPairing_left_nondegenerate",
+      "path": "BANANA/NonPrecompact/BananaPerfectComplementPairing.lean",
+      "blob": "7b7806fff53a424f00374cc9500f4732a3bee4e9",
+      "line": 68
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaPerfectComplementPairing",
+      "name": "perfectComplementPairing_right_nondegenerate",
+      "path": "BANANA/NonPrecompact/BananaPerfectComplementPairing.lean",
+      "blob": "7b7806fff53a424f00374cc9500f4732a3bee4e9",
+      "line": 104
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaPerfectOrthogonalEquiv",
+      "name": "bananaPerfectLeftOrthogonalEquiv",
+      "path": "BANANA/NonPrecompact/BananaPerfectOrthogonalEquiv.lean",
+      "blob": "a1feb7534233313a7d8a18e5efedea55ad2d8750",
+      "line": 62
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaPerfectOrthogonalEquiv",
+      "name": "bananaPerfectRightOrthogonalEquiv",
+      "path": "BANANA/NonPrecompact/BananaPerfectOrthogonalEquiv.lean",
+      "blob": "a1feb7534233313a7d8a18e5efedea55ad2d8750",
+      "line": 72
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaPerfectTotalDiagramAmalgam",
+      "name": "exists_bananaPerfectTotalSystem_perfect_amalgam",
+      "path": "BANANA/NonPrecompact/BananaPerfectTotalDiagramAmalgam.lean",
+      "blob": "9668b14c892c0e8753f83d12304498c537957091",
+      "line": 29
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaPerfectTotalSplitSystems",
+      "name": "exists_bananaPerfectTotalSplitSystem_amalgam",
+      "path": "BANANA/NonPrecompact/BananaPerfectTotalSplitSystems.lean",
+      "blob": "34078700a1976401032dfb53a4a759a482cb9818",
+      "line": 42
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaSortedDefinableTupleRamsey",
+      "name": "bananaTagged_completeTheory_hasSortedDefinableTupleRamsey",
+      "path": "BANANA/NonPrecompact/BananaSortedDefinableTupleRamsey.lean",
+      "blob": "8e6cd230cde3e92223f648b0f6dbac0fa440ecbf",
+      "line": 169
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaSortedSyntax",
+      "name": "Formula.realize_translate_decoded",
+      "path": "BANANA/NonPrecompact/BananaSortedSyntax.lean",
+      "blob": "9618b9e1abf03e34575142671fff6619df756233",
+      "line": 302
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaStrongBlockAmalgam",
+      "name": "left_pairing",
+      "path": "BANANA/NonPrecompact/BananaStrongBlockAmalgam.lean",
+      "blob": "673d3b381b951dd989e912b60e233f698c4b9f53",
+      "line": 108
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaStrongBlockAmalgam",
+      "name": "right_pairing",
+      "path": "BANANA/NonPrecompact/BananaStrongBlockAmalgam.lean",
+      "blob": "673d3b381b951dd989e912b60e233f698c4b9f53",
+      "line": 116
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaStructure",
+      "name": "edge_iff",
+      "path": "BANANA/NonPrecompact/BananaStructure.lean",
+      "blob": "7cd4910e72d9bcb787727cf8ac2a5c984b1dc5ab",
+      "line": 71
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaTaggedModelDecoding",
+      "name": "bananaTaggedModelPairingEquiv",
+      "path": "BANANA/NonPrecompact/BananaTaggedModelDecoding.lean",
+      "blob": "2056af152dfd19a9853bda2e64ba85a21eb193f6",
+      "line": 466
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaTaggedSyntaxReverse",
+      "name": "realize_fromTagged_decoded",
+      "path": "BANANA/NonPrecompact/BananaTaggedSyntaxReverse.lean",
+      "blob": "81b4015afbde8e135e67124ab9804ad60a92b770",
+      "line": 403
+    },
+    {
+      "module": "BANANA.NonPrecompact.BananaTriplePairing",
+      "name": "BananaMatrixEmbedding.exists_strong_amalgam",
+      "path": "BANANA/NonPrecompact/BananaTriplePairing.lean",
+      "blob": "7f3f1a4c259fbfcc447746f2ea2d63a6a9ffae10",
+      "line": 218
+    },
+    {
+      "module": "BANANA.NonPrecompact.BilinearResidue",
+      "name": "bilinearResidueFiber_card_odd",
+      "path": "BANANA/NonPrecompact/BilinearResidue.lean",
+      "blob": "46e249c81bc266fcd43e24d2941e2e4a88b82350",
+      "line": 533
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCopyTransport",
+      "name": "exists_booleanBananaPersistentColouring",
+      "path": "BANANA/NonPrecompact/BooleanBananaCopyTransport.lean",
+      "blob": "f509e6a9b0790eb91467cc19d8a354caf69bc89b",
+      "line": 274
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderMassSubgroups",
+      "name": "nonempty_cylinderPositiveMassRealisation",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderMassSubgroups.lean",
+      "blob": "f70ded9e6bef7cf0ef7e4fb934a598ea3b3d9e3b",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderMassSubgroups",
+      "name": "mk_cylinderClosedMaximalAmenableConjugacyClass",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderMassSubgroups.lean",
+      "blob": "f70ded9e6bef7cf0ef7e4fb934a598ea3b3d9e3b",
+      "line": 31
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderMassSubgroups",
+      "name": "cylinderMassSubgroup_properties",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderMassSubgroups.lean",
+      "blob": "f70ded9e6bef7cf0ef7e4fb934a598ea3b3d9e3b",
+      "line": 41
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderMassSubgroups",
+      "name": "cylinderMassSubgroups_not_conjugate",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderMassSubgroups.lean",
+      "blob": "f70ded9e6bef7cf0ef7e4fb934a598ea3b3d9e3b",
+      "line": 61
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderPadicCharge",
+      "name": "cylinderPadicChargeOrbit_dense_meagre",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderPadicCharge.lean",
+      "blob": "a4709f3e017127e2fcdb635cb1184a2b40c30219",
+      "line": 87
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderPadicCharge",
+      "name": "cylinderMarkedGroup_failsGenericPointProperty",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderPadicCharge.lean",
+      "blob": "a4709f3e017127e2fcdb635cb1184a2b40c30219",
+      "line": 107
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaCylinderPadicCharge",
+      "name": "exists_cylinderPadicChargeResidueEmbedding",
+      "path": "BANANA/NonPrecompact/BooleanBananaCylinderPadicCharge.lean",
+      "blob": "a4709f3e017127e2fcdb635cb1184a2b40c30219",
+      "line": 122
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaFirstOrderAge",
+      "name": "cylinder_firstOrderAge_strongAmalgamation",
+      "path": "BANANA/NonPrecompact/BooleanBananaFirstOrderAge.lean",
+      "blob": "f67cb74d2ec37bfc90575bf68e00220bfe54d0c4",
+      "line": 201
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaFirstOrderAge",
+      "name": "cylinder_isFraisseLimit",
+      "path": "BANANA/NonPrecompact/BooleanBananaFirstOrderAge.lean",
+      "blob": "f67cb74d2ec37bfc90575bf68e00220bfe54d0c4",
+      "line": 252
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity",
+      "name": "cylinderMarkedBoolean_categorical_completeTheory",
+      "path": "BANANA/NonPrecompact/BooleanBananaFirstOrderCategoricity.lean",
+      "blob": "8b26e1dca47e0d2ba5b3c0da86f7dcfa92aab3a7",
+      "line": 96
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaFirstOrderCategoricity",
+      "name": "cylinderMarkedBoolean_card_aleph0",
+      "path": "BANANA/NonPrecompact/BooleanBananaFirstOrderCategoricity.lean",
+      "blob": "8b26e1dca47e0d2ba5b3c0da86f7dcfa92aab3a7",
+      "line": 104
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaMassPrimeRange",
+      "name": "positiveMassPrimeSets_eq_of_range_eq",
+      "path": "BANANA/NonPrecompact/BooleanBananaMassPrimeRange.lean",
+      "blob": "d97d11528cab3c79a199e1fb093c7da5edc9a535",
+      "line": 50
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaMassRangeRealisation",
+      "name": "exists_positiveMass_element_of_age",
+      "path": "BANANA/NonPrecompact/BooleanBananaMassRangeRealisation.lean",
+      "blob": "3837611e078a0056e900e9420bd57f68073ecca9",
+      "line": 23
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaMassRangeRealisation",
+      "name": "exists_even_marked_mass_sequence_of_age",
+      "path": "BANANA/NonPrecompact/BooleanBananaMassRangeRealisation.lean",
+      "blob": "3837611e078a0056e900e9420bd57f68073ecca9",
+      "line": 103
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaMassStoneDynamics",
+      "name": "isClosed_massSubgroup",
+      "path": "BANANA/NonPrecompact/BooleanBananaMassStoneDynamics.lean",
+      "blob": "132fbacd54578b93e9cf2d9f36d77c4e25b9b574",
+      "line": 36
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaMassStoneDynamics",
+      "name": "massRange_eq_of_conjugate",
+      "path": "BANANA/NonPrecompact/BooleanBananaMassStoneDynamics.lean",
+      "blob": "132fbacd54578b93e9cf2d9f36d77c4e25b9b574",
+      "line": 213
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPadicCharge",
+      "name": "markedAutomorphisms_padicChargeAction_continuous",
+      "path": "BANANA/NonPrecompact/BooleanBananaPadicCharge.lean",
+      "blob": "83e8310dafcf705395e43fb9f382e28e11d92dac",
+      "line": 112
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPadicChargeExtension",
+      "name": "exists_padicCharge_extension",
+      "path": "BANANA/NonPrecompact/BooleanBananaPadicChargeExtension.lean",
+      "blob": "630055047b7e21fef33f82f8e25b7a693269b892",
+      "line": 117
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPadicChargeOrbit",
+      "name": "padicChargeOrbit_meagre",
+      "path": "BANANA/NonPrecompact/BooleanBananaPadicChargeOrbit.lean",
+      "blob": "04ff5e35573e099d6f2df3bb7218fbd1a2ead762",
+      "line": 126
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassArithmetic",
+      "name": "exists_positive_mass_grid",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassArithmetic.lean",
+      "blob": "335a0e933ac814d99933c7a1a32dca2efcf27fda",
+      "line": 112
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassCodes",
+      "name": "positiveMassAtomCode_countable",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassCodes.lean",
+      "blob": "d1d94c40789733059dbd2e0b897d45610e5544c0",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassCodes",
+      "name": "positiveMassAtomCode_unbounded",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassCodes.lean",
+      "blob": "d1d94c40789733059dbd2e0b897d45610e5544c0",
+      "line": 66
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassEPPA",
+      "name": "positiveMass_eppa",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassEPPA.lean",
+      "blob": "ecbb4b72133b6548c326ef1a6a9d2b7263367ff5",
+      "line": 51
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassJEP",
+      "name": "positiveMass_jointEmbedding",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassJEP.lean",
+      "blob": "827a7a4e3869838c48eddc276a2c0919206f9e1d",
+      "line": 63
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups",
+      "name": "automorphismHom",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassLimitGroups.lean",
+      "blob": "474681390bdee197bb15373d7a6c092896baa873",
+      "line": 215
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups",
+      "name": "uniformMassCover",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassLimitGroups.lean",
+      "blob": "474681390bdee197bb15373d7a6c092896baa873",
+      "line": 276
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups",
+      "name": "finiteStage_dense",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassLimitGroups.lean",
+      "blob": "474681390bdee197bb15373d7a6c092896baa873",
+      "line": 354
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassLimitGroups",
+      "name": "massSubgroup_amenable",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassLimitGroups.lean",
+      "blob": "474681390bdee197bb15373d7a6c092896baa873",
+      "line": 380
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassOnMarkedLimit",
+      "name": "uniformTower",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassOnMarkedLimit.lean",
+      "blob": "cf9cf9d0b8ec5e832db78e3a6a7f19f5ff1d2932",
+      "line": 48
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassOnMarkedLimit",
+      "name": "exists_unique_regular_invariantStoneProbability",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassOnMarkedLimit.lean",
+      "blob": "cf9cf9d0b8ec5e832db78e3a6a7f19f5ff1d2932",
+      "line": 141
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassOnMarkedLimit",
+      "name": "prime_mem_iff",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassOnMarkedLimit.lean",
+      "blob": "cf9cf9d0b8ec5e832db78e3a6a7f19f5ff1d2932",
+      "line": 160
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassReasonable",
+      "name": "positiveMass_restrict",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassReasonable.lean",
+      "blob": "0854edafa67c171e23c738d8d16c36cd70661196",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassReasonable",
+      "name": "positiveMass_reasonable",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassReasonable.lean",
+      "blob": "0854edafa67c171e23c738d8d16c36cd70661196",
+      "line": 70
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassStages",
+      "name": "exists_positive_mass_denominator_chain",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassStages.lean",
+      "blob": "bbef68a4dcde739557bfcd0cc9da80f8937df72f",
+      "line": 17
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaPositiveMassStrongAP",
+      "name": "positiveMass_strongAmalgamation",
+      "path": "BANANA/NonPrecompact/BooleanBananaPositiveMassStrongAP.lean",
+      "blob": "9c88742b24ee8a5f892d4e5138e5b0e298baf207",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaStoneAction",
+      "name": "markedAutomorphisms_stoneAction_continuous",
+      "path": "BANANA/NonPrecompact/BooleanBananaStoneAction.lean",
+      "blob": "33afa39504faa577d2ad2048f8eb9a5cb720a3f1",
+      "line": 146
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanBananaStoneNonamenability",
+      "name": "limit_not_amenable",
+      "path": "BANANA/NonPrecompact/BooleanBananaStoneNonamenability.lean",
+      "blob": "1a22ed7642628cb8a818ea67a17e154df3e92057",
+      "line": 100
+    },
+    {
+      "module": "BANANA.NonPrecompact.BooleanInvariantMass",
+      "name": "prebananaPresentedProbabilityMass_additive",
+      "path": "BANANA/NonPrecompact/BooleanInvariantMass.lean",
+      "blob": "2c06ce856b2114e9b3f3ccf8103c0e04bf729696",
+      "line": 267
+    },
+    {
+      "module": "BANANA.NonPrecompact.ClopenProbabilityExtension",
+      "name": "existsUnique_regularProbability_of_clopenCharge",
+      "path": "BANANA/NonPrecompact/ClopenProbabilityExtension.lean",
+      "blob": "17a2357f180e811a6cb39d5bc8e188b75b5a9679",
+      "line": 131
+    },
+    {
+      "module": "BANANA.NonPrecompact.CoherentConjugation",
+      "name": "conjugatedTransport_mul",
+      "path": "BANANA/NonPrecompact/CoherentConjugation.lean",
+      "blob": "766a7323ef3c7a3115f8c4c3dbfc0435cd7898d1",
+      "line": 33
+    },
+    {
+      "module": "BANANA.NonPrecompact.CoherentEppaPackage",
+      "name": "exists_alignedCoherentAmbientAction",
+      "path": "BANANA/NonPrecompact/CoherentEppaPackage.lean",
+      "blob": "3c0be314fb6b855bd40d0b6f73331150ad6837e9",
+      "line": 35
+    },
+    {
+      "module": "BANANA.NonPrecompact.CoherentEppaWitness",
+      "name": "exists_coherentEppaWitness",
+      "path": "BANANA/NonPrecompact/CoherentEppaWitness.lean",
+      "blob": "d114298615985351380a87811dc5413ad7859946",
+      "line": 374
+    },
+    {
+      "module": "BANANA.NonPrecompact.ColouringWrappers",
+      "name": "prebanana_odd_residue_copy_witness",
+      "path": "BANANA/NonPrecompact/ColouringWrappers.lean",
+      "blob": "ad61f512d61668289809fe922dc12734d9d2992c",
+      "line": 32
+    },
+    {
+      "module": "BANANA.NonPrecompact.ColouringWrappers",
+      "name": "folkman_odd_residue_copy_witness",
+      "path": "BANANA/NonPrecompact/ColouringWrappers.lean",
+      "blob": "ad61f512d61668289809fe922dc12734d9d2992c",
+      "line": 95
+    },
+    {
+      "module": "BANANA.NonPrecompact.Completion",
+      "name": "completionEmbedding",
+      "path": "BANANA/NonPrecompact/Completion.lean",
+      "blob": "0acfd767e202db0268ead4b612af5239bc0ccb25",
+      "line": 80
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionAutomorphism",
+      "name": "completionAutomorphism_left_completion",
+      "path": "BANANA/NonPrecompact/CompletionAutomorphism.lean",
+      "blob": "f08eb880418176282125cdb3992a3c79fe27796b",
+      "line": 105
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionAutomorphism",
+      "name": "completionAutomorphism_right_completion",
+      "path": "BANANA/NonPrecompact/CompletionAutomorphism.lean",
+      "blob": "f08eb880418176282125cdb3992a3c79fe27796b",
+      "line": 121
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionAutomorphismHom",
+      "name": "completionAutomorphism_comp_left",
+      "path": "BANANA/NonPrecompact/CompletionAutomorphismHom.lean",
+      "blob": "ce77e1f3511e3e8845d05649cedbce8a2542840e",
+      "line": 138
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionAutomorphismHom",
+      "name": "completionAutomorphism_comp_right",
+      "path": "BANANA/NonPrecompact/CompletionAutomorphismHom.lean",
+      "blob": "ce77e1f3511e3e8845d05649cedbce8a2542840e",
+      "line": 161
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionPersistence",
+      "name": "residueParityPalette_card",
+      "path": "BANANA/NonPrecompact/CompletionPersistence.lean",
+      "blob": "354496b1fac16a467cbdbdf7e068b0e870a7fc14",
+      "line": 74
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionPersistence",
+      "name": "completionIntersectionCount_map_parity",
+      "path": "BANANA/NonPrecompact/CompletionPersistence.lean",
+      "blob": "354496b1fac16a467cbdbdf7e068b0e870a7fc14",
+      "line": 123
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionPersistence",
+      "name": "exists_completionIntersectionPalette",
+      "path": "BANANA/NonPrecompact/CompletionPersistence.lean",
+      "blob": "354496b1fac16a467cbdbdf7e068b0e870a7fc14",
+      "line": 205
+    },
+    {
+      "module": "BANANA.NonPrecompact.CompletionPersistence",
+      "name": "exists_pairingOne_completionIntersectionColour",
+      "path": "BANANA/NonPrecompact/CompletionPersistence.lean",
+      "blob": "354496b1fac16a467cbdbdf7e068b0e870a7fc14",
+      "line": 227
+    },
+    {
+      "module": "BANANA.NonPrecompact.CoprecompactFixedPointMetrizability",
+      "name": "metrizableSpace_of_coprecompact_extremelyAmenable",
+      "path": "BANANA/NonPrecompact/CoprecompactFixedPointMetrizability.lean",
+      "blob": "2ab13119f42ef6a66b30444c681122c356686c2b",
+      "line": 118
+    },
+    {
+      "module": "BANANA.NonPrecompact.CopyRamseyDegree",
+      "name": "exists_completionResiduePersistentColouring",
+      "path": "BANANA/NonPrecompact/CopyRamseyDegree.lean",
+      "blob": "76e324057ec0777586ead6af64a16a543ed845a6",
+      "line": 162
+    },
+    {
+      "module": "BANANA.NonPrecompact.CopyRamseyDegree",
+      "name": "exists_pairingOne_completionResiduePersistentColouring",
+      "path": "BANANA/NonPrecompact/CopyRamseyDegree.lean",
+      "blob": "76e324057ec0777586ead6af64a16a543ed845a6",
+      "line": 236
+    },
+    {
+      "module": "BANANA.NonPrecompact.CopyRamseyDegree",
+      "name": "linePairCopyRamseyDegree_infinite",
+      "path": "BANANA/NonPrecompact/CopyRamseyDegree.lean",
+      "blob": "76e324057ec0777586ead6af64a16a543ed845a6",
+      "line": 328
+    },
+    {
+      "module": "BANANA.NonPrecompact.EmbeddedCompletionAction",
+      "name": "embeddedCompletionAmbientAutomorphism_left",
+      "path": "BANANA/NonPrecompact/EmbeddedCompletionAction.lean",
+      "blob": "ff6af7948576d1116c23aafe296f129962410039",
+      "line": 79
+    },
+    {
+      "module": "BANANA.NonPrecompact.EmbeddedCompletionAction",
+      "name": "embeddedCompletionAmbientAutomorphism_right",
+      "path": "BANANA/NonPrecompact/EmbeddedCompletionAction.lean",
+      "blob": "ff6af7948576d1116c23aafe296f129962410039",
+      "line": 97
+    },
+    {
+      "module": "BANANA.NonPrecompact.EmbeddedCompletionAction",
+      "name": "embeddedCompletionAmbientAutomorphism_comp_left",
+      "path": "BANANA/NonPrecompact/EmbeddedCompletionAction.lean",
+      "blob": "ff6af7948576d1116c23aafe296f129962410039",
+      "line": 146
+    },
+    {
+      "module": "BANANA.NonPrecompact.EmbeddedCompletionAction",
+      "name": "embeddedCompletionAmbientAutomorphism_comp_right",
+      "path": "BANANA/NonPrecompact/EmbeddedCompletionAction.lean",
+      "blob": "ff6af7948576d1116c23aafe296f129962410039",
+      "line": 164
+    },
+    {
+      "module": "BANANA.NonPrecompact.FiberGridCoordinates",
+      "name": "exists_common_subset_of_fiberGrid",
+      "path": "BANANA/NonPrecompact/FiberGridCoordinates.lean",
+      "blob": "b00d3007ead27321aadc3628f4701a5ed8d530e0",
+      "line": 194
+    },
+    {
+      "module": "BANANA.NonPrecompact.FiberProductParityAmalgam",
+      "name": "sum_fiberGridMark_right",
+      "path": "BANANA/NonPrecompact/FiberProductParityAmalgam.lean",
+      "blob": "3ef9713bb0b0cdeffd6e84ade48be6adee1bb29b",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.FiberProductParityAmalgam",
+      "name": "sum_fiberGridMark_left",
+      "path": "BANANA/NonPrecompact/FiberProductParityAmalgam.lean",
+      "blob": "3ef9713bb0b0cdeffd6e84ade48be6adee1bb29b",
+      "line": 62
+    },
+    {
+      "module": "BANANA.NonPrecompact.FinitePerfectGL",
+      "name": "finitePerfectGLFinite",
+      "path": "BANANA/NonPrecompact/FinitePerfectGL.lean",
+      "blob": "4e0c3caf61475da7340e980bd3364462ecd57019",
+      "line": 29
+    },
+    {
+      "module": "BANANA.NonPrecompact.FinitePerfectGL",
+      "name": "finitePerfectGLBlockLift_injective",
+      "path": "BANANA/NonPrecompact/FinitePerfectGL.lean",
+      "blob": "4e0c3caf61475da7340e980bd3364462ecd57019",
+      "line": 106
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderCanonicalAmalgamation",
+      "name": "exists_invariantExtension_of_canonicalAgeAmalgamation",
+      "path": "BANANA/NonPrecompact/FirstOrderCanonicalAmalgamation.lean",
+      "blob": "49d3fdbb39cf4320229d9288500349df26462c2a",
+      "line": 163
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderEmbeddingCopyDegree",
+      "name": "isLeast_firstOrderEmbeddingRamseyDegree",
+      "path": "BANANA/NonPrecompact/FirstOrderEmbeddingCopyDegree.lean",
+      "blob": "b423cdd052348c0fb2656879bde79df18071547e",
+      "line": 108
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderEnumerationEllis",
+      "name": "hasDefinableTupleRamsey_iff_exists_ellisMap",
+      "path": "BANANA/NonPrecompact/FirstOrderEnumerationEllis.lean",
+      "blob": "a6e0ca4e575bc4ee9d4b9e07e0d484685b3d7f7f",
+      "line": 416
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderExtremelyAmenableDegree",
+      "name": "firstOrderFiniteCopyDegree_of_coprecompactExtremelyAmenable",
+      "path": "BANANA/NonPrecompact/FirstOrderExtremelyAmenableDegree.lean",
+      "blob": "01dcec584db7e2d7e1e8c26457ec16df8a4dbb09",
+      "line": 175
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderGeneratedRamseyExpansion",
+      "name": "copyRamseyDegreeLE_card_generatedExpansionTypes",
+      "path": "BANANA/NonPrecompact/FirstOrderGeneratedRamseyExpansion.lean",
+      "blob": "fa5677bbb33fa30d9b78aa53c03f771db4d981db",
+      "line": 112
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderHereditaryExpansionRestriction",
+      "name": "exists_hereditary_restriction_of_onFunction_surjective",
+      "path": "BANANA/NonPrecompact/FirstOrderHereditaryExpansionRestriction.lean",
+      "blob": "db6ea274702de6643a303a58be53198cae91dd82",
+      "line": 35
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderInvariantEnumerationRamseySaturated",
+      "name": "hasDefinableTupleRamsey_iff_exists_automorphismInvariantEnumerationType",
+      "path": "BANANA/NonPrecompact/FirstOrderInvariantEnumerationRamseySaturated.lean",
+      "blob": "29f12e0cd1a5b94cb47986bce7b1512ca2209a71",
+      "line": 136
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderMetrizableFlowRamseyDegree",
+      "name": "firstOrderFiniteCopyDegree_of_metrizable_universalMinimalFlow",
+      "path": "BANANA/NonPrecompact/FirstOrderMetrizableFlowRamseyDegree.lean",
+      "blob": "9f15c17e80446ae9527d1389ecf5cdbaf39418f9",
+      "line": 76
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderOmittingTypes",
+      "name": "finite_tupleOrbitRepresentatives_of_categorical_completeTheory",
+      "path": "BANANA/NonPrecompact/FirstOrderOmittingTypes.lean",
+      "blob": "dbdf97b7040105678bdbd3ba87b0a8b4221c2afa",
+      "line": 331
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderOrbitCoPrecompact",
+      "name": "coprecompact_iff_finset_tupleOrbitRepresentatives",
+      "path": "BANANA/NonPrecompact/FirstOrderOrbitCoPrecompact.lean",
+      "blob": "b711b20a2f40f0fdbfd492f32d83a30c7909b5ba",
+      "line": 43
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderOrbitCoPrecompact",
+      "name": "mem_topologicalClosure_iff_preserves_tupleOrbits",
+      "path": "BANANA/NonPrecompact/FirstOrderOrbitCoPrecompact.lean",
+      "blob": "b711b20a2f40f0fdbfd492f32d83a30c7909b5ba",
+      "line": 68
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderOrbitExpansion",
+      "name": "range_restrictOrbitExpansionAut",
+      "path": "BANANA/NonPrecompact/FirstOrderOrbitExpansion.lean",
+      "blob": "bf3d77c90a5a24a9b1869ae862ce75d958841918",
+      "line": 70
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderOrbitExpansion",
+      "name": "categorical_orbitExpansion_of_coprecompact",
+      "path": "BANANA/NonPrecompact/FirstOrderOrbitExpansion.lean",
+      "blob": "bf3d77c90a5a24a9b1869ae862ce75d958841918",
+      "line": 118
+    },
+    {
+      "module": "BANANA.NonPrecompact.FirstOrderRamseyExpansion",
+      "name": "not_hasPrecompactRelationalRamseyExpansion",
+      "path": "BANANA/NonPrecompact/FirstOrderRamseyExpansion.lean",
+      "blob": "a9df4e012d60692c7cfe82518da53beb34bea12d",
+      "line": 290
+    },
+    {
+      "module": "BANANA.NonPrecompact.FixedPointColouring",
+      "name": "exists_finite_support_of_orbit_fixed_colourings",
+      "path": "BANANA/NonPrecompact/FixedPointColouring.lean",
+      "blob": "c657a4a4f8f3a4f1b8f999e6709cb059d96714d8",
+      "line": 144
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanActualTwoSortPairing",
+      "name": "pairingByPivots",
+      "path": "BANANA/NonPrecompact/FolkmanActualTwoSortPairing.lean",
+      "blob": "ba0f81bba9552de17cc758a30b8e0fc46bd9f6f6",
+      "line": 32
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanActualTwoSortPairing",
+      "name": "pairingByPivots_embedB",
+      "path": "BANANA/NonPrecompact/FolkmanActualTwoSortPairing.lean",
+      "blob": "ba0f81bba9552de17cc758a30b8e0fc46bd9f6f6",
+      "line": 51
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanActualTwoSortPairing",
+      "name": "pairingByPivots_embedC",
+      "path": "BANANA/NonPrecompact/FolkmanActualTwoSortPairing.lean",
+      "blob": "ba0f81bba9552de17cc758a30b8e0fc46bd9f6f6",
+      "line": 92
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomAmalgam",
+      "name": "FolkmanAtomAmalgam",
+      "path": "BANANA/NonPrecompact/FolkmanAtomAmalgam.lean",
+      "blob": "7c23600cd970876613c2fb708233539f7246202a",
+      "line": 38
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomAmalgam",
+      "name": "folkmanLeftImage",
+      "path": "BANANA/NonPrecompact/FolkmanAtomAmalgam.lean",
+      "blob": "7c23600cd970876613c2fb708233539f7246202a",
+      "line": 45
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomAmalgam",
+      "name": "folkmanRightImage",
+      "path": "BANANA/NonPrecompact/FolkmanAtomAmalgam.lean",
+      "blob": "7c23600cd970876613c2fb708233539f7246202a",
+      "line": 55
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomAmalgam",
+      "name": "exists_common_subset_of_folkmanAtomAmalgam",
+      "path": "BANANA/NonPrecompact/FolkmanAtomAmalgam.lean",
+      "blob": "7c23600cd970876613c2fb708233539f7246202a",
+      "line": 142
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomPivots",
+      "name": "folkmanChooseAtomPivots",
+      "path": "BANANA/NonPrecompact/FolkmanAtomPivots.lean",
+      "blob": "235141424753285c05530cdc01c311503d37b114",
+      "line": 27
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomPivots",
+      "name": "folkmanPivotLeftRetract",
+      "path": "BANANA/NonPrecompact/FolkmanAtomPivots.lean",
+      "blob": "235141424753285c05530cdc01c311503d37b114",
+      "line": 119
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomPivots",
+      "name": "folkmanPivotRightRetract",
+      "path": "BANANA/NonPrecompact/FolkmanAtomPivots.lean",
+      "blob": "235141424753285c05530cdc01c311503d37b114",
+      "line": 129
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomPivots",
+      "name": "folkmanPivotBaseRetract",
+      "path": "BANANA/NonPrecompact/FolkmanAtomPivots.lean",
+      "blob": "235141424753285c05530cdc01c311503d37b114",
+      "line": 139
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomPivots",
+      "name": "folkmanPivotLeftRetract_leftMap",
+      "path": "BANANA/NonPrecompact/FolkmanAtomPivots.lean",
+      "blob": "235141424753285c05530cdc01c311503d37b114",
+      "line": 149
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanAtomPivots",
+      "name": "folkmanPivotRightRetract_rightMap",
+      "path": "BANANA/NonPrecompact/FolkmanAtomPivots.lean",
+      "blob": "235141424753285c05530cdc01c311503d37b114",
+      "line": 163
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetLeftMap_inter",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 86
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetLeftMap_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 102
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetRightMap_inter",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 146
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetRightMap_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 161
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetLeftMap_injective",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 178
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetRightMap_injective",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 203
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteBooleanRingMaps",
+      "name": "folkmanFinsetImages_strong_intersection",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteBooleanRingMaps.lean",
+      "blob": "124269938f0734740f866ed997732d5ae9d1b45a",
+      "line": 228
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteClassData",
+      "name": "folkmanAtomStructureCountable",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteClassData.lean",
+      "blob": "c15446d2ffad0a74a65f37b12a540a03ad74ab1c",
+      "line": 35
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteClassData",
+      "name": "folkmanAtomStructure_unbounded_both_sorts",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteClassData.lean",
+      "blob": "c15446d2ffad0a74a65f37b12a540a03ad74ab1c",
+      "line": 48
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteClassData",
+      "name": "folkmanNativePullbackPairing_bilinear",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteClassData.lean",
+      "blob": "c15446d2ffad0a74a65f37b12a540a03ad74ab1c",
+      "line": 99
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteStrongAmalgamPairing",
+      "name": "exists_strong_amalgam_pairing",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteStrongAmalgamPairing.lean",
+      "blob": "a54f272c7160eab473142f70a0fd7bc3cd84cb5f",
+      "line": 31
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "FolkmanFiniteTwoSortAtomDiagram",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedB",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 71
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedC",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 79
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedB_injective",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 87
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedC_injective",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 96
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedB_zero",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 106
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedC_zero",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 113
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedB_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 120
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedC_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 136
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedB_inter",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 152
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "embedC_inter",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 168
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "base_commutes",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 184
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFiniteTwoSortRingDiagram",
+      "name": "images_eq_iff_common_base",
+      "path": "BANANA/NonPrecompact/FolkmanFiniteTwoSortRingDiagram.lean",
+      "blob": "366bb0f0624968005423543c1b49056f3baad0af",
+      "line": 192
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderCategoricity",
+      "name": "folkmanFirstOrderLimit_card_aleph0",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderCategoricity.lean",
+      "blob": "291a99fda0b337246c63394f9e6ebc509061cd59",
+      "line": 52
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderDecodingLimit",
+      "name": "folkmanFirstOrderLimit_factorsThroughPairedProducts",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderDecodingLimit.lean",
+      "blob": "de305281cd646e8b21274d2654f05ac536a694dc",
+      "line": 14
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderExistence",
+      "name": "exists_folkmanFirstOrderLimit_categorical",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderExistence.lean",
+      "blob": "72a37bcdadbc75a67dae0c26785bc17daef6d9cc",
+      "line": 24
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderFraisse",
+      "name": "folkmanFirstOrderClass_strongAmalgamation",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean",
+      "blob": "73a4df51a2556e57761253d567b432ae2c501e41",
+      "line": 93
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderFraisse",
+      "name": "folkmanFirstOrderClass_isFraisse",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderFraisse.lean",
+      "blob": "73a4df51a2556e57761253d567b432ae2c501e41",
+      "line": 146
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderInterval",
+      "name": "folkmanLeftInterval_stabilizer_transitive",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderInterval.lean",
+      "blob": "2e0f36e86feaf7f100d45c1fa8d64690dbb658d5",
+      "line": 224
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderInterval",
+      "name": "folkmanLeftElement_exists_partition",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderInterval.lean",
+      "blob": "2e0f36e86feaf7f100d45c1fa8d64690dbb658d5",
+      "line": 301
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderLimitNonamenability",
+      "name": "folkmanNativeLimit_not_amenable",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderLimitNonamenability.lean",
+      "blob": "76abaefdc4911d701cdcb94f7b8c4476e3dc1b89",
+      "line": 34
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderOrbits",
+      "name": "folkmanGeneratedRepresentative_atomCounts_le",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderOrbits.lean",
+      "blob": "540ba464b6da25ce1f24b843eba26ef20976bf90",
+      "line": 99
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderOrbits",
+      "name": "folkmanFirstOrderLimit_tupleOrbits_finite",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderOrbits.lean",
+      "blob": "540ba464b6da25ce1f24b843eba26ef20976bf90",
+      "line": 171
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanFirstOrderTaggedLimitOrbits",
+      "name": "folkmanFirstOrderLimit_exists_finite_tagged_tuple_orbit_representatives",
+      "path": "BANANA/NonPrecompact/FolkmanFirstOrderTaggedLimitOrbits.lean",
+      "blob": "18bacab01427f02c5ecce914925e8a180d8e2182",
+      "line": 15
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanIntersectionTransport",
+      "name": "images_eq_iff_common_base_of_equivs",
+      "path": "BANANA/NonPrecompact/FolkmanIntersectionTransport.lean",
+      "blob": "a07ee14b3e5aaaf7eb7cdd99b3b2522fd40aa823",
+      "line": 26
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeCompleteFiniteClass",
+      "name": "folkmanNativeCompleteFiniteClass_nonempty",
+      "path": "BANANA/NonPrecompact/FolkmanNativeCompleteFiniteClass.lean",
+      "blob": "03b6c32f127c967c9d2efe698cbc88c67e1162c4",
+      "line": 85
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedB",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 120
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedC",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 126
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedB_injective",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 131
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedC_injective",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 137
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedB_zero",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 143
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedC_zero",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 149
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedB_add",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 155
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedC_add",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 166
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedB_mul",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 177
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEmbeddings",
+      "name": "folkmanNativeEmbedC_mul",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEmbeddings.lean",
+      "blob": "68f6d4b9240a2025262aae6357d89841ad8a38a6",
+      "line": 188
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeEPPAObstruction",
+      "name": "folkmanNativeEPPA_fails",
+      "path": "BANANA/NonPrecompact/FolkmanNativeEPPAObstruction.lean",
+      "blob": "8729737862c6dabbb50b8079567481e540008d2f",
+      "line": 42
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness",
+      "name": "folkmanNativeFinCode_exists_atomEmbedding_with_maps",
+      "path": "BANANA/NonPrecompact/FolkmanNativeFiniteClassMorphismWitness.lean",
+      "blob": "886f7b2284f306efea45186fe393b71ab88ded46",
+      "line": 25
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeFiniteHeredity",
+      "name": "folkmanNativeFinite_hereditary",
+      "path": "BANANA/NonPrecompact/FolkmanNativeFiniteHeredity.lean",
+      "blob": "8d18249c21e3a4cfd04b03dfbab65c7f3e7d1ab0",
+      "line": 145
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeIntersection",
+      "name": "folkmanNativeEmbed_images_eq_iff_common_base",
+      "path": "BANANA/NonPrecompact/FolkmanNativeIntersection.lean",
+      "blob": "1decfe71297020f3275a85e2b54895a947d5148b",
+      "line": 66
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeJEP",
+      "name": "folkmanNative_joint_embedding",
+      "path": "BANANA/NonPrecompact/FolkmanNativeJEP.lean",
+      "blob": "b6054ec643740aedb1b954ae325153819196f21f",
+      "line": 34
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeNonUnitalRingOwners",
+      "name": "folkmanNonUnitalRingEmbedding_exists_partialAtomOwner",
+      "path": "BANANA/NonPrecompact/FolkmanNativeNonUnitalRingOwners.lean",
+      "blob": "942ae0921208ae3e20c82c07d6573ea36aab58a3",
+      "line": 70
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativePairingAtomMatrix",
+      "name": "folkmanNativePairing_eq_atomMatrix",
+      "path": "BANANA/NonPrecompact/FolkmanNativePairingAtomMatrix.lean",
+      "blob": "aa6023b0a08921a1bc75692630bd7c4fddc218fa",
+      "line": 65
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativePairingCompatibility",
+      "name": "folkmanNativeTransportPairing_compatible",
+      "path": "BANANA/NonPrecompact/FolkmanNativePairingCompatibility.lean",
+      "blob": "681e629874c7924aff32307a03c65c9413141ffa",
+      "line": 27
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativePairingTransport",
+      "name": "folkmanNativeTransportPairing",
+      "path": "BANANA/NonPrecompact/FolkmanNativePairingTransport.lean",
+      "blob": "1605ed7da81ff7489483f3e0a60fb2480ee35dec",
+      "line": 22
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativePairingTransport",
+      "name": "folkmanNativeTransportPairing_add_left",
+      "path": "BANANA/NonPrecompact/FolkmanNativePairingTransport.lean",
+      "blob": "1605ed7da81ff7489483f3e0a60fb2480ee35dec",
+      "line": 35
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativePairingTransport",
+      "name": "folkmanNativeTransportPairing_add_right",
+      "path": "BANANA/NonPrecompact/FolkmanNativePairingTransport.lean",
+      "blob": "1605ed7da81ff7489483f3e0a60fb2480ee35dec",
+      "line": 51
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativePairingTransport",
+      "name": "folkmanNativeTransportPairing_apply_codes",
+      "path": "BANANA/NonPrecompact/FolkmanNativePairingTransport.lean",
+      "blob": "1605ed7da81ff7489483f3e0a60fb2480ee35dec",
+      "line": 68
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv",
+      "name": "folkmanNativeRingAtomEquiv",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomEquiv.lean",
+      "blob": "e1f9e89ba401edcbf8f3c9d40895cd8df46e3a95",
+      "line": 30
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv",
+      "name": "folkmanNativeRingAtomEquiv_injective",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomEquiv.lean",
+      "blob": "e1f9e89ba401edcbf8f3c9d40895cd8df46e3a95",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv",
+      "name": "folkmanNativeRingAtomEquiv_surjective",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomEquiv.lean",
+      "blob": "e1f9e89ba401edcbf8f3c9d40895cd8df46e3a95",
+      "line": 45
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv",
+      "name": "folkmanNativeRingAtomEquiv_zero",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomEquiv.lean",
+      "blob": "e1f9e89ba401edcbf8f3c9d40895cd8df46e3a95",
+      "line": 51
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv",
+      "name": "folkmanNativeRingAtomEquiv_mul",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomEquiv.lean",
+      "blob": "e1f9e89ba401edcbf8f3c9d40895cd8df46e3a95",
+      "line": 61
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomEquiv",
+      "name": "folkmanNativeRingAtomEquiv_add",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomEquiv.lean",
+      "blob": "e1f9e89ba401edcbf8f3c9d40895cd8df46e3a95",
+      "line": 76
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomInverse",
+      "name": "folkmanNativeRingAtomEquiv_symm_empty",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomInverse.lean",
+      "blob": "7688591e311f7abb2905122d2d46a6273320bfb6",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomInverse",
+      "name": "folkmanNativeRingAtomEquiv_symm_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomInverse.lean",
+      "blob": "7688591e311f7abb2905122d2d46a6273320bfb6",
+      "line": 32
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingAtomInverse",
+      "name": "folkmanNativeRingAtomEquiv_symm_inter",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingAtomInverse.lean",
+      "blob": "7688591e311f7abb2905122d2d46a6273320bfb6",
+      "line": 47
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeRingMapCoordinates",
+      "name": "folkmanNativeRingAtomEquiv_map",
+      "path": "BANANA/NonPrecompact/FolkmanNativeRingMapCoordinates.lean",
+      "blob": "54db990209c0ef74021816b97530638c296ede46",
+      "line": 35
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeSortwiseIntersection",
+      "name": "native_sortwise_strong_intersection",
+      "path": "BANANA/NonPrecompact/FolkmanNativeSortwiseIntersection.lean",
+      "blob": "813ced8d96a5e68385dd81c7c377d7a65c54aa25",
+      "line": 106
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeStrongAmalgam",
+      "name": "folkmanNativeTwoSort_exists_strongAmalgamPairing",
+      "path": "BANANA/NonPrecompact/FolkmanNativeStrongAmalgam.lean",
+      "blob": "009bc5f4780a6828ac321fee33732c5667ef06db",
+      "line": 31
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeStrongAmalgamPackage",
+      "name": "folkmanNative_exists_language_strong_amalgam",
+      "path": "BANANA/NonPrecompact/FolkmanNativeStrongAmalgamPackage.lean",
+      "blob": "0202507742682db5df9e4ddac47c020d4107bdb0",
+      "line": 97
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanNativeTwoSortOwnerDiagram",
+      "name": "folkmanNativeTwoSort_exists_atomDiagram",
+      "path": "BANANA/NonPrecompact/FolkmanNativeTwoSortOwnerDiagram.lean",
+      "blob": "6303517f064ae0a51c953ecf8d7ef307367aa95f",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPairingExtensionCertificate",
+      "name": "folkmanCanonicalPairingExtension_exists",
+      "path": "BANANA/NonPrecompact/FolkmanPairingExtensionCertificate.lean",
+      "blob": "618af1ec0bb505bc44e2bc1a699753be0141570b",
+      "line": 22
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPersistence",
+      "name": "exists_folkmanPersistentColouring",
+      "path": "BANANA/NonPrecompact/FolkmanPersistence.lean",
+      "blob": "f8d1daab92d7b5c8a6cd67e04615e17278d02a03",
+      "line": 240
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPersistence",
+      "name": "folkmanAxCopyRamseyDegree_infinite",
+      "path": "BANANA/NonPrecompact/FolkmanPersistence.lean",
+      "blob": "f8d1daab92d7b5c8a6cd67e04615e17278d02a03",
+      "line": 379
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotLeftRetract_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 24
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotRightRetract_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 37
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotBaseRetract_symmDiff",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 50
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanRightPivot_mem_leftMap_iff",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 64
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanLeftPivot_mem_rightMap_iff",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 77
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotBaseRetract_leftMap_mem",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 91
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotBaseRetract_rightMap_mem",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 103
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotRightRetract_leftMap",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 116
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanPivotCrossIdentities",
+      "name": "folkmanPivotLeftRetract_rightMap",
+      "path": "BANANA/NonPrecompact/FolkmanPivotCrossIdentities.lean",
+      "blob": "00d1fdd7ffd3d4d3debf44b92f48983acc96045e",
+      "line": 142
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanRamseyExpansionObstruction",
+      "name": "exists_folkmanNativeCopyRangeColouring",
+      "path": "BANANA/NonPrecompact/FolkmanRamseyExpansionObstruction.lean",
+      "blob": "62f2feddb80f594b81f0c1d0257d213621c56383",
+      "line": 114
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanRamseyExpansionObstruction",
+      "name": "folkmanNativeCopyRamseyDegree_infinite",
+      "path": "BANANA/NonPrecompact/FolkmanRamseyExpansionObstruction.lean",
+      "blob": "62f2feddb80f594b81f0c1d0257d213621c56383",
+      "line": 130
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanRingPartialOwners",
+      "name": "folkman_exists_partialOwner_of_ringEmbedding",
+      "path": "BANANA/NonPrecompact/FolkmanRingPartialOwners.lean",
+      "blob": "b0d0c3e44e056651795854497c7396da225a325a",
+      "line": 55
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanTupleProfiles",
+      "name": "folkmanTupleNonzeroPatterns_card_le",
+      "path": "BANANA/NonPrecompact/FolkmanTupleProfiles.lean",
+      "blob": "8b7e36b86e256ef11623a93947b873875e7dfaeb",
+      "line": 67
+    },
+    {
+      "module": "BANANA.NonPrecompact.FolkmanTupleProfilesPairingTransport",
+      "name": "FolkmanAtomEmbedding.tupleProfile_preserved",
+      "path": "BANANA/NonPrecompact/FolkmanTupleProfilesPairingTransport.lean",
+      "blob": "30b7644d438d1b80f8c77925376ceb16b9d5b453",
+      "line": 158
+    },
+    {
+      "module": "BANANA.NonPrecompact.IndexedSubsetSums",
+      "name": "odd_indexedSubsetSums_two_pow_eq_univ",
+      "path": "BANANA/NonPrecompact/IndexedSubsetSums.lean",
+      "blob": "7064c4f26a9d9f54427439f65498d79d53320319",
+      "line": 224
+    },
+    {
+      "module": "BANANA.NonPrecompact.LinearBinaryRepresentability",
+      "name": "binarySubspaceRamsey_via_successors",
+      "path": "BANANA/NonPrecompact/LinearBinaryRepresentability.lean",
+      "blob": "d5761d5315b7aa8ba1a4565959b37e48df650f00",
+      "line": 102
+    },
+    {
+      "module": "BANANA.NonPrecompact.LinearBinaryRepresentability",
+      "name": "leftOneSidedCopyRamseyOne_via_successors",
+      "path": "BANANA/NonPrecompact/LinearBinaryRepresentability.lean",
+      "blob": "d5761d5315b7aa8ba1a4565959b37e48df650f00",
+      "line": 108
+    },
+    {
+      "module": "BANANA.NonPrecompact.LinearBinaryRepresentability",
+      "name": "rightOneSidedCopyRamseyOne_via_successors",
+      "path": "BANANA/NonPrecompact/LinearBinaryRepresentability.lean",
+      "blob": "d5761d5315b7aa8ba1a4565959b37e48df650f00",
+      "line": 114
+    },
+    {
+      "module": "BANANA.NonPrecompact.LinearExtension",
+      "name": "exists_linearEquiv_extends_of_surjective",
+      "path": "BANANA/NonPrecompact/LinearExtension.lean",
+      "blob": "bb08c0f1ac6ce8c0ed77da0159b706f779c7fdd5",
+      "line": 62
+    },
+    {
+      "module": "BANANA.NonPrecompact.LinePairSourceEmbedding",
+      "name": "BananaLinePairCopy.toSourceEmbedding",
+      "path": "BANANA/NonPrecompact/LinePairSourceEmbedding.lean",
+      "blob": "63123325a88f6658f86a45c11b6cab094b7b4bae",
+      "line": 71
+    },
+    {
+      "module": "BANANA.NonPrecompact.MatrixAffineParity",
+      "name": "pow_two_sub_dvd_card_matrixAffineFiber",
+      "path": "BANANA/NonPrecompact/MatrixAffineParity.lean",
+      "blob": "460b14f7d8a714da8a32533c676d560c668a5670",
+      "line": 72
+    },
+    {
+      "module": "BANANA.NonPrecompact.NativePointedRamseyExpansion",
+      "name": "copyRamseyDegreeLE_of_pointedCover",
+      "path": "BANANA/NonPrecompact/NativePointedRamseyExpansion.lean",
+      "blob": "7ef1f89608b55142f22eaa9286b9d231d8887a79",
+      "line": 72
+    },
+    {
+      "module": "BANANA.NonPrecompact.NativePointedRamseyExpansion",
+      "name": "booleanBanana_noFinitePointedCover",
+      "path": "BANANA/NonPrecompact/NativePointedRamseyExpansion.lean",
+      "blob": "7ef1f89608b55142f22eaa9286b9d231d8887a79",
+      "line": 119
+    },
+    {
+      "module": "BANANA.NonPrecompact.NativePointedRamseyExpansion",
+      "name": "folkmanNative_noFinitePointedCover",
+      "path": "BANANA/NonPrecompact/NativePointedRamseyExpansion.lean",
+      "blob": "7ef1f89608b55142f22eaa9286b9d231d8887a79",
+      "line": 125
+    },
+    {
+      "module": "BANANA.NonPrecompact.NativePointedRamseyExpansion",
+      "name": "banana_noFinitePointedCover",
+      "path": "BANANA/NonPrecompact/NativePointedRamseyExpansion.lean",
+      "blob": "7ef1f89608b55142f22eaa9286b9d231d8887a79",
+      "line": 132
+    },
+    {
+      "module": "BANANA.NonPrecompact.OpenSubgroupAmenability",
+      "name": "isTopologicallyAmenable_openSubgroup",
+      "path": "BANANA/NonPrecompact/OpenSubgroupAmenability.lean",
+      "blob": "ca4a6d39267e2b7763f5e072ecd8fef4f56004ec",
+      "line": 123
+    },
+    {
+      "module": "BANANA.NonPrecompact.ParityStarMatrix",
+      "name": "sum_row_parityStarMatrix",
+      "path": "BANANA/NonPrecompact/ParityStarMatrix.lean",
+      "blob": "673b42ae0ed7701c20b3d0a5f8864a7d753b4911",
+      "line": 37
+    },
+    {
+      "module": "BANANA.NonPrecompact.ParityStarMatrix",
+      "name": "sum_col_parityStarMatrix",
+      "path": "BANANA/NonPrecompact/ParityStarMatrix.lean",
+      "blob": "673b42ae0ed7701c20b3d0a5f8864a7d753b4911",
+      "line": 82
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectHomogeneity",
+      "name": "exists_perfectPairAutomorphism_extends",
+      "path": "BANANA/NonPrecompact/PerfectHomogeneity.lean",
+      "blob": "2bb34b8c287df32de7d18a36b4cd7cf0eefbfa87",
+      "line": 157
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectLeftRange",
+      "name": "exists_perfectBlockEmbedding_leftRange_eq",
+      "path": "BANANA/NonPrecompact/PerfectLeftRange.lean",
+      "blob": "4a17c3ee7107658346581badbf63152ab3ea69b8",
+      "line": 37
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectLeftRange",
+      "name": "exists_perfectBlockEmbedding_rightRange_eq",
+      "path": "BANANA/NonPrecompact/PerfectLeftRange.lean",
+      "blob": "4a17c3ee7107658346581badbf63152ab3ea69b8",
+      "line": 117
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectTotalComplementEquiv",
+      "name": "perfectTotalLeftComplementEquiv",
+      "path": "BANANA/NonPrecompact/PerfectTotalComplementEquiv.lean",
+      "blob": "1cd5f082f2a5b8574a7d50ccb9d8007b6e2b6d66",
+      "line": 25
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectTotalComplementEquiv",
+      "name": "perfectTotalRightComplementEquiv",
+      "path": "BANANA/NonPrecompact/PerfectTotalComplementEquiv.lean",
+      "blob": "1cd5f082f2a5b8574a7d50ccb9d8007b6e2b6d66",
+      "line": 68
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectTotalInvariantComplements",
+      "name": "perfectPair_leftAnnihilator_invariant_of_total",
+      "path": "BANANA/NonPrecompact/PerfectTotalInvariantComplements.lean",
+      "blob": "591b9be0cb4f3149dcd450d2b7eba4a0aa949ce5",
+      "line": 63
+    },
+    {
+      "module": "BANANA.NonPrecompact.PerfectTotalInvariantComplements",
+      "name": "perfectPair_rightAnnihilator_invariant_of_total",
+      "path": "BANANA/NonPrecompact/PerfectTotalInvariantComplements.lean",
+      "blob": "591b9be0cb4f3149dcd450d2b7eba4a0aa949ce5",
+      "line": 79
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral",
+      "name": "prebananaAbstractParity_atomSum_on_atoms",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractAtomsLiteral.lean",
+      "blob": "7a8f63f46b3221b9e52336c0f7992d492913437f",
+      "line": 46
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractAtomsLiteral",
+      "name": "prebananaAbstractParity_total_even_on_atoms",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractAtomsLiteral.lean",
+      "blob": "7a8f63f46b3221b9e52336c0f7992d492913437f",
+      "line": 61
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractClassEPPA",
+      "name": "prebananaFiniteBooleanClassEPPA_fails",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractClassEPPA.lean",
+      "blob": "7a64053af3185aa1fffd4bd04ab72ca8bcb844b6",
+      "line": 63
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedBooleanOperations",
+      "name": "PrebananaAbstractGeneratedMarkedIso.map_zero",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedBooleanOperations.lean",
+      "blob": "3a7b2403925a23236429ea4329f925e42e64d00b",
+      "line": 105
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedBooleanOperations",
+      "name": "PrebananaAbstractGeneratedMarkedIso.map_one",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedBooleanOperations.lean",
+      "blob": "3a7b2403925a23236429ea4329f925e42e64d00b",
+      "line": 115
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedBooleanOperations",
+      "name": "PrebananaAbstractGeneratedMarkedIso.map_complement",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedBooleanOperations.lean",
+      "blob": "3a7b2403925a23236429ea4329f925e42e64d00b",
+      "line": 125
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedBooleanOperations",
+      "name": "PrebananaAbstractGeneratedMarkedIso.map_join",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedBooleanOperations.lean",
+      "blob": "3a7b2403925a23236429ea4329f925e42e64d00b",
+      "line": 151
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedBooleanOperations",
+      "name": "PrebananaAbstractGeneratedMarkedIso.map_meet",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedBooleanOperations.lean",
+      "blob": "3a7b2403925a23236429ea4329f925e42e64d00b",
+      "line": 179
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedMarkedIso",
+      "name": "prebananaAbstractGeneratedMarkedIso_of_profile_eq",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedMarkedIso.lean",
+      "blob": "de4dacd1ebc748622ec266a4a25e0fa0a6ef5f8e",
+      "line": 41
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedMarkedIso",
+      "name": "PrebananaAbstractGeneratedMarkedIso.symm_preserves_mark",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedMarkedIso.lean",
+      "blob": "de4dacd1ebc748622ec266a4a25e0fa0a6ef5f8e",
+      "line": 68
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractGeneratedMarkedIso",
+      "name": "PrebananaAbstractGeneratedMarkedIso.map_generator",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractGeneratedMarkedIso.lean",
+      "blob": "de4dacd1ebc748622ec266a4a25e0fa0a6ef5f8e",
+      "line": 80
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractMarkedPartitions",
+      "name": "prebananaAbstractEmbedding_exists_literalMarkedAtomPartition",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractMarkedPartitions.lean",
+      "blob": "a009fcd570bd025acd57213c5c413701fe9bb8de",
+      "line": 125
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractMarkedTupleProfile",
+      "name": "prebananaAbstractMarkedTupleProfile",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractMarkedTupleProfile.lean",
+      "blob": "92f41306488cdc1fc6fc20a08d9f0ae459c789ea",
+      "line": 24
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractMarkedTupleProfile",
+      "name": "prebananaAbstractTerm_eq_iff_of_profile_eq",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractMarkedTupleProfile.lean",
+      "blob": "92f41306488cdc1fc6fc20a08d9f0ae459c789ea",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractMarkedTupleProfile",
+      "name": "prebananaAbstractTerm_mark_of_profile_eq",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractMarkedTupleProfile.lean",
+      "blob": "92f41306488cdc1fc6fc20a08d9f0ae459c789ea",
+      "line": 105
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaAbstractStrongAmalgamation",
+      "name": "prebananaAbstractFiniteStrongAmalgamation",
+      "path": "BANANA/NonPrecompact/PrebananaAbstractStrongAmalgamation.lean",
+      "blob": "fe9e6c9d581c8cb2ff1ca209a772217f476a227d",
+      "line": 29
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaActualMarkedEmbedding",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom",
+      "path": "BANANA/NonPrecompact/PrebananaActualMarkedEmbedding.lean",
+      "blob": "d5d37ce3d50e171795d6f6b9dff8d322fc9b54aa",
+      "line": 24
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaActualMarkedEmbedding",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_injective",
+      "path": "BANANA/NonPrecompact/PrebananaActualMarkedEmbedding.lean",
+      "blob": "d5d37ce3d50e171795d6f6b9dff8d322fc9b54aa",
+      "line": 36
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaActualMarkedEmbedding",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_surjective",
+      "path": "BANANA/NonPrecompact/PrebananaActualMarkedEmbedding.lean",
+      "blob": "d5d37ce3d50e171795d6f6b9dff8d322fc9b54aa",
+      "line": 43
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaActualMarkedEmbedding",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_preserves_mark",
+      "path": "BANANA/NonPrecompact/PrebananaActualMarkedEmbedding.lean",
+      "blob": "d5d37ce3d50e171795d6f6b9dff8d322fc9b54aa",
+      "line": 50
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaActualMarkedEmbedding",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_generator",
+      "path": "BANANA/NonPrecompact/PrebananaActualMarkedEmbedding.lean",
+      "blob": "d5d37ce3d50e171795d6f6b9dff8d322fc9b54aa",
+      "line": 57
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaActualMarkedEmbedding",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedBoundedLatticeHom_map_compl",
+      "path": "BANANA/NonPrecompact/PrebananaActualMarkedEmbedding.lean",
+      "blob": "d5d37ce3d50e171795d6f6b9dff8d322fc9b54aa",
+      "line": 69
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaClassEPPA",
+      "name": "prebananaAtomClassEPPA_fails",
+      "path": "BANANA/NonPrecompact/PrebananaClassEPPA.lean",
+      "blob": "4cc4a9b4e9239f29e003256bb0b9e6e882cf9107",
+      "line": 80
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaCopyDegree",
+      "name": "prebananaTwoMarkedCopyRamseyDegree_infinite",
+      "path": "BANANA/NonPrecompact/PrebananaCopyDegree.lean",
+      "blob": "5c2ce66e5fc7b4110ee55100bf49513dbd84c360",
+      "line": 125
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaEppaObstruction",
+      "name": "no_perm_maps_finset_to_disjoint_union",
+      "path": "BANANA/NonPrecompact/PrebananaEppaObstruction.lean",
+      "blob": "2764ba2cbd4bec4a45c8e292c2b5210d71c1d822",
+      "line": 21
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFibrewiseMarkedAllocation",
+      "name": "prebananaFibrewiseAllocate_marked",
+      "path": "BANANA/NonPrecompact/PrebananaFibrewiseMarkedAllocation.lean",
+      "blob": "cb422bc7d4b3d696a7994025cd379c6dcb73a486",
+      "line": 27
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteBooleanCoordinates",
+      "name": "prebananaFiniteBooleanAtomFinsetOrderIso",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteBooleanCoordinates.lean",
+      "blob": "8cc79fdfc619fe8dee0e181042792735980702a3",
+      "line": 64
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredity",
+      "name": "prebananaFiniteBooleanSubmodel",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteBooleanModelHeredity.lean",
+      "blob": "9c45f33d6b263f8d7806417e284aafc6a4532714",
+      "line": 20
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredity",
+      "name": "prebananaFiniteBooleanSubmodel_embedding",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteBooleanModelHeredity.lean",
+      "blob": "9c45f33d6b263f8d7806417e284aafc6a4532714",
+      "line": 45
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteBooleanModelJEP",
+      "name": "prebananaFiniteBooleanModel_jointEmbedding",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteBooleanModelJEP.lean",
+      "blob": "a89b2b733b4414b7d5f127dc0b164b30c016467f",
+      "line": 23
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteBooleanModelSkeleton",
+      "name": "prebananaFiniteBooleanModel_hasCanonicalAtomPresentation",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteBooleanModelSkeleton.lean",
+      "blob": "f02ba82e66573c6338a697b6a8a5c84fed211fa7",
+      "line": 22
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteBooleanModelStrongAP",
+      "name": "prebananaFiniteBooleanModel_strongAmalgamation",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteBooleanModelStrongAP.lean",
+      "blob": "8e7d7a40066dbef0e758c63e17037874c0f71a8d",
+      "line": 61
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteClass",
+      "name": "prebanana_arbitrarily_many_atoms",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteClass.lean",
+      "blob": "41fb16ccbf7376dac122a6f2d426673622e14fc6",
+      "line": 32
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteClass",
+      "name": "prebananaAtomStructureCountable",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteClass.lean",
+      "blob": "41fb16ccbf7376dac122a6f2d426673622e14fc6",
+      "line": 71
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiniteJEP",
+      "name": "prebananaAtomClass_joint_embedding",
+      "path": "BANANA/NonPrecompact/PrebananaFiniteJEP.lean",
+      "blob": "362052b4094f906ce55ec5484a49b3af317c4dbd",
+      "line": 22
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAge",
+      "name": "prebananaCylinder_allFiniteModels_embed",
+      "path": "BANANA/NonPrecompact/PrebananaFiveAryCylinderFiniteAge.lean",
+      "blob": "ce3bc0763cb035b2c642bb699907029fd9522f93",
+      "line": 43
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiveAryCylinderMarkedOrbitFiniteness",
+      "name": "prebananaCylinderMarkedOrbit_finite",
+      "path": "BANANA/NonPrecompact/PrebananaFiveAryCylinderMarkedOrbitFiniteness.lean",
+      "blob": "d062a2a96724561a85937069703feaecd0a3e962",
+      "line": 91
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaFiveAryCylinderUltrahomogeneity",
+      "name": "prebananaCylinder_exists_global_marked_boolean_automorphism",
+      "path": "BANANA/NonPrecompact/PrebananaFiveAryCylinderUltrahomogeneity.lean",
+      "blob": "8980545a586341dff0be96f68521008c9327fde7",
+      "line": 49
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaGeneratedBooleanClosure",
+      "name": "prebananaGeneratedBooleanSubalgebra_mem_iff",
+      "path": "BANANA/NonPrecompact/PrebananaGeneratedBooleanClosure.lean",
+      "blob": "8c5a7f7152c713447e5aacc3334f76f581953130",
+      "line": 29
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaGeneratedBooleanClosure",
+      "name": "prebananaAbstractTermRangeEquivGenerated",
+      "path": "BANANA/NonPrecompact/PrebananaGeneratedBooleanClosure.lean",
+      "blob": "8c5a7f7152c713447e5aacc3334f76f581953130",
+      "line": 88
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaGeneratedBooleanClosure",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv",
+      "path": "BANANA/NonPrecompact/PrebananaGeneratedBooleanClosure.lean",
+      "blob": "8c5a7f7152c713447e5aacc3334f76f581953130",
+      "line": 110
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaGeneratedBooleanClosure",
+      "name": "PrebananaAbstractGeneratedMarkedIso.toGeneratedEquiv_preserves_mark",
+      "path": "BANANA/NonPrecompact/PrebananaGeneratedBooleanClosure.lean",
+      "blob": "8c5a7f7152c713447e5aacc3334f76f581953130",
+      "line": 122
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaGridMarkedEmbeddings",
+      "name": "prebananaGridLeftEmbedding",
+      "path": "BANANA/NonPrecompact/PrebananaGridMarkedEmbeddings.lean",
+      "blob": "0ba000db4ca5af02fa4ebcc7a3486091a715821c",
+      "line": 134
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaGridMarkedEmbeddings",
+      "name": "prebananaGridRightEmbedding",
+      "path": "BANANA/NonPrecompact/PrebananaGridMarkedEmbeddings.lean",
+      "blob": "0ba000db4ca5af02fa4ebcc7a3486091a715821c",
+      "line": 147
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaHomogeneousLimitMassObstruction",
+      "name": "prebanana_no_invariantPresentedProbability_of_ultrahomogeneity",
+      "path": "BANANA/NonPrecompact/PrebananaHomogeneousLimitMassObstruction.lean",
+      "blob": "0acd31b1dd3d154027ddef17877e27accdbab717",
+      "line": 37
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaIndexedParity",
+      "name": "prebananaIndexedGrid_total_zero",
+      "path": "BANANA/NonPrecompact/PrebananaIndexedParity.lean",
+      "blob": "e5b6ffedc1aaf3384899f4f0ebe8db43c0139a42",
+      "line": 39
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaIndexedParity",
+      "name": "prebananaGridMarkedStructure",
+      "path": "BANANA/NonPrecompact/PrebananaIndexedParity.lean",
+      "blob": "e5b6ffedc1aaf3384899f4f0ebe8db43c0139a42",
+      "line": 77
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaOneGeneratorMarkedIso",
+      "name": "prebananaProperZeroMark_orbit_of_ultrahomogeneity",
+      "path": "BANANA/NonPrecompact/PrebananaOneGeneratorMarkedIso.lean",
+      "blob": "63d644d4b577a7c7dd306e5aaa919639b722400f",
+      "line": 176
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaPartitionEmbedding",
+      "name": "exists_prebananaAtomEmbedding_of_blocks",
+      "path": "BANANA/NonPrecompact/PrebananaPartitionEmbedding.lean",
+      "blob": "faf699aa5fe63de7a94d25aa005397feebd9a074",
+      "line": 17
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaPersistence",
+      "name": "exists_prebananaPersistentColouring",
+      "path": "BANANA/NonPrecompact/PrebananaPersistence.lean",
+      "blob": "cd2f9fd9e4a012af73c13d752228b8fba397841f",
+      "line": 124
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaPowersetBridge",
+      "name": "prebananaBooleanMap_parity",
+      "path": "BANANA/NonPrecompact/PrebananaPowersetBridge.lean",
+      "blob": "168666596b2a83062f0f2d143b023831465660cb",
+      "line": 117
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaResidueAmbient",
+      "name": "prebananaResidueAmbient",
+      "path": "BANANA/NonPrecompact/PrebananaResidueAmbient.lean",
+      "blob": "14e69970327e2ab2a72144de5d0c49a3a77c26c1",
+      "line": 18
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaResidueAmbient",
+      "name": "prebananaResidueAmbient_atomCount_even",
+      "path": "BANANA/NonPrecompact/PrebananaResidueAmbient.lean",
+      "blob": "14e69970327e2ab2a72144de5d0c49a3a77c26c1",
+      "line": 41
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaResidueBlocks",
+      "name": "card_parity_eq_residueParityHom_of_odd_sum",
+      "path": "BANANA/NonPrecompact/PrebananaResidueBlocks.lean",
+      "blob": "db5cca6cea68c47e64be9243b22a042f84dfb76a",
+      "line": 51
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaResidueBlocks",
+      "name": "exists_nonempty_odd_subset_sum_two_pow",
+      "path": "BANANA/NonPrecompact/PrebananaResidueBlocks.lean",
+      "blob": "db5cca6cea68c47e64be9243b22a042f84dfb76a",
+      "line": 64
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaResidueBlocks",
+      "name": "exists_nonempty_odd_subset_sum_family",
+      "path": "BANANA/NonPrecompact/PrebananaResidueBlocks.lean",
+      "blob": "db5cca6cea68c47e64be9243b22a042f84dfb76a",
+      "line": 131
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaResidueBlocks",
+      "name": "exists_prebanana_residue_block_assembly",
+      "path": "BANANA/NonPrecompact/PrebananaResidueBlocks.lean",
+      "blob": "db5cca6cea68c47e64be9243b22a042f84dfb76a",
+      "line": 195
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaTupleSignatures",
+      "name": "prebananaRealisedSignatures_card_le_two_pow",
+      "path": "BANANA/NonPrecompact/PrebananaTupleSignatures.lean",
+      "blob": "1d552a071b0b0e63723a9783d09db0c867e4e561",
+      "line": 56
+    },
+    {
+      "module": "BANANA.NonPrecompact.PrebananaTupleSignatures",
+      "name": "prebananaTupleProfiles_finite",
+      "path": "BANANA/NonPrecompact/PrebananaTupleSignatures.lean",
+      "blob": "1d552a071b0b0e63723a9783d09db0c867e4e561",
+      "line": 95
+    },
+    {
+      "module": "BANANA.NonPrecompact.QuadraticGauss",
+      "name": "quadraticGaussSum_sq_eq_card",
+      "path": "BANANA/NonPrecompact/QuadraticGauss.lean",
+      "blob": "148d7bdf1d480d53146de4234dcdaf8f73601750",
+      "line": 142
+    },
+    {
+      "module": "BANANA.NonPrecompact.QuadraticMoments",
+      "name": "pow_two_sub_two_mul_dvd_quadraticSubsetMoment",
+      "path": "BANANA/NonPrecompact/QuadraticMoments.lean",
+      "blob": "8b9c645d9a18ff417990767f3bfbbebaec0dea93",
+      "line": 64
+    },
+    {
+      "module": "BANANA.NonPrecompact.QuadraticMoments",
+      "name": "quadraticSubsetMoment_eq_sum_choose_bilinearWeight_self",
+      "path": "BANANA/NonPrecompact/QuadraticMoments.lean",
+      "blob": "8b9c645d9a18ff417990767f3bfbbebaec0dea93",
+      "line": 223
+    },
+    {
+      "module": "BANANA.NonPrecompact.QuadraticResidueStandard",
+      "name": "quadraticAffineWeight_residueFibres_odd",
+      "path": "BANANA/NonPrecompact/QuadraticResidueStandard.lean",
+      "blob": "423a8f28d2ef14a6425c196f2a2f49e57c26292f",
+      "line": 40
+    },
+    {
+      "module": "BANANA.NonPrecompact.RamseyDegreeClassifications",
+      "name": "bananaEmbeddingRamseyDegree_classification",
+      "path": "BANANA/NonPrecompact/RamseyDegreeClassifications.lean",
+      "blob": "b65f1c3a048129cf44f920b02ee41b95f3465cbf",
+      "line": 15
+    },
+    {
+      "module": "BANANA.NonPrecompact.RamseyDegreeClassifications",
+      "name": "embeddingRamseyDegree_classification",
+      "path": "BANANA/NonPrecompact/RamseyDegreeClassifications.lean",
+      "blob": "b65f1c3a048129cf44f920b02ee41b95f3465cbf",
+      "line": 28
+    },
+    {
+      "module": "BANANA.NonPrecompact.ResidueAlgebra",
+      "name": "ResidueAlgebra",
+      "path": "BANANA/NonPrecompact/ResidueAlgebra.lean",
+      "blob": "c8abb30dd88ef601ac0c280603aae8365e702254",
+      "line": 22
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticCopyDegree",
+      "name": "line_copyRamseyDegree_infinite",
+      "path": "BANANA/NonPrecompact/SymplecticCopyDegree.lean",
+      "blob": "23c1afc25b50783467b3cb2d3fe1ac10ca8d4ba4",
+      "line": 117
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticCopySystem",
+      "name": "exists_amalgam",
+      "path": "BANANA/NonPrecompact/SymplecticCopySystem.lean",
+      "blob": "6f5a5a86509f4862b75146db553ebfcaf2c83a40",
+      "line": 140
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticCountableModel",
+      "name": "exists_countableSymplectic_automorphism",
+      "path": "BANANA/NonPrecompact/SymplecticCountableModel.lean",
+      "blob": "42cf204de89b18a774362b8b11d11486107868c5",
+      "line": 94
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticCountableModel",
+      "name": "countableSymplectic_finite_age",
+      "path": "BANANA/NonPrecompact/SymplecticCountableModel.lean",
+      "blob": "42cf204de89b18a774362b8b11d11486107868c5",
+      "line": 106
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticPointColouring",
+      "name": "exists_symplecticPointColouring",
+      "path": "BANANA/NonPrecompact/SymplecticPointColouring.lean",
+      "blob": "12516d72e2bd11f1f3a7c7e3001df9b9821a894a",
+      "line": 171
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticQuadraticPolar",
+      "name": "polarBilin_upperQuadratic",
+      "path": "BANANA/NonPrecompact/SymplecticQuadraticPolar.lean",
+      "blob": "5406cae525eb808af548cbeb76a8add19aa8c023",
+      "line": 57
+    },
+    {
+      "module": "BANANA.NonPrecompact.SymplecticQuadraticPolar",
+      "name": "affinePolar_translate_quadratic",
+      "path": "BANANA/NonPrecompact/SymplecticQuadraticPolar.lean",
+      "blob": "5406cae525eb808af548cbeb76a8add19aa8c023",
+      "line": 81
+    },
+    {
+      "module": "BANANA.NonPrecompact.TopologicalAmenability",
+      "name": "isTopologicallyAmenable_of_dense_finite_subgroups",
+      "path": "BANANA/NonPrecompact/TopologicalAmenability.lean",
+      "blob": "01321e2f935effc854c794137556d28a9bbd0859",
+      "line": 34
+    },
+    {
+      "module": "BANANA.NonPrecompact.TwoSidedLinePair",
+      "name": "BananaMatrixStructure.exists_linePairCopy_of_positive",
+      "path": "BANANA/NonPrecompact/TwoSidedLinePair.lean",
+      "blob": "cf07f492dcddfad5b3ad0ab1eb1207082041775d",
+      "line": 49
+    },
+    {
+      "module": "BANANA.NonPrecompact.UniversalMinimalFlowUniqueness",
+      "name": "universalMinimalFlow_unique",
+      "path": "BANANA/NonPrecompact/UniversalMinimalFlowUniqueness.lean",
+      "blob": "6b8b515237cb218ef90131d6cdb79a9054a641ba",
+      "line": 148
+    },
+    {
+      "module": "SuccessorTree.CopyRamsey",
+      "name": "copyRamseyDegreeLE_of_embedding",
+      "path": "SuccessorTree/CopyRamsey.lean",
+      "blob": "88ae3feeed2eeb7fc6a56d68d5b2934c03b2537e",
+      "line": 257
+    }
+  ]
+}

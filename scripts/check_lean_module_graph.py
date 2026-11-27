@@ -67,7 +67,7 @@ dead = sorted(production - visited)
 print(f"Lean files: {len(sources)} ({len(production)} production, "
       f"{len(audits)} axiom audits)")
 print(f"Reachable production modules from BANANA.lean: {root_reachable}")
-print(f"Audit-only proof modules (review before deletion): {len(audit_only)}")
+print(f"Audit-only proof modules (must be reachable from root): {len(audit_only)}")
 print(f"Unreachable production modules: {len(dead)}")
 for name, dep in missing:
     print(f"MISSING IMPORT: {name} -> {dep}", file=sys.stderr)
@@ -79,5 +79,8 @@ for name in audit_only:
     print(f"AUDIT-ONLY PROOF MODULE: {name}", file=sys.stderr)
 for name in dead:
     print(f"DEAD MODULE CANDIDATE: {name}", file=sys.stderr)
-if missing or cycles or empty_audits or dead:
+root_audits = sorted(audits & root_seen)
+for name in root_audits:
+    print(f"AUDIT IMPORTED BY PRODUCTION ROOT: {name}", file=sys.stderr)
+if missing or cycles or empty_audits or dead or audit_only or root_audits:
     sys.exit(1)
