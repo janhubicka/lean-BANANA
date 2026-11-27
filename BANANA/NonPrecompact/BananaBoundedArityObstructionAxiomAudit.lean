@@ -1,5 +1,0 @@
-import BANANA.NonPrecompact.BananaBoundedArityObstruction
-
-#print axioms SuccessorTree.NonPrecompact.banana_not_ultrahomogeneous_of_bounded_relations
-#print axioms SuccessorTree.NonPrecompact.banana_not_ultrahomogeneous_of_finite_relations
-#print axioms SuccessorTree.NonPrecompact.bananaTagged_not_ultrahomogeneous

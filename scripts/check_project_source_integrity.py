@@ -41,13 +41,25 @@ def main() -> None:
     ap.add_argument("--root-only", action="store_true",
                     help="run before Lake materialises the pinned dependencies")
     args = ap.parse_args()
-    sources = source_files(ROOT, "BANANA")
+    sources = [p for module in ("BANANA", "SuccessorTree", "RamseySpace")
+               for p in source_files(ROOT, module)]
+    provenance = json.loads((ROOT / "docs/vendored-provenance.json").read_text())
+    expected = {x["path"]: x["blob"] for x in provenance["upstream_files"]}
+    actual = {p.relative_to(ROOT).as_posix() for module in ("SuccessorTree", "RamseySpace")
+              for p in (ROOT / module).rglob("*.lean")}
+    if actual != set(expected):
+        raise ValueError("vendored source closure changed")
+    import hashlib
+    for path, blob in expected.items():
+        content = (ROOT / path).read_bytes()
+        digest = hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
+        if digest != blob:
+            raise ValueError(f"vendored source changed: {path}")
     if not args.root_only:
         manifest = json.loads((ROOT / "lake-manifest.json").read_text())
         packages = ROOT / manifest["packagesDir"]
-        owned = {"lean-successors": "SuccessorTree",
-                 "lean-ramsey-space-todorcevic": "RamseySpace"}
-        seen = set()
+        allowed = {'https://github.com/leanprover-community/mathlib4': '5bd58ac291422a21f412ae354c91e7d172255a2c', 'https://github.com/leanprover-community/plausible': 'b7fb2b866d25bd937a2069931f9733197521cb27', 'https://github.com/leanprover-community/LeanSearchClient': 'c35806f43135ab3f254429d0c00bd13fc0123f77', 'https://github.com/leanprover-community/import-graph': '103cd9a46972ee39d9defb2f54ae49823b1228eb', 'https://github.com/leanprover-community/ProofWidgets4': '87dfe779d5dfd03142ee4fe158911b8eb553ec98', 'https://github.com/leanprover-community/aesop': 'a92ed98e694702934d40d12f24a1a449144db43e', 'https://github.com/leanprover-community/quote4': '37b0ba0b26109cf9f9c541f0f9557e50cfa1a3b9', 'https://github.com/leanprover-community/batteries': '950339ce0fd0cc0673a22d87036075737586aed2', 'https://github.com/leanprover/lean4-cli': '843844fa601dd56767b1eb22b7ada5b64d5e567a'}
+        seen = {}
         for pkg in manifest["packages"]:
             if pkg["type"] != "git":
                 raise ValueError(f"non-Git dependency is not release-pinned: {pkg['name']}")
@@ -60,13 +72,12 @@ def main() -> None:
             untracked = git(path, "ls-files", "--others", "--exclude-standard", "-z")
             if any(p.endswith(".lean") for p in untracked.split("\0")):
                 raise ValueError(f"untracked Lean source in dependency: {path}")
-            repo = pkg["url"].rstrip("/").removesuffix(".git").rsplit("/", 1)[-1]
-            if repo in owned:
-                seen.add(repo)
-                sources.extend(source_files(path, owned[repo]))
+            if pkg["url"] in seen or allowed.get(pkg["url"]) != actual:
+                raise ValueError(f"unexpected dependency: {pkg['url']} at {actual}")
+            seen[pkg["url"]] = actual
             print(f"PIN {pkg['name']} {actual}")
-        if seen != set(owned):
-            raise ValueError(f"missing project-owned dependency: {set(owned) - seen}")
+        if seen != allowed:
+            raise ValueError("unexpected mathlib dependency closure")
     errors = []
     for file in sources:
         try:

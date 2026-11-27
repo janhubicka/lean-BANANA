@@ -1,5 +1,7 @@
 # Classical dependencies of the BANANA circulation draft
 
+This is the historical source-level audit from the full development; the archival package retains its linked proof modules unchanged. For the exact extracted source scope and verification status, see [circulation-only scope](circulation-only-scope.md).
+
 This audit covers the classical results used in the circulation proofs at
 manuscript commit [60638d1](https://github.com/janhubicka/BANANA/commit/60638d1a7f43410af0763cd99e781a5ff87c70b8).
 The local checks used Lean 4.35.0-rc3 and mathlib

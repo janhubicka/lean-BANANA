@@ -1,4 +1,5 @@
-import BANANA.NonPrecompact.AffineParity
+import SuccessorTree
+import RamseySpace
 import BANANA.NonPrecompact.AlignedCompletionEmbedding
 import BANANA.NonPrecompact.BananaAmalgam
 import BANANA.NonPrecompact.BananaStrongBlockAmalgam
@@ -36,10 +37,8 @@ import BANANA.NonPrecompact.BananaLimitTupleKernelRange
 import BANANA.NonPrecompact.BananaLimitBlockProjection
 import BANANA.NonPrecompact.BananaRetractionLiftEquiv
 import BANANA.NonPrecompact.BananaLimitBlockPairLift
-import BANANA.NonPrecompact.BananaPersistence
 import BANANA.NonPrecompact.BananaStructure
 import BANANA.NonPrecompact.BananaFinitePartialSystems
-import BANANA.NonPrecompact.BananaFiniteSystemSourceBridge
 import BANANA.NonPrecompact.BananaFiniteSystemPerfectTotalCofinality
 import BANANA.NonPrecompact.BananaStandardPerfectSystems
 import BANANA.NonPrecompact.BananaFiniteSystemsJepWap
@@ -50,7 +49,6 @@ import BANANA.NonPrecompact.BinarySubspaceRamseyFromSuccessor
 import BANANA.NonPrecompact.BinarySubspaceStep
 import BANANA.NonPrecompact.BinarySkippedContraction
 import BANANA.NonPrecompact.BinaryWordTree
-import BANANA.NonPrecompact.BinaryAffineRamseyInterface
 import BANANA.NonPrecompact.CauchyBinet
 import BANANA.NonPrecompact.CoherentConjugation
 import BANANA.NonPrecompact.CoherentEppaPackage
@@ -65,7 +63,6 @@ import BANANA.NonPrecompact.CompletionAmbientAction
 import BANANA.NonPrecompact.BananaPerfectTripleAutomorphisms
 import BANANA.NonPrecompact.BananaPerfectSplitSystemActions
 import BANANA.NonPrecompact.BananaPerfectSplitSystemEmbeddings
-import BANANA.NonPrecompact.BananaPerfectSplitStrongIntersection
 import BANANA.NonPrecompact.BananaPerfectTotalSplitSystems
 import BANANA.NonPrecompact.CompletionAutomorphism
 import BANANA.NonPrecompact.BananaTotalFamilyPerfectCompletion
@@ -74,8 +71,6 @@ import BANANA.NonPrecompact.CompletionPersistence
 import BANANA.NonPrecompact.ConjugatedCompletionAction
 import BANANA.NonPrecompact.CopyRamseyDegree
 import BANANA.NonPrecompact.BananaOneSidedCopyDegree
-import BANANA.NonPrecompact.BananaOneSidedSubspaceEquiv
-import BANANA.NonPrecompact.BananaCopyFunctor
 import BANANA.NonPrecompact.TwoSidedLinePair
 import BANANA.NonPrecompact.LinePairSourceEmbedding
 import BANANA.NonPrecompact.EmbeddedCompletionAction
@@ -109,7 +104,6 @@ import BANANA.NonPrecompact.FolkmanActualTwoSortPairingBilinear
 import BANANA.NonPrecompact.FolkmanFiniteStrongAmalgamPairing
 import BANANA.NonPrecompact.FolkmanBilinearExtension
 import BANANA.NonPrecompact.FolkmanPairingExtensionCertificate
-import BANANA.NonPrecompact.FolkmanBilinearAllVectors
 import BANANA.NonPrecompact.FolkmanPersistence
 import BANANA.NonPrecompact.FolkmanTupleProfiles
 import BANANA.NonPrecompact.FolkmanTupleProfilesTransport
@@ -145,11 +139,9 @@ import BANANA.NonPrecompact.PerfectHomogeneity
 import BANANA.NonPrecompact.PerfectFamilyExtension
 import BANANA.NonPrecompact.PerfectCofinalTotalSystems
 import BANANA.NonPrecompact.BananaPerfectOrthogonalDecomposition
-import BANANA.NonPrecompact.BananaPerfectOrthogonalPairingSplit
 import BANANA.NonPrecompact.BananaPerfectOrthogonalEquiv
 import BANANA.NonPrecompact.BananaPerfectOrthogonalNondegenerate
 import BANANA.NonPrecompact.BananaPerfectComplementPairing
-import BANANA.NonPrecompact.BananaPerfectOrthogonalUniqueness
 import BANANA.NonPrecompact.FinitePerfectGL
 import BANANA.NonPrecompact.BananaLimitFiniteGLAction
 import BANANA.NonPrecompact.BananaLimitBlockLiftGroupLaw
@@ -169,7 +161,6 @@ import BANANA.NonPrecompact.PerfectSelfEmbedding
 import BANANA.NonPrecompact.PerfectTotalInvariantComplements
 import BANANA.NonPrecompact.BananaPerfectProjectionEquivariance
 import BANANA.NonPrecompact.PerfectTotalComplementEquiv
-import BANANA.NonPrecompact.BananaPerfectTotalBlockDiagonal
 import BANANA.NonPrecompact.PersistentColourings
 import BANANA.NonPrecompact.PrebananaAmalgamBridge
 import BANANA.NonPrecompact.PrebananaReindexPartition
@@ -183,10 +174,8 @@ import BANANA.NonPrecompact.PrebananaAmenabilityMeasureObstruction
 import BANANA.NonPrecompact.PrebananaAmenabilityThreeAtomCopy
 import BANANA.NonPrecompact.PrebananaStoneMeasureMass
 import BANANA.NonPrecompact.PrebananaCodedBooleanEmbedding
-import BANANA.NonPrecompact.PrebananaMarkedPowersetFibre
 import BANANA.NonPrecompact.PrebananaPowersetStrongAmalgam
 import BANANA.NonPrecompact.PrebananaAbstractStrongIntersectionTransfer
-import BANANA.NonPrecompact.PrebananaFiniteBooleanRepresentation
 import BANANA.NonPrecompact.PrebananaPowersetMapPartitions
 import BANANA.NonPrecompact.PrebananaAbstractBooleanEmbeddingMap
 import BANANA.NonPrecompact.PrebananaAbstractMarkedPartitions
@@ -196,7 +185,6 @@ import BANANA.NonPrecompact.PrebananaAbstractCodeParity
 import BANANA.NonPrecompact.PrebananaAbstractCodeEquivalence
 import BANANA.NonPrecompact.PrebananaTupleSignatures
 import BANANA.NonPrecompact.PrebananaFiniteOrbitCriterion
-import BANANA.NonPrecompact.PrebananaFiniteTupleExtensionCriterion
 import BANANA.NonPrecompact.PrebananaTupleSignatureEmbedding
 import BANANA.NonPrecompact.PrebananaTupleTermEqualities
 import BANANA.NonPrecompact.PrebananaTupleTermParity
@@ -218,18 +206,11 @@ import BANANA.NonPrecompact.PrebananaFiniteBooleanModelSkeleton
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelHeredity
 import BANANA.NonPrecompact.PrebananaFiniteBooleanModelEmbeddingCalculus
 import BANANA.NonPrecompact.PrebananaFiniteBooleanTower
-import BANANA.NonPrecompact.PrebananaFiveAryChildMarking
-import BANANA.NonPrecompact.PrebananaFiveAryWordMark
-import BANANA.NonPrecompact.PrebananaFiveAryWordStage
 import BANANA.NonPrecompact.PrebananaResidualParity
-import BANANA.NonPrecompact.PrebananaWitnessAllocation
-import BANANA.NonPrecompact.PrebananaMarkedNonbaseFibres
-import BANANA.NonPrecompact.PrebananaMarkedAllocation
 import BANANA.NonPrecompact.PrebananaFiveAryDescendantParity
 import BANANA.NonPrecompact.PrebananaSingleSpecialSuffix
 import BANANA.NonPrecompact.PrebananaUniformSuffixSelection
 import BANANA.NonPrecompact.PrebananaArbitraryTargetSuffixes
-import BANANA.NonPrecompact.PrebananaParentFibreMarkedAllocation
 import BANANA.NonPrecompact.PrebananaFibrewiseMarkedAllocation
 import BANANA.NonPrecompact.PrebananaFiveAryRefinementAllocation
 import BANANA.NonPrecompact.PrebananaFiveAryWordLevelAllocation
@@ -241,7 +222,6 @@ import BANANA.NonPrecompact.PrebananaFiveAryTowerLongPrefix
 import BANANA.NonPrecompact.PrebananaFiveAryAbstractExtensionFromPartitions
 import BANANA.NonPrecompact.PrebananaFiveAryFiniteExtensionTheorem
 import BANANA.NonPrecompact.PrebananaFiveAryConcatenation
-import BANANA.NonPrecompact.PrebananaFiveAryWordPrefix
 import BANANA.NonPrecompact.PrebananaFiveAryBooleanStage
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderLimitCarrier
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderInfinite
@@ -249,7 +229,6 @@ import BANANA.NonPrecompact.PrebananaFiveAryCylinderTowerCompatibility
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderMark
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteFamily
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAmbient
-import BANANA.NonPrecompact.PrebananaFiveAryCylinderLocalFiniteness
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteEmbeddingFactor
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteAge
 import BANANA.NonPrecompact.PrebananaFiveAryCylinderFiniteTuplePresentation
@@ -285,7 +264,6 @@ import BANANA.NonPrecompact.QuadraticResidueGenerating
 import BANANA.NonPrecompact.QuadraticResidueStandard
 import BANANA.NonPrecompact.ResidueAlgebra
 import BANANA.NonPrecompact.SubsetSums
-import BANANA.NonPrecompact.SymplecticAmalgam
 import BANANA.NonPrecompact.SymplecticCountableModel
 import BANANA.NonPrecompact.SymplecticCopyDegree
 import BANANA.NonPrecompact.SymplecticPointColouring
@@ -323,9 +301,7 @@ import BANANA.NonPrecompact.FiniteColouringCompactness
 import BANANA.NonPrecompact.FolkmanNativeCopyTransport
 import BANANA.NonPrecompact.OrbitCover
 import BANANA.NonPrecompact.PrebananaBaireOrbit
-import BANANA.NonPrecompact.BooleanBanana
 import BANANA.NonPrecompact.BooleanBananaCopyTransport
-import BANANA.NonPrecompact.FolkmanFirstOrderLimit
 import BANANA.NonPrecompact.FolkmanRamseyExpansionObstruction
 import BANANA.NonPrecompact.FiniteSubgroupAmenability
 import BANANA.NonPrecompact.BananaLimitTopologicalAmenability
@@ -360,7 +336,6 @@ import BANANA.NonPrecompact.FirstOrderOligomorphicCategoricity
 import BANANA.NonPrecompact.FirstOrderOrbitExpansion
 import BANANA.NonPrecompact.FolkmanFirstOrderCategoricity
 import BANANA.NonPrecompact.FolkmanFirstOrderExistence
-import BANANA.NonPrecompact.FolkmanFirstOrderFunctionalRamseyAge
 import BANANA.NonPrecompact.FolkmanFirstOrderRamseyObstruction
 import BANANA.NonPrecompact.FolkmanFirstOrderInterval
 import BANANA.NonPrecompact.BooleanBananaPadicChargeResiduePartition
@@ -386,7 +361,6 @@ import BANANA.NonPrecompact.BananaSortedSyntax
 import BANANA.NonPrecompact.BananaTaggedSyntaxReverse
 import BANANA.NonPrecompact.BananaSortedDefinableTupleRamsey
 import BANANA.NonPrecompact.BananaLimitFirstOrderAutomorphism
-import BANANA.NonPrecompact.BananaBoundedArityObstruction
 import BANANA.NonPrecompact.BananaLimitDenseConjugacy
 import BANANA.NonPrecompact.BananaNativeCopySystem
 import BANANA.NonPrecompact.BananaLimitParameterColouring
@@ -399,9 +373,7 @@ import BANANA.NonPrecompact.BananaGeneratedRamseyObstructions
 import BANANA.NonPrecompact.NativePointedRamseyExpansion
 import BANANA.NonPrecompact.FirstOrderEmbeddingCopyDegree
 import BANANA.NonPrecompact.RamseyDegreeClassifications
-import BANANA.NonPrecompact.FirstOrderExpansionTermClosure
 import BANANA.NonPrecompact.FirstOrderFiniteExpansionTypes
-import BANANA.NonPrecompact.PredecessorExpansionCounterexample
 import BANANA.NonPrecompact.FirstOrderFunctionalRamseyAge
 import BANANA.NonPrecompact.BananaLimitGenericBackAndForth
 import BANANA.NonPrecompact.BananaLimitDefinableColouring
@@ -414,5 +386,3 @@ import BANANA.NonPrecompact.UniversalMinimalFlowUniqueness
 import BANANA.NonPrecompact.BananaLimitExpansionGroup
 import BANANA.NonPrecompact.FolkmanNativeFiniteClassMorphismWitness
 import BANANA.NonPrecompact.FolkmanNativeSortwiseIntersection
-import BANANA.NonPrecompact.PrebananaGridMarginals
-import BANANA.NonPrecompact.PrebananaGridReindex
