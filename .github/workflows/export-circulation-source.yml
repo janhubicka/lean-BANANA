@@ -1,0 +1,32 @@
+name: Export exact circulation source for dependency audit
+on:
+  push:
+    branches: [arxiv-v1-circulation-only]
+    paths:
+      - '.github/workflows/export-circulation-source.yml'
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 0cdbf99cbc208e9f8a50ed46af255540993f91e4
+          persist-credentials: false
+      - name: Export exact source tree and blob inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "0cdbf99cbc208e9f8a50ed46af255540993f91e4"
+          mkdir -p "$RUNNER_TEMP/circulation-source"
+          git archive --format=tar --prefix=lean-BANANA/ HEAD | gzip -n > "$RUNNER_TEMP/circulation-source/source.tar.gz"
+          git ls-tree -r HEAD > "$RUNNER_TEMP/circulation-source/tree.txt"
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/circulation-source/revision.txt"
+          (cd "$RUNNER_TEMP/circulation-source" && sha256sum source.tar.gz tree.txt revision.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: circulation-source-0cdbf99cbc208e9f8a50ed46af255540993f91e4
+          path: ${{ runner.temp }}/circulation-source/
+          if-no-files-found: error
