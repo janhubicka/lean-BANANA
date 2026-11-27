@@ -26,7 +26,7 @@ def blobs(root):
     return found
 
 
-def check_requirements(requirements, inventory, banana, successor):
+def check_requirements(requirements, inventory, banana):
     """Resolve by defining module and exact or unique qualified suffix."""
     seen = set()
     resolved = set()
@@ -38,8 +38,9 @@ def check_requirements(requirements, inventory, banana, successor):
         seen.add(key)
         if module != path.removesuffix(".lean").replace("/", "."):
             raise ValueError(f"inconsistent module and source path: {key}")
-        tree = successor if module.startswith("SuccessorTree.") else banana
-        if tree.get(path) != blob:
+        if not module.startswith("BANANA."):
+            raise ValueError(f"unexpected external project module: {module}")
+        if banana.get(path) != blob:
             raise ValueError(f"linked source changed; review the declaration crosswalk: {path}")
         source_name = name.removeprefix("_root_.")
         matches = sorted(n for n in inventory.get(module, ())
@@ -56,16 +57,8 @@ def main():
     if len(sys.argv) != 2:
         sys.exit("Usage: check_manuscript_linked_declarations.py <project-axioms.log>")
     data = json.loads((ROOT / "scripts/manuscript_linked_declarations.json").read_text())
-    manifest = json.loads((ROOT / "lake-manifest.json").read_text())
-    pkgs = [p for p in manifest["packages"]
-            if p["url"].rstrip("/").removesuffix(".git").endswith("/lean-successors")]
-    if len(pkgs) != 1 or pkgs[0]["rev"] != data["successor_pin"]:
-        raise ValueError("successor manifest pin changed; review linked declarations")
-    dep = ROOT / manifest["packagesDir"] / pkgs[0]["name"].strip("«»")
-    if git(dep, "rev-parse", "HEAD").decode().strip() != data["successor_pin"]:
-        raise ValueError("successor checkout pin mismatch")
     inventory = check_inventory(Path(sys.argv[1]).read_text(encoding="utf-8"))
-    count, distinct = check_requirements(data["required"], inventory, blobs(ROOT), blobs(dep))
+    count, distinct = check_requirements(data["required"], inventory, blobs(ROOT))
     print(f"PASS: {count} manuscript source declaration references resolve uniquely "
           f"to {distinct} directly audited compiled declarations at the checked source blobs")
 

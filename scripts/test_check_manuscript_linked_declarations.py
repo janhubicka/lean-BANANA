@@ -7,14 +7,13 @@ class ManuscriptDeclarationTests(unittest.TestCase):
     def setUp(self):
         self.req = [{"module": "BANANA.Example", "name": "foo",
                      "path": "BANANA/Example.lean", "blob": "blob"},
-                    {"module": "SuccessorTree.Example", "name": "bar",
-                     "path": "SuccessorTree/Example.lean", "blob": "dep"}]
-        self.inv = {"BANANA.Example": {"A.foo"}, "SuccessorTree.Example": {"S.bar"}}
-        self.root = {"BANANA/Example.lean": "blob"}
-        self.dep = {"SuccessorTree/Example.lean": "dep"}
+                    {"module": "BANANA.Other", "name": "bar",
+                     "path": "BANANA/Other.lean", "blob": "dep"}]
+        self.inv = {"BANANA.Example": {"A.foo"}, "BANANA.Other": {"S.bar"}}
+        self.root = {"BANANA/Example.lean": "blob", "BANANA/Other.lean": "dep"}
 
     def check(self):
-        return check_requirements(self.req, self.inv, self.root, self.dep)
+        return check_requirements(self.req, self.inv, self.root)
 
     def test_complete(self):
         self.assertEqual(self.check(), (2, 2))
@@ -35,8 +34,14 @@ class ManuscriptDeclarationTests(unittest.TestCase):
             self.check()
 
     def test_dependency_changed(self):
-        self.dep.clear()
+        del self.root["BANANA/Other.lean"]
         with self.assertRaisesRegex(ValueError, "linked source changed"):
+            self.check()
+
+    def test_external_project_module(self):
+        self.req[1].update(module="SuccessorTree.Example",
+                           path="SuccessorTree/Example.lean")
+        with self.assertRaisesRegex(ValueError, "unexpected external"):
             self.check()
 
     def test_duplicate(self):

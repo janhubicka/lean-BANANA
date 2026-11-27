@@ -1,8 +1,14 @@
 {
-  "description": "Public Lean source declaration references required by the circulation validation markers. No manuscript prose or internal review metadata. Source identities must remain unchanged or the crosswalk must be reviewed.",
+  "description": "Circulation-only Lean source requirements. Classical GLR is a stated premise for the one-sided upper bounds, not a proved combinatorial result or additional axiom. The corresponding manuscript markers must be relative. Exact source identities and direct axiom coverage are enforced.",
   "source_reference": "4fabdd7cf1bf1206912cd0d6c92e685b04e769cf",
-  "successor_pin": "d9be105f73ca5a0f3f411b87d4c2419d0eb94753",
   "required": [
+    {
+      "module": "BANANA.CopyRamsey",
+      "name": "copyRamseyDegreeLE_of_embedding",
+      "path": "BANANA/CopyRamsey.lean",
+      "blob": "88ae3feeed2eeb7fc6a56d68d5b2934c03b2537e",
+      "line": 257
+    },
     {
       "module": "BANANA.NonPrecompact.AlignedCompletionEmbedding",
       "name": "exists_alignedCompletionEmbedding",
@@ -455,8 +461,8 @@
       "module": "BANANA.NonPrecompact.BananaOneSidedCopyDegree",
       "name": "BananaMatrixStructure.copyRamseyDegree_classification",
       "path": "BANANA/NonPrecompact/BananaOneSidedCopyDegree.lean",
-      "blob": "ea33253eb5c295fba48834ba071d7f304d4f333a",
-      "line": 157
+      "blob": "596c684163c91d65c8d710f1f77a46dc22b7012f",
+      "line": 158
     },
     {
       "module": "BANANA.NonPrecompact.BananaPerfectComplementPairing",
@@ -562,6 +568,27 @@
       "path": "BANANA/NonPrecompact/BilinearResidue.lean",
       "blob": "46e249c81bc266fcd43e24d2941e2e4a88b82350",
       "line": 533
+    },
+    {
+      "module": "BANANA.NonPrecompact.BinarySubspaceRamseyInterface",
+      "name": "BinarySubspaceRamsey",
+      "path": "BANANA/NonPrecompact/BinarySubspaceRamseyInterface.lean",
+      "blob": "c8f00ad78905daa8fa71fe7b9eaf65a5c18714a6",
+      "line": 60
+    },
+    {
+      "module": "BANANA.NonPrecompact.BinarySubspaceRamseyInterface",
+      "name": "leftOneSidedCopyRamseyOne_of_binarySubspaceRamsey",
+      "path": "BANANA/NonPrecompact/BinarySubspaceRamseyInterface.lean",
+      "blob": "c8f00ad78905daa8fa71fe7b9eaf65a5c18714a6",
+      "line": 96
+    },
+    {
+      "module": "BANANA.NonPrecompact.BinarySubspaceRamseyInterface",
+      "name": "rightOneSidedCopyRamseyOne_of_binarySubspaceRamsey",
+      "path": "BANANA/NonPrecompact/BinarySubspaceRamseyInterface.lean",
+      "blob": "c8f00ad78905daa8fa71fe7b9eaf65a5c18714a6",
+      "line": 139
     },
     {
       "module": "BANANA.NonPrecompact.BooleanBananaCopyTransport",
@@ -1866,27 +1893,6 @@
       "line": 224
     },
     {
-      "module": "BANANA.NonPrecompact.LinearBinaryRepresentability",
-      "name": "binarySubspaceRamsey_via_successors",
-      "path": "BANANA/NonPrecompact/LinearBinaryRepresentability.lean",
-      "blob": "d5761d5315b7aa8ba1a4565959b37e48df650f00",
-      "line": 102
-    },
-    {
-      "module": "BANANA.NonPrecompact.LinearBinaryRepresentability",
-      "name": "leftOneSidedCopyRamseyOne_via_successors",
-      "path": "BANANA/NonPrecompact/LinearBinaryRepresentability.lean",
-      "blob": "d5761d5315b7aa8ba1a4565959b37e48df650f00",
-      "line": 108
-    },
-    {
-      "module": "BANANA.NonPrecompact.LinearBinaryRepresentability",
-      "name": "rightOneSidedCopyRamseyOne_via_successors",
-      "path": "BANANA/NonPrecompact/LinearBinaryRepresentability.lean",
-      "blob": "d5761d5315b7aa8ba1a4565959b37e48df650f00",
-      "line": 114
-    },
-    {
       "module": "BANANA.NonPrecompact.LinearExtension",
       "name": "exists_linearEquiv_extends_of_surjective",
       "path": "BANANA/NonPrecompact/LinearExtension.lean",
@@ -2450,15 +2456,15 @@
       "module": "BANANA.NonPrecompact.RamseyDegreeClassifications",
       "name": "bananaEmbeddingRamseyDegree_classification",
       "path": "BANANA/NonPrecompact/RamseyDegreeClassifications.lean",
-      "blob": "b65f1c3a048129cf44f920b02ee41b95f3465cbf",
-      "line": 15
+      "blob": "cb19dac6b1e87c88eb50f6e26230375ab75c4704",
+      "line": 16
     },
     {
       "module": "BANANA.NonPrecompact.RamseyDegreeClassifications",
       "name": "embeddingRamseyDegree_classification",
       "path": "BANANA/NonPrecompact/RamseyDegreeClassifications.lean",
-      "blob": "b65f1c3a048129cf44f920b02ee41b95f3465cbf",
-      "line": 28
+      "blob": "cb19dac6b1e87c88eb50f6e26230375ab75c4704",
+      "line": 29
     },
     {
       "module": "BANANA.NonPrecompact.ResidueAlgebra",
@@ -2478,7 +2484,7 @@
       "module": "BANANA.NonPrecompact.SymplecticCopySystem",
       "name": "exists_amalgam",
       "path": "BANANA/NonPrecompact/SymplecticCopySystem.lean",
-      "blob": "6f5a5a86509f4862b75146db553ebfcaf2c83a40",
+      "blob": "b040da1a9eb19714b588012ce88fddb0683fcd94",
       "line": 140
     },
     {
@@ -2536,13 +2542,6 @@
       "path": "BANANA/NonPrecompact/UniversalMinimalFlowUniqueness.lean",
       "blob": "6b8b515237cb218ef90131d6cdb79a9054a641ba",
       "line": 148
-    },
-    {
-      "module": "SuccessorTree.CopyRamsey",
-      "name": "copyRamseyDegreeLE_of_embedding",
-      "path": "SuccessorTree/CopyRamsey.lean",
-      "blob": "88ae3feeed2eeb7fc6a56d68d5b2934c03b2537e",
-      "line": 257
     }
   ]
 }

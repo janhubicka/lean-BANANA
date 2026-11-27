@@ -21,7 +21,7 @@ sources = {p.relative_to(ROOT).as_posix(): p for p in files}
 def local_imports(file):
     out = set()
     for line in strip_lean_comments(file.read_text(encoding="utf-8")).splitlines():
-        match = re.match(r"\s*import\s+(.+)$", line)
+        match = re.match(r"\s*(?:(?:public|private|meta)\s+)?import\s+(.+)$", line)
         if not match:
             continue
         for name in match.group(1).split():
@@ -29,6 +29,8 @@ def local_imports(file):
                 out.add("BANANA.lean")
             elif name.startswith("BANANA."):
                 out.add(name.replace(".", "/") + ".lean")
+            elif name.split(".")[0] in {"SuccessorTree", "RamseySpace"}:
+                sys.exit(f"EXTERNAL PROJECT IMPORT: {file} -> {name}")
     return out
 
 

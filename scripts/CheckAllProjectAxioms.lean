@@ -14,10 +14,13 @@ set_option maxHeartbeats 0 in
 run_cmd do
   let env := (← getEnv).setExporting false
   let roots : Array Name :=
-    #[.str .anonymous "BANANA", .str .anonymous "SuccessorTree",
-      .str .anonymous "RamseySpace"]
+    #[.str .anonymous "BANANA"]
   let allowed : List String := ["propext", "Classical.choice", "Quot.sound"]
   let modules := env.header.moduleNames
+  for modName in modules do
+    if (Name.str .anonymous "SuccessorTree").isPrefixOf modName ||
+        (Name.str .anonymous "RamseySpace").isPrefixOf modName then
+      throwError "Unexpected external project module {modName}"
   let entries := env.const2ModIdx.toList.filterMap fun (decl, idx) =>
     let modName := modules[idx.toNat]!
     if roots.any (fun root => root.isPrefixOf modName) then

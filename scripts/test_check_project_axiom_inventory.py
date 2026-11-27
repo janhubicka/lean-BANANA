@@ -4,7 +4,7 @@ from check_project_axiom_inventory import check_inventory
 
 
 GOOD = ("PROJECT_AXIOMS\tBANANA.Example\tExample.foo\tpropext,Quot.sound\n"
-        "PROJECT_AXIOMS\tSuccessorTree.Example\tExample.bar\t\n"
+        "PROJECT_AXIOMS\tBANANA.Other\tExample.bar\t\n"
         "PROJECT_AXIOMS_DONE\t2\t0\t2\n")
 
 

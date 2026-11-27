@@ -10,7 +10,7 @@ import sys
 
 from check_axiom_report import ALLOWED
 
-PREFIXES = {"BANANA", "SuccessorTree", "RamseySpace"}
+PREFIXES = {"BANANA"}
 
 
 def check_inventory(text: str) -> dict[str, set[str]]:
@@ -38,7 +38,7 @@ def check_inventory(text: str) -> dict[str, set[str]]:
     by_module = {}
     for name, module in seen.items():
         by_module.setdefault(module, set()).add(name)
-    for prefix in ("BANANA", "SuccessorTree"):
+    for prefix in ("BANANA",):
         if not any(m.split(".")[0] == prefix for m in by_module):
             raise ValueError(f"no visible declarations audited for {prefix}")
     print(f"PASS: {checked} directly audited declarations in {len(by_module)} modules; "

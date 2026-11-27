@@ -15,8 +15,6 @@ modules=(
   BANANA.NonPrecompact.LinePairDegreeAxiomAudit
   BANANA.NonPrecompact.BananaCopyDegreeAxiomAudit
   BANANA.NonPrecompact.BananaOneSidedAxiomAudit
-  BANANA.NonPrecompact.BananaOneSidedSubspaceEquivAxiomAudit
-  BANANA.NonPrecompact.BananaCopyFunctorAxiomAudit
   BANANA.NonPrecompact.FinitePerfectGLAxiomAudit
 )
 

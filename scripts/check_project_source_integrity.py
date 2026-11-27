@@ -45,8 +45,8 @@ def main() -> None:
     if not args.root_only:
         manifest = json.loads((ROOT / "lake-manifest.json").read_text())
         packages = ROOT / manifest["packagesDir"]
-        owned = {"lean-successors": "SuccessorTree",
-                 "lean-ramsey-space-todorcevic": "RamseySpace"}
+        # Version 1 has only mathlib and its pinned dependency ecosystem.
+        allowed_urls = ["https://github.com/leanprover-community/mathlib4","https://github.com/leanprover-community/plausible","https://github.com/leanprover-community/LeanSearchClient","https://github.com/leanprover-community/import-graph","https://github.com/leanprover-community/ProofWidgets4","https://github.com/leanprover-community/aesop","https://github.com/leanprover-community/quote4","https://github.com/leanprover-community/batteries","https://github.com/leanprover/lean4-cli"]
         seen = set()
         for pkg in manifest["packages"]:
             if pkg["type"] != "git":
@@ -60,13 +60,12 @@ def main() -> None:
             untracked = git(path, "ls-files", "--others", "--exclude-standard", "-z")
             if any(p.endswith(".lean") for p in untracked.split("\0")):
                 raise ValueError(f"untracked Lean source in dependency: {path}")
-            repo = pkg["url"].rstrip("/").removesuffix(".git").rsplit("/", 1)[-1]
-            if repo in owned:
-                seen.add(repo)
-                sources.extend(source_files(path, owned[repo]))
+            if pkg["url"] not in allowed_urls:
+                raise ValueError(f"unexpected dependency: {pkg['url']}")
+            seen.add(pkg["url"])
             print(f"PIN {pkg['name']} {actual}")
-        if seen != set(owned):
-            raise ValueError(f"missing project-owned dependency: {set(owned) - seen}")
+        if seen != set(allowed_urls):
+            raise ValueError(f"unexpected dependency closure: {seen}")
     errors = []
     for file in sources:
         try:
